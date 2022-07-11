@@ -1,0 +1,62 @@
+.container {
+  width: 450px;
+  padding: 0px;
+  padding-top: 30px;
+}
+
+.bg-gradient-primary {
+  background-color: #011c6b;
+  background-image: linear-gradient(180deg,#011c6b 10%,#011c6b);
+  background-size: cover;
+}
+
+.card-button-style {
+  font-size: 12px;
+}
+
+.table-style {
+  font-size: 12px;
+  width: 100%;
+}
+
+.input-style {
+  font-size: 12px;
+}
+
+.card-header-label-margin {
+  margin-bottom: 0px;
+}
+
+.check-style {
+  padding-top: 3px;
+}
+
+select.form-control[multiple], select.form-control[size], textarea.form-control {
+  height: 150px;
+}
+
+.span-size {
+  font-size: 12px;
+}
+
+a {
+  color: #5a5c69;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #36b9cc;
+  background-color: #fff;
+  border-color: #dddfeb #dddfeb #fff;
+}
+
+a:hover {
+  color: #36b9cc;
+  text-decoration: underline;
+}
+
+.input-style-tabs {
+  font-size: 13px;
+}
+
