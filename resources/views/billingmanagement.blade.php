@@ -33,7 +33,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="text-center">1</td>
-                                                            <td class="text-center">DIliman (Main)</td>
+                                                            <td class="text-center">Diliman (Main)</td>
                                                             <td class="text-center">123,456</td>
                                                             <td class="text-center">123,456,789.50</td>
                                                         </tr>
