@@ -9,8 +9,8 @@
                         <div class="row">
                             <div class="col text-right"><button class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_add_new_ay"><i class="fas fa-plus"></i>&nbsp;New Billing</button></div>
                         </div>
-                        <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                            <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                        <div class="table-responsive table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                            <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_listofbillings">
                                 <thead>
                                     <tr>
                                         <th class="text-center">NO.</th>
