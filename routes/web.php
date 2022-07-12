@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('index', 'App\Http\Controllers\Pagescontroller@index')->name('index');
 Route::get('listofbillings', 'App\Http\Controllers\Pagescontroller@listofbillings')->name('listofbillings');
 Route::get('billingmanagement', 'App\Http\Controllers\Pagescontroller@billingmanagement')->name('billingmanagement');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard');
