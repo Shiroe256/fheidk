@@ -22,6 +22,9 @@ class Pagescontroller extends Controller
         return view('profile');
     }
 
+    public function index(){
+        return view('index');
+    }
     // public function contactus(){
     //     return view('contactus');
     // }
