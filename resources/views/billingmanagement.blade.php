@@ -20,8 +20,8 @@
                                     <form class="mt-4">
                                         <div class="form-group input-style">
                                             <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary</h5>
-                                            <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                                <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                                            <div class="table-responsive table-style mt-2" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_billingform_1">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">NO.</th>
@@ -71,8 +71,8 @@
                                                             data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                                <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                                            <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_billingform_2">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center"><input type="checkbox"></th>
@@ -91,7 +91,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">DIliman (Main)</td>
+                                                            <td class="text-left">Diliman (Main)</td>
                                                             <td class="text-left">FHE-123-456</td>
                                                             <td>Molina</td>
                                                             <td>Carlo</td>
@@ -174,7 +174,7 @@
                                                             <td>Bachelor of Science in Information and Techology</td>
                                                             <td class="text-center">4</td>
                                                             <td class="text-left">Graduating</td>
-                                                            <td class="text-left">For Payment<br></td>
+                                                            <td class="text-left">For Payment</td>
                                                             <td class="text-center">
                                                                 <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
                                                             </td>
@@ -201,8 +201,8 @@
                                                             data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                                <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                                            <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_billingform_3">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center"><input type="checkbox"></th>
@@ -339,8 +339,8 @@
                                         <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm" type="button" data-toggle="modal" data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                     </div>
                                 </div>
-                                <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                                <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                    <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_exception_report">
                                         <thead>
                                             <tr>
                                                 <th class="text-center"><input type="checkbox"></th>
@@ -459,8 +459,8 @@
                                                     <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button"><i class="fas fa-file-download"></i>&nbsp;Download Generated Forms</button></div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                                <table class="table table-bordered table-hover table-sm dataTable my-0" id="dataTable">
+                                            <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_billing_summary">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center">NO.</th>
@@ -576,8 +576,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="table-responsive table-bordered table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table table-bordered table-hover dataTable my-0" id="dataTable">
+                                        <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                            <table class="table table-bordered table-hover dataTable my-0 table-style" id="tbl_billing_attachments">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">NO.</th>
@@ -1481,9 +1481,12 @@
     <script type="text/javascript" src="{{url('js\bs-init.js')}}"></script>
     <script type="text/javascript" src="{{url('js\theme.js')}}"></script>
     <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="{{url('js\datatables.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js')}}"></script>
+    <script src="{{url('https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js')}}"></script>
 
 </body>
 
