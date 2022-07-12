@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="{{url('fonts\font-awesome.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome5-overrides.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{('https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css')}}">
+    
 </head>
 
 <body id="page-top">
@@ -26,7 +28,7 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="{{route('dashboard')}}"><i class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('dashboard')}}"><i class="fas fa-home"></i><span>Home</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('listofbillings')}}"><i class="fas fa-users"></i><span>FHE Billing</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
