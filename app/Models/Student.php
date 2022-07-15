@@ -10,12 +10,14 @@ class Hei extends Model{
     public function createStudent($data = array())
     {
         $student = DB::table('tbl_master_student')->insertGetId($data);
+        return $student;
     }
 
     public function updateStudent($data = array())
     {
         $student = DB::table('tbl_master_student')->where('uid', $data['uid'])
         ->update($data);
+        return $student;
     }
 
     public function getStudent($uid)
@@ -30,6 +32,8 @@ class Hei extends Model{
         where('fname','like','%' .  $fname . '%')->
         where('mname','like','%' .  $mname . '%')->
         where('lname','like','%' .  $lname . '%')->get();
+
+        return $students;
     }
 
     // [
