@@ -110,25 +110,25 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input name='prov' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input name='city' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input name='barangay' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>House /Building No./Street</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>House /Building No./Street</label><input name='street' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col-xl-3">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input name='zipcode' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -143,18 +143,18 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input name='mobnum' class="form-control input-style" type="number"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input name='altmobnum' class="form-control input-style" type="number"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input name='email' class="form-control input-style" type="email"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Email Address (if available)</label><input class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label>Alternative Email Address (if available)</label><input name='altemail' class="form-control input-style" type="email"></div>
                             </div>
                         </div>
                     </div>
@@ -169,15 +169,15 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input name='course' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input name='yearlevel' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input name='totunits' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label>Amount of Tuition Fee</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
@@ -192,16 +192,16 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input name='nstpunit' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Amount of NSTP</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
+                                <div class="form-group"><label>Amount of NSTP</label><input name='' class="form-control input-style" type="number" min="0" readonly=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-11"><label class="custom-control-label check-style" for="formCheck-11">Transferee</label></div>
+                                    <div class="custom-control custom-checkbox"><input name='' class="custom-control-input" type="checkbox" id="formCheck-11"><label class="custom-control-label check-style" for="formCheck-11">Transferee</label></div>
                                 </div>
                             </div>
                         </div>
