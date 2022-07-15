@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Hei extends Model{
+class Student extends Model{
 
     public function createStudent($data = array())
     {

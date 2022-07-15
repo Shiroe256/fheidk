@@ -43,3 +43,8 @@ Route::get('listofbillings', 'App\Http\Controllers\Pagescontroller@listofbilling
 Route::get('billingmanagement', 'App\Http\Controllers\Pagescontroller@billingmanagement')->name('billingmanagement');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
+
+//routes ni migs na pang testing
+Route::get('/', function () {
+    return view('billingmanagement');
+});

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use app\Models\Student;
 
 class Students extends Controller
 {
-    public function newStudent()
+    public function newStudent($student = array())
     {
-        # code...
+        $student_model = new Student();
+        $student_model->createStudent($student);
     }
 }
