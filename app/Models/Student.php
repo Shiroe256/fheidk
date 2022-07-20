@@ -2,39 +2,49 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model{
+class Students extends Model{
+    
+    use HasFactory;
+    protected $table = 'students';
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'course',
+    ];
 
-    public function createStudent($data = array())
-    {
-        $student = DB::table('tbl_master_student')->insertGetId($data);
-        return $student;
-    }
+    // public function createStudent($data = array())
+    // {
+    //     $student = DB::table('tbl_master_student')->insertGetId($data);
+    //     return $student;
+    // }
 
-    public function updateStudent($data = array())
-    {
-        $student = DB::table('tbl_master_student')->where('uid', $data['uid'])
-        ->update($data);
-        return $student;
-    }
+    // public function updateStudent($data = array())
+    // {
+    //     $student = DB::table('tbl_master_student')->where('uid', $data['uid'])
+    //     ->update($data);
+    //     return $student;
+    // }
 
-    public function getStudent($uid)
-    {
-        $student = DB::table('tbl_master_student')->where('uid',$uid)->first();
-        return $student;
-    }
+    // public function getStudent($uid)
+    // {
+    //     $student = DB::table('tbl_master_student')->where('uid',$uid)->first();
+    //     return $student;
+    // }
 
-    public function searchStudents($fname = '', $mname = '', $lname = '')
-    {
-        $students = DB::table('tbl_master_student')->
-        where('fname','like','%' .  $fname . '%')->
-        where('mname','like','%' .  $mname . '%')->
-        where('lname','like','%' .  $lname . '%')->get();
+    // public function searchStudents($fname = '', $mname = '', $lname = '')
+    // {
+    //     $students = DB::table('tbl_master_student')->
+    //     where('fname','like','%' .  $fname . '%')->
+    //     where('mname','like','%' .  $mname . '%')->
+    //     where('lname','like','%' .  $lname . '%')->get();
 
-        return $students;
-    }
+    //     return $students;
+    // }
 
     // [
     //     'app_id' => $data['app_id'],
