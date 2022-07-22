@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,8 @@ Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('pro
 Route::get('/testing', function () {
     return view('billingmanagement');
 });
+
+//route for login
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
