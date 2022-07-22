@@ -9,6 +9,14 @@ use App\Models\TemporaryBilling;
 
 class BillingController extends Controller
 {
+
+    public function fetchTempStudent(){
+        $TempStudents = TemporaryBilling::all();
+        return response()->json([
+            'tbl_billing_details_temp'=>$TempStudents,
+        ]);
+    }
+
     //new temporary student
     public function newTempStudent(Request $request)
     {

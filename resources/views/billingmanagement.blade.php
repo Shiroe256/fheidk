@@ -85,11 +85,12 @@
                                                             <th class="text-center">YEAR</th>
                                                             <th class="text-left">REMARKS</th>
                                                             <th class="text-left">STATUS</th>
+                                                            <th class="text-left">AMOUNT BILLED</th>
                                                             <th class="text-center">ACTION</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
+                                                    <tbody id="tbl_list_of_students_form_2">
+                                                        {{-- <tr>
                                                             <td class="text-center"><input type="checkbox"></td>
                                                             <td class="text-left">Diliman (Main)</td>
                                                             <td class="text-left">FHE-123-456</td>
@@ -103,8 +104,8 @@
                                                             <td class="text-center">
                                                                 <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
+                                                        </tr> --}}
+                                                        {{-- <tr>
                                                             <td class="text-center"><input type="checkbox"></td>
                                                             <td class="text-left">Los Baños</td>
                                                             <td class="text-left">FHE-123-456</td>
@@ -178,7 +179,7 @@
                                                             <td class="text-center">
                                                                 <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
                                                             </td>
-                                                        </tr>
+                                                        </tr> --}}
                                                     </tbody>
                                                     <tfoot>
                                                         <tr></tr>
@@ -1026,6 +1027,7 @@
     <script type="text/javascript" src="{{url('js\theme.js')}}"></script>
     <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
     <script type="text/javascript" src="{{url('js\datatables.js')}}"></script>
+    <script type="text/javascript" src="{{url('js\student_crud.js')}}"></script>
     <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
     <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js')}}"></script>

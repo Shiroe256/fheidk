@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\BillingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +56,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//CRUD Routes
+Route::get('get-tempstudents',[BillingController::class,'fetchTempStudent']);
