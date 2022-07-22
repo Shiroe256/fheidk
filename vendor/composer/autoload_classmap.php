@@ -4922,6 +4922,7 @@ return array(
     'Symfony\\Component\\Routing\\RequestContext' => $vendorDir . '/symfony/routing/RequestContext.php',
     'Symfony\\Component\\Routing\\RequestContextAwareInterface' => $vendorDir . '/symfony/routing/RequestContextAwareInterface.php',
     'Symfony\\Component\\Routing\\Requirement\\EnumRequirement' => $vendorDir . '/symfony/routing/Requirement/EnumRequirement.php',
+    'Symfony\\Component\\Routing\\Requirement\\Requirement' => $vendorDir . '/symfony/routing/Requirement/Requirement.php',
     'Symfony\\Component\\Routing\\Route' => $vendorDir . '/symfony/routing/Route.php',
     'Symfony\\Component\\Routing\\RouteCollection' => $vendorDir . '/symfony/routing/RouteCollection.php',
     'Symfony\\Component\\Routing\\RouteCompiler' => $vendorDir . '/symfony/routing/RouteCompiler.php',
