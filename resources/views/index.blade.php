@@ -26,7 +26,7 @@
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
                 <div class="p-5">
-                    <form class="user">
+                    <form id="login_form" action="user" class="user" method="POST">
                         <div class="form-group">
                             <div class="text-center"><img src="{{url('img\UnifastLogo.png')}}" style="width: 200px;"></div>
                         </div>
@@ -35,13 +35,15 @@
                                 <h5 class="text-dark mb-4">FREE HIGHER EDUCATION PORTAL</h5>
                             </div>
                         </div>
-                        <div class="form-group"><input class="form-control form-control-user" type="text" placeholder="Username"></div>
-                        <div class="form-group"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
+                        @csrf
+                        <div class="form-group"><input class="form-control form-control-user" type="text" id="username" placeholder="Username" name="username" required></div>
+                        <div class="form-group"><input class="form-control form-control-user" type="password" id="password" placeholder="Password" name="password" required></div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                                 <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Show Password</label></div>
                             </div>
-                        </div><a class="btn btn-primary btn-block text-white btn-user" role="button" href="{{route('dashboard')}}">Login</a></form>
+                        </div><button class="btn btn-primary btn-block text-white btn-user" role="button" type="submit">Login</button>'
+                    </form>
                 </div>
             </div>
         </div>
