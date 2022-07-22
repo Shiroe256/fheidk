@@ -1033,6 +1033,7 @@
     <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js')}}"></script>
     <script src="{{url('https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{url('https://unpkg.com/xlsx/dist/xlsx.full.min.js')}}"></script>
 
 </body>
 
