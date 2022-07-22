@@ -78,8 +78,6 @@ class TemporaryBilling extends Model
         'exam_result',
         'remarks',
         'stud_status',
-        'uploaded_by',
-        'uploaded_at',
-        'updated_at'
+        'uploaded_by'
     ];
 }
