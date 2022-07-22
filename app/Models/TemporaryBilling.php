@@ -80,4 +80,16 @@ class TemporaryBilling extends Model
         'stud_status',
         'uploaded_by'
     ];
+
+    public function getTempStudents($reference_no)
+    {
+        $tempstudents = DB::table($this->table)->where('reference_no',$reference_no)->get();
+        return $tempstudents;
+    }
+
+    public function getTempStudentInfo($uid)
+    {
+        $tempstudent = DB::table($this->table)->where('reference_no',$uid)->get();
+        return $tempstudent;
+    }
 }

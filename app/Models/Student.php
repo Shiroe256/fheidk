@@ -31,23 +31,22 @@ class Student extends Model
 
     public function updateStudent($data = array())
     {
-        $student = DB::table('tbl_master_student')->where('uid', $data['uid'])
+        $student = DB::table($this->table)->where('uid', $data['uid'])
             ->update($data);
         return $student;
     }
 
     public function getStudent($uid)
     {
-        $student = DB::table('tbl_master_student')->where('uid', $uid)->first();
+        $student = DB::table($this->table)->where('uid', $uid)->first();
         return $student;
     }
 
     public function searchStudents($fname = '', $mname = '', $lname = '')
     {
-        $students = DB::table('tbl_master_student')->where('fname', 'like', '%' .  $fname . '%')->where('mname', 'like', '%' .  $mname . '%')->where('lname', 'like', '%' .  $lname . '%')->get();
-
-    //     return $students;
-    // }
+        $students = DB::table($this->table)->where('fname', 'like', '%' .  $fname . '%')->where('mname', 'like', '%' .  $mname . '%')->where('lname', 'like', '%' .  $lname . '%')->get();
+        return $students;
+    }
 
     // [
     //     'app_id' => $data['app_id'],
@@ -89,5 +88,5 @@ class Student extends Model
     //     'nationality' => $data['nationality'],
     //     'ay_graduated' => $data['ay_graduated'],
     // ]
-}
+
 }

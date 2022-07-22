@@ -45,6 +45,6 @@ Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name(
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
 
 //routes ni migs na pang testing
-Route::get('/', function () {
+Route::get('/testing', function () {
     return view('billingmanagement');
 });

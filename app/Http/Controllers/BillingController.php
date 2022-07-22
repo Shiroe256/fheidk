@@ -84,6 +84,18 @@ class BillingController extends Controller
         $tempstudent->save();
     }
 
+    public function getTempStudents(Request $request)
+    {
+        $tempstudent = new TemporaryBilling;
+        return $tempstudent->getTempStudents($request->reference_no);
+    }
+
+    public function getTempStudent(Request $request)
+    {
+        $tempstudent = new TemporaryBilling;
+        return $tempstudent->getTempStudent($request->reference_no);
+    }
+
     public function newStudent(Request $request)
     {
         $student = new Student;
