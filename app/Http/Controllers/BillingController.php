@@ -96,6 +96,12 @@ class BillingController extends Controller
         return $tempstudent->getTempStudent($request->reference_no);
     }
 
+    public function deleteTempStudent(Request $request)
+    {
+        $tempstudent = TemporaryBilling::find($request->uid);
+        $tempstudent->delete();
+    }
+
     public function newStudent(Request $request)
     {
         $student = new Student;
