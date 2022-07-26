@@ -1303,7 +1303,31 @@
                     "remarks"
                 ]
             });
-            console.log(output);
+            console.log(JSON.stringify(output));
+
+            // let request = new XMLHttpRequest();
+            // request.open("POST", );
+            // // request.setRequestHeader("Accept", "application/json");
+            // request.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+            // request.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'));
+            // request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: window.location.origin + "/add-tempstudents",
+                type: "POST",
+                data: JSON.stringify(output),
+                dataType: 'JSON',
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+
+
+            request.send(output);
 
         };
         reader.readAsArrayBuffer(template);

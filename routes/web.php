@@ -49,7 +49,7 @@ Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('pro
 
 //routes ni migs na pang testing
 Route::get('/testing', function () {
-    return view('billingmanagement');
+    return view('billingmanagementcopy');
 });
 
 //route for login
@@ -59,3 +59,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //CRUD Routes
 Route::get('get-tempstudents',[BillingController::class,'fetchTempStudent']);
+Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);

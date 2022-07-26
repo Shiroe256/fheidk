@@ -17,6 +17,16 @@ class BillingController extends Controller
         ]);
     }
 
+    public function batchTempStudent(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            echo "post";
+        }
+        foreach ($request as $rownumber => $row) {
+            // echo $rownumber;
+        }
+    }
+
     //new temporary student
     public function newTempStudent(Request $request)
     {
@@ -74,25 +84,25 @@ class BillingController extends Controller
         $tempstudent->tranche = $request->tranche;
         $tempstudent->app_id = $request->app_id;
 
-        $tempstudent->tuition_fee = $request->tuition_fee;
-        $tempstudent->entrance_fee = $request->entrance_fee;
-        $tempstudent->admission_fee = $request->admission_fee;
-        $tempstudent->athletic_fee = $request->athletic_fee;
-        $tempstudent->computer_fee = $request->computer_fee;
-        $tempstudent->cultural_fee = $request->cultural_fee;
-        $tempstudent->development_fee = $request->development_fee;
-        $tempstudent->guidance_fee = $request->guidance_fee;
-        $tempstudent->handbook_fee = $request->handbook_fee;
-        $tempstudent->laboratory_fee = $request->laboratory_fee;
-        $tempstudent->library_fee = $request->library_fee;
-        $tempstudent->medical_dental_fee = $request->medical_dental_fee;
-        $tempstudent->registration_fee = $request->registration_fee;
-        $tempstudent->school_id_fee = $request->school_id_fee;
-        $tempstudent->nstp_fee = $request->nstp_fee;
-        $tempstudent->stud_cor = $request->stud_cor;
-        $tempstudent->remarks = $request->remarks;
-        $tempstudent->stud_status = $request->stud_status;
-        $tempstudent->uploaded_by = $request->uploaded_by;
+        // $tempstudent->tuition_fee = $request->tuition_fee;
+        // $tempstudent->entrance_fee = $request->entrance_fee;
+        // $tempstudent->admission_fee = $request->admission_fee;
+        // $tempstudent->athletic_fee = $request->athletic_fee;
+        // $tempstudent->computer_fee = $request->computer_fee;
+        // $tempstudent->cultural_fee = $request->cultural_fee;
+        // $tempstudent->development_fee = $request->development_fee;
+        // $tempstudent->guidance_fee = $request->guidance_fee;
+        // $tempstudent->handbook_fee = $request->handbook_fee;
+        // $tempstudent->laboratory_fee = $request->laboratory_fee;
+        // $tempstudent->library_fee = $request->library_fee;
+        // $tempstudent->medical_dental_fee = $request->medical_dental_fee;
+        // $tempstudent->registration_fee = $request->registration_fee;
+        // $tempstudent->school_id_fee = $request->school_id_fee;
+        // $tempstudent->nstp_fee = $request->nstp_fee;
+        // $tempstudent->stud_cor = $request->stud_cor;
+        // $tempstudent->remarks = $request->remarks;
+        // $tempstudent->stud_status = $request->stud_status;
+        // $tempstudent->uploaded_by = $request->uploaded_by;
         
         $tempstudent->save();
     }
