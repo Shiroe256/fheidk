@@ -13,10 +13,6 @@ class BillingController extends Controller
 {
 
     public function fetchTempStudent(){
-        // $TempStudents = TemporaryBilling::all();
-        // return response()->json([
-        //     'tbl_billing_details_temp'=>$TempStudents,
-        // ]);
         $students = TemporaryBilling::all();
 		$output = '';
 		if ($students->count() > 0) {
