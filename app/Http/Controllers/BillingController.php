@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use app\Models\Student;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class BillingController extends Controller
 {
+    private function generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
+    {
+        $reference_number = $hei_psg_region . "-" . $hei_sid . "-" . $ac_year . "-" . $semester . "-" . $tranche;
+        return $reference_number;
+    }
 
     public function fetchTempStudent(){
         $students = TemporaryBilling::all();
@@ -62,6 +68,23 @@ class BillingController extends Controller
 			echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
 		}
     }
+    public function newBilling(Request $request)
+    {
+        $billing = new Billing;
+        $billing->hei_psg_region = $request->hei_psg_region;
+        $billing->hei_sid = $request->hei_sid;
+        $billing->hei_uii = $request->hei_uii;
+        $billing->reference_no = $this->generateBillingReferenceNumber($request->$hei_psg_region,$request->$hei_sid,$request->$ac_year,$request->$semester,$request->$tranche);
+        $billing->ac_year = $request->ac_year;
+        $billing->semester = $request->semester;
+        $billing->tranche = $request->tranche;
+        $billing->total_beneficiaries = $request->total_beneficiaries;
+        $billing->total_amount = $request->total_amount;
+        $billing->billing_status = $request->billing_status;
+        $billing->created_by = $request->created_by;
+
+        $billing->save();
+    }
 
     // public function store(Request $request) {
 	// 	$file = $request->file('avatar');
@@ -105,12 +128,67 @@ class BillingController extends Controller
 
     public function batchTempStudent(Request $request)
     {
-        if ($request->isMethod('post')) {
-            echo "post";
+        $tempstudents[] =  $request->getContent();
+        foreach ($tempstudents as $num => $tempstudent) {
+            $this->_newTempStudentBatch($tempstudent);
         }
-        foreach ($request as $rownumber => $row) {
-            // echo $rownumber;
-        }
+    }
+
+    public function _newTempStudentBatch($data = array())
+    {
+        $tempstudent = new TemporaryBilling;
+        $tempstudent->fhe_award_no = $data->fhe_aw_no;
+        $tempstudent->stud_id = $data->stud_no;
+        $tempstudent->lrn = $data->lrnum;
+        $tempstudent->stud_lname = $data->last_name;
+        $tempstudent->stud_fname = $data->given_name;
+        $tempstudent->stud_mname = $data->mid_name;
+        $tempstudent->stud_ext_name = $data->ext_name;
+        $tempstudent->stud_sex = $data->sex_at_birth;
+        $tempstudent->stud_birth_date = $data->birthdate;
+        $tempstudent->stud_birth_place = $data->birthplace;
+        $tempstudent->f_lname = $data->fathers_lname;
+        $tempstudent->f_fname = $data->fathers_gname;
+        $tempstudent->f_mname = $data->fathers_mname;
+        $tempstudent->m_lname = $data->mothers_lname;
+        $tempstudent->m_fname = $data->mothers_gname;
+        $tempstudent->m_mname = $data->mothers_mname;
+        $tempstudent->permanent_prov = $data->perm_prov;
+        $tempstudent->permanent_city = $data->perm_city;
+        $tempstudent->permanent_brgy = $data->perm_brgy;
+        $tempstudent->permanent_street = $data->perm_street;
+        $tempstudent->permanent_zip = $data->perm_zip;
+        $tempstudent->present_prov = $data->pres_prov;
+        $tempstudent->present_city = $data->pres_city;
+        $tempstudent->present_brgy = $data->pres_brgy;
+        $tempstudent->present_street = $data->pres_street;
+        $tempstudent->present_zip = $data->pres_zip;
+        $tempstudent->stud_email = $data->email;
+        $tempstudent->stud_alt_email = $data->a_email;
+        $tempstudent->stud_phone_no = $data->contact_number;
+        $tempstudent->stud_alt_phone_no = $data->contact_number_2;
+        $tempstudent->transferee = $data->is_transferee;
+        $tempstudent->degree_program = $data->degree_course_id;
+        $tempstudent->year_level = $data->year_level;
+        $tempstudent->lab_unit = $data->lab_u;
+        $tempstudent->comp_lab_unit = $data->com_lab_u;
+        $tempstudent->academic_unit = $data->acad_u;
+        $tempstudent->nstp_unit = $data->nstp_u;
+        $tempstudent->total_exam_taken = $data->exams;
+        $tempstudent->exam_result = $data->exam_result;
+        $tempstudent->remarks = $data->remarks;
+
+
+
+        $tempstudent->hei_psg_region = $data->hei_psg_region;
+        $tempstudent->hei_sid = $data->hei_sid;
+        $tempstudent->hei_uii = $data->hei_uii;
+        $tempstudent->hei_name = $data->hei_name;
+        $tempstudent->reference_no = $data->reference_no;
+        $tempstudent->ac_year = $data->ac_year;
+        $tempstudent->semester = $data->semester;
+        $tempstudent->tranche = $data->tranche;
+        $tempstudent->app_id = $data->app_id;
     }
 
     //new temporary student
@@ -281,7 +359,7 @@ class BillingController extends Controller
         $student->alt_email = $request->alt_email;
         $student->nationality = $request->nationality;
         $student->ay_graduate = $request->ay_graduate;
-        
+
         $student->save();
     }
 }
