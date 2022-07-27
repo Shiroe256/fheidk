@@ -53,10 +53,11 @@ Route::get('/testing', function () {
 });
 
 //route for login
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Routes
-Route::get('get-tempstudents',[BillingController::class,'fetchTempStudent']);
-Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']); //batch
+Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
+Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
+Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);

@@ -1,7 +1,7 @@
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_new_student_info">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form>
+            <form id='frm_add_student' method="POST">
                 <div class="modal-header">
                     <h6 class="modal-title">TYPE OF ACTION</h6><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button id="btn_add_student" class="add_student btn btn-primary card-button-style" type="submit">Add Student</button></div>
             </form>
         </div>
     </div>
