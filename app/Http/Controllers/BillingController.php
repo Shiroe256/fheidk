@@ -67,7 +67,6 @@ class BillingController extends Controller
 		}
     }
 
-<<<<<<< HEAD
     // public function store(Request $request) {
 	// 	$file = $request->file('avatar');
 	// 	$fileName = time() . '.' . $file->getClientOriginalExtension();
@@ -107,7 +106,7 @@ class BillingController extends Controller
     //         ]);
     //     }
     // }
-=======
+
     public function batchTempStudent(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -117,192 +116,111 @@ class BillingController extends Controller
             // echo $rownumber;
         }
     }
->>>>>>> 67673b7ae76a6939005330d80f2069e7fd4e0207
 
     //new temporary student
     public function newTempStudent(Request $request)
     {
-<<<<<<< HEAD
-        // $validator = Validator::make($request->all(),[
-        //     'stud_lname'=>'required|max:255',
-        //     'stud_fname'=>'required|max:255',
-        //     'stud_sex'=>'required|max:25',
-        //     'stud_birth_date'=>'required|dateformat:dd-MM-yyyy',
-        //     'stud_birth_place'=>'required|max:255',
-        //     'present_prov'=>'required|max:255',
-        //     'present_city'=>'required|max:255',
-        //     'present_barangay'=>'required|max:255',
-        //     'present_zipcode'=>'required|max:255',
-        //     'permanent_prov'=>'required|max:255',
-        //     'permanent_city'=>'required|max:255',
-        //     'permanent_barangay'=>'required|max:255',
-        //     'permanent_zipcode'=>'required|max:255',
-        //     'stud_email'=>'required|email|max:255',
-        //     'stud_phone_no' => 'required|regex:/^(09|\+639)\d{9}$/',
-        //     'degree_program'=>'required|max:255'
+        $validator = Validator::make($request->all(),[
+            'stud_lname'=>'required|max:255',
+            'stud_fname'=>'required|max:255',
+            'stud_sex'=>'required|max:25',
+            'stud_birth_date'=>'required|dateformat:dd-MM-yyyy',
+            'stud_birth_place'=>'required|max:255',
+            'present_prov'=>'required|max:255',
+            'present_city'=>'required|max:255',
+            'present_barangay'=>'required|max:255',
+            'present_zipcode'=>'required|max:255',
+            'permanent_prov'=>'required|max:255',
+            'permanent_city'=>'required|max:255',
+            'permanent_barangay'=>'required|max:255',
+            'permanent_zipcode'=>'required|max:255',
+            'stud_email'=>'required|email|max:255',
+            'stud_phone_no' => 'required|regex:/^(09|\+639)\d{9}$/',
+            'degree_program'=>'required|max:255'
 
-        // ]);
+        ]);
 
-        // if($validator->fails()){
-        //     return response()->json([
-        //         'status'=>400,
-        //         'errors'=>$validator->messages(),
-        //     ]);
-        // }else{
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }else{
             $tempstudent = new TemporaryBilling;
-            // $tempstudent->hei_psg_region = $request->hei_psg_region;
-            // $tempstudent->hei_sid = $request->hei_sid;
-            // $tempstudent->hei_uii = $request->hei_uii;
-            // $tempstudent->hei_name = $request->hei_name;
-            // $tempstudent->reference_no = $request->reference_no;
-            // $tempstudent->ac_year = $request->ac_year;
-            // $tempstudent->semester = $request->semester;
-            // $tempstudent->tranche = $request->tranche;
-            // $tempstudent->app_id = $request->app_id;
-            // $tempstudent->fhe_award_no = $request->fhe_award_no;
-            // $tempstudent->stud_id = $request->stud_id;
-            // $tempstudent->lrn_no = $request->lrn_no;
+            $tempstudent->hei_psg_region = $request->hei_psg_region;
+            $tempstudent->hei_sid = $request->hei_sid;
+            $tempstudent->hei_uii = $request->hei_uii;
+            $tempstudent->hei_name = $request->hei_name;
+            $tempstudent->reference_no = $request->reference_no;
+            $tempstudent->ac_year = $request->ac_year;
+            $tempstudent->semester = $request->semester;
+            $tempstudent->tranche = $request->tranche;
+            $tempstudent->app_id = $request->app_id;
+            $tempstudent->fhe_award_no = $request->fhe_award_no;
+            $tempstudent->stud_id = $request->stud_id;
+            $tempstudent->lrn_no = $request->lrn_no;
             $tempstudent->stud_lname = $request->lname;
             $tempstudent->stud_fname = $request->fname;
             $tempstudent->stud_mname = $request->mname;
-            // $tempstudent->stud_ext_name = $request->stud_ext_name;
-            // $tempstudent->stud_sex = $request->stud_sex;
-            // $tempstudent->stud_birth_date = $request->stud_birth_date;
-            // $tempstudent->stud_birth_place = $request->stud_birth_place;
-            // $tempstudent->f_lname = $request->f_lname;
-            // $tempstudent->f_fname = $request->f_fname;
-            // $tempstudent->f_mname = $request->f_mname;
-            // $tempstudent->m_lname = $request->m_lname;
-            // $tempstudent->m_fname = $request->m_fname;
-            // $tempstudent->m_mname = $request->m_mname;
-            // $tempstudent->present_prov = $request->present_prov;
-            // $tempstudent->present_city = $request->present_city;
-            // $tempstudent->present_barangay = $request->present_barangay;
-            // $tempstudent->present_street = $request->present_street;
-            // $tempstudent->present_zipcode = $request->present_zipcode;
-            // $tempstudent->permanent_prov = $request->permanent_prov;
-            // $tempstudent->permanent_city = $request->permanent_city;
-            // $tempstudent->permanent_barangay = $request->permanent_barangay;
-            // $tempstudent->permanent_street = $request->permanent_street;
-            // $tempstudent->permanent_zipcode = $request->permanent_zipcode;
-            // $tempstudent->stud_email = $request->stud_email;
-            // $tempstudent->stud_alt_email = $request->stud_alt_email;
-            // $tempstudent->stud_phone_no = $request->stud_phone_no;
-            // $tempstudent->stud_alt_phone_no = $request->stud_alt_phone_no;
-            // $tempstudent->transferee = $request->transferee;
-            // $tempstudent->degree_program = $request->degree_program;
-            // $tempstudent->year_level = $request->year_level;
-            // $tempstudent->lab_unit = $request->lab_unit;
-            // $tempstudent->comp_lab_unit = $request->comp_lab_unit;
-            // $tempstudent->academic_unit = $request->academic_unit;
-            // $tempstudent->nstp_unit = $request->nstp_unit;
-            // $tempstudent->tuition_fee = $request->tuition_fee;
-            // $tempstudent->entrance_fee = $request->entrance_fee;
-            // $tempstudent->admission_fee = $request->admission_fee;
-            // $tempstudent->atlhletic_fee = $request->atlhletic_fee;
-            // $tempstudent->computer_fee = $request->computer_fee;
-            // $tempstudent->cultural_fee = $request->cultural_fee;
-            // $tempstudent->development_fee = $request->development_fee;
-            // $tempstudent->guidance_fee = $request->guidance_fee;
-            // $tempstudent->handbook_fee = $request->handbook_fee;
-            // $tempstudent->laboratory_fee = $request->laboratory_fee;
-            // $tempstudent->library_fee = $request->library_fee;
-            // $tempstudent->medical_dental_fee = $request->medical_dental_fee;
-            // $tempstudent->registration_fee = $request->registration_fee;
-            // $tempstudent->school_id_fee = $request->school_id_fee;
-            // $tempstudent->nstp_fee = $request->nstp_fee;
-            // $tempstudent->stud_cor = $request->stud_cor;
-            // $tempstudent->total_exam_taken = $request->total_exam_taken;
-            // $tempstudent->exam_result = $request->exam_result;
-            // $tempstudent->remarks = $request->remarks;
-            // $tempstudent->stud_status = $request->stud_status;
-            // $tempstudent->uploaded_by = $request->uploaded_by;
+            $tempstudent->stud_ext_name = $request->stud_ext_name;
+            $tempstudent->stud_sex = $request->stud_sex;
+            $tempstudent->stud_birth_date = $request->stud_birth_date;
+            $tempstudent->stud_birth_place = $request->stud_birth_place;
+            $tempstudent->f_lname = $request->f_lname;
+            $tempstudent->f_fname = $request->f_fname;
+            $tempstudent->f_mname = $request->f_mname;
+            $tempstudent->m_lname = $request->m_lname;
+            $tempstudent->m_fname = $request->m_fname;
+            $tempstudent->m_mname = $request->m_mname;
+            $tempstudent->present_prov = $request->present_prov;
+            $tempstudent->present_city = $request->present_city;
+            $tempstudent->present_barangay = $request->present_barangay;
+            $tempstudent->present_street = $request->present_street;
+            $tempstudent->present_zipcode = $request->present_zipcode;
+            $tempstudent->permanent_prov = $request->permanent_prov;
+            $tempstudent->permanent_city = $request->permanent_city;
+            $tempstudent->permanent_barangay = $request->permanent_barangay;
+            $tempstudent->permanent_street = $request->permanent_street;
+            $tempstudent->permanent_zipcode = $request->permanent_zipcode;
+            $tempstudent->stud_email = $request->stud_email;
+            $tempstudent->stud_alt_email = $request->stud_alt_email;
+            $tempstudent->stud_phone_no = $request->stud_phone_no;
+            $tempstudent->stud_alt_phone_no = $request->stud_alt_phone_no;
+            $tempstudent->transferee = $request->transferee;
+            $tempstudent->degree_program = $request->degree_program;
+            $tempstudent->year_level = $request->year_level;
+            $tempstudent->lab_unit = $request->lab_unit;
+            $tempstudent->comp_lab_unit = $request->comp_lab_unit;
+            $tempstudent->academic_unit = $request->academic_unit;
+            $tempstudent->nstp_unit = $request->nstp_unit;
+            $tempstudent->tuition_fee = $request->tuition_fee;
+            $tempstudent->entrance_fee = $request->entrance_fee;
+            $tempstudent->admission_fee = $request->admission_fee;
+            $tempstudent->atlhletic_fee = $request->atlhletic_fee;
+            $tempstudent->computer_fee = $request->computer_fee;
+            $tempstudent->cultural_fee = $request->cultural_fee;
+            $tempstudent->development_fee = $request->development_fee;
+            $tempstudent->guidance_fee = $request->guidance_fee;
+            $tempstudent->handbook_fee = $request->handbook_fee;
+            $tempstudent->laboratory_fee = $request->laboratory_fee;
+            $tempstudent->library_fee = $request->library_fee;
+            $tempstudent->medical_dental_fee = $request->medical_dental_fee;
+            $tempstudent->registration_fee = $request->registration_fee;
+            $tempstudent->school_id_fee = $request->school_id_fee;
+            $tempstudent->nstp_fee = $request->nstp_fee;
+            $tempstudent->stud_cor = $request->stud_cor;
+            $tempstudent->total_exam_taken = $request->total_exam_taken;
+            $tempstudent->exam_result = $request->exam_result;
+            $tempstudent->remarks = $request->remarks;
+            $tempstudent->stud_status = $request->stud_status;
+            $tempstudent->uploaded_by = $request->uploaded_by;
             
             $tempstudent->save();
             return response()->json([
                 'status'=>200,
-                // 'message'=>'Student Added Successfully',
+                'message'=>'Student Added Successfully',
             ]);
-        // }
-
-       
-=======
-        $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = $request->fhe_aw_no;
-        $tempstudent->stud_id = $request->stud_no;
-        $tempstudent->lrn = $request->lrnum;
-        $tempstudent->stud_lname = $request->last_name;
-        $tempstudent->stud_fname = $request->given_name;
-        $tempstudent->stud_mname = $request->mid_name;
-        $tempstudent->stud_ext_name = $request->ext_name;
-        $tempstudent->stud_sex = $request->sex_at_birth;
-        $tempstudent->stud_birth_date = $request->birthdate;
-        $tempstudent->stud_birth_place = $request->birthplace;
-        $tempstudent->f_lname = $request->fathers_lname;
-        $tempstudent->f_fname = $request->fathers_gname;
-        $tempstudent->f_mname = $request->fathers_mname;
-        $tempstudent->m_lname = $request->mothers_lname;
-        $tempstudent->m_fname = $request->mothers_gname;
-        $tempstudent->m_mname = $request->mothers_mname;
-        $tempstudent->permanent_prov = $request->perm_prov;
-        $tempstudent->permanent_city = $request->perm_city;
-        $tempstudent->permanent_brgy = $request->perm_brgy;
-        $tempstudent->permanent_street = $request->perm_street;
-        $tempstudent->permanent_zip = $request->perm_zip;
-        $tempstudent->present_prov = $request->pres_prov;
-        $tempstudent->present_city = $request->pres_city;
-        $tempstudent->present_brgy = $request->pres_brgy;
-        $tempstudent->present_street = $request->pres_street;
-        $tempstudent->present_zip = $request->pres_zip;
-        $tempstudent->stud_email = $request->email;
-        $tempstudent->stud_alt_email = $request->a_email;
-        $tempstudent->stud_phone_no = $request->contact_number;
-        $tempstudent->stud_alt_phone_no = $request->contact_number_2;
-        $tempstudent->transferee = $request->is_transferee;
-        $tempstudent->degree_program = $request->degree_course_id;
-        $tempstudent->year_level = $request->year_level;
-        $tempstudent->lab_unit = $request->lab_u;
-        $tempstudent->comp_lab_unit = $request->com_lab_u;
-        $tempstudent->academic_unit = $request->acad_u;
-        $tempstudent->nstp_unit = $request->nstp_u;
-        $tempstudent->total_exam_taken = $request->exams;
-        $tempstudent->exam_result = $request->exam_result;
-        $tempstudent->remarks = $request->remarks;
-
-
-
-        $tempstudent->hei_psg_region = $request->hei_psg_region;
-        $tempstudent->hei_sid = $request->hei_sid;
-        $tempstudent->hei_uii = $request->hei_uii;
-        $tempstudent->hei_name = $request->hei_name;
-        $tempstudent->reference_no = $request->reference_no;
-        $tempstudent->ac_year = $request->ac_year;
-        $tempstudent->semester = $request->semester;
-        $tempstudent->tranche = $request->tranche;
-        $tempstudent->app_id = $request->app_id;
-
-        // $tempstudent->tuition_fee = $request->tuition_fee;
-        // $tempstudent->entrance_fee = $request->entrance_fee;
-        // $tempstudent->admission_fee = $request->admission_fee;
-        // $tempstudent->athletic_fee = $request->athletic_fee;
-        // $tempstudent->computer_fee = $request->computer_fee;
-        // $tempstudent->cultural_fee = $request->cultural_fee;
-        // $tempstudent->development_fee = $request->development_fee;
-        // $tempstudent->guidance_fee = $request->guidance_fee;
-        // $tempstudent->handbook_fee = $request->handbook_fee;
-        // $tempstudent->laboratory_fee = $request->laboratory_fee;
-        // $tempstudent->library_fee = $request->library_fee;
-        // $tempstudent->medical_dental_fee = $request->medical_dental_fee;
-        // $tempstudent->registration_fee = $request->registration_fee;
-        // $tempstudent->school_id_fee = $request->school_id_fee;
-        // $tempstudent->nstp_fee = $request->nstp_fee;
-        // $tempstudent->stud_cor = $request->stud_cor;
-        // $tempstudent->remarks = $request->remarks;
-        // $tempstudent->stud_status = $request->stud_status;
-        // $tempstudent->uploaded_by = $request->uploaded_by;
-        
-        $tempstudent->save();
->>>>>>> 67673b7ae76a6939005330d80f2069e7fd4e0207
+        }
     }
 
     public function getTempStudents(Request $request)
