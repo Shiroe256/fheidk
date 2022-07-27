@@ -87,67 +87,71 @@ class BillingController extends Controller
 
     public function batchTempStudent(Request $request)
     {
-        $tempstudents[] =  $request->getContent();
-        foreach ($tempstudents as $num => $tempstudent) {
-            $this->_newTempStudentBatch($tempstudent);
-        }
+        $tempstudents[] =  json_decode($request->getContent());
+        print_r($tempstudents);
+        // echo $tempstudents[0][0];
+        // foreach ($tempstudents as $num => $tempstudent) {
+        //     echo $tempstudent;
+        //     return 0;
+        //     // $this->_newTempStudentBatch($tempstudent);
+        // }
     }
 
     public function _newTempStudentBatch($data = array())
     {
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = $data->fhe_aw_no;
-        $tempstudent->stud_id = $data->stud_no;
-        $tempstudent->lrn = $data->lrnum;
-        $tempstudent->stud_lname = $data->last_name;
-        $tempstudent->stud_fname = $data->given_name;
-        $tempstudent->stud_mname = $data->mid_name;
-        $tempstudent->stud_ext_name = $data->ext_name;
-        $tempstudent->stud_sex = $data->sex_at_birth;
-        $tempstudent->stud_birth_date = $data->birthdate;
-        $tempstudent->stud_birth_place = $data->birthplace;
-        $tempstudent->f_lname = $data->fathers_lname;
-        $tempstudent->f_fname = $data->fathers_gname;
-        $tempstudent->f_mname = $data->fathers_mname;
-        $tempstudent->m_lname = $data->mothers_lname;
-        $tempstudent->m_fname = $data->mothers_gname;
-        $tempstudent->m_mname = $data->mothers_mname;
-        $tempstudent->permanent_prov = $data->perm_prov;
-        $tempstudent->permanent_city = $data->perm_city;
-        $tempstudent->permanent_brgy = $data->perm_brgy;
-        $tempstudent->permanent_street = $data->perm_street;
-        $tempstudent->permanent_zip = $data->perm_zip;
-        $tempstudent->present_prov = $data->pres_prov;
-        $tempstudent->present_city = $data->pres_city;
-        $tempstudent->present_brgy = $data->pres_brgy;
-        $tempstudent->present_street = $data->pres_street;
-        $tempstudent->present_zip = $data->pres_zip;
-        $tempstudent->stud_email = $data->email;
-        $tempstudent->stud_alt_email = $data->a_email;
-        $tempstudent->stud_phone_no = $data->contact_number;
-        $tempstudent->stud_alt_phone_no = $data->contact_number_2;
-        $tempstudent->transferee = $data->is_transferee;
-        $tempstudent->degree_program = $data->degree_course_id;
-        $tempstudent->year_level = $data->year_level;
-        $tempstudent->lab_unit = $data->lab_u;
-        $tempstudent->comp_lab_unit = $data->com_lab_u;
-        $tempstudent->academic_unit = $data->acad_u;
-        $tempstudent->nstp_unit = $data->nstp_u;
-        $tempstudent->total_exam_taken = $data->exams;
-        $tempstudent->exam_result = $data->exam_result;
-        $tempstudent->remarks = $data->remarks;
+        $tempstudent->fhe_award_no = $data['fhe_aw_no'];
+        $tempstudent->stud_id = $data['stud_no'];
+        $tempstudent->lrn = $data['lrnum'];
+        $tempstudent->stud_lname = $data['last_name'];
+        $tempstudent->stud_fname = $data['given_name'];
+        $tempstudent->stud_mname = $data['mid_name'];
+        $tempstudent->stud_ext_name = $data['ext_name'];
+        $tempstudent->stud_sex = $data['sex_at_birth'];
+        $tempstudent->stud_birth_date = $data['birthdate'];
+        $tempstudent->stud_birth_place = $data['birthplace'];
+        $tempstudent->f_lname = $data['fathers_lname'];
+        $tempstudent->f_fname = $data['fathers_gname'];
+        $tempstudent->f_mname = $data['fathers_mname'];
+        $tempstudent->m_lname = $data['mothers_lname'];
+        $tempstudent->m_fname = $data['mothers_gname'];
+        $tempstudent->m_mname = $data['mothers_mname'];
+        $tempstudent->permanent_prov = $data['perm_prov'];
+        $tempstudent->permanent_city = $data['perm_city'];
+        $tempstudent->permanent_brgy = $data['perm_brgy'];
+        $tempstudent->permanent_street = $data['perm_street'];
+        $tempstudent->permanent_zip = $data['perm_zip'];
+        $tempstudent->present_prov = $data['pres_prov'];
+        $tempstudent->present_city = $data['pres_city'];
+        $tempstudent->present_brgy = $data['pres_brgy'];
+        $tempstudent->present_street = $data['pres_street'];
+        $tempstudent->present_zip = $data['pres_zip'];
+        $tempstudent->stud_email = $data['email'];
+        $tempstudent->stud_alt_email = $data['a_email'];
+        $tempstudent->stud_phone_no = $data['contact_number'];
+        $tempstudent->stud_alt_phone_no = $data['contact_number_2'];
+        $tempstudent->transferee = $data['is_transferee'];
+        $tempstudent->degree_program = $data['degree_course_id'];
+        $tempstudent->year_level = $data['year_level'];
+        $tempstudent->lab_unit = $data['lab_u'];
+        $tempstudent->comp_lab_unit = $data['com_lab_u'];
+        $tempstudent->academic_unit = $data['acad_u'];
+        $tempstudent->nstp_unit = $data['nstp_u'];
+        $tempstudent->total_exam_taken = $data['exams'];
+        $tempstudent->exam_result = $data['exam_result'];
+        $tempstudent->remarks = $data['remarks'];
 
 
 
-        $tempstudent->hei_psg_region = $data->hei_psg_region;
-        $tempstudent->hei_sid = $data->hei_sid;
-        $tempstudent->hei_uii = $data->hei_uii;
-        $tempstudent->hei_name = $data->hei_name;
-        $tempstudent->reference_no = $data->reference_no;
-        $tempstudent->ac_year = $data->ac_year;
-        $tempstudent->semester = $data->semester;
-        $tempstudent->tranche = $data->tranche;
-        $tempstudent->app_id = $data->app_id;
+        $tempstudent->hei_psg_region = $data['hei_psg_region'];
+        $tempstudent->hei_sid = $data['hei_sid'];
+        $tempstudent->hei_uii = $data['hei_uii'];
+        $tempstudent->hei_name = $data['hei_name'];
+        $tempstudent->reference_no = $data['reference_no'];
+        $tempstudent->ac_year = $data['ac_year'];
+        $tempstudent->semester = $data['semester'];
+        $tempstudent->tranche = $data['tranche'];
+        $tempstudent->app_id = $data['app_id'];
     }
 
     //new temporary student
