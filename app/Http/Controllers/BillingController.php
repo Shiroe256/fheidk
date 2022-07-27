@@ -18,6 +18,56 @@ class BillingController extends Controller
         return $reference_number;
     }
 
+    public function fetchTempStudent(){
+        $students = TemporaryBilling::all();
+		$output = '';
+		if ($students->count() > 0) {
+			$output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
+            <thead>
+                <tr>
+                    <th class="text-center"><input type="checkbox"></th>
+                    <th class="text-left">HEI CAMPUS</th>
+                    <th class="text-left">AWARD NUMBER</th>
+                    <th class="text-left">LASTNAME</th>
+                    <th class="text-left">FIRSTNAME</th>
+                    <th class="text-left">MIDDLENAME</th>
+                    <th>COURSE</th>
+                    <th class="text-center">YEAR</th>
+                    <th class="text-left">REMARKS</th>
+                    <th class="text-left">STATUS</th>
+                    <th class="text-left">AMOUNT BILLED</th>
+                    <th class="text-center">ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="tbl_list_of_students_form_2">';
+			foreach ($students as $student) {
+				$output .= '<tr>
+                    <td class="text-center"><input type="checkbox"></td>
+                    <td class="text-left">'. $student->hei_name .'</td>
+                    <td class="text-left">'. $student->fhe_award_no .'</td>
+                    <td>'. $student->stud_lname .'</td>
+                    <td>'. $student->stud_fname .'</td>
+                    <td>'. $student->stud_mname .'</td>
+                    <td>'. $student->degree_program .'</td>
+                    <td class="text-center">'. $student->year_level .'</td>
+                    <td class="text-left">'. $student->remarks .'</td>
+                    <td class="text-left">'. $student->stud_status .'</td>
+                    <td class="text-left"></td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>';
+			}
+			$output .= '</tbody>
+            </table>';
+			echo $output;
+		} else {
+			echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
+		}
+    }
     public function newBilling(Request $request)
     {
         $billing = new Billing;
@@ -34,15 +84,6 @@ class BillingController extends Controller
         $billing->created_by = $request->created_by;
 
         $billing->save();
-    }
-
-    public function fetchTempStudent()
-    {
-        $TempStudents = TemporaryBilling::all();
-        return response()->json([
-            'tbl_billing_details_temp' => $TempStudents
-
-        ]);
     }
 
     // public function store(Request $request) {
