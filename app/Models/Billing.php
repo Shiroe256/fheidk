@@ -21,8 +21,7 @@ class Billing extends Model
         'total_beneficiaries',
         'total_amount',
         'billing_status',
-        'created_by',
-        'created_at',
+        'created_by'
     ];
 
 }

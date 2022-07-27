@@ -1319,6 +1319,8 @@
             $.ajax({
                 url: window.location.origin + "/add-tempstudents",
                 type: "POST",
+                contentType: "json",
+                processData: false,
                 data: JSON.stringify(output),
                 dataType: 'JSON',
                 success: function(data) {

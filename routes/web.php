@@ -59,4 +59,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //CRUD Routes
 Route::get('get-tempstudents',[BillingController::class,'fetchTempStudent']);
-Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);
+Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']); //batch
