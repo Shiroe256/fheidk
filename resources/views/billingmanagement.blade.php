@@ -1,4 +1,4 @@
-@include('includes.header');
+@include('includes.header')
             <div class="container-fluid">
                 <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY 2020-2021</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">1st Semester</span> / <span class="badge badge-pill badge-info">1st Tranche</span></h5>
                 <div class="card shadow">
@@ -71,120 +71,8 @@
                                                             data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                                 </div>
                                             </div>
-                                            <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_billingform_2">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center"><input type="checkbox"></th>
-                                                            <th class="text-left">HEI CAMPUS</th>
-                                                            <th class="text-left">AWARD NUMBER</th>
-                                                            <th class="text-left">LASTNAME</th>
-                                                            <th class="text-left">FIRSTNAME</th>
-                                                            <th class="text-left">MIDDLENAME</th>
-                                                            <th>COURSE</th>
-                                                            <th class="text-center">YEAR</th>
-                                                            <th class="text-left">REMARKS</th>
-                                                            <th class="text-left">STATUS</th>
-                                                            <th class="text-left">AMOUNT BILLED</th>
-                                                            <th class="text-center">ACTION</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tbl_list_of_students_form_2">
-                                                        {{-- <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Diliman (Main)</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">4</td>
-                                                            <td class="text-left">Graduating</td>
-                                                            <td class="text-left">Duplicate Entry<br></td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr> --}}
-                                                        {{-- <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Los Baños</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-left"><br></td>
-                                                            <td class="text-left">Duplicate Entry<br></td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Visayas</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">3</td>
-                                                            <td class="text-left"><br></td>
-                                                            <td class="text-left">Maximum Amount for Guidance Fee / Laboratory Fee/ Development Fee Exceeded<br></td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Baguio</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">4</td>
-                                                            <td class="text-left">Graduating</td>
-                                                            <td class="text-left">Exceeded the Maximum Grace Period Allowed<br></td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Baguio</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">4</td>
-                                                            <td class="text-left">Graduating</td>
-                                                            <td class="text-left">For Payment</td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center"><input type="checkbox"></td>
-                                                            <td class="text-left">Baguio</td>
-                                                            <td class="text-left">FHE-123-456</td>
-                                                            <td>Molina</td>
-                                                            <td>Carlo</td>
-                                                            <td>Espartinez</td>
-                                                            <td>Bachelor of Science in Information and Techology</td>
-                                                            <td class="text-center">4</td>
-                                                            <td class="text-left">Graduating</td>
-                                                            <td class="text-left">For Payment</td>
-                                                            <td class="text-center">
-                                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i></button></div>
-                                                            </td>
-                                                        </tr> --}}
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr></tr>
-                                                    </tfoot>
-                                                </table>
+                                            <div id="show_all_students" class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                                                                                                   
                                             </div>
                                         </div>
                                     </form>
@@ -607,7 +495,7 @@
                                                         <td class="text-center"><span class="badge badge-pill badge-warning input-style">For Review</span></td>
                                                         <td class="text-center"></td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info" role="button" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" title="View billing submission" href="Admin/billinginformation.html" data-target="#mod_upload_signed_forms"><i class="fas fa-file-upload"></i></a>
+                                                            <div class="btn-group btn-group-sm"     role="group"><a class="btn btn-outline-info" role="button" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" title="View billing submission" href="Admin/billinginformation.html" data-target="#mod_upload_signed_forms"><i class="fas fa-file-upload"></i></a>
                                                                 <a
                                                                     class="btn btn-outline-info" role="button" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" title="View billing submission" href="Admin/billinginformation.html" data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
                                                             </div>
@@ -1018,21 +906,22 @@
             </div>
         </div>
     </div>
-    
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\bootstrap.min.js')}}"></script>
+
+    {{-- <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script> --}}
     <script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js')}}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
     <script type="text/javascript" src="{{url('js\chart.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js\bs-init.js')}}"></script>
+    <script type="text/javascript" src="{{url('js\bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js\theme.js')}}"></script>
     <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
     <script type="text/javascript" src="{{url('js\datatables.js')}}"></script>
     <script type="text/javascript" src="{{url('js\student_crud.js')}}"></script>
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js')}}"></script>
-    <script src="{{url('https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url('https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{url('https://unpkg.com/xlsx/dist/xlsx.full.min.js')}}"></script>
 
 </body>

@@ -49,13 +49,19 @@ Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('pro
 
 //routes ni migs na pang testing
 Route::get('/testing', function () {
-    return view('billingmanagement');
+    return view('billingmanagementcopy');
 });
 
 //route for login
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Routes
+<<<<<<< HEAD
+Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
+Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
+=======
 Route::get('get-tempstudents',[BillingController::class,'fetchTempStudent']);
+Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);
+>>>>>>> 67673b7ae76a6939005330d80f2069e7fd4e0207
