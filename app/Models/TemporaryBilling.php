@@ -61,7 +61,7 @@ class TemporaryBilling extends Model
         'tuition_fee',
         'entrance_fee',
         'admission_fee',
-        'atlhletic_fee',
+        'athletic_fee',
         'computer_fee',
         'cultural_fee',
         'development_fee',
@@ -80,6 +80,8 @@ class TemporaryBilling extends Model
         'stud_status',
         'uploaded_by'
     ];
+    public $timestamps = false;
+
 
     public function getTempStudents($reference_no)
     {

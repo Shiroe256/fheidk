@@ -1256,9 +1256,15 @@
         reader.onload = function(e) {
             var data = e.target.result;
             var workbook = XLSX.readFile(data);
-            var range = workbook.Sheets.Billing_Form;
+            var sheet = workbook.Sheets.Billing_Form;
 
-            var output = XLSX.utils.sheet_to_json(range, {
+    //   var firstSheetName = workbook.SheetNames[0];
+    //   var worksheet = workbook.Sheets[firstSheetName];
+
+
+            var output = XLSX.utils.sheet_to_json(sheet, {
+                range: 7,
+                raw: false,
                 header: [
                     "seq_no",
                     "fhe_aw_no",
@@ -1303,14 +1309,7 @@
                     "remarks"
                 ]
             });
-            console.log(JSON.stringify(output));
 
-            // let request = new XMLHttpRequest();
-            // request.open("POST", );
-            // // request.setRequestHeader("Accept", "application/json");
-            // request.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
-            // request.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'));
-            // request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
