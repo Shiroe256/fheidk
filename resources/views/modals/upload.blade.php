@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button id="btn_upload_template" class="btn btn-primary card-button-style" type="button">Upload</button></div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button id="btn_upload_template" class="btn btn-primary card-button-style" type="button" data-dismiss="modal">Upload</button></div>
             </form>
         </div>
     </div>

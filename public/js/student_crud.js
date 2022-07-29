@@ -2,23 +2,7 @@ $(document).ready(function () {
 
     fetchTempStudent();
 
-    function fetchTempStudent() {
-        $.ajax({
-            url: "/get-tempstudents",
-            method: 'get',
-            success: function (response) {
-                $("#show_all_students").html(response);
-                $("#tbl_students").DataTable({
-                    "order": [[3, "asc"]],
-                    orderCellsTop: true,
-                    fixedHeader: true,
-                    columnDefs: [
-                        { orderable: false, targets: [0, -1] }
-                    ]
-                });
-            }
-        });
-    }
+    
 
 
     $(document).on('click', '#btn_add_student', function(e){
@@ -64,3 +48,23 @@ $(document).ready(function () {
 
 
 }); 
+
+
+//nilabas ko para ma call ko sa iba
+function fetchTempStudent() {
+    $.ajax({
+        url: "/get-tempstudents",
+        method: 'get',
+        success: function (response) {
+            $("#show_all_students").html(response);
+            $("#tbl_students").DataTable({
+                "order": [[3, "asc"]],
+                orderCellsTop: true,
+                fixedHeader: true,
+                columnDefs: [
+                    { orderable: false, targets: [0, -1] }
+                ]
+            });
+        }
+    });
+}

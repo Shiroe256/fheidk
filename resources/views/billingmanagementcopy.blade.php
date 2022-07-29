@@ -1,4 +1,8 @@
-@include('includes.header');
+@extends('layouts.layout')
+@section('header')
+    @include('includes.header2')
+@endsection
+@section('content')
 <div class="container-fluid">
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
             2020-2021</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">1st Semester</span> / <span
@@ -1233,108 +1237,12 @@
     </div>
 </div>
 
-<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\chart.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\bs-init.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\theme.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\xlsx.full.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\datatables.js') }}"></script>
-<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js') }}"></script>
-<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js') }}">
-</script>
-<script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js') }}"></script>
-<script src="{{ url('https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ url('https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js') }}"></script>
-<script>
-    document.getElementById("btn_upload_template").onclick = function() {
-        console.log("nag click");
-        var template = document.getElementById("upload_template").files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var data = e.target.result;
-            var workbook = XLSX.readFile(data);
-            var sheet = workbook.Sheets.Billing_Form;
+@endsection
 
-    //   var firstSheetName = workbook.SheetNames[0];
-    //   var worksheet = workbook.Sheets[firstSheetName];
-
-
-            var output = XLSX.utils.sheet_to_json(sheet, {
-                range: 7,
-                raw: false,
-                header: [
-                    "seq_no",
-                    "fhe_aw_no",
-                    "stud_no",
-                    "lrnum",
-                    "last_name",
-                    "given_name",
-                    "mid_name",
-                    "ext_name",
-                    "sex_at_birth",
-                    "birthdate",
-                    "birthplace",
-                    "fathers_lname",
-                    "fathers_gname",
-                    "fathers_mname",
-                    "mothers_lname",
-                    "mothers_gname",
-                    "mothers_mname",
-                    "perm_prov",
-                    "perm_city",
-                    "perm_brgy",
-                    "perm_street",
-                    "perm_zip",
-                    "pres_prov",
-                    "pres_city",
-                    "pres_brgy",
-                    "pres_street",
-                    "pres_zip",
-                    "email",
-                    "a_email",
-                    "contact_number",
-                    "contact_number_2",
-                    "is_transferee",
-                    "degree_course_id",
-                    "year_level",
-                    "lab_u",
-                    "com_lab_u",
-                    "acad_u",
-                    "nstp_u",
-                    "exams",
-                    "exam_result",
-                    "remarks"
-                ]
-            });
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: window.location.origin + "/add-tempstudents",
-                type: "POST",
-                contentType: "json",
-                processData: false,
-                data: JSON.stringify(output),
-                dataType: 'JSON',
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-
-
-            request.send(output);
-
-        };
-        reader.readAsArrayBuffer(template);
-
-    }
-</script>
+@section('footer')
+@include('includes.footer')
+<script type="text/javascript" src="{{ url('js/billing.js') }}"></script>
+@endsection
 </body>
 
 </html>
