@@ -2,58 +2,70 @@ document.getElementById("btn_upload_template").onclick = function () {
     uploadBatch();
 }
 
-// function validateFields(data) {
-//     data.forEach(stud => {
-//         var numpattern = /[0-9]/;
-//         var sexpattern = /MALE|FEMALE/;
-//         if(!(typeof stud['seq_no'] === 'number' && isFinite(stud['seq_no']))) return 0;
-//         stud['fhe_aw_no']
-//         stud['stud_no']
-//         stud['lrnum']
-//         if(numpattern.test(stud['given_name'])) return 0;
-//         if(numpattern.test(stud['mid_name'])) return 0;
-//         if(numpattern.test(stud['ext_name'])) return 0;
-//         if(numpattern.test(stud['last_name'])) return 0;
-//         if(sexpattern.test(stud['sex_at_birth'])) return 0;
-//         stud['birthdate']
-//         stud['birthplace']
-//         stud['fathers_lname']
-//         stud['fathers_gname']
-//         stud['fathers_mname']
-//         stud['mothers_lname']
-//         stud['mothers_gname']
-//         stud['mothers_mname']
-//         stud['perm_prov']
-//         stud['perm_city']
-//         stud['perm_brgy']
-//         stud['perm_street']
-//         stud['perm_zip']
-//         stud['pres_prov']
-//         stud['pres_city']
-//         stud['pres_brgy']
-//         stud['pres_street']
-//         stud['pres_zip']
-//         stud['email']
-//         stud['a_email']
-//         stud['contact_number']
-//         stud['contact_number_2']
-//         stud['is_transferee']
-//         stud['degree_course_id']
-//         stud['year_level']
-//         stud['lab_u']
-//         stud['com_lab_u']
-//         stud['acad_u']
-//         stud['nstp_u']
-//         stud['exams']
-//         stud['exam_result']
-//         stud['remarks']
-//     });
-// }
+function validateFields(data) {
+
+    var errors = [];
+    for (const stud of data) {
+        var numpattern = /\d/;
+        var sexpattern = /MALE|FEMALE/;
+        var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,2}$/;
+        var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var error = [];
+        // errors[ctr] = [];
+        // stud['fhe_aw_no']
+        // stud['stud_no']
+        // stud['lrnum']
+        // if(!numpattern.test(stud['seq_no'])) error.push('');
+        if (numpattern.test(stud['given_name'])) error.push('There are invalid characters in the First Name Field');
+        if (numpattern.test(stud['mid_name'])) error.push('There are invalid characters in the Middle Name Field');
+        // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
+        if (numpattern.test(stud['last_name'])) error.push('There are invalid characters in the Last Name Field');
+        if (sexpattern.test(stud['sex_at_birth'])) error.push('There are invalid characters in the Sex Field');
+        // console.log(stud['birthdate']);
+        if (!datepattern.test(stud['birthdate'])) error.push('The birthdate is using an invalid format');
+        // stud['birthplace']
+        if (numpattern.test(stud['fathers_lname'])) error.push('There are invalid characters in the Father\'s Last Name Field');
+        if (numpattern.test(stud['fathers_gname'])) error.push('There are invalid characters in the Father\'s First Name Field');
+        if (numpattern.test(stud['fathers_mname'])) error.push('There are invalid characters in the Father\'s Middle Name Field');
+        if (numpattern.test(stud['mothers_lname'])) error.push('There are invalid characters in the Mother\'s Last Name Field');
+        if (numpattern.test(stud['mothers_gname'])) error.push('There are invalid characters in the Mother\'s First Name Field');
+        if (numpattern.test(stud['mothers_mname'])) error.push('There are invalid characters in the Mother\'s Middle Name Field');
+        if (!emailpattern.test(stud['email'])) error.push('The email field isn\'t using a valid format');
+        if (!emailpattern.test(stud['a_email'])) error.push('The alternate email field isn\'t using a valid format');
+
+        // stud['perm_prov']
+        // stud['perm_city']
+        // stud['perm_brgy']
+        // stud['perm_street']
+        // stud['perm_zip']
+        // stud['pres_prov']
+        // stud['pres_city']
+        // stud['pres_brgy']
+        // stud['pres_street']
+        // stud['pres_zip']
+
+        // stud['contact_number']
+        // stud['contact_number_2']
+        // stud['is_transferee']
+        // stud['degree_course_id']
+        if (!numpattern.test(stud['year_level'])) error.push('The year level must only be a number');
+        // stud['lab_u']
+        // stud['com_lab_u']
+        // stud['acad_u']
+        // stud['nstp_u']
+        // stud['exams']
+        // stud['exam_result']
+        // stud['remarks']
+
+        errors.push(error);
+    }
+    return errors;
+}
 
 function uploadBatch() {
     var file = document.getElementById("upload_template").files;
     if (file.length < 1) {
-        alert("Please select a XLSX file");
+        alert("Please select an XLSX file");
     } else {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -113,26 +125,47 @@ function uploadBatch() {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $.ajax({
-                url: window.location.origin + "/add-tempstudents",
-                type: "POST",
-                contentType: "json",
-                processData: false,
-                data: JSON.stringify(output),
-                dataType: 'JSON',
-                complete: function () {
-                    fetchTempStudent();
-                },
-                beforeSend: function () {
 
-                },
-                success: function () {
-
-                },
-                error: function () {
-
-                }
+            // console.log(validateFields(output));
+            let errorctr = 0; //counts error
+            var errors = validateFields(output); //storefields to validate
+            let errorhtml = "";
+            errors.forEach(item => {
+                if (item.length > 0) ++errorctr;
+                errorhtml.concat('<tr><td>' + item + '</tr></td>');
             });
+            console.log(errors);
+            if (errorctr > 0) {
+                // console.log("merong " + errorctr + " items with errors");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
+                        errors
+                });
+            } else {
+                //if there are no items with errors then the ajax request pushes through
+                $.ajax({
+                    url: window.location.origin + "/add-tempstudents",
+                    type: "POST",
+                    contentType: "json",
+                    processData: false,
+                    data: JSON.stringify(output),
+                    dataType: 'JSON',
+                    complete: function () {
+                        fetchTempStudent();
+                    },
+                    beforeSend: function () {
+
+                    },
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
         };
         reader.readAsArrayBuffer(document.getElementById("upload_template").files[0]);
     }
