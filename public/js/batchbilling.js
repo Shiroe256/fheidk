@@ -1,6 +1,15 @@
-document.getElementById("btn_upload_template").onclick = function () {
+const fileInput = document.getElementById('upload_template');
+const uploadButton = document.getElementById('btn_upload_template');
+const closeButton = document.getElementById("closebutton");
+uploadButton.onclick = function () {
     uploadBatch();
 }
+fileInput.onchange = () => {
+    const selectedFile = fileInput.files[0];
+    console.log(selectedFile);
+    document.getElementById('upload_template_text').innerHTML = selectedFile.name;
+}
+
 
 function validateFields(data) {
 
@@ -154,15 +163,27 @@ function uploadBatch() {
                     dataType: 'JSON',
                     complete: function () {
                         fetchTempStudent();
+                        uploadButton.innerHTML = 'Upload';
+                        uploadButton.disabled = false;
+                        closeButton.disabled = false;
+                        fileInput.disabled = false;
+                        document.getElementById("closebutton").click();
                     },
                     beforeSend: function () {
-
+                        uploadButton.innerHTML = 'Uploading...';
+                        uploadButton.disabled = true;
+                        closeButton.disabled = true;
+                        fileInput.disabled = true;
                     },
                     success: function () {
-
+                        Swal.fire('Uploading Success',
+                            'The students in the spreadsheet have been uploaded',
+                            'success');
                     },
                     error: function () {
-
+                        Swal.fire('An Error has been encountered',
+                            'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
+                            'error');
                     }
                 });
             }
