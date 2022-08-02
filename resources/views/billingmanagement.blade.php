@@ -67,7 +67,7 @@
                                                 </div>
                                                 <div class="col text-right">
                                                     <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button><button class="btn btn-outline-info btn-sm"
-                                                            type="button" data-toggle="modal" data-target="#mod_new_student_info"><i class="fas fa-user-plus"></i>&nbsp;Add Student</button><button class="btn btn-outline-danger btn-sm" type="button" data-toggle="modal"
+                                                            type="button" data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i class="fas fa-user-plus"></i>&nbsp;Add Student</button><button class="btn btn-outline-danger btn-sm" type="button" data-toggle="modal"
                                                             data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                                 </div>
                                             </div>
