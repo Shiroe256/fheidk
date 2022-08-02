@@ -2,9 +2,6 @@ $(document).ready(function () {
 
     fetchTempStudent();
 
-    
-
-
     $(document).on('click', '#btn_add_student', function(e){
         e.preventDefault();
         
