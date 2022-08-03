@@ -6,7 +6,6 @@ uploadButton.onclick = function () {
 }
 fileInput.onchange = () => {
     const selectedFile = fileInput.files[0];
-    console.log(selectedFile);
     document.getElementById('upload_template_text').innerHTML = selectedFile.name;
 }
 
@@ -138,19 +137,23 @@ function uploadBatch() {
             // console.log(validateFields(output));
             let errorctr = 0; //counts error
             var errors = validateFields(output); //storefields to validate
-            let errorhtml = "";
+            let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
+            let ctr = 1;
             errors.forEach(item => {
                 if (item.length > 0) ++errorctr;
-                errorhtml.concat('<tr><td>' + item + '</tr></td>');
+                errorhtml = errorhtml.concat('<tr><td>' + ctr++ +'</td><td><ul>');
+                item.forEach(column => {
+                    errorhtml = errorhtml.concat('<li>' + column + '</li>');
+                });
+                errorhtml = errorhtml.concat('</ul></td></tr>');
             });
-            console.log(errors);
+            errorhtml = errorhtml.concat('</tbody></table>');
             if (errorctr > 0) {
-                // console.log("merong " + errorctr + " items with errors");
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                        errors
+                        errorhtml
                 });
             } else {
                 //if there are no items with errors then the ajax request pushes through
