@@ -1,50 +1,60 @@
-$(document).ready(function () {
+$(function() {
 
-    fetchTempStudent();
+fetchTempStudent();
 
-    $(document).on('click', '#btn_add_student', function(e){
-        e.preventDefault();
-        
-        var data={
-            'stud_lname': $('#lname').val(),
-            'stud_fname': $('#fname').val(),
-            'stud_mname': $('#mname').val(),
+ // add new student ajax request
+ $("#frm_add_student").submit(function(e) {
+    e.preventDefault();
+    const fd = new FormData(this);
+    $("#btn_add_student").text('Adding...');
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-        
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-
-        $("#btn_add_student").text('Adding...');
-        $.ajax({
-            url: "/newtempstudent",
-            method: 'post',
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function (response) {
-                if (response.status == 200) {
-                    Swal.fire(
-                        'Added!',
-                        'Student Added Successfully!',
-                        'success'
-                    )
-                    fetchTempStudent();
-                }
-                $("#btn_add_student").text('Add Student');
-                $("#frm_add_student")[0].reset();
-                $("#mod_new_student_info").modal('hide');
-            }
-        });
     });
 
+    $.ajax({
+      url: '/newtempstudent',
+      method: 'post',
+      data: fd,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      success: function(response) {
+        if (response.status == 200) {
+          Swal.fire(
+            'Added!',
+            'Student Added Successfully!',
+            'success'
+          )
+          fetchTempStudent();
+        $("#btn_add_student").text('Add Student');
+        $("#frm_add_student")[0].reset();
+        $("#mod_new_student_info").modal('hide');
+        }else if(response.status == 400) {
+            let i = 1;
+            let errorMessage = '';
+            $.each(response.errors, function(key, err_values){
+                console.log(err_values);
+                errorMessage = errorMessage+'<br />'+ i++ + '. ' +err_values;
+            })
+            Swal.fire({
+                // position: 'top',
+                title: 'Oops... you missed something',
+                html: errorMessage,
+                icon:'warning', 
 
+            })
+        
+            fetchTempStudent();
+            $("#btn_add_student").text('Add Student');
+          }
+      }
+    });
+  });
 
-}); 
 
 
 //nilabas ko para ma call ko sa iba
@@ -65,3 +75,4 @@ function fetchTempStudent() {
         }
     });
 }
+});

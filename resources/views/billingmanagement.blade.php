@@ -783,10 +783,10 @@
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
     
-    @include('modals.addstudent');
-    @include('modals.admissionentrance');
-    @include('modals.nstpinfo');
-    @include('modals.upload');
+    @include('modals.addstudent')
+    @include('modals.admissionentrance')
+    @include('modals.nstpinfo')
+    @include('modals.upload')
     
     
     <div class="modal fade" role="dialog" tabindex="-1" id="mod_view_uploaded_file">

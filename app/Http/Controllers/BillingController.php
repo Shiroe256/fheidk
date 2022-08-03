@@ -70,63 +70,87 @@ class BillingController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
         }
     }
-    public function newBilling(Request $request)
-    {
-        $billing = new Billing;
-        $billing->hei_psg_region = $request->hei_psg_region;
-        $billing->hei_sid = $request->hei_sid;
-        $billing->hei_uii = $request->hei_uii;
-        $billing->reference_no = $this->generateBillingReferenceNumber($request->$hei_psg_region, $request->$hei_sid, $request->$ac_year, $request->$semester, $request->$tranche);
-        $billing->ac_year = $request->ac_year;
-        $billing->semester = $request->semester;
-        $billing->tranche = $request->tranche;
-        $billing->total_beneficiaries = $request->total_beneficiaries;
-        $billing->total_amount = $request->total_amount;
-        $billing->billing_status = $request->billing_status;
-        $billing->created_by = $request->created_by;
 
-        $billing->save();
+    // handle insert a new employee ajax request
+	public function newTempStudent(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'last_name'=>'required', //modal field name => validation
+            'first_name' => 'required',
+            'sex' => 'required',
+            'birthplace' => 'required',
+            'present_province' => 'required',
+            'present_city' => 'required',
+            'present_barangay' => 'required',
+            'present_zipcode' => 'required',
+            'permanent_province' => 'required',
+            'permanent_city' => 'required',
+            'permanent_barangay' => 'required',
+            'permanent_zipcode' => 'required',
+            'email_address' => 'required|email',
+            'mobile_number' => 'required|regex:/^(09)\d{9}$/',
+            'course_enrolled' => 'required',
+            'year_level' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }else{  
+		$students = [
+            //static sample data
+            'hei_psg_region' => '01',
+            'hei_sid' => '01040',
+            'hei_uii' => '01040',
+            'hei_name' => 'Mariano Marcos State University',
+            'reference_no' => '01-MMMSU-2020-1-1',
+            'ac_year' => '2020',
+            'semester' => '1',
+            'tranche' => '1',
+            'app_id' => '01040-20222227-00003',
+            'fhe_award_no' => 'FHE-01-01040-20222207-00003',
+            'stud_id' => '',
+            'lrn_no' => '',
+            //actual data being collected in the modal
+            'stud_lname' => $request->last_name, //tablename => $request->name of input field
+            'stud_fname' => $request->first_name, 
+            'stud_mname' => $request->middle_name,
+            'stud_ext_name' => $request->extension_name,
+            'stud_sex' => $request->sex,
+            'stud_birth_date' => $request->birthdate,
+            'stud_birth_place' => $request->birthplace,
+            'f_lname' => $request->f_lname,
+            'f_fname' => $request->f_fname,
+            'f_mname' => $request->f_mname,
+            'm_lname' => $request->m_lname,
+            'm_fname' => $request->m_fname,
+            'm_mname' => $request->m_mname,
+            'present_prov' => $request->present_province,
+            'present_city' => $request->present_city,
+            'present_barangay' => $request->present_barangay,
+            'present_street' => $request->present_street,
+            'present_zipcode' => $request->present_zipcode,
+            'permanent_prov' => $request->permanent_province,
+            'permanent_city' => $request->permanent_city,
+            'permanent_barangay' => $request->permanent_barangay,
+            'permanent_street' => $request->permanent_street,
+            'permanent_zipcode' => $request->permanent_zipcode,
+            'stud_email' => $request->email_address,
+            'stud_alt_email' => $request->alt_email_address,
+            'stud_phone_no' => $request->mobile_number,
+            'alt_stud_phone_no' => $request->alt_mobile_number,
+            //static
+            'trasferee' => '',
+            'degree_program' => $request->course_enrolled,
+            'year_level' => $request->year_level
+        ];
+		TemporaryBilling::create($students);
+		return response()->json([
+			'status' => 200,
+		]);
     }
-
-    // public function store(Request $request) {
-    // 	$file = $request->file('avatar');
-    // 	$fileName = time() . '.' . $file->getClientOriginalExtension();
-    // 	$file->storeAs('public/images', $fileName);
-
-    // 	$studentData = ['first_name' => $request->fname, 'last_name' => $request->lname, 'email' => $request->email, 'phone' => $request->phone, 'post' => $request->post, 'avatar' => $fileName];
-    // 	Student::create($studentData);
-    // 	return response()->json([
-    // 		'status' => 200,
-    // 	]);
-    // }
-
-    // public function store(Request $request){
-
-    //     $validator = Validator::make($request->all(),[
-    //         'name'=>'required|max:191',
-    //         'email'=>'required|email|max:191',
-    //         'phone'=>'required|max:191',
-    //         'course'=>'required|max:191',
-    //     ]);
-
-    //     if($validator->fails()){
-    //         return response()->json([
-    //             'status'=>400,
-    //             'errors'=>$validator->messages(),
-    //         ]);
-    //     }else{
-    //         $student = new Student;
-    //         $student->name = $request->input('name');
-    //         $student->email = $request->input('email');
-    //         $student->phone = $request->input('phone');
-    //         $student->course = $request->input('course');
-    //         $student->save();
-    //         return response()->json([
-    //             'status'=>200,
-    //             'message'=>'Student Added Successfully',
-    //         ]);
-    //     }
-    // }
+	}
 
     public function batchTempStudent(Request $request)
     {
@@ -252,111 +276,6 @@ class BillingController extends Controller
         }
     }
 
-    //new temporary student
-    public function newTempStudent(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'stud_lname' => 'required|max:255',
-            'stud_fname' => 'required|max:255',
-            'stud_sex' => 'required|max:25',
-            'stud_birth_date' => 'required|dateformat:dd-MM-yyyy',
-            'stud_birth_place' => 'required|max:255',
-            'present_prov' => 'required|max:255',
-            'present_city' => 'required|max:255',
-            'present_barangay' => 'required|max:255',
-            'present_zipcode' => 'required|max:255',
-            'permanent_prov' => 'required|max:255',
-            'permanent_city' => 'required|max:255',
-            'permanent_barangay' => 'required|max:255',
-            'permanent_zipcode' => 'required|max:255',
-            'stud_email' => 'required|email|max:255',
-            'stud_phone_no' => 'required|regex:/^(09|\+639)\d{9}$/',
-            'degree_program' => 'required|max:255'
-
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        } else {
-            $tempstudent = new TemporaryBilling;
-            $tempstudent->hei_psg_region = $request->hei_psg_region;
-            $tempstudent->hei_sid = $request->hei_sid;
-            $tempstudent->hei_uii = $request->hei_uii;
-            $tempstudent->hei_name = $request->hei_name;
-            $tempstudent->reference_no = $request->reference_no;
-            $tempstudent->ac_year = $request->ac_year;
-            $tempstudent->semester = $request->semester;
-            $tempstudent->tranche = $request->tranche;
-            $tempstudent->app_id = $request->app_id;
-            $tempstudent->fhe_award_no = $request->fhe_award_no;
-            $tempstudent->stud_id = $request->stud_id;
-            $tempstudent->lrn_no = $request->lrn_no;
-            $tempstudent->stud_lname = $request->lname;
-            $tempstudent->stud_fname = $request->fname;
-            $tempstudent->stud_mname = $request->mname;
-            $tempstudent->stud_ext_name = $request->stud_ext_name;
-            $tempstudent->stud_sex = $request->stud_sex;
-            $tempstudent->stud_birth_date = $request->stud_birth_date;
-            $tempstudent->stud_birth_place = $request->stud_birth_place;
-            $tempstudent->f_lname = $request->f_lname;
-            $tempstudent->f_fname = $request->f_fname;
-            $tempstudent->f_mname = $request->f_mname;
-            $tempstudent->m_lname = $request->m_lname;
-            $tempstudent->m_fname = $request->m_fname;
-            $tempstudent->m_mname = $request->m_mname;
-            $tempstudent->present_prov = $request->present_prov;
-            $tempstudent->present_city = $request->present_city;
-            $tempstudent->present_barangay = $request->present_barangay;
-            $tempstudent->present_street = $request->present_street;
-            $tempstudent->present_zipcode = $request->present_zipcode;
-            $tempstudent->permanent_prov = $request->permanent_prov;
-            $tempstudent->permanent_city = $request->permanent_city;
-            $tempstudent->permanent_barangay = $request->permanent_barangay;
-            $tempstudent->permanent_street = $request->permanent_street;
-            $tempstudent->permanent_zipcode = $request->permanent_zipcode;
-            $tempstudent->stud_email = $request->stud_email;
-            $tempstudent->stud_alt_email = $request->stud_alt_email;
-            $tempstudent->stud_phone_no = $request->stud_phone_no;
-            $tempstudent->stud_alt_phone_no = $request->stud_alt_phone_no;
-            $tempstudent->transferee = $request->transferee;
-            $tempstudent->degree_program = $request->degree_program;
-            $tempstudent->year_level = $request->year_level;
-            $tempstudent->lab_unit = $request->lab_unit;
-            $tempstudent->comp_lab_unit = $request->comp_lab_unit;
-            $tempstudent->academic_unit = $request->academic_unit;
-            $tempstudent->nstp_unit = $request->nstp_unit;
-            $tempstudent->tuition_fee = $request->tuition_fee;
-            $tempstudent->entrance_fee = $request->entrance_fee;
-            $tempstudent->admission_fee = $request->admission_fee;
-            $tempstudent->atlhletic_fee = $request->atlhletic_fee;
-            $tempstudent->computer_fee = $request->computer_fee;
-            $tempstudent->cultural_fee = $request->cultural_fee;
-            $tempstudent->development_fee = $request->development_fee;
-            $tempstudent->guidance_fee = $request->guidance_fee;
-            $tempstudent->handbook_fee = $request->handbook_fee;
-            $tempstudent->laboratory_fee = $request->laboratory_fee;
-            $tempstudent->library_fee = $request->library_fee;
-            $tempstudent->medical_dental_fee = $request->medical_dental_fee;
-            $tempstudent->registration_fee = $request->registration_fee;
-            $tempstudent->school_id_fee = $request->school_id_fee;
-            $tempstudent->nstp_fee = $request->nstp_fee;
-            $tempstudent->stud_cor = $request->stud_cor;
-            $tempstudent->total_exam_taken = $request->total_exam_taken;
-            $tempstudent->exam_result = $request->exam_result;
-            $tempstudent->remarks = $request->remarks;
-            $tempstudent->stud_status = $request->stud_status;
-            $tempstudent->uploaded_by = $request->uploaded_by;
-
-            $tempstudent->save();
-            return response()->json([
-                'status' => 200,
-                'message' => 'Student Added Successfully',
-            ]);
-        }
-    }
 
     public function getTempStudents(Request $request)
     {

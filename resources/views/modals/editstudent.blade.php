@@ -4,7 +4,7 @@
             <form id='frm_add_student' method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h6 class="modal-title">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h6 class="modal-title">EDIT STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-style">
