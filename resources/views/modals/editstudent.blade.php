@@ -1,4 +1,4 @@
-<div id="mod_new_student_info" class="modal fade" role="dialog" tabindex="-1">
+<div id="mod_edit_student_info" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form id='frm_add_student' method="POST">
@@ -12,8 +12,10 @@
                     </div>
                     <div class="form-group input-style">
                         <div class="form-row">
+                            <input name="student_id" id="student_id">
+                            {{-- <input type="hidden" name="student_id" id="student_id"> --}}
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Lastname</label><input name='last_name' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Lastname</label><input name='llast_name' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Firstname</label><input name='first_name' class="form-control input-style" type="text"></div>
@@ -282,7 +284,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-bs-dismiss="modal">Close</button><button id="btn_add_student" class="add_student btn btn-primary card-button-style" type="submit">Add Student</button></div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-bs-dismiss="modal">Close</button><button id="btn_update_student" class="add_student btn btn-primary card-button-style" type="submit">Update Student</button></div>
             </form>
         </div>
     </div>

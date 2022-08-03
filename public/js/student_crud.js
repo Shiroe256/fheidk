@@ -1,4 +1,4 @@
-$(function() {
+
 
 fetchTempStudent();
 
@@ -54,8 +54,25 @@ fetchTempStudent();
       }
     });
   });
+//end of new add student
 
-
+ // edit employee ajax request
+ $(document).on('click', '.btn_update_student', function(e) {
+  e.preventDefault();
+  let id = $(this).attr('id');
+  $.ajax({
+    url: '/edit',
+    method: 'get',
+    data: {
+      uid: id,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function(response) {
+      $("#student_id").val(response.uid);
+      $("#last_name").val(response.stud_lname);;
+    }
+  });
+});
 
 //nilabas ko para ma call ko sa iba
 function fetchTempStudent() {
@@ -75,4 +92,3 @@ function fetchTempStudent() {
         }
     });
 }
-});

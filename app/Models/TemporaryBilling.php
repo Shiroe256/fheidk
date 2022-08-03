@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TemporaryBilling extends Model
 {
+    use HasFactory;
     protected $table = 'tbl_billing_details_temp';
-    protected $primarykey = 'uid';
+    public $primaryKey = 'uid';
     protected $fillable = [
         'hei_psg_region',
         'hei_sid',
