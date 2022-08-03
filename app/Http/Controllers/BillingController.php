@@ -132,9 +132,13 @@ class BillingController extends Controller
     {
         $tempstudents[] =  json_decode($request->getContent());
 
-        // print_r($tempstudents);
         foreach ($tempstudents[0] as $num => $tempstudent) {
-            $this->_newTempStudentBatch($tempstudent);
+            if (!$this->_newTempStudentBatch($tempstudent)) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'There is an error. Please contact the administrator',
+                ]);
+            }
         }
         return response()->json([
             'status' => 200,
@@ -144,6 +148,7 @@ class BillingController extends Controller
 
     public function _newTempStudentBatch($data = array())
     {
+        
         $tempstudent = new TemporaryBilling;
         $tempstudent->fhe_award_no = $data->fhe_aw_no;
         $tempstudent->stud_id = $data->stud_no;
@@ -219,7 +224,32 @@ class BillingController extends Controller
         $tempstudent->tranche = 1;
         $tempstudent->app_id = 'x';
 
-        $tempstudent->save();
+        $validator = Validator::make($tempstudent->toArray(), [
+            'stud_lname' => 'required|max:255',
+            'stud_fname' => 'required|max:255',
+            'stud_sex' => 'required|max:25',
+            // 'stud_birth_date' => 'required|dateformat:dd-MM-yyyy',
+            'stud_birth_place' => 'required|max:255',
+            'present_prov' => 'required|max:255',
+            'present_city' => 'required|max:255',
+            'present_barangay' => 'required|max:255',
+            'present_zipcode' => 'required|max:255',
+            'permanent_prov' => 'required|max:255',
+            'permanent_city' => 'required|max:255',
+            'permanent_barangay' => 'required|max:255',
+            'permanent_zipcode' => 'required|max:255',
+            'stud_email' => 'required|email|max:255',
+            // 'stud_phone_no' => 'required|regex:/^(09)\d{9}$/',
+            'degree_program' => 'required|max:255'
+
+        ]);
+
+        if ($validator->fails()) {
+            return 0;
+        } else {
+            $tempstudent->save();
+            return 1;
+        }
     }
 
     //new temporary student

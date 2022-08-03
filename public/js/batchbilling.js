@@ -141,13 +141,14 @@ function uploadBatch() {
             let ctr = 1;
             errors.forEach(item => {
                 if (item.length > 0) ++errorctr;
-                errorhtml = errorhtml.concat('<tr><td>' + ctr++ +'</td><td><ul>');
+                errorhtml += '<tr><td>' + ctr++ + '</td><td><ul>';
                 item.forEach(column => {
-                    errorhtml = errorhtml.concat('<li>' + column + '</li>');
+                    errorhtml += '<li>' + column + '</li>';
                 });
-                errorhtml = errorhtml.concat('</ul></td></tr>');
+                errorhtml += '</ul></td></tr>';
             });
-            errorhtml = errorhtml.concat('</tbody></table>');
+            errorhtml += '</tbody></table>';
+            errorctr = 0;
             if (errorctr > 0) {
                 Swal.fire({
                     icon: 'error',
