@@ -181,14 +181,11 @@ function uploadBatch() {
                         fileInput.disabled = true;
                     },
                     success: function () {
-                        document.getElementById("closebutton").click();
                         Swal.fire('Uploading Success',
                         'The students in the spreadsheet have been uploaded',
                         'success');
                     },
                     error: function () {
-                        resetUploadButton();
-                        document.getElementById("closebutton").click();
                         Swal.fire('An Error has been encountered',
                         'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
                         'error');
