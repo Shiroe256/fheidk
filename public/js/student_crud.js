@@ -142,6 +142,7 @@ $("#frm_update_student").submit(function (e) {
   });
 });
 
+
 //nilabas ko para ma call ko sa iba
 function fetchTempStudent() {
   $.ajax({

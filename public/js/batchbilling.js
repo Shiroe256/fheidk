@@ -8,7 +8,12 @@ fileInput.onchange = () => {
     const selectedFile = fileInput.files[0];
     document.getElementById('upload_template_text').innerHTML = selectedFile.name;
 }
-
+function resetUploadButton() {
+    uploadButton.innerHTML = 'Upload';
+    uploadButton.disabled = false;
+    closeButton.disabled = false;
+    fileInput.disabled = false;
+}
 
 function validateFields(data) {
 
@@ -17,6 +22,7 @@ function validateFields(data) {
         var numpattern = /\d/;
         var sexpattern = /MALE|FEMALE/;
         var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,2}$/;
+        var contactnumpattern = /^(9)\d{9}$/;
         var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var error = [];
         // errors[ctr] = [];
@@ -40,6 +46,7 @@ function validateFields(data) {
         if (numpattern.test(stud['mothers_mname'])) error.push('There are invalid characters in the Mother\'s Middle Name Field');
         if (!emailpattern.test(stud['email'])) error.push('The email field isn\'t using a valid format');
         if (!emailpattern.test(stud['a_email'])) error.push('The alternate email field isn\'t using a valid format');
+        if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
 
         // stud['perm_prov']
         // stud['perm_city']
@@ -134,7 +141,6 @@ function uploadBatch() {
                 }
             });
 
-            // console.log(validateFields(output));
             let errorctr = 0; //counts error
             var errors = validateFields(output); //storefields to validate
             let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
@@ -148,7 +154,6 @@ function uploadBatch() {
                 errorhtml += '</ul></td></tr>';
             });
             errorhtml += '</tbody></table>';
-            errorctr = 0;
             if (errorctr > 0) {
                 Swal.fire({
                     icon: 'error',
@@ -164,14 +169,10 @@ function uploadBatch() {
                     contentType: "json",
                     processData: false,
                     data: JSON.stringify(output),
-                    dataType: 'JSON',
                     complete: function () {
+                        resetUploadButton();
+                        closeButton.click();
                         fetchTempStudent();
-                        uploadButton.innerHTML = 'Upload';
-                        uploadButton.disabled = false;
-                        closeButton.disabled = false;
-                        fileInput.disabled = false;
-                        document.getElementById("closebutton").click();
                     },
                     beforeSend: function () {
                         uploadButton.innerHTML = 'Uploading...';
@@ -181,17 +182,17 @@ function uploadBatch() {
                     },
                     success: function () {
                         Swal.fire('Uploading Success',
-                            'The students in the spreadsheet have been uploaded',
-                            'success');
+                        'The students in the spreadsheet have been uploaded',
+                        'success');
                     },
                     error: function () {
                         Swal.fire('An Error has been encountered',
-                            'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
-                            'error');
+                        'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
+                        'error');
                     }
                 });
             }
         };
-        reader.readAsArrayBuffer(document.getElementById("upload_template").files[0]);
+        reader.readAsArrayBuffer(fileInput.files[0]);
     }
 }
