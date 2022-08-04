@@ -77,7 +77,6 @@ class BillingController extends Controller
         $validator = Validator::make($request->all(), [
             'last_name' => 'required', //modal field name => validation
             'first_name' => 'required',
-            'sex' => 'required',
             'birthplace' => 'required',
             'present_province' => 'required',
             'present_city' => 'required',
@@ -153,13 +152,82 @@ class BillingController extends Controller
         }
     }
 
-   // handle edit an employee ajax request
-	public function edit(Request $request) {
-		$id = $request->uid;
-		$students = TemporaryBilling::find($id);
+    // handle edit an student ajax request
+    public function editTempStudent(Request $request)
+    {
+        $id = $request->uid;
+        $students = TemporaryBilling::find($id);
         // $students = TemporaryBilling::firstWhere('uid',$id);
-		return response()->json($students);
-	}
+        return response()->json($students);
+    }
+
+    // handle update an student ajax request
+    public function updateTempStudent(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'edit_last_name' => 'required', //modal field name => validation
+            'edit_first_name' => 'required',
+            'edit_birthplace' => 'required',
+            'edit_present_province' => 'required',
+            'edit_present_city' => 'required',
+            'edit_present_barangay' => 'required',
+            'edit_present_zipcode' => 'required',
+            'edit_permanent_province' => 'required',
+            'edit_permanent_city' => 'required',
+            'edit_permanent_barangay' => 'required',
+            'edit_permanent_zipcode' => 'required',
+            'edit_email_address' => 'required|email',
+            // 'edit_mobile_number' => 'required|regex:/^(09)\d{9}$/',
+            'edit_course_enrolled' => 'required',
+            'edit_year_level' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            $students = TemporaryBilling::find($request->edit_student_id);
+            $studData = [
+                //actual data being collected in the modal
+                'stud_lname' => $request->edit_last_name, //tablename => $request->name of input field
+                'stud_fname' => $request->edit_first_name,
+                'stud_mname' => $request->edit_middle_name,
+                'stud_ext_name' => $request->edit_extension_name,
+                'stud_sex' => $request->edit_sex,
+                'stud_birth_date' => $request->edit_birthdate,
+                'stud_birth_place' => $request->edit_birthplace,
+                'f_lname' => $request->edit_f_lname,
+                'f_fname' => $request->edit_f_fname,
+                'f_mname' => $request->edit_f_mname,
+                'm_lname' => $request->edit_m_lname,
+                'm_fname' => $request->edit_m_fname,
+                'm_mname' => $request->edit_m_mname,
+                'present_prov' => $request->edit_present_province,
+                'present_city' => $request->edit_present_city,
+                'present_barangay' => $request->edit_present_barangay,
+                'present_street' => $request->edit_present_street,
+                'present_zipcode' => $request->edit_present_zipcode,
+                'permanent_prov' => $request->edit_permanent_province,
+                'permanent_city' => $request->edit_permanent_city,
+                'permanent_barangay' => $request->edit_permanent_barangay,
+                'permanent_street' => $request->edit_permanent_street,
+                'permanent_zipcode' => $request->edit_permanent_zipcode,
+                'stud_email' => $request->edit_email_address,
+                'stud_alt_email' => $request->edit_alt_email_address,
+                'stud_phone_no' => $request->edit_mobile_number,
+                'alt_stud_phone_no' => $request->edit_alt_mobile_number,
+                'degree_program' => $request->edit_course_enrolled,
+                'year_level' => $request->edit_year_level
+            ];
+            $students->update($studData);
+            return response()->json([
+                'status' => 200,
+            ]);
+        }
+    }
+
 
     //batch upload controller
     public function batchTempStudent(Request $request)
