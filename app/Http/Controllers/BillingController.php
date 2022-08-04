@@ -176,7 +176,7 @@ class BillingController extends Controller
             'edit_permanent_barangay' => 'required',
             'edit_permanent_zipcode' => 'required',
             'edit_email_address' => 'required|email',
-            // 'edit_mobile_number' => 'required|regex:/^(09)\d{9}$/',
+            'edit_mobile_number' => 'required|regex:/^(09)\d{9}$/',
             'edit_course_enrolled' => 'required',
             'edit_year_level' => 'required'
         ]);
