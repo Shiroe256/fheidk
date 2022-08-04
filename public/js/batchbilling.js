@@ -193,6 +193,6 @@ function uploadBatch() {
                 });
             }
         };
-        reader.readAsArrayBuffer(document.getElementById("upload_template").files[0]);
+        reader.readAsArrayBuffer(fileInput.files[0]);
     }
 }

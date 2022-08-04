@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-// use app\Models\Student;
 use App\Models\TemporaryBilling;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
@@ -153,29 +152,56 @@ class BillingController extends Controller
         }
     }
 
-   // handle edit an employee ajax request
-	public function edit(Request $request) {
-		$id = $request->uid;
-		$students = TemporaryBilling::find($id);
+    // handle edit an employee ajax request
+    public function edit(Request $request)
+    {
+        $id = $request->uid;
+        $students = TemporaryBilling::find($id);
         // $students = TemporaryBilling::firstWhere('uid',$id);
-		return response()->json($students);
-	}
+        return response()->json($students);
+    }
 
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
         $tempstudents[] =  json_decode($request->getContent());
 
-        // print_r($tempstudents);
-        foreach ($tempstudents[0] as $num => $tempstudent) {
-            if (!$this->_newTempStudentBatch($tempstudent)) {
-                return response('Error',400);
-            }
+        //pass validation to each item then return an error and cancel the whole uploading if there are errors
+        foreach ($tempstudents[0] as $tempstudent) {
+            if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Error', 400);
         }
-        return response('Success',200);
+        //upload all rows if there is no problem
+        foreach ($tempstudents[0] as $tempstudent) {
+            $this->newTempStudentBatch($tempstudent);
+        }
+        return response('Success', 200);
     }
 
-    public function _newTempStudentBatch($data = array())
+    private function validateTempStudentFields($tempstudent)
+    {
+        $validator = Validator::make((array) $tempstudent, [
+            'last_name' => 'required|max:255',
+            'given_name' => 'required|max:255',
+            'sex_at_birth' => 'required|max:25',
+            'birthdate' => 'required|date_format:Y-m-d',
+            'birthplace' => 'required|max:255',
+            'pres_prov' => 'required|max:255',
+            'pres_city' => 'required|max:255',
+            'pres_brgy' => 'required|max:255',
+            'pres_zip' => 'required|max:255',
+            'perm_prov' => 'required|max:255',
+            'perm_city' => 'required|max:255',
+            'perm_brgy' => 'required|max:255',
+            'perm_zip' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'contact_number' => 'required|regex:/^(9)\d{9}$/'
+            // 'degree_program' => 'required|max:255'
+        ]);
+
+        return $validator->fails();
+    }
+
+    private function newTempStudentBatch($data = array())
     {
         $tempstudent = new TemporaryBilling;
         $tempstudent->fhe_award_no = $data->fhe_aw_no;
@@ -210,7 +236,6 @@ class BillingController extends Controller
         $tempstudent->stud_phone_no = $data->contact_number;
         $tempstudent->stud_alt_phone_no = $data->contact_number_2;
         $tempstudent->transferee = $data->is_transferee;
-
 
         //dummy data
         $tempstudent->degree_program = 69;
@@ -252,31 +277,7 @@ class BillingController extends Controller
         $tempstudent->tranche = 1;
         $tempstudent->app_id = 'x';
 
-        $validator = Validator::make($tempstudent->toArray(), [
-            'stud_lname' => 'required|max:255',
-            'stud_fname' => 'required|max:255',
-            'stud_sex' => 'required|max:25',
-            'stud_birth_date' => 'required|date_format:Y-m-d',
-            'stud_birth_place' => 'required|max:255',
-            'present_prov' => 'required|max:255',
-            'present_city' => 'required|max:255',
-            'present_barangay' => 'required|max:255',
-            'present_zipcode' => 'required|max:255',
-            'permanent_prov' => 'required|max:255',
-            'permanent_city' => 'required|max:255',
-            'permanent_barangay' => 'required|max:255',
-            'permanent_zipcode' => 'required|max:255',
-            'stud_email' => 'required|email|max:255',
-            'stud_phone_no' => 'required|regex:/^(9)\d{9}$/',
-            'degree_program' => 'required|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return 0;
-        } else {
-            $tempstudent->save();
-            return 1;
-        }
+        $tempstudent->save();
     }
 
 
