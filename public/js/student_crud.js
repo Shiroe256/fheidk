@@ -57,6 +57,7 @@ fetchTempStudent();
 
 
 
+});
 //nilabas ko para ma call ko sa iba
 function fetchTempStudent() {
     $.ajax({
@@ -74,5 +75,4 @@ function fetchTempStudent() {
             });
         }
     });
-}
-});
+};

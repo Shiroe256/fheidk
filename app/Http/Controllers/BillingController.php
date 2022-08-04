@@ -158,16 +158,10 @@ class BillingController extends Controller
 
         foreach ($tempstudents[0] as $num => $tempstudent) {
             if (!$this->_newTempStudentBatch($tempstudent)) {
-                return response()->json([
-                    'status' => 500,
-                    'message' => 'There is an error. Please contact the administrator',
-                ]);
+                return response('Error',400);
             }
         }
-        return response()->json([
-            'status' => 200,
-            'message' => 'Student Added Successfully',
-        ]);
+        return response('Success',200);
     }
 
     public function _newTempStudentBatch($data = array())
@@ -252,7 +246,7 @@ class BillingController extends Controller
             'stud_lname' => 'required|max:255',
             'stud_fname' => 'required|max:255',
             'stud_sex' => 'required|max:25',
-            // 'stud_birth_date' => 'required|dateformat:dd-MM-yyyy',
+            'stud_birth_date' => 'required|date_format:Y-m-d',
             'stud_birth_place' => 'required|max:255',
             'present_prov' => 'required|max:255',
             'present_city' => 'required|max:255',
@@ -263,9 +257,8 @@ class BillingController extends Controller
             'permanent_barangay' => 'required|max:255',
             'permanent_zipcode' => 'required|max:255',
             'stud_email' => 'required|email|max:255',
-            // 'stud_phone_no' => 'required|regex:/^(09)\d{9}$/',
+            'stud_phone_no' => 'required|regex:/^(9)\d{9}$/',
             'degree_program' => 'required|max:255'
-
         ]);
 
         if ($validator->fails()) {
