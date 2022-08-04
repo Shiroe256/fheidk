@@ -57,7 +57,7 @@ class BillingController extends Controller
                     <td class="text-left"></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <button class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-target="#mod_new_student_info"><i class="far fa-edit"></i>
+                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
                             </button>
                         </div>
                     </td>
@@ -71,10 +71,11 @@ class BillingController extends Controller
         }
     }
 
-    // handle insert a new employee ajax request
-	public function newTempStudent(Request $request) {
-        $validator = Validator::make($request->all(),[
-            'last_name'=>'required', //modal field name => validation
+    // handle insert a new student ajax request
+    public function newTempStudent(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'last_name' => 'required', //modal field name => validation
             'first_name' => 'required',
             'sex' => 'required',
             'birthplace' => 'required',
@@ -92,70 +93,80 @@ class BillingController extends Controller
             'year_level' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages(),
+                'status' => 400,
+                'errors' => $validator->messages(),
             ]);
-        }else{  
-		$students = [
-            //static sample data
-            'hei_psg_region' => '01',
-            'hei_sid' => '01040',
-            'hei_uii' => '01040',
-            'hei_name' => 'Mariano Marcos State University',
-            'reference_no' => '01-MMMSU-2020-1-1',
-            'ac_year' => '2020',
-            'semester' => '1',
-            'tranche' => '1',
-            'app_id' => '01040-20222227-00003',
-            'fhe_award_no' => 'FHE-01-01040-20222207-00003',
-            'stud_id' => '',
-            'lrn_no' => '',
-            //actual data being collected in the modal
-            'stud_lname' => $request->last_name, //tablename => $request->name of input field
-            'stud_fname' => $request->first_name, 
-            'stud_mname' => $request->middle_name,
-            'stud_ext_name' => $request->extension_name,
-            'stud_sex' => $request->sex,
-            'stud_birth_date' => $request->birthdate,
-            'stud_birth_place' => $request->birthplace,
-            'f_lname' => $request->f_lname,
-            'f_fname' => $request->f_fname,
-            'f_mname' => $request->f_mname,
-            'm_lname' => $request->m_lname,
-            'm_fname' => $request->m_fname,
-            'm_mname' => $request->m_mname,
-            'present_prov' => $request->present_province,
-            'present_city' => $request->present_city,
-            'present_barangay' => $request->present_barangay,
-            'present_street' => $request->present_street,
-            'present_zipcode' => $request->present_zipcode,
-            'permanent_prov' => $request->permanent_province,
-            'permanent_city' => $request->permanent_city,
-            'permanent_barangay' => $request->permanent_barangay,
-            'permanent_street' => $request->permanent_street,
-            'permanent_zipcode' => $request->permanent_zipcode,
-            'stud_email' => $request->email_address,
-            'stud_alt_email' => $request->alt_email_address,
-            'stud_phone_no' => $request->mobile_number,
-            'alt_stud_phone_no' => $request->alt_mobile_number,
-            //static
-            'trasferee' => '',
-            'degree_program' => $request->course_enrolled,
-            'year_level' => $request->year_level
-        ];
-		TemporaryBilling::create($students);
-		return response()->json([
-			'status' => 200,
-		]);
+        } else {
+            $students = [
+                //static sample data
+                'hei_psg_region' => '01',
+                'hei_sid' => '01040',
+                'hei_uii' => '01040',
+                'hei_name' => 'Mariano Marcos State University',
+                'reference_no' => '01-MMMSU-2020-1-1',
+                'ac_year' => '2020',
+                'semester' => '1',
+                'tranche' => '1',
+                'app_id' => '01040-20222227-00003',
+                'fhe_award_no' => 'FHE-01-01040-20222207-00003',
+                'stud_id' => '',
+                'lrn_no' => '',
+                //actual data being collected in the modal
+                'stud_lname' => $request->last_name, //tablename => $request->name of input field
+                'stud_fname' => $request->first_name,
+                'stud_mname' => $request->middle_name,
+                'stud_ext_name' => $request->extension_name,
+                'stud_sex' => $request->sex,
+                'stud_birth_date' => $request->birthdate,
+                'stud_birth_place' => $request->birthplace,
+                'f_lname' => $request->f_lname,
+                'f_fname' => $request->f_fname,
+                'f_mname' => $request->f_mname,
+                'm_lname' => $request->m_lname,
+                'm_fname' => $request->m_fname,
+                'm_mname' => $request->m_mname,
+                'present_prov' => $request->present_province,
+                'present_city' => $request->present_city,
+                'present_barangay' => $request->present_barangay,
+                'present_street' => $request->present_street,
+                'present_zipcode' => $request->present_zipcode,
+                'permanent_prov' => $request->permanent_province,
+                'permanent_city' => $request->permanent_city,
+                'permanent_barangay' => $request->permanent_barangay,
+                'permanent_street' => $request->permanent_street,
+                'permanent_zipcode' => $request->permanent_zipcode,
+                'stud_email' => $request->email_address,
+                'stud_alt_email' => $request->alt_email_address,
+                'stud_phone_no' => $request->mobile_number,
+                'alt_stud_phone_no' => $request->alt_mobile_number,
+                //static
+                'trasferee' => '',
+                'degree_program' => $request->course_enrolled,
+                'year_level' => $request->year_level
+            ];
+            TemporaryBilling::create($students);
+            return response()->json([
+                'status' => 200,
+            ]);
+        }
     }
+
+   // handle edit an employee ajax request
+	public function edit(Request $request) {
+		$id = $request->uid;
+		$students = TemporaryBilling::find($id);
+        // $students = TemporaryBilling::firstWhere('uid',$id);
+		return response()->json($students);
 	}
 
+    //batch upload controller
     public function batchTempStudent(Request $request)
     {
         $tempstudents[] =  json_decode($request->getContent());
 
+        // print_r($tempstudents);
         foreach ($tempstudents[0] as $num => $tempstudent) {
             if (!$this->_newTempStudentBatch($tempstudent)) {
                 return response('Error',400);
@@ -166,7 +177,6 @@ class BillingController extends Controller
 
     public function _newTempStudentBatch($data = array())
     {
-        
         $tempstudent = new TemporaryBilling;
         $tempstudent->fhe_award_no = $data->fhe_aw_no;
         $tempstudent->stud_id = $data->stud_no;
