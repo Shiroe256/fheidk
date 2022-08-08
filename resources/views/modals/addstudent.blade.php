@@ -27,15 +27,15 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select class="form-control input-style">
-                                        <optgroup name='sex' label="Select Sex">
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select name='sex' class="form-control input-style">
+                                        <optgroup label="Select Sex">
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </optgroup>
                                     </select></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input name='birthdate' class="form-control input-style" type="date"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id="birthdate" name='birthdate' class="date form-control input-style"></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input name='birthplace' class="form-control input-style" type="text"></div>

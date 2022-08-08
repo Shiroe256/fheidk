@@ -61,5 +61,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
 Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);
-Route::get('/edit', [BillingController::class, 'edit'])->name('edit');
-// Route::get('/update-tempstudents', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
+Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
+Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');

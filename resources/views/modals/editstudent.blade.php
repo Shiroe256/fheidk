@@ -1,7 +1,7 @@
 <div id="mod_edit_student_info" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form id='frm_add_student' method="POST">
+            <form id='frm_update_student' method="POST">
                 @csrf
                 <div class="modal-header">
                     <h6 class="modal-title">EDIT STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -12,57 +12,57 @@
                     </div>
                     <div class="form-group input-style">
                         <div class="form-row">
-                            <input name="student_id" id="student_id">
+                            <input type="hidden" name="edit_student_id" id="edit_student_id">
                             {{-- <input type="hidden" name="student_id" id="student_id"> --}}
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Lastname</label><input name='llast_name' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Lastname</label><input id='edit_last_name' name='edit_last_name' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Firstname</label><input name='first_name' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Firstname</label><input id='edit_first_name' name='edit_first_name' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Middlename</label><input name='middle_name' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Middlename</label><input id='edit_middle_name' name='edit_middle_name' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col-xl-1">
-                                <div class="form-group"><label>Extension</label><input name='extension_name' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>Extension</label><input id='edit_extension_name' name='edit_extension_name' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select class="form-control input-style">
-                                        <optgroup name='sex' label="Select Sex">
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select id='edit_sex' name='edit_sex' class="form-control input-style">
+                                        <optgroup label="Select Sex">
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </optgroup>
                                     </select></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input name='birthdate' class="form-control input-style" type="date"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id='edit_birthdate' name='edit_birthdate' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input name='birthplace' class="form-control input-style" type="text"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>Mother's Lastname</label><input name='m_lname' class="form-control input-style" type="text"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Mother's Firstname</label><input name='m_fname' class="form-control input-style" type="text"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Mother's Middlename</label><input name='m_mname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input id='edit_birthplace' name='edit_birthplace' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Father's Lastname</label><input name='f_lname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>Mother's Lastname</label><input id='edit_m_lname' name='edit_m_lname' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Father's Firstname</label><input name='f_fname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>Mother's Firstname</label><input id='edit_m_fname' name='edit_m_fname' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Father's Middlename</label><input name='f_mname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>Mother's Middlename</label><input id='edit_m_mname' name='edit_m_mname' class="form-control input-style" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Father's Lastname</label><input id='edit_f_lname' name='edit_f_lname' class="form-control input-style" type="text"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Father's Firstname</label><input id='edit_f_fname' name='edit_f_fname' class="form-control input-style" type="text"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Father's Middlename</label><input id='edit_f_mname' name='edit_f_mname' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -77,25 +77,25 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input name='present_province' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input id='edit_present_province' name='edit_present_province' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input name='present_city' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input id='edit_present_city' name='edit_present_city' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input name='present_barangay' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input id='edit_present_barangay' name='edit_present_barangay' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>House /Building No./Street</label><input name='present_street' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>House /Building No./Street</label><input id='edit_present_street' name='edit_present_street' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col-xl-3">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input name='present_zipcode' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input id='edit_present_zipcode' name='edit_present_zipcode' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -113,25 +113,25 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input name='permanent_province' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input id='edit_permanent_province' name='edit_permanent_province' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input name='permanent_city' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;City</label><input id='edit_permanent_city' name='edit_permanent_city' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input name='permanent_barangay' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Barangay</label><input id='edit_permanent_barangay' name='edit_permanent_barangay' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>House /Building No./Street</label><input name='permanent_street' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label>House /Building No./Street</label><input id='edit_permanent_street' name='edit_permanent_street' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col-xl-3">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input name='permanent_zipcode' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Zip Code</label><input id='edit_permanent_zipcode' name='edit_permanent_zipcode' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -146,18 +146,18 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input name='mobile_number' class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input id='edit_mobile_number' name='edit_mobile_number' class="form-control input-style" type="number"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input name='alt_mobile_number' class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input id='edit_alt_mobile_number' name='edit_alt_mobile_number' class="form-control input-style" type="number"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input name='email_address' class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input id='edit_email_address' name='edit_email_address' class="form-control input-style" type="email"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Email Address (if available)</label><input name='alt_email_address' class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label>Alternative Email Address (if available)</label><input id='edit_alt_email_address' name='edit_alt_email_address' class="form-control input-style" type="email"></div>
                             </div>
                         </div>
                     </div>
@@ -172,10 +172,10 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input name='course_enrolled' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input id='edit_course_enrolled' name='edit_course_enrolled' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input name='year_level' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='edit_year_level' name='edit_year_level' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         {{-- <div class="form-row">

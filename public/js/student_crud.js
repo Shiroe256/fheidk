@@ -1,5 +1,3 @@
-
-
 fetchTempStudent();
 
 // add new student ajax request
@@ -47,8 +45,6 @@ $("#frm_add_student").submit(function (e) {
           icon: 'warning',
 
         })
-
-        fetchTempStudent();
         $("#btn_add_student").text('Add Student');
       }
     }
@@ -56,20 +52,92 @@ $("#frm_add_student").submit(function (e) {
 });
 //end of new add student
 
-// edit employee ajax request
+// edit student ajax request
 $(document).on('click', '.btn_update_student', function (e) {
   e.preventDefault();
   let id = $(this).attr('id');
   $.ajax({
-    url: '/edit',
+    url: '/edit-tempstudent',
     method: 'get',
     data: {
       uid: id,
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      $("#student_id").val(response.uid);
-      $("#last_name").val(response.stud_lname);;
+      $("#edit_student_id").val(response.uid);
+      $("#edit_last_name").val(response.stud_lname);
+      $("#edit_first_name").val(response.stud_fname);
+      $("#edit_middle_name").val(response.stud_mname);
+      $("#edit_extension_name").val(response.stud_ext_name);
+      $("#edit_sex").val(response.stud_sex);
+      $("#edit_birthdate").val(response.stud_birth_date);
+      $("#edit_birthplace").val(response.stud_birth_place);
+      $("#edit_m_lname").val(response.m_lname);
+      $("#edit_m_fname").val(response.m_fname);
+      $("#edit_m_mname").val(response.m_mname);
+      $("#edit_f_lname").val(response.f_lname);
+      $("#edit_f_fname").val(response.f_fname);
+      $("#edit_f_mname").val(response.f_mname);
+      $("#edit_present_province").val(response.present_prov);
+      $("#edit_present_city").val(response.present_city);
+      $("#edit_present_barangay").val(response.present_barangay);
+      $("#edit_present_street").val(response.present_street);
+      $("#edit_present_zipcode").val(response.present_zipcode);
+      $("#edit_permanent_province").val(response.permanent_prov);
+      $("#edit_permanent_city").val(response.permanent_city);
+      $("#edit_permanent_barangay").val(response.permanent_barangay);
+      $("#edit_permanent_street").val(response.permanent_street);
+      $("#edit_permanent_zipcode").val(response.permanent_zipcode);
+      $("#edit_mobile_number").val(response.stud_phone_no);
+      $("#edit_alt_mobile_number").val(response.stud_alt_phone_no);
+      $("#edit_email_address").val(response.stud_email);
+      $("#edit_alt_email_address").val(response.stud_alt_email);
+      $("#edit_course_enrolled").val(response.degree_program);
+      $("#edit_year_level").val(response.year_level);
+    }
+  });
+});
+
+// update students ajax request
+$("#frm_update_student").submit(function (e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  $("#btn_update_student").text('Updating...');
+  $.ajax({
+    url: '/update-tempstudent',
+    method: 'post',
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire(
+          'Updated!',
+          'Student Updated Successfully!',
+          'success'
+        )
+        fetchTempStudent();
+        $("#btn_update_student").text('Update Student');
+        $("#frm_update_student")[0].reset();
+        $("#mod_edit_student_info").modal('hide');
+      } else if (response.status == 400) {
+        let i = 1;
+        let errorMessage = '';
+        $.each(response.errors, function (key, err_values) {
+          console.log(err_values);
+          errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+        })
+        Swal.fire({
+          // position: 'top',
+          title: 'Oops... you missed something',
+          html: errorMessage,
+          icon: 'warning',
+
+        })
+        $("#btn_update_student").text('Update Student');
+      }
     }
   });
 });
@@ -92,4 +160,4 @@ function fetchTempStudent() {
       });
     }
   });
-};
+}
