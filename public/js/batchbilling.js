@@ -14,7 +14,7 @@ function resetUploadButton() {
     closeButton.disabled = false;
     fileInput.disabled = false;
 }
-
+//generates a 2d array of all the errors per line
 function validateFields(data) {
 
     var errors = [];
@@ -77,9 +77,11 @@ function validateFields(data) {
     return errors;
 }
 
+//upload batch function used in the ajax request
 function uploadBatch() {
     var file = document.getElementById("upload_template").files;
     if (file.length < 1) {
+        //if there is no file selected
         alert("Please select an XLSX file");
     } else {
         var reader = new FileReader();
@@ -87,7 +89,7 @@ function uploadBatch() {
             var data = e.target.result;
             var workbook = XLSX.readFile(data);
             var sheet = workbook.Sheets.Billing_Form;
-
+            //use this headers instead of the ones on the sheet
             var output = XLSX.utils.sheet_to_json(sheet, {
                 range: 7,
                 raw: false,
@@ -175,10 +177,10 @@ function uploadBatch() {
                         fetchTempStudent();
                     },
                     beforeSend: function () {
-                        uploadButton.innerHTML = 'Uploading...';
                         uploadButton.disabled = true;
                         closeButton.disabled = true;
                         fileInput.disabled = true;
+                        uploadButton.innerHTML = 'Uploading...';
                     },
                     success: function () {
                         Swal.fire('Uploading Success',
