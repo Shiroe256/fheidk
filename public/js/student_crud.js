@@ -215,13 +215,12 @@ function btnDeleteToggle(){
 }
 
 //Delete data
-$(document).on('click', '#btn_delete_students', function(e){
-  e.preventDefault();
+$(document).on('click', '#btn_delete_students', function(){
   var checkedStudents = [];
   $($('input[name="student_checkbox"]:checked')).each(function(){
      checkedStudents.push($(this).val());
   });
-  var url ='/delete-tempstudent'
+  alert(checkedStudents);
 });
 
 //nilabas ko para ma call ko sa iba
