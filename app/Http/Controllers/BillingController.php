@@ -26,7 +26,7 @@ class BillingController extends Controller
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
             <thead>
                 <tr>
-                    <th class="text-center"><input type="checkbox"></th>
+                    <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
                     <th class="text-left">HEI CAMPUS</th>
                     <th class="text-left">AWARD NUMBER</th>
                     <th class="text-left">LASTNAME</th>
@@ -43,7 +43,7 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_students_form_2">';
             foreach ($students as $student) {
                 $output .= '<tr>
-                    <td class="text-center"><input type="checkbox"></td>
+                    <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
                     <td class="text-left">' . $student->hei_name . '</td>
                     <td class="text-left">' . $student->fhe_award_no . '</td>
                     <td>' . $student->stud_lname . '</td>
@@ -66,7 +66,7 @@ class BillingController extends Controller
             </table>';
             echo $output;
         } else {
-            echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
+            echo '<h1 class="text-center text-secondary my-5">No student records.</h1>';
         }
     }
 
@@ -227,23 +227,34 @@ class BillingController extends Controller
         }
     }
 
+    // handle delete an employee ajax request
+	// public function deleteTempStudent(Request $request) {
+	// 	$id = $request->uid;
+	// 	$student = TemporaryBilling::find($id);
+	// 	TemporaryBilling::destroy($id);
+	// }
+
+    public function deleteTempStudent(Request $request){
+        $students = TemporaryBilling::find($request->uid);
+        $students->delete();
+    }
 
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
-        $tempstudents =  json_decode($request->getContent(),true); //json decode into array (the second parameter)
+        $tempstudents[] =  json_decode($request->getContent());
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
-        foreach ($tempstudents as $tempstudent) {
+        foreach ($tempstudents[0] as $tempstudent) {
             if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Error', 400);
         }
         //upload all rows if there is no problem
-        foreach ($tempstudents as $tempstudent) {
+        foreach ($tempstudents[0] as $tempstudent) {
             $this->newTempStudentBatch($tempstudent);
         }
         return response('Success', 200);
     }
-    
+
     private function validateTempStudentFields($tempstudent)
     {
         $validator = Validator::make((array) $tempstudent, [
@@ -271,45 +282,45 @@ class BillingController extends Controller
     private function newTempStudentBatch($data = array())
     {
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = $data['fhe_aw_no'];
-        $tempstudent->stud_id = $data['stud_no'];
-        $tempstudent->lrn_no = $data['lrnum'];
-        $tempstudent->stud_lname = $data['last_name'];
-        $tempstudent->stud_fname = $data['given_name'];
-        $tempstudent->stud_mname = $data['mid_name'];
-        $tempstudent->stud_ext_name = $data['ext_name'];
-        $tempstudent->stud_sex = $data['sex_at_birth'];
+        $tempstudent->fhe_award_no = $data->fhe_aw_no;
+        $tempstudent->stud_id = $data->stud_no;
+        $tempstudent->lrn_no = $data->lrnum;
+        $tempstudent->stud_lname = $data->last_name;
+        $tempstudent->stud_fname = $data->given_name;
+        $tempstudent->stud_mname = $data->mid_name;
+        $tempstudent->stud_ext_name = $data->ext_name;
+        $tempstudent->stud_sex = $data->sex_at_birth;
         $d = new DateTime(str_replace("/", "-", $tempstudent->birthdate));
         $tempstudent->stud_birth_date = $d->format("Y-m-d");
-        $tempstudent->stud_birth_place = $data['birthplace'];
-        $tempstudent->f_lname = $data['fathers_lname'];
-        $tempstudent->f_fname = $data['fathers_gname'];
-        $tempstudent->f_mname = $data['fathers_mname'];
-        $tempstudent->m_lname = $data['mothers_lname'];
-        $tempstudent->m_fname = $data['mothers_gname'];
-        $tempstudent->m_mname = $data['mothers_mname'];
-        $tempstudent->permanent_prov = $data['perm_prov'];
-        $tempstudent->permanent_city = $data['perm_city'];
-        $tempstudent->permanent_barangay = $data['perm_brgy'];
-        $tempstudent->permanent_street = $data['perm_street'];
-        $tempstudent->permanent_zipcode = $data['perm_zip'];
-        $tempstudent->present_prov = $data['pres_prov'];
-        $tempstudent->present_city = $data['pres_city'];
-        $tempstudent->present_barangay = $data['pres_brgy'];
-        $tempstudent->present_street = $data['pres_street'];
-        $tempstudent->present_zipcode = $data['pres_zip'];
-        $tempstudent->stud_email = $data['email'];
-        $tempstudent->stud_alt_email = $data['a_email'];
-        $tempstudent->stud_phone_no = $data['contact_number'];
-        $tempstudent->stud_alt_phone_no = $data['contact_number_2'];
-        $tempstudent->transferee = $data['is_transferee'];
+        $tempstudent->stud_birth_place = $data->birthplace;
+        $tempstudent->f_lname = $data->fathers_lname;
+        $tempstudent->f_fname = $data->fathers_gname;
+        $tempstudent->f_mname = $data->fathers_mname;
+        $tempstudent->m_lname = $data->mothers_lname;
+        $tempstudent->m_fname = $data->mothers_gname;
+        $tempstudent->m_mname = $data->mothers_mname;
+        $tempstudent->permanent_prov = $data->perm_prov;
+        $tempstudent->permanent_city = $data->perm_city;
+        $tempstudent->permanent_barangay = $data->perm_brgy;
+        $tempstudent->permanent_street = $data->perm_street;
+        $tempstudent->permanent_zipcode = $data->perm_zip;
+        $tempstudent->present_prov = $data->pres_prov;
+        $tempstudent->present_city = $data->pres_city;
+        $tempstudent->present_barangay = $data->pres_brgy;
+        $tempstudent->present_street = $data->pres_street;
+        $tempstudent->present_zipcode = $data->pres_zip;
+        $tempstudent->stud_email = $data->email;
+        $tempstudent->stud_alt_email = $data->a_email;
+        $tempstudent->stud_phone_no = $data->contact_number;
+        $tempstudent->stud_alt_phone_no = $data->contact_number_2;
+        $tempstudent->transferee = $data->is_transferee;
 
         //dummy data
         $tempstudent->degree_program = 69;
-        $tempstudent->lab_unit = $data['lab_u'];
-        $tempstudent->comp_lab_unit = $data['com_lab_u'];
-        $tempstudent->academic_unit = $data['acad_u'];
-        $tempstudent->nstp_unit = $data['nstp_u'];
+        $tempstudent->lab_unit = $data->lab_u;
+        $tempstudent->comp_lab_unit = $data->com_lab_u;
+        $tempstudent->academic_unit = $data->acad_u;
+        $tempstudent->nstp_unit = $data->nstp_u;
         $tempstudent->tuition_fee = 0;
         $tempstudent->entrance_fee = 0;
         $tempstudent->admission_fee = 0;
@@ -360,11 +371,6 @@ class BillingController extends Controller
         return $tempstudent->getTempStudent($request->reference_no);
     }
 
-    public function deleteTempStudent(Request $request)
-    {
-        $tempstudent = TemporaryBilling::find($request->uid);
-        $tempstudent->delete();
-    }
 
     public function newStudent(Request $request)
     {

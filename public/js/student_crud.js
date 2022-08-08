@@ -143,6 +143,87 @@ $("#frm_update_student").submit(function (e) {
 });
 
 
+// delete employee ajax request
+$(document).on('click', '.deleteIcon', function (e) {
+  e.preventDefault();
+  let id = $(this).attr('id');
+  let csrf = '{{ csrf_token() }}';
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/deleteTempStudent',
+        method: 'delete',
+        data: {
+          id: id,
+          _token: csrf
+        },
+        success: function (response) {
+          console.log(response);
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          fetchTempStudent();
+        }
+      });
+    }
+  })
+});
+
+
+//Main check box is checked
+$(document).on('click', 'input[name=main_checkbox]', function () {
+  if (this.checked) {
+    $('input[name="student_checkbox"]').each(function () {
+      this.checked = true;
+    });
+  } else {
+    $('input[name="student_checkbox"]').each(function () {
+      this.checked = false;
+    });
+  }
+  btnDeleteToggle();
+});
+
+//all checkbox in a page is checked
+$(document).on('change', 'input[name="student_checkbox"]', function () {
+  if ($('input[name="student_checkbox"]').length == $('input[name="student_checkbox"]:checked').length) {
+    $('input[name="main_checkbox"]').prop('checked', true);
+  } else {
+    $('input[name="main_checkbox"]').prop('checked', false);
+  }
+  btnDeleteToggle();
+});
+
+//Delete button hide and show
+function btnDeleteToggle(){
+  if($('input[name="student_checkbox"]:checked').length > 0){
+    $('#btn_delete_students').html('');
+    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove ('+$('input[name="student_checkbox"]:checked').length+')').removeClass('d-none');
+  }else{
+    $('#btn_delete_students').addClass('d-none');
+  }
+}
+
+//Delete data
+$(document).on('click', '#btn_delete_students', function(e){
+  e.preventDefault();
+  var checkedStudents = [];
+  $($('input[name="student_checkbox"]:checked')).each(function(){
+     checkedStudents.push($(this).val());
+  });
+  var url ='/delete-tempstudent'
+});
+
 //nilabas ko para ma call ko sa iba
 function fetchTempStudent() {
   $.ajax({
