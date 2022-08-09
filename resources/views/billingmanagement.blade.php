@@ -67,8 +67,7 @@
                                                 </div>
                                                 <div class="col text-right">
                                                     <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button><button class="btn btn-outline-info btn-sm"
-                                                            type="button" data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i class="fas fa-user-plus"></i>&nbsp;Add Student</button><button class="btn btn-outline-danger btn-sm" type="button" data-toggle="modal"
-                                                            data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                                                            type="button" data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i class="fas fa-user-plus"></i>&nbsp;Add Student</button><button class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students" type="button"></button></div>
                                                 </div>
                                             </div>
                                             <div id="show_all_students" class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
@@ -86,8 +85,7 @@
                                                 </div>
                                                 <div class="col text-right">
                                                     <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button><button class="btn btn-outline-info btn-sm"
-                                                            type="button" data-toggle="modal" data-target="#mod_admission_entrance"><i class="fas fa-user-plus"></i>&nbsp;Add Applicant</button><button class="btn btn-outline-danger btn-sm" type="button" data-toggle="modal"
-                                                            data-target="#mod_remove"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                                                            type="button" data-toggle="modal" data-target="#mod_admission_entrance"><i class="fas fa-user-plus"></i>&nbsp;Add Applicant</button><button class="btn btn_delete_student btn-outline-danger btn-sm" type="button"><i class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                                                 </div>
                                             </div>
                                             <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
