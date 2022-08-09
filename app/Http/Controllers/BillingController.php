@@ -380,7 +380,7 @@ class BillingController extends Controller
         foreach ($billings as $billing) {
             //get students of each billing transaction
             $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
-            //check each studetn in billing transaction for duplciates in fhe award number
+            //check each student in billing transaction for duplciates in fhe award number
             foreach ($students as $student) {
 
                 //get duplicate fhe numbers
