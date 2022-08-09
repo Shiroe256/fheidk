@@ -155,7 +155,6 @@ class BillingController extends Controller
     {
         $id = $request->uid;
         $students = TemporaryBilling::find($id);
-        // $students = TemporaryBilling::firstWhere('uid',$id);
         return response()->json($students);
     }
 
