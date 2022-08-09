@@ -224,11 +224,11 @@ class BillingController extends Controller
             ]);
         }
     }
-
+    //handles delete student information
     public function deleteTempStudent(Request $request){
         $id = $request->uid;
         // $students = TemporaryBilling::find($id);
-        $students = TemporaryBilling::whereIn('uid',$id);
+        $students = TemporaryBilling::whereIn('uid', $id);
         $students->delete();
     }
 
@@ -360,7 +360,7 @@ class BillingController extends Controller
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
     public function queueBillingFOrChecking($reference_no)
     {
-        $billing = Billing::where('reference_no',$reference_no);
+        $billing = Billing::where('reference_no', $reference_no);
         $billing->billing_status = 3;
         $billing->save();
     }
@@ -378,7 +378,7 @@ class BillingController extends Controller
             foreach ($students as $student) {
 
                 //get duplicate fhe numbers
-                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'),$student('reference_no'));
+                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
                 //if there are any duplicates they are marked in the remarks
                 if (count($duplicatefheno) > 1) {
                     $selectedstudent = TemporaryBilling::find($student['uid']);
@@ -410,7 +410,7 @@ class BillingController extends Controller
             Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
         }
     }
-    private function getDuplicateFHENo($fhe_award_no,$reference_no)
+    private function getDuplicateFHENo($fhe_award_no, $reference_no)
     {
         $duplicates = TemporaryBilling::where('fhe_award_no', $fhe_award_no)
             ->where('reference_no', $reference_no)
