@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Billing;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\TemporaryBilling;
 use DateTime;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class BillingController extends Controller
 {
@@ -231,7 +230,7 @@ class BillingController extends Controller
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
-        $tempstudents =  json_decode($request->getContent(),true); //json decode into array (the second parameter)
+        $tempstudents =  json_decode($request->getContent(), true); //json decode into array (the second parameter)
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         foreach ($tempstudents as $tempstudent) {
@@ -243,7 +242,7 @@ class BillingController extends Controller
         }
         return response('Success', 200);
     }
-    
+
     private function validateTempStudentFields($tempstudent)
     {
         $validator = Validator::make((array) $tempstudent, [
@@ -252,6 +251,8 @@ class BillingController extends Controller
             'sex_at_birth' => 'required|max:25',
             'birthdate' => 'required|date_format:Y-m-d',
             'birthplace' => 'required|max:255',
+            'mothers_gname' => 'required|max:255', //mother madien fname
+            'mothers_lname' => 'required|max:255', //mother madien lname
             'pres_prov' => 'required|max:255',
             'pres_city' => 'required|max:255',
             'pres_brgy' => 'required|max:255',
@@ -265,6 +266,7 @@ class BillingController extends Controller
             // 'degree_program' => 'required|max:255'
         ]);
 
+        //return validator failure status
         return $validator->fails();
     }
 
@@ -347,6 +349,77 @@ class BillingController extends Controller
         $tempstudent->save();
     }
 
+
+    //Billing Checker functions
+
+    //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
+    public function queueBillingFOrChecking($reference_no)
+    {
+        $billing = Billing::where('reference_no',$reference_no);
+        $billing->billing_status = 3;
+        $billing->save();
+    }
+    public function checkBilling()
+    {
+        //look for billings marked for a checker queue
+        $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
+            ->get();
+
+        //check each student of each billing
+        foreach ($billings as $billing) {
+            //get students of each billing transaction
+            $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
+            //check each studetn in billing transaction for duplciates in fhe award number
+            foreach ($students as $student) {
+
+                //get duplicate fhe numbers
+                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'),$student('reference_no'));
+                //if there are any duplicates they are marked in the remarks
+                if (count($duplicatefheno) > 1) {
+                    $selectedstudent = TemporaryBilling::find($student['uid']);
+                    $selectedstudent->remarks = 'Has a duplicate student';
+                    $selectedstudent->save();
+                }
+
+                //fetch duplicates in the masterlist
+                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
+                    array(
+                        'fname' => $student['stud_fname'],
+                        'lname' => $student['stud_lname'],
+                        'birthdate' => $student['stud_birth_date']
+                    )
+                );
+                //if there are duplicates in the masterlist add a remark
+                if (count($duplicateinmasterlist) > 0) {
+                    $selectedstudent = TemporaryBilling::find($student['uid']);
+                    $selectedstudent->remarks = 'Has a duplicate student in the Master List';
+                    $selectedstudent->save();
+                }
+            }
+            //when the billing has been checked. Save it with a new status.
+            $selectedbilling = Billing::find($billing['uid']);
+            $selectedbilling->billing_status = 3; //3 is done queue
+            $selectedbilling->save();
+
+            //write a success message in the logs
+            Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
+        }
+    }
+    private function getDuplicateFHENo($fhe_award_no,$reference_no)
+    {
+        $duplicates = TemporaryBilling::where('fhe_award_no', $fhe_award_no)
+            ->where('reference_no', $reference_no)
+            ->get();
+        return $duplicates;
+    }
+    private function getDuplicatesStudentsInMasterList($data = array())
+    {
+        $duplicates = Student::where('fname', 'like', '%' . $data['fname'] . '%')
+            ->where('lname', 'like', '%' . $data['lname'] . '%')
+            ->where('birthdate', $data['birthdate'])
+            ->get();
+        return $duplicates;
+    }
 
     public function getTempStudents(Request $request)
     {

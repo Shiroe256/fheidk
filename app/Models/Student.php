@@ -10,7 +10,7 @@ class Student extends Model
 {
 
     protected $table = 'tbl_master_student';
-    protected $primarykey = 'uid';
+    protected $primaryKey = 'uid';
     protected $fillable = [
         'app_id', 'fhe_award_no', 'tes_award_no', 'slp_award_no', 'national_id',
         'fname', 'mname', 'lname', 'ext_name', 'm_fname', 'm_mname', 'm_lname', 'f_fname', 'f_mname',
