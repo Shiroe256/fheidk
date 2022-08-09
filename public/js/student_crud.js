@@ -142,44 +142,6 @@ $("#frm_update_student").submit(function (e) {
   });
 });
 
-
-// delete employee ajax request
-$(document).on('click', '.deleteIcon', function (e) {
-  e.preventDefault();
-  let id = $(this).attr('id');
-  let csrf = '{{ csrf_token() }}';
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      $.ajax({
-        url: '/deleteTempStudent',
-        method: 'delete',
-        data: {
-          id: id,
-          _token: csrf
-        },
-        success: function (response) {
-          console.log(response);
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-          fetchTempStudent();
-        }
-      });
-    }
-  })
-});
-
-
 //Main check box is checked
 $(document).on('click', 'input[name=main_checkbox]', function () {
   if (this.checked) {
@@ -204,24 +166,64 @@ $(document).on('change', 'input[name="student_checkbox"]', function () {
   btnDeleteToggle();
 });
 
+//Delete data
+$(document).on('click', '#btn_delete_students', function () {
+  var checkedStudents = [];
+  $($('input[name="student_checkbox"]:checked')).each(function () {
+    checkedStudents.push($(this).val());
+  });
+  let id = checkedStudents;
+  
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      alert(id);
+      console.log(id);
+      $.ajax({
+        url: '/delete-tempstudent',
+        method: 'delete',
+        data: {
+          uid: id
+        },
+        success: function (response) {
+          console.log(response);
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          $('#btn_delete_students').addClass('d-none');
+          fetchTempStudent();
+        }
+      });
+    }
+  })
+});
+
+
 //Delete button hide and show
-function btnDeleteToggle(){
-  if($('input[name="student_checkbox"]:checked').length > 0){
+function btnDeleteToggle() {
+  if ($('input[name="student_checkbox"]:checked').length > 0) {
     $('#btn_delete_students').html('');
-    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove ('+$('input[name="student_checkbox"]:checked').length+')').removeClass('d-none');
-  }else{
+    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove (' + $('input[name="student_checkbox"]:checked').length + ')').removeClass('d-none');
+  } else {
     $('#btn_delete_students').addClass('d-none');
   }
 }
 
-//Delete data
-$(document).on('click', '#btn_delete_students', function(){
-  var checkedStudents = [];
-  $($('input[name="student_checkbox"]:checked')).each(function(){
-     checkedStudents.push($(this).val());
-  });
-  alert(checkedStudents);
-});
 
 //nilabas ko para ma call ko sa iba
 function fetchTempStudent() {

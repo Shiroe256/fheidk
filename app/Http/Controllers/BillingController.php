@@ -226,15 +226,10 @@ class BillingController extends Controller
         }
     }
 
-    // handle delete an employee ajax request
-	// public function deleteTempStudent(Request $request) {
-	// 	$id = $request->uid;
-	// 	$student = TemporaryBilling::find($id);
-	// 	TemporaryBilling::destroy($id);
-	// }
-
     public function deleteTempStudent(Request $request){
-        $students = TemporaryBilling::find($request->uid);
+        $id = $request->uid;
+        // $students = TemporaryBilling::find($id);
+        $students = TemporaryBilling::whereIn('uid',$id);
         $students->delete();
     }
 

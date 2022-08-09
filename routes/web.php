@@ -63,3 +63,4 @@ Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->na
 Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
+Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');

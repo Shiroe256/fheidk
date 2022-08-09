@@ -15,6 +15,7 @@
 }
 
 .table-style {
+  /* Change to 14px for deployment */
   font-size: 12px;
   width: 100%;
 }
