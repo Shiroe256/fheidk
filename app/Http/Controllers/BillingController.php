@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Billing;
+use App\Models\OtherSchoolFees;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
+use App\Models\TuitionFees;
 use DateTime;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class BillingController extends Controller
 {
@@ -150,6 +153,26 @@ class BillingController extends Controller
         }
     }
 
+    // find the tosf of the students
+    public function findTuitionFee(Request $request)
+    {
+        $course_enrolled = $request->course_enrolled;
+        $total_unit = $request->total_unit;
+        $year_level = $request->year_level;
+        $tuitionFee = TuitionFees::select(DB::raw('tuition_per_unit * '. $total_unit .' AS total_tuition'))
+        ->where('course_enrolled','like', '%'. $course_enrolled .'%')
+        ->where('year_level','like', '%'. $year_level .'%')
+        ->value('total_tuition');
+        return response()->json($tuitionFee);
+    }
+
+    public function findOtherSchoolFees(Request $request)
+    {
+        $course_enrolled = $request->course_enrolled;
+        $otherSchoolFees = OtherSchoolFees::find($course_enrolled);
+        return response()->json($otherSchoolFees);
+    }
+
     // handle edit an student ajax request
     public function editTempStudent(Request $request)
     {
@@ -224,8 +247,10 @@ class BillingController extends Controller
             ]);
         }
     }
+
     //handles delete student information
-    public function deleteTempStudent(Request $request){
+    public function deleteTempStudent(Request $request)
+    {
         $id = $request->uid;
         // $students = TemporaryBilling::find($id);
         $students = TemporaryBilling::whereIn('uid', $id);

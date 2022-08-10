@@ -52,6 +52,44 @@ $("#frm_add_student").submit(function (e) {
 });
 //end of new add student
 
+// get tuition fee based on student's degree_program
+$(document).on('change', '#total_unit', function (e) {
+  e.preventDefault();
+  let course = $("#course_enrolled").val();
+  let total_unit = $("#total_unit").val();
+  let year_level = $("#year_level").val();
+  $.ajax({
+    url: '/get-tuitionfee',
+    method: 'get',
+    data: {
+      degree_program: course,
+      total_unit: total_unit,
+      year_level: year_level,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      $("#total_tuition").val(response);
+    }
+  });
+});
+
+// get other school fee based on student's degree_program
+$(document).on('change', '#course_enrolled', function (e) {
+  e.preventDefault();
+  let course = $("#course_enrolled").val();
+  $.ajax({
+    url: '/get-otherschoolfee',
+    method: 'get',
+    data: {
+      degree_program: course,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      $("#edit_student_id").val(response.uid);
+    }
+  });
+});
+
 // edit student ajax request
 $(document).on('click', '.btn_update_student', function (e) {
   e.preventDefault();
@@ -190,8 +228,6 @@ $(document).on('click', '#btn_delete_students', function () {
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      alert(id);
-      console.log(id);
       $.ajax({
         url: '/delete-tempstudent',
         method: 'delete',

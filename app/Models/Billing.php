@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Billing extends Model
 {
     protected $table = 'tbl_fhe_billing_records';
-    protected $primarykey = 'uid';
+    protected $primaryKey = 'uid';
     protected $fillable = [
         'hei_psg_region',
         'hei_sid',

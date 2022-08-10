@@ -1,5 +1,5 @@
 <div id="mod_new_student_info" class="modal fade" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <form id='frm_add_student' method="POST">
                 @csrf
@@ -21,7 +21,7 @@
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Middlename</label><input name='middle_name' class="form-control input-style" type="text"></div>
                             </div>
-                            <div class="col-xl-1">
+                            <div class="col">
                                 <div class="form-group"><label>Extension</label><input name='extension_name' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                     </select></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id="birthdate" name='birthdate' class="date form-control input-style"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id="birthdate" name='birthdate' class="date form-control input-style" readonly></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input name='birthplace' class="form-control input-style" type="text"></div>
@@ -170,18 +170,18 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input name='course_enrolled' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input id='course_enrolled' name='course_enrolled' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input name='year_level' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='year_level' name='year_level' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
-                        {{-- <div class="form-row">
+                        <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input name='total_unit' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input id='total_unit' name='total_unit' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Amount of Tuition Fee</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
+                                <div class="form-group"><label>Amount of Tuition Fee</label><input id='total_tuition' name='total_tuition' class="form-control input-style" type="number" min="0" readonly=""></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -225,7 +225,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Athletic Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Athletic Fee</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label>Computer Fee</label><input class="form-control input-style" type="number" min="0"></div>
@@ -279,7 +279,7 @@
                             <div class="col">
                                 <div class="form-group"><label>Remarks</label><textarea class="form-control input-style" placeholder="Enter remarks here . . ."></textarea></div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-bs-dismiss="modal">Close</button><button id="btn_add_student" class="add_student btn btn-primary card-button-style" type="submit">Add Student</button></div>
