@@ -1,4 +1,5 @@
 fetchTempStudent();
+selectDegreePrograms();
 
 // add new student ajax request
 $("#frm_add_student").submit(function (e) {
@@ -62,17 +63,108 @@ $(document).on('change', '#total_unit', function (e) {
     url: '/get-tuitionfee',
     method: 'get',
     data: {
-      degree_program: course,
+      course_enrolled: course,
       total_unit: total_unit,
       year_level: year_level,
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      console.log(response);
       $("#total_tuition").val(response);
     }
   });
 });
 
+if(($('#total_unit').val() !== null || $('#total_unit').val() !== '') && typeof str === 'string' && str.length === 0) {
+  $(document).on('change', '#course_enrolled', function (e) {
+    e.preventDefault();
+    let course = $("#course_enrolled").val();
+    let total_unit = $("#total_unit").val();
+    let year_level = $("#year_level").val();
+    $.ajax({
+      url: '/get-tuitionfee',
+      method: 'get',
+      data: {
+        course_enrolled: course,
+        total_unit: total_unit,
+        year_level: year_level,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        console.log(response);
+        $("#total_tuition").val(response);
+      }
+    });
+  });
+  
+  $(document).on('change', '#year_level', function (e) {
+    e.preventDefault();
+    let course = $("#course_enrolled").val();
+    let total_unit = $("#total_unit").val();
+    let year_level = $("#year_level").val();
+    $.ajax({
+      url: '/get-tuitionfee',
+      method: 'get',
+      data: {
+        course_enrolled: course,
+        total_unit: total_unit,
+        year_level: year_level,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        console.log(response);
+        $("#total_tuition").val(response);
+      }
+    });
+  });
+}
+
+//get other school fee based on student's degree_program
+$(document).on('change', '#course_enrolled', function (e) {
+  e.preventDefault();
+  let course = $("#course_enrolled").val();
+  $.ajax({
+    url: '/get-otherschoolfee',
+    method: 'get',
+    data: {
+      course_enrolled: course,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      //console.log(response);
+      //display amount
+      $("#admission_fee").val(response[0].total_amount);
+      $("#athletic_fee").val(response[1].total_amount);
+      $("#computer_fee").val(response[2].total_amount);
+      $("#cultural_fee").val(response[3].total_amount);
+      $("#development_fee").val(response[4].total_amount);
+      $("#entrance_fee").val(response[5].total_amount);
+      $("#guidance_fee").val(response[6].total_amount);
+      $("#handbook_fee").val(response[7].total_amount);
+      $("#laboratory_fee").val(response[8].total_amount);
+      $("#library_fee").val(response[9].total_amount);
+      $("#medical_dental_fee").val(response[10].total_amount);
+      $("#registration_fee").val(response[11].total_amount);
+      $("#school_id_fee").val(response[12].total_amount);
+      //set max amount allowed
+      $("#admission_fee").attr("max", response[0].total_amount);
+      $("#athletic_fee").attr("max", response[1].total_amount);
+      $("#computer_fee").attr("max", response[2].total_amount);
+      $("#cultural_fee").attr("max", response[3].total_amount);
+      $("#development_fee").attr("max", response[4].total_amount);
+      $("#entrance_fee").attr("max", response[5].total_amount);
+      $("#guidance_fee").attr("max", response[6].total_amount);
+      $("#handbook_fee").attr("max", response[7].total_amount);
+      $("#laboratory_fee").attr("max", response[8].total_amount);
+      $("#library_fee").attr("max", response[9].total_amount);
+      $("#medical_dental_fee").attr("max", response[10].total_amount);
+      $("#registration_fee").attr("max", response[11].total_amount);
+      $("#school_id_fee").attr("max", response[12].total_amount);
+    }
+  });
+}); 
+
+/*
 // get other school fee based on student's degree_program
 $(document).on('change', '#course_enrolled', function (e) {
   e.preventDefault();
@@ -81,7 +173,7 @@ $(document).on('change', '#course_enrolled', function (e) {
     url: '/get-otherschoolfee',
     method: 'get',
     data: {
-      degree_program: course,
+      course_enrolled: course,
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
@@ -89,7 +181,7 @@ $(document).on('change', '#course_enrolled', function (e) {
     }
   });
 });
-
+*/
 // edit student ajax request
 $(document).on('click', '.btn_update_student', function (e) {
   e.preventDefault();
@@ -276,6 +368,22 @@ function fetchTempStudent() {
           { orderable: false, targets: [0, -1] }
         ]
       });
+    }
+  });
+}
+
+function selectDegreePrograms() {
+  $.ajax({
+    url: '/get-degreeprograms',
+    method: 'get',
+    data: {
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      console.log(response);
+      $('#course_enrolled').html('');
+      $('#course_enrolled').append('<option value='+ response[0].course_enrolled  +'>'+ response[0].course_enrolled  +'</option>');
+      // $("#total_tuition").val(response);
     }
   });
 }

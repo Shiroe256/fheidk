@@ -160,7 +160,7 @@ class BillingController extends Controller
         $total_unit = $request->total_unit;
         $year_level = $request->year_level;
         $tuitionFee = TuitionFees::select(DB::raw('tuition_per_unit * '. $total_unit .' AS total_tuition'))
-        ->where('course_enrolled','like', '%'. $course_enrolled .'%')
+        ->where(trim('course_enrolled'), trim($course_enrolled))
         ->where('year_level','like', '%'. $year_level .'%')
         ->value('total_tuition');
         return response()->json($tuitionFee);
@@ -169,8 +169,19 @@ class BillingController extends Controller
     public function findOtherSchoolFees(Request $request)
     {
         $course_enrolled = $request->course_enrolled;
-        $otherSchoolFees = OtherSchoolFees::find($course_enrolled);
+        $otherSchoolFees = OtherSchoolFees::select(DB::raw('type_of_fee, SUM(amount) as total_amount'))
+        ->where(trim('course_enrolled'), trim($course_enrolled))
+        ->groupby('type_of_fee', 'course_enrolled')
+        ->get();
         return response()->json($otherSchoolFees);
+    }
+
+    public function selectDegreePrograms(Request $request)
+    {
+        $selectDegreePrograms = OtherSchoolFees::select('course_enrolled')
+        ->groupby('course_enrolled')
+        ->get();
+        return response()->json($selectDegreePrograms);
     }
 
     // handle edit an student ajax request

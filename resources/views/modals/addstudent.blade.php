@@ -27,12 +27,16 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select name='sex' class="form-control input-style">
+                                <div class="form-group"><label>
+                                     <span class="text-danger">*</span>&nbsp;Sex</label>
+                                     <select name='sex' class="form-control input-style">
                                         <optgroup label="Select Sex">
+                                            <option value="" selected disabled>--Select Sex--</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </optgroup>
-                                    </select></div>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id="birthdate" name='birthdate' class="date form-control input-style" readonly></div>
@@ -170,7 +174,16 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input id='course_enrolled' name='course_enrolled' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label>
+                                    {{-- <input id='course_enrolled' name='course_enrolled' class="form-control input-style" type="text"> --}}
+                                    <select id='course_enrolled' name='course_enrolled' class="form-control input-style">
+                                        <optgroup label="Select Course">
+                                            {{-- <option value="" selected disabled>--Select Degree Program--</option>
+                                            <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
+                                            <option value="Bachelor of Science in Information and Technology">Bachelor of Science in Information and Technology</option> --}}
+                                        </optgroup>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='year_level' name='year_level' class="form-control input-style" type="number" min="0"></div>
@@ -217,55 +230,55 @@
                         </div>
                         <div class="form-row">
                             <div class="col-xl-6">
-                                <div class="form-group"><label>Entrance Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Entrance Fee</label><input id="entrance_fee" name="entrance_fee" class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Admission Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>Athletic Fee</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Computer Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Admission Fee</label><input id="admission_fee" name="admission_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Cultural Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Athletic Fee</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Development Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>Guidance Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Handbook Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Computer Fee</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Laboratory Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Cultural Fee</label><input id="cultural_fee" name="cultural_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Library Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Development Fee</label><input id="development_fee" name="development_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Medical and Dental Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Guidance Fee</label><input id="guidance_fee" name="guidance_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Registration Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Handbook Fee</label><input id="handbook_fee" name="handbook_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Laboratory Fee</label><input id="laboratory_fee" name="laboratory_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Library Fee</label><input id="library_fee" name="library_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Medical and Dental Fee</label><input id="medical_dental_fee" name="medical_dental_fee"class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Registration Fee</label><input id="registration_fee" name="registration_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-xl-6">
-                                <div class="form-group"><label>School ID Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>School ID Fee</label><input id="school_id_fee" name="school_id_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
                         <div class="form-row">

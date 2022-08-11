@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OtherSchoolFees extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_tuition_fees';
+    protected $table = 'tbl_other_school_fees';
     public $primaryKey = 'uid';
     protected $fillable = [
         'ac_year',
