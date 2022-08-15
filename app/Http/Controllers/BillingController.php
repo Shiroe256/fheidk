@@ -274,11 +274,11 @@ class BillingController extends Controller
         $tempstudents =  json_decode($request->getContent(), true); //json decode into array (the second parameter)
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
-        foreach ($tempstudents[0] as $tempstudent) {
+        foreach ($tempstudents as $tempstudent) {
             if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Error', 400);
         }
         //upload all rows if there is no problem
-        foreach ($tempstudents[0] as $tempstudent) {
+        foreach ($tempstudents as $tempstudent) {
             $this->newTempStudentBatch($tempstudent);
         }
         return response('Success', 200);
@@ -314,45 +314,45 @@ class BillingController extends Controller
     private function newTempStudentBatch($data = array())
     {
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = $data->fhe_aw_no;
-        $tempstudent->stud_id = $data->stud_no;
-        $tempstudent->lrn_no = $data->lrnum;
-        $tempstudent->stud_lname = $data->last_name;
-        $tempstudent->stud_fname = $data->given_name;
-        $tempstudent->stud_mname = $data->mid_name;
-        $tempstudent->stud_ext_name = $data->ext_name;
-        $tempstudent->stud_sex = $data->sex_at_birth;
+        $tempstudent->fhe_award_no = $data['fhe_aw_no'];
+        $tempstudent->stud_id = $data['stud_no'];
+        $tempstudent->lrn_no = $data['lrnum'];
+        $tempstudent->stud_lname = $data['last_name'];
+        $tempstudent->stud_fname = $data['given_name'];
+        $tempstudent->stud_mname = $data['mid_name'];
+        $tempstudent->stud_ext_name = $data['ext_name'];
+        $tempstudent->stud_sex = $data['sex_at_birth'];
         $d = new DateTime(str_replace("/", "-", $tempstudent->birthdate));
         $tempstudent->stud_birth_date = $d->format("Y-m-d");
-        $tempstudent->stud_birth_place = $data->birthplace;
-        $tempstudent->f_lname = $data->fathers_lname;
-        $tempstudent->f_fname = $data->fathers_gname;
-        $tempstudent->f_mname = $data->fathers_mname;
-        $tempstudent->m_lname = $data->mothers_lname;
-        $tempstudent->m_fname = $data->mothers_gname;
-        $tempstudent->m_mname = $data->mothers_mname;
-        $tempstudent->permanent_prov = $data->perm_prov;
-        $tempstudent->permanent_city = $data->perm_city;
-        $tempstudent->permanent_barangay = $data->perm_brgy;
-        $tempstudent->permanent_street = $data->perm_street;
-        $tempstudent->permanent_zipcode = $data->perm_zip;
-        $tempstudent->present_prov = $data->pres_prov;
-        $tempstudent->present_city = $data->pres_city;
-        $tempstudent->present_barangay = $data->pres_brgy;
-        $tempstudent->present_street = $data->pres_street;
-        $tempstudent->present_zipcode = $data->pres_zip;
-        $tempstudent->stud_email = $data->email;
-        $tempstudent->stud_alt_email = $data->a_email;
-        $tempstudent->stud_phone_no = $data->contact_number;
-        $tempstudent->stud_alt_phone_no = $data->contact_number_2;
-        $tempstudent->transferee = $data->is_transferee;
+        $tempstudent->stud_birth_place = $data['birthplace'];
+        $tempstudent->f_lname = $data['fathers_lname'];
+        $tempstudent->f_fname = $data['fathers_gname'];
+        $tempstudent->f_mname = $data['fathers_mname'];
+        $tempstudent->m_lname = $data['mothers_lname'];
+        $tempstudent->m_fname = $data['mothers_gname'];
+        $tempstudent->m_mname = $data['mothers_mname'];
+        $tempstudent->permanent_prov = $data['perm_prov'];
+        $tempstudent->permanent_city = $data['perm_city'];
+        $tempstudent->permanent_barangay = $data['perm_brgy'];
+        $tempstudent->permanent_street = $data['perm_street'];
+        $tempstudent->permanent_zipcode = $data['perm_zip'];
+        $tempstudent->present_prov = $data['pres_prov'];
+        $tempstudent->present_city = $data['pres_city'];
+        $tempstudent->present_barangay = $data['pres_brgy'];
+        $tempstudent->present_street = $data['pres_street'];
+        $tempstudent->present_zipcode = $data['pres_zip'];
+        $tempstudent->stud_email = $data['email'];
+        $tempstudent->stud_alt_email = $data['a_email'];
+        $tempstudent->stud_phone_no = $data['contact_number'];
+        $tempstudent->stud_alt_phone_no = $data['contact_number_2'];
+        $tempstudent->transferee = $data['is_transferee'];
 
         //dummy data
         $tempstudent->degree_program = 69;
-        $tempstudent->lab_unit = $data->lab_u;
-        $tempstudent->comp_lab_unit = $data->com_lab_u;
-        $tempstudent->academic_unit = $data->acad_u;
-        $tempstudent->nstp_unit = $data->nstp_u;
+        $tempstudent->lab_unit = $data['lab_u'];
+        $tempstudent->comp_lab_unit = $data['com_lab_u'];
+        $tempstudent->academic_unit = $data['acad_u'];
+        $tempstudent->nstp_unit = $data['nstp_u'];
         $tempstudent->tuition_fee = 0;
         $tempstudent->entrance_fee = 0;
         $tempstudent->admission_fee = 0;
