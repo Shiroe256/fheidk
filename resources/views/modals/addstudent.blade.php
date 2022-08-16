@@ -177,11 +177,7 @@
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label>
                                     {{-- <input id='course_enrolled' name='course_enrolled' class="form-control input-style" type="text"> --}}
                                     <select id='course_enrolled' name='course_enrolled' class="form-control input-style">
-                                        <optgroup label="Select Course">
-                                            {{-- <option value="" selected disabled>--Select Degree Program--</option>
-                                            <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-                                            <option value="Bachelor of Science in Information and Technology">Bachelor of Science in Information and Technology</option> --}}
-                                        </optgroup>
+                                            <option value="" selected disabled>--Select Degree Program--</option>
                                     </select>
                                 </div>
                             </div>

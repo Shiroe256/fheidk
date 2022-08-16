@@ -56,7 +56,7 @@ $("#frm_add_student").submit(function (e) {
 // get tuition fee based on student's degree_program
 $(document).on('change', '#total_unit', function (e) {
   e.preventDefault();
-  let course = $("#course_enrolled").val();
+  let course = $("#course_enrolled option:selected").text();
   let total_unit = $("#total_unit").val();
   let year_level = $("#year_level").val();
   $.ajax({
@@ -78,7 +78,7 @@ $(document).on('change', '#total_unit', function (e) {
 if(($('#total_unit').val() !== null || $('#total_unit').val() !== '') && typeof str === 'string' && str.length === 0) {
   $(document).on('change', '#course_enrolled', function (e) {
     e.preventDefault();
-    let course = $("#course_enrolled").val();
+    let course = $("#course_enrolled option:selected").text();
     let total_unit = $("#total_unit").val();
     let year_level = $("#year_level").val();
     $.ajax({
@@ -99,7 +99,7 @@ if(($('#total_unit').val() !== null || $('#total_unit').val() !== '') && typeof 
   
   $(document).on('change', '#year_level', function (e) {
     e.preventDefault();
-    let course = $("#course_enrolled").val();
+    let course = $("#course_enrolled option:selected").text();
     let total_unit = $("#total_unit").val();
     let year_level = $("#year_level").val();
     $.ajax({
@@ -122,7 +122,7 @@ if(($('#total_unit').val() !== null || $('#total_unit').val() !== '') && typeof 
 //get other school fee based on student's degree_program
 $(document).on('change', '#course_enrolled', function (e) {
   e.preventDefault();
-  let course = $("#course_enrolled").val();
+  let course = $("#course_enrolled option:selected").text();
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
@@ -380,10 +380,10 @@ function selectDegreePrograms() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response);
-      $('#course_enrolled').html('');
-      $('#course_enrolled').append('<option value='+ response[0].course_enrolled  +'>'+ response[0].course_enrolled  +'</option>');
-      // $("#total_tuition").val(response);
+      for (let index = 0; index < response.length; ++index) {
+        let degree_program = response[index].course_enrolled;
+        $('#course_enrolled').append('<option value='+ degree_program +'>'+ degree_program +'</option>');
+    }
     }
   });
 }
