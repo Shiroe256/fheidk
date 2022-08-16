@@ -57,10 +57,15 @@ Route::get('/testing', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//billing
+Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
+Route::get('/billing/{ref_no}', [BillingController::class, 'getBilling'])->name('getBilling');
+// Route::get('/billing/{}', [BillingController::class, 'billing'])->name('billing');
+
 //CRUD Routes
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
-Route::post('/add-tempstudents',[BillingController::class,'batchTempStudent']);
+Route::post('/add-batchtempstudents',[BillingController::class,'batchTempStudent']);
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
 Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');

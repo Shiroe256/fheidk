@@ -159,10 +159,10 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $total_unit = $request->total_unit;
         $year_level = $request->year_level;
-        $tuitionFee = TuitionFees::select(DB::raw('tuition_per_unit * '. $total_unit .' AS total_tuition'))
-        ->where(trim('course_enrolled'), trim($course_enrolled))
-        ->where('year_level','like', '%'. $year_level .'%')
-        ->value('total_tuition');
+        $tuitionFee = TuitionFees::select(DB::raw('tuition_per_unit * ' . $total_unit . ' AS total_tuition'))
+            ->where(trim('course_enrolled'), trim($course_enrolled))
+            ->where('year_level', 'like', '%' . $year_level . '%')
+            ->value('total_tuition');
         return response()->json($tuitionFee);
     }
 
@@ -170,17 +170,17 @@ class BillingController extends Controller
     {
         $course_enrolled = $request->course_enrolled;
         $otherSchoolFees = OtherSchoolFees::select(DB::raw('type_of_fee, SUM(amount) as total_amount'))
-        ->where(trim('course_enrolled'), trim($course_enrolled))
-        ->groupby('type_of_fee', 'course_enrolled')
-        ->get();
+            ->where(trim('course_enrolled'), trim($course_enrolled))
+            ->groupby('type_of_fee', 'course_enrolled')
+            ->get();
         return response()->json($otherSchoolFees);
     }
 
     public function selectDegreePrograms(Request $request)
     {
         $selectDegreePrograms = OtherSchoolFees::select('course_enrolled')
-        ->groupby('course_enrolled')
-        ->get();
+            ->groupby('course_enrolled')
+            ->get();
         return response()->json($selectDegreePrograms);
     }
 
@@ -266,6 +266,42 @@ class BillingController extends Controller
         // $students = TemporaryBilling::find($id);
         $students = TemporaryBilling::whereIn('uid', $id);
         $students->delete();
+    }
+
+    public function newBilling(Request $request)
+    {
+        $region = 1;
+        $hei_uii = "11040";
+        $hei_sid = "11040";
+        $billing = [
+            'ac_year' => $request->ac_year,
+            'semester' => $request->semester,
+            'hei_uii' => $hei_uii,
+            'hei_sid' => $hei_sid,
+            'reference_no' => $this->generateBillingReferenceNumber(1, $hei_sid, $request->ac_year, $request->semester, 1)
+        ];
+        $reference_no = Billing::create($billing)->reference_no;
+
+        return redirect(route('billing') . "/" . $reference_no);
+    }
+
+    public function getBilling($ref_no)
+    {
+        //gather all the categories for everybody in the world
+        $otherfees = OtherSchoolFees::where('hei_uii', "01040")
+            ->selectRaw('course_enrolled,type_of_fee,category')
+            ->groupBy('course_enrolled', 'type_of_fee', 'category')
+            ->get();
+        //declare an array to store the shit
+        $otherfeesresult = array();
+        foreach ($otherfees as $row) {
+            //store the shit
+            $otherfeesresult[$row->course_enrolled][$row->type_of_fee][] = $row->category;
+        }
+        //package the shit and put it out of a view
+        $data['otherfees'] = $otherfeesresult;
+        $data['ref_no'] = $ref_no;
+        return view('billing', $data);
     }
 
     //batch upload controller

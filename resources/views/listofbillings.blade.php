@@ -97,7 +97,7 @@
     </div>
    
 	@include('includes.footer');
-
+    <script src="{{url('js\listofbilling.js')}}"></script>
 </body>
 
 </html>
