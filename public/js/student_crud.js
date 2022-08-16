@@ -163,7 +163,6 @@ $(document).on('change', '#course_enrolled', function (e) {
 
       //disable keys if maximum amount is reached
       $('#admission_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[0].total_amount)
         if ($(this).val() > response[0].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -174,7 +173,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#athletic_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[1].total_amount)
         if ($(this).val() > response[1].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -185,7 +183,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#computer_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[2].total_amount)
         if ($(this).val() > response[2].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -196,7 +193,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#cultural_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[3].total_amount)
         if ($(this).val() > response[3].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -207,7 +203,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#development_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[4].total_amount)
         if ($(this).val() > response[4].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -217,19 +212,8 @@ $(document).on('change', '#course_enrolled', function (e) {
         }
       });
 
-      $('#development_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[4].total_amount)
-        if ($(this).val() > response[4].total_amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[4].total_amount);
-        }
-      });
 
       $('#entrance_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[5].total_amount)
         if ($(this).val() > response[5].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -240,7 +224,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#guidance_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[6].total_amount)
         if ($(this).val() > response[6].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -251,7 +234,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#handbook_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[7].total_amount)
         if ($(this).val() > response[7].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -262,7 +244,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#laboratory_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[8].total_amount)
         if ($(this).val() > response[8].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -273,7 +254,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#library_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[9].total_amount)
         if ($(this).val() > response[9].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -284,7 +264,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#medical_dental_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[10].total_amount)
         if ($(this).val() > response[10].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -295,7 +274,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#registration_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[11].total_amount)
         if ($(this).val() > response[11].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
@@ -306,7 +284,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       });
 
       $('#school_id_fee').on('keyup keydown change', function (e) {
-        console.log($(this).val() > response[12].total_amount)
         if ($(this).val() > response[12].total_amount
           && e.keyCode !== 46
           && e.keyCode !== 8
