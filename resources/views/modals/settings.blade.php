@@ -1,4 +1,13 @@
 <?php
+function ordinal($number)
+{
+    $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+    if ($number % 100 >= 11 && $number % 100 <= 13) {
+        return $number . 'th';
+    } else {
+        return $number . $ends[$number % 10];
+    }
+}
 $ctr = 0;
 ?>
 <div class="mb-3">
@@ -20,28 +29,33 @@ $ctr = 0;
                 <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
             </div>
         </div>
-        <div id="settings_{{ $ctr++ }}">
-            <ul class="list-unstyled card-columns">
-                @foreach ($course as $typeoffeename => $typeoffee)
-                    <li>
-                        <div class="card p-3">
-                            <strong>{{ $typeoffeename }}</strong>
-                            <ul class="list-unstyled">
-                                @foreach ($typeoffee as $categoryname => $category)
-                                    <li>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input"
-                                                id="switch_{{ $category['id'] }}">
-                                            <label class="custom-control-label"
-                                                for="switch_{{ $category['id'] }}">{{ $category['category'] }}</label>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        @foreach ($course as $yearlevel => $yr)
+            <div class="card p-3">
+                <strong class="mb-3">{{ ordinal($yearlevel) }} Year</strong>
+                <div id="settings_{{ $ctr++ }}">
+                    <ul class="list-unstyled card-columns">
+                        @foreach ($yr as $typeoffeename => $typeoffee)
+                            <li>
+                                <div class="card p-3">
+                                    <strong>{{ $typeoffeename }}</strong>
+                                    <ul class="list-unstyled">
+                                        @foreach ($typeoffee as $categoryname => $category)
+                                            <li>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="switch_{{ $category['id'] }}">
+                                                    <label class="custom-control-label"
+                                                        for="switch_{{ $category['id'] }}">{{ $category['category'] }}</label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endforeach
