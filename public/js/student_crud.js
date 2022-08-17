@@ -119,6 +119,72 @@ if (($('#total_unit').val() !== null || $('#total_unit').val() !== '') && typeof
   });
 }
 
+// get nstp fee based on student's degree_program
+$(document).on('change', '#nstp_unit', function (e) {
+  e.preventDefault();
+  let course = $("#course_enrolled option:selected").text();
+  let nstp_unit = $("#nstp_unit").val();
+  let year_level = $("#year_level").val();
+  $.ajax({
+    url: '/get-nstpfee',
+    method: 'get',
+    data: {
+      course_enrolled: course,
+      nstp_unit: nstp_unit,
+      year_level: year_level,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      console.log(response);
+      $("#total_nstp").val(response);
+    }
+  });
+});
+
+if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof str === 'string' && str.length === 0) {
+  $(document).on('change', '#course_enrolled', function (e) {
+    e.preventDefault();
+  let course = $("#course_enrolled option:selected").text();
+  let nstp_unit = $("#nstp_unit").val();
+  let year_level = $("#year_level").val();
+  $.ajax({
+    url: '/get-nstpfee',
+    method: 'get',
+    data: {
+      course_enrolled: course,
+      nstp_unit: nstp_unit,
+      year_level: year_level,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      console.log(response);
+      $("#total_nstp").val(response);
+    }
+  });
+});
+
+  $(document).on('change', '#year_level', function (e) {
+    e.preventDefault();
+    let course = $("#course_enrolled option:selected").text();
+    let nstp_unit = $("#nstp_unit").val();
+    let year_level = $("#year_level").val();
+    $.ajax({
+      url: '/get-nstpfee',
+      method: 'get',
+      data: {
+        course_enrolled: course,
+        nstp_unit: nstp_unit,
+        year_level: year_level,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        console.log(response);
+        $("#total_nstp").val(response);
+      }
+    });
+  });
+}
+
 //get other school fee based on student's degree_program
 $(document).on('change', '#course_enrolled', function (e) {
   e.preventDefault();
@@ -146,6 +212,7 @@ $(document).on('change', '#course_enrolled', function (e) {
       $("#medical_dental_fee").val(response[10].total_amount);
       $("#registration_fee").val(response[11].total_amount);
       $("#school_id_fee").val(response[12].total_amount);
+      $("#degree_program").val($("#course_enrolled option:selected").text());
       //set max amount allowed
       $("#admission_fee").attr("max", response[0].total_amount);
       $("#athletic_fee").attr("max", response[1].total_amount);
@@ -160,7 +227,6 @@ $(document).on('change', '#course_enrolled', function (e) {
       $("#medical_dental_fee").attr("max", response[10].total_amount);
       $("#registration_fee").attr("max", response[11].total_amount);
       $("#school_id_fee").attr("max", response[12].total_amount);
-
       //disable keys if maximum amount is reached
       $('#admission_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[0].total_amount
@@ -171,7 +237,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[0].total_amount);
         }
       });
-
       $('#athletic_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[1].total_amount
           && e.keyCode !== 46
@@ -181,7 +246,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[1].total_amount);
         }
       });
-
       $('#computer_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[2].total_amount
           && e.keyCode !== 46
@@ -191,7 +255,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[2].total_amount);
         }
       });
-
       $('#cultural_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[3].total_amount
           && e.keyCode !== 46
@@ -201,7 +264,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[3].total_amount);
         }
       });
-
       $('#development_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[4].total_amount
           && e.keyCode !== 46
@@ -211,8 +273,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[4].total_amount);
         }
       });
-
-
       $('#entrance_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[5].total_amount
           && e.keyCode !== 46
@@ -222,7 +282,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[5].total_amount);
         }
       });
-
       $('#guidance_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[6].total_amount
           && e.keyCode !== 46
@@ -232,7 +291,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[6].total_amount);
         }
       });
-
       $('#handbook_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[7].total_amount
           && e.keyCode !== 46
@@ -242,7 +300,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[7].total_amount);
         }
       });
-
       $('#laboratory_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[8].total_amount
           && e.keyCode !== 46
@@ -252,7 +309,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[8].total_amount);
         }
       });
-
       $('#library_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[9].total_amount
           && e.keyCode !== 46
@@ -262,7 +318,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[9].total_amount);
         }
       });
-
       $('#medical_dental_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[10].total_amount
           && e.keyCode !== 46
@@ -272,7 +327,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[10].total_amount);
         }
       });
-
       $('#registration_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[11].total_amount
           && e.keyCode !== 46
@@ -282,7 +336,6 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[11].total_amount);
         }
       });
-
       $('#school_id_fee').on('keyup keydown change', function (e) {
         if ($(this).val() > response[12].total_amount
           && e.keyCode !== 46
@@ -292,30 +345,54 @@ $(document).on('change', '#course_enrolled', function (e) {
           $(this).val(response[12].total_amount);
         }
       });
-
-
     }
   });
 });
 
-/*
-// get other school fee based on student's degree_program
-$(document).on('change', '#course_enrolled', function (e) {
-  e.preventDefault();
-  let course = $("#course_enrolled").val();
-  $.ajax({
-    url: '/get-otherschoolfee',
-    method: 'get',
-    data: {
-      course_enrolled: course,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      $("#edit_student_id").val(response.uid);
-    }
-  });
+//If checkbox_address is checked
+$(document).on('click', 'input[name=checkbox_address]', function () {
+  if (this.checked) {
+   $("input[name=permanent_province]").val($("input[name=present_province]").val());
+   $("input[name=permanent_city]").val($("input[name=present_city]").val());
+   $("input[name=permanent_barangay]").val($("input[name=present_barangay]").val());
+   $("input[name=permanent_street]").val($("input[name=present_street]").val());
+   $("input[name=permanent_zipcode]").val($("input[name=present_zipcode]").val());
+  }else{
+    $("input[name=permanent_province]").val('');
+    $("input[name=permanent_city]").val('');
+    $("input[name=permanent_barangay]").val('');
+    $("input[name=permanent_street]").val('');
+    $("input[name=permanent_zipcode]").val('');
+  }
 });
-*/
+
+//if student has nstp
+$(document).on('click', 'input[name=checkbox_nstp]', function () {
+  if (this.checked) {
+    $('.input_nstp').removeClass('d-none')
+  }else{
+    $('.input_nstp').addClass('d-none')
+  }
+});
+
+//if students is a transferee
+$(document).on('click', 'input[name=checkbox_transferee]', function () {
+  if (this.checked) {
+    $('.input_transferee').removeClass('d-none')
+  }else{
+    $('.input_transferee').addClass('d-none')
+  }
+});
+
+//if students is a freshmen
+$(document).on('change', '#year_level', function () {
+  if ($(this).val() == 1) {
+    $('.input_transferee').removeClass('d-none')
+  }else{
+    $('.input_transferee').addClass('d-none')
+  }
+});
+
 // edit student ajax request
 $(document).on('click', '.btn_update_student', function (e) {
   e.preventDefault();
@@ -406,6 +483,7 @@ $("#frm_update_student").submit(function (e) {
   });
 });
 
+//Delete function
 //Main check box is checked
 $(document).on('click', 'input[name=main_checkbox]', function () {
   if (this.checked) {
@@ -475,7 +553,6 @@ $(document).on('click', '#btn_delete_students', function () {
   })
 });
 
-
 //Delete button hide and show
 function btnDeleteToggle() {
   if ($('input[name="student_checkbox"]:checked').length > 0) {
@@ -486,8 +563,7 @@ function btnDeleteToggle() {
   }
 }
 
-
-//nilabas ko para ma call ko sa iba
+//fetch records from the database
 function fetchTempStudent() {
   $.ajax({
     url: "/get-tempstudents",
@@ -506,6 +582,7 @@ function fetchTempStudent() {
   });
 }
 
+//fetch all degree programs from the database to select input
 function selectDegreePrograms() {
   $.ajax({
     url: '/get-degreeprograms',

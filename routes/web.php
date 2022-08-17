@@ -73,6 +73,7 @@ Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStude
 //Autocomplete textbox
 Route::get('/get-tuitionfee', [BillingController::class, 'findTuitionFee'])->name('findTuitionFee');
 Route::get('/get-otherschoolfee', [BillingController::class, 'findOtherSchoolFees'])->name('findOtherSchoolFees');
+Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('findNSTPFee');
 
 //Select inputs
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
