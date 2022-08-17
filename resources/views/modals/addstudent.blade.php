@@ -1,5 +1,5 @@
 <div id="mod_new_student_info" class="modal fade" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form id='frm_add_student' method="POST">
                 @csrf
@@ -39,21 +39,25 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id="birthdate" name='birthdate' class="date form-control input-style" readonly></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label>
+                                    <div class="input-group"><div class="input-group-prepend"><span class="input-group-text icon-container"><i class="fa fa-calendar-o"></i></span></div><input id="birthdate" name='birthdate' class="date form-control input-style" autocomplete="off" onkeydown="return false;" >
+                                </div>
+                                    
                             </div>
+                        </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input name='birthplace' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Mother's Lastname</label><input name='m_lname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mother's Maiden Lastname</label><input name='m_lname' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Mother's Firstname</label><input name='m_fname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mother's Firstname</label><input name='m_fname' class="form-control input-style" type="text"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Mother's Middlename</label><input name='m_mname' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mother's Middlename</label><input name='m_mname' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -110,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 text-right">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input check-style" type="checkbox" id="formCheck-7"><label class="custom-control-label" for="formCheck-7" style="padding-top: 3px;">Present Address</label></div>
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input check-style" type="checkbox" id="checkbox_address" name="checkbox_address"><label class="custom-control-label" for="checkbox_address" style="padding-top: 3px;">Present Address</label></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -175,7 +179,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label>
-                                    {{-- <input id='course_enrolled' name='course_enrolled' class="form-control input-style" type="text"> --}}
+                                    <input id='degree_program' name='degree_program' type="hidden" class="form-control input-style" type="text">
                                     <select id='course_enrolled' name='course_enrolled' class="form-control input-style">
                                             <option value="" selected disabled>--Select Degree Program--</option>
                                     </select>
@@ -196,37 +200,28 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label check-style" for="formCheck-1">With National Service Training Program (NSTP)?</label></div>
+                                    <div class="custom-control custom-checkbox"><input id="checkbox_nstp" name="checkbox_nstp" class="custom-control-input" type="checkbox"><label class="custom-control-label check-style" for="checkbox_nstp">With National Service Training Program (NSTP)?</label></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="input_nstp form-row d-none">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input name='nstp_unit' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input id='nstp_unit' name='nstp_unit' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Amount of NSTP</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
+                                <div class="form-group"><label>Amount of NSTP</label><input id='total_nstp' name='total_nstp' class="form-control input-style" type="number" min="0" readonly=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input name='transferee' class="custom-control-input" type="checkbox" id="formCheck-11"><label class="custom-control-label check-style" for="formCheck-11">Transferee</label></div>
+                                    <div class="custom-control custom-checkbox"><input id="checkbox_transferee" name="checkbox_transferee" class="custom-control-input" type="checkbox"><label class="custom-control-label check-style" for="checkbox_transferee">Transferee</label></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <p class="input-style">&nbsp;Select additional fees to be charge:<br></p>
-                                    <div class="custom-control custom-control-inline custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-12"><label class="custom-control-label check-style" for="formCheck-12">Entrance Fee</label></div>
-                                    <div class="custom-control custom-control-inline custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-13"><label class="custom-control-label check-style" for="formCheck-13">Admission Fee</label></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
+                        <div class="input_transferee form-row d-none">
                             <div class="col-xl-6">
-                                <div class="form-group"><label>Entrance Fee</label><input id="entrance_fee" name="entrance_fee" class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Entrance Fee</label><input id="entrance_fee" name="entrance_fee" class= "form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label>Admission Fee</label><input id="admission_fee" name="admission_fee" class="form-control input-style" type="number" min="0" max=""></div>
@@ -286,7 +281,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Remarks</label><textarea class="form-control input-style" placeholder="Enter remarks here . . ."></textarea></div>
+                                <div class="form-group"><label>Remarks</label><textarea id="remarks" name="remarks" class="form-control input-style" placeholder="Enter remarks here . . ."></textarea></div>
                             </div>
                         </div>
                     </div>

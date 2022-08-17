@@ -140,11 +140,33 @@ class BillingController extends Controller
                 'stud_email' => $request->email_address,
                 'stud_alt_email' => $request->alt_email_address,
                 'stud_phone_no' => $request->mobile_number,
-                'alt_stud_phone_no' => $request->alt_mobile_number,
+                'stud_alt_phone_no' => $request->alt_mobile_number,
                 //static
                 'trasferee' => '',
-                'degree_program' => $request->course_enrolled,
-                'year_level' => $request->year_level
+                'degree_program' => $request->degree_program,
+                'year_level' => $request->year_level,
+                'lab_unit' => '1',
+                'comp_lab_unit' => '1',
+                'academic_unit' => $request->total_unit,
+                'nstp_unit' => $request->nstp_unit,
+                'tuition_fee' => $request->total_tuition,
+                'entrance_fee' => $request->entrance_fee,
+                'admission_fee' => $request->admission_fee,
+                'athletic_fee' => $request->athletic_fee,
+                'computer_fee' => $request->computer_fee,
+                'cultural_fee' => $request->cultural_fee,
+                'development_fee' => $request->development_fee,
+                'guidance_fee' => $request->guidance_fee,
+                'handbook_fee' => $request->handbook_fee,
+                'laboratory_fee' => $request->laboratory_fee,
+                'library_fee' => $request->library_fee,
+                'medical_dental_fee' => $request->medical_dental_fee,
+                'registration_fee' => $request->registration_fee,
+                'school_id_fee' => $request->school_id_fee,
+                'nstp_fee' => $request->nstp_fee,
+                'stud_cor' => 'sample',
+                'nstp_fee' => $request->nstp_fee,
+                'remarks' => $request->remarks
             ];
             TemporaryBilling::create($students);
             return response()->json([
@@ -176,6 +198,20 @@ class BillingController extends Controller
         return response()->json($otherSchoolFees);
     }
 
+    // find the tosf of the students
+    public function findNSTPFee(Request $request)
+    {
+        $course_enrolled = $request->course_enrolled;
+        $nstp_unit = $request->nstp_unit;
+        $year_level = $request->year_level;
+        $nstpFee = TuitionFees::select(DB::raw('nstp_cost_per_unit * ' . $nstp_unit . ' AS total_nstp'))
+            ->where(trim('course_enrolled'), trim($course_enrolled))
+            ->where('year_level', 'like', '%' . $year_level . '%')
+            ->value('total_nstp');
+        return response()->json($nstpFee);
+    }
+
+    // select degree programs from the database
     public function selectDegreePrograms(Request $request)
     {
         $selectDegreePrograms = OtherSchoolFees::select('course_enrolled')
