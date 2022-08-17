@@ -21,9 +21,9 @@
                                     <div class="form-group"><label>Semester</label>
                                         <select id="semester" class="form-control input-style">
                                             <option value="" selected="">--Select Semester--</option>
-                                            <option value="1st">1st</option>
-                                            <option value="2nd">2nd</option>
-                                            <option value="3rd">3rd</option>
+                                            <option value="1">1st</option>
+                                            <option value="2">2nd</option>
+                                            <option value="3">3rd</option>
                                             <option value="Summer">Summer</option>
                                         </select>
                                     </div>
