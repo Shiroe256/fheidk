@@ -305,19 +305,30 @@ class BillingController extends Controller
 
     public function newBilling(Request $request)
     {
-        $region = 1;
         $hei_uii = "11040";
-        $hei_sid = "11040";
+        $hei_sid = "11040"; //bullshit data lang muna
+        $hei_psg_region = 1; //bullshit data lang muna
+        $tranche = 1; //bullshit data lang muna
+        $total_beneficaries = 1; //bullshit data lang muna
+        $total_amount = 1;
+        $billing_status = 1;
+        $created_by = 1;
         $billing = [
             'ac_year' => $request->ac_year,
             'semester' => $request->semester,
             'hei_uii' => $hei_uii,
             'hei_sid' => $hei_sid,
+            'hei_psg_region' => $hei_psg_region,
+            'tranche' => $tranche,
+            'total_beneficiaries' => $total_beneficaries,
+            'total_amount' =>         $total_amount,
+            'billing_status' =>         $billing_status,
+            'created_by' =>         $created_by,
             'reference_no' => $this->generateBillingReferenceNumber(1, $hei_sid, $request->ac_year, $request->semester, 1)
         ];
         $reference_no = Billing::create($billing)->reference_no;
 
-        return redirect(route('billing') . "/" . $reference_no);
+        echo $reference_no;
     }
 
     public function getBilling($ref_no)
@@ -325,13 +336,13 @@ class BillingController extends Controller
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::where('hei_uii', "01040")
             ->selectRaw('max(uid) as uid,max(amount) as amount,course_enrolled,type_of_fee,category,year_level')
-            ->groupBy('course_enrolled', 'type_of_fee', 'category','year_level')
+            ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
             ->get();
         //declare an array to store the shit
         $otherfeesresult = array();
         foreach ($otherfees as $row) {
             //store the shit
-            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category,'id' => $row->uid,'amount' => $row->amount);
+            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount);
         }
         //package the shit and put it out of a view
         $data['otherfees'] = $otherfeesresult;

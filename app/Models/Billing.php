@@ -10,6 +10,7 @@ class Billing extends Model
 {
     protected $table = 'tbl_fhe_billing_records';
     protected $primaryKey = 'uid';
+    public $timestamps = false;
     protected $fillable = [
         'hei_psg_region',
         'hei_sid',
