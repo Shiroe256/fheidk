@@ -45,7 +45,7 @@ $ctr = 0;
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="switch_{{ $category['id'] }}">
                                                     <label class="custom-control-label"
-                                                        for="switch_{{ $category['id'] }}">{{ $category['category'] }}</label>
+                                                        for="switch_{{ $category['id'] }}">{{ $category['category'] }}<small class="text-muted"> + {{ $category['amount'] }}</small> </label>
                                                 </div>
                                             </li>
                                         @endforeach

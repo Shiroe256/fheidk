@@ -12,7 +12,7 @@
                 @include('modals.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-primary">Save All</button>
             </div>
         </div>
     </div>
