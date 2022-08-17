@@ -6,13 +6,13 @@
     <div>
         <div class="card shadow">
             <div class="card-header">
-                <h4>{{ $ref_no }}</h4>
+                Billing "Other School Fees" Settings
             </div>
             <div class="card-body">
                 @include('modals.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">Previous</button><button class="btn btn-primary">Next</button>
+                <button class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -49,8 +49,21 @@
 <script type="text/javascript" src="{{ url('js\dateformat.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('js/batchbilling.js') }}"></script>
-
+{{-- <script type="text/javascript" src="{{ url('js/batchbilling.js') }}"></script> --}}
+<script>
+    $('#select_course').change(function() {
+        $(".course-settings").each(function() {
+            $(this).addClass("d-none");
+        });
+        console.log($(this).val());
+        $('#course_' + $(this).val()).removeClass("d-none");
+    });
+    $('.toggleall').change(function() {
+       var toggle = $(this).is(":checked");
+       $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop( "checked", toggle);
+       console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
+    });
+</script>
 
 </body>
 

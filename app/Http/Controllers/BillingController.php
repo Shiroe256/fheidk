@@ -289,19 +289,19 @@ class BillingController extends Controller
     {
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::where('hei_uii', "01040")
-            ->selectRaw('course_enrolled,type_of_fee,category')
+            ->selectRaw('max(uid) as uid,course_enrolled,type_of_fee,category')
             ->groupBy('course_enrolled', 'type_of_fee', 'category')
             ->get();
         //declare an array to store the shit
         $otherfeesresult = array();
         foreach ($otherfees as $row) {
             //store the shit
-            $otherfeesresult[$row->course_enrolled][$row->type_of_fee][] = $row->category;
+            $otherfeesresult[$row->course_enrolled][$row->type_of_fee][] = array('category' => $row->category,'id' => $row->uid);
         }
         //package the shit and put it out of a view
         $data['otherfees'] = $otherfeesresult;
         $data['ref_no'] = $ref_no;
-        return view('billing', $data);
+        return view('billingsettings', $data);
     }
 
     //batch upload controller

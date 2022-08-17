@@ -14,8 +14,8 @@ document.getElementById('new_billing').onclick = function () {
         data: "ac_year=" + ac + "&semester=" + sem,
         success: function (data) {
             console.log(data);
-            document.getElementById('billing_settings').innerHTML += data;
-            document.getElementById('ac_sem_selector').classList.add("d-none");
+            // document.getElementById('billing_settings').innerHTML += data;
+            // document.getElementById('ac_sem_selector').classList.add("d-none");
             
         }
     });
