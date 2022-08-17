@@ -163,9 +163,8 @@ class BillingController extends Controller
                 'medical_dental_fee' => $request->medical_dental_fee,
                 'registration_fee' => $request->registration_fee,
                 'school_id_fee' => $request->school_id_fee,
-                'nstp_fee' => $request->nstp_fee,
+                'nstp_fee' => $request->total_nstp,
                 'stud_cor' => 'sample',
-                'nstp_fee' => $request->nstp_fee,
                 'remarks' => $request->remarks
             ];
             TemporaryBilling::create($students);
