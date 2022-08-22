@@ -41,31 +41,29 @@ use App\Http\Controllers\BillingController;
 Route::get('/', function () {
     return view('index');
 });
+//billing CRUD
+Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
+Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
+//list of billings dati
+Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
+Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement'])->name('billingmanagement');
+Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
+
+
 Route::get('index', 'App\Http\Controllers\Pagescontroller@index')->name('index');
-Route::get('listofbillings', 'App\Http\Controllers\Pagescontroller@listofbillings')->name('listofbillings');
-Route::get('billingmanagement', 'App\Http\Controllers\Pagescontroller@billingmanagement')->name('billingmanagement');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
-
-//routes ni migs na pang testing
-Route::get('/testing', function () {
-    return view('billingmanagementcopy');
-});
 
 //route for login
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//billing
-Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
-Route::get('/billing/{ref_no}', [BillingController::class, 'getBilling'])->name('getBilling');
-// Route::get('/billing/{}', [BillingController::class, 'billing'])->name('billing');
 
 //CRUD Routes
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
-Route::post('/add-batchtempstudents',[BillingController::class,'batchTempStudent']);
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
 Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');

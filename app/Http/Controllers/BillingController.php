@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Billing;
 use App\Models\OtherSchoolFees;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
@@ -331,7 +332,17 @@ class BillingController extends Controller
         echo $reference_no;
     }
 
-    public function getBilling($ref_no)
+    public function billingList()
+    {
+        $data['billings'] = Billing::all();
+        return view('listofbillings', $data);
+    }
+
+    public function billingmanagement(){
+        return view('billingmanagement');
+    }
+
+    public function getBillingSettings($ref_no)
     {
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::where('hei_uii', "01040")
@@ -348,6 +359,33 @@ class BillingController extends Controller
         $data['otherfees'] = $otherfeesresult;
         $data['ref_no'] = $ref_no;
         return view('billingsettings', $data);
+    }
+
+    public function saveSettings(Request $request)
+    {
+        $onsettings = $request->on;
+        $offsettings = $request->off;
+        $ons = array();
+        $offs = array();
+        $bs_reference_no = '1-11040-2020-2021-3-1';
+        //on
+        $bs_status = 1;
+        if ($onsettings) {
+            foreach ($onsettings as $osf_uid) {
+                $ons[] = array('bs_reference_no' => $bs_reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+            }
+        }
+        Settings::upsert($ons, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
+        //off
+        $bs_status = 0;
+        if ($offsettings) {
+            foreach ($offsettings as $osf_uid) {
+                $offs[] = array('bs_reference_no' => $bs_reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+            }
+        }
+        Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
+
+        echo $bs_reference_no;
     }
 
     //batch upload controller

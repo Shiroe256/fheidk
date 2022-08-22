@@ -9,10 +9,10 @@
                 Billing "Other School Fees" Settings
             </div>
             <div class="card-body">
-                @include('modals.settings')
+                @include('elements.settings')
             </div>
             <div class="card-footer">
-                <a href="{{ url('billingmanagement')}}" class="btn btn-primary">Save All</a>
+                <button class="btn btn-primary" id="btn_save">Save All</button>
             </div>
         </div>
     </div>
@@ -59,9 +59,37 @@
         $('#course_' + $(this).val()).removeClass("d-none");
     });
     $('.toggleall').change(function() {
-       var toggle = $(this).is(":checked");
-       $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop( "checked", toggle);
-       console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
+        var toggle = $(this).is(":checked");
+        $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop("checked", toggle);
+        console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
+    });
+
+    $('#btn_save').click(function() {
+        var on = [];
+        var off = [];
+        $('[id^="switch_"]').each(function(index) {
+            if ($(this).is(':checked')) {
+                on.push($(this).val());
+            } else {
+                off.push($(this).val());
+            }
+        });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: window.location.origin + "/save-settings",
+            type: "PUT",
+            data: {
+                on: on,
+                off: off
+            },
+            success: function(data) {
+                window.location.href = "/billing/" + data;
+            }
+        });
     });
 </script>
 

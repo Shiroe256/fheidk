@@ -31,7 +31,7 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('dashboard')}}"><i class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('listofbillings')}}"><i class="fas fa-users"></i><span>FHE Billing</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('billings')}}"><i class="fas fa-users"></i><span>FHE Billing</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

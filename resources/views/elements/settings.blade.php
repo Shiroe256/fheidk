@@ -20,6 +20,7 @@ $ctr = 0;
 
 <?php
 $ctr = 0;
+$checkid = 0;
 ?>
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
@@ -39,13 +40,15 @@ $ctr = 0;
                                 <div class="card p-3">
                                     <strong>{{ $typeoffeename }}</strong>
                                     <ul class="list-unstyled">
-                                        @foreach ($typeoffee as $categoryname => $category)
+                                        @foreach ($typeoffee as $categoryid => $category)
                                             <li>
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input"
-                                                        id="switch_{{ $category['id'] }}">
+                                                        id="switch_{{ $checkid }}" value="{{ $category['id'] }}">
                                                     <label class="custom-control-label"
-                                                        for="switch_{{ $category['id'] }}">{{ $category['category'] }}<small class="text-muted"> + {{ $category['amount'] }}</small> </label>
+                                                        for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
+                                                            class="text-muted"> + {{ $category['amount'] }}</small>
+                                                    </label>
                                                 </div>
                                             </li>
                                         @endforeach
