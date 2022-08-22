@@ -338,14 +338,22 @@ class BillingController extends Controller
         return view('listofbillings', $data);
     }
 
-    public function billingmanagement(){
-        return view('billingmanagement');
+    public function billingmanagement($ref_no)
+    {
+        $billings = Billing::where('reference_no', $ref_no)->first();
+        if ($billings) {
+            return view('billingmanagement');
+        }
+        abort(404);
     }
 
     public function getBillingSettings($ref_no)
     {
+        $hei_uii = "01040";
+
+        
         //gather all the categories for everybody in the world
-        $otherfees = OtherSchoolFees::where('hei_uii', "01040")
+        $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->selectRaw('max(uid) as uid,max(amount) as amount,course_enrolled,type_of_fee,category,year_level')
             ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
             ->get();
@@ -354,8 +362,11 @@ class BillingController extends Controller
         foreach ($otherfees as $row) {
             //store the shit
             $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount);
+            $uid[] = $row->uid;
         }
         //package the shit and put it out of a view
+        $this->upsertSettings($ref_no,$uid);
+
         $data['otherfees'] = $otherfeesresult;
         $data['ref_no'] = $ref_no;
         return view('billingsettings', $data);
@@ -365,10 +376,15 @@ class BillingController extends Controller
     {
         $onsettings = $request->on;
         $offsettings = $request->off;
-        $ons = array();
-        $offs = array();
         $bs_reference_no = '1-11040-2020-2021-3-1';
+        $this->upsertSettings($bs_reference_no,$onsettings,$offsettings);
+        echo $bs_reference_no;
+    }
+
+    private function upsertSettings($bs_reference_no,$onsettings = array(), $offsettings = array())
+    {
         //on
+        $ons = array();
         $bs_status = 1;
         if ($onsettings) {
             foreach ($onsettings as $osf_uid) {
@@ -377,6 +393,7 @@ class BillingController extends Controller
         }
         Settings::upsert($ons, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
         //off
+        $offs = array();
         $bs_status = 0;
         if ($offsettings) {
             foreach ($offsettings as $osf_uid) {
@@ -384,10 +401,7 @@ class BillingController extends Controller
             }
         }
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
-
-        echo $bs_reference_no;
     }
-
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
