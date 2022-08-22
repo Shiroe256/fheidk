@@ -12,7 +12,7 @@
                 @include('modals.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">Save All</button>
+                <a href="{{ url('billingmanagement')}}" class="btn btn-primary">Save All</a>
             </div>
         </div>
     </div>
