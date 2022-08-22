@@ -55,7 +55,7 @@ Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name(
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
 
 //route for login
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
