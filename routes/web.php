@@ -49,16 +49,13 @@ Route::get('/billings', [BillingController::class, 'billingList'])->name('billin
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement'])->name('billingmanagement');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
-
 Route::get('index', 'App\Http\Controllers\Pagescontroller@index')->name('index');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
 
 //route for login
-Auth::routes();
-
+Auth::routes(['verify'=>true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 //CRUD Routes
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
