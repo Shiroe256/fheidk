@@ -13,11 +13,7 @@ document.getElementById('new_billing').onclick = function () {
         type: "PUT",
         data: "ac_year=" + ac + "&semester=" + sem,
         success: function (data) {
-            window.location.href = "/billing/" + data + "/settings";
-            console.log(window.location.hostname + "/billing/" + data);
-            // document.getElementById('billing_settings').innerHTML += data;
-            // document.getElementById('ac_sem_selector').classList.add("d-none");
-            
+            window.location.href = data;
         }
     });
 

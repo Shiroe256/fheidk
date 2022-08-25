@@ -44,7 +44,8 @@ $checkid = 0;
                                             <li>
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input"
-                                                        id="switch_{{ $checkid }}" value="{{ $category['id'] }}">
+                                                        id="switch_{{ $checkid }}" value="{{ $category['id'] }}"
+                                                        {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
                                                     <label class="custom-control-label"
                                                         for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
                                                             class="text-muted"> + {{ $category['amount'] }}</small>

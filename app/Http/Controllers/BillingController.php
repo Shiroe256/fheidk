@@ -329,7 +329,8 @@ class BillingController extends Controller
         ];
         $reference_no = Billing::create($billing)->reference_no;
 
-        echo $reference_no;
+        // echo $reference_no;
+        $this->newBillingSettings($reference_no);
     }
 
     public function billingList()
@@ -347,26 +348,40 @@ class BillingController extends Controller
         abort(404);
     }
 
+    private function newBillingSettings($ref_no)
+    {
+        $hei_uii = "01040";
+        $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
+            ->selectRaw('uid')
+            ->get();
+        foreach ($otherfees as $row) {
+            //store the shit
+            $uid[] = $row->uid;
+        }
+        $this->upsertSettings($ref_no, $uid);
+        
+        echo "/billing/" . $ref_no . "/settings";
+    }
+
     public function getBillingSettings($ref_no)
     {
         $hei_uii = "01040";
 
-        
         //gather all the categories for everybody in the world
-        $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
-            ->selectRaw('max(uid) as uid,max(amount) as amount,course_enrolled,type_of_fee,category,year_level')
-            ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            ->where('hei_uii', $hei_uii)
+            ->where('bs_reference_no', $ref_no)
+            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,bs_status')
             ->get();
+        // ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
         //declare an array to store the shit
-        $otherfeesresult = array();
+        // $otherfeesresult = array();
         foreach ($otherfees as $row) {
             //store the shit
-            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount);
-            $uid[] = $row->uid;
+            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
         }
-        //package the shit and put it out of a view
-        $this->upsertSettings($ref_no,$uid);
 
+        //package the shit and put it out of a view
         $data['otherfees'] = $otherfeesresult;
         $data['ref_no'] = $ref_no;
         return view('billingsettings', $data);
@@ -376,12 +391,12 @@ class BillingController extends Controller
     {
         $onsettings = $request->on;
         $offsettings = $request->off;
-        $bs_reference_no = '1-11040-2020-2021-3-1';
-        $this->upsertSettings($bs_reference_no,$onsettings,$offsettings);
+        $bs_reference_no = $request->reference_no;
+        $this->upsertSettings($bs_reference_no, $onsettings, $offsettings);
         echo $bs_reference_no;
     }
 
-    private function upsertSettings($bs_reference_no,$onsettings = array(), $offsettings = array())
+    private function upsertSettings($bs_reference_no, $onsettings = array(), $offsettings = array())
     {
         //on
         $ons = array();
@@ -528,7 +543,7 @@ class BillingController extends Controller
     //Billing Checker functions
 
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
-    public function queueBillingFOrChecking($reference_no)
+    public function queueBillingForChecking($reference_no)
     {
         $billing = Billing::where('reference_no', $reference_no);
         $billing->billing_status = 3;

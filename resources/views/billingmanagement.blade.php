@@ -4,7 +4,7 @@
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center"><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('billings')}}"><i class="fas fa-arrow-left"></i>&nbsp;Return to the previous page</a>
                         <div class="btn-group" role="group">
-                            <a href="" id="btn_run_billing_checker" class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;</a href="{{url('billingsettings')}}">
+                            <a href="{{Request::url()}}{{"/settings"}}" id="btn_run_billing_checker" class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;</a>
                             <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing Checker</button>
                             <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
                         </div>
