@@ -12,7 +12,7 @@
                 @include('elements.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" id="btn_save" value="{{$ref_no}}">Save All</button>
+                <button class="btn btn-primary" id="btn_save" value="{{ $ref_no }}">Save All</button>
             </div>
         </div>
     </div>
@@ -51,6 +51,7 @@
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
 {{-- <script type="text/javascript" src="{{ url('js/batchbilling.js') }}"></script> --}}
 <script>
+    var changes = [];
     $('#select_course').change(function() {
         $(".course-settings").each(function() {
             $(this).addClass("d-none");
@@ -64,17 +65,34 @@
         console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
     });
 
+    $('[id^="switch_"]').click(function(index) {
+        if (changes.indexOf($(this).attr("id")) === -1) {
+            changes.push($(this).attr("id"));
+        }
+        console.log(changes);
+    });
+
     $('#btn_save').click(function() {
         var on = [];
         var off = [];
         var reference_no = $(this).val();
-        $('[id^="switch_"]').each(function(index) {
-            if ($(this).is(':checked')) {
-                on.push($(this).val());
-            } else {
-                off.push($(this).val());
-            }
+        changes.forEach(element => {
+            $('#' + element).each(function(index) {
+                if ($(this).is(':checked')) {
+                    on.push($(this).val());
+                } else {
+                    off.push($(this).val());
+                }
+            });
         });
+
+        // $('[id^="switch_"]').each(function(index) {
+        //     if ($(this).is(':checked')) {
+        //         on.push($(this).val());
+        //     } else {
+        //         off.push($(this).val());
+        //     }
+        // });
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')

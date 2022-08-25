@@ -10,7 +10,6 @@ class Settings extends Model
 {
     protected $table = 'tbl_billing_settings';
     protected $primaryKey = 'bs_uid';
-    public $timestamps = false;
     protected $fillable = [
         'bs_uid',
         'bs_status',

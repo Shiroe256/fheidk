@@ -333,6 +333,20 @@ class BillingController extends Controller
         $this->newBillingSettings($reference_no);
     }
 
+    private function newBillingSettings($ref_no)
+    {
+        $hei_uii = "01040";
+        $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
+            ->selectRaw('uid')
+            ->get();
+        foreach ($otherfees as $row) {
+            //store the shit
+            $uid[] = $row->uid;
+        }
+        $this->upsertSettings($ref_no, $uid);
+        
+        echo "/billings/" . $ref_no . "/settings";
+    }
     public function billingList()
     {
         $data['billings'] = Billing::all();
@@ -348,20 +362,6 @@ class BillingController extends Controller
         abort(404);
     }
 
-    private function newBillingSettings($ref_no)
-    {
-        $hei_uii = "01040";
-        $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
-            ->selectRaw('uid')
-            ->get();
-        foreach ($otherfees as $row) {
-            //store the shit
-            $uid[] = $row->uid;
-        }
-        $this->upsertSettings($ref_no, $uid);
-        
-        echo "/billing/" . $ref_no . "/settings";
-    }
 
     public function getBillingSettings($ref_no)
     {
