@@ -61,3 +61,7 @@ a:hover {
   font-size: 13px;
 }
 
+.container.registration {
+  width: 750px;
+}
+

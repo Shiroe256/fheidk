@@ -22,6 +22,10 @@ class Pagescontroller extends Controller
         return view('profile');
     }
 
+    public function registry(){
+        return view('registry');
+    }
+
     public function index(){
         return view('index');
     }
