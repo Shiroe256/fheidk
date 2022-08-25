@@ -12,7 +12,7 @@
                 @include('elements.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" id="btn_save">Save All</button>
+                <button class="btn btn-primary" id="btn_save" value="{{$ref_no}}">Save All</button>
             </div>
         </div>
     </div>
@@ -67,6 +67,7 @@
     $('#btn_save').click(function() {
         var on = [];
         var off = [];
+        var reference_no = $(this).val();
         $('[id^="switch_"]').each(function(index) {
             if ($(this).is(':checked')) {
                 on.push($(this).val());
@@ -84,10 +85,11 @@
             type: "PUT",
             data: {
                 on: on,
-                off: off
+                off: off,
+                reference_no: reference_no
             },
             success: function(data) {
-                window.location.href = "/billing/" + data;
+                window.location.href = "/billings/" + data;
             }
         });
     });
