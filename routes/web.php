@@ -50,8 +50,9 @@ Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement'
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('index', 'App\Http\Controllers\Pagescontroller@index')->name('index');
-Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard');
-Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile');
+Route::get('registry', 'App\Http\Controllers\Pagescontroller@registry')->name('registry');
+Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard')->middleware('auth');
+Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');
 
 //route for login
 Auth::routes(['verify'=>true]);
