@@ -13,7 +13,8 @@ $ctr = 0;
 <div class="mb-3">
     <select name="" id="select_course" class="custom-select">
         @foreach ($otherfees as $course => $x)
-            <option value="{{ $ctr++ }}">{{ $course }}</option>
+            <option value="{{ $ctr++ }}">{{ $course }} - Last Updated: {{ $course_lastupdated[$course] }}
+            </option>
         @endforeach
     </select>
 </div>
