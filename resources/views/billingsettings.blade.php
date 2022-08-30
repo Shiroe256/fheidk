@@ -72,7 +72,7 @@
         console.log(changes);
     });
 
-    $('#btn_save').click(function() {
+    $('#btn_save').change(function() {
         var on = [];
         var off = [];
         var reference_no = $(this).val();
