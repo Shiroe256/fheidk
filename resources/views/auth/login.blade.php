@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text icon-container"><i class="fa fa-envelope"></i></span>
+                                    <span class="input-group-text icon-container"><i class="fas fa-user "></i></span>
                                 </div>
                                 <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text icon-container"><i class="fa fa-lock"></i></span>
+                                    <span class="input-group-text icon-container"><i onclick="myFunction(this)" class="far fa-eye"></i></span>
                                 </div>
                                 <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -45,30 +45,25 @@
                             @enderror
                             </div>
                         </div>
-
-                        {{-- <div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input type="checkbox" id="showPass" name="showPass" />
-                                    </div>
-                                </div>
-                                <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                            </div>
-                             @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div> --}}
-                        {{-- <div class="form-group">
+                        <script>
+                            function myFunction(x) {
+                              x.classList.toggle("fa-eye-slash");
+                              if(x.classList.contains("fa-eye-slash")){
+                                $('#password').attr('type', 'text');
+                              }else{
+                                $('#password').attr('type', 'password');
+                              }
+                            }
+                        </script>
+                      
+                        <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                                 <div class="form-check">
-                                    <input class="form-check-input custom-control-input" type="checkbox" id="showPass" name="showPass">
-                                    <label class="form-check-label custom-control-label" for="showPass">Remember </label>
+                                    <input class="form-check-input custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label custom-control-label" for="remember">Remember Password</label>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <button class="btn btn-primary btn-block text-white btn-user" role="button" type="submit">Login</button>
                         <hr>
                         <div class="text-center"><a class="small" href="{{ route('password.request') }}">Forgot Password?</a></div>

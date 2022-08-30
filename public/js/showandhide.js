@@ -38,12 +38,4 @@ $(document).ready(function () {
         $("#billing_exceptions_div").hide(300);
     }
 
-    $('#showPass').on('click', function (event) {
-        if ($('#showPass').is(":checked")) {
-           $('#password').attr('type', 'text');
-        } else {
-            $('#password').attr('type', 'password');
-        }
-    });
-    
 });
