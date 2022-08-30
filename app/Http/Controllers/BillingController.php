@@ -355,7 +355,7 @@ class BillingController extends Controller
             $uid[] = $row->uid;
         }
         $this->upsertSettings($ref_no, $uid);
-        
+
         echo "/billings/" . $ref_no . "/settings";
     }
     public function billingList()
@@ -382,17 +382,26 @@ class BillingController extends Controller
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $ref_no)
-            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,bs_status')
+            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,bs_status,updated_at')
+            // ->orderBy('updated_at')
             ->get();
         // ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
         //declare an array to store the shit
         // $otherfeesresult = array();
-        foreach ($otherfees as $row) {
+        $course_lastupdated = array();
+        foreach ($otherfees as $key => $row) {
+            if (!array_key_exists($row->course_enrolled,$course_lastupdated)) {
+                $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+            }
             //store the shit
             $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
+            if ($course_lastupdated[$row->course_enrolled] < $row->updated_at) {
+                $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+            }
         }
 
         //package the shit and put it out of a view
+        $data['course_lastupdated'] = $course_lastupdated;
         $data['otherfees'] = $otherfeesresult;
         $data['ref_no'] = $ref_no;
         return view('billingsettings', $data);

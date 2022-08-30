@@ -62,17 +62,16 @@
     $('.toggleall').change(function() {
         var toggle = $(this).is(":checked");
         $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop("checked", toggle);
-        console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
+        $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').change();
     });
 
-    $('[id^="switch_"]').click(function(index) {
+    $('[id^="switch_"]').change(function(index) {
         if (changes.indexOf($(this).attr("id")) === -1) {
             changes.push($(this).attr("id"));
         }
-        console.log(changes);
     });
 
-    $('#btn_save').change(function() {
+    $('#btn_save').click(function() {
         var on = [];
         var off = [];
         var reference_no = $(this).val();
