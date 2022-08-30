@@ -62,6 +62,7 @@
     $('.toggleall').change(function() {
         var toggle = $(this).is(":checked");
         $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop("checked", toggle);
+        $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').change();
         console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
     });
 
