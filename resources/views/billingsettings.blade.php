@@ -63,14 +63,12 @@
         var toggle = $(this).is(":checked");
         $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').prop("checked", toggle);
         $('#settings_' + $(this).attr('id').substring(10) + ' input:checkbox').change();
-        console.log($('#settings_' + $(this).attr('id').substring(10) + ' > input:checkbox'));
     });
 
     $('[id^="switch_"]').change(function(index) {
         if (changes.indexOf($(this).attr("id")) === -1) {
             changes.push($(this).attr("id"));
         }
-        console.log(changes);
     });
 
     $('#btn_save').click(function() {
