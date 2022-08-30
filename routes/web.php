@@ -39,8 +39,8 @@ use App\Http\Controllers\BillingController;
 // Route::resource('blog', 'App\Http\Controllers\Pagescontroller'); 
 
 Route::get('/', function () {
-    return view('index');
-});
+    return view('dashboard');
+})->middleware('auth');
 //billing CRUD
 Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
@@ -49,7 +49,6 @@ Route::get('/billings', [BillingController::class, 'billingList'])->name('billin
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement']);
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
-Route::get('index', 'App\Http\Controllers\Pagescontroller@index')->name('index');
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard')->middleware('auth');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');

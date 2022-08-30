@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Dashboard - FHE Portal</title>
+    <title>UniFAST</title>
     <link rel="icon" type="image/png" sizes="1024x1021" href="{{url('img\UnifastLogo.png')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" type="text/css" href="{{url('css\bootstrap.min.css')}}"/>
@@ -42,7 +42,8 @@
                         <h6 class="text-info mb-0">UNIVERSITY OF THE PHILIPPINES</h6>
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ (Auth::user()->fhe_focal_fname . ' ' . Auth::user()->fhe_focal_mname . ' ' . Auth::user()->fhe_focal_lname) }}</span><img class="border rounded-circle img-profile" src="{{url('img\Carlo%20Molina.JPG')}}"></a>
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ (Auth::user()->fhe_focal_fname . ' ' . Auth::user()->fhe_focal_mname . ' ' . Auth::user()->fhe_focal_lname) }}</span><img class="border rounded-circle img-profile" src="{{url('img\Carlo%20Molina.JPG')}}"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
                                         <a class="dropdown-item" role="presentation" href="{{route('profile')}}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>

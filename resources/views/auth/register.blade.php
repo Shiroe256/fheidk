@@ -1,6 +1,6 @@
-@include('includes.header2')
+@extends('layouts.app')
 
-<body class="bg-gradient-primary">
+@section('content')
     <div class="container registration">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
@@ -8,7 +8,7 @@
                     <div class="col-lg-12 col-xl-12">
                         <div class="p-5">
                             <div class="text-center">
-                                <h4 class="text-dark mb-4">Create an Account!</h4>
+                                <h4 class="text-dark mb-4">Create an Account</h4>
                             </div>
                             <form class="user" method="POST" action="{{ route('register') }}">
                                 @csrf
@@ -92,24 +92,12 @@
                                 </div><button class="btn btn-primary btn-block text-white btn-user" type="submit">Register Account</button>
                                 <hr>
                             </form>
-                            <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
-                            <div class="text-center"><a class="small" href="login.html">Already have an account? Login!</a></div>
+                            <div class="text-center"><a class="small" href="{{ route('password.request') }}">Forgot Password?</a></div>
+                            <div class="text-center"><a class="small" href="{{ route('login') }}">Already have an account? Login!</a></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\bootstrap.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\chart.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\bs-init.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\theme.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-</body>
-@include('includes.footer')
-</html>
+    @endsection

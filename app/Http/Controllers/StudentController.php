@@ -9,6 +9,17 @@ use App\Models\TemporaryBilling;
 
 class Students extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
+
     // //new temporary student
     // public function newTempStudent(Request $request)
     // {

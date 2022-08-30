@@ -6,6 +6,16 @@ use Illuminate\Http\Request;
 
 class Pagescontroller extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
+
     public function listofbillings(){
         return view('listofbillings');
     }
@@ -26,9 +36,6 @@ class Pagescontroller extends Controller
         return view('registers');
     }
 
-    public function index(){
-        return view('index');
-    }
     // public function contactus(){
     //     return view('contactus');
     // }
