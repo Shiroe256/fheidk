@@ -54,8 +54,8 @@ class RegisterController extends Controller
             'fhe_focal_lname' => ['required', 'string', 'max:255'],
             'fhe_focal_fname' => ['required', 'string', 'max:255'],
             'fhe_focal_mname' => ['required', 'string', 'max:255'],
+            'contact_number' => 'required|regex:/^(09)\d{9}$/',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'avatar' => ['string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -72,7 +72,11 @@ class RegisterController extends Controller
 		// $fileName = time() . '.' . $file->getClientOriginalExtension();
 		// $file->storeAs('public/images', $fileName);
         return User::create([
-            'name' => $data['name'],
+            'hei_uii' => $data['hei_uii'],
+            'fhe_focal_lname' => $data['fhe_focal_lname'],
+            'fhe_focal_fname' => $data['fhe_focal_fname'],
+            'fhe_focal_mname' => $data['fhe_focal_mname'],
+            'contact_no' => $data['contact_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
