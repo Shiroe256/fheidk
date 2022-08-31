@@ -1,4 +1,4 @@
-@include('includes.header');
+@include('includes.header')
 
             <div class="container-fluid">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">

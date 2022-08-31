@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -41,6 +42,7 @@ use App\Http\Controllers\BillingController;
 Route::get('/', function () {
     return view('dashboard');
 })->middleware('auth');
+
 //billing CRUD
 Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
@@ -72,3 +74,6 @@ Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('fin
 
 //Select inputs
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
+
+//Users Profile Routes
+Route::get('/get-user', [UserController::class, 'fetchUser'])->name('fetchUser');
