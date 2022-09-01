@@ -12,7 +12,7 @@ function fetchUser() {
       $("#fhe_focal_mname").val(response.fhe_focal_mname);
       $("#email").val(response.email);
       $("#contact").val(response.contact_no);
-      $("#avatar").val(response.avatar);
+      $("#user_avatar").val(response.avatar);
     }
   });
 }
