@@ -165,12 +165,19 @@ function uploadBatch() {
                 });
             } else {
                 //if there are no items with errors then the ajax request pushes through
+                var reference_no = $('#reference_no').val();
+                var ac_year = $('#ac_year').val();
+                var semester = $('#semester').val();
+                var tranche = $('#tranche').val();
                 $.ajax({
-                    url: window.location.origin + "/add-tempstudents",
+                    url: window.location.origin + "/add-batchtempstudents",
                     type: "POST",
-                    contentType: "json",
-                    processData: false,
-                    data: JSON.stringify(output),
+                    data: {payload: JSON.stringify(output),
+                    reference_no: reference_no,
+                    ac_year: ac_year,
+                    semester: semester,
+                    tranche: tranche
+                    },
                     complete: function () {
                         resetUploadButton();
                         closeButton.click();
@@ -182,7 +189,8 @@ function uploadBatch() {
                         fileInput.disabled = true;
                         uploadButton.innerHTML = 'Uploading...';
                     },
-                    success: function () {
+                    success: function (data) {
+                        console.log(data);
                         Swal.fire('Uploading Success',
                         'The students in the spreadsheet have been uploaded',
                         'success');

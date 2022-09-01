@@ -72,3 +72,6 @@ Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('fin
 
 //Select inputs
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
+
+// test
+Route::get('/test', [BillingController::class, 'test']);

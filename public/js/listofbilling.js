@@ -14,6 +14,7 @@ document.getElementById('new_billing').onclick = function () {
         data: "ac_year=" + ac + "&semester=" + sem,
         success: function (data) {
             window.location.href = data;
+            // console.log(data);
         }
     });
 

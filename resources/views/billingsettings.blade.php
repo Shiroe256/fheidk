@@ -1,8 +1,11 @@
+<?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);
+//need mo ayusin at tanggalin ung ; sa extension=intl sa php.ini file mo para dito
+?>
 @include('includes.header')
 <div class="container-fluid">
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
-            2020-2021</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">1st Semester</span> / <span
-            class="badge badge-pill badge-info">1st Tranche</span></h5>
+            {{ $ac_year }}</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">{{ $f->format($semester) }}
+            Semester</span> / <span class="badge badge-pill badge-info">{{ $f->format($tranche) }} Tranche</span></h5>
     <div>
         <div class="card shadow">
             <div class="card-header">
@@ -12,7 +15,7 @@
                 @include('elements.settings')
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" id="btn_save" value="{{ $ref_no }}">Save All</button>
+                <button class="btn btn-primary" id="btn_save" value="{{ $reference_no }}">Save All</button>
             </div>
         </div>
     </div>

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Billing;
+use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +25,7 @@ class BillingController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth', 'verified']);
     }
 
     private function generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
@@ -315,16 +317,30 @@ class BillingController extends Controller
         $students->delete();
     }
 
+    private function getHeiInformation($hei_uii)
+    {
+        $hei = Hei::where('hei_uii', $hei_uii)->first();
+        $heiinfo = array('hei_psg_region' => $hei->hei_psg_region, 'hei_sid' => $hei->hei_sid, 'hei_shortname' => $hei->hei_shortname);
+        return $heiinfo;
+    }
+
+    // private function getBillingInformation($reference_no)
+    // {
+    //     $billing = Billing::where('reference_no', $reference_no)->first();
+    //     $billinginfo = array('')
+    // }
+
     public function newBilling(Request $request)
     {
-        $hei_uii = "11040";
-        $hei_sid = "11040"; //bullshit data lang muna
-        $hei_psg_region = 1; //bullshit data lang muna
+        $hei_uii = Auth::user()->hei_uii;
+        $heiinfo = $this->getHeiInformation($hei_uii);
+        $hei_sid = $heiinfo['hei_sid']; //bullshit data lang muna
+        $hei_psg_region = $heiinfo['hei_psg_region']; //bullshit data lang muna
         $tranche = 1; //bullshit data lang muna
-        $total_beneficaries = 1; //bullshit data lang muna
-        $total_amount = 1;
-        $billing_status = 1;
-        $created_by = 1;
+        $total_beneficaries = 0; //bullshit data lang muna
+        $total_amount = 0;
+        $billing_status = 0;
+        $created_by = Auth::user()->email;
         $billing = [
             'ac_year' => $request->ac_year,
             'semester' => $request->semester,
@@ -336,17 +352,17 @@ class BillingController extends Controller
             'total_amount' =>         $total_amount,
             'billing_status' =>         $billing_status,
             'created_by' =>         $created_by,
-            'reference_no' => $this->generateBillingReferenceNumber(1, $hei_sid, $request->ac_year, $request->semester, 1)
+            'reference_no' => $this->generateBillingReferenceNumber($hei_psg_region, $hei_sid, $request->ac_year, $request->semester, $tranche)
         ];
         $reference_no = Billing::create($billing)->reference_no;
 
         // echo $reference_no;
-        $this->newBillingSettings($reference_no);
+        $this->newBillingSettings($reference_no, $hei_uii);
     }
 
-    private function newBillingSettings($ref_no)
+    private function newBillingSettings($reference_no, $hei_uii)
     {
-        $hei_uii = "01040";
+        //adds all the necessary rows for the settings of the billing and are all on by default
         $otherfees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->selectRaw('uid')
             ->get();
@@ -354,43 +370,52 @@ class BillingController extends Controller
             //store the shit
             $uid[] = $row->uid;
         }
-        $this->upsertSettings($ref_no, $uid);
+        $this->upsertSettings($reference_no, $uid);
 
-        echo "/billings/" . $ref_no . "/settings";
+        echo "/billings/" . $reference_no . "/settings";
     }
     public function billingList()
     {
-        $data['billings'] = Billing::all();
+        $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
         return view('listofbillings', $data);
     }
 
-    public function billingmanagement($ref_no)
+    public function billingmanagement($reference_no)
     {
-        $billings = Billing::where('reference_no', $ref_no)->first();
-        if ($billings) {
-            return view('billingmanagement');
+        $billings = Billing::where('reference_no', $reference_no)->first();
+        $hei_uii = Auth::user()->hei_uii;
+        $data['ac_year'] = $billings->ac_year;
+        $data['semester'] = $billings->semester;
+        $data['tranche'] = $billings->tranche;
+        $data['reference_no'] = $billings->reference_no;
+        if ($billings && $billings->hei_uii == $hei_uii) {
+            return view('billingmanagement', $data);
         }
-        abort(404);
+        abort(401);
     }
 
 
-    public function getBillingSettings($ref_no)
+    public function getBillingSettings($reference_no)
     {
-        $hei_uii = "01040";
+        $billings = Billing::where('reference_no', $reference_no)->first();
+        $data['ac_year'] = $billings->ac_year;
+        $data['semester'] = $billings->semester;
+        $data['tranche'] = $billings->tranche;
+        $hei_uii = Auth::user()->hei_uii;
+        if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
+            return response('Unauthorized', 401);
+        }
 
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
-            ->where('bs_reference_no', $ref_no)
+            ->where('bs_reference_no', $reference_no)
             ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,bs_status,updated_at')
-            // ->orderBy('updated_at')
             ->get();
-        // ->groupBy('course_enrolled', 'type_of_fee', 'category', 'year_level')
-        //declare an array to store the shit
-        // $otherfeesresult = array();
-        $course_lastupdated = array();
+        $course_lastupdated = [];
+        $otherfeesresult = [];
         foreach ($otherfees as $key => $row) {
-            if (!array_key_exists($row->course_enrolled,$course_lastupdated)) {
+            if (!array_key_exists($row->course_enrolled, $course_lastupdated)) {
                 $course_lastupdated[$row->course_enrolled] = $row->updated_at;
             }
             //store the shit
@@ -403,12 +428,24 @@ class BillingController extends Controller
         //package the shit and put it out of a view
         $data['course_lastupdated'] = $course_lastupdated;
         $data['otherfees'] = $otherfeesresult;
-        $data['ref_no'] = $ref_no;
+        $data['reference_no'] = $reference_no;
         return view('billingsettings', $data);
+    }
+
+    private function getHeiUiiOfBilling($reference_no)
+    {
+        $hei_uii = Billing::where('reference_no', $reference_no)->first()->hei_uii;
+        return $hei_uii;
     }
 
     public function saveSettings(Request $request)
     {
+        $hei_uii = Auth::user()->hei_uii;
+        if ($hei_uii != $this->getHeiUiiOfBilling($request->reference_no)) {
+            return response('Unauthorized', 401);
+        }
+        //^checks if hei_uii is the same before applying changes
+
         $onsettings = $request->on;
         $offsettings = $request->off;
         $bs_reference_no = $request->reference_no;
@@ -418,6 +455,7 @@ class BillingController extends Controller
 
     private function upsertSettings($bs_reference_no, $onsettings = array(), $offsettings = array())
     {
+        //mass updates of all the settings that were changed
         //on
         $ons = array();
         $bs_status = 1;
@@ -440,15 +478,42 @@ class BillingController extends Controller
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
-        $tempstudents =  json_decode($request->getContent(), true); //json decode into array (the second parameter)
+        $hei_uii = Auth::user()->hei_uii;
+
+        $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
+        $reference_no = $request->reference_no;
+        $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
+        $heiinfo = $this->getHeiInformation($hei_uii);
+        // echo $reference_no;
+        // build the array for fees
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            ->where('hei_uii', $hei_uii)
+            ->where('bs_reference_no', "1-11040-2020-2021-1-1")
+            ->where('bs_status', 1)
+            ->where('semester', 1)
+            ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
+            ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
+            ->get();
+
+        $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
+
+        foreach ($tuitionFees as $tuitionFee) {
+            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Tuition'] =  $tuitionFee->tuition_per_unit;
+            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Nstp'] =  $tuitionFee->nstp_cost_per_unit;
+        }
+        foreach ($otherfees as $otherfee) {
+            $fees[$otherfee->course_enrolled][$otherfee->year_level][$otherfee->type_of_fee] = $otherfee->total_amount;
+        }
+        $json_fees = json_encode($fees);
+        //build array for fees and tosf end
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         foreach ($tempstudents as $tempstudent) {
-            if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Error', 400);
+            if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
         }
         //upload all rows if there is no problem
         foreach ($tempstudents as $tempstudent) {
-            $this->newTempStudentBatch($tempstudent);
+            $this->newTempStudentBatch($tempstudent, $reference_no, $json_fees, $heiinfo, $billinginfo);
         }
         return response('Success', 200);
     }
@@ -480,8 +545,51 @@ class BillingController extends Controller
         return $validator->fails();
     }
 
-    private function newTempStudentBatch($data = array())
+    public function test()
     {
+        //build the array for fees
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            ->where('hei_uii', "01040")
+            ->where('bs_reference_no', "1-11040-2020-2021-1-1")
+            ->where('bs_status', 1)
+            ->where('semester', 1)
+            ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
+            ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
+            ->get();
+
+        $tuitionFees = TuitionFees::where('hei_uii', "01040")->where('semester', 1)->get();
+
+        foreach ($tuitionFees as $tuitionFee) {
+            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Tuition'] =  $tuitionFee->tuition_per_unit;
+            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Nstp'] =  $tuitionFee->nstp_cost_per_unit;
+        }
+        foreach ($otherfees as $otherfee) {
+            $fees[$otherfee->course_enrolled][$otherfee->year_level][$otherfee->type_of_fee] = $otherfee->total_amount;
+        }
+        //build array for tosf end
+        // print_r($fees['Bachelor of Science in Information and Technology'][1]);
+        // echo json_encode($fees);
+        print_r(json_decode(json_encode($fees), true));
+        //Admission
+        //Athletic
+        //Computer
+        //Cultural
+        //Development
+        //Entrance
+        //Guidance
+        //Handbook
+        //Laboratory
+        //Library
+        //Medical and Dental
+        //Registration
+        //School ID
+    }
+
+    private function newTempStudentBatch($data = array(), $reference_no, $json_fees, $heiinfo, $billinginfo)
+    {
+        $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
+        $hei_uii = Auth::user()->hei_uii;
+
         $tempstudent = new TemporaryBilling;
         $tempstudent->fhe_award_no = $data['fhe_aw_no'];
         $tempstudent->stud_id = $data['stud_no'];
@@ -517,44 +625,44 @@ class BillingController extends Controller
         $tempstudent->transferee = $data['is_transferee'];
 
         //dummy data
-        $tempstudent->degree_program = 69;
+        $tempstudent->degree_program = $data['degree_course_id'];
         $tempstudent->lab_unit = $data['lab_u'];
         $tempstudent->comp_lab_unit = $data['com_lab_u'];
         $tempstudent->academic_unit = $data['acad_u'];
         $tempstudent->nstp_unit = $data['nstp_u'];
-        $tempstudent->tuition_fee = 0;
-        $tempstudent->entrance_fee = 0;
-        $tempstudent->admission_fee = 0;
-        $tempstudent->athletic_fee = 0;
-        $tempstudent->computer_fee = 0;
-        $tempstudent->cultural_fee = 0;
-        $tempstudent->development_fee = 0;
-        $tempstudent->guidance_fee = 0;
-        $tempstudent->handbook_fee = 0;
-        $tempstudent->laboratory_fee = 0;
-        $tempstudent->library_fee = 0;
-        $tempstudent->medical_dental_fee = 0;
-        $tempstudent->registration_fee = 0;
-        $tempstudent->school_id_fee = 0;
-        $tempstudent->nstp_fee = 0;
-        $tempstudent->stud_cor = 0;
-        $tempstudent->total_exam_taken = 0;
-        $tempstudent->exam_result = 0;
-        $tempstudent->remarks = 0;
-        $tempstudent->stud_status = 0;
-        $tempstudent->uploaded_by = 0;
 
-        //dummy data
-        $tempstudent->ac_year = 2022;
-        $tempstudent->hei_psg_region = 13;
-        $tempstudent->hei_sid = 01040;
-        $tempstudent->hei_uii = 01040;
-        $tempstudent->hei_name = "";
-        $tempstudent->reference_no = "";
-        $tempstudent->year_level = 1;
-        $tempstudent->semester = 1;
-        $tempstudent->tranche = 1;
-        $tempstudent->app_id = 'x';
+        $tempstudent->tuition_fee = (int) $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Tuition'] * (int) $data['acad_u'];
+        $tempstudent->entrance_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Entrance'];
+        $tempstudent->admission_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Admission'];
+        $tempstudent->athletic_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Athletic'];
+        $tempstudent->computer_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Computer'];
+        $tempstudent->cultural_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Cultural'];
+        $tempstudent->development_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Development'];
+        $tempstudent->guidance_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Guidance'];
+        $tempstudent->handbook_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Handbook'];
+        $tempstudent->laboratory_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Laboratory'];
+        $tempstudent->library_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Library'];
+        $tempstudent->medical_dental_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Medical and Dental'];
+        $tempstudent->registration_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Registration'];
+        $tempstudent->school_id_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['School ID'];
+        $tempstudent->nstp_fee = (int) $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Nstp'] * (int) $data['nstp_u'];;
+        $tempstudent->stud_cor = 0; //dummydata
+        $tempstudent->total_exam_taken = $data['exams'];
+        $tempstudent->exam_result = $data['exam_result'];
+        $tempstudent->remarks = $data['remarks'];
+        $tempstudent->stud_status = 0;
+        $tempstudent->uploaded_by = Auth::user()->email;
+
+        $tempstudent->ac_year = $billinginfo['ac_year'];
+        $tempstudent->hei_psg_region = $heiinfo['hei_psg_region'];
+        $tempstudent->hei_sid = $heiinfo['hei_sid'];
+        $tempstudent->hei_uii = $hei_uii;
+        $tempstudent->hei_name = $heiinfo['hei_shortname'];
+        $tempstudent->reference_no = $billinginfo['reference_no'];
+        $tempstudent->year_level = $data['year_level'];
+        $tempstudent->semester = $billinginfo['semester'];
+        $tempstudent->tranche = $billinginfo['tranche'];
+        $tempstudent->app_id = '';
 
         $tempstudent->save();
     }
@@ -642,7 +750,6 @@ class BillingController extends Controller
         $tempstudent = new TemporaryBilling;
         return $tempstudent->getTempStudent($request->reference_no);
     }
-
 
     public function newStudent(Request $request)
     {
