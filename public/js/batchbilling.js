@@ -1,12 +1,40 @@
 const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
 const closeButton = document.getElementById("closebutton");
+const queueButton = document.getElementById("btn_queue");
+const reference_no = $('#reference_no').val();
+const ac_year = $('#ac_year').val();
+const semester = $('#semester').val();
+const tranche = $('#tranche').val();
+
 uploadButton.onclick = function () {
     uploadBatch();
 }
 fileInput.onchange = () => {
     const selectedFile = fileInput.files[0];
     document.getElementById('upload_template_text').innerHTML = selectedFile.name;
+}
+queueButton.onclick = function () {
+    queueBilling();
+}
+function queueBilling() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: window.location.origin + "/queue",
+        type: "POST",
+        data: {
+            reference_no: reference_no
+        },
+        success: function (data) {
+            Swal.fire('Uploading Success',
+                'The students in the spreadsheet have been uploaded',
+                'success');
+        },
+    });
 }
 function resetUploadButton() {
     uploadButton.innerHTML = 'Upload';
@@ -165,18 +193,15 @@ function uploadBatch() {
                 });
             } else {
                 //if there are no items with errors then the ajax request pushes through
-                var reference_no = $('#reference_no').val();
-                var ac_year = $('#ac_year').val();
-                var semester = $('#semester').val();
-                var tranche = $('#tranche').val();
                 $.ajax({
                     url: window.location.origin + "/add-batchtempstudents",
                     type: "POST",
-                    data: {payload: JSON.stringify(output),
-                    reference_no: reference_no,
-                    ac_year: ac_year,
-                    semester: semester,
-                    tranche: tranche
+                    data: {
+                        payload: JSON.stringify(output),
+                        reference_no: reference_no,
+                        ac_year: ac_year,
+                        semester: semester,
+                        tranche: tranche
                     },
                     complete: function () {
                         resetUploadButton();
@@ -190,15 +215,14 @@ function uploadBatch() {
                         uploadButton.innerHTML = 'Uploading...';
                     },
                     success: function (data) {
-                        console.log(data);
                         Swal.fire('Uploading Success',
-                        'The students in the spreadsheet have been uploaded',
-                        'success');
+                            'The students in the spreadsheet have been uploaded',
+                            'success');
                     },
                     error: function () {
                         Swal.fire('An Error has been encountered',
-                        'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
-                        'error');
+                            'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
+                            'error');
                     }
                 });
             }

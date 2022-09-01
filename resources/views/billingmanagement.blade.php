@@ -15,6 +15,7 @@
                 <input type="hidden" id="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_run_billing_checker"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;</a>
+                <button id="btn_queue" class="btn btn-outline-info btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Queue</button>
                 <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>

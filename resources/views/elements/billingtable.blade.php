@@ -17,13 +17,27 @@
             @foreach ($billings as $id => $billing)
                 <tr>
                     <td class="text-center">{{ $id + 1 }}</td>
-                    <td class="text-center">{{ $billing['reference_no'] }}</td>
+                    <td class="text-center"><a
+                            href="{{ route('billings') . '/' . $billing['reference_no'] }}">{{ $billing['reference_no'] }}</a>
+                    </td>
                     <td class="text-center"><strong>{{ $billing['ac_year'] }}</strong></td>
                     <td class="text-center"><strong>{{ $billing['semester'] }}</strong></td>
                     <td class="text-center">{{ $billing['tranche'] }}</td>
                     <td class="text-center">{{ $billing['total_amount'] }}</td>
                     <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
-                    <td class="text-center"><span class="badge badge-pill badge-primary span-size">Submitted</span></td>
+                    <td class="text-center">
+                        <?php
+                            if($billing['billing_status']==1): ?>
+                        <span class="badge badge-pill badge-secondary span-size">Open</span>
+                        <?php
+                            elseif ($billing['billing_status']==2):?>
+                        <span class="badge badge-pill badge-primary span-size">Queue</span>
+                        <?php
+                            elseif ($billing['billing_status']==3):?>
+                        <span class="badge badge-pill badge-primary span-size">Submitted</span>
+                        <?php
+                            endif;?>
+                    </td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"

@@ -671,11 +671,12 @@ class BillingController extends Controller
     //Billing Checker functions
 
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
-    public function queueBillingForChecking($reference_no)
+    public function queueBillingForChecking(Request $request)
     {
-        $billing = Billing::where('reference_no', $reference_no);
-        $billing->billing_status = 3;
+        $billing = Billing::where('reference_no', $request->reference_no)->first();
+        $billing->billing_status = 2;
         $billing->save();
+        return response('Success', 200);
     }
     public function checkBilling()
     {
@@ -722,6 +723,7 @@ class BillingController extends Controller
             //write a success message in the logs
             Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
         }
+        echo "done";
     }
     private function getDuplicateFHENo($fhe_award_no, $reference_no)
     {

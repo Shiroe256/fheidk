@@ -77,3 +77,7 @@ Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreeProgra
 
 //Users Profile Routes
 Route::get('/get-user', [UserController::class, 'fetchUser'])->name('fetchUser');
+
+//Test
+Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
+Route::post('/queue', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
