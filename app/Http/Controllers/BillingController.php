@@ -513,7 +513,7 @@ class BillingController extends Controller
         }
         //upload all rows if there is no problem
         foreach ($tempstudents as $tempstudent) {
-            $this->newTempStudentBatch($tempstudent, $reference_no, $json_fees, $heiinfo, $billinginfo);
+            $this->newTempStudentBatch($tempstudent, $json_fees, $heiinfo, $billinginfo);
         }
         return response('Success', 200);
     }
@@ -585,7 +585,7 @@ class BillingController extends Controller
         //School ID
     }
 
-    private function newTempStudentBatch($data = array(), $reference_no, $json_fees, $heiinfo, $billinginfo)
+    private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
     {
         $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
         $hei_uii = Auth::user()->hei_uii;
