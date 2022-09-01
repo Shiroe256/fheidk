@@ -9,11 +9,20 @@
                                     <div class="card-header py-3">
                                         <p class="text-primary m-0 font-weight-bold">FHE Focal Person Settings</p>
                                     </div>
-                                    <div class="card-body text-center"><img class="rounded-circle mb-3 mt-4" src="{{url('img\Carlo%20Molina.JPG')}}" width="160" height="160">
-                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change Avatar</button></div>
-                                    </div>
                                     <div class="card-body">
-                                        <form>
+                                        <div id="avatar_div" class="form-group text-center">
+                                            <img class="square rounded" src="{{url('storage\images').('/').Auth::user()->avatar}}" width="160" height="160">
+                                        </div>
+                                        <form id='frm_update_user' method="POST">
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label class="col-form-label"><strong>Avatar</strong></label></div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <input type="hidden" name="user_avatar" id="user_avatar">
+                                                    <div class="col"><input type="file" id="avatar" name="avatar" ></div>
+                                                </div>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label><strong>Last Name</strong></label><input id="fhe_focal_lname" name="fhe_focal_lname" class="form-control" type="text"></div>
@@ -34,7 +43,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group text-right">
-                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" type="button">Update Settings</button></div>
+                                                <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" type="submit">Update Settings</button></div>
                                                 <div class="btn-group btn-group-sm" role="group"><button class="btn btn-primary" type="button">Reset Password</button></div>
                                             </div>
                                         </form>
@@ -68,7 +77,7 @@
                                             <div class="form-group"><label><strong>HEI Email</strong></label><input id="hei_email" name="hei_email" class="form-control" type="email"></div>
                                         </div>
                                         <div class="col">
-                                            <div class="form-group"><label><strong>HEI Contact</strong></label><input id="hei_contact" name="hei_contact" class="form-control" type="number"></div>
+                                            <div class="form-group"><label><strong>HEI Contact</strong></label><input id="hei_contact" name="hei_contact" class="form-control" type="text"></div>
                                         </div>
                                     </div>
                                     <div class="form-row">
