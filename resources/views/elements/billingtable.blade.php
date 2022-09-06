@@ -1,3 +1,5 @@
+<?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);?>
+<?php $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); ?>
 <div class="table-responsive table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
     <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_listofbillings">
         <thead>
@@ -21,9 +23,9 @@
                             href="{{ route('billings') . '/' . $billing['reference_no'] }}">{{ $billing['reference_no'] }}</a>
                     </td>
                     <td class="text-center"><strong>{{ $billing['ac_year'] }}</strong></td>
-                    <td class="text-center"><strong>{{ $billing['semester'] }}</strong></td>
-                    <td class="text-center">{{ $billing['tranche'] }}</td>
-                    <td class="text-center">{{ $billing['total_amount'] }}</td>
+                    <td class="text-center"><strong>{{ $f->format($billing['semester']) }}</strong></td>
+                    <td class="text-center">{{ $f->format($billing['tranche']) }}</td>
+                    <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
                     <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
                     <td class="text-center">
                         <?php

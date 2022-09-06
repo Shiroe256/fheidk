@@ -36,7 +36,7 @@ class BillingController extends Controller
 
     public function fetchTempStudent()
     {
-        $students = TemporaryBilling::all();
+        $students = TemporaryBilling::orderBy('remarks')->get();
         $output = '';
         if ($students->count() > 0) {
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">

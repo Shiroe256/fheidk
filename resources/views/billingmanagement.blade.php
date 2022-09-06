@@ -146,7 +146,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr class="bg-warning">
                                                 <td class="text-center"><input type="checkbox"></td>
                                                 <td class="text-left">DIliman (Main)</td>
                                                 <td class="text-left">FHE-123-456</td>
