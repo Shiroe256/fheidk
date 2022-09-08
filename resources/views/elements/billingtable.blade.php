@@ -33,7 +33,7 @@
                         <span class="badge badge-pill badge-secondary span-size">Open</span>
                         <?php
                             elseif ($billing['billing_status']==2):?>
-                        <span class="badge badge-pill badge-primary span-size">Queue</span>
+                        <span class="badge badge-pill badge-warning span-size">On-Process</span>
                         <?php
                             elseif ($billing['billing_status']==3):?>
                         <span class="badge badge-pill badge-primary span-size">Submitted</span>

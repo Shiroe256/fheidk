@@ -31,35 +31,11 @@ class UserController extends Controller
     public function fetchHeis()
     {
         $heis = DB::table('tbl_heis')
-        // ->where('hei_uii',Auth::user()->hei_uii)
-        ->where('hei_uii','01026')
+        ->where('hei_uii',Auth::user()->hei_uii)
         ->first();
         return response()->json($heis);
     }
 
-    // public function update(Request $request) {
-	// 	$fileName = '';
-	// 	$user = User::find($request->emp_id);
-	// 	if ($request->hasFile('avatar')) {
-	// 		$file = $request->file('avatar');
-	// 		$fileName = time() . '.' . $file->getClientOriginalExtension();
-	// 		$file->storeAs('public/images', $fileName);
-	// 		if ($user->avatar) {
-	// 			Storage::delete('public/images/' . $user->avatar);
-	// 		}
-	// 	} else {
-	// 		$fileName = $request->emp_avatar;
-	// 	}
-
-	// 	$empData = ['first_name' => $request->fname, 'last_name' => $request->lname, 'email' => $request->email, 'phone' => $request->phone, 'post' => $request->post, 'avatar' => $fileName];
-
-	// 	$emp->update($empData);
-	// 	return response()->json([
-	// 		'status' => 200,
-	// 	]);
-	// }
-
-    // handle update a user ajax request
     public function updateUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
