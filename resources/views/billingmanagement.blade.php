@@ -4,15 +4,15 @@
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
             {{ $ac_year }}</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">{{ $f->format($semester) }}
             Semester</span> / <span class="badge badge-pill badge-info">{{ $f->format($tranche) }} Tranche</span></h5>
-            <input type="hidden" name="" id="ac_year" value="{{ $ac_year }}">
-            <input type="hidden" name="" id="semester" value="{{ $semester }}">
-            <input type="hidden" name="" id="tranche" value="{{ $tranche }}">
+            <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
+            <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
+            <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
     <div class="card shadow">
         <div class="card-header d-flex justify-content-between align-items-center"><a class="btn btn-outline-dark btn-sm"
                 role="button" href="{{ route('billings') }}"><i class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
             <div class="btn-group" role="group">
-                <input type="hidden" id="reference_no" value="{{ $reference_no }}">
+                <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_run_billing_checker"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;</a>
                 <button id="btn_queue" class="btn btn-outline-info btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Queue</button>
@@ -38,42 +38,9 @@
                         <form class="mt-4">
                             <div class="form-group input-style">
                                 <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary</h5>
-                                <div class="table-responsive table-style mt-2" role="grid"
+                                <div id="show_summary" class="table-responsive table-style mt-2" role="grid"
                                     aria-describedby="dataTable_info">
-                                    <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                        id="tbl_billingform_1">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">NO.</th>
-                                                <th class="text-center">HEI CAMPUS</th>
-                                                <th class="text-center">TOTAL BENEFICIARIES<br></th>
-                                                <th class="text-center">TOTAL AMOUNT<br></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">Diliman (Main)</td>
-                                                <td class="text-center">123,456</td>
-                                                <td class="text-center">123,456,789.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td class="text-center">Los Baños</td>
-                                                <td class="text-center">123,456<br></td>
-                                                <td class="text-center">123,456,789.50<br></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td class="text-center">Visayas</td>
-                                                <td class="text-center">123,456<br></td>
-                                                <td class="text-center">123,456,789.50<br></td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr></tr>
-                                        </tfoot>
-                                    </table>
+                                    {{-- SUMMARY TABLE HERE --}}
                                 </div>
                             </div>
                         </form>
@@ -99,7 +66,7 @@
                                 </div>
                                 <div id="show_all_students" class="table-responsive mt-2 table-style" role="grid"
                                     aria-describedby="dataTable_info">
-
+                                    {{-- STUDENT TABLE HERE --}}
                                 </div>
                             </div>
                         </form>

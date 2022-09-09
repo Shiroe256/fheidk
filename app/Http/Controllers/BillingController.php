@@ -6,6 +6,7 @@ use App\Models\Billing;
 use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\Settings;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
@@ -44,6 +45,7 @@ class BillingController extends Controller
                 <tr>
                     <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
                     <th class="text-left">HEI CAMPUS</th>
+                    <th class="text-left">APP ID</th>
                     <th class="text-left">AWARD NUMBER</th>
                     <th class="text-left">LASTNAME</th>
                     <th class="text-left">FIRSTNAME</th>
@@ -58,9 +60,11 @@ class BillingController extends Controller
             </thead>
             <tbody id="tbl_list_of_students_form_2">';
             foreach ($students as $student) {
+                $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
                     <td class="text-left">' . $student->hei_name . '</td>
+                    <td class="text-left">' . $student->app_id . '</td>
                     <td class="text-left">' . $student->fhe_award_no . '</td>
                     <td>' . $student->stud_lname . '</td>
                     <td>' . $student->stud_fname . '</td>
@@ -69,7 +73,7 @@ class BillingController extends Controller
                     <td class="text-center">' . $student->year_level . '</td>
                     <td class="text-left">' . $student->remarks . '</td>
                     <td class="text-left">' . $student->stud_status . '</td>
-                    <td class="text-left"></td>
+                    <td class="text-left">' .$total_amount. '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
                             <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
@@ -83,6 +87,56 @@ class BillingController extends Controller
             echo $output;
         } else {
             echo '<h1 class="text-center text-secondary my-5">No student records.</h1>';
+        }
+    }
+
+    public function fetchTempSummary()
+    {
+        //aayusin pa
+        $hei_summary = TemporaryBilling::select('COUNT(hei_uii) AS total_beneficiaries')
+        ->count()
+        ->groupby('hei_uii')
+        ->get();
+        
+        $output = '';
+        if ($hei_summary->count() > 0) {
+            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
+            id="tbl_summary">
+            <thead>
+                <tr>
+                    <th class="text-center">NO.</th>
+                    <th class="text-center">HEI CAMPUS</th>
+                    <th class="text-center">TOTAL BENEFICIARIES<br></th>
+                    <th class="text-center">TOTAL AMOUNT<br></th>
+                </tr>
+            </thead>
+            <tbody id="tbl_list_of_students_form_1">';
+            foreach ($hei_summary as $summary) {
+                // $summary = $summary->tuition_fee + $summary->entrance_fee + $summary->admission_fee + $summary->athletic_fee + $summary->computer_fee + $summary->cultural_fee + $summary->development_fee + $summary->guidance_fee + $summary->handbook_fee + $summary->laboratory_fee + $summary->library_fee + $summary->medical_dental_fee +  $summary->registration_fee + $summary->school_id_fee + $summary->nstp_fee;
+                $output .= '<tr>
+                <td class="text-center">1</td>
+                <td class="text-center">'. $summary->hei_name .'</td>
+                <td class="text-center">'. $summary->total_beneficiaries .'</td>
+                <td class="text-center">123,456,789.50</td>
+            </tr>
+            <tr>
+                <td class="text-center">2</td>
+                <td class="text-center">Los Baños</td>
+                <td class="text-center">123,456<br></td>
+                <td class="text-center">123,456,789.50<br></td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td class="text-center">Visayas</td>
+                <td class="text-center">123,456<br></td>
+                <td class="text-center">123,456,789.50<br></td>
+            </tr>';
+            }
+            $output .= '</tbody>
+            </table>';
+            echo $output;
+        } else {
+            echo '<h1 class="text-center text-secondary my-5">No billing records.</h1>';
         }
     }
 
@@ -113,20 +167,21 @@ class BillingController extends Controller
                 'errors' => $validator->messages(),
             ]);
         } else {
+
             $students = [
                 //static sample data
-                'hei_psg_region' => '01',
-                'hei_sid' => '01040',
-                'hei_uii' => '01040',
-                'hei_name' => 'Mariano Marcos State University',
-                'reference_no' => '01-MMMSU-2020-1-1',
-                'ac_year' => '2020',
-                'semester' => '1',
-                'tranche' => '1',
-                'app_id' => '01040-20222227-00003',
-                'fhe_award_no' => 'FHE-01-01040-20222207-00003',
-                'stud_id' => '',
-                'lrn_no' => '',
+                'hei_psg_region' => $request->hei_psg_region,
+                'hei_sid' => Auth::user()->hei_sid,
+                'hei_uii' => $request->hei_uii,
+                'hei_name' => $request->selected_campus,
+                'reference_no' => $request->reference_no,
+                'ac_year' => $request->ac_year,
+                'semester' => $request->semester,
+                'tranche' => $request->tranche,
+                'app_id' => '',
+                'fhe_award_no' => '',
+                'stud_id' => $request->stud_id,
+                'lrn_no' => $request->lrn_no,
                 //actual data being collected in the modal
                 'stud_lname' => $request->last_name, //tablename => $request->name of input field
                 'stud_fname' => $request->first_name,
@@ -156,7 +211,7 @@ class BillingController extends Controller
                 'stud_phone_no' => $request->mobile_number,
                 'stud_alt_phone_no' => $request->alt_mobile_number,
                 //static
-                'trasferee' => '',
+                'transferee' => $request->checkbox_transferee,
                 'degree_program' => $request->degree_program,
                 'year_level' => $request->year_level,
                 'lab_unit' => '1',
@@ -225,12 +280,26 @@ class BillingController extends Controller
     }
 
     // select degree programs from the database
-    public function selectDegreePrograms(Request $request)
+    public function selectDegreePrograms()
     {
         $selectDegreePrograms = OtherSchoolFees::select('course_enrolled')
             ->groupby('course_enrolled')
             ->get();
         return response()->json($selectDegreePrograms);
+    }
+
+    public function selectCampus()
+    {
+        $hei_uii = Auth::user()->hei_uii;
+        $heiinfo = $this->getHeiInformation($hei_uii);
+        $hei_sid = $heiinfo['hei_sid'];
+        if(empty($hei_sid)){
+            return response()->json(0);
+        }else{
+            $hei = Hei::where('hei_sid', $hei_sid)->get();
+            return response()->json($hei);
+        }
+        
     }
 
     // handle edit an student ajax request
@@ -384,6 +453,7 @@ class BillingController extends Controller
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
         $hei_uii = Auth::user()->hei_uii;
+        $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;

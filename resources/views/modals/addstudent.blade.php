@@ -7,10 +7,41 @@
                     <h6 class="modal-title">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
+                    
+                    <div class="form-group input-style campus_div d-none">
+                        <h6 class="modal-title text-dark">Campus</h6>
+                    </div>
+                    <div class="form-group input-style campus_div d-none">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
+                                    <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
+                                    <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
+                                    <input type="hidden" id='hei_psg_region' name='hei_psg_region'value="{{ $hei_psg_region }}">
+                                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
+                                    <input type="hidden" id='hei_uii' name='hei_uii' type="text">
+                                    <input type="hidden" id='selected_campus' name='selected_campus' type="text">
+                                    <select id="hei_campus" name="hei_campus" class="form-control input-style-tabs">                           
+                                        <option selected disabled>-- Select Campus --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group input-style">
                         <h6 class="modal-title text-dark">Personal Information</h6>
                     </div>
                     <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Student ID</label><input id='stud_id' name='stud_id' class="form-control input-style" type="text"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>LRN No.</label><input id="lrn_no" name='lrn_no' class="form-control input-style" type="text"></div>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Lastname</label><input name='last_name' class="form-control input-style" type="text"></div>
@@ -25,6 +56,7 @@
                                 <div class="form-group"><label>Extension</label><input name='extension_name' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group"><label>
@@ -215,7 +247,9 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input id="checkbox_transferee" name="checkbox_transferee" class="custom-control-input" type="checkbox"><label class="custom-control-label check-style" for="checkbox_transferee">Transferee</label></div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="checkbox_transferee" name="checkbox_transferee" class="custom-control-input" type="checkbox" value="Yes"><label class="custom-control-label check-style" for="checkbox_transferee">Transferee</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
