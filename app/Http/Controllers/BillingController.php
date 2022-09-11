@@ -93,12 +93,12 @@ class BillingController extends Controller
     public function fetchTempSummary()
     {
         //aayusin pa
-        $hei_summary = TemporaryBilling::select('COUNT(hei_uii) AS total_beneficiaries')
-        ->count()
-        ->groupby('hei_uii')
-        ->get();
+        $hei_summary = TemporaryBilling::select(DB::raw('hei_name, COUNT(*) AS total_beneficiaries, (SUM(tuition_fee) + SUM(entrance_fee) + SUM(admission_fee) + SUM(athletic_fee) + SUM(computer_fee) + SUM(cultural_fee) + SUM(development_fee) + SUM(guidance_fee) + SUM(handbook_fee) + SUM(laboratory_fee) + SUM(library_fee) + SUM(medical_dental_fee) + SUM(registration_fee) + SUM(school_id_fee) + SUM(nstp_fee))as total_amount'))
+            ->groupBy('hei_name')
+            ->get();
         
         $output = '';
+        $cnt = 1;
         if ($hei_summary->count() > 0) {
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
             id="tbl_summary">
@@ -112,24 +112,11 @@ class BillingController extends Controller
             </thead>
             <tbody id="tbl_list_of_students_form_1">';
             foreach ($hei_summary as $summary) {
-                // $summary = $summary->tuition_fee + $summary->entrance_fee + $summary->admission_fee + $summary->athletic_fee + $summary->computer_fee + $summary->cultural_fee + $summary->development_fee + $summary->guidance_fee + $summary->handbook_fee + $summary->laboratory_fee + $summary->library_fee + $summary->medical_dental_fee +  $summary->registration_fee + $summary->school_id_fee + $summary->nstp_fee;
                 $output .= '<tr>
-                <td class="text-center">1</td>
+                <td class="text-center">'. $cnt++ .'</td>
                 <td class="text-center">'. $summary->hei_name .'</td>
                 <td class="text-center">'. $summary->total_beneficiaries .'</td>
-                <td class="text-center">123,456,789.50</td>
-            </tr>
-            <tr>
-                <td class="text-center">2</td>
-                <td class="text-center">Los Baños</td>
-                <td class="text-center">123,456<br></td>
-                <td class="text-center">123,456,789.50<br></td>
-            </tr>
-            <tr>
-                <td class="text-center">3</td>
-                <td class="text-center">Visayas</td>
-                <td class="text-center">123,456<br></td>
-                <td class="text-center">123,456,789.50<br></td>
+                <td class="text-center">'. $summary->total_amount .'</td>
             </tr>';
             }
             $output .= '</tbody>

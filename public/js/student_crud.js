@@ -31,6 +31,7 @@ $("#frm_add_student").submit(function (e) {
           'success'
         )
         fetchTempStudent();
+        fetchTempSummary();
         $("#btn_add_student").text('Add Student');
         $("#frm_add_student")[0].reset();
         $("#mod_new_student_info").modal('hide');
@@ -639,16 +640,15 @@ function fetchTempSummary() {
     url: "/get-tempsummary",
     method: 'get',
     success: function (response) {
-      // $("#show_summary").html(response);
-      // $("#tbl_summary").DataTable({
-      //   "order": [[3, "asc"]],
-      //   orderCellsTop: true,
-      //   fixedHeader: true,
-      //   columnDefs: [
-      //     { orderable: false, targets: [0, -1] }
-      //   ]
-      // });
-      alert();
+      $("#show_summary").html(response);
+      $("#tbl_summary").DataTable({
+        "order": [[3, "asc"]],
+        orderCellsTop: true,
+        fixedHeader: true,
+        columnDefs: [
+          { orderable: false, targets: [0, -1] }
+        ]
+      });
     }
   });
 }

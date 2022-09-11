@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = 'users';
     public $primaryKey = 'id';
     protected $fillable = [
+        'hei_sid',
         'hei_uii',
         'fhe_focal_lname',
         'fhe_focal_fname',

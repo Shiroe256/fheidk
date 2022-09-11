@@ -72,6 +72,7 @@ class RegisterController extends Controller
 		// $fileName = time() . '.' . $file->getClientOriginalExtension();
 		// $file->storeAs('public/images', $fileName);
         return User::create([
+            'hei_sid' => '01040',//default value for testing
             'hei_uii' => $data['hei_uii'],
             'fhe_focal_lname' => $data['fhe_focal_lname'],
             'fhe_focal_fname' => $data['fhe_focal_fname'],
