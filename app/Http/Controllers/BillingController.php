@@ -802,21 +802,22 @@ class BillingController extends Controller
                 $selectedstudent = TemporaryBilling::find($student['uid']);
                 //get student and enrollment info
                 $studentinfo = $this->getStudentInfo($student->fhe_award_no);
-                if ($studentinfo == null) {
-                    continue;
-                }
+                
                 // $course = $this->getCourseLength($student->app_id);
-                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
-                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
-
-
+                
+                
                 if ($student->fhe_award_no != '') {
                     //get duplicate fhe numbers within the billing transaction
-                    $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
-                    //if there are any duplicates they are marked in the remarks
-                    if (count($duplicatefheno) > 1) {
-                        $selectedstudent->remarks .= 'Has a duplicate student in this Billing Submission';
+                    // $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
+                    // //if there are any duplicates they are marked in the remarks
+                    // if ($duplicatefheno > 1) {
+                    //     $selectedstudent->remarks .= 'Has a duplicate student in this Billing Submission';
+                    // }
+                    if ($studentinfo == null) {
+                        continue;
                     }
+                    $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
+                    $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
                     //if there are any duplicates for this semester
                     if ($studentinfo->count() > 0) {
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
@@ -840,7 +841,7 @@ class BillingController extends Controller
                         if ($totallength > $normal_length) {
                             $selectedstudent->remarks .= '\nExceeded Maximum Resicency';
                         }
-                        //maximum recidency end
+                        //maximum residency end
 
                         //check for duplicates in other schools
                         // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
@@ -877,7 +878,7 @@ class BillingController extends Controller
     {
         $duplicates = TemporaryBilling::where('fhe_award_no', $fhe_award_no)
             ->where('reference_no', $reference_no)
-            ->get();
+            ->get()->count();
         return $duplicates;
     }
     private function getDuplicatesStudentsInMasterList($data = array())
