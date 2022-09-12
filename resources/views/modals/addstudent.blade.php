@@ -59,8 +59,8 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>
-                                     <span class="text-danger">*</span>&nbsp;Sex</label>
+                                <div class="form-group">
+                                    <label><span class="text-danger">*</span>&nbsp;Sex</label>
                                      <select name='sex' class="form-control input-style">
                                         <optgroup label="Select Sex">
                                             <option value="" selected disabled>--Select Sex--</option>

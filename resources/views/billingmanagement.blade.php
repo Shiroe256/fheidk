@@ -82,9 +82,6 @@
                                     <div class="col text-right">
                                         <div class="btn-group" role="group"><button
                                                 class="btn btn-outline-info btn-sm" type="button"
-                                                data-toggle="modal" data-target="#mod_upload"><i
-                                                    class="fas fa-file-upload"></i>&nbsp;Upload List</button><button
-                                                class="btn btn-outline-info btn-sm" type="button"
                                                 data-toggle="modal" data-target="#mod_admission_entrance"><i
                                                     class="fas fa-user-plus"></i>&nbsp;Add Applicant</button><button
                                                 class="btn btn_delete_student btn-outline-danger btn-sm"
@@ -92,158 +89,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive mt-2 table-style" role="grid"
+                                <div id="show_all_applicants" class="table-responsive mt-2 table-style" role="grid"
                                     aria-describedby="dataTable_info">
-                                    <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                        id="tbl_billingform_3">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center"><input type="checkbox"></th>
-                                                <th class="text-left">HEI CAMPUS</th>
-                                                <th class="text-left">AWARD NUMBER</th>
-                                                <th class="text-left">LASTNAME</th>
-                                                <th class="text-left">FIRSTNAME</th>
-                                                <th class="text-left">MIDDLENAME</th>
-                                                <th>COURSE</th>
-                                                <th class="text-center">YEAR</th>
-                                                <th class="text-left">REMARKS</th>
-                                                <th class="text-center">NO. OF EXAM TAKEN</th>
-                                                <th class="text-left">STATUS</th>
-                                                <th class="text-center">ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-warning">
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">DIliman (Main)</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">4</td>
-                                                <td class="text-left">Transferee</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left">Passed and Enrolled<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">Los Baños</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left"><br></td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left">Passed but did not Enroll<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">Visayas</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left"><br></td>
-                                                <td class="text-center">2</td>
-                                                <td class="text-left">Failed<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">Baguio</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left"></td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left">Passed and Enrolled<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">Baguio</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left"></td>
-                                                <td class="text-center">2</td>
-                                                <td class="text-left">Passed and Enrolled<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox"></td>
-                                                <td class="text-left">Baguio</td>
-                                                <td class="text-left">FHE-123-456</td>
-                                                <td>Molina</td>
-                                                <td>Carlo</td>
-                                                <td>Espartinez</td>
-                                                <td>Bachelor of Science in Information and Techology</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left"></td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-left">Passed but did not Enroll<br></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"><button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Edit Student Information"
-                                                            data-target="#mod_admission_entrance"><i
-                                                                class="far fa-edit"></i></button></div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr></tr>
-                                        </tfoot>
-                                    </table>
+                                    {{-- APPLICANTS TABLE HERE --}}
                                 </div>
                             </div>
                         </form>
@@ -325,32 +173,11 @@
                                 </tr>
                                 <tr>
                                     <td class="text-center"><input type="checkbox"></td>
-                                    <td class="text-left">Visayas</td>
-                                    <td class="text-left">FHE-123-456</td>
-                                    <td>Molina</td>
-                                    <td>Carlo</td>
-                                    <td>Espartinez</td>
-                                    <td>Bachelor of Science in Information and Techology</td>
-                                    <td class="text-center">3</td>
-                                    <td class="text-left"><br></td>
-                                    <td class="text-left">Maximum Amount for Guidance Fee / Laboratory Fee/ Development
-                                        Fee Exceeded<br></td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group"><button
-                                                class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip=""
-                                                data-placement="bottom" type="button"
-                                                title="Edit Student Information"
-                                                data-target="#mod_new_student_info"><i
-                                                    class="far fa-edit"></i></button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"><input type="checkbox"></td>
                                     <td class="text-left">Baguio</td>
                                     <td class="text-left">FHE-123-456</td>
-                                    <td>Molina</td>
-                                    <td>Carlo</td>
-                                    <td>Espartinez</td>
+                                    <td>Doe</td>
+                                    <td>John</td>
+                                    <td>Maxwell</td>
                                     <td>Bachelor of Science in Information and Techology</td>
                                     <td class="text-center">4</td>
                                     <td class="text-left">Graduating</td>
