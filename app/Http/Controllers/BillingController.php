@@ -7,7 +7,6 @@ use App\Models\EnrollmentInfo;
 use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\Settings;
-use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
