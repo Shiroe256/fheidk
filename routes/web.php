@@ -74,6 +74,7 @@ Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('fin
 
 //Select inputs
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
+Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
 
 //Test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
@@ -84,3 +85,6 @@ Route::post('/queue', [BillingController::class, 'queueBillingForChecking'])->na
 Route::get('/get-user', [UserController::class, 'fetchUser'])->name('fetchUser');
 Route::get('/get-heis', [UserController::class, 'fetchHeis'])->name('fetchHeis');
 Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
+
+//SUMMARY
+Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');

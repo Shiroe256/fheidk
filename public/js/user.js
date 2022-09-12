@@ -62,6 +62,7 @@ $("#frm_update_user").submit(function (e) {
           'User Updated Successfully!',
           'success'
         )
+        $("#avatar_header_div").load(location.href + " #avatar_header_div");
         $("#avatar_div").load(location.href + " #avatar_div");
         fetchUser();
       } else if (response.status == 400) {

@@ -1,5 +1,7 @@
 fetchTempStudent();
+fetchTempSummary();
 selectDegreePrograms();
+selectCampus()
 
 // add new student ajax request
 $("#frm_add_student").submit(function (e) {
@@ -29,6 +31,7 @@ $("#frm_add_student").submit(function (e) {
           'success'
         )
         fetchTempStudent();
+        fetchTempSummary();
         $("#btn_add_student").text('Add Student');
         $("#frm_add_student")[0].reset();
         $("#mod_new_student_info").modal('hide');
@@ -595,6 +598,57 @@ function selectDegreePrograms() {
         let degree_program = response[index].course_enrolled;
         $('#course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
       }
+    }
+  });
+}
+
+//fetch all degree programs from the database to select input
+function selectCampus() {
+  $.ajax({
+    url: '/get-campus',
+    method: 'get',
+    data: {
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      if(response == 0){
+        $('.campus_div').addClass('d-none');
+      }else{
+      $('.campus_div').removeClass('d-none');
+      for (let index = 0; index < response.length; ++index) {
+        let campus = response[index].hei_name;
+        let hei_uii = response[index].hei_uii;
+        $('#hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
+      }
+     console.log(response);
+    }
+    }
+  });
+}
+
+$(document).on('change', '#hei_campus', function (e) {
+  e.preventDefault();
+  let campus = $("#hei_campus option:selected").text();
+  let hei_uii = $("#hei_campus option:selected").attr('id');
+  $("#selected_campus").val(campus);
+  $("#hei_uii").val(hei_uii);
+});
+
+//fetch records from the database
+function fetchTempSummary() {
+  $.ajax({
+    url: "/get-tempsummary",
+    method: 'get',
+    success: function (response) {
+      $("#show_summary").html(response);
+      $("#tbl_summary").DataTable({
+        "order": [[3, "asc"]],
+        orderCellsTop: true,
+        fixedHeader: true,
+        columnDefs: [
+          { orderable: false, targets: [0, -1] }
+        ]
+      });
     }
   });
 }
