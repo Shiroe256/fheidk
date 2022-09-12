@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 
-    protected $table = 'tbl_master_student';
+    protected $table = 'tbl_master_student_blank';
     protected $primaryKey = 'uid';
     protected $fillable = [
         'app_id', 'fhe_award_no', 'tes_award_no', 'slp_award_no', 'national_id',

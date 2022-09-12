@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Billing;
+use App\Models\EnrollmentInfo;
 use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
+use App\Models\Student;
+use App\Models\Course;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -488,9 +491,9 @@ class BillingController extends Controller
         // build the array for fees
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
-            ->where('bs_reference_no', "1-11040-2020-2021-1-1")
+            ->where('bs_reference_no', $reference_no)
             ->where('bs_status', 1)
-            ->where('semester', 1)
+            ->where('semester', $request->semester)
             ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
             ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
             ->get();
@@ -498,11 +501,11 @@ class BillingController extends Controller
         $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
 
         foreach ($tuitionFees as $tuitionFee) {
-            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Tuition'] =  $tuitionFee->tuition_per_unit;
-            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Nstp'] =  $tuitionFee->nstp_cost_per_unit;
+            $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['TUITION'] =  $tuitionFee->tuition_per_unit;
+            $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['NSTP'] =  $tuitionFee->nstp_cost_per_unit;
         }
         foreach ($otherfees as $otherfee) {
-            $fees[$otherfee->course_enrolled][$otherfee->year_level][$otherfee->type_of_fee] = $otherfee->total_amount;
+            $fees[strtoupper($otherfee->course_enrolled)][strtoupper($otherfee->year_level)][strtoupper($otherfee->type_of_fee)] = $otherfee->total_amount;
         }
         $json_fees = json_encode($fees);
         //build array for fees and tosf end
@@ -545,45 +548,45 @@ class BillingController extends Controller
         return $validator->fails();
     }
 
-    public function test()
-    {
-        //build the array for fees
-        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-            ->where('hei_uii', "01040")
-            ->where('bs_reference_no', "1-11040-2020-2021-1-1")
-            ->where('bs_status', 1)
-            ->where('semester', 1)
-            ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
-            ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
-            ->get();
+    // public function test()
+    // {
+    //     //build the array for fees
+    //     $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+    //         ->where('hei_uii', "01040")
+    //         ->where('bs_reference_no', "1-11040-2020-2021-1-1")
+    //         ->where('bs_status', 1)
+    //         ->where('semester', 1)
+    //         ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
+    //         ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
+    //         ->get();
 
-        $tuitionFees = TuitionFees::where('hei_uii', "01040")->where('semester', 1)->get();
+    //     $tuitionFees = TuitionFees::where('hei_uii', "01040")->where('semester', 1)->get();
 
-        foreach ($tuitionFees as $tuitionFee) {
-            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Tuition'] =  $tuitionFee->tuition_per_unit;
-            $fees[$tuitionFee->course_enrolled][$tuitionFee->year_level]['Nstp'] =  $tuitionFee->nstp_cost_per_unit;
-        }
-        foreach ($otherfees as $otherfee) {
-            $fees[$otherfee->course_enrolled][$otherfee->year_level][$otherfee->type_of_fee] = $otherfee->total_amount;
-        }
-        //build array for tosf end
-        // print_r($fees['Bachelor of Science in Information and Technology'][1]);
-        // echo json_encode($fees);
-        print_r(json_decode(json_encode($fees), true));
-        //Admission
-        //Athletic
-        //Computer
-        //Cultural
-        //Development
-        //Entrance
-        //Guidance
-        //Handbook
-        //Laboratory
-        //Library
-        //Medical and Dental
-        //Registration
-        //School ID
-    }
+    //     foreach ($tuitionFees as $tuitionFee) {
+    //         $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['TUITION'] =  $tuitionFee->tuition_per_unit;
+    //         $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['NSTP'] =  $tuitionFee->nstp_cost_per_unit;
+    //     }
+    //     foreach ($otherfees as $otherfee) {
+    //         $fees[strtoupper($otherfee->course_enrolled)][strtoupper($otherfee->year_level)][strtoupper($otherfee->type_of_fee)] = $otherfee->total_amount;
+    //     }
+    //     //build array for tosf end
+    //     // print_r($fees['Bachelor of Science in Information and Technology'][1]);
+    //     // echo json_encode($fees);
+    //     echo json_encode($fees);
+    //     //Admission
+    //     //Athletic
+    //     //Computer
+    //     //Cultural
+    //     //Development
+    //     //Entrance
+    //     //Guidance
+    //     //Handbook
+    //     //Laboratory
+    //     //Library
+    //     //Medical and Dental
+    //     //Registration
+    //     //School ID
+    // }
 
     private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
     {
@@ -629,23 +632,39 @@ class BillingController extends Controller
         $tempstudent->lab_unit = $data['lab_u'];
         $tempstudent->comp_lab_unit = $data['com_lab_u'];
         $tempstudent->academic_unit = $data['acad_u'];
-        $tempstudent->nstp_unit = $data['nstp_u'];
+        $tempstudent->nstp_unit = is_numeric($data['nstp_u']) ? $data['nstp_u'] : 0;
 
-        $tempstudent->tuition_fee = (int) $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Tuition'] * (int) $data['acad_u'];
-        $tempstudent->entrance_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Entrance'];
-        $tempstudent->admission_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Admission'];
-        $tempstudent->athletic_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Athletic'];
-        $tempstudent->computer_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Computer'];
-        $tempstudent->cultural_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Cultural'];
-        $tempstudent->development_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Development'];
-        $tempstudent->guidance_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Guidance'];
-        $tempstudent->handbook_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Handbook'];
-        $tempstudent->laboratory_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Laboratory'];
-        $tempstudent->library_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Library'];
-        $tempstudent->medical_dental_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Medical and Dental'];
-        $tempstudent->registration_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Registration'];
-        $tempstudent->school_id_fee = $json_fees['Bachelor of Elementary Education'][$data['year_level']]['School ID'];
-        $tempstudent->nstp_fee = (int) $json_fees['Bachelor of Elementary Education'][$data['year_level']]['Nstp'] * (int) $data['nstp_u'];;
+
+        //finalized fees
+        $Entrance = $this->findKey($json_fees,'ENTRANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ENTRANCE'] : 0;
+        $Admission = $this->findKey($json_fees,'ADMISSION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ADMISSION'] : 0;
+        $Athletic = $this->findKey($json_fees,'ATHLETIC') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ATHLETIC'] : 0;
+        $Computer = $this->findKey($json_fees,'COMPUTER') ? $json_fees[$data['degree_course_id']][$data['year_level']]['COMPUTER'] : 0;
+        $Cultural = $this->findKey($json_fees,'CULTURAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['CULTURAL'] : 0;
+        $Development = $this->findKey($json_fees,'DEVELOPMENT') ? $json_fees[$data['degree_course_id']][$data['year_level']]['DEVELOPMENT'] : 0;
+        $Guidance = $this->findKey($json_fees,'GUIDANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['GUIDANCE'] : 0;
+        $Handbook = $this->findKey($json_fees,'HANDBOOK') ? $json_fees[$data['degree_course_id']][$data['year_level']]['HANDBOOK'] : 0;
+        $Laboratory = $this->findKey($json_fees,'LABORATORY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LABORATORY'] : 0;
+        $Library = $this->findKey($json_fees,'LIBRARY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LIBRARY'] : 0;
+        $Medical_and_Dental = $this->findKey($json_fees,'MEDICAL AND DENTAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['MEDICAL AND DENTAL'] : 0;
+        $Registration = $this->findKey($json_fees,'REGISTRATION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['REGISTRATION'] : 0;
+        $ID = $this->findKey($json_fees,'SCHOOL ID') ? $json_fees[$data['degree_course_id']][$data['year_level']]['SCHOOL ID'] : 0;
+
+        $tempstudent->tuition_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['TUITION'] * (float) $data['acad_u'];
+        $tempstudent->entrance_fee = $Entrance;
+        $tempstudent->admission_fee = $Admission;
+        $tempstudent->athletic_fee = $Athletic;
+        $tempstudent->computer_fee = $Computer;
+        $tempstudent->cultural_fee = $Cultural;
+        $tempstudent->development_fee = $Development;
+        $tempstudent->guidance_fee = $Guidance;
+        $tempstudent->handbook_fee = $Handbook;
+        $tempstudent->laboratory_fee = $Laboratory;
+        $tempstudent->library_fee = $Library;
+        $tempstudent->medical_dental_fee = $Medical_and_Dental;
+        $tempstudent->registration_fee = $Registration;
+        $tempstudent->school_id_fee = $ID;
+        $tempstudent->nstp_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['NSTP'] * (float) $data['nstp_u'];
         $tempstudent->stud_cor = 0; //dummydata
         $tempstudent->total_exam_taken = $data['exams'];
         $tempstudent->exam_result = $data['exam_result'];
@@ -668,6 +687,19 @@ class BillingController extends Controller
     }
 
 
+    private function findKey($array, $keySearch)
+    {
+        foreach ($array as $key => $item) {
+            if ($key == $keySearch) {
+                echo 'yes, it exists';
+                return true;
+            } elseif (is_array($item) && $this->findKey($item, $keySearch)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Billing Checker functions
 
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
@@ -678,6 +710,26 @@ class BillingController extends Controller
         $billing->save();
         return response('Success', 200);
     }
+
+    private function getStudentInfo($fhe_award_no)
+    {
+        $studentinfo = Student::where('fhe_award_no', $fhe_award_no)->first();
+        return $studentinfo;
+    }
+
+    private function getCourseUid($hei_uii, $course)
+    {
+        $courses = Course::where('hei_uii', $hei_uii)->where('degree_program', $course)->first();
+        return $courses->uid;
+    }
+
+    public function getCourseLength($course_uid)
+    {
+        $course = Course::find($course_uid);
+        $length = (int) $course->normal_length + 1;
+        return $length;
+    }
+
     public function checkBilling()
     {
         //look for billings marked for a checker queue
@@ -690,16 +742,55 @@ class BillingController extends Controller
             $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
             //check each student in billing transaction for duplciates in fhe award number
             foreach ($students as $student) {
-
-                //get duplicate fhe numbers
-                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
-                //if there are any duplicates they are marked in the remarks
-                if (count($duplicatefheno) > 1) {
-                    $selectedstudent = TemporaryBilling::find($student['uid']);
-                    $selectedstudent->remarks = 'Has a duplicate student';
-                    $selectedstudent->save();
+                //select student for later updates
+                $selectedstudent = TemporaryBilling::find($student['uid']);
+                //get student and enrollment info
+                $studentinfo = $this->getStudentInfo($student->fhe_award_no);
+                if ($studentinfo == null) {
+                    continue;
                 }
+                // $course = $this->getCourseLength($student->app_id);
+                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
+                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
 
+
+                if ($student->fhe_award_no != '') {
+                    //get duplicate fhe numbers within the billing transaction
+                    $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
+                    //if there are any duplicates they are marked in the remarks
+                    if (count($duplicatefheno) > 1) {
+                        $selectedstudent->remarks .= 'Has a duplicate student in this Billing Submission';
+                    }
+                    //if there are any duplicates for this semester
+                    if ($studentinfo->count() > 0) {
+                        foreach ($enrollmentinfo as $key => $enrollmenti) {
+                            // if (array_key_first($enrollmentinfo) == $key) {
+                            //     $startacyear = $enrollmenti->ac_year;
+                            //     $startsem = $enrollmenti->semester;
+                            //     //get start
+                            // }
+                            if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
+                                $selectedstudent->remarks .= '\nHas a duplicate this year and semester already';
+                                if ($enrollmenti->hei_uii <> $billing->hei_uii) {
+                                    $selectedstudent->remarks .= '\nHas a duplicate from other school';
+                                }
+                            }
+                        }
+
+                        //maximum residency start
+                        $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
+                        $length = $enrollmentinfo->count() / 2; //count the number of years since it is half of the number of semesters
+                        $totallength = $length - $loainfo->count() / 2;
+                        if ($totallength > $normal_length) {
+                            $selectedstudent->remarks .= '\nExceeded Maximum Resicency';
+                        }
+                        //maximum recidency end
+
+                        //check for duplicates in other schools
+                        // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
+
+                    }
+                }
                 //fetch duplicates in the masterlist
                 $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
                     array(
@@ -710,11 +801,12 @@ class BillingController extends Controller
                 );
                 //if there are duplicates in the masterlist add a remark
                 if (count($duplicateinmasterlist) > 0) {
-                    $selectedstudent = TemporaryBilling::find($student['uid']);
-                    $selectedstudent->remarks = 'Has a duplicate student in the Master List';
-                    $selectedstudent->save();
+                    $selectedstudent->remarks .= '\nHas a duplicate student in the Master List';
                 }
+                $selectedstudent->save();
             }
+
+
             //when the billing has been checked. Save it with a new status.
             $selectedbilling = Billing::find($billing['uid']);
             $selectedbilling->billing_status = 3; //3 is done queue

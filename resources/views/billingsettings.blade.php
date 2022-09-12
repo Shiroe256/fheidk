@@ -1,4 +1,4 @@
-<?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);
+<?php $f = new NumberFormatter('en', NumberFormatter::ORDINAL);
 //need mo ayusin at tanggalin ung ; sa extension=intl sa php.ini file mo para dito
 ?>
 @include('includes.header')
@@ -54,12 +54,14 @@
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
 {{-- <script type="text/javascript" src="{{ url('js/batchbilling.js') }}"></script> --}}
 <script>
+    var on = [];
+    var off = [];
     var changes = [];
+    var reference_no = $('#btn_save').val();
     $('#select_course').change(function() {
         $(".course-settings").each(function() {
             $(this).addClass("d-none");
         });
-        console.log($(this).val());
         $('#course_' + $(this).val()).removeClass("d-none");
     });
     $('.toggleall').change(function() {
@@ -72,12 +74,17 @@
         if (changes.indexOf($(this).attr("id")) === -1) {
             changes.push($(this).attr("id"));
         }
+        changes.forEach(element => {
+            if ($(this).is(':checked')) {
+                console.log($(this).val());
+            } else {
+                console.log($(this).val());
+            }
+        });
+        // console.log(changes);
     });
 
     $('#btn_save').click(function() {
-        var on = [];
-        var off = [];
-        var reference_no = $(this).val();
         changes.forEach(element => {
             $('#' + element).each(function(index) {
                 if ($(this).is(':checked')) {
