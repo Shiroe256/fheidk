@@ -11,7 +11,13 @@
                                     </div>
                                     <div class="card-body">
                                         <div id="avatar_div" class="form-group text-center">
-                                            <img class="square rounded" src="{{url('storage\images').('/').Auth::user()->avatar}}" width="160" height="160">
+                                            <img class="square rounded" 
+                                            @if(is_null(Auth::user()->avatar))
+                                            src="{{url('storage\images\user.png')}}"
+                                            @else
+                                            src="{{url('storage\images').('/').Auth::user()->avatar}}"
+                                            @endif
+                                            width="160" height="160">
                                         </div>
                                         <form id='frm_update_user' method="POST">
                                             <div class="form-group">

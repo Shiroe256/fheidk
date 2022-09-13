@@ -1010,6 +1010,8 @@
 <script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\datatables.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\applicant_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\dateformat.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
