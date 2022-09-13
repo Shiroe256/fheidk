@@ -49,7 +49,7 @@ function validateFields(data) {
     for (const stud of data) {
         var numpattern = /\d/;
         var sexpattern = /MALE|FEMALE/;
-        var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,2}$/;
+        var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,4}$/;
         var contactnumpattern = /^(9)\d{9}$/;
         var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var error = [];
@@ -73,7 +73,7 @@ function validateFields(data) {
         // if (numpattern.test(stud['mothers_gname']) || stud['mothers_gname'] == '') error.push('There are invalid characters in the Mother\'s First Name Field');
         // if (numpattern.test(stud['mothers_mname'])) error.push('There are invalid characters in the Mother\'s Middle Name Field');
         if (!emailpattern.test(stud['email'])) error.push('The email field isn\'t using a valid format');
-        if (!emailpattern.test(stud['a_email'])) error.push('The alternate email field isn\'t using a valid format');
+        // if (!emailpattern.test(stud['a_email']) && stud['a_email'] != '') error.push('The alternate email field isn\'t using a valid format');
         // if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
 
         // stud['perm_prov']
@@ -215,6 +215,7 @@ function uploadBatch() {
                         uploadButton.innerHTML = 'Uploading...';
                     },
                     success: function (data) {
+                        console.log(data);
                         Swal.fire('Uploading Success',
                             'The students in the spreadsheet have been uploaded',
                             'success');
