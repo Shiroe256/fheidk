@@ -23,8 +23,8 @@
                                             <option value="" selected="">--Select Semester--</option>
                                             <option value="1">1st</option>
                                             <option value="2">2nd</option>
-                                            <option value="3">3rd</option>
-                                            <option value="Summer">Summer</option>
+                                            {{-- <option value="3">3rd</option>
+                                            <option value="Summer">Summer</option> --}}
                                         </select>
                                     </div>
                                 </div>
