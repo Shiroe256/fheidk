@@ -806,6 +806,7 @@ function selectDegreePrograms() {
         let degree_program = response[index].course_enrolled;
         $('#course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
         $('#edit_course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
+        $('#course_applied').append('<option value=' + degree_program + '>' + degree_program + '</option>');
       }
     }
   });
@@ -829,6 +830,7 @@ function selectCampus() {
         let hei_uii = response[index].hei_uii;
         $('#hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
         $('#edit_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
+        $('#applied_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
       }
     }
     }

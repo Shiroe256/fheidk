@@ -186,7 +186,7 @@ class BillingController extends Controller
             $output .= '</tbody>
             <tfoot>
             <tr>
-                <th colspan="2" class="text-center">GRAND TOTAL:</th>
+                <th colspan="2" class="text-center">GRAND TOTAL</th>
                 <th class="text-center"></th>
                 <th class="text-center"></th>
             </tr>
@@ -301,21 +301,13 @@ class BillingController extends Controller
         }
     }
 
-    // handle insert a new student ajax request
+    // handle insert a new applicant ajax request
     public function newTempApplicant(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'last_name' => 'required', //modal field name => validation
             'first_name' => 'required',
             'birthplace' => 'required',
-            'present_province' => 'required',
-            'present_city' => 'required',
-            'present_barangay' => 'required',
-            'present_zipcode' => 'required',
-            'permanent_province' => 'required',
-            'permanent_city' => 'required',
-            'permanent_barangay' => 'required',
-            'permanent_zipcode' => 'required',
             'email_address' => 'required|email',
             'mobile_number' => 'required|regex:/^(09)\d{9}$/',
             'course_enrolled' => 'required',
