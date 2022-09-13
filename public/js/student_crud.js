@@ -1,7 +1,8 @@
 fetchTempStudent();
 fetchTempSummary();
+fetchTempApplicants();
 selectDegreePrograms();
-selectCampus()
+selectCampus();
 
 // add new student ajax request
 $("#frm_add_student").submit(function (e) {
@@ -72,7 +73,6 @@ $(document).on('change', '#total_unit', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response);
       $("#total_tuition").val(response);
     }
   });
@@ -138,7 +138,6 @@ $(document).on('change', '#nstp_unit', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response);
       $("#total_nstp").val(response);
     }
   });
@@ -352,6 +351,170 @@ $(document).on('change', '#course_enrolled', function (e) {
   });
 });
 
+//Update student
+$(document).on('change', '#edit_course_enrolled', function (e) {
+  e.preventDefault();
+  let course = $("#edit_course_enrolled option:selected").text();
+  $.ajax({
+    url: '/get-otherschoolfee',
+    method: 'get',
+    data: {
+      course_enrolled: course,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      //console.log(response);
+      //display amount
+      $("#edit_admission_fee").val(response[0].total_amount);
+      $("#edit_athletic_fee").val(response[1].total_amount);
+      $("#edit_computer_fee").val(response[2].total_amount);
+      $("#edit_cultural_fee").val(response[3].total_amount);
+      $("#edit_development_fee").val(response[4].total_amount);
+      $("#edit_entrance_fee").val(response[5].total_amount);
+      $("#edit_guidance_fee").val(response[6].total_amount);
+      $("#edit_handbook_fee").val(response[7].total_amount);
+      $("#edit_laboratory_fee").val(response[8].total_amount);
+      $("#edit_library_fee").val(response[9].total_amount);
+      $("#edit_medical_dental_fee").val(response[10].total_amount);
+      $("#edit_registration_fee").val(response[11].total_amount);
+      $("#edit_school_id_fee").val(response[12].total_amount);
+      $("#edit_degree_program").val($("#edit_course_enrolled option:selected").text());
+      //set max amount allowed
+      $("#edit_admission_fee").attr("max", response[0].total_amount);
+      $("#edit_athletic_fee").attr("max", response[1].total_amount);
+      $("#edit_computer_fee").attr("max", response[2].total_amount);
+      $("#edit_cultural_fee").attr("max", response[3].total_amount);
+      $("#edit_development_fee").attr("max", response[4].total_amount);
+      $("#edit_entrance_fee").attr("max", response[5].total_amount);
+      $("#edit_guidance_fee").attr("max", response[6].total_amount);
+      $("#edit_handbook_fee").attr("max", response[7].total_amount);
+      $("#edit_laboratory_fee").attr("max", response[8].total_amount);
+      $("#edit_library_fee").attr("max", response[9].total_amount);
+      $("#edit_medical_dental_fee").attr("max", response[10].total_amount);
+      $("#edit_registration_fee").attr("max", response[11].total_amount);
+      $("#edit_school_id_fee").attr("max", response[12].total_amount);
+      //disable keys if maximum amount is reached
+      $('#edit_admission_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[0].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[0].total_amount);
+        }
+      });
+      $('#edit_athletic_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[1].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[1].total_amount);
+        }
+      });
+      $('#edit_computer_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[2].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[2].total_amount);
+        }
+      });
+      $('#edit_cultural_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[3].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[3].total_amount);
+        }
+      });
+      $('#edit_development_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[4].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[4].total_amount);
+        }
+      });
+      $('#edit_entrance_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[5].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[5].total_amount);
+        }
+      });
+      $('#edit_guidance_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[6].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[6].total_amount);
+        }
+      });
+      $('#edit_handbook_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[7].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[7].total_amount);
+        }
+      });
+      $('#edit_laboratory_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[8].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[8].total_amount);
+        }
+      });
+      $('#edit_library_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[9].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[9].total_amount);
+        }
+      });
+      $('#edit_medical_dental_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[10].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[10].total_amount);
+        }
+      });
+      $('#edit_registration_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[11].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[11].total_amount);
+        }
+      });
+      $('#edit_school_id_fee').on('keyup keydown change', function (e) {
+        if ($(this).val() > response[12].total_amount
+          && e.keyCode !== 46
+          && e.keyCode !== 8
+        ) {
+          e.preventDefault();
+          $(this).val(response[12].total_amount);
+        }
+      });
+    }
+  });
+});
+
 //If checkbox_address is checked
 $(document).on('click', 'input[name=checkbox_address]', function () {
   if (this.checked) {
@@ -397,6 +560,7 @@ $(document).on('change', '#year_level', function () {
 });
 
 // edit student ajax request
+// aayusin pa yung sa max amount, naka onchange yung course
 $(document).on('click', '.btn_update_student', function (e) {
   e.preventDefault();
   let id = $(this).attr('id');
@@ -408,6 +572,8 @@ $(document).on('click', '.btn_update_student', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      //di dapat append to dumodble
+      $('#edit_hei_campus').append('<option selected value=' + response.hei_name + '>' + response.hei_name + '</option>');
       $("#edit_student_id").val(response.uid);
       $("#edit_last_name").val(response.stud_lname);
       $("#edit_first_name").val(response.stud_fname);
@@ -436,10 +602,47 @@ $(document).on('click', '.btn_update_student', function (e) {
       $("#edit_alt_mobile_number").val(response.stud_alt_phone_no);
       $("#edit_email_address").val(response.stud_email);
       $("#edit_alt_email_address").val(response.stud_alt_email);
-      $("#edit_course_enrolled").val(response.degree_program);
+      $("#edit_degree_program").val(response.degree_program);
+      //di dapat append to dumodble
+      $('#edit_course_enrolled').append('<option selected value=' + response.degree_program + '>' + response.degree_program + '</option>');
       $("#edit_year_level").val(response.year_level);
+      $("#edit_total_unit").val(response.academic_unit);
+      $("#edit_tuition_fee").val(response.tuition_fee);
+      $("#edit_nstp_unit").val(response.nstp_unit);
+      $("#edit_nstp_fee").val(response.nstp_fee);
+      $("#edit_entrance_fee").val(response.entrance_fee);
+      $("#edit_admission_fee").val(response.admission_fee);
+      $("#edit_athletic_fee").val(response.athletic_fee);
+      $("#edit_computer_fee").val(response.computer_fee);
+      $("#edit_cultural_fee").val(response.cultural_fee);
+      $("#edit_development_fee").val(response.development_fee);
+      $("#edit_guidance_fee").val(response.guidance_fee);
+      $("#edit_handbook_fee").val(response.handbook_fee);
+      $("#edit_laboratory_fee").val(response.laboratory_fee);
+      $("#edit_library_fee").val(response.library_fee);
+      $("#edit_medical_dental_fee").val(response.medical_dental_fee);
+      $("#edit_registration_fee").val(response.registration_fee);
+      $("#edit_school_id_fee").val(response.school_id_fee);
+      $("#edit_remarks").val(response.remarks);
+      if($("#edit_nstp_unit").val() !== ""){
+        $("#nstp_div").removeClass("d-none");
+        $("#edit_with_nstp").prop('checked', true);
+      }
     }
   });
+});
+
+//No NSTP Value
+$(document).on('click', '#edit_with_nstp', function () {
+  if (this.checked) {
+    $("#nstp_div").removeClass("d-none");
+  }else{
+    $("#edit_nstp_unit").val("");
+    $("#edit_nstp_fee").val("");
+
+    $("#nstp_div").addClass("d-none");
+    alert($("#edit_nstp_unit").val());
+  }
 });
 
 // update students ajax request
@@ -568,9 +771,14 @@ function btnDeleteToggle() {
 
 //fetch records from the database
 function fetchTempStudent() {
+  let reference_no = $("#reference_no").val();
   $.ajax({
     url: "/get-tempstudents",
     method: 'get',
+    data: {
+      reference_no: reference_no,
+      _token: '{{ csrf_token() }}'
+    },
     success: function (response) {
       $("#show_all_students").html(response);
       $("#tbl_students").DataTable({
@@ -597,6 +805,8 @@ function selectDegreePrograms() {
       for (let index = 0; index < response.length; ++index) {
         let degree_program = response[index].course_enrolled;
         $('#course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
+        $('#edit_course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
+        $('#course_applied').append('<option value=' + degree_program + '>' + degree_program + '</option>');
       }
     }
   });
@@ -619,8 +829,9 @@ function selectCampus() {
         let campus = response[index].hei_name;
         let hei_uii = response[index].hei_uii;
         $('#hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
+        $('#edit_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
+        $('#applied_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
       }
-     console.log(response);
     }
     }
   });
@@ -634,14 +845,79 @@ $(document).on('change', '#hei_campus', function (e) {
   $("#hei_uii").val(hei_uii);
 });
 
-//fetch records from the database
+$(document).on('change', '#edit_hei_campus', function (e) {
+  e.preventDefault();
+  let campus = $("#edit_hei_campus option:selected").text();
+  let hei_uii = $("#edit_hei_campus option:selected").attr('id');
+  $("#edit_selected_campus").val(campus);
+  $("#edit_hei_uii").val(hei_uii);
+});
+
+//fetch records from the database summary of billings
 function fetchTempSummary() {
+  let reference_no = $("#reference_no").val();
   $.ajax({
     url: "/get-tempsummary",
     method: 'get',
+    data: {
+      reference_no: reference_no,
+      _token: '{{ csrf_token() }}'
+    },
     success: function (response) {
       $("#show_summary").html(response);
       $("#tbl_summary").DataTable({
+        "order": [[3, "des"]],
+        orderCellsTop: true,
+        fixedHeader: true,
+        footerCallback: function (row, data, start, end, display) {
+          var api = this.api();
+
+          // Remove the formatting to get integer data for summation
+          var intVal = function (i) {
+              return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+          };
+
+          // Total over all pages
+          total = api
+              .column(3)
+              .data()
+              .reduce(function (a, b) {
+                  return intVal(a) + intVal(b);
+              }, 0);
+
+          // Update footer
+          $(api.column(3).footer()).html('₱' + total);
+
+
+           // Total over all pages
+           total2 = api
+           .column(2)
+           .data()
+           .reduce(function (a, b) {
+               return intVal(a) + intVal(b);
+           }, 0);
+
+       // Update footer
+       $(api.column(2).footer()).html(total2);
+      }
+      });
+    }
+  });
+}
+
+//fetch records from the database
+function fetchTempApplicants() {
+  let reference_no = $("#reference_no").val();
+  $.ajax({
+    url: "/get-tempapplicants",
+    method: 'get',
+    data: {
+      reference_no: reference_no,
+      _token: '{{ csrf_token() }}'
+    },
+    success: function (response) {
+      $("#show_all_applicants").html(response);
+      $("#tbl_applicants").DataTable({
         "order": [[3, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,

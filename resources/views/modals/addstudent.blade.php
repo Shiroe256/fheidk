@@ -59,8 +59,8 @@
 
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>
-                                     <span class="text-danger">*</span>&nbsp;Sex</label>
+                                <div class="form-group">
+                                    <label><span class="text-danger">*</span>&nbsp;Sex</label>
                                      <select name='sex' class="form-control input-style">
                                         <optgroup label="Select Sex">
                                             <option value="" selected disabled>--Select Sex--</option>
@@ -73,12 +73,11 @@
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label>
                                     <div class="input-group"><div class="input-group-prepend"><span class="input-group-text icon-container"><i class="fa fa-calendar-o"></i></span></div><input id="birthdate" name='birthdate' class="date form-control input-style" autocomplete="off" onkeydown="return false;" >
-                                </div>
-                                    
+                                </div>   
                             </div>
                         </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input name='birthplace' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input id="birthplace" name='birthplace' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -115,7 +114,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input name='present_province' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Province</label><input id='present_province' name='present_province' class="form-control input-style" type="text"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -184,18 +183,18 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input name='mobile_number' class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Mobile Number</label><input id='mobile_number' name='mobile_number' class="form-control input-style" type="number"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input name='alt_mobile_number' class="form-control input-style" type="number"></div>
+                                <div class="form-group"><label>Alternative Mobile Number (if available)</label><input id='alt_mobile_number' name='alt_mobile_number' class="form-control input-style" type="number"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input name='email_address' class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Email Address</label><input id='email_address' name='email_address' class="form-control input-style" type="email"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Alternative Email Address (if available)</label><input name='alt_email_address' class="form-control input-style" type="email"></div>
+                                <div class="form-group"><label>Alternative Email Address (if available)</label><input id='alt_email_address' name='alt_email_address' class="form-control input-style" type="email"></div>
                             </div>
                         </div>
                     </div>

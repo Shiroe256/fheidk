@@ -7,6 +7,29 @@
                     <h6 class="modal-title">EDIT STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="form-group input-style campus_div d-none">
+                        <h6 class="modal-title text-dark">Campus</h6>
+                    </div>
+                    <div class="form-group input-style campus_div d-none">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="hidden" name="edit_ac_year" id="edit_ac_year" value="{{ $ac_year }}">
+                                    <input type="hidden" name="edit_semester" id="edit_semester" value="{{ $semester }}">
+                                    <input type="hidden" name="edit_tranche" id="edit_tranche" value="{{ $tranche }}">
+                                    <input type="hidden" id='edit_hei_psg_region' name='edit_hei_psg_region'value="{{ $hei_psg_region }}">
+                                    <input type="hidden" id="edit_reference_no" name="edit_reference_no" value="{{ $reference_no }}">
+                                    <input type="hidden" id='edit_hei_uii' name='edit_hei_uii' type="text">
+                                    <input type="hidden" id='edit_selected_campus' name='edit_selected_campus' type="text">
+                                    <select id="edit_hei_campus" name="edit_hei_campus" class="form-control input-style-tabs">                           
+                                        <option disabled>-- Select Campus --</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group input-style">
                         <h6 class="modal-title text-dark">Personal Information</h6>
                     </div>
@@ -29,12 +52,16 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label><select id='edit_sex' name='edit_sex' class="form-control input-style">
+                                <div class="form-group">
+                                    <label><span class="text-danger">*</span>&nbsp;Sex</label>
+                                     <select id='edit_sex' name='edit_sex' class="form-control input-style">
                                         <optgroup label="Select Sex">
+                                            <option value="" selected disabled>--Select Sex--</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </optgroup>
-                                    </select></div>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id='edit_birthdate' name='edit_birthdate' class="form-control input-style" type="text"></div>
@@ -172,102 +199,98 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label><input id='edit_course_enrolled' name='edit_course_enrolled' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label>
+                                    <input id='edit_degree_program' name='edit_degree_program' type="hidden" class="form-control input-style" type="text">
+                                    <select id='edit_course_enrolled' name='edit_course_enrolled' class="form-control input-style">
+                                            <option value="" selected disabled>--Select Degree Program--</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='edit_year_level' name='edit_year_level' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
-                        {{-- <div class="form-row">
+                        <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input name='total_unit' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total No. of Units Enrolled</label><input name='edit_total_unit' id='edit_total_unit' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Amount of Tuition Fee</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
+                                <div class="form-group"><label>Amount of Tuition Fee</label><input name='edit_tuition_fee' id='edit_tuition_fee' class="form-control input-style" type="number" min="0" readonly=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label check-style" for="formCheck-1">With National Service Training Program (NSTP)?</label></div>
+                                    <div class="custom-control custom-checkbox"><input name='edit_with_nstp' id='edit_with_nstp' class="custom-control-input" type="checkbox"><label class="custom-control-label check-style" for="edit_with_nstp">With National Service Training Program (NSTP)?</label></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div id="nstp_div" name="nstp_div" class="form-row d-none">
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input name='nstp_unit' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Total NSTP Unit Taken</label><input name='edit_nstp_unit' id='edit_nstp_unit' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Amount of NSTP</label><input class="form-control input-style" type="number" min="0" readonly=""></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox"><input name='transferee' class="custom-control-input" type="checkbox" id="formCheck-11"><label class="custom-control-label check-style" for="formCheck-11">Transferee</label></div>
-                                </div>
+                                <div class="form-group"><label>Amount of NSTP</label><input name='edit_nstp_fee' id='edit_nstp_fee' class="form-control input-style" type="number" min="0" readonly=""></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <p class="input-style">&nbsp;Select additional fees to be charge:<br></p>
-                                    <div class="custom-control custom-control-inline custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-12"><label class="custom-control-label check-style" for="formCheck-12">Entrance Fee</label></div>
-                                    <div class="custom-control custom-control-inline custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-13"><label class="custom-control-label check-style" for="formCheck-13">Admission Fee</label></div>
+                                    <div class="custom-control custom-checkbox"><input id='edit_checkbox_transferee' name='edit_checkbox_transferee' class="custom-control-input" type="checkbox" value="Yes"><label class="custom-control-label check-style" for="edit_checkbox_transferee">Transferee</label></div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-xl-6">
-                                <div class="form-group"><label>Entrance Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Entrance Fee</label><input id='edit_entrance_fee' name='edit_entrance_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Admission Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>Athletic Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Computer Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Admission Fee</label><input id='edit_admission_fee' name='edit_admission_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Cultural Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Athletic Fee</label><input id='edit_athletic_fee' name='edit_athletic_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Development Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>Guidance Fee</label><input class="form-control input-style" type="number" min="0"></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group"><label>Handbook Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Computer Fee</label><input id='edit_computer_fee' name='edit_computer_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Laboratory Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Cultural Fee</label><input id='edit_cultural_fee' name='edit_cultural_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Library Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Development Fee</label><input id='edit_development_fee' name='edit_development_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Medical and Dental Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Guidance Fee</label><input id='edit_guidance_fee' name='edit_guidance_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Registration Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>Handbook Fee</label><input id='edit_handbook_fee' name='edit_handbook_fee' class="form-control input-style" type="number" min="0"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Laboratory Fee</label><input id='edit_laboratory_fee' name='edit_laboratory_fee' class="form-control input-style" type="number" min="0"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Library Fee</label><input id='edit_library_fee' name='edit_library_fee' class="form-control input-style" type="number" min="0"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Medical and Dental Fee</label><input id='edit_medical_dental_fee' name='edit_medical_dental_fee' class="form-control input-style" type="number" min="0"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Registration Fee</label><input id='edit_registration_fee' name='edit_registration_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-xl-6">
-                                <div class="form-group"><label>School ID Fee</label><input class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label>School ID Fee</label><input id='edit_school_id_fee' name='edit_school_id_fee' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -279,9 +302,9 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Remarks</label><textarea class="form-control input-style" placeholder="Enter remarks here . . ."></textarea></div>
+                                <div class="form-group"><label>Remarks</label><textarea id='edit_remarks' name='edit_remarks' class="form-control input-style" placeholder="Enter remarks here . . ."></textarea></div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-bs-dismiss="modal">Close</button><button id="btn_update_student" class="add_student btn btn-primary card-button-style" type="submit">Update Student</button></div>

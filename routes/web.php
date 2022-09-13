@@ -59,7 +59,7 @@ Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('pro
 Auth::routes(['verify'=>true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//CRUD Routes
+//CRUD Enrolled
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
 Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
@@ -86,5 +86,8 @@ Route::get('/get-user', [UserController::class, 'fetchUser'])->name('fetchUser')
 Route::get('/get-heis', [UserController::class, 'fetchHeis'])->name('fetchHeis');
 Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
 
-//SUMMARY
+//Summary
 Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');
+
+//CRUD Applicants
+Route::get('/get-tempapplicants', [BillingController::class, 'fetchTempApplicants'])->name('fetchTempApplicants');
