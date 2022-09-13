@@ -178,11 +178,7 @@ class BillingController extends Controller
             foreach ($hei_summary as $summary) {
                 $output .= '<tr>
                 <td class="text-center">' . $cnt++ . '</td>
-<<<<<<< HEAD
-                <td class="text-center">' . $summary->hei_name . '</td>
-=======
                 <td>' . $summary->hei_name . '</td>
->>>>>>> a31ee298f7ce78bff0619204d686ec0216bcda88
                 <td class="text-center">' . $summary->total_beneficiaries . '</td>
                 <td class="text-center">' . $summary->total_amount . '</td>
             </tr>';
