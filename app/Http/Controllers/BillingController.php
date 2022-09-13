@@ -986,7 +986,7 @@ class BillingController extends Controller
                 //select student for later updates
                 $selectedstudent = TemporaryBilling::find($student['uid']);
                 //get student and enrollment info
-                $studentinfo = $this->getStudentInfo($student->fhe_award_no);
+                // $studentinfo = $this->getStudentInfo($student->fhe_award_no);
 
                 // $course = $this->getCourseLength($student->app_id);
 
@@ -998,13 +998,13 @@ class BillingController extends Controller
                     // if ($duplicatefheno > 1) {
                     //     $selectedstudent->remarks .= 'Has a duplicate student in this Billing Submission';
                     // }
-                    if ($studentinfo == null) {
-                        continue;
-                    }
+                    // if ($studentinfo == null) {
+                    //     continue;
+                    // }
                     $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
                     $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
                     //if there are any duplicates for this semester
-                    if ($studentinfo->count() > 0) {
+                    // if ($studentinfo->count() > 0) {
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
                             // if (array_key_first($enrollmentinfo) == $key) {
                             //     $startacyear = $enrollmenti->ac_year;
@@ -1031,7 +1031,7 @@ class BillingController extends Controller
                         //check for duplicates in other schools
                         // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
 
-                    }
+                    // }
                 }
                 //fetch duplicates in the masterlist
                 $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
