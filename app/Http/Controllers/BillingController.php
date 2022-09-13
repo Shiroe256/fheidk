@@ -314,7 +314,7 @@ class BillingController extends Controller
             'birthplace' => 'required',
             'email_address' => 'required|email',
             'mobile_number' => 'required|regex:/^(09)\d{9}$/',
-            'course_enrolled' => 'required',
+            'degree_program_applied' => 'required',
             'year_level' => 'required'
         ]);
 
@@ -325,12 +325,12 @@ class BillingController extends Controller
             ]);
         } else {
 
-            $students = [
+            $applicants = [
                 //static sample data
                 'hei_psg_region' => $request->hei_psg_region,
                 'hei_sid' => Auth::user()->hei_sid,
                 'hei_uii' => $request->hei_uii,
-                'hei_name' => $request->selected_campus,
+                'hei_name' => $request->applied_selected_campus,
                 'reference_no' => $request->reference_no,
                 'ac_year' => $request->ac_year,
                 'semester' => $request->semester,
@@ -347,53 +347,22 @@ class BillingController extends Controller
                 'stud_sex' => $request->sex,
                 'stud_birth_date' => $request->birthdate,
                 'stud_birth_place' => $request->birthplace,
-                'f_lname' => $request->f_lname,
-                'f_fname' => $request->f_fname,
-                'f_mname' => $request->f_mname,
-                'm_lname' => $request->m_lname,
-                'm_fname' => $request->m_fname,
-                'm_mname' => $request->m_mname,
-                'present_prov' => $request->present_province,
-                'present_city' => $request->present_city,
-                'present_barangay' => $request->present_barangay,
-                'present_street' => $request->present_street,
-                'present_zipcode' => $request->present_zipcode,
-                'permanent_prov' => $request->permanent_province,
-                'permanent_city' => $request->permanent_city,
-                'permanent_barangay' => $request->permanent_barangay,
-                'permanent_street' => $request->permanent_street,
-                'permanent_zipcode' => $request->permanent_zipcode,
+    
                 'stud_email' => $request->email_address,
                 'stud_alt_email' => $request->alt_email_address,
                 'stud_phone_no' => $request->mobile_number,
                 'stud_alt_phone_no' => $request->alt_mobile_number,
-                //static
+        
                 'transferee' => $request->checkbox_transferee,
-                'degree_program' => $request->degree_program,
+                'degree_program' => $request->degree_program_applied,
                 'year_level' => $request->year_level,
-                'lab_unit' => '1',
-                'comp_lab_unit' => '1',
-                'academic_unit' => $request->total_unit,
-                'nstp_unit' => $request->nstp_unit,
-                'tuition_fee' => $request->total_tuition,
-                'entrance_fee' => $request->entrance_fee,
-                'admission_fee' => $request->admission_fee,
-                'athletic_fee' => $request->athletic_fee,
-                'computer_fee' => $request->computer_fee,
-                'cultural_fee' => $request->cultural_fee,
-                'development_fee' => $request->development_fee,
-                'guidance_fee' => $request->guidance_fee,
-                'handbook_fee' => $request->handbook_fee,
-                'laboratory_fee' => $request->laboratory_fee,
-                'library_fee' => $request->library_fee,
-                'medical_dental_fee' => $request->medical_dental_fee,
-                'registration_fee' => $request->registration_fee,
-                'school_id_fee' => $request->school_id_fee,
-                'nstp_fee' => $request->total_nstp,
+                'year_level' => $request->year_level,
+                'total_exam_taken' => $request->total_exam_taken,
+                'admission_fee' => $request->total_amount,
+                'exam_result' => $request->exam_result,
                 'stud_cor' => 'sample',
-                'remarks' => $request->remarks
             ];
-            TemporaryBilling::create($students);
+            TemporaryBilling::create($applicants);
             return response()->json([
                 'status' => 200,
             ]);
@@ -441,6 +410,7 @@ class BillingController extends Controller
     public function selectDegreePrograms()
     {
         $selectDegreePrograms = OtherSchoolFees::select('course_enrolled')
+            ->where('hei_uii', Auth::user()->hei_uii)
             ->groupby('course_enrolled')
             ->get();
         return response()->json($selectDegreePrograms);

@@ -1,6 +1,4 @@
 fetchTempStudent();
-fetchTempSummary();
-fetchTempApplicants();
 selectDegreePrograms();
 selectCampus();
 
@@ -57,7 +55,7 @@ $("#frm_add_student").submit(function (e) {
 });
 //end of new add student
 
-// get tuition fee based on student's degree_program
+// get tuition fee based on student's degree_program for adding student in form 1
 $(document).on('change', '#total_unit', function (e) {
   e.preventDefault();
   let course = $("#course_enrolled option:selected").text();
@@ -837,6 +835,7 @@ function selectCampus() {
   });
 }
 
+//set inputs value
 $(document).on('change', '#hei_campus', function (e) {
   e.preventDefault();
   let campus = $("#hei_campus option:selected").text();
@@ -845,6 +844,7 @@ $(document).on('change', '#hei_campus', function (e) {
   $("#hei_uii").val(hei_uii);
 });
 
+//set inputs value for edit
 $(document).on('change', '#edit_hei_campus', function (e) {
   e.preventDefault();
   let campus = $("#edit_hei_campus option:selected").text();
@@ -852,79 +852,3 @@ $(document).on('change', '#edit_hei_campus', function (e) {
   $("#edit_selected_campus").val(campus);
   $("#edit_hei_uii").val(hei_uii);
 });
-
-//fetch records from the database summary of billings
-function fetchTempSummary() {
-  let reference_no = $("#reference_no").val();
-  $.ajax({
-    url: "/get-tempsummary",
-    method: 'get',
-    data: {
-      reference_no: reference_no,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      $("#show_summary").html(response);
-      $("#tbl_summary").DataTable({
-        "order": [[3, "des"]],
-        orderCellsTop: true,
-        fixedHeader: true,
-        footerCallback: function (row, data, start, end, display) {
-          var api = this.api();
-
-          // Remove the formatting to get integer data for summation
-          var intVal = function (i) {
-              return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
-          };
-
-          // Total over all pages
-          total = api
-              .column(3)
-              .data()
-              .reduce(function (a, b) {
-                  return intVal(a) + intVal(b);
-              }, 0);
-
-          // Update footer
-          $(api.column(3).footer()).html('₱' + total);
-
-
-           // Total over all pages
-           total2 = api
-           .column(2)
-           .data()
-           .reduce(function (a, b) {
-               return intVal(a) + intVal(b);
-           }, 0);
-
-       // Update footer
-       $(api.column(2).footer()).html(total2);
-      }
-      });
-    }
-  });
-}
-
-//fetch records from the database
-function fetchTempApplicants() {
-  let reference_no = $("#reference_no").val();
-  $.ajax({
-    url: "/get-tempapplicants",
-    method: 'get',
-    data: {
-      reference_no: reference_no,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      $("#show_all_applicants").html(response);
-      $("#tbl_applicants").DataTable({
-        "order": [[3, "asc"]],
-        orderCellsTop: true,
-        fixedHeader: true,
-        columnDefs: [
-          { orderable: false, targets: [0, -1] }
-        ]
-      });
-    }
-  });
-}

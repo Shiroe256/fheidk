@@ -19,8 +19,8 @@
                                     <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
                                     <input type="hidden" id='hei_psg_region' name='hei_psg_region' value="{{ $hei_psg_region }}">
                                     <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                                    <input type="hidden" id='hei_uii' name='hei_uii' type="text">
-                                    <input type="hidden" id='applied_selected_campus' name='applied_selected_campus' type="text">
+                                    <input type="text" id='hei_uii' name='hei_uii' type="text">
+                                    <input type="text" id='applied_selected_campus' name='applied_selected_campus' type="text">
                                     <select id="applied_hei_campus" name="applied_hei_campus" class="form-control input-style-tabs">                           
                                         <option selected disabled>-- Select Campus --</option>
                                     </select>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style" type="submit">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button" data-dismiss="modal">Close</button><button id="btn_add_applicant" class="add_applicant btn btn-primary card-button-style" type="submit">Add Applicant</button></div>
             </form>
         </div>
     </div>

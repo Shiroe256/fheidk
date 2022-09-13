@@ -91,3 +91,4 @@ Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->
 
 //CRUD Applicants
 Route::get('/get-tempapplicants', [BillingController::class, 'fetchTempApplicants'])->name('fetchTempApplicants');
+Route::post('/newtempapplicants', [BillingController::class, 'newTempApplicant'])->name('newTempApplicant');
