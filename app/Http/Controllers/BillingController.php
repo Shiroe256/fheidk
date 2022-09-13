@@ -768,7 +768,6 @@ class BillingController extends Controller
         // echo 'all values are ok';
         //upload all rows if there is no problem
         foreach ($tempstudents as $tempstudent) {
-            print_r($tempstudent);
             $this->newTempStudentBatch($tempstudent, $json_fees, $heiinfo, $billinginfo);
         }
         return response('Success', 200);

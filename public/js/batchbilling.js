@@ -191,6 +191,12 @@ function uploadBatch() {
                     html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
                         errorhtml
                 });
+            } else if (output.length < 1) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: 'Please check the name of your Sheet'
+                });
             } else {
                 //if there are no items with errors then the ajax request pushes through
                 $.ajax({
@@ -214,8 +220,7 @@ function uploadBatch() {
                         fileInput.disabled = true;
                         uploadButton.innerHTML = 'Uploading...';
                     },
-                    success: function (data) {
-                        console.log(data);
+                    success: function () {
                         Swal.fire('Uploading Success',
                             'The students in the spreadsheet have been uploaded',
                             'success');
