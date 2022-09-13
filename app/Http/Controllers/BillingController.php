@@ -347,12 +347,12 @@ class BillingController extends Controller
                 'stud_sex' => $request->sex,
                 'stud_birth_date' => $request->birthdate,
                 'stud_birth_place' => $request->birthplace,
-    
+
                 'stud_email' => $request->email_address,
                 'stud_alt_email' => $request->alt_email_address,
                 'stud_phone_no' => $request->mobile_number,
                 'stud_alt_phone_no' => $request->alt_mobile_number,
-        
+
                 'transferee' => $request->checkbox_transferee,
                 'degree_program' => $request->degree_program_applied,
                 'year_level' => $request->year_level,
@@ -980,86 +980,88 @@ class BillingController extends Controller
 
         //check each student of each billing
         // foreach ($billings as $billing) {
-            //get students of each billing transaction
-            $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
-            //check each student in billing transaction for duplciates in fhe award number
-            foreach ($students as $student) {
-                // select student for later updates
-                $student = TemporaryBilling::find($student['uid']);
-                // get student and enrollment info
-                $studentinfo = $this->getStudentInfo($student->fhe_award_no);
-
-
-
-                if ($student->fhe_award_no != '') {
-                    //get duplicate fhe numbers within the billing transaction
-                    $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
-                    // //if there are any duplicates they are marked in the remarks
-                    if ($duplicatefheno > 1) {
-                        $student->remarks .= 'Has a duplicate student in this Billing Submission';
-                    }
-                    if ($studentinfo == null) {
-                        continue;
-                    }
-                    $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
-                    $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
-                    //if there are any duplicates for this semester
-                    if ($studentinfo->count() > 0) {
-                        foreach ($enrollmentinfo as $key => $enrollmenti) {
-                            // if (array_key_first($enrollmentinfo) == $key) {
-                            //     $startacyear = $enrollmenti->ac_year;
-                            //     $startsem = $enrollmenti->semester;
-                            //     //get start
-                            // }
-                            if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
-                                $student->remarks .= '\nHas a duplicate this year and semester already';
-                                if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                    $student->remarks .= '\nHas a duplicate from other school';
-                                }
-                            }
-                        }
-
-                        //maximum residency start
-                        // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
-                        $normal_length = 4;
-                        $length = $enrollmentinfo->count() / 2; //count the number of years since it is half of the number of semesters
-                        $totallength = $length - $loainfo->count() / 2;
-                        if ($totallength > $normal_length) {
-                            $student->remarks .= '\nExceeded Maximum Resicency';
-                        }
-                        //maximum residency end
-
-                        //check for duplicates in other schools
-                        // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
-
-                    }
-                }
-                //fetch duplicates in the masterlist
-                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
-                    array(
-                        'fname' => $student['stud_fname'],
-                        'lname' => $student['stud_lname'],
-                        'birthdate' => $student['stud_birth_date']
-                    )
-                );
-                //if there are duplicates in the masterlist add a remark
-                if (count($duplicateinmasterlist) > 0) {
-                    $student->remarks .= '\nHas a duplicate student in the Master List';
-                }
-                // $student->remarks = 'hello';
-                $student->save();
-                // $selectedstudent->remarks = 'hello';
-                // $selectedstudent->save();
+        //get students of each billing transaction
+        $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
+        //check each student in billing transaction for duplciates in fhe award number
+        foreach ($students as $student) {
+            // select student for later updates
+            // $student = TemporaryBilling::find($student['uid']);
+            // get student and enrollment info
+            $studentinfo = $this->getStudentInfo($student->fhe_award_no);
+            $student->remarks = '';
+            //check duplicates
+            
+            $duplicates = $students->where('stud_fname',$student->stud_fname)->where('stud_lname',$student->stud_lname)->where('stud_birth_date',$student->stud_birth_date)->count();
+            if ($duplicates > 1) {
+                $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
             }
 
+            if ($student->fhe_award_no != '') {
+                //get duplicate fhe numbers within the billing transaction
+                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
+                //if there are any duplicates they are marked in the remarks
+                if ($duplicatefheno > 1) {
+                    $student->remarks .= 'Has a duplicate student in this Billing Submission';
+                }
+                if ($studentinfo == null) {
+                    continue;
+                }
 
-            //when the billing has been checked. Save it with a new status.
-            $selectedbilling = Billing::find($billing['uid']);
-            $selectedbilling->billing_status = 3; //3 is done queue
-            $selectedbilling->save();
+                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
+                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
+                //if there are any duplicates for this semester
+                if ($studentinfo->count() > 0) {
+                    foreach ($enrollmentinfo as $key => $enrollmenti) {
 
-            //write a success message in the logs
-            Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
+                        if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
+                            $student->remarks .= '\nHas a duplicate this year and semester already';
+                            if ($enrollmenti->hei_uii <> $billing->hei_uii) {
+                                $student->remarks .= '\nHas a duplicate from other school';
+                            }
+                        }
+                    }
+
+                    //maximum residency start
+                    // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
+                    $normal_length = 4;
+                    $length = $enrollmentinfo->count() / 2; //count the number of years since it is half of the number of semesters
+                    $totallength = $length - $loainfo->count() / 2;
+                    if ($totallength > $normal_length) {
+                        $student->remarks .= '\nExceeded Maximum Resicency';
+                    }
+                    //maximum residency end
+
+                    //check for duplicates in other schools
+                    // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
+
+                }
+            }
+            //fetch duplicates in the masterlist
+            $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
+                array(
+                    'fname' => $student['stud_fname'],
+                    'lname' => $student['stud_lname'],
+                    'birthdate' => $student['stud_birth_date']
+                )
+            );
+            //if there are duplicates in the masterlist add a remark
+            if (count($duplicateinmasterlist) > 0) {
+                $student->remarks .= '\nHas a duplicate student in the Master List';
+            }
+            // // $student->remarks = 'hello';
+            $student->save();
+            // $selectedstudent->remarks = 'hello';
+            // $selectedstudent->save();
+        }
+
+
+        //when the billing has been checked. Save it with a new status.
+        $selectedbilling = Billing::find($billing['uid']);
+        $selectedbilling->billing_status = 3; //3 is done queue
+        $selectedbilling->save();
+
+        //write a success message in the logs
+        Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
         // }
         echo "done";
     }
