@@ -34,7 +34,7 @@
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
                         data-dismiss="modal">Close</button>
-                    <a id="new_billing" class="btn btn-primary card-button-style" role="button">Next</a>
+                    <button id="new_billing" class="btn btn-primary card-button-style" role="button">Next</button>
                 </div>
             </form>
         </div>

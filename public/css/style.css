@@ -71,3 +71,26 @@ a:hover {
   width: 750px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.form-control {
+  color: #000000;
+}
+
+
