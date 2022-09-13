@@ -78,7 +78,7 @@ Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('sel
 
 //Test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test', [BillingController::class, 'test'])->name('checkBilling');
+Route::get('/test', [BillingController::class, 'test']);
 Route::post('/queue', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
 
 //Users Profile Routes
