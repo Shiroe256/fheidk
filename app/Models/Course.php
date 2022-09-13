@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $table = 'tbl_registry';
-    // protected $primaryKey = 'uid';
+    protected $primaryKey = 'uid';
     public $timestamps = false;
     // protected $fillable = [
     //     'hei_psg_region',
