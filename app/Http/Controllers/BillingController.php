@@ -75,7 +75,7 @@ class BillingController extends Controller
                     <td class="text-center">' . $student->year_level . '</td>
                     <td class="text-left">' . $student->remarks . '</td>
                     <td class="text-left">' . $student->stud_status . '</td>
-                    <td class="text-left">' .$total_amount. '</td>
+                    <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
                             <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
@@ -98,7 +98,7 @@ class BillingController extends Controller
         $hei_summary = TemporaryBilling::select(DB::raw('hei_name, COUNT(*) AS total_beneficiaries, (SUM(tuition_fee) + SUM(entrance_fee) + SUM(admission_fee) + SUM(athletic_fee) + SUM(computer_fee) + SUM(cultural_fee) + SUM(development_fee) + SUM(guidance_fee) + SUM(handbook_fee) + SUM(laboratory_fee) + SUM(library_fee) + SUM(medical_dental_fee) + SUM(registration_fee) + SUM(school_id_fee) + SUM(nstp_fee))as total_amount'))
             ->groupBy('hei_name')
             ->get();
-        
+
         $output = '';
         $cnt = 1;
         if ($hei_summary->count() > 0) {
@@ -115,10 +115,10 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_students_form_1">';
             foreach ($hei_summary as $summary) {
                 $output .= '<tr>
-                <td class="text-center">'. $cnt++ .'</td>
-                <td class="text-center">'. $summary->hei_name .'</td>
-                <td class="text-center">'. $summary->total_beneficiaries .'</td>
-                <td class="text-center">'. $summary->total_amount .'</td>
+                <td class="text-center">' . $cnt++ . '</td>
+                <td class="text-center">' . $summary->hei_name . '</td>
+                <td class="text-center">' . $summary->total_beneficiaries . '</td>
+                <td class="text-center">' . $summary->total_amount . '</td>
             </tr>';
             }
             $output .= '</tbody>
@@ -282,13 +282,12 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
         $heiinfo = $this->getHeiInformation($hei_uii);
         $hei_sid = $heiinfo['hei_sid'];
-        if(empty($hei_sid)){
+        if (empty($hei_sid)) {
             return response()->json(0);
-        }else{
+        } else {
             $hei = Hei::where('hei_sid', $hei_sid)->get();
             return response()->json($hei);
         }
-        
     }
 
     // handle edit an student ajax request
@@ -644,6 +643,23 @@ class BillingController extends Controller
     //     //School ID
     // }
 
+    public function getDegreeCourseID($course)
+    {
+        $courseid = 0;
+        // $courseid = DB::table('tbl_registry')
+        if (strtoupper($course) == 'BACHELOR OF SCIENCE IN INFORMATION AND TECHNOLOGY') {
+            $courseid = 37895;
+        }
+        return $courseid;
+    }
+
+    public function getHeiCourses($hei_uii)
+    {
+        //to be continued
+    }
+
+
+
     private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
     {
         $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
@@ -684,7 +700,7 @@ class BillingController extends Controller
         $tempstudent->transferee = $data['is_transferee'];
 
         //dummy data
-        $tempstudent->degree_program = $data['degree_course_id'];
+        $tempstudent->degree_program = $this->getDegreeCourseID($data['degree_course_id']);
         $tempstudent->lab_unit = $data['lab_u'];
         $tempstudent->comp_lab_unit = $data['com_lab_u'];
         $tempstudent->academic_unit = $data['acad_u'];
@@ -692,19 +708,19 @@ class BillingController extends Controller
 
 
         //finalized fees
-        $Entrance = $this->findKey($json_fees,'ENTRANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ENTRANCE'] : 0;
-        $Admission = $this->findKey($json_fees,'ADMISSION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ADMISSION'] : 0;
-        $Athletic = $this->findKey($json_fees,'ATHLETIC') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ATHLETIC'] : 0;
-        $Computer = $this->findKey($json_fees,'COMPUTER') ? $json_fees[$data['degree_course_id']][$data['year_level']]['COMPUTER'] : 0;
-        $Cultural = $this->findKey($json_fees,'CULTURAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['CULTURAL'] : 0;
-        $Development = $this->findKey($json_fees,'DEVELOPMENT') ? $json_fees[$data['degree_course_id']][$data['year_level']]['DEVELOPMENT'] : 0;
-        $Guidance = $this->findKey($json_fees,'GUIDANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['GUIDANCE'] : 0;
-        $Handbook = $this->findKey($json_fees,'HANDBOOK') ? $json_fees[$data['degree_course_id']][$data['year_level']]['HANDBOOK'] : 0;
-        $Laboratory = $this->findKey($json_fees,'LABORATORY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LABORATORY'] : 0;
-        $Library = $this->findKey($json_fees,'LIBRARY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LIBRARY'] : 0;
-        $Medical_and_Dental = $this->findKey($json_fees,'MEDICAL AND DENTAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['MEDICAL AND DENTAL'] : 0;
-        $Registration = $this->findKey($json_fees,'REGISTRATION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['REGISTRATION'] : 0;
-        $ID = $this->findKey($json_fees,'SCHOOL ID') ? $json_fees[$data['degree_course_id']][$data['year_level']]['SCHOOL ID'] : 0;
+        $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ENTRANCE'] : 0;
+        $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ADMISSION'] : 0;
+        $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ATHLETIC'] : 0;
+        $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$data['degree_course_id']][$data['year_level']]['COMPUTER'] : 0;
+        $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['CULTURAL'] : 0;
+        $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$data['degree_course_id']][$data['year_level']]['DEVELOPMENT'] : 0;
+        $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['GUIDANCE'] : 0;
+        $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$data['degree_course_id']][$data['year_level']]['HANDBOOK'] : 0;
+        $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LABORATORY'] : 0;
+        $Library = $this->findKey($json_fees, 'LIBRARY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LIBRARY'] : 0;
+        $Medical_and_Dental = $this->findKey($json_fees, 'MEDICAL AND DENTAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['MEDICAL AND DENTAL'] : 0;
+        $Registration = $this->findKey($json_fees, 'REGISTRATION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['REGISTRATION'] : 0;
+        $ID = $this->findKey($json_fees, 'SCHOOL ID') ? $json_fees[$data['degree_course_id']][$data['year_level']]['SCHOOL ID'] : 0;
 
         $tempstudent->tuition_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['TUITION'] * (float) $data['acad_u'];
         $tempstudent->entrance_fee = $Entrance;
@@ -802,10 +818,10 @@ class BillingController extends Controller
                 $selectedstudent = TemporaryBilling::find($student['uid']);
                 //get student and enrollment info
                 $studentinfo = $this->getStudentInfo($student->fhe_award_no);
-                
+
                 // $course = $this->getCourseLength($student->app_id);
-                
-                
+
+
                 if ($student->fhe_award_no != '') {
                     //get duplicate fhe numbers within the billing transaction
                     // $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));

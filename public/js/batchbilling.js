@@ -66,15 +66,15 @@ function validateFields(data) {
         // console.log(stud['birthdate']);
         if (!datepattern.test(stud['birthdate'])) error.push('The birthdate is using an invalid format');
         // stud['birthplace']
-        if (numpattern.test(stud['fathers_lname'])) error.push('There are invalid characters in the Father\'s Last Name Field');
-        if (numpattern.test(stud['fathers_gname'])) error.push('There are invalid characters in the Father\'s First Name Field');
-        if (numpattern.test(stud['fathers_mname'])) error.push('There are invalid characters in the Father\'s Middle Name Field');
-        if (numpattern.test(stud['mothers_lname']) || stud['mothers_lname'] == '') error.push('There are invalid characters in the Mother\'s Last Name Field');
-        if (numpattern.test(stud['mothers_gname']) || stud['mothers_gname'] == '') error.push('There are invalid characters in the Mother\'s First Name Field');
-        if (numpattern.test(stud['mothers_mname'])) error.push('There are invalid characters in the Mother\'s Middle Name Field');
+        // if (numpattern.test(stud['fathers_lname'])) error.push('There are invalid characters in the Father\'s Last Name Field');
+        // if (numpattern.test(stud['fathers_gname'])) error.push('There are invalid characters in the Father\'s First Name Field');
+        // if (numpattern.test(stud['fathers_mname'])) error.push('There are invalid characters in the Father\'s Middle Name Field');
+        // if (numpattern.test(stud['mothers_lname']) || stud['mothers_lname'] == '') error.push('There are invalid characters in the Mother\'s Last Name Field');
+        // if (numpattern.test(stud['mothers_gname']) || stud['mothers_gname'] == '') error.push('There are invalid characters in the Mother\'s First Name Field');
+        // if (numpattern.test(stud['mothers_mname'])) error.push('There are invalid characters in the Mother\'s Middle Name Field');
         if (!emailpattern.test(stud['email'])) error.push('The email field isn\'t using a valid format');
         if (!emailpattern.test(stud['a_email'])) error.push('The alternate email field isn\'t using a valid format');
-        if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
+        // if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
 
         // stud['perm_prov']
         // stud['perm_city']
