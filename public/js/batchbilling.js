@@ -168,12 +168,12 @@ function validateFields(data) {
         if (stud['perm_prov'] === undefined) error.push('There is an address field missing');
         if (stud['perm_city'] === undefined) error.push('There is an address field missing');
         if (stud['perm_brgy'] === undefined) error.push('There is an address field missing');
-        if (stud['perm_street'] === undefined) error.push('There is an address field missing');
+        // if (stud['perm_street'] === undefined) error.push('There is an address field missing');
         if (stud['perm_zip'] === undefined) error.push('There is an address field missing');
         if (stud['pres_prov'] === undefined) error.push('There is an address field missing');
         if (stud['pres_city'] === undefined) error.push('There is an address field missing');
         if (stud['pres_brgy'] === undefined) error.push('There is an address field missing');
-        if (stud['pres_street'] === undefined) error.push('There is an address field missing');
+        // if (stud['pres_street'] === undefined) error.push('There is an address field missing');
         if (stud['pres_zip'] === undefined) error.push('There is an address field missing');
 
         if (stud['contact_number'] === undefined) error.push('Contact number is missing');

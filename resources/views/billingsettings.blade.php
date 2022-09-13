@@ -9,6 +9,9 @@
     <div>
         <div class="card shadow">
             <div class="card-header">
+                <a class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
+                        class="fas fa-arrow-left"></i>&nbsp;Return to the
+                    previous page</a>
                 Billing "Other School Fees" Settings
             </div>
             <div class="card-body">

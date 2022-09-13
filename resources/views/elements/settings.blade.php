@@ -32,38 +32,42 @@ $checkid = 0;
             </div>
         </div>
         @foreach ($course as $yearlevel => $yr)
-            <div class="card p-3">
-                <strong class="mb-3">{{ ordinal($yearlevel) }} Year</strong>
-                @foreach ($yr as $semname => $sem)
-                <strong class="mb-3">{{ ordinal($semname) }} Semester</strong>
-                    <div id="settings_{{ $ctr++ }}">
-                        <ul class="list-unstyled card-columns">
-                            @foreach ($sem as $typeoffeename => $typeoffee)
-                                <li>
-                                    <div class="card p-3">
-                                        <strong>{{ $typeoffeename }}</strong>
-                                        <ul class="list-unstyled">
-                                            @foreach ($typeoffee as $categoryid => $category)
-                                                <li>
-                                                    <div class="custom-control custom-switch">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="switch_{{ $checkid }}"
-                                                            value="{{ $category['id'] }}"
-                                                            {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
-                                                        <label class="custom-control-label"
-                                                            for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
-                                                                class="text-muted"> + {{ $category['amount'] }}</small>
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endforeach
+            <div class="card">
+                <div class="card card-header">
+                    <strong class="">{{ ordinal($yearlevel) }} Year</strong>
+                </div>
+                <div class="card-body p-3">
+                    @foreach ($yr as $semname => $sem)
+                        <strong class="mb-3">{{ ordinal($semname) }} Semester</strong>
+                        <div id="settings_{{ $ctr++ }}">
+                            <ul class="list-unstyled card-columns">
+                                @foreach ($sem as $typeoffeename => $typeoffee)
+                                    <li>
+                                        <div class="card p-3">
+                                            <strong>{{ $typeoffeename }}</strong>
+                                            <ul class="list-unstyled">
+                                                @foreach ($typeoffee as $categoryid => $category)
+                                                    <li>
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="switch_{{ $checkid }}"
+                                                                value="{{ $category['id'] }}"
+                                                                {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
+                                                            <label class="custom-control-label"
+                                                                for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
+                                                                    class="text-muted"> + {{ $category['amount'] }}</small>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endforeach
     </div>
