@@ -178,7 +178,11 @@ class BillingController extends Controller
             foreach ($hei_summary as $summary) {
                 $output .= '<tr>
                 <td class="text-center">' . $cnt++ . '</td>
+<<<<<<< HEAD
+                <td class="text-center">' . $summary->hei_name . '</td>
+=======
                 <td>' . $summary->hei_name . '</td>
+>>>>>>> a31ee298f7ce78bff0619204d686ec0216bcda88
                 <td class="text-center">' . $summary->total_beneficiaries . '</td>
                 <td class="text-center">' . $summary->total_amount . '</td>
             </tr>';
@@ -626,7 +630,7 @@ class BillingController extends Controller
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
-            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,bs_status,updated_at')
+            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,updated_at')
             ->get();
         $course_lastupdated = [];
         $otherfeesresult = [];
@@ -635,7 +639,7 @@ class BillingController extends Controller
                 $course_lastupdated[$row->course_enrolled] = $row->updated_at;
             }
             //store the shit
-            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
+            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
             if ($course_lastupdated[$row->course_enrolled] < $row->updated_at) {
                 $course_lastupdated[$row->course_enrolled] = $row->updated_at;
             }
@@ -697,11 +701,15 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
+        if (count($tempstudents) < 1) {
+            return response('Invalid', 400);
+        }
         $reference_no = $request->reference_no;
         $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
         $heiinfo = $this->getHeiInformation($hei_uii);
         // echo $reference_no;
         // build the array for fees
+
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
@@ -727,11 +735,13 @@ class BillingController extends Controller
         foreach ($tempstudents as $tempstudent) {
             if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
         }
+        // echo 'all values are ok';
         //upload all rows if there is no problem
         foreach ($tempstudents as $tempstudent) {
             $this->newTempStudentBatch($tempstudent, $json_fees, $heiinfo, $billinginfo);
         }
         return response('Success', 200);
+        // echo 'ok';
     }
 
     private function validateTempStudentFields($tempstudent)
@@ -801,67 +811,85 @@ class BillingController extends Controller
     //     //School ID
     // }
 
+    public function getDegreeCourseID($course)
+    {
+        $courseid = 0;
+        // $courseid = DB::table('tbl_registry')
+        if (strtoupper($course) == 'BACHELOR OF SCIENCE IN INFORMATION AND TECHNOLOGY') {
+            $courseid = 37895;
+        }
+        return $courseid;
+    }
+
+    public function getHeiCourses($hei_uii)
+    {
+        //to be continued
+    }
+
+
+
     private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
     {
         $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = $data['fhe_aw_no'];
-        $tempstudent->stud_id = $data['stud_no'];
-        $tempstudent->lrn_no = $data['lrnum'];
-        $tempstudent->stud_lname = $data['last_name'];
-        $tempstudent->stud_fname = $data['given_name'];
-        $tempstudent->stud_mname = $data['mid_name'];
-        $tempstudent->stud_ext_name = $data['ext_name'];
-        $tempstudent->stud_sex = $data['sex_at_birth'];
+        $tempstudent->fhe_award_no = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : '';
+        $tempstudent->stud_id = array_key_exists('stud_no', $data) ? $data['stud_no'] : '';
+        $tempstudent->lrn_no = array_key_exists('lrnum', $data) ? $data['lrnum'] : '';
+        $tempstudent->stud_lname = array_key_exists('last_name', $data) ? $data['last_name'] : '';
+        $tempstudent->stud_fname = array_key_exists('given_name', $data) ? $data['given_name'] : '';
+        $tempstudent->stud_mname = array_key_exists('mid_name', $data) ? $data['mid_name'] : '';
+        $tempstudent->stud_ext_name = array_key_exists('ext_name', $data) ? $data['ext_name'] : '';
+        $tempstudent->stud_sex = array_key_exists('sex_at_birth', $data) ? $data['sex_at_birth'] : '';
         $d = new DateTime(str_replace("/", "-", $tempstudent->birthdate));
         $tempstudent->stud_birth_date = $d->format("Y-m-d");
-        $tempstudent->stud_birth_place = $data['birthplace'];
-        $tempstudent->f_lname = $data['fathers_lname'];
-        $tempstudent->f_fname = $data['fathers_gname'];
-        $tempstudent->f_mname = $data['fathers_mname'];
-        $tempstudent->m_lname = $data['mothers_lname'];
-        $tempstudent->m_fname = $data['mothers_gname'];
-        $tempstudent->m_mname = $data['mothers_mname'];
-        $tempstudent->permanent_prov = $data['perm_prov'];
-        $tempstudent->permanent_city = $data['perm_city'];
-        $tempstudent->permanent_barangay = $data['perm_brgy'];
-        $tempstudent->permanent_street = $data['perm_street'];
-        $tempstudent->permanent_zipcode = $data['perm_zip'];
-        $tempstudent->present_prov = $data['pres_prov'];
-        $tempstudent->present_city = $data['pres_city'];
-        $tempstudent->present_barangay = $data['pres_brgy'];
-        $tempstudent->present_street = $data['pres_street'];
-        $tempstudent->present_zipcode = $data['pres_zip'];
-        $tempstudent->stud_email = $data['email'];
-        $tempstudent->stud_alt_email = $data['a_email'];
-        $tempstudent->stud_phone_no = $data['contact_number'];
-        $tempstudent->stud_alt_phone_no = $data['contact_number_2'];
-        $tempstudent->transferee = $data['is_transferee'];
+        $tempstudent->stud_birth_place = array_key_exists('birthplace', $data) ? $data['birthplace'] : '';
+        $tempstudent->f_lname = array_key_exists('fathers_lname', $data) ? $data['fathers_lname'] : '';
+        $tempstudent->f_fname = array_key_exists('fathers_gname', $data) ? $data['fathers_gname'] : '';
+        $tempstudent->f_mname = array_key_exists('fathers_mname', $data) ? $data['fathers_mname'] : '';
+        $tempstudent->m_lname = array_key_exists('mothers_lname', $data) ? $data['mothers_lname'] : '';
+        $tempstudent->m_fname = array_key_exists('mothers_gname', $data) ? $data['mothers_gname'] : '';
+        $tempstudent->m_mname = array_key_exists('mothers_mname', $data) ? $data['mothers_mname'] : '';
+        $tempstudent->permanent_prov = array_key_exists('perm_prov', $data) ? $data['perm_prov'] : '';
+        $tempstudent->permanent_city = array_key_exists('perm_city', $data) ? $data['perm_city'] : '';
+        $tempstudent->permanent_barangay = array_key_exists('perm_brgy', $data) ? $data['perm_brgy'] : '';
+        $tempstudent->permanent_street = array_key_exists('perm_street', $data) ? $data['perm_street'] : '';
+        $tempstudent->permanent_zipcode = array_key_exists('perm_zip', $data) ? $data['perm_zip'] : '';
+        $tempstudent->present_prov = array_key_exists('pres_prov', $data) ? $data['pres_prov'] : '';
+        $tempstudent->present_city = array_key_exists('pres_city', $data) ? $data['pres_city'] : '';
+        $tempstudent->present_barangay = array_key_exists('pres_brgy', $data) ? $data['pres_brgy'] : '';
+        $tempstudent->present_street = array_key_exists('pres_street', $data) ? $data['pres_street'] : '';
+        $tempstudent->present_zipcode = array_key_exists('pres_zip', $data) ? $data['pres_zip'] : '';
+        $tempstudent->stud_email = array_key_exists('email', $data) ? $data['email'] : '';
+        $tempstudent->stud_alt_email = array_key_exists('a_email', $data) ? $data['a_email'] : '';
+        $tempstudent->stud_phone_no = array_key_exists('contact_number', $data) ? $data['contact_number'] : '';
+        $tempstudent->stud_alt_phone_no = array_key_exists('contact_number_2', $data) ? $data['contact_number_2'] : '';
+        $tempstudent->transferee = array_key_exists('is_transferee', $data) ? $data['is_transferee'] : '';
 
         //dummy data
-        $tempstudent->degree_program = $data['degree_course_id'];
+        $tempstudent->degree_program = $this->getDegreeCourseID($data['degree_course_id']);
         $tempstudent->lab_unit = $data['lab_u'];
         $tempstudent->comp_lab_unit = $data['com_lab_u'];
         $tempstudent->academic_unit = $data['acad_u'];
-        $tempstudent->nstp_unit = is_numeric($data['nstp_u']) ? $data['nstp_u'] : 0;
+        $nstp_unit = array_key_exists('nstp_u', $data) ? $data['nstp_u'] : 0;
+        $tempstudent->nstp_unit = $nstp_unit;
 
 
         //finalized fees
-        $Entrance = $this->findKey($json_fees,'ENTRANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ENTRANCE'] : 0;
-        $Admission = $this->findKey($json_fees,'ADMISSION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ADMISSION'] : 0;
-        $Athletic = $this->findKey($json_fees,'ATHLETIC') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ATHLETIC'] : 0;
-        $Computer = $this->findKey($json_fees,'COMPUTER') ? $json_fees[$data['degree_course_id']][$data['year_level']]['COMPUTER'] : 0;
-        $Cultural = $this->findKey($json_fees,'CULTURAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['CULTURAL'] : 0;
-        $Development = $this->findKey($json_fees,'DEVELOPMENT') ? $json_fees[$data['degree_course_id']][$data['year_level']]['DEVELOPMENT'] : 0;
-        $Guidance = $this->findKey($json_fees,'GUIDANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['GUIDANCE'] : 0;
-        $Handbook = $this->findKey($json_fees,'HANDBOOK') ? $json_fees[$data['degree_course_id']][$data['year_level']]['HANDBOOK'] : 0;
-        $Laboratory = $this->findKey($json_fees,'LABORATORY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LABORATORY'] : 0;
-        $Library = $this->findKey($json_fees,'LIBRARY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LIBRARY'] : 0;
-        $Medical_and_Dental = $this->findKey($json_fees,'MEDICAL AND DENTAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['MEDICAL AND DENTAL'] : 0;
-        $Registration = $this->findKey($json_fees,'REGISTRATION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['REGISTRATION'] : 0;
-        $ID = $this->findKey($json_fees,'SCHOOL ID') ? $json_fees[$data['degree_course_id']][$data['year_level']]['SCHOOL ID'] : 0;
+        $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ENTRANCE'] : 0;
+        $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ADMISSION'] : 0;
+        $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$data['degree_course_id']][$data['year_level']]['ATHLETIC'] : 0;
+        $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$data['degree_course_id']][$data['year_level']]['COMPUTER'] : 0;
+        $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['CULTURAL'] : 0;
+        $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$data['degree_course_id']][$data['year_level']]['DEVELOPMENT'] : 0;
+        $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$data['degree_course_id']][$data['year_level']]['GUIDANCE'] : 0;
+        $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$data['degree_course_id']][$data['year_level']]['HANDBOOK'] : 0;
+        $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LABORATORY'] : 0;
+        $Library = $this->findKey($json_fees, 'LIBRARY') ? $json_fees[$data['degree_course_id']][$data['year_level']]['LIBRARY'] : 0;
+        $Medical_and_Dental = $this->findKey($json_fees, 'MEDICAL AND DENTAL') ? $json_fees[$data['degree_course_id']][$data['year_level']]['MEDICAL AND DENTAL'] : 0;
+        $Registration = $this->findKey($json_fees, 'REGISTRATION') ? $json_fees[$data['degree_course_id']][$data['year_level']]['REGISTRATION'] : 0;
+        $ID = $this->findKey($json_fees, 'SCHOOL ID') ? $json_fees[$data['degree_course_id']][$data['year_level']]['SCHOOL ID'] : 0;
 
         $tempstudent->tuition_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['TUITION'] * (float) $data['acad_u'];
         $tempstudent->entrance_fee = $Entrance;
@@ -877,11 +905,11 @@ class BillingController extends Controller
         $tempstudent->medical_dental_fee = $Medical_and_Dental;
         $tempstudent->registration_fee = $Registration;
         $tempstudent->school_id_fee = $ID;
-        $tempstudent->nstp_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['NSTP'] * (float) $data['nstp_u'];
+        $tempstudent->nstp_fee = (float) $json_fees[$data['degree_course_id']][$data['year_level']]['NSTP'] * (float) $nstp_unit;
         $tempstudent->stud_cor = 0; //dummydata
-        $tempstudent->total_exam_taken = $data['exams'];
-        $tempstudent->exam_result = $data['exam_result'];
-        $tempstudent->remarks = $data['remarks'];
+        $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
+        $tempstudent->exam_result = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
+        $tempstudent->remarks = array_key_exists('remarks', $data) ? $data['remarks'] : '';
         $tempstudent->stud_status = 0;
         $tempstudent->uploaded_by = Auth::user()->email;
 
@@ -959,10 +987,10 @@ class BillingController extends Controller
                 $selectedstudent = TemporaryBilling::find($student['uid']);
                 //get student and enrollment info
                 $studentinfo = $this->getStudentInfo($student->fhe_award_no);
-                
+
                 // $course = $this->getCourseLength($student->app_id);
-                
-                
+
+
                 if ($student->fhe_award_no != '') {
                     //get duplicate fhe numbers within the billing transaction
                     // $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
