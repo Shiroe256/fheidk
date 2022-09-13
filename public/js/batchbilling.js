@@ -118,9 +118,7 @@ function queueBilling() {
             reference_no: reference_no
         },
         success: function (data) {
-            Swal.fire('Uploading Success',
-                'The students in the spreadsheet have been uploaded',
-                'success');
+            window.location.href = "/billings/";
         },
     });
 }

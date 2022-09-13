@@ -43,10 +43,10 @@
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
-                                title="Edit" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
+                                title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                     class="far fa-eye"></i></a>
                             <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
-                                data-placement="bottom" title="Edit"
+                                data-placement="bottom" title="Edit Billing Settings"
                                 href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                     class="fas fa-sliders"></i></a>
                         </div>
