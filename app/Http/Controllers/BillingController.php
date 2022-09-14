@@ -987,6 +987,7 @@ class BillingController extends Controller
             // get student and enrollment info
             $studentinfo = $this->getStudentInfo($student->fhe_award_no);
             $student->remarks = '';
+            print_r($student);
 
             //fetch duplicates in the masterlist
             $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
@@ -996,18 +997,23 @@ class BillingController extends Controller
                     'birthdate' => $student['stud_birth_date']
                 )
             );
+            printf("\n");
+            print_r($duplicateinmasterlist);
             //if there are duplicates in the masterlist add a remark
             if (count($duplicateinmasterlist) > 0) {
                 $student->fhe_award_no .= $duplicateinmasterlist->fhe_award_no;
                 $student->remarks .= '/nFHE award no. automatically selected from Master table';
+                $student->save();
             }
 
             $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
             if ($duplicates > 1) {
                 $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
             }
+            printf("\n");
+            print_r($duplicates);
 
-            if ($student->fhe_award_no != '') {
+            if ($student->fhe_award_no != '' && count($duplicateinmasterlist) > 0) {
 
                 if ($studentinfo == null) {
                     continue;
