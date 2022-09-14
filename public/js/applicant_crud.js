@@ -58,14 +58,14 @@ $(document).on('change', '#course_applied', function (e) {
   let course = $("#course_applied option:selected").text();
       $("#degree_program_applied").val($("#course_applied option:selected").text());
 });
-
+ 
 //set inputs value
 $(document).on('change', '#applied_hei_campus', function (e) {
   e.preventDefault();
   let campus = $("#applied_hei_campus option:selected").text();
   let hei_uii = $("#applied_hei_campus option:selected").attr('id');
   $("#applied_selected_campus").val(campus);
-  $("#hei_uii").val(hei_uii);
+  $("#applied_hei_uii").val(hei_uii);
 });
 
 //fetch records from the database
