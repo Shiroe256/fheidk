@@ -991,8 +991,7 @@ class BillingController extends Controller
                     'birthdate' => $student->stud_birth_date
                 )
             );
-            printf("\n");
-            echo json_encode($duplicateinmasterlist);
+
             //if there are duplicates in the masterlist add a remark
             if ($duplicateinmasterlist != NULL) {
                 $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
@@ -1014,7 +1013,7 @@ class BillingController extends Controller
                 $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
                 $firstyear = $enrollmentinfo->first()->ac_year;
                 $firstsem = $enrollmentinfo->first()->semester;
-                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
+                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
                     foreach ($enrollmentinfo as $key => $enrollmenti) {
