@@ -123,7 +123,7 @@ function queueBilling() {
             reference_no: reference_no
         },
         success: function (data) {
-            window.location.href = "/billings/";
+            window.location.href = "/billings?queued=" + reference_no;
         },
     });
 }
