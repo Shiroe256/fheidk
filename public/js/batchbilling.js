@@ -11,9 +11,7 @@ uploadButton.onclick = function () {
     uploadBatch();
 }
 fileInput.onchange = () => {
-    uploadButton.disabled = true;
-    closeButton.disabled = true;
-    // fileInput.disabled = true;
+    
     const selectedFile = fileInput.files[0];
     document.getElementById('upload_template_text').innerHTML = selectedFile.name;
 
@@ -85,13 +83,15 @@ fileInput.onchange = () => {
         });
         errorhtml += '</tbody></table>';
         if (errorctr > 0) {
+            deactivateUploadButton();
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                    errorhtml
+                errorhtml
             });
         } else if (output.length < 1) {
+            deactivateUploadButton();
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -105,6 +105,10 @@ fileInput.onchange = () => {
 }
 queueButton.onclick = function () {
     queueBilling();
+}
+function deactivateUploadButton(){
+    uploadButton.disabled = true;
+    closeButton.disabled = true;
 }
 function queueBilling() {
     $.ajaxSetup({
@@ -275,6 +279,7 @@ function uploadBatch() {
             });
             errorhtml += '</tbody></table>';
             if (errorctr > 0) {
+                deactivateUploadButton();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -282,6 +287,7 @@ function uploadBatch() {
                         errorhtml
                 });
             } else if (output.length < 1) {
+                deactivateUploadButton();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -316,6 +322,7 @@ function uploadBatch() {
                             'success');
                     },
                     error: function () {
+                        deactivateUploadButton();
                         Swal.fire('An Error has been encountered',
                             'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
                             'error');
