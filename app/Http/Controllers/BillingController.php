@@ -1077,7 +1077,7 @@ class BillingController extends Controller
         $duplicates = Student::where('fname', 'like', '%' . $data['fname'] . '%')
             ->where('lname', 'like', '%' . $data['lname'] . '%')
             ->where('birthdate', $data['birthdate'])
-            ->get();
+            ->first();
         return $duplicates;
     }
 
