@@ -1010,8 +1010,6 @@ class BillingController extends Controller
             if ($duplicates > 1) {
                 $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
             }
-            printf("\n");
-            print_r($duplicates);
 
             if ($student->fhe_award_no != '' && count($duplicateinmasterlist) > 0) {
 
