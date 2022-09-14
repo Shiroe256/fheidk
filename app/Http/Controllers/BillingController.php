@@ -973,11 +973,11 @@ class BillingController extends Controller
         // $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
         $billing = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
             ->first();
-
+        $reference_no = $billing['reference_no'];
         //check each student of each billing
         // foreach ($billings as $billing) {
         //get students of each billing transaction
-        $students = TemporaryBilling::where('reference_no', $billing['reference_no'])->orderBy('uid')->get();
+        $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
         //check each student in billing transaction for duplciates in fhe award number
         foreach ($students as $student) {
             // select student for later updates
@@ -986,15 +986,17 @@ class BillingController extends Controller
             $studentinfo = $this->getStudentInfo($student->fhe_award_no);
             $student->remarks = '';
             //check duplicates
-            
-            $duplicates = $students->where('stud_fname',$student->stud_fname)->where('stud_lname',$student->stud_lname)->where('stud_birth_date',$student->stud_birth_date)->count();
+
+            $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
             if ($duplicates > 1) {
                 $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
             }
 
             if ($student->fhe_award_no != '') {
                 //get duplicate fhe numbers within the billing transaction
-                $duplicatefheno = $this->getDuplicateFHENo($student('fhe_award_no'), $student('reference_no'));
+                $duplicatefheno = $duplicates = TemporaryBilling::where('fhe_award_no', $student->fhe_award_no)
+                    ->where('reference_no', $reference_no)
+                    ->get()->count();
                 //if there are any duplicates they are marked in the remarks
                 if ($duplicatefheno > 1) {
                     $student->remarks .= 'Has a duplicate student in this Billing Submission';
