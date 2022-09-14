@@ -1011,8 +1011,8 @@ class BillingController extends Controller
                 }
 
                 $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
-                $firstyear = $enrollmentinfo->first()->ac_year;
-                $firstsem = $enrollmentinfo->first()->semester;
+                $firstyear = (float) $enrollmentinfo->first()->ac_year;
+                $firstsem = (float) $enrollmentinfo->first()->semester;
                 $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
@@ -1031,8 +1031,8 @@ class BillingController extends Controller
                     // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
                     $normal_length = 4;
                     $firstsem_discrepancy = $firstsem > 1 ? 0.5 : 0;
-                    $lastsem_discrepancy = $billing->semester > 1 ? 0 : 0.5;
-                    $length = $billing->ac_year - $firstyear; //count the number of years since it is half of the number of semesters
+                    $lastsem_discrepancy = (float) $billing->semester > 1 ? 0 : 0.5;
+                    $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
                     $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                     if ($totallength > $normal_length) {
                         $student->remarks .= '\nExceeded Maximum Residency with ' + $totallength;
