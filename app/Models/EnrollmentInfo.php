@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EnrollmentInfo extends Model
 {
-    protected $table = 'tbl_enrollment_detail';
+    protected $table = 'tbl_enrollment_detail_blank';
     protected $primaryKey = 'uid';
     // public $timestamps = false;
     protected $fillable = [
