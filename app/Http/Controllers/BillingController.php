@@ -998,7 +998,7 @@ class BillingController extends Controller
                 )
             );
             printf("\n");
-            print_r($duplicateinmasterlist);
+            echo json_encode($duplicateinmasterlist);
             //if there are duplicates in the masterlist add a remark
             if (count($duplicateinmasterlist) > 0) {
                 $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
