@@ -1017,7 +1017,7 @@ class BillingController extends Controller
                     continue;
                 }
 
-                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
+                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
                 $firstyear = $enrollmentinfo->first()->ac_year;
                 $firstsem = $enrollmentinfo->first()->semester;
                 $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
