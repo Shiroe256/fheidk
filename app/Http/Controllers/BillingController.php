@@ -950,12 +950,6 @@ class BillingController extends Controller
         return response('Success', 200);
     }
 
-    private function getStudentInfo($fhe_award_no)
-    {
-        $studentinfo = Student::where('fhe_award_no', $fhe_award_no)->first();
-        return $studentinfo;
-    }
-
     private function getCourseUid($hei_uii, $course)
     {
         $courses = Course::where('hei_uii', $hei_uii)->where('degree_program', $course)->first();
@@ -985,7 +979,7 @@ class BillingController extends Controller
             // select student for later updates
             // $student = TemporaryBilling::find($student['uid']);
             // get student and enrollment info
-            $studentinfo = $this->getStudentInfo($student->fhe_award_no);
+            $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
             $student->remarks = '';
             print_r($student);
 
