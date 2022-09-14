@@ -97,10 +97,11 @@ fileInput.onchange = () => {
                 title: 'Oops...',
                 html: 'Please check the name of your Sheet'
             });
+        }   else{
+            resetUploadButton();
         }
     };
     reader.readAsArrayBuffer(fileInput.files[0]);
-    resetUploadButton();
 }
 queueButton.onclick = function () {
     queueBilling();

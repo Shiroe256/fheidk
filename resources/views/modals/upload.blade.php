@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="modal-footer"><button id="closebutton" class="btn btn-light card-button-style close" data-dismiss="modal" type="button">Close</button><button id="btn_upload_template"
-                        class="btn btn-primary card-button-style" type="button" >Upload</button>
+                        class="btn btn-primary card-button-style" type="button" disabled>Upload</button>
                 </div>
             </form>
         </div>

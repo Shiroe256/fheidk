@@ -985,7 +985,20 @@ class BillingController extends Controller
             // get student and enrollment info
             $studentinfo = $this->getStudentInfo($student->fhe_award_no);
             $student->remarks = '';
-            //check duplicates
+
+            //fetch duplicates in the masterlist
+            $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
+                array(
+                    'fname' => $student['stud_fname'],
+                    'lname' => $student['stud_lname'],
+                    'birthdate' => $student['stud_birth_date']
+                )
+            );
+            //if there are duplicates in the masterlist add a remark
+            if (count($duplicateinmasterlist) > 0) {
+                $student->fhe_award_no .= $duplicateinmasterlist->fhe_award_no;
+                $student->remarks .= '/nFHE award no. automatically selected from Master table';
+            }
 
             $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
             if ($duplicates > 1) {
@@ -993,19 +1006,14 @@ class BillingController extends Controller
             }
 
             if ($student->fhe_award_no != '') {
-                //get duplicate fhe numbers within the billing transaction
-                $duplicatefheno = $duplicates = TemporaryBilling::where('fhe_award_no', $student->fhe_award_no)
-                    ->where('reference_no', $reference_no)
-                    ->get()->count();
-                //if there are any duplicates they are marked in the remarks
-                if ($duplicatefheno > 1) {
-                    $student->remarks .= 'Has a duplicate student in this Billing Submission';
-                }
+
                 if ($studentinfo == null) {
                     continue;
                 }
 
                 $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year', 'semester')->get();
+                $firstyear = $enrollmentinfo->first()->ac_year;
+                $firstsem = $enrollmentinfo->first()->semester;
                 $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year', 'semester')->get(); //LOA
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
@@ -1020,34 +1028,22 @@ class BillingController extends Controller
                     }
 
                     //maximum residency start
+                    //we have yet to get a database of the duration of courses
                     // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
                     $normal_length = 4;
-                    $length = $enrollmentinfo->count() / 2; //count the number of years since it is half of the number of semesters
-                    $totallength = $length - $loainfo->count() / 2;
+                    $firstsem_discrepancy = $firstsem > 1 ? 0.5 : 0;
+                    $lastsem_discrepancy = $billing->semester > 1 ? 0 : 0.5;
+                    $length = $billing->ac_year - $firstyear; //count the number of years since it is half of the number of semesters
+                    $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                     if ($totallength > $normal_length) {
-                        $student->remarks .= '\nExceeded Maximum Resicency';
+                        $student->remarks .= '\nExceeded Maximum Residency with ' + $totallength;
                     }
                     //maximum residency end
-
-                    //check for duplicates in other schools
-                    // $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('')->get();
-
                 }
             }
-            //fetch duplicates in the masterlist
-            $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
-                array(
-                    'fname' => $student['stud_fname'],
-                    'lname' => $student['stud_lname'],
-                    'birthdate' => $student['stud_birth_date']
-                )
-            );
-            //if there are duplicates in the masterlist add a remark
-            if (count($duplicateinmasterlist) > 0) {
-                $student->remarks .= '\nHas a duplicate student in the Master List';
-            }
-            // // $student->remarks = 'hello';
+
             $student->save();
+            // // $student->remarks = 'hello';
             // $selectedstudent->remarks = 'hello';
             // $selectedstudent->save();
         }
