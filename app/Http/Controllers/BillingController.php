@@ -992,9 +992,9 @@ class BillingController extends Controller
             //fetch duplicates in the masterlist
             $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
                 array(
-                    'fname' => $student['stud_fname'],
-                    'lname' => $student['stud_lname'],
-                    'birthdate' => $student['stud_birth_date']
+                    'fname' => $student->stud_fname,
+                    'lname' => $student->stud_lname,
+                    'birthdate' => $student->stud_birth_date
                 )
             );
             printf("\n");
