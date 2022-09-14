@@ -1000,7 +1000,7 @@ class BillingController extends Controller
             printf("\n");
             echo json_encode($duplicateinmasterlist);
             //if there are duplicates in the masterlist add a remark
-            if (count($duplicateinmasterlist) > 0) {
+            if ($duplicateinmasterlist === NULL) {
                 $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                 $student->remarks .= '/nFHE award no. automatically selected from Master table';
                 $student->save();
@@ -1011,7 +1011,7 @@ class BillingController extends Controller
                 $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
             }
 
-            if ($student->fhe_award_no != '' && count($duplicateinmasterlist) > 0) {
+            if ($student->fhe_award_no != '' && $duplicateinmasterlist === NULL) {
 
                 if ($studentinfo == null) {
                     continue;
