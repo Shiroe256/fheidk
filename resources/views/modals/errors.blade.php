@@ -1,5 +1,5 @@
 <div id="mod_errors" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-xl" style="max-width: 1000px!important;">
+    <div class="modal-dialog" style="max-width: 1000px!important;">
         <div class="modal-content">
             <div class="row no-gutters" style="height: 500px;">
                 <div class="col-md-4 card">
