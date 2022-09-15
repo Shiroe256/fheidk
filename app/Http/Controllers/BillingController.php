@@ -1004,7 +1004,7 @@ class BillingController extends Controller
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
                     //compute nstp units
-                    if ($nstpunits > 6) {
+                    if ($nstpunits >= 6) {
                         $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
                     }
                     
