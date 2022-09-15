@@ -817,13 +817,6 @@ class BillingController extends Controller
         return $courseid;
     }
 
-    public function getHeiCourses($hei_uii)
-    {
-        //to be continued
-    }
-
-
-
     private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
     {
         $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
@@ -956,13 +949,6 @@ class BillingController extends Controller
         return $courses->uid;
     }
 
-    // public function getCourseLength($course_uid)
-    // {
-    //     $course = Course::find($course_uid);
-    //     $length = (int) $course->normal_length + 1;
-    //     return $length;
-    // }
-
     public function checkBilling()
     {
         //look for billings marked for a checker queue
@@ -995,13 +981,13 @@ class BillingController extends Controller
             //if there are duplicates in the masterlist add a remark
             if ($duplicateinmasterlist != NULL) {
                 $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
-                $student->remarks .= '/nFHE award no. automatically selected from Master table';
+                $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
                 $student->save();
             }
 
             $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
             if ($duplicates > 1) {
-                $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student';
+                $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
             }
 
             if ($student->fhe_award_no != '' && $duplicateinmasterlist != NULL) {
@@ -1019,9 +1005,9 @@ class BillingController extends Controller
                     foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                         if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
-                            $student->remarks .= '\nHas a duplicate this year and semester already';
+                            $student->remarks .= 'Has a duplicate this year and semester already</br>';
                             if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                $student->remarks .= '\nHas a duplicate from other school';
+                                $student->remarks .= 'Has a duplicate from other school</br>';
                             }
                         }
                     }
@@ -1035,7 +1021,7 @@ class BillingController extends Controller
                     $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
                     $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                     if ($totallength > $normal_length) {
-                        $student->remarks .= '\nExceeded Maximum Residency with ' . strval($totallength);
+                        $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
                     }
                     //maximum residency end
                 }

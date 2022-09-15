@@ -1,5 +1,6 @@
 <?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);?>
 @include('includes.header')
+@include('modals.errors')
 <div class="container-fluid">
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
             {{ $ac_year }}</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">{{ $f->format($semester) }}

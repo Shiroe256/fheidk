@@ -83,13 +83,11 @@ fileInput.onchange = () => {
         });
         errorhtml += '</tbody></table>';
         if (errorctr > 0) {
+            $('#mod_upload').modal('hide');
             deactivateUploadButton();
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                errorhtml
-            });
+            $('#error_count').html(errorctr);
+            $('#error_summary').html(errorhtml);
+            $('#mod_errors').modal('show');
         } else if (output.length < 1) {
             deactivateUploadButton();
             Swal.fire({
@@ -108,7 +106,6 @@ queueButton.onclick = function () {
 }
 function deactivateUploadButton(){
     uploadButton.disabled = true;
-    closeButton.disabled = true;
 }
 function queueBilling() {
     $.ajaxSetup({
