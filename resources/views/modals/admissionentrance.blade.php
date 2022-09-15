@@ -51,7 +51,7 @@
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Sex</label>
                                     <select id="sex" name="sex" class="form-control input-style">
                                         <optgroup label="Select Sex">
-                                            <option value="">--Select Sex--</option>
+                                            <option selected value="" readonly>--Select Sex--</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </optgroup>
