@@ -1,5 +1,5 @@
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_upload" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <div class="modal-content">
             <form>
                 <div class="modal-header">
