@@ -84,14 +84,15 @@ fileInput.onchange = () => {
         errorhtml += '</tbody></table>';
         if (errorctr > 0) {
             $('#mod_upload').modal('hide');
-            fileInput.val = '';
+            fileInput.value = '';
+            
             deactivateUploadButton();
             $('#error_count').html(errorctr);
             $('#error_summary').html(errorhtml);
             $('#mod_errors').modal('show');
         } else if (output.length < 1) {
             deactivateUploadButton();
-            fileInput.val = '';
+            fileInput.value = '';
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -279,7 +280,7 @@ function uploadBatch() {
             });
             errorhtml += '</tbody></table>';
             if (errorctr > 0) {
-                fileInput.val = '';
+                fileInput.value = '';
                 $('#mod_upload').modal('hide');
                 deactivateUploadButton();
                 $('#error_count').html(errorctr);
@@ -287,7 +288,7 @@ function uploadBatch() {
                 $('#mod_errors').modal('show');
             } else if (output.length < 1) {
                 deactivateUploadButton();
-                fileInput.val = '';
+                fileInput.value = '';
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -306,7 +307,7 @@ function uploadBatch() {
                         tranche: tranche
                     },
                     complete: function () {
-                        fileInput.val = '';
+                        fileInput.value = '';
                         resetUploadButton();
                         closeButton.click();
                         fetchTempStudent();
