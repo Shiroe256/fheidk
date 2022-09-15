@@ -306,6 +306,9 @@ function uploadBatch() {
                         resetUploadButton();
                         closeButton.click();
                         fetchTempStudent();
+                        fetchTempSummary();
+                        fetchTempApplicants();
+
                     },
                     beforeSend: function () {
                         uploadButton.disabled = true;

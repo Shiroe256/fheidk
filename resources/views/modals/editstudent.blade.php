@@ -21,7 +21,7 @@
                                     <input type="hidden" id='edit_hei_psg_region' name='edit_hei_psg_region'value="{{ $hei_psg_region }}">
                                     <input type="hidden" id="edit_reference_no" name="edit_reference_no" value="{{ $reference_no }}">
                                     <input type="hidden" id='edit_hei_uii' name='edit_hei_uii' type="text">
-                                    <input type="hidden" id='edit_selected_campus' name='edit_selected_campus' type="text">
+                                    <input type="hidden" id='edit_selected_campus' name='edit_selected_campus'>
                                     <select id="edit_hei_campus" name="edit_hei_campus" class="form-control input-style-tabs">                           
                                         <option disabled>-- Select Campus --</option>
                                     </select>

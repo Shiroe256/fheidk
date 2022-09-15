@@ -9,8 +9,8 @@
                 <th class="text-center">ACADEMIC YEAR</th>
                 <th class="text-center">SEMESTER</th>
                 <th class="text-center">TRANCHE</th>
-                <th class="text-center">TOTAL AMOUNT</th>
-                <th class="text-center">TOTAL BENEFICIARIES</th>
+                {{-- <th class="text-center">TOTAL AMOUNT</th>
+                <th class="text-center">TOTAL BENEFICIARIES</th> --}}
                 <th class="text-center">STATUS</th>
                 <th class="text-center">ACTION</th>
             </tr>
@@ -25,8 +25,8 @@
                     <td class="text-center"><strong>{{ $billing['ac_year'] }}</strong></td>
                     <td class="text-center"><strong>{{ $f->format($billing['semester']) }}</strong></td>
                     <td class="text-center">{{ $f->format($billing['tranche']) }}</td>
-                    <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
-                    <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
+                    {{-- <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
+                    <td class="text-center">{{ $billing['total_beneficiaries'] }}</td> --}}
                     <td class="text-center">
                         <?php
                             if($billing['billing_status']==1): ?>

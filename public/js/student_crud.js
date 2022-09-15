@@ -571,7 +571,9 @@ $(document).on('click', '.btn_update_student', function (e) {
     },
     success: function (response) {
       //di dapat append to dumodble
-      $('#edit_hei_campus').append('<option selected value=' + response.hei_name + '>' + response.hei_name + '</option>');
+      $('#edit_selected_campus').val(response.hei_name);
+      // $('#edit_hei_campus').text(response.hei_name);
+      // $('#edit_hei_campus').append('<option selected value=' + response.hei_name + '>' + response.hei_name + '</option>');
       $("#edit_student_id").val(response.uid);
       $("#edit_last_name").val(response.stud_lname);
       $("#edit_first_name").val(response.stud_fname);
@@ -746,7 +748,7 @@ $(document).on('click', '#btn_delete_students', function () {
           console.log(response);
           Swal.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Student record has been deleted.',
             'success'
           )
           $('#btn_delete_students').addClass('d-none');
@@ -819,8 +821,10 @@ function selectCampus() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      if(response == 0){
+      console.log(response.length);
+      if(response.length == 1){
         $('.campus_div').addClass('d-none');
+        $('#selected_campus').val(response[0].hei_name);
       }else{
       $('.campus_div').removeClass('d-none');
       for (let index = 0; index < response.length; ++index) {
