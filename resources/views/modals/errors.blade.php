@@ -1,5 +1,5 @@
 <div id="mod_errors" class="modal fade" tabindex="-1">
-    <div class="modal-dialog" style="max-width: 1000px!important;">
+    <div class="modal-dialog text-dark" style="max-width: 1000px!important;">
         <div class="modal-content">
             <div class="row no-gutters" style="height: 500px;">
                 <div class="col-md-4 card">
@@ -19,7 +19,7 @@
                                 <small class="text-muted">Pull your sheet together.</small>
                     </div>
                     <div class="card-footer text-center">
-                        <button class="btn btn-block btn-outline-dark w-3" class="close" data-dismiss="modal"
+                        <button class="btn btn-block btn-outline-dark w-3" class="close" data-bs-dismiss="modal"
                             aria-label="Close">OK</button>
                     </div>
                 </div>

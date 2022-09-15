@@ -84,12 +84,14 @@ fileInput.onchange = () => {
         errorhtml += '</tbody></table>';
         if (errorctr > 0) {
             $('#mod_upload').modal('hide');
+            fileInput.val = '';
             deactivateUploadButton();
             $('#error_count').html(errorctr);
             $('#error_summary').html(errorhtml);
             $('#mod_errors').modal('show');
         } else if (output.length < 1) {
             deactivateUploadButton();
+            fileInput.val = '';
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -276,6 +278,7 @@ function uploadBatch() {
             });
             errorhtml += '</tbody></table>';
             if (errorctr > 0) {
+                fileInput.val = '';
                 $('#mod_upload').modal('hide');
                 deactivateUploadButton();
                 $('#error_count').html(errorctr);
@@ -283,6 +286,7 @@ function uploadBatch() {
                 $('#mod_errors').modal('show');
             } else if (output.length < 1) {
                 deactivateUploadButton();
+                fileInput.val = '';
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -301,12 +305,12 @@ function uploadBatch() {
                         tranche: tranche
                     },
                     complete: function () {
+                        fileInput.val = '';
                         resetUploadButton();
                         closeButton.click();
                         fetchTempStudent();
                         fetchTempSummary();
                         fetchTempApplicants();
-
                     },
                     beforeSend: function () {
                         uploadButton.disabled = true;
