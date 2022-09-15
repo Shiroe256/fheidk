@@ -13,7 +13,7 @@ uploadButton.onclick = function () {
 fileInput.onchange = () => {
 
     const selectedFile = fileInput.files[0];
-    document.getElementById('upload_template_text').innerHTML = selectedFile.name;
+    
 
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -99,6 +99,7 @@ fileInput.onchange = () => {
             });
         } else {
             resetUploadButton();
+            document.getElementById('upload_template_text').innerHTML = selectedFile.name;
         }
     };
     reader.readAsArrayBuffer(fileInput.files[0]);
@@ -311,6 +312,7 @@ function uploadBatch() {
                         fetchTempStudent();
                         fetchTempSummary();
                         fetchTempApplicants();
+                        document.getElementById('upload_template_text').innerHTML = selectedFile.name;
                     },
                     beforeSend: function () {
                         uploadButton.disabled = true;
