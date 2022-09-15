@@ -11,9 +11,9 @@ uploadButton.onclick = function () {
     uploadBatch();
 }
 fileInput.onchange = () => {
-    
+
     const selectedFile = fileInput.files[0];
-    document.getElementById('upload_template_text').innerHTML = selectedFile.name;
+    
 
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -71,7 +71,7 @@ fileInput.onchange = () => {
 
         let errorctr = 0; //counts error
         var errors = validateFields(output); //storefields to validate
-        let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
+        let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
         let ctr = 1;
         errors.forEach(item => {
             if (item.length > 0) ++errorctr;
@@ -83,22 +83,24 @@ fileInput.onchange = () => {
         });
         errorhtml += '</tbody></table>';
         if (errorctr > 0) {
+            $('#mod_upload').modal('hide');
+            fileInput.value = '';
+            
             deactivateUploadButton();
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                errorhtml
-            });
+            $('#error_count').html(errorctr);
+            $('#error_summary').html(errorhtml);
+            $('#mod_errors').modal('show');
         } else if (output.length < 1) {
             deactivateUploadButton();
+            fileInput.value = '';
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 html: 'Please check the name of your Sheet'
             });
-        }   else{
+        } else {
             resetUploadButton();
+            document.getElementById('upload_template_text').innerHTML = selectedFile.name;
         }
     };
     reader.readAsArrayBuffer(fileInput.files[0]);
@@ -106,9 +108,8 @@ fileInput.onchange = () => {
 queueButton.onclick = function () {
     queueBilling();
 }
-function deactivateUploadButton(){
+function deactivateUploadButton() {
     uploadButton.disabled = true;
-    closeButton.disabled = true;
 }
 function queueBilling() {
     $.ajaxSetup({
@@ -194,7 +195,7 @@ function validateFields(data) {
         // stud['exam_result']
         // stud['remarks']
 
-        if(error.length > 0) errors.push(error);
+        if (error.length > 0) errors.push(error);
     }
     return errors;
 }
@@ -279,15 +280,15 @@ function uploadBatch() {
             });
             errorhtml += '</tbody></table>';
             if (errorctr > 0) {
+                fileInput.value = '';
+                $('#mod_upload').modal('hide');
                 deactivateUploadButton();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                        errorhtml
-                });
+                $('#error_count').html(errorctr);
+                $('#error_summary').html(errorhtml);
+                $('#mod_errors').modal('show');
             } else if (output.length < 1) {
                 deactivateUploadButton();
+                fileInput.value = '';
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -306,12 +307,13 @@ function uploadBatch() {
                         tranche: tranche
                     },
                     complete: function () {
+                        fileInput.value = '';
                         resetUploadButton();
                         closeButton.click();
                         fetchTempStudent();
                         fetchTempSummary();
                         fetchTempApplicants();
-
+                        document.getElementById('upload_template_text').innerHTML = selectedFile.name;
                     },
                     beforeSend: function () {
                         uploadButton.disabled = true;

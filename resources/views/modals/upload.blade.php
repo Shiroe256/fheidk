@@ -1,5 +1,5 @@
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
         <div class="modal-content">
             <form>
                 <div class="modal-header">
@@ -11,7 +11,8 @@
                         <label class="custom-file-label" id="upload_template_text">Choose file</label>
                     </div>
                 </div>
-                <div class="modal-footer"><button id="closebutton" class="btn btn-light card-button-style close" data-dismiss="modal" type="button">Close</button><button id="btn_upload_template"
+                <div class="modal-footer"><button id="closebutton" class="btn btn-light card-button-style close"
+                        data-bs-dismiss="modal" type="button">Close</button><button id="btn_upload_template"
                         class="btn btn-primary card-button-style" type="button" disabled>Upload</button>
                 </div>
             </form>

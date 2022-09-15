@@ -1,24 +1,27 @@
-<?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);?>
+<?php $f = new NumberFormatter('en', NumberFormatter::ORDINAL); ?>
 @include('includes.header')
 <div class="container-fluid">
     <h6 class="text-dark mb-4">FHE Management / AY
-            {{ $ac_year }}&nbsp;/&nbsp;{{ $f->format($semester) }}
-            Semester / {{ $f->format($tranche) }} Tranche</h6>
-            <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
-            <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
-            <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
+        {{ $ac_year }}&nbsp;/&nbsp;{{ $f->format($semester) }}
+        Semester / {{ $f->format($tranche) }} Tranche</h6>
+    <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
+    <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
+    <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
     <div class="card shadow">
-        <div class="card-header d-flex justify-content-between align-items-center"><a class="btn btn-outline-dark btn-sm"
-                role="button" href="{{ route('billings') }}"><i class="fas fa-arrow-left"></i>&nbsp;Return to the
+        <div class="card-header d-flex justify-content-between align-items-center"><a
+                class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
+                    class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
-                    <a href="{{url('files\template.xlsx')}}" id="btn_download_template"
+                <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
-                    <button class="btn btn-outline-info btn-sm" type="button" data-toggle="modal" data-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
-                <button id="btn_queue" class="btn btn-outline-info btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Queue for checking</button>
+                <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal"
+                    data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
+                <button id="btn_queue" class="btn btn-outline-info btn-sm" type="button"><i
+                        class="far fa-edit"></i>&nbsp;Queue for checking</button>
                 <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm d-none" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>
@@ -32,7 +35,7 @@
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-4">BILLING FORM 1</a></li>
                     <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-5">BILLING FORM 2</a></li>   
+                            href="#tab-5">BILLING FORM 2</a></li>
                     <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-6">BILLING FORM 3</a></li>
                 </ul>
@@ -57,8 +60,9 @@
                                                 class="fas fa-user-graduate"></i>&nbsp;Beneficiaries</h5>
                                     </div>
                                     <div class="col text-right">
-                                        <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#mod_new_student_info" data-backdrop="static" data-keyboard="false"><i
+                                        <div class="btn-group" role="group"><button
+                                                class="btn btn-outline-info btn-sm" type="button"
+                                                data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i
                                                     class="fas fa-user-plus"></i>&nbsp;Add Student</button><button
                                                 class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
                                                 type="button"></button></div>
@@ -89,8 +93,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="show_all_applicants" class="table-responsive mt-2 table-style" role="grid"
-                                    aria-describedby="dataTable_info">
+                                <div id="show_all_applicants" class="table-responsive mt-2 table-style"
+                                    role="grid" aria-describedby="dataTable_info">
                                     {{-- APPLICANTS TABLE HERE --}}
                                 </div>
                             </div>
@@ -854,7 +858,9 @@
 @include('modals.editstudent')
 @include('modals.admissionentrance')
 @include('modals.nstpinfo')
+@include('modals.errors')
 @include('modals.upload')
+
 
 
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_view_uploaded_file">
@@ -924,9 +930,8 @@
                     <div class="form-group input-style">
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>URL Link</label><input
-                                        class="form-control input-style" type="text"
-                                        value="https://drive.google.com/drive/u/0/my-drive"></div>
+                                <div class="form-group"><label>URL Link</label><input class="form-control input-style"
+                                        type="text" value="https://drive.google.com/drive/u/0/my-drive"></div>
                             </div>
                         </div>
                     </div>
