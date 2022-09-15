@@ -23,7 +23,7 @@
                             aria-label="Close">OK</button>
                     </div>
                 </div>
-                <div id="error_summary" class="bg-secondary col-md-8 p-3 text-white mh-100"
+                <div id="error_summary" class="bg-dark col-md-8 p-3 text-white mh-100"
                     style="font-family:monospace;overflow-y: scroll;">
                 </div>
             </div>
