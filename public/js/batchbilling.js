@@ -71,7 +71,7 @@ fileInput.onchange = () => {
 
         let errorctr = 0; //counts error
         var errors = validateFields(output); //storefields to validate
-        let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
+        let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><td>Row Number</td><td>Error</td></tr></thead><tbody>";
         let ctr = 1;
         errors.forEach(item => {
             if (item.length > 0) ++errorctr;
