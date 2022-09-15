@@ -999,7 +999,7 @@ class BillingController extends Controller
                 $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
                 $firstyear = (float) $enrollmentinfo->first()->ac_year;
                 $firstsem = (float) $enrollmentinfo->first()->semester;
-                $loainfo = $enrollmentinfo->where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
+                $loainfo = EnrollmentInfo::where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
                 $nstpunits = $enrollmentinfo->sum('nstp_unit');
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
