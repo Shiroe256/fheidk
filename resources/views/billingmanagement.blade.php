@@ -1,6 +1,5 @@
 <?php $f = new NumberFormatter("en", NumberFormatter::ORDINAL);?>
 @include('includes.header')
-@include('modals.errors')
 <div class="container-fluid">
     <h6 class="text-dark mb-4">FHE Management / AY
             {{ $ac_year }}&nbsp;/&nbsp;{{ $f->format($semester) }}
@@ -856,6 +855,8 @@
 @include('modals.admissionentrance')
 @include('modals.nstpinfo')
 @include('modals.upload')
+@include('modals.errors')
+
 
 
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_view_uploaded_file">
