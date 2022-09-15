@@ -58,7 +58,7 @@
                                     </div>
                                     <div class="col text-right">
                                         <div class="btn-group" role="group"><button class="btn btn-outline-info btn-sm" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i
+                                                data-bs-toggle="modal" data-bs-target="#mod_new_student_info" data-backdrop="static" data-keyboard="false"><i
                                                     class="fas fa-user-plus"></i>&nbsp;Add Student</button><button
                                                 class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
                                                 type="button"></button></div>

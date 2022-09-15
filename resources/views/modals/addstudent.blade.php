@@ -1,15 +1,15 @@
-<div id="mod_new_student_info" class="modal fade" role="dialog" tabindex="-1">
+<div id="mod_new_student_info" class="modal fade" role="dialog" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form id='frm_add_student' method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h6 class="modal-title">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h6 class="modal-title text-primary">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     
                     <div class="form-group input-style campus_div d-none">
-                        <h6 class="modal-title text-dark">Campus</h6>
+                        <h6 class="modal-title">Campus</h6>
                     </div>
                     <div class="form-group input-style campus_div d-none">
                         <div class="form-row">
@@ -28,10 +28,11 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     </div>
-
+                   
                     <div class="form-group input-style">
-                        <h6 class="modal-title text-dark">Personal Information</h6>
+                        <h6 class="modal-title">Personal Information</h6>
                     </div>
                     <div class="form-group input-style">
                         <div class="form-row">
@@ -108,7 +109,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Present Address</h6>
+                                    <h6 class="modal-title">Present Address</h6>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +142,7 @@
                         <div class="form-row">
                             <div class="col-xl-9">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Permanent Address</h6>
+                                    <h6 class="modal-title">Permanent Address</h6>
                                 </div>
                             </div>
                             <div class="col-xl-3 text-right">
@@ -177,7 +178,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Contact Information</h6>
+                                    <h6 class="modal-title">Contact Information</h6>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +204,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Enrollment Information</h6>
+                                    <h6 class="modal-title">Enrollment Information</h6>
                                 </div>
                             </div>
                         </div>
