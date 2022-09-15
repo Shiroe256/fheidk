@@ -11,7 +11,7 @@ uploadButton.onclick = function () {
     uploadBatch();
 }
 fileInput.onchange = () => {
-    
+
     const selectedFile = fileInput.files[0];
     document.getElementById('upload_template_text').innerHTML = selectedFile.name;
 
@@ -95,7 +95,7 @@ fileInput.onchange = () => {
                 title: 'Oops...',
                 html: 'Please check the name of your Sheet'
             });
-        }   else{
+        } else {
             resetUploadButton();
         }
     };
@@ -104,7 +104,7 @@ fileInput.onchange = () => {
 queueButton.onclick = function () {
     queueBilling();
 }
-function deactivateUploadButton(){
+function deactivateUploadButton() {
     uploadButton.disabled = true;
 }
 function queueBilling() {
@@ -191,7 +191,7 @@ function validateFields(data) {
         // stud['exam_result']
         // stud['remarks']
 
-        if(error.length > 0) errors.push(error);
+        if (error.length > 0) errors.push(error);
     }
     return errors;
 }
@@ -276,13 +276,11 @@ function uploadBatch() {
             });
             errorhtml += '</tbody></table>';
             if (errorctr > 0) {
+                $('#mod_upload').modal('hide');
                 deactivateUploadButton();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: 'You have ' + errorctr + ' item/s with errors. Please check your XLSX file</br>' +
-                        errorhtml
-                });
+                $('#error_count').html(errorctr);
+                $('#error_summary').html(errorhtml);
+                $('#mod_errors').modal('show');
             } else if (output.length < 1) {
                 deactivateUploadButton();
                 Swal.fire({
