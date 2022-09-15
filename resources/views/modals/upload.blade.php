@@ -1,4 +1,4 @@
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload" data-keyboard="false">
+<div class="modal-bootstrap fade" role="dialog" tabindex="-1" id="mod_upload" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <form>
