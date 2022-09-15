@@ -859,7 +859,7 @@ class BillingController extends Controller
         //dummy data
         $course = strtoupper($data['degree_course_id']);
         $year_level = strtoupper($data['year_level']);
-        $tempstudent->degree_program = $this->getDegreeCourseID($data['degree_course_id']);
+        $tempstudent->degree_program = $course;
         $tempstudent->lab_unit = $data['lab_u'];
         $tempstudent->comp_lab_unit = $data['com_lab_u'];
         $tempstudent->academic_unit = $data['acad_u'];
@@ -999,9 +999,15 @@ class BillingController extends Controller
                 $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
                 $firstyear = (float) $enrollmentinfo->first()->ac_year;
                 $firstsem = (float) $enrollmentinfo->first()->semester;
-                $loainfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
+                $loainfo = $enrollmentinfo->where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
+                $nstpunits = $enrollmentinfo->sum('nstp_unit');
                 //if there are any duplicates for this semester
                 if ($studentinfo->count() > 0) {
+                    //compute nstp units
+                    if ($nstpunits > 6) {
+                        $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                    }
+                    
                     foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                         if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
