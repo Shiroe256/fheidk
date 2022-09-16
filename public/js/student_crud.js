@@ -1,7 +1,6 @@
 fetchTempStudent();
 selectDegreePrograms();
 selectCampus();
-getOSF();
 
 // add new student ajax request
 $("#frm_add_student").submit(function (e) {
