@@ -56,7 +56,7 @@ $("#frm_add_student").submit(function (e) {
 //end of new add student
 
 // get tuition fee based on student's degree_program for adding student in form 1
-$(document).on('change', '#total_unit', "#year_level", function (e) {
+$(document).on('change', '#total_unit', function (e) {
   e.preventDefault();
   let course = $("#course_enrolled option:selected").text();
   let total_unit = $("#total_unit").val();
@@ -186,7 +186,7 @@ if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof
 }
 
 //get other school fee based on student's degree_program
-$(document).on('change', '#course_enrolled', "#year_level", function (e) {
+$(document).on('change', '#course_enrolled', function (e) {
   e.preventDefault();
   let course = $("#course_enrolled option:selected").text();
   $.ajax({
