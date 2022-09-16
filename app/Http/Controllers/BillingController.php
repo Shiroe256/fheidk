@@ -383,7 +383,7 @@ class BillingController extends Controller
     {
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
-        if(is_null($course_enrolled) || empty($course_enrolled) ||  $course_enrolled = "" || is_null($year_level) || $year_level ="" || empty($year_level)){
+        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
             return response()->json(0);
         }else{
         $otherSchoolFees = OtherSchoolFees::select(DB::raw('type_of_fee, SUM(amount) as total_amount'))
