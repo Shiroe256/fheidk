@@ -383,12 +383,16 @@ class BillingController extends Controller
     {
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
+        if(is_null($course_enrolled) || is_null($year_level)){
+            return response()->json(0);
+        }else{
         $otherSchoolFees = OtherSchoolFees::select(DB::raw('type_of_fee, SUM(amount) as total_amount'))
             ->where(trim('course_enrolled'), trim($course_enrolled))
             ->where('year_level', $year_level)
             ->groupby('type_of_fee', 'course_enrolled')
             ->get();
         return response()->json($otherSchoolFees);
+        }
     }
 
     // find the tosf of the students
