@@ -860,7 +860,6 @@ function selectCampus() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response.length);
       if(response.length == 1){
         $('.campus_div').addClass('d-none');
         $('#selected_campus').val(response[0].hei_name);
