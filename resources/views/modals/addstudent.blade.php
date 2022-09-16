@@ -7,7 +7,14 @@
                     <h6 class="modal-title text-primary">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
+                    <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
+                    <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
+                    <input type="hidden" id='hei_psg_region' name='hei_psg_region'value="{{ $hei_psg_region }}">
+                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
+                    <input type="hidden" id='hei_uii' name='hei_uii'>
+                    <input type="hidden" id='selected_campus' name='selected_campus' type="text">
+
                     <div class="form-group input-style campus_div d-none">
                         <h6 class="modal-title">Campus</h6>
                     </div>
@@ -15,13 +22,6 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
-                                    <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
-                                    <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
-                                    <input type="hidden" id='hei_psg_region' name='hei_psg_region'value="{{ $hei_psg_region }}">
-                                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                                    <input type="hidden" id='hei_uii' name='hei_uii'>
-                                    <input type="hidden" id='selected_campus' name='selected_campus' type="text">
                                     <select id="hei_campus" name="hei_campus" class="form-control input-style-tabs">                           
                                         <option selected disabled>-- Select Campus --</option>
                                     </select>
