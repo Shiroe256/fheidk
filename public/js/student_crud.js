@@ -199,9 +199,9 @@ $(document).on('change', '#course_enrolled', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      // if(response=0){
-      //   console.log('yeah');
-      // }else{
+      if(response==0 || response.length==0){
+        console.log('yeah');
+      }else{
       console.log(response);
       //display amount
       //   $("#admission_fee").val(response[0].total_amount);
@@ -350,7 +350,7 @@ $(document).on('change', '#course_enrolled', function (e) {
       //     $(this).val(response[12].total_amount);
       //   }
       // });
-    // }
+    }
   }
   });
 });
@@ -368,9 +368,9 @@ $(document).on('change', '#year_level', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      // if(response=0){
-      //   console.log('yeah');
-      // }else{
+      if(response==0 || response.length==0){
+        console.log('yeah');
+      }else{
       console.log(response);
       //display amount
       // $("#admission_fee").val(response[0].total_amount);
@@ -519,7 +519,7 @@ $(document).on('change', '#year_level', function (e) {
       //     $(this).val(response[12].total_amount);
       //   }
       // });
-    // }
+    }
   }
   });
 });
