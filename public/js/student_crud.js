@@ -187,18 +187,23 @@ if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof
 
 //get the tosf of the students 
 function getOSF(){
-  let course = $("#course_enrolled option:selected").text();
-  let year_level = $("#year_level").val();
-  $.ajax({
-    url: '/get-otherschoolfee',
-    method: 'get',
-    data: {
-      course_enrolled: course,
-      year_level: year_level,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      console.log(response);
+  if((($("#course_enrolled").val() !== null || $("#course_enrolled").val() !== '') && typeof str === 'string' && str.length === 0)&&(($("#year_level").val() !== null || $("#year_level").val() !== '') && typeof str === 'string' && str.length === 0)){
+ alert(wp);
+  }else{
+    alert(gg);
+  }
+  // let course = $("#course_enrolled option:selected").text();
+  // let year_level = $("#year_level").val();
+  // $.ajax({
+  //   url: '/get-otherschoolfee',
+  //   method: 'get',
+  //   data: {
+  //     course_enrolled: course,
+  //     year_level: year_level,
+  //     _token: '{{ csrf_token() }}'
+  //   },
+  //   success: function (response) {
+  //     console.log(response);
       //display amount
       // $("#admission_fee").val(response[0].total_amount);
       // $("#athletic_fee").val(response[1].total_amount);
@@ -346,13 +351,8 @@ function getOSF(){
       //     $(this).val(response[12].total_amount);
       //   }
       // });
-    }
-  });
-}
-
-if(($("#course_enrolled").val() !== null || $("#course_enrolled").val() !== '') && typeof str === 'string' && str.length === 0){
-  alert();
-  getOSF();
+    // }
+  // });
 }
 
 //get other school fee based on student's degree_program
