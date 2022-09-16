@@ -189,9 +189,9 @@ if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof
 //get the tosf of the students 
 function getOSF(){
   if((($("#course_enrolled").val() !== null || $("#course_enrolled").val() !== '') && typeof str === 'string' && str.length === 0)&&(($("#year_level").val() !== null || $("#year_level").val() !== '') && typeof str === 'string' && str.length === 0)){
- alert(wp);
+ alert('wp');
   }else{
-    alert(gg);
+    alert('gg');
   }
   // let course = $("#course_enrolled option:selected").text();
   // let year_level = $("#year_level").val();
