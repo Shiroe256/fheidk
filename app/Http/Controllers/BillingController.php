@@ -390,6 +390,8 @@ class BillingController extends Controller
             ->where('reference_no', '01-01040-2021-2022-1-1')
             ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
             ->where('year_level', '1')
+            ->where("semester", '1')
+            ->groupBy("type_of_fee")
             ->get();
         return response()->json($otherSchoolFees);
         }
