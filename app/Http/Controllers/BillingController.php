@@ -386,7 +386,7 @@ class BillingController extends Controller
         if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
             return response()->json(0);
         }else{
-        $otherSchoolFees = SchoolFees::select("*", "if (bs_status = 0, 0, sum(amount) )")
+        $otherSchoolFees = SchoolFees::select(DB::raw("*", "if (bs_status = 0, 0, sum(amount) )"))
             ->where('reference_no', '01-01040-2021-2022-1-1')
             ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
             ->where('year_level', '1')
