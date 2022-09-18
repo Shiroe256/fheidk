@@ -391,7 +391,7 @@ class BillingController extends Controller
             ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
             ->where('year_level', '1')
             ->where("semester", "=", '1')
-            ->groupBy("type_of_fee")
+            ->groupby("type_of_fee")
             ->get();
         return response()->json($otherSchoolFees);
         }
