@@ -17,7 +17,7 @@ var heiinfo;
 templateReq.onload = function (e) {
     var workbook = XLSX.read(templateReq.response);
     var worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    var worksheet_courses = workbook.Sheets[Courses];
+    var worksheet_courses = workbook.Sheets[data_courses];
     var courses = [];
     heiinfo.courses.forEach(course => {
         courses.push([course]);
@@ -31,7 +31,7 @@ templateReq.onload = function (e) {
 
 templateData.onload = function (e) {
     heiinfo = JSON.parse(this.responseText);
-    templateReq.open("GET", window.location.origin + "/files/template.xlsx", true);
+    templateReq.open("GET", window.location.origin + "/files/template2.xlsx", true);
     templateReq.responseType = "arraybuffer";
     templateReq.send();
 
