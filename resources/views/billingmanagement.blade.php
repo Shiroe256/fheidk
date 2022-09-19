@@ -14,6 +14,7 @@
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
+                <input type="text" id="billing_status" name="billing_status" value="{{ $billing_status }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
                     class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <a id="btn_download_template"
@@ -30,11 +31,8 @@
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
-        <?php
-            $records = DB::table('tbl_billing_details_temp')
-            ->where('reference_no', $reference_no)
-            ->get();
-        ?>
+        
+        
         <div id="billing_forms_div" class="card-body billing_forms_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">

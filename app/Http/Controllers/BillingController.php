@@ -676,6 +676,7 @@ class BillingController extends Controller
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
         $data['reference_no'] = $billings->reference_no;
+        $data['billing_status'] = $billings->billing_status;
         if ($billings && $billings->hei_uii == $hei_uii) {
             return view('billingmanagement', $data);
         }
