@@ -18,7 +18,7 @@ templateReq.onload = function (e) {
     var workbook = XLSX.read(templateReq.response);
     var worksheet = workbook.Sheets[workbook.SheetNames[0]];
     XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
-    XLSX.writeFileXLSX(workbook, reference_no);
+    XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
 };
 
 templateData.onload = function (e) {
