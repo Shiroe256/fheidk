@@ -21,7 +21,7 @@
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
-                        class="far fa-edit"></i>&nbsp;Queue for checking</button>
+                        class="far fa-edit"></i>&nbsp;Run Validation</button>
                 <button id="btn_run_billing_checker" class="btn btn-outline-primary btn-sm d-none" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>
@@ -30,6 +30,12 @@
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
+        <?php
+        $applicants = TemporaryBilling::orderBy('remarks')
+            ->where('reference_no', .{{ $reference_no }})
+            ->where('remarks','total_exam_taken')
+            ->get();
+        ?>
         <div id="billing_forms_div" class="card-body billing_forms_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
