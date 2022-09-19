@@ -82,7 +82,7 @@ class BillingController extends Controller
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
+                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
                             </button>
                         </div>
                     </td>
