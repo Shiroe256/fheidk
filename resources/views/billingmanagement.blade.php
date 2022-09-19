@@ -18,11 +18,11 @@
                     class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
-                <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal"
+                <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
-                <button id="btn_queue" class="btn btn-outline-info btn-sm" type="button"><i
+                <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Queue for checking</button>
-                <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm d-none" type="button"
+                <button id="btn_run_billing_checker" class="btn btn-outline-primary btn-sm d-none" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>
                 <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
