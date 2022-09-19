@@ -13,6 +13,7 @@ use App\Models\TuitionFees;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\SchoolFees;
+use Illuminate\Support\Facades\Storage;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -1020,6 +1021,18 @@ class BillingController extends Controller
         return $courses->uid;
     }
 
+    public function getSheetTemplate()
+    {
+        $hei_uii = Auth::user()->hei_uii;
+        $hei_info = Hei::where('hei_uii', $hei_uii)->first();
+        $response['hei_uii'] = $hei_uii;
+        $response['hei_name'] = $hei_info->hei_name;
+        $response['hei_psg_region'] = $hei_info->hei_psg_region;
+        // $response['reference_no'] = request()->segment(count(request()->segments()));
+
+        echo json_encode($response);
+    }
+
     public function checkBilling()
     {
         //look for billings marked for a checker queue
@@ -1036,6 +1049,7 @@ class BillingController extends Controller
         //get students of each billing transaction
         $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
         //check each student in billing transaction for duplciates in fhe award number
+
         foreach ($students as $student) {
             // select student for later updates
             // $student = TemporaryBilling::find($student['uid']);
@@ -1080,7 +1094,7 @@ class BillingController extends Controller
                     if ($nstpunits >= 6) {
                         $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
                     }
-                    
+
                     foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                         if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
@@ -1105,6 +1119,7 @@ class BillingController extends Controller
                     //maximum residency end
                 }
             }
+            // $total_amount += $student->
             if ($student->remarks != '') {
                 $billing->status_status = 4;
             }

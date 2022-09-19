@@ -2,18 +2,52 @@ const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
 const closeButton = document.getElementById("closebutton");
 const queueButton = document.getElementById("btn_queue");
+const templateButton = document.getElementById("btn_template");
 const reference_no = $('#reference_no').val();
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
 const tranche = $('#tranche').val();
+var templateReq = new XMLHttpRequest();
+var templateData = new XMLHttpRequest();
+var heiinfo;
+
+
+/* set up async GET request */
+
+templateReq.onload = function (e) {
+    var workbook = XLSX.read(templateReq.response);
+    var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
+    XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
+};
+
+templateData.onload = function (e) {
+    heiinfo = JSON.parse(this.responseText);
+    templateReq.open("GET", window.location.origin + "/files/template.xlsx", true);
+    templateReq.responseType = "arraybuffer";
+    templateReq.send();
+
+
+};
+
+templateButton.onclick = function () {
+    templateData.open("POST", window.location.origin + "/fetchTemplateData", true);
+    templateData.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+    // templateData.setRequestHeader("Content-type", 'multipart/form-data'); // or application/json
+    templateData.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'));
+    templateData.send();
+}
 
 uploadButton.onclick = function () {
+
     uploadBatch();
 }
+
+
 fileInput.onchange = () => {
 
     const selectedFile = fileInput.files[0];
-    
+
 
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -85,7 +119,7 @@ fileInput.onchange = () => {
         if (errorctr > 0) {
             $('#mod_upload').modal('hide');
             fileInput.value = '';
-            
+
             deactivateUploadButton();
             $('#error_count').html(errorctr);
             $('#error_summary').html(errorhtml);
@@ -118,7 +152,7 @@ function queueBilling() {
         }
     });
     $.ajax({
-        url: window.location.origin + "/queue",
+        url: window.location.origin + "/queueBilling",
         type: "POST",
         data: {
             reference_no: reference_no
@@ -134,9 +168,7 @@ function resetUploadButton() {
     closeButton.disabled = false;
     fileInput.disabled = false;
 }
-function checkForErrors(params) {
 
-}
 //generates a 2d array of all the errors per line
 function validateFields(data) {
 
