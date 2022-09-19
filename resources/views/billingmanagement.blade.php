@@ -16,7 +16,7 @@
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
-                <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
+                <a id="btn_template"
                     class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
                 <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>

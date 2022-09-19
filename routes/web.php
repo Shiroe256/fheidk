@@ -46,7 +46,7 @@ Route::get('/', function () {
 //billing CRUD
 Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
-//list of billings dati
+//Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement']);
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
@@ -79,7 +79,11 @@ Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('sel
 //Test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
 Route::get('/test', [BillingController::class, 'test']);
-Route::post('/queue', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
+
+//Billing Checker
+Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
+Route::post('/fetchTemplateData', [BillingController::class, 'getSheetTemplate'])->name('fetchTemplateData');
+Route::get('/fetchTemplate', [BillingController::class, 'downloadSheetTemplate'])->name('downloadTemplate');
 
 //Users Profile Routes
 Route::get('/get-user', [UserController::class, 'fetchUser'])->name('fetchUser');

@@ -13,6 +13,7 @@ use App\Models\TuitionFees;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\SchoolFees;
+use Illuminate\Support\Facades\Storage;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -383,17 +384,17 @@ class BillingController extends Controller
     {
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
-        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
+        if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
             return response()->json(0);
-        }else{
-        $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
-            ->where('reference_no', '01-01040-2021-2022-1-1')
-            ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
-            ->where('year_level', '1')
-            ->where('semester', '1')
-            ->groupby('type_of_fee')
-            ->get();
-        return response()->json($otherSchoolFees);
+        } else {
+            $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
+                ->where('reference_no', '01-01040-2021-2022-1-1')
+                ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
+                ->where('year_level', '1')
+                ->where('semester', '1')
+                ->groupby('type_of_fee')
+                ->get();
+            return response()->json($otherSchoolFees);
         }
     }
 
@@ -957,6 +958,18 @@ class BillingController extends Controller
         return $courses->uid;
     }
 
+    public function getSheetTemplate()
+    {
+        $hei_uii = Auth::user()->hei_uii;
+        $hei_info = Hei::where('hei_uii', $hei_uii)->first();
+        $response['hei_uii'] = $hei_uii;
+        $response['hei_name'] = $hei_info->hei_name;
+        $response['hei_psg_region'] = $hei_info->hei_psg_region;
+        // $response['reference_no'] = request()->segment(count(request()->segments()));
+
+        echo json_encode($response);
+    }
+
     public function checkBilling()
     {
         //look for billings marked for a checker queue
@@ -973,6 +986,7 @@ class BillingController extends Controller
         //get students of each billing transaction
         $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
         //check each student in billing transaction for duplciates in fhe award number
+
         foreach ($students as $student) {
             // select student for later updates
             // $student = TemporaryBilling::find($student['uid']);
@@ -1017,7 +1031,7 @@ class BillingController extends Controller
                     if ($nstpunits >= 6) {
                         $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
                     }
-                    
+
                     foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                         if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
@@ -1042,6 +1056,7 @@ class BillingController extends Controller
                     //maximum residency end
                 }
             }
+            // $total_amount += $student->
             if ($student->remarks != '') {
                 $billing->status_status = 4;
             }
