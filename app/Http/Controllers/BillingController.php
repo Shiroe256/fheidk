@@ -206,7 +206,7 @@ class BillingController extends Controller
         $reference_no  = $request->reference_no;
         $students = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
-            ->where('remarks', 'Check your spreadsheet. There is a duplicate of this student')
+            ->where('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
             ->get();
         $output = '';
         if ($students->count() > 0) {
