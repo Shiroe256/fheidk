@@ -32,7 +32,7 @@
         </div>
         <?php
         $applicants = TemporaryBilling::orderBy('remarks')
-            ->where('reference_no', {{ $reference_no }})
+            ->where('reference_no', $reference_no)
             ->get();
         ?>
         <div id="billing_forms_div" class="card-body billing_forms_div">
