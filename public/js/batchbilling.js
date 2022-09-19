@@ -17,7 +17,7 @@ var heiinfo;
 templateReq.onload = function (e) {
     var workbook = XLSX.read(templateReq.response);
     var worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    var worksheet_courses = workbook.Sheets[workbook.SheetNames[1]];
+    var worksheet_courses = workbook.Sheets[Courses];
     var courses = [];
     heiinfo.courses.forEach(course => {
         courses.push([course]);
@@ -25,7 +25,7 @@ templateReq.onload = function (e) {
     console.log(heiinfo.courses);
     console.log(courses);
     XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
-    XLSX.utils.sheet_add_aoa(worksheet_courses, [["asdasd"],['asdasd']], { origin: "A1" });
+    XLSX.utils.sheet_add_aoa(worksheet_courses, courses, { origin: "A1" });
     XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
 };
 
