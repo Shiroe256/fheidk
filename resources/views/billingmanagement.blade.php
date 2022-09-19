@@ -14,7 +14,7 @@
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                <input type="text" id="billing_status" name="billing_status" value="{{ $billing_status }}">
+                <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
                     class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <a id="btn_download_template"
@@ -32,7 +32,7 @@
             </div>
         </div>
         
-        
+        @if($billing_status == '1')
         <div id="billing_forms_div" class="card-body billing_forms_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -107,7 +107,9 @@
                 </div>
             </div>
         </div>
-        
+        @endif
+
+        @if($billing_status == '4')
         <div id="billing_exceptions_div" class="card-body billing_exceptions_div"  style="display:none">
             <form>
                 <div class="form-group input-style">
@@ -127,7 +129,8 @@
                 </div>
             </form>
         </div>
-
+        @endif
+        
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
             <div>
                 <ul class="nav nav-tabs nav-fill">
