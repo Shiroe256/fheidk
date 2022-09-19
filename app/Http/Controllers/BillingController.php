@@ -198,6 +198,67 @@ class BillingController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No billing records.</h1>';
         }
     }
+    
+
+    public function fetchTempExceptions(Request $request)
+    {
+        $reference_no  = $request->reference_no;
+        $students = TemporaryBilling::orderBy('remarks')
+            ->where('reference_no', $reference_no)
+            ->where('remarks', 'Check your spreadsheet. There is a duplicate of this student')
+            ->get();
+        $output = '';
+        if ($students->count() > 0) {
+            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
+            <thead>
+                <tr>
+                    <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
+                    <th class="text-left">HEI CAMPUS</th>
+                    <th class="text-left">APP ID</th>
+                    <th class="text-left">AWARD NUMBER</th>
+                    <th class="text-left">LASTNAME</th>
+                    <th class="text-left">FIRSTNAME</th>
+                    <th class="text-left">MIDDLENAME</th>
+                    <th>COURSE</th>
+                    <th class="text-center">YEAR</th>
+                    <th class="text-left">REMARKS</th>
+                    <th class="text-left">STATUS</th>
+                    <th class="text-left">AMOUNT BILLED</th>
+                    <th class="text-center">ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="tbl_list_of_students_form_2">';
+            foreach ($students as $student) {
+                $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
+                $output .= '<tr>
+                    <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
+                    <td class="text-left">' . $student->hei_name . '</td>
+                    <td class="text-left">' . $student->app_id . '</td>
+                    <td class="text-left">' . $student->fhe_award_no . '</td>
+                    <td>' . $student->stud_lname . '</td>
+                    <td>' . $student->stud_fname . '</td>
+                    <td>' . $student->stud_mname . '</td>
+                    <td>' . $student->degree_program . '</td>
+                    <td class="text-center">' . $student->year_level . '</td>
+                    <td class="text-left">' . $student->remarks . '</td>
+                    <td class="text-left">' . $student->stud_status . '</td>
+                    <td class="text-left">' . $total_amount . '</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>';
+            }
+            $output .= '</tbody>
+            </table>';
+            echo $output;
+        } else {
+            echo '<h1 class="text-center text-secondary my-5">No student records.</h1>';
+        }
+    }
+
 
     // handle insert a new student ajax request
     public function newTempStudent(Request $request)
