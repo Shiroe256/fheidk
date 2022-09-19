@@ -384,7 +384,7 @@ class BillingController extends Controller
         $reference_no  = $request->reference_no;
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
-        $semester = $request->add_semester;
+        $semester = $request->semester;
         // if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
         //     return response()->json(0);
         // }else{
@@ -396,7 +396,7 @@ class BillingController extends Controller
         //     ->groupby('type_of_fee')
         //     ->get();
         // return response()->json($otherSchoolFees);
-        return response()->json($reference_no);
+        return response()->json($course_enrolled);
         // }
     }
 
