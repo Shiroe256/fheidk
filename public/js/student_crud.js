@@ -188,16 +188,30 @@ if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof
 //get other school fee based on student's degree_program
 $(document).on('change', '#course_enrolled', function (e) {
   e.preventDefault();
+  getOSF();
+});
+
+$(document).on('change', '#year_level', function (e) {
+  e.preventDefault();
+  getOSF();
+});
+
+function getOSF(){
   let course = $("#course_enrolled option:selected").text();
+  let year_level = $("#year_level").val();
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
     data: {
       course_enrolled: course,
+      year_level: year_level,
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      //console.log(response);
+      if(response==0 || response.length==0){
+        console.log('No value course or year level detected.');
+      }else{
+      console.log(response);
       //display amount
       $("#admission_fee").val(response[0].total_amount);
       $("#athletic_fee").val(response[1].total_amount);
@@ -346,8 +360,9 @@ $(document).on('change', '#course_enrolled', function (e) {
         }
       });
     }
+  }
   });
-});
+}
 
 //Update student
 $(document).on('change', '#edit_course_enrolled', function (e) {
@@ -530,6 +545,23 @@ $(document).on('click', 'input[name=checkbox_address]', function () {
   }
 });
 
+//If edit_checkbox_address is checked
+$(document).on('click', 'input[name=edit_checkbox_address]', function () {
+  if (this.checked) {
+   $("input[name=edit_permanent_province]").val($("input[name=edit_present_province]").val());
+   $("input[name=edit_permanent_city]").val($("input[name=edit_present_city]").val());
+   $("input[name=edit_permanent_barangay]").val($("input[name=edit_present_barangay]").val());
+   $("input[name=edit_permanent_street]").val($("input[name=edit_present_street]").val());
+   $("input[name=edit_permanent_zipcode]").val($("input[name=edit_present_zipcode]").val());
+  }else{
+    $("input[name=edit_permanent_province]").val('');
+    $("input[name=edit_permanent_city]").val('');
+    $("input[name=edit_permanent_barangay]").val('');
+    $("input[name=edit_permanent_street]").val('');
+    $("input[name=edit_permanent_zipcode]").val('');
+  }
+});
+
 //if student has nstp
 $(document).on('click', 'input[name=checkbox_nstp]', function () {
   if (this.checked) {
@@ -570,10 +602,8 @@ $(document).on('click', '.btn_update_student', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      //di dapat append to dumodble
       $('#edit_selected_campus').val(response.hei_name);
-      // $('#edit_hei_campus').text(response.hei_name);
-      // $('#edit_hei_campus').append('<option selected value=' + response.hei_name + '>' + response.hei_name + '</option>');
+      $('#edit_hei_campus').val(response.hei_name);
       $("#edit_student_id").val(response.uid);
       $("#edit_last_name").val(response.stud_lname);
       $("#edit_first_name").val(response.stud_fname);
@@ -603,8 +633,7 @@ $(document).on('click', '.btn_update_student', function (e) {
       $("#edit_email_address").val(response.stud_email);
       $("#edit_alt_email_address").val(response.stud_alt_email);
       $("#edit_degree_program").val(response.degree_program);
-      //di dapat append to dumodble
-      $('#edit_course_enrolled').append('<option selected value=' + response.degree_program + '>' + response.degree_program + '</option>');
+      $('#edit_course_enrolled').val(response.degree_program);
       $("#edit_year_level").val(response.year_level);
       $("#edit_total_unit").val(response.academic_unit);
       $("#edit_tuition_fee").val(response.tuition_fee);
@@ -624,6 +653,18 @@ $(document).on('click', '.btn_update_student', function (e) {
       $("#edit_registration_fee").val(response.registration_fee);
       $("#edit_school_id_fee").val(response.school_id_fee);
       $("#edit_remarks").val(response.remarks);
+
+      if(($("#edit_present_province").val() ==  $("#edit_permanent_province").val()) && ($("#edit_present_city").val() ==  $("#edit_permanent_city").val()) && ($("#edit_present_barangay").val() ==  $("#edit_permanent_barangay").val()) && ($("#edit_present_street").val() ==  $("#edit_permanent_street").val()) && ($("#edit_present_zipcode").val() ==  $("#edit_permanent_zipcode").val())){
+        $("#edit_checkbox_address").prop('checked', true);
+      }
+
+      if(response.transferee == "Yes"){
+        $("#edit_checkbox_transferee").prop('checked', true);
+      }else{
+        ("#edit_checkbox_transferee").p
+        rop('checked', false);
+      }
+
       if($("#edit_nstp_unit").val() !== ""){
         $("#nstp_div").removeClass("d-none");
         $("#edit_with_nstp").prop('checked', true);
@@ -641,7 +682,6 @@ $(document).on('click', '#edit_with_nstp', function () {
     $("#edit_nstp_fee").val("");
 
     $("#nstp_div").addClass("d-none");
-    alert($("#edit_nstp_unit").val());
   }
 });
 
@@ -805,7 +845,6 @@ function selectDegreePrograms() {
       for (let index = 0; index < response.length; ++index) {
         let degree_program = response[index].course_enrolled;
         $('#course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
-        $('#edit_course_enrolled').append('<option value=' + degree_program + '>' + degree_program + '</option>');
         $('#course_applied').append('<option value=' + degree_program + '>' + degree_program + '</option>');
       }
     }
@@ -821,7 +860,6 @@ function selectCampus() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      console.log(response.length);
       if(response.length == 1){
         $('.campus_div').addClass('d-none');
         $('#selected_campus').val(response[0].hei_name);
@@ -831,7 +869,6 @@ function selectCampus() {
         let campus = response[index].hei_name;
         let hei_uii = response[index].hei_uii;
         $('#hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
-        $('#edit_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
         $('#applied_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
       }
     }

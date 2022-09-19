@@ -1,15 +1,15 @@
-<div id="mod_edit_student_info" class="modal fade" role="dialog" tabindex="-1">
+<div id="mod_edit_student_info" class="modal fade" role="dialog" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form id='frm_update_student' method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h6 class="modal-title">EDIT STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h6 class="modal-title text-primary">EDIT STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group input-style campus_div d-none">
-                        <h6 class="modal-title text-dark">Campus</h6>
+                        <h6 class="modal-title">Campus</h6>
                     </div>
                     <div class="form-group input-style campus_div d-none">
                         <div class="form-row">
@@ -22,16 +22,29 @@
                                     <input type="hidden" id="edit_reference_no" name="edit_reference_no" value="{{ $reference_no }}">
                                     <input type="hidden" id='edit_hei_uii' name='edit_hei_uii' type="text">
                                     <input type="hidden" id='edit_selected_campus' name='edit_selected_campus'>
-                                    <select id="edit_hei_campus" name="edit_hei_campus" class="form-control input-style-tabs">                           
-                                        <option disabled>-- Select Campus --</option>
-                                    </select>
+                                    <?php
+                                        $hei_sid = Auth::user()->hei_sid;
+                                        if (empty($hei_sid)) {
+                                            return response()->json(0);
+                                        } else {
+                                            echo'<select id="edit_hei_campus" name="edit_hei_campus" class="form-control input-style-tabs">                           
+                                                <option disabled>-- Select Campus --</option>';
+                                            $hei = DB::table('tbl_heis')->where('hei_sid', $hei_sid)->get();
+                                            if ($hei->count() > 0) {
+                                                foreach ($hei as $hei_campus) {
+                                                    echo'<option>'. $hei_campus->hei_name .'</option>';
+                                                }
+                                            }
+                                            echo'</select>';
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group input-style">
-                        <h6 class="modal-title text-dark">Personal Information</h6>
+                        <h6 class="modal-title">Personal Information</h6>
                     </div>
                     <div class="form-group input-style">
                         <div class="form-row">
@@ -64,7 +77,10 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label><input id='edit_birthdate' name='edit_birthdate' class="form-control input-style" type="text"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthdate</label>
+                                    <div class="input-group"><div class="input-group-prepend"><span class="input-group-text icon-container"><i class="fa fa-calendar-o"></i></span></div><input id="edit_birthdate" name='edit_birthdate' class="date form-control input-style" autocomplete="off" onkeydown="return false;" >
+                                </div>   
+                            </div>
                             </div>
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Birthplace</label><input id='edit_birthplace' name='edit_birthplace' class="form-control input-style" type="text"></div>
@@ -98,7 +114,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Present Address</h6>
+                                    <h6 class="modal-title">Present Address</h6>
                                 </div>
                             </div>
                         </div>
@@ -131,11 +147,11 @@
                         <div class="form-row">
                             <div class="col-xl-9">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Permanent Address</h6>
+                                    <h6 class="modal-title">Permanent Address</h6>
                                 </div>
                             </div>
                             <div class="col-xl-3 text-right">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input check-style" type="checkbox" id="formCheck-7"><label class="custom-control-label" for="formCheck-7" style="padding-top: 3px;">Present Address</label></div>
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input check-style" type="checkbox" id="edit_checkbox_address" name="edit_checkbox_address"><label class="custom-control-label" for="edit_checkbox_address" style="padding-top: 3px;">Present Address</label></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -167,7 +183,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Contact Information</h6>
+                                    <h6 class="modal-title">Contact Information</h6>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +209,7 @@
                         <div class="form-row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <h6 class="modal-title text-dark">Enrollment Information</h6>
+                                    <h6 class="modal-title">Enrollment Information</h6>
                                 </div>
                             </div>
                         </div>
@@ -201,9 +217,21 @@
                             <div class="col">
                                 <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Course Enrolled</label>
                                     <input id='edit_degree_program' name='edit_degree_program' type="hidden" class="form-control input-style" type="text">
-                                    <select id='edit_course_enrolled' name='edit_course_enrolled' class="form-control input-style">
-                                            <option value="" selected disabled>--Select Degree Program--</option>
-                                    </select>
+                                    <?php
+                                            echo' <select id="edit_course_enrolled" name="edit_course_enrolled" class="form-control input-style">
+                                            <option value="" selected disabled>--Select Degree Program--</option>';
+                                            $selectDegreePrograms = DB::table('tbl_other_school_fees')
+                                            ->select('course_enrolled')
+                                            ->where('hei_uii', Auth::user()->hei_uii)
+                                            ->groupby('course_enrolled')
+                                            ->get();
+                                            if ($selectDegreePrograms->count() > 0) {
+                                                foreach ($selectDegreePrograms as $degree) {
+                                                    echo'<option>'. $degree->course_enrolled .'</option>';
+                                                }
+                                            }
+                                            echo'</select>';
+                                    ?>
                                 </div>
                             </div>
                             <div class="col">

@@ -12,6 +12,7 @@ use App\Models\TemporaryBilling;
 use App\Models\TuitionFees;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\SchoolFees;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -365,7 +366,6 @@ class BillingController extends Controller
         }
     }
 
-
     // find the tosf of the students
     public function findTuitionFee(Request $request)
     {
@@ -382,11 +382,19 @@ class BillingController extends Controller
     public function findOtherSchoolFees(Request $request)
     {
         $course_enrolled = $request->course_enrolled;
-        $otherSchoolFees = OtherSchoolFees::select(DB::raw('type_of_fee, SUM(amount) as total_amount'))
-            ->where(trim('course_enrolled'), trim($course_enrolled))
-            ->groupby('type_of_fee', 'course_enrolled')
+        $year_level = $request->year_level;
+        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
+            return response()->json(0);
+        }else{
+        $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
+            ->where('reference_no', '01-01040-2021-2022-1-1')
+            ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
+            ->where('year_level', '1')
+            ->where('semester', '1')
+            ->groupby('type_of_fee')
             ->get();
         return response()->json($otherSchoolFees);
+        }
     }
 
     // find the tosf of the students
