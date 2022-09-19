@@ -1069,8 +1069,6 @@ class BillingController extends Controller
         $billing->billing_status = 3; //3 is done queue
         //set billing status but not save it yet. IF there are no errors ayun
 
-        e
-
         //check each student of each billing
         // foreach ($billings as $billing) {
         //get students of each billing transaction
