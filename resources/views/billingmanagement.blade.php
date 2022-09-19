@@ -15,10 +15,10 @@
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
-                <a id="btn_template"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
-                <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal"
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
+                <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
+                <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Queue for checking</button>
@@ -107,7 +107,8 @@
         
 
 
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="display:none">
+        {{-- <div id="billing_exceptions_div" class="card-body billing_exceptions_div"> --}}
+        <div class="card-body">
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -120,109 +121,8 @@
                                         class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                         </div>
                     </div>
-                    <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                        <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                            id="tbl_exception_report">
-                            <thead>
-                                <tr>
-                                    <th class="text-center"><input type="checkbox"></th>
-                                    <th class="text-left">HEI CAMPUS</th>
-                                    <th class="text-left">AWARD NUMBER</th>
-                                    <th class="text-left">LASTNAME</th>
-                                    <th class="text-left">FIRSTNAME</th>
-                                    <th class="text-left">MIDDLENAME</th>
-                                    <th>COURSE</th>
-                                    <th class="text-center">YEAR</th>
-                                    <th class="text-left">REMARKS</th>
-                                    <th class="text-left">STATUS</th>
-                                    <th class="text-center">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center"><input type="checkbox"></td>
-                                    <td class="text-left">DIliman (Main)</td>
-                                    <td class="text-left">FHE-123-456</td>
-                                    <td>Molina</td>
-                                    <td>Carlo</td>
-                                    <td>Espartinez</td>
-                                    <td>Bachelor of Science in Information and Techology</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-left">Graduating</td>
-                                    <td class="text-left">Duplicate Entry<br></td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group"><button
-                                                class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip=""
-                                                data-placement="bottom" type="button"
-                                                title="Edit Student Information"
-                                                data-target="#mod_new_student_info"><i
-                                                    class="far fa-edit"></i></button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"><input type="checkbox"></td>
-                                    <td class="text-left">Los Baños</td>
-                                    <td class="text-left">FHE-123-456</td>
-                                    <td>Molina</td>
-                                    <td>Carlo</td>
-                                    <td>Espartinez</td>
-                                    <td>Bachelor of Science in Information and Techology</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-left"><br></td>
-                                    <td class="text-left">Duplicate Entry<br></td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group"><button
-                                                class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip=""
-                                                data-placement="bottom" type="button"
-                                                title="Edit Student Information"
-                                                data-target="#mod_new_student_info"><i
-                                                    class="far fa-edit"></i></button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"><input type="checkbox"></td>
-                                    <td class="text-left">Baguio</td>
-                                    <td class="text-left">FHE-123-456</td>
-                                    <td>Doe</td>
-                                    <td>John</td>
-                                    <td>Maxwell</td>
-                                    <td>Bachelor of Science in Information and Techology</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-left">Graduating</td>
-                                    <td class="text-left">Exceeded the Maximum Grace Period Allowed<br></td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group"><button
-                                                class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip=""
-                                                data-placement="bottom" type="button"
-                                                title="Edit Student Information"
-                                                data-target="#mod_new_student_info"><i
-                                                    class="far fa-edit"></i></button></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"><input type="checkbox"></td>
-                                    <td class="text-left">Baguio</td>
-                                    <td class="text-left">FHE-123-456</td>
-                                    <td>Molina</td>
-                                    <td>Carlo</td>
-                                    <td>Espartinez</td>
-                                    <td>Bachelor of Science in Information and Techology</td>
-                                    <td class="text-center">4</td>
-                                    <td class="text-left">Graduating</td>
-                                    <td class="text-left">NSTP taken exceeded 6 units</td>
-                                    <td class="text-center">
-                                        <div class="btn-group btn-group-sm" role="group"><button
-                                                class="btn btn-outline-info" data-toggle="modal" data-bs-tooltip=""
-                                                data-placement="bottom" type="button"
-                                                title="Edit Student Information" data-target="#mod_nstp_info"><i
-                                                    class="far fa-edit"></i></button></div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr></tr>
-                            </tfoot>
-                        </table>
+                    <div id="show_all_exceptions" class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                        
                     </div>
                 </div>
             </form>
@@ -1029,6 +929,7 @@
 <script type="text/javascript" src="{{ url('js\datatables.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\exception_report.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\applicant_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\dateformat.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
