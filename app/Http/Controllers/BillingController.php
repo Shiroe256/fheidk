@@ -49,7 +49,7 @@ class BillingController extends Controller
         if ($students->count() > 0) {
             $student_status ='';
             if($students->stud_status == 0){
-                $student_status == 'Enrolled';
+                $student_status = 'Enrolled';
             }
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
             <thead>
@@ -238,7 +238,7 @@ class BillingController extends Controller
 
                 $student_status ='';
                 if($exception->stud_status == 0){
-                    $student_status == 'Enrolled';
+                    $student_status = 'Enrolled';
                 }
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $exception->uid . '" name="student_checkbox" value="' . $exception->uid . '"></td>
