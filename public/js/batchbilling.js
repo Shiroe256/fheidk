@@ -16,8 +16,8 @@ var heiinfo;
 
 templateReq.onload = function (e) {
     var workbook = XLSX.read(templateReq.response);
-    var worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    var worksheet_courses = workbook.Sheets[data_courses];
+    var worksheet = workbook.Sheets.Billing_Form;
+    var worksheet_courses = workbook.Sheets.data_courses;
     var courses = [];
     heiinfo.courses.forEach(course => {
         courses.push([course]);
