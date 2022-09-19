@@ -38,7 +38,7 @@
                             elseif ($billing['billing_status']==3):?>
                         <span class="badge badge-pill badge-primary span-size">Done</span>
                         <?php
-                            elseif ($billing['billing_status']==3):?>
+                            elseif ($billing['billing_status']==4):?>
                         <span class="badge badge-pill badge-danger span-size">For Review</span>
                         <?php
                             endif;?>
