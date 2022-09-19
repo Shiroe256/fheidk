@@ -119,7 +119,7 @@ class BillingController extends Controller
                     <th class="text-center">YEAR</th>
                     <th class="text-left">REMARKS</th>
                     <th class="text-center">NO. OF EXAM TAKEN</th>
-                    <th class="text-left">STATUS</th>
+                    <th class="text-left">RESULT</th>
                     <th class="text-center">ACTION</th>
                 </tr>
             </thead>

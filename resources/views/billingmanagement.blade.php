@@ -25,6 +25,7 @@
                 <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm d-none" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>
+                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm d-none" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
                 <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
@@ -103,6 +104,9 @@
                 </div>
             </div>
         </div>
+        
+
+
         <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="display:none">
             <form>
                 <div class="form-group input-style">
@@ -223,6 +227,9 @@
                 </div>
             </form>
         </div>
+
+
+
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -590,6 +597,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div id="summary_billing_submitted_div" class="card-body summary_billing_submitted_div" style="display:none">
             <form class="mt-4">
                 <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i> Submit Billing</h5>
@@ -844,6 +854,9 @@
                 </div>
             </form>
         </div>
+
+
+
     </div>
 </div>
 </div>
