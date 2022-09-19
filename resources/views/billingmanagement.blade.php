@@ -31,7 +31,7 @@
             </div>
         </div>
         <?php
-        $applicants = TemporaryBilling::orderBy('remarks')
+            $records = DB::table('tbl_billing_details_temp')
             ->where('reference_no', $reference_no)
             ->get();
         ?>
