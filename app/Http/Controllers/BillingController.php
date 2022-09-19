@@ -960,10 +960,14 @@ class BillingController extends Controller
     public function checkBilling()
     {
         //look for billings marked for a checker queue
-        // $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
         $billing = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
             ->first();
         $reference_no = $billing['reference_no'];
+        //when the billing has been checked. Save it with a new status.
+        $billing->billing_status = 3; //3 is done queue
+        //set billing status but not save it yet. IF there are no errors ayun
+
+
         //check each student of each billing
         // foreach ($billings as $billing) {
         //get students of each billing transaction
@@ -975,7 +979,6 @@ class BillingController extends Controller
             // get student and enrollment info
             $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
             $student->remarks = '';
-            print_r($student);
 
             //fetch duplicates in the masterlist
             $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
@@ -990,7 +993,6 @@ class BillingController extends Controller
             if ($duplicateinmasterlist != NULL) {
                 $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                 $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
-                $student->save();
             }
 
             $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
@@ -1040,18 +1042,16 @@ class BillingController extends Controller
                     //maximum residency end
                 }
             }
-
+            if ($student->remarks != '') {
+                $billing->status_status = 4;
+            }
             $student->save();
             // // $student->remarks = 'hello';
             // $selectedstudent->remarks = 'hello';
             // $selectedstudent->save();
         }
 
-
-        //when the billing has been checked. Save it with a new status.
-        $selectedbilling = Billing::find($billing['uid']);
-        $selectedbilling->billing_status = 3; //3 is done queue
-        $selectedbilling->save();
+        $billing->save();
 
         //write a success message in the logs
         Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
