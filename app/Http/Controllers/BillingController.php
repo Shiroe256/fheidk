@@ -1028,6 +1028,9 @@ class BillingController extends Controller
         $response['hei_uii'] = $hei_uii;
         $response['hei_name'] = $hei_info->hei_name;
         $response['hei_psg_region'] = $hei_info->hei_psg_region;
+
+        $courses = OtherSchoolFees::select('course_enrolled')->where('hei_uii',$hei_uii)->groupBy('hei_uii','course_enrolled')->get();
+        $response['courses'] = $courses;
         // $response['reference_no'] = request()->segment(count(request()->segments()));
 
         echo json_encode($response);

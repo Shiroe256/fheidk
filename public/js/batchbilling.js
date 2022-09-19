@@ -2,7 +2,7 @@ const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
 const closeButton = document.getElementById("closebutton");
 const queueButton = document.getElementById("btn_queue");
-const templateButton = document.getElementById("btn_template");
+const templateButton = document.getElementById("btn_download_template");
 const reference_no = $('#reference_no').val();
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
@@ -17,7 +17,15 @@ var heiinfo;
 templateReq.onload = function (e) {
     var workbook = XLSX.read(templateReq.response);
     var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    var worksheet_courses = workbook.Sheets[workbook.SheetNames[1]];
+    var courses = [];
+    heiinfo.courses.forEach(course => {
+        courses.push([course]);
+    });
+    console.log(heiinfo.courses);
+    console.log(courses);
     XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
+    XLSX.utils.sheet_add_aoa(worksheet_courses, [["asdasd"],['asdasd']], { origin: "A1" });
     XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
 };
 
