@@ -887,8 +887,8 @@ $(document).on('change', '#hei_campus', function (e) {
   e.preventDefault();
   let campus = $("#hei_campus option:selected").text();
   let hei_uii = $("#hei_campus option:selected").attr('id');
-  $("#selected_campus").val(campus);
-  $("#hei_uii").val(hei_uii);
+  $("#add_selected_campus").val(campus);
+  $("#add_hei_uii").val(hei_uii);
 });
 
 //set inputs value for edit
