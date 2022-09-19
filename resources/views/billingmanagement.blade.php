@@ -105,7 +105,7 @@
             </div>
         </div>
         
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
+        <div id="billing_exceptions_div" class="card-body billing_exceptions_div"  style="display:none">
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
