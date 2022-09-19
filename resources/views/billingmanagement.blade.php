@@ -30,9 +30,11 @@
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
-        
-
-
+        <?php
+        $applicants = TemporaryBilling::orderBy('remarks')
+            ->where('reference_no', {{ $reference_no }})
+            ->get();
+        ?>
         <div id="billing_forms_div" class="card-body billing_forms_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
