@@ -25,7 +25,7 @@
                 <button id="btn_run_billing_checker" class="btn btn-outline-info btn-sm d-none" type="button"
                     data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
                     Checker</button>
-                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm d-none" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
+                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
                 <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
