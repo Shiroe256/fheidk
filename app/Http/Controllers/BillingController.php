@@ -47,10 +47,6 @@ class BillingController extends Controller
             ->get();
         $output = '';
         if ($students->count() > 0) {
-            $student_status = '';
-            if ($students->stud_status == 0) {
-                $student_status = 'Enrolled';
-            }
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
             <thead>
                 <tr>
@@ -72,6 +68,10 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_students_form_2">';
             foreach ($students as $student) {
                 $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
+                $student_status = '';
+                if ($students->stud_status == 0) {
+                    $student_status = 'Enrolled';
+                }
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
                     <td class="text-left">' . $student->hei_name . '</td>
@@ -210,7 +210,7 @@ class BillingController extends Controller
         $reference_no  = $request->reference_no;
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
-            ->andwhere('remarks', 'FHE award no. automatically selected from Master table</br>')
+            ->where('remarks', 'FHE award no. automatically selected from Master table</br>')
             ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
             ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
             ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
