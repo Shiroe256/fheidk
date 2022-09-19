@@ -83,7 +83,7 @@ class BillingController extends Controller
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
+                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
                             </button>
                         </div>
                     </td>
@@ -120,7 +120,7 @@ class BillingController extends Controller
                     <th class="text-center">YEAR</th>
                     <th class="text-left">REMARKS</th>
                     <th class="text-center">NO. OF EXAM TAKEN</th>
-                    <th class="text-left">STATUS</th>
+                    <th class="text-left">RESULT</th>
                     <th class="text-center">ACTION</th>
                 </tr>
             </thead>
@@ -140,7 +140,7 @@ class BillingController extends Controller
                     <td class="text-left">' . $applicant->exam_result . '<br></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <button id="' . $applicant->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Applicant Information" data-bs-target="#mod_admission_entrance"><i class="far fa-edit"></i>
+                            <button id="' . $applicant->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Applicant Information" data-bs-target="#mod_admission_entrance"><i class="far fa-edit"></i>
                             </button>
                         </div>
                     </td>
@@ -382,19 +382,21 @@ class BillingController extends Controller
 
     public function findOtherSchoolFees(Request $request)
     {
+        $reference_no  = $request->reference_no;
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
-        if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
+        $semester = $request->semester;
+        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
             return response()->json(0);
-        } else {
-            $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
-                ->where('reference_no', '01-01040-2021-2022-1-1')
-                ->where('course_enrolled', 'Bachelor of Science in Information and Technology')
-                ->where('year_level', '1')
-                ->where('semester', '1')
-                ->groupby('type_of_fee')
-                ->get();
-            return response()->json($otherSchoolFees);
+        }else{
+        $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
+            ->where('reference_no', $reference_no)
+            ->where('course_enrolled', $course_enrolled)
+            ->where('year_level', $year_level)
+            ->where('semester', $semester)
+            ->groupby('type_of_fee', 'category')
+            ->get();
+        return response()->json($otherSchoolFees);
         }
     }
 
