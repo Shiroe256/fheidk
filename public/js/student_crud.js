@@ -211,7 +211,7 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log('No value course or year level detected.');
       }else{
-      console.log(response);
+      console.log(response[0].amount);
 
       //display amount
       $("#admission_fee").val(response[0].amount);
