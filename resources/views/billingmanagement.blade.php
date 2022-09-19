@@ -32,7 +32,7 @@
             </div>
         </div>
         
-        @if($billing_status == '1')
+        @if($billing_status == 1)
         <div id="billing_forms_div" class="card-body billing_forms_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -109,7 +109,7 @@
         </div>
         @endif
 
-        @if($billing_status == '4')
+        @if($billing_status == 4)
         <div id="billing_exceptions_div" class="card-body billing_exceptions_div"  style="display:none">
             <form>
                 <div class="form-group input-style">
@@ -130,7 +130,7 @@
             </form>
         </div>
         @endif
-        
+
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
             <div>
                 <ul class="nav nav-tabs nav-fill">
