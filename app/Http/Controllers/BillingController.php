@@ -212,10 +212,10 @@ class BillingController extends Controller
             ->where('reference_no', $reference_no)
             // ->where('remarks', 'FHE award no. automatically selected from Master table</br>')
             ->where('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
-            // ->where('remarks', 'Has exceeded the amount of NSTP units.</br>')
-            // ->where('remarks', 'Has a duplicate this year and semester already</br>')
-            // ->where('remarks', 'Has a duplicate from other school</br>')
-            // ->where('remarks', '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>')
+            ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
+            ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
+            ->orwhere('remarks', 'Has a duplicate from other school</br>')
+            ->orwhere('remarks', '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>')
             ->get();
         $output = '';
         if ($exceptions->count() > 0) {
