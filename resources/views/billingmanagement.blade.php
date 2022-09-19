@@ -130,7 +130,7 @@
         </div>
         @endif
 
-        @if($billing_status == 4)
+        @if($billing_status == 6)
         <div id="summary_billing_div" class="card-body summary_billing_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
