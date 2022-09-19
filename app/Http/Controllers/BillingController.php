@@ -47,6 +47,10 @@ class BillingController extends Controller
             ->get();
         $output = '';
         if ($students->count() > 0) {
+            $student_status ='';
+            if($students->stud_status == '0'){
+                $student_status == 'Enrolled';
+            }
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
             <thead>
                 <tr>
@@ -79,7 +83,7 @@ class BillingController extends Controller
                     <td>' . $student->degree_program . '</td>
                     <td class="text-center">' . $student->year_level . '</td>
                     <td class="text-left">' . $student->remarks . '</td>
-                    <td class="text-left">' . $student->stud_status . '</td>
+                    <td class="text-left">' . $student_status . '</td>
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
@@ -231,6 +235,11 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_exceptions">';
             foreach ($exceptions as $exception) {
                 $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
+
+                $student_status ='';
+                if($exception->stud_status == '0'){
+                    $student_status == 'Enrolled';
+                }
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $exception->uid . '" name="student_checkbox" value="' . $exception->uid . '"></td>
                     <td class="text-left">' . $exception->hei_name . '</td>
@@ -242,7 +251,7 @@ class BillingController extends Controller
                     <td>' . $exception->degree_program . '</td>
                     <td class="text-center">' . $exception->year_level . '</td>
                     <td class="text-left">' . $exception->remarks . '</td>
-                    <td class="text-left">' . $exception->stud_status . '</td>
+                    <td class="text-left">' . $student_status . '</td>
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
