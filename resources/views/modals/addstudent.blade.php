@@ -7,13 +7,13 @@
                     <h6 class="modal-title text-primary">ADD STUDENT</h6><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="add_ac_year" id="add_ac_year" value="{{ $ac_year }}">
-                    <input type="hidden" name="add_semester" id="add_semester" value="{{ $semester }}">
-                    <input type="hidden" name="add_tranche" id="add_tranche" value="{{ $tranche }}">
-                    <input type="hidden" id='add_hei_psg_region' name='add_hei_psg_region'value="{{ $hei_psg_region }}">
-                    <input type="hidden" id="add_reference_no" name="add_reference_no" value="{{ $reference_no }}">
-                    <input type="hidden" id='add_hei_uii' name='add_hei_uii'>
-                    <input type="hidden" id='add_selected_campus' name='add_selected_campus' type="text">
+                    <input type="text" name="add_ac_year" id="add_ac_year" value="{{ $ac_year }}">
+                    <input type="text" name="add_semester" id="add_semester" value="{{ $semester }}">
+                    <input type="text" name="add_tranche" id="add_tranche" value="{{ $tranche }}">
+                    <input type="text" id='add_hei_psg_region' name='add_hei_psg_region'value="{{ $hei_psg_region }}">
+                    <input type="text" id="add_reference_no" name="add_reference_no" value="{{ $reference_no }}">
+                    <input type="text" id='add_hei_uii' name='add_hei_uii'>
+                    <input type="text" id='add_selected_campus' name='add_selected_campus' type="text">
 
                     <div class="form-group input-style campus_div d-none">
                         <h6 class="modal-title">Campus</h6>
