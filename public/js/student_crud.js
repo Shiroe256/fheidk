@@ -198,7 +198,8 @@ $(document).on('change', '#year_level', function (e) {
 
 function getOSF(){
   let course = $("#course_enrolled option:selected").text();
-  let year_level = $("#year_level").val();
+  let year_level = $("#add_year_level").val();
+  
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
