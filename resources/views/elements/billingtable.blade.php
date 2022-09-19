@@ -36,10 +36,10 @@
                         <span class="badge badge-pill badge-warning span-size">On-Process</span>
                         <?php
                             elseif ($billing['billing_status']==3):?>
-                        <span class="badge badge-pill badge-primary span-size">Done</span>
+                        <span class="badge badge-pill badge-primary span-size">Done Processing: Ready For Submission</span>
                         <?php
                             elseif ($billing['billing_status']==4):?>
-                        <span class="badge badge-pill badge-danger span-size">For Review</span>
+                        <span class="badge badge-pill badge-danger span-size">Done Processing: For Review</span>
                         <?php
                             endif;?>
                     </td>
