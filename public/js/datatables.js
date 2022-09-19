@@ -1,10 +1,11 @@
-// // $(document).ready(function () {
-// //     //tbl_listofbillings
-// //     $('#tbl_listofbillings').DataTable({
-// //         "order": [[2, "asc"]],
-// //         orderCellsTop: true,
-// //         fixedHeader: true
-// //     });
+$(document).ready(function () {
+    //tbl_listofbillings
+    $('#tbl_listofbillings').DataTable({
+        "order": [[2, "asc"]],
+        orderCellsTop: true,
+        fixedHeader: true
+    });
+}
 
 // //     //tbl_billingform_1
 // //     $('#tbl_billingform_1').DataTable({
