@@ -213,155 +213,155 @@ function getOSF(){
       }else{
       console.log(response[0].amount);
 
-      //display amount
-      $("#admission_fee").val(response[0].amount);
-      $("#athletic_fee").val(response[1].amount);
-      $("#computer_fee").val(response[2].amount);
-      $("#cultural_fee").val(response[3].amount);
-      $("#development_fee").val(response[4].amount);
-      $("#entrance_fee").val(response[5].amount);
-      $("#guidance_fee").val(response[6].amount);
-      $("#handbook_fee").val(response[7].amount);
-      $("#laboratory_fee").val(response[8].amount);
-      $("#library_fee").val(response[9].amount);
-      $("#medical_dental_fee").val(response[10].amount);
-      $("#registration_fee").val(response[11].amount);
-      $("#school_id_fee").val(response[12].amount);
-      $("#degree_program").val($("#course_enrolled option:selected").text());
-      //set max amount allowed
-      $("#admission_fee").attr("max", response[0].amount);
-      $("#athletic_fee").attr("max", response[1].amount);
-      $("#computer_fee").attr("max", response[2].amount);
-      $("#cultural_fee").attr("max", response[3].amount);
-      $("#development_fee").attr("max", response[4].amount);
-      $("#entrance_fee").attr("max", response[5].amount);
-      $("#guidance_fee").attr("max", response[6].amount);
-      $("#handbook_fee").attr("max", response[7].amount);
-      $("#laboratory_fee").attr("max", response[8].amount);
-      $("#library_fee").attr("max", response[9].amount);
-      $("#medical_dental_fee").attr("max", response[10].amount);
-      $("#registration_fee").attr("max", response[11].amount);
-      $("#school_id_fee").attr("max", response[12].amount);
-      //disable keys if maximum amount is reached
-      $('#admission_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[0].total_amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[0].amount);
-        }
-      });
-      $('#athletic_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[1].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[1].amount);
-        }
-      });
-      $('#computer_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[2].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[2].amount);
-        }
-      });
-      $('#cultural_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[3].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[3].amount);
-        }
-      });
-      $('#development_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[4].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[4].amount);
-        }
-      });
-      $('#entrance_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[5].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[5].amount);
-        }
-      });
-      $('#guidance_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[6].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[6].amount);
-        }
-      });
-      $('#handbook_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[7].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[7].amount);
-        }
-      });
-      $('#laboratory_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[8].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[8].amount);
-        }
-      });
-      $('#library_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[9].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[9].amount);
-        }
-      });
-      $('#medical_dental_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[10].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[10].amount);
-        }
-      });
-      $('#registration_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[11].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[11].amount);
-        }
-      });
-      $('#school_id_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[12].amount
-          && e.keyCode !== 46
-          && e.keyCode !== 8
-        ) {
-          e.preventDefault();
-          $(this).val(response[12].amount);
-        }
-      });
-    }
-  }
+  //     //display amount
+  //     $("#admission_fee").val(response[0].amount);
+  //     $("#athletic_fee").val(response[1].amount);
+  //     $("#computer_fee").val(response[2].amount);
+  //     $("#cultural_fee").val(response[3].amount);
+  //     $("#development_fee").val(response[4].amount);
+  //     $("#entrance_fee").val(response[5].amount);
+  //     $("#guidance_fee").val(response[6].amount);
+  //     $("#handbook_fee").val(response[7].amount);
+  //     $("#laboratory_fee").val(response[8].amount);
+  //     $("#library_fee").val(response[9].amount);
+  //     $("#medical_dental_fee").val(response[10].amount);
+  //     $("#registration_fee").val(response[11].amount);
+  //     $("#school_id_fee").val(response[12].amount);
+  //     $("#degree_program").val($("#course_enrolled option:selected").text());
+  //     //set max amount allowed
+  //     $("#admission_fee").attr("max", response[0].amount);
+  //     $("#athletic_fee").attr("max", response[1].amount);
+  //     $("#computer_fee").attr("max", response[2].amount);
+  //     $("#cultural_fee").attr("max", response[3].amount);
+  //     $("#development_fee").attr("max", response[4].amount);
+  //     $("#entrance_fee").attr("max", response[5].amount);
+  //     $("#guidance_fee").attr("max", response[6].amount);
+  //     $("#handbook_fee").attr("max", response[7].amount);
+  //     $("#laboratory_fee").attr("max", response[8].amount);
+  //     $("#library_fee").attr("max", response[9].amount);
+  //     $("#medical_dental_fee").attr("max", response[10].amount);
+  //     $("#registration_fee").attr("max", response[11].amount);
+  //     $("#school_id_fee").attr("max", response[12].amount);
+  //     //disable keys if maximum amount is reached
+  //     $('#admission_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[0].total_amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[0].amount);
+  //       }
+  //     });
+  //     $('#athletic_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[1].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[1].amount);
+  //       }
+  //     });
+  //     $('#computer_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[2].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[2].amount);
+  //       }
+  //     });
+  //     $('#cultural_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[3].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[3].amount);
+  //       }
+  //     });
+  //     $('#development_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[4].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[4].amount);
+  //       }
+  //     });
+  //     $('#entrance_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[5].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[5].amount);
+  //       }
+  //     });
+  //     $('#guidance_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[6].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[6].amount);
+  //       }
+  //     });
+  //     $('#handbook_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[7].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[7].amount);
+  //       }
+  //     });
+  //     $('#laboratory_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[8].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[8].amount);
+  //       }
+  //     });
+  //     $('#library_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[9].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[9].amount);
+  //       }
+  //     });
+  //     $('#medical_dental_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[10].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[10].amount);
+  //       }
+  //     });
+  //     $('#registration_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[11].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[11].amount);
+  //       }
+  //     });
+  //     $('#school_id_fee').on('keyup keydown change', function (e) {
+  //       if ($(this).val() > response[12].amount
+  //         && e.keyCode !== 46
+  //         && e.keyCode !== 8
+  //       ) {
+  //         e.preventDefault();
+  //         $(this).val(response[12].amount);
+  //       }
+  //     });
+     }
+   }
   });
 }
 
