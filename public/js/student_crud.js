@@ -197,15 +197,19 @@ $(document).on('change', '#year_level', function (e) {
 });
 
 function getOSF(){
-  let course = $("#course_enrolled option:selected").text();
+  let reference_no = $("#add_reference_no").val();
+  let course_enrolled = $("#course_enrolled option:selected").text();
   let year_level = $("#add_year_level").val();
+  let semester = $("#add_semester").val();
   
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
     data: {
-      course_enrolled: course,
+      reference_no: reference_no,
+      course_enrolled: course_enrolled,
       year_level: year_level,
+      semester: semester,
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
