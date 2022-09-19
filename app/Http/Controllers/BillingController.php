@@ -396,7 +396,7 @@ class BillingController extends Controller
         //     ->groupby('type_of_fee')
         //     ->get();
         // return response()->json($otherSchoolFees);
-        return response()->json($course_enrolled);
+        return response()->json($year_level);
         // }
     }
 
