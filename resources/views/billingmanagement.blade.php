@@ -105,9 +105,7 @@
             </div>
         </div>
         
-
-
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
+        <div id="billing_exceptions_div" class="card-body billing_exceptions_div"  style="display:none">
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -121,13 +119,11 @@
                         </div>
                     </div>
                     <div id="show_all_exceptions" class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-                        
+                        {{-- EXCEPTIONS TABLE HERE --}}
                     </div>
                 </div>
             </form>
         </div>
-
-
 
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
             <div>
