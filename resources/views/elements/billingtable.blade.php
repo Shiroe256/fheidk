@@ -65,8 +65,5 @@
             {{-- sample shit --}}
 
         </tbody>
-        <tfoot>
-            <tr></tr>
-        </tfoot>
     </table>
 </div>
