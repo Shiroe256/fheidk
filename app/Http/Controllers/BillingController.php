@@ -68,6 +68,10 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_students_form_2">';
             foreach ($students as $student) {
                 $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
+                $student_status = '';
+                if ($student->stud_status == 0) {
+                    $student_status = 'Enrolled';
+                }
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
                     <td class="text-left">' . $student->hei_name . '</td>
@@ -79,7 +83,7 @@ class BillingController extends Controller
                     <td>' . $student->degree_program . '</td>
                     <td class="text-center">' . $student->year_level . '</td>
                     <td class="text-left">' . $student->remarks . '</td>
-                    <td class="text-left">' . $student->stud_status . '</td>
+                    <td class="text-left">' . $student_status . '</td>
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
@@ -199,14 +203,19 @@ class BillingController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No billing records.</h1>';
         }
     }
-    
+
 
     public function fetchTempExceptions(Request $request)
     {
         $reference_no  = $request->reference_no;
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
-            ->where('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
+            ->where('remarks', 'FHE award no. automatically selected from Master table</br>')
+            ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
+            ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
+            ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
+            ->orwhere('remarks', 'Has a duplicate from other school</br>')
+            ->orwhere('remarks', 'like', '%</br>Exceeded Maximum Residency with years</br>%')
             ->get();
         $output = '';
         if ($exceptions->count() > 0) {
@@ -231,6 +240,19 @@ class BillingController extends Controller
             <tbody id="tbl_list_of_exceptions">';
             foreach ($exceptions as $exception) {
                 $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
+
+                $student_status = '';
+                if ($exception->stud_status == 0) {
+                    $student_status = 'Enrolled';
+                } elseif ($exception->stud_status == 1) {
+                    $student_status = 'On-LOA';
+                } elseif ($exception->stud_status == 2) {
+                    $student_status = 'Dropped';
+                } elseif ($exception->stud_status == 3) {
+                    $student_status = 'Graduated';
+                } else {
+                    $student_status = '';
+                }
                 $output .= '<tr>
                     <td class="text-center"><input type="checkbox" id="' . $exception->uid . '" name="student_checkbox" value="' . $exception->uid . '"></td>
                     <td class="text-left">' . $exception->hei_name . '</td>
@@ -242,7 +264,7 @@ class BillingController extends Controller
                     <td>' . $exception->degree_program . '</td>
                     <td class="text-center">' . $exception->year_level . '</td>
                     <td class="text-left">' . $exception->remarks . '</td>
-                    <td class="text-left">' . $exception->stud_status . '</td>
+                    <td class="text-left">' . $student_status . '</td>
                     <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
@@ -447,17 +469,17 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->semester;
-        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
+        if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
             return response()->json(0);
-        }else{
-        $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
-            ->where('reference_no', $reference_no)
-            ->where('course_enrolled', $course_enrolled)
-            ->where('year_level', $year_level)
-            ->where('semester', $semester)
-            ->groupby('type_of_fee', 'category')
-            ->get();
-        return response()->json($otherSchoolFees);
+        } else {
+            $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
+                ->where('reference_no', $reference_no)
+                ->where('course_enrolled', $course_enrolled)
+                ->where('year_level', $year_level)
+                ->where('semester', $semester)
+                ->groupby('type_of_fee', 'category')
+                ->get();
+            return response()->json($otherSchoolFees);
         }
     }
 
@@ -1030,7 +1052,7 @@ class BillingController extends Controller
         $response['hei_name'] = $hei_info->hei_name;
         $response['hei_psg_region'] = $hei_info->hei_psg_region;
 
-        $courses = OtherSchoolFees::select('course_enrolled')->where('hei_uii',$hei_uii)->groupBy('hei_uii','course_enrolled')->get();
+        $courses = OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get();
         $response['courses'] = $courses;
         // $response['reference_no'] = request()->segment(count(request()->segments()));
 
@@ -1046,7 +1068,6 @@ class BillingController extends Controller
         //when the billing has been checked. Save it with a new status.
         $billing->billing_status = 3; //3 is done queue
         //set billing status but not save it yet. IF there are no errors ayun
-
 
         //check each student of each billing
         // foreach ($billings as $billing) {
