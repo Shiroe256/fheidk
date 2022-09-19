@@ -69,7 +69,7 @@ class BillingController extends Controller
             foreach ($students as $student) {
                 $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
                 $student_status = '';
-                if ($students->stud_status == 0) {
+                if ($student->stud_status == 0) {
                     $student_status = 'Enrolled';
                 }
                 $output .= '<tr>
