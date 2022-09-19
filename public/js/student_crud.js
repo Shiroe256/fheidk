@@ -219,150 +219,150 @@ function getOSF(){
       console.log(response);
 
       //display amount
-      $("#admission_fee").val(response[0].amount);
-      $("#athletic_fee").val(response[1].amount);
-      $("#computer_fee").val(response[2].amount);
-      $("#cultural_fee").val(response[3].amount);
-      $("#development_fee").val(response[4].amount);
-      $("#entrance_fee").val(response[5].amount);
-      $("#guidance_fee").val(response[6].amount);
-      $("#handbook_fee").val(response[7].amount);
-      $("#laboratory_fee").val(response[8].amount);
-      $("#library_fee").val(response[9].amount);
-      $("#medical_dental_fee").val(response[10].amount);
-      $("#registration_fee").val(response[11].amount);
-      $("#school_id_fee").val(response[12].amount);
+      $("#admission_fee").val(response[0].result);
+      $("#athletic_fee").val(response[1].result);
+      $("#computer_fee").val(response[2].result);
+      $("#cultural_fee").val(response[3].result);
+      $("#development_fee").val(response[4].result);
+      $("#entrance_fee").val(response[5].result);
+      $("#guidance_fee").val(response[6].result);
+      $("#handbook_fee").val(response[7].result);
+      $("#laboratory_fee").val(response[8].result);
+      $("#library_fee").val(response[9].result);
+      $("#medical_dental_fee").val(response[10].result);
+      $("#registration_fee").val(response[11].result);
+      $("#school_id_fee").val(response[12].result);
       $("#degree_program").val($("#course_enrolled option:selected").text());
       //set max amount allowed
-      $("#admission_fee").attr("max", response[0].amount);
-      $("#athletic_fee").attr("max", response[1].amount);
-      $("#computer_fee").attr("max", response[2].amount);
-      $("#cultural_fee").attr("max", response[3].amount);
-      $("#development_fee").attr("max", response[4].amount);
-      $("#entrance_fee").attr("max", response[5].amount);
-      $("#guidance_fee").attr("max", response[6].amount);
-      $("#handbook_fee").attr("max", response[7].amount);
-      $("#laboratory_fee").attr("max", response[8].amount);
-      $("#library_fee").attr("max", response[9].amount);
-      $("#medical_dental_fee").attr("max", response[10].amount);
-      $("#registration_fee").attr("max", response[11].amount);
-      $("#school_id_fee").attr("max", response[12].amount);
+      $("#admission_fee").attr("max", response[0].result);
+      $("#athletic_fee").attr("max", response[1].result);
+      $("#computer_fee").attr("max", response[2].result);
+      $("#cultural_fee").attr("max", response[3].result);
+      $("#development_fee").attr("max", response[4].result);
+      $("#entrance_fee").attr("max", response[5].result);
+      $("#guidance_fee").attr("max", response[6].result);
+      $("#handbook_fee").attr("max", response[7].result);
+      $("#laboratory_fee").attr("max", response[8].result);
+      $("#library_fee").attr("max", response[9].result);
+      $("#medical_dental_fee").attr("max", response[10].result);
+      $("#registration_fee").attr("max", response[11].result);
+      $("#school_id_fee").attr("max", response[12].result);
       //disable keys if maximum amount is reached
       $('#admission_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[0].amount
+        if ($(this).val() > response[0].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[0].amount);
+          $(this).val(response[0].result);
         }
       });
       $('#athletic_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[1].amount
+        if ($(this).val() > response[1].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[1].amount);
+          $(this).val(response[1].result);
         }
       });
       $('#computer_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[2].amount
+        if ($(this).val() > response[2].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[2].amount);
+          $(this).val(response[2].result);
         }
       });
       $('#cultural_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[3].amount
+        if ($(this).val() > response[3].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[3].amount);
+          $(this).val(response[3].result);
         }
       });
       $('#development_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[4].amount
+        if ($(this).val() > response[4].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[4].amount);
+          $(this).val(response[4].result);
         }
       });
       $('#entrance_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[5].amount
+        if ($(this).val() > response[5].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[5].amount);
+          $(this).val(response[5].result);
         }
       });
       $('#guidance_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[6].amount
+        if ($(this).val() > response[6].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[6].amount);
+          $(this).val(response[6].result);
         }
       });
       $('#handbook_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[7].amount
+        if ($(this).val() > response[7].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[7].amount);
+          $(this).val(response[7].result);
         }
       });
       $('#laboratory_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[8].amount
+        if ($(this).val() > response[8].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[8].amount);
+          $(this).val(response[8].result);
         }
       });
       $('#library_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[9].amount
+        if ($(this).val() > response[9].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[9].amount);
+          $(this).val(response[9].result);
         }
       });
       $('#medical_dental_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[10].amount
+        if ($(this).val() > response[10].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[10].amount);
+          $(this).val(response[10].result);
         }
       });
       $('#registration_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[11].amount
+        if ($(this).val() > response[11].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[11].amount);
+          $(this).val(response[11].result);
         }
       });
       $('#school_id_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[12].amount
+        if ($(this).val() > response[12].result
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
           e.preventDefault();
-          $(this).val(response[12].amount);
+          $(this).val(response[12].result);
         }
       });
     }
