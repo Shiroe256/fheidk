@@ -15,10 +15,10 @@
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
-                <a id="btn_template"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
-                <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal"
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
+                <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
+                <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Queue for checking</button>
@@ -106,7 +106,8 @@
         </div>
         
 
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
+
+        <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="display:none">
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -119,11 +120,13 @@
                                         class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                         </div>
                     </div>
-                        {{-- Exception Report Table Here --}}
+                    <div id="show_all_exceptions" class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                        
                     </div>
                 </div>
             </form>
         </div>
+
 
 
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
