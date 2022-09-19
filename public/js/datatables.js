@@ -5,7 +5,7 @@ $(document).ready(function () {
         orderCellsTop: true,
         fixedHeader: true
     });
-}
+});
 
 // //     //tbl_billingform_1
 // //     $('#tbl_billingform_1').DataTable({
