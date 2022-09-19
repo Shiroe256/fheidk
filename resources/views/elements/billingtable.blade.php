@@ -9,9 +9,10 @@
                 <th class="text-center">ACADEMIC YEAR</th>
                 <th class="text-center">SEMESTER</th>
                 <th class="text-center">TRANCHE</th>
-                {{-- <th class="text-center">TOTAL AMOUNT</th>
-                <th class="text-center">TOTAL BENEFICIARIES</th> --}}
+                <th class="text-center">TOTAL AMOUNT</th>
+                <th class="text-center">TOTAL BENEFICIARIES</th>
                 <th class="text-center">STATUS</th>
+                <th class="text-center">REMARKS</th>
                 <th class="text-center">ACTION</th>
             </tr>
         </thead>
@@ -25,24 +26,37 @@
                     <td class="text-center"><strong>{{ $billing['ac_year'] }}</strong></td>
                     <td class="text-center"><strong>{{ $f->format($billing['semester']) }}</strong></td>
                     <td class="text-center">{{ $f->format($billing['tranche']) }}</td>
-                    {{-- <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
-                    <td class="text-center">{{ $billing['total_beneficiaries'] }}</td> --}}
+                    <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
+                    <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
                     <td class="text-center">
                         <?php
                             if($billing['billing_status']==1): ?>
-                        <span class="badge badge-pill badge-secondary span-size">Open</span>
+                        <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
                         <?php
                             elseif ($billing['billing_status']==2):?>
-                        <span class="badge badge-pill badge-warning span-size">On-Process</span>
+                        <span class="badge badge-pill badge-info span-size">Ongoing Validation, please return once done</span>
                         <?php
                             elseif ($billing['billing_status']==3):?>
-                        <span class="badge badge-pill badge-primary span-size">Done</span>
+                        <span class="badge badge-pill badge-primary span-size">Done Validating: Ready For Submission</span>
                         <?php
                             elseif ($billing['billing_status']==4):?>
-                        <span class="badge badge-pill badge-danger span-size">For Review</span>
+                        <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
+                        <?php
+                            elseif ($billing['billing_status']==5):?>
+                        <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing Unit</span>
+                        <?php
+                            elseif ($billing['billing_status']==6):?>
+                        <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Admin Unit</span>
+                        <?php
+                            elseif ($billing['billing_status']==7):?>
+                        <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                        <?php
+                            elseif ($billing['billing_status']==8):?>
+                        <span class="badge badge-pill badge-success span-size">Disbursed</span>
                         <?php
                             endif;?>
                     </td>
+                    <td></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
@@ -59,8 +73,5 @@
             {{-- sample shit --}}
 
         </tbody>
-        <tfoot>
-            <tr></tr>
-        </tfoot>
     </table>
 </div>
