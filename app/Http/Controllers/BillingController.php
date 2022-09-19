@@ -139,7 +139,7 @@ class BillingController extends Controller
                     <td class="text-left">' . $applicant->exam_result . '<br></td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
-                            <button id="' . $applicant->uid . '" class="btn btn_update_student btn-outline-info" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Applicant Information" data-bs-target="#mod_admission_entrance"><i class="far fa-edit"></i>
+                            <button id="' . $applicant->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Applicant Information" data-bs-target="#mod_admission_entrance"><i class="far fa-edit"></i>
                             </button>
                         </div>
                     </td>

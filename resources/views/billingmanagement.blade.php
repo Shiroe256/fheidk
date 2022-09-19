@@ -15,9 +15,9 @@
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <a href="{{ url('files\template.xlsx') }}" id="btn_download_template"
-                    class="btn btn-outline-info btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
+                    class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</a>
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
                     data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col text-right">
                                         <div class="btn-group" role="group"><button
-                                                class="btn btn-outline-info btn-sm" type="button"
+                                                class="btn btn-outline-primary btn-sm" type="button"
                                                 data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i
                                                     class="fas fa-user-plus"></i>&nbsp;Add Student</button><button
                                                 class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col text-right">
                                         <div class="btn-group" role="group"><button
-                                                class="btn btn-outline-info btn-sm" type="button"
+                                                class="btn btn-outline-primary btn-sm" type="button"
                                                 data-toggle="modal" data-target="#mod_admission_entrance"><i
                                                     class="fas fa-user-plus"></i>&nbsp;Add Applicant</button><button
                                                 class="btn btn_delete_student btn-outline-danger btn-sm"
