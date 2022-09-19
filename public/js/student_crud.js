@@ -249,7 +249,7 @@ function getOSF(){
       $("#school_id_fee").attr("max", response[12].amount);
       //disable keys if maximum amount is reached
       $('#admission_fee').on('keyup keydown change', function (e) {
-        if ($(this).val() > response[0].total_amount
+        if ($(this).val() > response[0].amount
           && e.keyCode !== 46
           && e.keyCode !== 8
         ) {
