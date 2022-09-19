@@ -48,7 +48,7 @@ class BillingController extends Controller
         $output = '';
         if ($students->count() > 0) {
             $student_status ='';
-            if($students->stud_status == '0'){
+            if($students->stud_status == 0){
                 $student_status == 'Enrolled';
             }
             $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
@@ -237,7 +237,7 @@ class BillingController extends Controller
                 $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
 
                 $student_status ='';
-                if($exception->stud_status == '0'){
+                if($exception->stud_status == 0){
                     $student_status == 'Enrolled';
                 }
                 $output .= '<tr>
