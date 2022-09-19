@@ -385,18 +385,19 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->add_semester;
-        if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
-            return response()->json(0);
-        }else{
-        $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
-            ->where('reference_no', $reference_no)
-            ->where('course_enrolled', $course_enrolled)
-            ->where('year_level', $year_level)
-            ->where('semester', $semester)
-            ->groupby('type_of_fee')
-            ->get();
-        return response()->json($otherSchoolFees);
-        }
+        // if(is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)){
+        //     return response()->json(0);
+        // }else{
+        // $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee, category, coverage, amount, bs_status'))
+        //     ->where('reference_no', $reference_no)
+        //     ->where('course_enrolled', $course_enrolled)
+        //     ->where('year_level', $year_level)
+        //     ->where('semester', $semester)
+        //     ->groupby('type_of_fee')
+        //     ->get();
+        // return response()->json($otherSchoolFees);
+        return response()->json($reference_no,$course_enrolled,$year_level,$semester);
+        // }
     }
 
     // find the tosf of the students
