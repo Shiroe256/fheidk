@@ -14,31 +14,54 @@ var heiinfo;
 
 /* set up async GET request */
 
-templateReq.onload = function (e) {
-    var workbook = XLSX.read(templateReq.response);
-    var worksheet = workbook.Sheets.Billing_Form;
-    var worksheet_courses = workbook.Sheets.data_courses;
-    var courses = [];
-    heiinfo.courses.forEach(course => {
-        courses.push([course]);
-    });
-    console.log(heiinfo.courses);
-    console.log(courses);
-    XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
-    XLSX.utils.sheet_add_aoa(worksheet_courses, courses, { origin: "A1" });
-    XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
-};
+// templateReq.onload = function (e) {
+//     var workbook = XLSX.read(templateReq.response);
+//     var worksheet = workbook.Sheets.Billing_Form;
+//     var worksheet_courses = workbook.Sheets.data_courses;
+//     var courses = [];
+//     heiinfo.courses.forEach(course => {
+//         courses.push([course]);
+//     });
+//     console.log(heiinfo.courses);
+//     console.log(courses);
+//     XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
+//     XLSX.utils.sheet_add_aoa(worksheet_courses, courses, { origin: "A1" });
+//     XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
+// };
 
+templateReq.onload = function (e) {
+    // const ExcelJS = require('exceljs');
+    const workbook = new ExcelJS.Workbook();
+    const sheet_Billing_info = workbook.addWorksheet('Billing_Form');
+    const rowheaders = [7, "Last Name", "Given Name", "Middle Name ", "(Do not Abbreviate)", "Extension Name", "Sex at Birth ", "(Male or Female)", "Birthdate ", "(mm/dd/yyyy)", "Birthplace", "Last Name", "Given Name", "Middle Name", "Last Name", "Given Name", "Middle Name", "Province", "City", "Barangay", "House/Building No./ Street", "Zip Code", "Province", "City", "Barangay", "House/Building No./ Street", "Zip Code", "Email", "Alternate  ", "E-mail", "Phone No.", "Alternate Phone No.", "Transferee ", "(Yes or No)", "Degree Registry ID", "Year Level", "Laboratory Units / subject", "Computer Lab Units/Subject", "Academic Units Enrolled (credit and non-credit courses)", "Academic Units of NSTP Enrolled (credit and non-credit courses)", "No. of times the student has taken the exam", "Exam Result"];
+    sheet_Billing_info.addRow(rowheaders);
+
+    workbook.xlsx.load(templateReq.response)//Change file name here or give file path
+        .then(function () {
+            var worksheet = workbook.getWorksheet('Billing_Form');
+            var i = 1;
+            // worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
+            //     r = worksheet.getRow(i).values;
+            //     r1 = r[2];// Indexing a column
+            //     console.log(r1);
+            //     i++;
+            // });
+            // worksheet.getCell('B3').value = "abc";//Change the cell number here
+            return workbook.xlsx.writeFile('file.xlsx')//Change file name here or give     file path
+        });
+
+
+};
 templateData.onload = function (e) {
     heiinfo = JSON.parse(this.responseText);
     templateReq.open("GET", window.location.origin + "/files/template2.xlsx", true);
     templateReq.responseType = "arraybuffer";
     templateReq.send();
-
-
 };
 
 templateButton.onclick = function () {
+
+    // createWorkbook();
     templateData.open("POST", window.location.origin + "/fetchTemplateData", true);
     templateData.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
     // templateData.setRequestHeader("Content-type", 'multipart/form-data'); // or application/json
