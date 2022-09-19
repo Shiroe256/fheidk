@@ -1125,7 +1125,7 @@ class BillingController extends Controller
             }
             // $total_amount += $student->
             if ($student->remarks != '') {
-                $billing->status_status = 4;
+                $billing->billing_status = 4;
             }
             $student->save();
             // // $student->remarks = 'hello';
