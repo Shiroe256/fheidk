@@ -381,7 +381,7 @@ class BillingController extends Controller
 
     public function findOtherSchoolFees(Request $request)
     {
-        $reference_no  = $request->add_reference_no;
+        $reference_no  = $request->reference_no;
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->add_semester;
