@@ -208,7 +208,7 @@ function getOSF(){
     data: {
       reference_no: reference_no,
       course_enrolled: course_enrolled,
-      year_level: year_levels,
+      year_levels: year_levels,
       semester: semester,
       _token: '{{ csrf_token() }}'
     },
