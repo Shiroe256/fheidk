@@ -61,22 +61,22 @@
                         <?php
                         if ($billing['billing_status']==2):?>
                         <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-outline-info disabled"
+                            <a class="btn btn-outline-primary disabled"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
                                 title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                     class="far fa-eye"></i></a>
-                            <a class="btn btn-outline-warning disabled" role="button" data-toggle="tooltip" data-bs-tooltip=""
+                            <a class="btn btn-outline-primary disabled" role="button" data-toggle="tooltip" data-bs-tooltip=""
                                 data-placement="bottom" title="Edit Billing Settings"
                                 href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                     class="fas fa-sliders"></i></a>
                         </div>
                         <?php
                             else:?>
-                        <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
+                        <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-primary"
                             role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
                             title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                 class="far fa-eye"></i></a>
-                        <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
+                        <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip=""
                             data-placement="bottom" title="Edit Billing Settings"
                             href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                 class="fas fa-sliders"></i></a>
