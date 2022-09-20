@@ -170,7 +170,7 @@ class BillingController extends Controller
         $output = '';
         $cnt = 1;
         if ($hei_summary->count() > 0) {
-            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
+            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style tbl_summary"
             id="tbl_summary">
             <thead>
                 <tr>

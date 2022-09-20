@@ -20,7 +20,7 @@
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Run Validation</button>
                 <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button" style="display:none"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
-                <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
+                <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
         
@@ -43,7 +43,7 @@
                         <form class="mt-4">
                             <div class="form-group input-style">
                                 <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary</h5>
-                                <div id="show_summary" class="table-responsive table-style mt-2" role="grid"
+                                <div id="show_summary" class="table-responsive table-style mt-2 show_summary" role="grid"
                                     aria-describedby="dataTable_info">
                                     {{-- SUMMARY TABLE HERE --}}
                                 </div>
@@ -156,7 +156,7 @@
                                                 Forms</button></div>
                                     </div>
                                 </div>
-                                <div id="show_summary" class="table-responsive table-style mt-2" role="grid"
+                                <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary" role="grid"
                                     aria-describedby="dataTable_info">
                                    {{-- SUMMARY TABLE HERE --}}
                                 </div>
