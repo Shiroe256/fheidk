@@ -32,29 +32,55 @@ var heiinfo;
 templateReq.onload = function (e) {
     // const ExcelJS = require('exceljs');
     const workbook = new ExcelJS.Workbook();
-    const sheet_Billing_info = workbook.addWorksheet('Billing_Form');
-    const rowheaders = [7, "Last Name", "Given Name", "Middle Name ", "(Do not Abbreviate)", "Extension Name", "Sex at Birth ", "(Male or Female)", "Birthdate ", "(mm/dd/yyyy)", "Birthplace", "Last Name", "Given Name", "Middle Name", "Last Name", "Given Name", "Middle Name", "Province", "City", "Barangay", "House/Building No./ Street", "Zip Code", "Province", "City", "Barangay", "House/Building No./ Street", "Zip Code", "Email", "Alternate  ", "E-mail", "Phone No.", "Alternate Phone No.", "Transferee ", "(Yes or No)", "Degree Registry ID", "Year Level", "Laboratory Units / subject", "Computer Lab Units/Subject", "Academic Units Enrolled (credit and non-credit courses)", "Academic Units of NSTP Enrolled (credit and non-credit courses)", "No. of times the student has taken the exam", "Exam Result"];
-    sheet_Billing_info.addRow(rowheaders);
 
     workbook.xlsx.load(templateReq.response)//Change file name here or give file path
         .then(function () {
-            var worksheet = workbook.getWorksheet('Billing_Form');
-            var i = 1;
-            // worksheet.eachRow({ includeEmpty: false }, function (row, rowNumber) {
-            //     r = worksheet.getRow(i).values;
-            //     r1 = r[2];// Indexing a column
-            //     console.log(r1);
-            //     i++;
-            // });
-            // worksheet.getCell('B3').value = "abc";//Change the cell number here
-            return workbook.xlsx.writeFile('file.xlsx')//Change file name here or give     file path
+            var ws = workbook.getWorksheet('Billing_Form');
+            ws.getCell('B1').value = heiinfo.hei_psg_region;
+            ws.getCell('B2').value = heiinfo.hei_uii;
+            ws.getCell('B3').value = heiinfo.hei_name;
+            ws.getCell('B4').value = reference_no;
+            var crs = workbook.addWorksheet('courses');
+            console.log(heiinfo.courses);
+            heiinfo.courses.forEach(course => {
+                crs.addRow([course.course_enrolled]);
+                console.log([course.course_enrolled]);
+            });
+            crs.addRow(heiinfo.courses);
+            ws.dataValidations.add('AG8:AG20000',{
+                type: 'list',
+                allowBlank: true,
+                formulae: ['courses!$A:$A']
+              });
+            workbook.xlsx.writeBuffer( {
+                    base64: true
+                })
+                .then( function (xls64) {
+                    // build anchor tag and attach file (works in chrome)
+                    var a = document.createElement("a");
+                    var data = new Blob([xls64], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    
+                    var url = URL.createObjectURL(data);
+                    a.href = url;
+                    a.download = "export.xlsx";
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(function() {
+                            document.body.removeChild(a);
+                            window.URL.revokeObjectURL(url);
+                        },
+                        0);
+                })
+                .catch(function(error) {
+                    console.log(error.message);
+                });
         });
 
 
 };
 templateData.onload = function (e) {
     heiinfo = JSON.parse(this.responseText);
-    templateReq.open("GET", window.location.origin + "/files/template2.xlsx", true);
+    templateReq.open("GET", window.location.origin + "/files/templateblank.xlsx", true);
     templateReq.responseType = "arraybuffer";
     templateReq.send();
 };
