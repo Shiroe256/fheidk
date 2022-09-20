@@ -155,46 +155,14 @@
                                                 Forms</button></div>
                                     </div>
                                 </div>
-                                <div class="table-responsive mt-2 table-style" role="grid"
+                                <div id="show_summary" class="table-responsive table-style mt-2" role="grid"
                                     aria-describedby="dataTable_info">
-                                    <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                        id="tbl_billing_summary">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">NO.</th>
-                                                <th class="text-center">HEI CAMPUS</th>
-                                                <th class="text-center">TOTAL BENEFICIARIES<br></th>
-                                                <th class="text-center">TOTAL AMOUNT<br></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td class="text-center">DIliman (Main)</td>
-                                                <td class="text-center">123,456</td>
-                                                <td class="text-center">123,456,789.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td class="text-center">Los Baños</td>
-                                                <td class="text-center">123,456<br></td>
-                                                <td class="text-center">123,456,789.50<br></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td class="text-center">Visayas</td>
-                                                <td class="text-center">123,456<br></td>
-                                                <td class="text-center">123,456,789.50<br></td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr></tr>
-                                        </tfoot>
-                                    </table>
+                                   {{-- SUMMARY TABLE HERE --}}
                                 </div>
                             </div>
                         </form>
                     </div>
+
                     <div class="tab-pane fade" role="tabpanel" id="tab-8">
                         <form class="mt-4">
                             <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i>&nbsp;Submit Billing</h5>
@@ -495,6 +463,7 @@
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

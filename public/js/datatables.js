@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //tbl_listofbillings
     $("#tbl_listofbillings").DataTable({
-        "order": [[3, "asc"]],
+        "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,
         columnDefs: [
