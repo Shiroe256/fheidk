@@ -14,7 +14,7 @@
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                <input id="billing_status" name="billing_status" value="{{ $billing_status }}">
+                <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings" class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
