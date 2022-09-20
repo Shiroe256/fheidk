@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <h6 class="text-dark mb-4">FHE Management / AY
         {{ $ac_year }}&nbsp;/&nbsp;{{ $f->format($semester) }}
-        Semester / {{ $f->format($tranche) }} Tranche / {{ $reference_no }}</h6>
+        Semester / {{ $f->format($tranche) }} Tranche / Reference No. {{ $reference_no }}</h6>
     <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
     <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
     <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
