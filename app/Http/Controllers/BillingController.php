@@ -479,7 +479,7 @@ class BillingController extends Controller
                 ->where('year_level', $year_level)
                 ->where('semester', $semester)
                 ->get();
-            return response()->json($otherSchoolFees);
+            return response()->json($reference_no);
         }
     }
 
