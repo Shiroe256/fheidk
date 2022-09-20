@@ -130,7 +130,7 @@
         </div>
         @endif
 
-        @if($billing_status == 6)
+        @if($billing_status == 3)
         <div id="summary_billing_div" class="card-body summary_billing_div">
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -501,8 +501,8 @@
         @endif
 
 
-
-        <div id="summary_billing_submitted_div" class="card-body summary_billing_submitted_div" style="display:none">
+        @if($billing_status == 5 || $billing_status == 6 || $billing_status == 7)
+        <div id="summary_billing_submitted_div" class="card-body summary_billing_submitted_div">
             <form class="mt-4">
                 <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i> Submit Billing</h5>
                 <div class="form-row">
@@ -756,7 +756,7 @@
                 </div>
             </form>
         </div>
-
+        @endif
 
 
     </div>
