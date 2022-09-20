@@ -214,7 +214,7 @@ function getOSF(){
     },
     success: function (response) {
       if(response==0 || response.length==0){
-        console.log(course_enrolled);
+        console.log(year_level);
       }else{
       console.log(response);
 
