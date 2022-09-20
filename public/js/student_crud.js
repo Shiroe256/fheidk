@@ -191,7 +191,7 @@ $(document).on('change', '#course_enrolled', function (e) {
   getOSF();
 });
 
-$(document).on('change', '#year_level', function (e) {
+$(document).on('change', '#add_year_level', function (e) {
   e.preventDefault();
   getOSF();
 });
