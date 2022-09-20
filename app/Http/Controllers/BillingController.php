@@ -469,19 +469,18 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->semester;
-        // if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
-            return response()->json($year_level);
-        // } 
-        // else {
-        //     $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
-        //         ->where('reference_no', $reference_no)
-        //         ->where('course_enrolled', $course_enrolled)
-        //         ->where('year_level', $year_level)
-        //         ->where('semester', $semester)
-        //         ->groupby('type_of_fee', 'category')
-        //         ->get();
-        //     return response()->json($otherSchoolFees);
-        // }
+        if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
+            return response()->json(0);
+        } else {
+            $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
+                ->where('reference_no', $reference_no)
+                ->where('course_enrolled', $course_enrolled)
+                ->where('year_level', $year_level)
+                ->where('semester', $semester)
+                ->groupby('type_of_fee', 'category')
+                ->get();
+            return response()->json($otherSchoolFees);
+        }
     }
 
     // find the tosf of the students
