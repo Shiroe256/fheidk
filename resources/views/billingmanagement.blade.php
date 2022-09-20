@@ -25,6 +25,9 @@
         
         @if($billing_status == 1)
         <div id="billing_forms_div" class="card-body billing_forms_div">
+        @else
+        <div id="billing_forms_div" class="card-body billing_forms_div" style="d-none">
+        @endif
             <div>
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
@@ -98,10 +101,13 @@
                 </div>
             </div>
         </div>
-        @endif
+        
 
         @if($billing_status == 4)
         <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
+        @else
+        <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="d-none"> 
+        @endif
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -120,10 +126,12 @@
                 </div>
             </form>
         </div>
-        @endif
 
         @if($billing_status == 3)
         <div id="summary_billing_div" class="card-body summary_billing_div">
+        @else
+        <div id="summary_billing_div" class="card-body summary_billing_div" style="d-none">
+        @endif
             <div>
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab"
@@ -376,7 +384,6 @@
                 </div>
             </div>
         </div>
-        @endif
 
     </div>
 </div>
