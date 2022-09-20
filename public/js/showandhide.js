@@ -15,11 +15,11 @@ $(document).ready(function () {
     }
 
     $('#btn_forms').on('click', function (event) {
+        alert();
         $("#summary_billing_div").hide(300);
-        $("#btn_run_billing_checker").show(300);
-        $("#btn_forms").hide(300);
+       
         $("#billing_forms_div").show(300);
-        $("#billing_exceptions_div").hide(300);
+
     });
 
 
