@@ -11,29 +11,10 @@ var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
 
-
-/* set up async GET request */
-
-// templateReq.onload = function (e) {
-//     var workbook = XLSX.read(templateReq.response);
-//     var worksheet = workbook.Sheets.Billing_Form;
-//     var worksheet_courses = workbook.Sheets.data_courses;
-//     var courses = [];
-//     heiinfo.courses.forEach(course => {
-//         courses.push([course]);
-//     });
-//     console.log(heiinfo.courses);
-//     console.log(courses);
-//     XLSX.utils.sheet_add_aoa(worksheet, [[heiinfo.hei_psg_region], [heiinfo.hei_uii], [heiinfo.hei_name], [reference_no]], { origin: "B1" });
-//     XLSX.utils.sheet_add_aoa(worksheet_courses, courses, { origin: "A1" });
-//     XLSX.writeFileXLSX(workbook, reference_no + ".xlsx");
-// };
-
 templateReq.onload = function (e) {
-    // const ExcelJS = require('exceljs');
     const workbook = new ExcelJS.Workbook();
 
-    workbook.xlsx.load(templateReq.response)//Change file name here or give file path
+    workbook.xlsx.load(templateReq.response)
         .then(function () {
             var ws = workbook.getWorksheet('Billing_Form');
             ws.getCell('B1').value = heiinfo.hei_psg_region;
@@ -44,6 +25,7 @@ templateReq.onload = function (e) {
             heiinfo.courses.forEach(course => {
                 crs.addRow([course.course_enrolled]);
             });
+            crs.state = 'hidden';
             ws.dataValidations.add('AG8:AG20000',{
                 type: 'list',
                 allowBlank: true,
@@ -53,7 +35,6 @@ templateReq.onload = function (e) {
                     base64: true
                 })
                 .then( function (xls64) {
-                    // build anchor tag and attach file (works in chrome)
                     var a = document.createElement("a");
                     var data = new Blob([xls64], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
     
@@ -84,10 +65,8 @@ templateData.onload = function (e) {
 
 templateButton.onclick = function () {
 
-    // createWorkbook();
     templateData.open("POST", window.location.origin + "/fetchTemplateData", true);
     templateData.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
-    // templateData.setRequestHeader("Content-type", 'multipart/form-data'); // or application/json
     templateData.setRequestHeader("X-CSRF-Token", $('meta[name="csrf-token"]').attr('content'));
     templateData.send();
 }
