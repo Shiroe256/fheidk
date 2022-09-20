@@ -12,7 +12,7 @@ $(document).ready(function () {
     // if($('#billing_exceptions_div').is(':visible')){
     //     $("#billing_forms_div").hide(300);
     //     $("#summary_billing_div").hide(300);
-    }
+    // }
 
     $('#btn_forms').on('click', function (event) {
         alert();
