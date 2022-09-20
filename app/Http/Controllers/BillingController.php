@@ -480,7 +480,7 @@ class BillingController extends Controller
                 ->where('semester', $semester)
                 ->groupby('type_of_fee', 'category')
                 ->get();
-            return response()->json($otherSchoolFees);
+            return response()->json($year_level);
         }
     }
 
