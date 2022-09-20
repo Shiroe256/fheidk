@@ -475,11 +475,11 @@ class BillingController extends Controller
         }else {
             $otherSchoolFees = SchoolFees::select(DB::raw('*'))
                 ->where('reference_no', $reference_no)
-                ->where('course_enrolled', $course_enrolled)
-                ->where('year_level', $year_level)
-                ->where('semester', $semester)
+                ->andwhere('course_enrolled', $course_enrolled)
+                ->andwhere('year_level', $year_level)
+                ->andwhere('semester', $semester)
                 ->get();
-            return response()->json($reference_no);
+            return response()->json($otherSchoolFees);
         }
     }
 
