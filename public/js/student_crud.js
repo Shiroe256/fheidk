@@ -199,7 +199,7 @@ $(document).on('change', '#year_level', function (e) {
 function getOSF(){
   let reference_no = $("#add_reference_no").val();
   let course_enrolled = $("#course_enrolled option:selected").text();
-  let year_level = $("#year_level").val();
+  let year_levels = $("#year_level").val();
   let semester = $("#add_semester").val();
   
   $.ajax({
@@ -208,7 +208,7 @@ function getOSF(){
     data: {
       reference_no: reference_no,
       course_enrolled: course_enrolled,
-      year_level: year_level,
+      year_level: year_levels,
       semester: semester,
       _token: '{{ csrf_token() }}'
     },
