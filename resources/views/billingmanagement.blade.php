@@ -938,6 +938,7 @@
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js/batchbilling.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 
 
 </body>

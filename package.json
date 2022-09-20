@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "exceljs": "^4.3.0"
+        "exceljs": "^4.3.0",
+        "file-saver": "^2.0.5"
     }
 }
