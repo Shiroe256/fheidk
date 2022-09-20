@@ -15,7 +15,11 @@ $(document).ready(function () {
     // }
 
     if ($('#billing_status').val(3)) {
-        $("#btn_exceptions").hide(300);
+        $("#btn_forms").show(300);
+    }
+
+    if ($('#billing_status').val(4)) {
+        $("#btn_forms").show(300);
     }
 
     $('#btn_forms').on('click', function (event) {

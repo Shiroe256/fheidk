@@ -19,8 +19,8 @@
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Run Validation</button>
-                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
-                <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
+                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button" style="display:none"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
+                <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
         

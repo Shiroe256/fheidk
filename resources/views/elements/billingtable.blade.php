@@ -30,7 +30,7 @@
                     <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
                     <td class="text-center">
                         <?php
-                            if($billing['billing_status']==1): ?>
+                            if($billing['billing_status']==1):?>
                         <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
                         <?php
                             elseif ($billing['billing_status']==2):?>
