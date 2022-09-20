@@ -14,7 +14,7 @@
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                <input id="reference_no" name="reference_no" value="{{ $billing_status }}">
+                <input id="billing_status" name="billing_status" value="{{ $billing_status }}">
                 <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings" class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
                 <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
@@ -24,11 +24,7 @@
             </div>
         </div>
         
-        @if($billing_status == 1)
-        <div id="billing_forms_div" class="card-body billing_forms_div">
-        @else
         <div id="billing_forms_div" class="card-body billing_forms_div" style="d-none">
-        @endif
             <div>
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
@@ -103,12 +99,7 @@
             </div>
         </div>
         
-
-        @if($billing_status == 4)
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
-        @else
         <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="d-none"> 
-        @endif
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -127,12 +118,8 @@
                 </div>
             </form>
         </div>
-
-        @if($billing_status == 3)
-        <div id="summary_billing_div" class="card-body summary_billing_div">
-        @else
+       
         <div id="summary_billing_div" class="card-body summary_billing_div" style="d-none">
-        @endif
             <div>
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab"
