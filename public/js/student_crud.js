@@ -199,7 +199,7 @@ $(document).on('change', '#year_level', function (e) {
 function getOSF(){
   let reference_no = $("#add_reference_no").val();
   let course_enrolled = $("#course_enrolled option:selected").text();
-  let year_level = $("#year_level").val();
+  let year_level = $("#add_year_level").val();
   let semester = $("#add_semester").val();
   
   $.ajax({

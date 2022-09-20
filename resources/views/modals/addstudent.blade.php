@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='year_level' name='year_level' class="form-control input-style" type="number" min="0"></div>
+                                <div class="form-group"><label><span class="text-danger">*</span>&nbsp;Year Level</label><input id='add_year_level' name='add_year_level' class="form-control input-style" type="number" min="0"></div>
                             </div>
                         </div>
                         <div class="form-row">
