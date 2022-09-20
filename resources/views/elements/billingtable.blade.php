@@ -57,29 +57,29 @@
                             endif;?>
                     </td>
                     <td></td>
-                    @if($billing['billing_status']==2)
                     <td class="text-center">
+                        @if($billing['billing_status']==2)
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
                                 title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                     class="far fa-eye"></i></a>
                             <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
                                 data-placement="bottom" title="Edit Billing Settings"
-                                href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}" disabled><i
+                                href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                     class="fas fa-sliders"></i></a>
                         </div>
-                    </td>
-                    @else
+                        @else
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
-                                role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
-                                title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
+                            role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
+                            title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}" disabled><i
                                 class="far fa-eye"></i></a>
-                            <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
+                        <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
                             data-placement="bottom" title="Edit Billing Settings"
                             href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}" disabled><i
                                 class="fas fa-sliders"></i></a>
                         </div>
-                    @endif
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             {{-- sample shit --}}
