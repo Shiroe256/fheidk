@@ -41,12 +41,9 @@ templateReq.onload = function (e) {
             ws.getCell('B3').value = heiinfo.hei_name;
             ws.getCell('B4').value = reference_no;
             var crs = workbook.addWorksheet('courses');
-            console.log(heiinfo.courses);
             heiinfo.courses.forEach(course => {
                 crs.addRow([course.course_enrolled]);
-                console.log([course.course_enrolled]);
             });
-            crs.addRow(heiinfo.courses);
             ws.dataValidations.add('AG8:AG20000',{
                 type: 'list',
                 allowBlank: true,
