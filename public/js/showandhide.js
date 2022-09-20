@@ -14,6 +14,10 @@ $(document).ready(function () {
     //     $("#summary_billing_div").hide(300);
     // }
 
+    if ($('#billing_status').val(3)) {
+        $("#btn_exceptions").hide(300);
+    }
+
     $('#btn_forms').on('click', function (event) {
         alert();
         $("#summary_billing_div").hide(300);
