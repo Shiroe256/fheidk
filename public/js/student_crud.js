@@ -214,7 +214,7 @@ function getOSF(){
     },
     success: function (response) {
       if(response==0 || response.length==0){
-        console.log('No value course or year level detected.');
+        console.log(reference_no);
       }else{
       console.log(response);
 

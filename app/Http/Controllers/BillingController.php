@@ -278,7 +278,7 @@ class BillingController extends Controller
             </table>';
             echo $output;
         } else {
-            echo '<h1 class="text-center text-secondary my-5">No exception reports.</h1>';
+            echo '<h1 class="text-center text-secondary my-5">No exception reports, please run the billing checker again.</h1>';
         }
     }
 
