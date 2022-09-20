@@ -467,7 +467,7 @@ class BillingController extends Controller
     {
         $reference_no  = $request->reference_no;
         $course_enrolled = $request->course_enrolled;
-        $year_levels = $request->year_level;
+        $year_levels = $request->year_levels;
         $semester = $request->semester;
         if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_levels) || empty($year_levels)) {
             return response()->json($year_levels);
