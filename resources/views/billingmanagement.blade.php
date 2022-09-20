@@ -356,13 +356,11 @@
                                 </div>
                             </div>
 
-                            @if($billing_status == 5)
-                           
-                            @else
+                            @if($billing_status == 3)
                             <div class="form-row">
                                 <div class="col-xl-12 offset-xl-0">
                                     <div class="form-group input-style">
-                                        <p class="text-right"><button class="btn btn-outline-info btn-sm"
+                                        <p class="text-right"><button class="btn btn-outline-primary btn-sm"
                                                 type="button" data-toggle="modal"
                                                 data-target="#mod_submit_final_billing"><i
                                                     class="far fa-paper-plane"></i>&nbsp;Submit Final Billing</button>
@@ -371,7 +369,7 @@
                                 </div>
                             </div>
                             @endif
-                            
+
                         </form>
                     </div>
 
