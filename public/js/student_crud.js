@@ -191,7 +191,7 @@ $(document).on('change', '#course_enrolled', function (e) {
   getOSF();
 });
 
-$(document).on('change', '#add_year_level', function (e) {
+$(document).on('change', '#year_level', function (e) {
   e.preventDefault();
   getOSF();
 });
@@ -199,7 +199,7 @@ $(document).on('change', '#add_year_level', function (e) {
 function getOSF(){
   let reference_no = $("#add_reference_no").val();
   let course_enrolled = $("#course_enrolled option:selected").text();
-  let year_level = $("#add_year_level").val();
+  let year_level = $("#year_level").val();
   let semester = $("#add_semester").val();
   
   $.ajax({
@@ -214,7 +214,7 @@ function getOSF(){
     },
     success: function (response) {
       // if(response==0 || response.length==0){
-        console.log(response);
+        console.log(year_level);
     //   }else{
     //   console.log(response);
 
