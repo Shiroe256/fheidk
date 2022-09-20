@@ -59,7 +59,7 @@
                     <td></td>
                     <td class="text-center">
                         <?php
-                        if ($billing['billing_status']==2)?>
+                        if ($billing['billing_status']==2):?>
                         <div class="btn-group btn-group-sm" role="group">
                             <a class="btn btn-outline-info disabled"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
@@ -71,7 +71,7 @@
                                     class="fas fa-sliders"></i></a>
                         </div>
                         <?php
-                            else?>
+                            else:?>
                         <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-info"
                             role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
                             title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
