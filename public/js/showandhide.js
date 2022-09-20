@@ -26,6 +26,12 @@ $(document).ready(function () {
 
     if ($('#billing_status').val(4)) {
         $("#btn_forms").show(300);
+
+        $('#btn_forms').on('click', function (event) {
+            $("#btn_forms").hide(300);
+            $("#billing_exceptions_div").hide(300);
+            $("#billing_forms_div").show(300);
+        });
     }
 
 
