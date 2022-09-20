@@ -14,20 +14,12 @@
                 previous page</a>
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
-                    class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
-                <button id="btn_download_template"
-                    class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
-                <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
-                    data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
-                <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
-                        class="far fa-edit"></i>&nbsp;Run Validation</button>
-                <button id="btn_run_billing_checker" class="btn btn-outline-primary btn-sm d-none" type="button"
-                    data-toggle="modal" data-target="#mod_billing_checker"><i class="far fa-edit"></i>&nbsp;Run Billing
-                    Checker</button>
+                <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings" class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage Settings</a>
+                <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
+                <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload List</button>
+                <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-edit"></i>&nbsp;Run Validation</button>
                 <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception Report</button>
-                <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button" style="display:none"><i
-                        class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
+                <button id="btn_forms" class="btn btn-outline-info btn-sm" type="button"><i class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
             </div>
         </div>
         
@@ -150,7 +142,7 @@
                                     </div>
                                     <div class="col text-right">
                                         <div class="btn-group" role="group"><button
-                                                class="btn btn-outline-info btn-sm" type="button"><i
+                                                class="btn btn-outline-primary btn-sm" type="button"><i
                                                     class="fas fa-file-download"></i>&nbsp;Download Generated
                                                 Forms</button></div>
                                     </div>
@@ -363,6 +355,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @if($billing_status == 5)
+                           
+                            @else
                             <div class="form-row">
                                 <div class="col-xl-12 offset-xl-0">
                                     <div class="form-group input-style">
@@ -374,6 +370,8 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
+                            
                         </form>
                     </div>
 
@@ -381,265 +379,6 @@
             </div>
         </div>
         @endif
-
-
-        @if($billing_status == 5 || $billing_status == 6 || $billing_status == 7)
-        <div id="summary_billing_submitted_div" class="card-body summary_billing_submitted_div">
-            <form class="mt-4">
-                <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i> Submit Billing</h5>
-                <div class="form-row">
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Reference
-                                        Number</span></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-small-size">FHE-UP-2019-2020-1-1</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 offset-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Date of
-                                        Submission</span></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-small-size">June 20, 2020</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Academic Year</span>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-small-size">2019-2020</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Semester</span></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-small-size">1st</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Tranche</span></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-small-size">1st</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Total No. of
-                                        Beneficiaries</span></div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="text-danger span-billing-size">123,456,789</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col"><span class="span-billing-label-small-size">Total Amount</span>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col"><span class="text-danger span-billing-size">123,456,789</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive table-bordered table mt-2 table-style" role="grid"
-                    aria-describedby="dataTable_info">
-                    <table class="table table-bordered table-hover dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center">NO.</th>
-                                <th class="text-left">BILLING DOCUMENTS</th>
-                                <th class="text-center">STATUS</th>
-                                <th class="text-center">REMARKS</th>
-                                <th class="text-center">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-left">Consolidated Billing Statement (Form 1)</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-left">Consolidated Billing Details (Form 2)</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td class="text-left">Consolidated Billing Details (Form 3)</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">4</td>
-                                <td class="text-left">Notarized Registrar&#39;s Certification</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">5</td>
-                                <td class="text-left">Certificate of Registration of Students (CORs)</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html" data-target="#mod_upload_link_cor"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="tooltip"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                            target="_blank"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">6</td>
-                                <td class="text-left">Bank Certification of the HEI Certified by the HEI</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">7</td>
-                                <td class="text-left">Bank Certification of the HEI Certified by the Bank</td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div role="group" class="btn-group btn-group-sm"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-placement="bottom" title="View billing submission"
-                                            href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr></tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="form-row">
-                    <div class="col-xl-12 offset-xl-0">
-                        <div class="form-group input-style"><label>Remarks</label>
-                            <textarea class="form-control form-control-lg input-style" placeholder="Type your remarks here. . ."></textarea>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        @endif
-
 
     </div>
 </div>
