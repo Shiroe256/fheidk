@@ -214,7 +214,7 @@ function getOSF(){
     },
     success: function (response) {
       if(response==0 || response.length==0){
-        console.log(reference_no);
+        console.log(course_enrolled);
       }else{
       console.log(response);
 
