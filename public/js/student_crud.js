@@ -214,7 +214,7 @@ function getOSF(){
     },
     success: function (response) {
       // if(response==0 || response.length==0){
-        console.log(year_level);
+        console.log(response);
     //   }else{
     //   console.log(response);
 
