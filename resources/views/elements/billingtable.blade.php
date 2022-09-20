@@ -61,13 +61,13 @@
                         <?php
                         if ($billing['billing_status']==2):?>
                         <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-outline-info"
+                            <a class="btn btn-outline-info disabled"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
-                                title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}" disabled><i
+                                title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                     class="far fa-eye"></i></a>
-                            <a class="btn btn-outline-warning" role="button" data-toggle="tooltip" data-bs-tooltip=""
+                            <a class="btn btn-outline-warning disabled" role="button" data-toggle="tooltip" data-bs-tooltip=""
                                 data-placement="bottom" title="Edit Billing Settings"
-                                href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}" disabled><i
+                                href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                     class="fas fa-sliders"></i></a>
                         </div>
                         <?php
