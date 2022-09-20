@@ -59,7 +59,7 @@
                     <td></td>
                     <td class="text-center">
                         <?php
-                        if ($billing['billing_status']==2):?>
+                        if ($billing['billing_status']==2)?>
                         <div class="btn-group btn-group-sm" role="group">
                             <a class="btn btn-outline-info disabled"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
