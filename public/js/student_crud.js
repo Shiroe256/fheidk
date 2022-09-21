@@ -233,7 +233,7 @@ function getOSF(){
         NewArrayMo = {res}
         console.log(NewArrayMo)
 
-         var newArray = NewArrayMo.filter(function (el)
+         var newArray = NewArrayMo.res.filter(function (el)
          {
            return el.amount = 300
          }
