@@ -232,7 +232,6 @@ function getOSF(){
 
         // console.log(res);
        var arrayName = res;
-       employee[arrayName] = new Array();
          console.log(arrayName);
         // var newArray = data.filter(function (el)
         // {
