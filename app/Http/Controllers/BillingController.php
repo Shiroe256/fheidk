@@ -988,12 +988,12 @@ class BillingController extends Controller
         
         if ($this->findKey($json_fees, 'LABORATORY')) {
             if ($json_fees[$course][$year_level]['LABORATORY']['COVERAGE'] == 'per unit') {
-                $Computer = (float) $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] * $lab_unit;
+                $Laboratory = (float) $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] * $lab_unit;
             } else{ //per student
-                $Computer = $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'];
+                $Laboratory = $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'];
             }
         } else {
-            $Computer = 0;
+            $Laboratory = 0;
         }
        
         // $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] : 0;
