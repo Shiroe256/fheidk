@@ -226,7 +226,7 @@ function getOSF(){
           } 
           acc.push(obj);
           return acc;
-        }, [fuck]);
+        }, fuck[]);
 
          console.log(res);
 
