@@ -969,72 +969,141 @@ class BillingController extends Controller
 
         //finalized fees
         $Entrance = 0;
-        foreach ($json_fees[$course][$year_level]['ENTRANCE'] as $key => $ent_fee) {
-            $Entrance += (float) $ent_fee['AMOUNT'];
-        }
         $Admission = 0;
-        foreach ($json_fees[$course][$year_level]['ADMISSION'] as $key => $adm_fee) {
-            $Admission += (float) $adm_fee['AMOUNT'];
-        }
         $Athletic = 0;
-        foreach ($json_fees[$course][$year_level]['ATHELTIC'] as $key => $ath_fee) {
-            $Athletic += (float) $ath_fee['AMOUNT'];
-        }
         $Computer = 0;
-        foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
-            if ($comp_fee['COVERAGE'] == 'per unit') {
-                $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
-            }
-            if ($comp_fee['COVERAGE'] == 'per student') {
-                $Computer += (float) $comp_fee['AMOUNT'];
-            }
-        }
         $Cultural = 0;
-        foreach ($json_fees[$course][$year_level]['CULTURAL'] as $key => $cul_fee) {
-            $Cultural += (float) $cul_fee['AMOUNT'];
-        }
         $Development = 0;
-        foreach ($json_fees[$course][$year_level]['DEVELOPMENT'] as $key => $dev_fee) {
-            $Development += (float) $dev_fee['AMOUNT'];
-        }
         $Guidance = 0;
-        foreach ($json_fees[$course][$year_level]['GUIDANCE'] as $key => $gui_fee) {
-            $Guidance += (float) $gui_fee['AMOUNT'];
-        }
         $Handbook = 0;
-        foreach ($json_fees[$course][$year_level]['HANDBOOK'] as $key => $hand_fee) {
-            $Handbook += (float) $hand_fee['AMOUNT'];
-        }
-
         $Laboratory = 0;
-        if ($this->findKey($json_fees, 'LABORATORY')) {
-            foreach ($json_fees[$course][$year_level]['LABORATORY'] as $key => $lab_fee) {
-                if ($lab_fee['COVERAGE'] == 'per unit') {
-                    $Laboratory += (float) $lab_fee['AMOUNT'] * $lab_unit;
+        $Library = 0;
+        $Medical_and_Dental = 0;
+        $Registration = 0;
+        $ID = 0;
+        foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
+            $total_fee = 0;
+            foreach ($category as $fee) {
+                if ($fee['COVERAGE'] == 'per unit') {
+                    if ($type_of_fee == 'COMPUTER') {
+                        $unit_multiplier = $comp_lab_unit;
+                    } else {
+                        $unit_multiplier = $lab_unit;
+                    }
+                    $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
                 }
-                if ($lab_fee['COVERAGE'] == 'per student') {
-                    $Laboratory += (float) $lab_fee['AMOUNT'];
+                if ($fee['COVERAGE'] == 'per student') {
+                    $total_fee += (float) $fee['AMOUNT'];
                 }
             }
+            switch ($type_of_fee) {
+                case 'ENTRANCE':
+                    $Entrance += $total_fee;
+                    break;
+                case 'ADMISSION':
+                    $Admission += $total_fee;
+                    break;
+                case 'ATHLETIC':
+                    $Athletic += $total_fee;
+                    break;
+                case 'COMPUTER':
+                    $Computer += $total_fee;
+                    break;
+                case 'CULTURAL':
+                    $Cultural += $total_fee;
+                    break;
+                case 'DEVELOPMENT':
+                    $Development += $total_fee;
+                    break;
+                case 'GUIDANCE':
+                    $Guidance += $total_fee;
+                    break;
+                case 'HANDBOOK':
+                    $Handbook += $total_fee;
+                    break;
+                case 'LABORATORY':
+                    $Laboratory += $total_fee;
+                    break;
+                case 'LIBRARY':
+                    $Library += $total_fee;
+                    break;
+                case 'MEDICAL AND DENTAL':
+                    $Medical_and_Dental += $total_fee;
+                    break;
+                case 'REGISTRATION':
+                    $Registration += $total_fee;
+                    break;
+                case 'SCHOOL ID':
+                    $ID += $total_fee;
+                    break;
+            }
         }
+        // foreach ($json_fees[$course][$year_level]['ENTRANCE'] as $key => $ent_fee) {
+        //     $Entrance += (float) $ent_fee['AMOUNT'];
+        // }
 
-        // $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] : 0;
-        $Library = 0;
-        foreach ($json_fees[$course][$year_level]['LIBRARY'] as $key => $lib_fee) {
-            $Library += (float) $lib_fee['AMOUNT'];
-        }
-        $Medical_and_Dental = 0;
-        foreach ($json_fees[$course][$year_level]['MEDICAL AND DENTAL'] as $key => $med_fee) {
-            $Medical_and_Dental += (float) $med_fee['AMOUNT'];
-        }
-        $Registration = 0;
-        foreach ($json_fees[$course][$year_level]['REGISTRATION'] as $key => $reg_fee) {
-            $Registration += (float) $reg_fee['AMOUNT'];
-        }
-        $ID = 0;
-        foreach ($json_fees[$course][$year_level]['SCHOOL ID'] as $key => $id_fee) {
-            $ID += (float) $id_fee['AMOUNT'];
-        }
+        // foreach ($json_fees[$course][$year_level]['ADMISSION'] as $key => $adm_fee) {
+        //     $Admission += (float) $adm_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['ATHLETIC'] as $key => $ath_fee) {
+        //     $Athletic += (float) $ath_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
+        //     if ($comp_fee['COVERAGE'] == 'per unit') {
+        //         $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
+        //     }
+        //     if ($comp_fee['COVERAGE'] == 'per student') {
+        //         $Computer += (float) $comp_fee['AMOUNT'];
+        //     }
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['CULTURAL'] as $key => $cul_fee) {
+        //     $Cultural += (float) $cul_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['DEVELOPMENT'] as $key => $dev_fee) {
+        //     $Development += (float) $dev_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['GUIDANCE'] as $key => $gui_fee) {
+        //     $Guidance += (float) $gui_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['HANDBOOK'] as $key => $hand_fee) {
+        //     $Handbook += (float) $hand_fee['AMOUNT'];
+        // }
+
+
+        // if ($this->findKey($json_fees, 'LABORATORY')) {
+        //     foreach ($json_fees[$course][$year_level]['LABORATORY'] as $key => $lab_fee) {
+        //         if ($lab_fee['COVERAGE'] == 'per unit') {
+        //             $Laboratory += (float) $lab_fee['AMOUNT'] * $lab_unit;
+        //         }
+        //         if ($lab_fee['COVERAGE'] == 'per student') {
+        //             $Laboratory += (float) $lab_fee['AMOUNT'];
+        //         }
+        //     }
+        // }
+
+        // // $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] : 0;
+
+        // foreach ($json_fees[$course][$year_level]['LIBRARY'] as $key => $lib_fee) {
+        //     $Library += (float) $lib_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['MEDICAL AND DENTAL'] as $key => $med_fee) {
+        //     $Medical_and_Dental += (float) $med_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['REGISTRATION'] as $key => $reg_fee) {
+        //     $Registration += (float) $reg_fee['AMOUNT'];
+        // }
+
+        // foreach ($json_fees[$course][$year_level]['SCHOOL ID'] as $key => $id_fee) {
+        //     $ID += (float) $id_fee['AMOUNT'];
+        // }
 
         $tempstudent->tuition_fee = (float) $json_fees[$course][$year_level]['TUITION'] * (float) $data['acad_u'];
         $tempstudent->entrance_fee = $Entrance;
