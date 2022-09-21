@@ -230,7 +230,7 @@ function getOSF(){
         }, []);
 
         var NewArrayMo = new Array();
-        NewArrayMo[0] = {res}
+        NewArrayMo = {res}
         console.log(NewArrayMo)
 
         // var newArray = fuck.filter(function (el)
