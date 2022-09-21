@@ -221,7 +221,7 @@ function getOSF(){
         let traveler = response;
 
         var res = traveler.reduce((acc, obj)=>{
-          var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.bs_status === obj.bs_status);
+          var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
             existItem.amount += obj.amount;
             return acc;
