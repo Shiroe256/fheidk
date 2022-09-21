@@ -233,11 +233,11 @@ function getOSF(){
         other_school_fee = {res}
         console.log(other_school_fee);
 
-        //  var admission_fee = other_school_fee.res.filter(function (el)
-        //  {
-        //    return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
-        //  }
-        //  );
+         var admission_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
+         }
+         );
 
          var cultural_fee = other_school_fee.res.filter(function (el)
          {
@@ -245,17 +245,21 @@ function getOSF(){
          }
          );
 
-         console.log(cultural_fee);
+         if(admission_fee.length == 0){
+          $("#admission_fee").val(0);
+         }else{
+          $("#admission_fee").val(admission_fee[0].amount);
+         }
 
          if(cultural_fee.length == 0){
-          console.log(0);
+          $("#cultural_fee").val(0);
          }else{
-          console.log(cultural_fee[0].amount);
+          $("#cultural_fee").val(cultural_fee[0].amount);
          }
 
       //display amount
 
-        $("#admission_fee").val(admission_fee[0].amount);
+        
     //   $("#athletic_fee").val(response[1].result);
     //   $("#computer_fee").val(response[2].result);
     //   $("#cultural_fee").val(response[3].result);
