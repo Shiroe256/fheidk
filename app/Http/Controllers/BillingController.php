@@ -981,7 +981,6 @@ class BillingController extends Controller
         $Medical_and_Dental = 0;
         $Registration = 0;
         $ID = 0;
-        print_r($json_fees[$course][$year_level]);
         foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
             $total_fee = 0;
             if (is_array($category) === false) { //skip nstp and tuition
