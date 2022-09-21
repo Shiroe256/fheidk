@@ -469,10 +469,10 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->semester;
-        
+
         if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
             return response()->json(0);
-        }else {
+        } else {
             $otherSchoolFees = SchoolFees::select(DB::raw('*'))
                 ->where('reference_no', $reference_no)
                 ->where('course_enrolled', $course_enrolled)
@@ -632,12 +632,6 @@ class BillingController extends Controller
         $heiinfo = array('hei_psg_region' => $hei->hei_psg_region, 'hei_sid' => $hei->hei_sid, 'hei_shortname' => $hei->hei_shortname);
         return $heiinfo;
     }
-
-    // private function getBillingInformation($reference_no)
-    // {
-    //     $billing = Billing::where('reference_no', $reference_no)->first();
-    //     $billinginfo = array('')
-    // }
 
     public function newBilling(Request $request)
     {
@@ -801,13 +795,19 @@ class BillingController extends Controller
         // echo $reference_no;
         // build the array for fees
 
+        // $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+        //     ->where('hei_uii', $hei_uii)
+        //     ->where('bs_reference_no', $reference_no)
+        //     ->where('bs_status', 1)
+        //     ->where('semester', $request->semester)
+        //     ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
+        //     ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
+        //     ->get();
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
-            ->where('bs_status', 1)
             ->where('semester', $request->semester)
-            ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
-            ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
+            ->selectRaw('bs_status,course_enrolled,type_of_fee,year_level,coverage,amount')
             ->get();
 
         $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
@@ -817,7 +817,10 @@ class BillingController extends Controller
             $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['NSTP'] =  $tuitionFee->nstp_cost_per_unit;
         }
         foreach ($otherfees as $otherfee) {
-            $fees[strtoupper($otherfee->course_enrolled)][strtoupper($otherfee->year_level)][strtoupper($otherfee->type_of_fee)] = $otherfee->total_amount;
+            if ($otherfee->bs_status == 1) {
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee]['AMOUNT'] += $otherfee->amount;
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee]['COVERAGE'] += $otherfee->coverage;
+            }
         }
         $json_fees = json_encode($fees);
         //build array for fees and tosf end
@@ -955,27 +958,49 @@ class BillingController extends Controller
         $course = strtoupper($data['degree_course_id']);
         $year_level = strtoupper($data['year_level']);
         $tempstudent->degree_program = $course;
-        $tempstudent->lab_unit = $data['lab_u'];
-        $tempstudent->comp_lab_unit = $data['com_lab_u'];
+        $lab_unit = (float) $data['lab_u'];
+        $tempstudent->lab_unit = $lab_unit;
+        $comp_lab_unit = (float) $data['com_lab_u'];
+        $tempstudent->comp_lab_unit = $comp_lab_unit;
         $tempstudent->academic_unit = $data['acad_u'];
         $nstp_unit = array_key_exists('nstp_u', $data) ? $data['nstp_u'] : 0;
         $tempstudent->nstp_unit = $nstp_unit;
 
 
         //finalized fees
-        $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$course][$year_level]['ENTRANCE'] : 0;
-        $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION'] : 0;
-        $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC'] : 0;
-        $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$course][$year_level]['COMPUTER'] : 0;
-        $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$course][$year_level]['CULTURAL'] : 0;
-        $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$course][$year_level]['DEVELOPMENT'] : 0;
-        $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$course][$year_level]['GUIDANCE'] : 0;
-        $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$course][$year_level]['HANDBOOK'] : 0;
-        $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY'] : 0;
-        $Library = $this->findKey($json_fees, 'LIBRARY') ? $json_fees[$course][$year_level]['LIBRARY'] : 0;
-        $Medical_and_Dental = $this->findKey($json_fees, 'MEDICAL AND DENTAL') ? $json_fees[$course][$year_level]['MEDICAL AND DENTAL'] : 0;
-        $Registration = $this->findKey($json_fees, 'REGISTRATION') ? $json_fees[$course][$year_level]['REGISTRATION'] : 0;
-        $ID = $this->findKey($json_fees, 'SCHOOL ID') ? $json_fees[$course][$year_level]['SCHOOL ID'] : 0;
+        $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$course][$year_level]['ENTRANCE']['AMOUNT'] : 0;
+        $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION']['AMOUNT'] : 0;
+        $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC']['AMOUNT'] : 0;
+        if ($this->findKey($json_fees, 'COMPUTER')) {
+            if ($json_fees[$course][$year_level]['COMPUTER']['COVERAGE'] == 'per unit') {
+                $Computer = (float) $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] * $comp_lab_unit;
+            } else{ //per student
+                $Computer = $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'];
+            }
+        } else {
+            $Computer = 0;
+        }
+        // $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] : 0;
+        $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$course][$year_level]['CULTURAL']['AMOUNT'] : 0;
+        $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$course][$year_level]['DEVELOPMENT']['AMOUNT'] : 0;
+        $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$course][$year_level]['GUIDANCE']['AMOUNT'] : 0;
+        $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$course][$year_level]['HANDBOOK']['AMOUNT'] : 0;
+        
+        if ($this->findKey($json_fees, 'LABORATORY')) {
+            if ($json_fees[$course][$year_level]['LABORATORY']['COVERAGE'] == 'per unit') {
+                $Computer = (float) $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] * $lab_unit;
+            } else{ //per student
+                $Computer = $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'];
+            }
+        } else {
+            $Computer = 0;
+        }
+       
+        // $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] : 0;
+        $Library = $this->findKey($json_fees, 'LIBRARY') ? $json_fees[$course][$year_level]['LIBRARY']['AMOUNT'] : 0;
+        $Medical_and_Dental = $this->findKey($json_fees, 'MEDICAL AND DENTAL') ? $json_fees[$course][$year_level]['MEDICAL AND DENTAL']['AMOUNT'] : 0;
+        $Registration = $this->findKey($json_fees, 'REGISTRATION') ? $json_fees[$course][$year_level]['REGISTRATION']['AMOUNT'] : 0;
+        $ID = $this->findKey($json_fees, 'SCHOOL ID') ? $json_fees[$course][$year_level]['SCHOOL ID']['AMOUNT'] : 0;
 
         $tempstudent->tuition_fee = (float) $json_fees[$course][$year_level]['TUITION'] * (float) $data['acad_u'];
         $tempstudent->entrance_fee = $Entrance;
