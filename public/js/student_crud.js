@@ -232,12 +232,12 @@ function getOSF(){
 
         // console.log(res);
 
-       res.filter(function (el)
+        var newArray = res.filter(function (el)
         {
           return el.amount = 300
         }
         );
-        console.log(res);
+        console.log(newArray);
 
     //   //display amount
       $("#admission_fee").val(response[0].result);
