@@ -232,7 +232,7 @@ function getOSF(){
 
          
 
-         let fuck = new res;
+         let fuck = [res];
 
          console.log(fuck);
 
