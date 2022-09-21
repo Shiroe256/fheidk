@@ -984,6 +984,9 @@ class BillingController extends Controller
         print_r($json_fees[$course][$year_level]);
         foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
             $total_fee = 0;
+            if (is_array($category) === false) {
+                continue;
+            }
             foreach ($category as $fee) {
                 if ($fee['COVERAGE'] == 'per unit') {
                     if ($type_of_fee == 'COMPUTER') {
