@@ -218,7 +218,8 @@ function getOSF(){
       }else{
         console.log(response);
 
-        var res = response.fuck.reduce((acc, obj)=>{
+        var resu = new Array();
+        var resu = response.fuck.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
             existItem.amount += obj.amount;
@@ -228,7 +229,7 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(res);
+         console.log(resu);
 
         // var newArray = fuck.filter(function (el)
         // {
