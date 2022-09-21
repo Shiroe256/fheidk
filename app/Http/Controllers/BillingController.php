@@ -807,7 +807,7 @@ class BillingController extends Controller
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
             ->where('semester', $request->semester)
-            ->selectRaw('bs_status,course_enrolled,type_of_fee,year_level,coverage,amount')
+            ->selectRaw('bs_status,course_enrolled,type_of_fee,year_level,coverage,amount,category')
             ->get();
 
         $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
@@ -984,7 +984,6 @@ class BillingController extends Controller
         print_r($json_fees[$course][$year_level]);
         // foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
         //     $total_fee = 0;
-        // }
         //     foreach ($category as $fee) {
         //         if ($fee['COVERAGE'] == 'per unit') {
         //             if ($type_of_fee == 'COMPUTER') {
