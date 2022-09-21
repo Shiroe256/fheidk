@@ -231,14 +231,15 @@ function getOSF(){
         }, []);
 
         // console.log(res);
-       var arrayName = res;
-         console.log(arrayName);
-        // var newArray = data.filter(function (el)
-        // {
-        //   return el.amount = 300
-        // }
-        // );
-        // console.log(newArray);
+
+        var arr = [res];
+        // console.log(arr);
+        var newArray = arr.filter(function (el)
+        {
+          return el.amount = 300
+        }
+        );
+        console.log(newArray);
 
     //   //display amount
       $("#admission_fee").val(response[0].result);
