@@ -216,9 +216,9 @@ function getOSF(){
     success: function (response) {
       var res = new Array();
       if(response==0 || response.length==0){
-        console.log(response);
+        console.log('No selected year or course.');
       }else{
-        console.log(response);
+        // console.log(response);
         var res = response.osf.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
@@ -231,46 +231,145 @@ function getOSF(){
 
         var other_school_fee = new Array();
         other_school_fee = {res}
-        console.log(other_school_fee);
+        // console.log(other_school_fee);
 
          var admission_fee = other_school_fee.res.filter(function (el)
          {
            return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
          }
          );
-
+         var athletic_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Athletic" && el.coverage == "per new student" && el.bs_status == 1
+         }
+         );
+         var computer_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Computer" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
          var cultural_fee = other_school_fee.res.filter(function (el)
          {
            return el.type_of_fee == "Cultural" && el.coverage == "per student" && el.bs_status == 1
          }
          );
+         var development_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Development" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var entrance_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Entrance" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var guidance_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Guidance" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var handbook_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Handbook" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var laboratory_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Laboratory" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var library_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Library" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var medical_dental_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Medical and Dental" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var registration_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Registration" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+         var school_id_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "School ID" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
 
+
+
+        //display amount
          if(admission_fee.length == 0){
           $("#admission_fee").val(0);
          }else{
           $("#admission_fee").val(admission_fee[0].amount);
          }
-
+         if(athletic_fee.length == 0){
+          $("#athletic_fee").val(0);
+         }else{
+          $("#athletic_fee").val(athletic_fee[0].amount);
+         }
+         if(computer_fee.length == 0){
+          $("#computer_fee").val(0);
+         }else{
+          $("#computer_fee").val(computer_fee[0].amount);
+         }
          if(cultural_fee.length == 0){
           $("#cultural_fee").val(0);
          }else{
           $("#cultural_fee").val(cultural_fee[0].amount);
          }
+         if(development_fee.length == 0){
+          $("#development_fee").val(0);
+         }else{
+          $("#development_fee").val(development_fee[0].amount);
+         }
+         if(entrance_fee.length == 0){
+          $("#entrance_fee").val(0);
+         }else{
+          $("#entrance_fee").val(entrance_fee[0].amount);
+         }
+         if(guidance_fee.length == 0){
+          $("#guidance_fee").val(0);
+         }else{
+          $("#guidance_fee").val(guidance_fee[0].amount);
+         }
+         if(handbook_fee.length == 0){
+          $("#handbook_fee").val(0);
+         }else{
+          $("#handbook_fee").val(handbook_fee[0].amount);
+         }
+         if(laboratory_fee.length == 0){
+          $("#laboratory_fee").val(0);
+         }else{
+          $("#laboratory_fee").val(laboratory_fee[0].amount);
+         }
+         if(library_fee.length == 0){
+          $("#library_fee").val(0);
+         }else{
+          $("#library_fee").val(library_fee[0].amount);
+         }
+         if(medical_dental_fee.length == 0){
+          $("#medical_dental_fee").val(0);
+         }else{
+          $("#medical_dental_fee").val(medical_dental_fee[0].amount);
+         }
+         if(registration_fee.length == 0){
+          $("#registration_fee").val(0);
+         }else{
+          $("#registration_fee").val(registration_fee[0].amount);
+         }
+         if(school_id_fee.length == 0){
+          $("#school_id_fee").val(0);
+         }else{
+          $("#school_id_fee").val(school_id_fee[0].amount);
+         }
 
-      //display amount
+   
 
-        
-    //   $("#athletic_fee").val(response[1].result);
-    //   $("#computer_fee").val(response[2].result);
-    //   $("#cultural_fee").val(response[3].result);
-    //   $("#development_fee").val(response[4].result);
-    //   $("#entrance_fee").val(response[5].result);
-    //   $("#guidance_fee").val(response[6].result);
-    //   $("#handbook_fee").val(response[7].result);
-    //   $("#laboratory_fee").val(response[8].result);
-    //   $("#library_fee").val(response[9].result);
-    //   $("#medical_dental_fee").val(response[10].result);
-    //   $("#registration_fee").val(response[11].result);
     //   $("#school_id_fee").val(response[12].result);
     //   $("#degree_program").val($("#course_enrolled option:selected").text());
     //   //set max amount allowed
