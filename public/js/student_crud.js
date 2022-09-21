@@ -245,6 +245,8 @@ function getOSF(){
          }
          );
 
+         console.log(cultural_fee);
+
          if(cultural_fee[0].amount == 0){
           console.log(0);
          }else{
