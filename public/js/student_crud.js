@@ -216,6 +216,7 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log(response);
       }else{
+        console.log(response);
       console.log(response[0].amount + response[1].amount);
 
       //display amount
