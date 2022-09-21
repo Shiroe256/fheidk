@@ -228,7 +228,7 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(response);
+         console.log(response.fuck);
 
         // var newArray = fuck.filter(function (el)
         // {
