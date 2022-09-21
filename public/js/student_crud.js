@@ -216,7 +216,6 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log(response);
       }else{
-        console.log(response);
 
         let osf = response;
 
@@ -229,8 +228,6 @@ function getOSF(){
           acc.push(obj);
           return acc;
         }, []);
-
-        console.log(res);
 
         var newArray = $(res).filter(function (el)
         {
