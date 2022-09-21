@@ -252,9 +252,9 @@ function getOSF(){
          }
 
          if(cultural_fee.length == 0){
-          console.log(0);
+          $("#cultural_fee").val(0);
          }else{
-          console.log(cultural_fee[0].amount);
+          $("#cultural_fee").val(cultural_fee[0].amount);
          }
 
       //display amount
