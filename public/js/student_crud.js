@@ -232,7 +232,9 @@ function getOSF(){
 
         // console.log(res);
 
-        var newArray = res.filter(function (el)
+        var arr = [res];
+        console.log(arr);
+        var newArray = arr.filter(function (el)
         {
           return el.amount = 300
         }
