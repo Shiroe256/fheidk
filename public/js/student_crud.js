@@ -238,7 +238,7 @@ function getOSF(){
            return el.type_of_fee == "Admission" && el.coverage == "per student" && el.bs_status == 1
          }
          );
-         console.log(admission_fee.amount);
+         console.log(admission_fee);
 
     //   //display amount
       // $("#admission_fee").val(response[0].result);
