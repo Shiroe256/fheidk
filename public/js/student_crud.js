@@ -234,7 +234,7 @@ function getOSF(){
 
         var newArray = $(res).filter(function (el)
         {
-          return el.amount > 0
+          return el.amount = 300
         }
         );
         console.log(newArray);
