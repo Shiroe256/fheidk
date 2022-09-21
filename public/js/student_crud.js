@@ -216,7 +216,7 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log(response);
       }else{
-         console.log(response);
+        //  console.log(response);
 
         let osf = response;
 
@@ -230,9 +230,13 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(res);
+         
 
-        var newArray = res.filter(function (el)
+         let fuck = res;
+
+         console.log(fuck);
+
+        var newArray = fuck.filter(function (el)
         {
           return el.amount = 300
         }
