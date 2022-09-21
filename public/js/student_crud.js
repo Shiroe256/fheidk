@@ -233,12 +233,12 @@ function getOSF(){
         NewArrayMo = {res}
         console.log(NewArrayMo)
 
-         var newArray = NewArrayMo.res.filter(function (el)
-         {
-           return el.amount = 300
-         }
-         );
-         console.log(newArray);
+        //  var newArray = NewArrayMo.res.filter(function (el)
+        //  {
+        //    return el.amount = 300
+        //  }
+        //  );
+        //  console.log(newArray);
 
     //   //display amount
       // $("#admission_fee").val(response[0].result);
