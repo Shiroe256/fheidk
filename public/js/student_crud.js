@@ -232,7 +232,7 @@ function getOSF(){
 
         console.log(res);
 
-        var newArray = filter(function (el)
+        var newArray = $(res).filter(function (el)
         {
           return el.amount > 0
         }
