@@ -239,8 +239,21 @@ function getOSF(){
          }
          );
 
+         var cultural_fee = other_school_fee.res.filter(function (el)
+         {
+           return el.type_of_fee == "Cultural" && el.coverage == "per student" && el.bs_status == 1
+         }
+         );
+
+         if(cultural_fee[0].amount <= 0){
+          console.log(0);
+         }else{
+          console.log(cultural_fee[0].amount);
+         }
+
       //display amount
-      $("#admission_fee").val(admission_fee[0].amount);
+
+        $("#admission_fee").val(admission_fee[0].amount);
     //   $("#athletic_fee").val(response[1].result);
     //   $("#computer_fee").val(response[2].result);
     //   $("#cultural_fee").val(response[3].result);
