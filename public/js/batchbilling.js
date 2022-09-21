@@ -1,6 +1,6 @@
 const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
-const closeButton = document.getElementById("closebutton");
+const closeButton = document.getElementById("btn_closeupload");
 const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const reference_no = $('#reference_no').val();

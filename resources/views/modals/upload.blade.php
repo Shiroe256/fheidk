@@ -12,10 +12,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light card-button-style" type="button"
+                    <button id="btn_closeupload" class="btn btn-light card-button-style" type="button"
                         data-bs-dismiss="modal">Close</button>
-                        <button id="btn_upload_template"
-                        class="btn btn-primary card-button-style" type="button" disabled>Upload</button>
+                    <button id="btn_upload_template" class="btn btn-primary card-button-style" type="button"
+                        disabled>Upload</button>
                 </div>
             </form>
         </div>
