@@ -40,7 +40,7 @@ templateReq.onload = function (e) {
     
                     var url = URL.createObjectURL(data);
                     a.href = url;
-                    a.download = "export.xlsx";
+                    a.download = "template_" + reference_no + ".xlsx";
                     document.body.appendChild(a);
                     a.click();
                     setTimeout(function() {

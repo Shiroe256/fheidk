@@ -1062,103 +1062,99 @@ class BillingController extends Controller
     public function checkBilling()
     {
         //look for billings marked for a checker queue
-        $billing = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
-            ->first();
-        $reference_no = $billing['reference_no'];
-        //when the billing has been checked. Save it with a new status.
-        $billing->billing_status = 3; //3 is done queue
-        //set billing status but not save it yet. IF there are no errors ayun
-
+        $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
+            ->get();
         //check each student of each billing
-        // foreach ($billings as $billing) {
-        //get students of each billing transaction
-        $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
-        //check each student in billing transaction for duplciates in fhe award number
+        foreach ($billings as $billing) {
+            $reference_no = $billing['reference_no'];
+            //when the billing has been checked. Save it with a new status.
+            $billing->billing_status = 3; //3 is done queue
+            //set billing status but not save it yet. IF there are no errors ayun
 
-        foreach ($students as $student) {
-            // select student for later updates
-            // $student = TemporaryBilling::find($student['uid']);
-            // get student and enrollment info
-            $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
-            $student->remarks = '';
+            //get students of each billing transaction
+            $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
+            //check each student in billing transaction for duplciates in fhe award number
 
-            //fetch duplicates in the masterlist
-            $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
-                array(
-                    'fname' => $student->stud_fname,
-                    'lname' => $student->stud_lname,
-                    'birthdate' => $student->stud_birth_date
-                )
-            );
+            foreach ($students as $student) {
+                // select student for later updates
+                // $student = TemporaryBilling::find($student['uid']);
+                // get student and enrollment info
+                $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
+                $student->remarks = '';
 
-            //if there are duplicates in the masterlist add a remark
-            if ($duplicateinmasterlist != NULL) {
-                $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
-                $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
-            }
+                //fetch duplicates in the masterlist
+                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
+                    array(
+                        'fname' => $student->stud_fname,
+                        'lname' => $student->stud_lname,
+                        'birthdate' => $student->stud_birth_date
+                    )
+                );
 
-            $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
-            if ($duplicates > 1) {
-                $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
-            }
-
-            if ($student->fhe_award_no != '' && $duplicateinmasterlist != NULL) {
-
-                if ($studentinfo == null) {
-                    continue;
+                //if there are duplicates in the masterlist add a remark
+                if ($duplicateinmasterlist != NULL) {
+                    $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
+                    $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
                 }
 
-                $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
-                $firstyear = (float) $enrollmentinfo->first()->ac_year;
-                $firstsem = (float) $enrollmentinfo->first()->semester;
-                $loainfo = EnrollmentInfo::where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
-                $nstpunits = $enrollmentinfo->sum('nstp_unit');
-                //if there are any duplicates for this semester
-                if ($studentinfo->count() > 0) {
-                    //compute nstp units
-                    if ($nstpunits >= 6) {
-                        $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
+                if ($duplicates > 1) {
+                    $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
+                }
+
+                if ($student->fhe_award_no != '' && $duplicateinmasterlist != NULL) {
+
+                    if ($studentinfo == null) {
+                        continue;
                     }
 
-                    foreach ($enrollmentinfo as $key => $enrollmenti) {
+                    $enrollmentinfo = EnrollmentInfo::where('app_id', $studentinfo->app_id)->orderBy('ac_year')->orderBy('semester')->get();
+                    $firstyear = (float) $enrollmentinfo->first()->ac_year;
+                    $firstsem = (float) $enrollmentinfo->first()->semester;
+                    $loainfo = EnrollmentInfo::where('status', 2)->orderBy('ac_year')->orderBy('semester')->get(); //LOA
+                    $nstpunits = $enrollmentinfo->sum('nstp_unit');
+                    //if there are any duplicates for this semester
+                    if ($studentinfo->count() > 0) {
+                        //compute nstp units
+                        if ($nstpunits >= 6) {
+                            $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                        }
 
-                        if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
-                            $student->remarks .= 'Has a duplicate this year and semester already</br>';
-                            if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                $student->remarks .= 'Has a duplicate from other school</br>';
+                        foreach ($enrollmentinfo as $key => $enrollmenti) {
+
+                            if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
+                                $student->remarks .= 'Has a duplicate this year and semester already</br>';
+                                if ($enrollmenti->hei_uii <> $billing->hei_uii) {
+                                    $student->remarks .= 'Has a duplicate from other school</br>';
+                                }
                             }
                         }
-                    }
 
-                    //maximum residency start
-                    //we have yet to get a database of the duration of courses
-                    // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
-                    $normal_length = 4;
-                    $firstsem_discrepancy = $firstsem > 1 ? 0.5 : 0;
-                    $lastsem_discrepancy = (float) $billing->semester > 1 ? 0 : 0.5;
-                    $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
-                    $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
-                    if ($totallength > $normal_length) {
-                        $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
+                        //maximum residency start
+                        //we have yet to get a database of the duration of courses
+                        // $normal_length = $this->getCourseLength($this->getCourseUid($billing->hei_uii, $student->degree_program));
+                        $normal_length = 4;
+                        $firstsem_discrepancy = $firstsem > 1 ? 0.5 : 0;
+                        $lastsem_discrepancy = (float) $billing->semester > 1 ? 0 : 0.5;
+                        $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
+                        $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
+                        if ($totallength > $normal_length) {
+                            $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
+                        }
+                        //maximum residency end
                     }
-                    //maximum residency end
                 }
+                if ($student->remarks != '') {
+                    $billing->billing_status = 4;
+                }
+                $student->save();
             }
-            // $total_amount += $student->
-            if ($student->remarks != '') {
-                $billing->billing_status = 4;
-            }
-            $student->save();
-            // // $student->remarks = 'hello';
-            // $selectedstudent->remarks = 'hello';
-            // $selectedstudent->save();
+
+            $billing->save();
+
+            //write a success message in the logs
+            Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
         }
-
-        $billing->save();
-
-        //write a success message in the logs
-        Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
-        // }
         echo "done";
     }
     private function getDuplicateFHENo($fhe_award_no, $reference_no)
