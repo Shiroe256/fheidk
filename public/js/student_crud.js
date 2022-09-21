@@ -234,7 +234,7 @@ function getOSF(){
 
         var newArray = res.filter(function (el)
         {
-          return el.type_of_fee = 'Entrance Exam'
+          return el.type_of_fee === 'Entrance Exam'
         }
         );
         console.log(newArray);
