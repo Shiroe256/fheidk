@@ -232,12 +232,12 @@ function getOSF(){
 
         console.log(res);
 
-        var obj = [];
+        var objs = [];
 
-        obj = res;
+        objs = res;
 
 
-        var newArray = obj.filter(function (el)
+        var newArray = objs.filter(function (el)
         {
           return el.type_of_fee == "Entrance Exam"
         }
