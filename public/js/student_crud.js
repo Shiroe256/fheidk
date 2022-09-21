@@ -235,7 +235,7 @@ function getOSF(){
 
          var newArray = other_school_fee.res.filter(function (el)
          {
-           return el.amount == 300
+           return el.type_of_fee == "Admission" 
          }
          );
          console.log(newArray);
