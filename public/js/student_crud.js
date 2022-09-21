@@ -216,7 +216,7 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log(response);
       }else{
-        //  console.log(response);
+        console.log(response);
 
         var res = response.fuck.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
