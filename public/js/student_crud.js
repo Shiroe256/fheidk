@@ -231,7 +231,7 @@ function getOSF(){
 
          console.log(res);
 
-         const arr  = fuck[res];
+         const arr[]  = res;
 
          console.log(arr);
 
