@@ -229,7 +229,7 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(res);
+         console.log(existItem);
 
         // var newArray = fuck.filter(function (el)
         // {
