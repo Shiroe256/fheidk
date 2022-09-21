@@ -202,6 +202,7 @@ function getOSF(){
   let year_level = $("#year_level").val();
   let semester = $("#add_semester").val();
   
+  
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
@@ -213,13 +214,12 @@ function getOSF(){
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      var res = new Array();
       if(response==0 || response.length==0){
         console.log(response);
       }else{
         console.log(response);
-
-        var resu = new Array();
-        var resu = response.fuck.reduce((acc, obj)=>{
+        var res = response.fuck.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
             existItem.amount += obj.amount;
@@ -229,7 +229,7 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(resu);
+         console.log(res);
 
         // var newArray = fuck.filter(function (el)
         // {
