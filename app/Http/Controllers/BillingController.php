@@ -972,7 +972,7 @@ class BillingController extends Controller
         $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION']['AMOUNT'] : 0;
         $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC']['AMOUNT'] : 0;
         $Computer = 0;
-        if ($this->findKey($json_fees, 'COMPUTER')) {
+        // if ($this->findKey($json_fees, 'COMPUTER')) {
             foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
                 if ($comp_fee['COVERAGE'] == 'per unit') {
                     $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
@@ -981,7 +981,7 @@ class BillingController extends Controller
                     $Computer += (float) $comp_fee['AMOUNT'];
                 }
             }
-        }
+        // }
         // $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] : 0;
         $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$course][$year_level]['CULTURAL']['AMOUNT'] : 0;
         $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$course][$year_level]['DEVELOPMENT']['AMOUNT'] : 0;
