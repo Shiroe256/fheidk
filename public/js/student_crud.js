@@ -216,6 +216,7 @@ function getOSF(){
       if(response==0 || response.length==0){
         console.log(response);
       }else{
+        // console.log(response);
 
         let osf = response;
 
@@ -229,12 +230,16 @@ function getOSF(){
           return acc;
         }, []);
 
-        var newArray = $(res).filter(function (el)
+        // console.log(res);
+
+        var arr = [res];
+        console.log(arr);
+        var newArray = res.filter(function (el)
         {
           return el.amount = 300
         }
         );
-        console.log(newArray);
+        // console.log(newArray);
 
     //   //display amount
       $("#admission_fee").val(response[0].result);
