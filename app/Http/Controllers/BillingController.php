@@ -818,8 +818,8 @@ class BillingController extends Controller
         }
         foreach ($otherfees as $otherfee) {
             if ($otherfee->bs_status == 1) {
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee][strtoupper($otherfee->category)]['AMOUNT'] =  $otherfee->amount;
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee][strtoupper($otherfee->category)]['COVERAGE'] = $otherfee->coverage;
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][strtoupper($otherfee->category)]['AMOUNT'] =  $otherfee->amount;
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][strtoupper($otherfee->category)]['COVERAGE'] = $otherfee->coverage;
             }
         }
         $json_fees = json_encode($fees);
