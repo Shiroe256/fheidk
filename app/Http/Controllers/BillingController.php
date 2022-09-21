@@ -472,7 +472,7 @@ class BillingController extends Controller
 
         if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
             return response()->json(0);
-        }else {
+        } else {
             $otherSchoolFees['fuck'] = SchoolFees::select(DB::raw('*'))
                 ->where('reference_no', $reference_no)
                 ->where('course_enrolled', $course_enrolled)
@@ -818,8 +818,8 @@ class BillingController extends Controller
         }
         foreach ($otherfees as $otherfee) {
             if ($otherfee->bs_status == 1) {
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee]['AMOUNT'] += $otherfee->amount;
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee]['COVERAGE'] += $otherfee->coverage;
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee][strtoupper($otherfee->category)]['AMOUNT'] =  $otherfee->amount;
+                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][$otherfee->type_of_fee][strtoupper($otherfee->category)]['COVERAGE'] = $otherfee->coverage;
             }
         }
         $json_fees = json_encode($fees);
@@ -971,14 +971,16 @@ class BillingController extends Controller
         $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$course][$year_level]['ENTRANCE']['AMOUNT'] : 0;
         $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION']['AMOUNT'] : 0;
         $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC']['AMOUNT'] : 0;
+        $Computer = 0;
         if ($this->findKey($json_fees, 'COMPUTER')) {
-            if ($json_fees[$course][$year_level]['COMPUTER']['COVERAGE'] == 'per unit') {
-                $Computer = (float) $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] * $comp_lab_unit;
-            } else{ //per student
-                $Computer = $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'];
+            foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
+                if ($comp_fee['COVERAGE'] == 'per unit') {
+                    $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
+                }
+                if ($comp_fee['COVERAGE'] == 'per student') {
+                    $Computer += (float) $comp_fee['AMOUNT'];
+                }
             }
-        } else {
-            $Computer = 0;
         }
         // $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] : 0;
         $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$course][$year_level]['CULTURAL']['AMOUNT'] : 0;
@@ -986,16 +988,18 @@ class BillingController extends Controller
         $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$course][$year_level]['GUIDANCE']['AMOUNT'] : 0;
         $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$course][$year_level]['HANDBOOK']['AMOUNT'] : 0;
         
+        $Laboratory = 0;
         if ($this->findKey($json_fees, 'LABORATORY')) {
-            if ($json_fees[$course][$year_level]['LABORATORY']['COVERAGE'] == 'per unit') {
-                $Laboratory = (float) $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] * $lab_unit;
-            } else{ //per student
-                $Laboratory = $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'];
+            foreach ($json_fees[$course][$year_level]['LABORATORY'] as $key => $lab_fee) {
+                if ($lab_fee['COVERAGE'] == 'per unit') {
+                    $Laboratory += (float) $lab_fee['AMOUNT'] * $lab_unit;
+                }
+                if ($lab_fee['COVERAGE'] == 'per student') {
+                    $Laboratory += (float) $lab_fee['AMOUNT'];
+                }
             }
-        } else {
-            $Laboratory = 0;
         }
-       
+
         // $Laboratory = $this->findKey($json_fees, 'LABORATORY') ? $json_fees[$course][$year_level]['LABORATORY']['AMOUNT'] : 0;
         $Library = $this->findKey($json_fees, 'LIBRARY') ? $json_fees[$course][$year_level]['LIBRARY']['AMOUNT'] : 0;
         $Medical_and_Dental = $this->findKey($json_fees, 'MEDICAL AND DENTAL') ? $json_fees[$course][$year_level]['MEDICAL AND DENTAL']['AMOUNT'] : 0;
