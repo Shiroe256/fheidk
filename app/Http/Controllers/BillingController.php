@@ -968,9 +968,9 @@ class BillingController extends Controller
 
 
         //finalized fees
-        $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$course][$year_level]['ENTRANCE']['AMOUNT'] : 0;
-        $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION']['AMOUNT'] : 0;
-        $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC']['AMOUNT'] : 0;
+        // $Entrance = $this->findKey($json_fees, 'ENTRANCE') ? $json_fees[$course][$year_level]['ENTRANCE']['AMOUNT'] : 0;
+        // $Admission = $this->findKey($json_fees, 'ADMISSION') ? $json_fees[$course][$year_level]['ADMISSION']['AMOUNT'] : 0;
+        // $Athletic = $this->findKey($json_fees, 'ATHLETIC') ? $json_fees[$course][$year_level]['ATHLETIC']['AMOUNT'] : 0;
         $Computer = 0;
         print_r($json_fees[$course][$year_level]['COMPUTER']);
         // // if ($this->findKey($json_fees, 'COMPUTER')) {
