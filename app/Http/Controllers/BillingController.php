@@ -974,21 +974,22 @@ class BillingController extends Controller
         $Computer = 0;
         print_r($json_fees[$course][$year_level]['COMPUTER']);
         // // if ($this->findKey($json_fees, 'COMPUTER')) {
-        //     foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
-        //         if ($comp_fee['COVERAGE'] == 'per unit') {
-        //             $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
-        //         }
-        //         if ($comp_fee['COVERAGE'] == 'per student') {
-        //             $Computer += (float) $comp_fee['AMOUNT'];
-        //         }
-        //     }
+        foreach ($json_fees[$course][$year_level]['COMPUTER'] as $key => $comp_fee) {
+            if ($comp_fee['COVERAGE'] == 'per unit') {
+                $Computer += (float) $comp_fee['AMOUNT'] * $comp_lab_unit;
+            }
+            if ($comp_fee['COVERAGE'] == 'per student') {
+                $Computer += (float) $comp_fee['AMOUNT'];
+            }
+        }
+        echo $Computer;
         // // }
         // // $Computer = $this->findKey($json_fees, 'COMPUTER') ? $json_fees[$course][$year_level]['COMPUTER']['AMOUNT'] : 0;
         // $Cultural = $this->findKey($json_fees, 'CULTURAL') ? $json_fees[$course][$year_level]['CULTURAL']['AMOUNT'] : 0;
         // $Development = $this->findKey($json_fees, 'DEVELOPMENT') ? $json_fees[$course][$year_level]['DEVELOPMENT']['AMOUNT'] : 0;
         // $Guidance = $this->findKey($json_fees, 'GUIDANCE') ? $json_fees[$course][$year_level]['GUIDANCE']['AMOUNT'] : 0;
         // $Handbook = $this->findKey($json_fees, 'HANDBOOK') ? $json_fees[$course][$year_level]['HANDBOOK']['AMOUNT'] : 0;
-        
+
         // $Laboratory = 0;
         // if ($this->findKey($json_fees, 'LABORATORY')) {
         //     foreach ($json_fees[$course][$year_level]['LABORATORY'] as $key => $lab_fee) {
