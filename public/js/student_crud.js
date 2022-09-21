@@ -231,7 +231,7 @@ function getOSF(){
 
         var other_school_fee = new Array();
         other_school_fee = {res}
-        console.log(NewArrayMo)
+        console.log(other_school_fee);
 
          var newArray = other_school_fee.res.filter(function (el)
          {
