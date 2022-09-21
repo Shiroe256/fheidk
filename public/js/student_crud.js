@@ -229,11 +229,9 @@ function getOSF(){
           return acc;
         }, []);
 
-         console.log(res);
-
-         const arr[]  = res;
-
-         console.log(arr);
+        var NewArrayMo = new Array();
+        NewArrayMo[0] = {res}
+        console.log(NewArrayMo)
 
         // var newArray = fuck.filter(function (el)
         // {
