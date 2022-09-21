@@ -218,9 +218,7 @@ function getOSF(){
       }else{
         //  console.log(response);
 
-        let osf = response;
-
-        var res = osf.reduce((acc, obj)=>{
+        var res = fuck.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
             existItem.amount += obj.amount;
@@ -230,18 +228,14 @@ function getOSF(){
           return acc;
         }, []);
 
-         
+         console.log(res);
 
-         let fuck = [res];
-
-         console.log(fuck);
-
-        var newArray = fuck.filter(function (el)
-        {
-          return el.amount = 300
-        }
-        );
-        console.log(newArray);
+        // var newArray = fuck.filter(function (el)
+        // {
+        //   return el.amount = 300
+        // }
+        // );
+        // console.log(newArray);
 
     //   //display amount
       $("#admission_fee").val(response[0].result);
