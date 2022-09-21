@@ -235,7 +235,7 @@ function getOSF(){
 
          var admission_fee = other_school_fee.res.filter(function (el)
          {
-           return el.type_of_fee == "Admission" && el.coverage == "per student" && el.bs_status == 1
+           return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
          }
          );
          console.log(admission_fee);
