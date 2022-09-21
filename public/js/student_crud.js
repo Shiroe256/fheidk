@@ -231,12 +231,12 @@ function getOSF(){
         }, []);
 
         console.log(res);
-
-        var newArray = res.filter(function (el)
-        {
-          return el.type_of_fee == "Entrance Exam"
-        }
-        );
+        var newArray = res;
+        // var newArray = res.filter(function (el)
+        // {
+        //   return el.type_of_fee == "Entrance Exam"
+        // }
+        // );
         console.log(newArray);
 
     //   //display amount
