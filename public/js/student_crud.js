@@ -238,10 +238,9 @@ function getOSF(){
            return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
          }
          );
-         console.log(admission_fee);
 
-    //   //display amount
-      // $("#admission_fee").val(response[0].result);
+      //display amount
+      $("#admission_fee").val(admission_fee[0].amount);
     //   $("#athletic_fee").val(response[1].result);
     //   $("#computer_fee").val(response[2].result);
     //   $("#cultural_fee").val(response[3].result);
