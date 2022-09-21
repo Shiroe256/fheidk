@@ -231,7 +231,7 @@ function getOSF(){
         }, []);
 
         // console.log(res);
-        var arr = student[res];
+        var arr = [res];
         // console.log(arr);
         var newArray = arr.filter(function (el)
         {
