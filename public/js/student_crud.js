@@ -202,6 +202,7 @@ function getOSF(){
   let year_level = $("#year_level").val();
   let semester = $("#add_semester").val();
   
+  
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
@@ -213,27 +214,33 @@ function getOSF(){
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      var res = new Array();
       if(response==0 || response.length==0){
         console.log(response);
       }else{
         console.log(response);
-
-        let traveler = response;
-
-        var res = traveler.reduce((acc, obj)=>{
+        var res = response.fuck.reduce((acc, obj)=>{
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
           if(existItem){
             existItem.amount += obj.amount;
             return acc;
           } 
+          console.log(existItem);
           acc.push(obj);
           return acc;
         }, []);
 
-        console.log(res);
+         
+
+        // var newArray = fuck.filter(function (el)
+        // {
+        //   return el.amount = 300
+        // }
+        // );
+        // console.log(newArray);
 
     //   //display amount
-    //   $("#admission_fee").val(response[0].result);
+      // $("#admission_fee").val(response[0].result);
     //   $("#athletic_fee").val(response[1].result);
     //   $("#computer_fee").val(response[2].result);
     //   $("#cultural_fee").val(response[3].result);
