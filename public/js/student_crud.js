@@ -234,6 +234,8 @@ function getOSF(){
          const arr = new Array();
          arr = res;
 
+         console.log(arr);
+
         // var newArray = fuck.filter(function (el)
         // {
         //   return el.amount = 300
