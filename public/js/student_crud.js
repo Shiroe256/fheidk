@@ -233,12 +233,12 @@ function getOSF(){
         other_school_fee = {res}
         console.log(other_school_fee);
 
-         var newArray = other_school_fee.res.filter(function (el)
+         var admission_fee = other_school_fee.res.filter(function (el)
          {
-           return el.bs_status == 1
+           return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
          }
          );
-         console.log(newArray);
+         console.log(admission_fee);
 
     //   //display amount
       // $("#admission_fee").val(response[0].result);
