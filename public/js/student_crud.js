@@ -231,8 +231,7 @@ function getOSF(){
 
          console.log(res);
 
-         const arr = new Array();
-         arr = res;
+         const arr  = [res];
 
          console.log(arr);
 
