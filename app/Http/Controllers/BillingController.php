@@ -982,63 +982,63 @@ class BillingController extends Controller
         $Registration = 0;
         $ID = 0;
         print_r($json_fees[$course][$year_level]);
-        // foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
-        //     $total_fee = 0;
-        //     foreach ($category as $fee) {
-        //         if ($fee['COVERAGE'] == 'per unit') {
-        //             if ($type_of_fee == 'COMPUTER') {
-        //                 $unit_multiplier = $comp_lab_unit;
-        //             } else {
-        //                 $unit_multiplier = $lab_unit;
-        //             }
-        //             $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
-        //         }
-        //         if ($fee['COVERAGE'] == 'per student') {
-        //             $total_fee += (float) $fee['AMOUNT'];
-        //         }
-        //     }
-        //     switch ($type_of_fee) {
-        //         case 'ENTRANCE':
-        //             $Entrance += $total_fee;
-        //             break;
-        //         case 'ADMISSION':
-        //             $Admission += $total_fee;
-        //             break;
-        //         case 'ATHLETIC':
-        //             $Athletic += $total_fee;
-        //             break;
-        //         case 'COMPUTER':
-        //             $Computer += $total_fee;
-        //             break;
-        //         case 'CULTURAL':
-        //             $Cultural += $total_fee;
-        //             break;
-        //         case 'DEVELOPMENT':
-        //             $Development += $total_fee;
-        //             break;
-        //         case 'GUIDANCE':
-        //             $Guidance += $total_fee;
-        //             break;
-        //         case 'HANDBOOK':
-        //             $Handbook += $total_fee;
-        //             break;
-        //         case 'LABORATORY':
-        //             $Laboratory += $total_fee;
-        //             break;
-        //         case 'LIBRARY':
-        //             $Library += $total_fee;
-        //             break;
-        //         case 'MEDICAL AND DENTAL':
-        //             $Medical_and_Dental += $total_fee;
-        //             break;
-        //         case 'REGISTRATION':
-        //             $Registration += $total_fee;
-        //             break;
-        //         case 'SCHOOL ID':
-        //             $ID += $total_fee;
-        //             break;
-        //     }
-        // }
+        foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
+            $total_fee = 0;
+            foreach ($category as $fee) {
+                if ($fee['COVERAGE'] == 'per unit') {
+                    if ($type_of_fee == 'COMPUTER') {
+                        $unit_multiplier = $comp_lab_unit;
+                    } else {
+                        $unit_multiplier = $lab_unit;
+                    }
+                    $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
+                }
+                if ($fee['COVERAGE'] == 'per student') {
+                    $total_fee += (float) $fee['AMOUNT'];
+                }
+            }
+            switch ($type_of_fee) {
+                case 'ENTRANCE':
+                    $Entrance += $total_fee;
+                    break;
+                case 'ADMISSION':
+                    $Admission += $total_fee;
+                    break;
+                case 'ATHLETIC':
+                    $Athletic += $total_fee;
+                    break;
+                case 'COMPUTER':
+                    $Computer += $total_fee;
+                    break;
+                case 'CULTURAL':
+                    $Cultural += $total_fee;
+                    break;
+                case 'DEVELOPMENT':
+                    $Development += $total_fee;
+                    break;
+                case 'GUIDANCE':
+                    $Guidance += $total_fee;
+                    break;
+                case 'HANDBOOK':
+                    $Handbook += $total_fee;
+                    break;
+                case 'LABORATORY':
+                    $Laboratory += $total_fee;
+                    break;
+                case 'LIBRARY':
+                    $Library += $total_fee;
+                    break;
+                case 'MEDICAL AND DENTAL':
+                    $Medical_and_Dental += $total_fee;
+                    break;
+                case 'REGISTRATION':
+                    $Registration += $total_fee;
+                    break;
+                case 'SCHOOL ID':
+                    $ID += $total_fee;
+                    break;
+            }
+        }
         // foreach ($json_fees[$course][$year_level]['ENTRANCE'] as $key => $ent_fee) {
         //     $Entrance += (float) $ent_fee['AMOUNT'];
         // }
@@ -1106,40 +1106,40 @@ class BillingController extends Controller
         //     $ID += (float) $id_fee['AMOUNT'];
         // }
 
-        // $tempstudent->tuition_fee = (float) $json_fees[$course][$year_level]['TUITION'] * (float) $data['acad_u'];
-        // $tempstudent->entrance_fee = $Entrance;
-        // $tempstudent->admission_fee = $Admission;
-        // $tempstudent->athletic_fee = $Athletic;
-        // $tempstudent->computer_fee = $Computer;
-        // $tempstudent->cultural_fee = $Cultural;
-        // $tempstudent->development_fee = $Development;
-        // $tempstudent->guidance_fee = $Guidance;
-        // $tempstudent->handbook_fee = $Handbook;
-        // $tempstudent->laboratory_fee = $Laboratory;
-        // $tempstudent->library_fee = $Library;
-        // $tempstudent->medical_dental_fee = $Medical_and_Dental;
-        // $tempstudent->registration_fee = $Registration;
-        // $tempstudent->school_id_fee = $ID;
-        // $tempstudent->nstp_fee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
-        // $tempstudent->stud_cor = 0; //dummydata
-        // $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
-        // $tempstudent->exam_result = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
-        // $tempstudent->remarks = array_key_exists('remarks', $data) ? $data['remarks'] : '';
-        // $tempstudent->stud_status = 0;
-        // $tempstudent->uploaded_by = Auth::user()->email;
+        $tempstudent->tuition_fee = (float) $json_fees[$course][$year_level]['TUITION'] * (float) $data['acad_u'];
+        $tempstudent->entrance_fee = $Entrance;
+        $tempstudent->admission_fee = $Admission;
+        $tempstudent->athletic_fee = $Athletic;
+        $tempstudent->computer_fee = $Computer;
+        $tempstudent->cultural_fee = $Cultural;
+        $tempstudent->development_fee = $Development;
+        $tempstudent->guidance_fee = $Guidance;
+        $tempstudent->handbook_fee = $Handbook;
+        $tempstudent->laboratory_fee = $Laboratory;
+        $tempstudent->library_fee = $Library;
+        $tempstudent->medical_dental_fee = $Medical_and_Dental;
+        $tempstudent->registration_fee = $Registration;
+        $tempstudent->school_id_fee = $ID;
+        $tempstudent->nstp_fee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
+        $tempstudent->stud_cor = 0; //dummydata
+        $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
+        $tempstudent->exam_result = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
+        $tempstudent->remarks = array_key_exists('remarks', $data) ? $data['remarks'] : '';
+        $tempstudent->stud_status = 0;
+        $tempstudent->uploaded_by = Auth::user()->email;
 
-        // $tempstudent->ac_year = $billinginfo['ac_year'];
-        // $tempstudent->hei_psg_region = $heiinfo['hei_psg_region'];
-        // $tempstudent->hei_sid = $heiinfo['hei_sid'];
-        // $tempstudent->hei_uii = $hei_uii;
-        // $tempstudent->hei_name = $heiinfo['hei_shortname'];
-        // $tempstudent->reference_no = $billinginfo['reference_no'];
-        // $tempstudent->year_level = $year_level;
-        // $tempstudent->semester = $billinginfo['semester'];
-        // $tempstudent->tranche = $billinginfo['tranche'];
-        // $tempstudent->app_id = '';
+        $tempstudent->ac_year = $billinginfo['ac_year'];
+        $tempstudent->hei_psg_region = $heiinfo['hei_psg_region'];
+        $tempstudent->hei_sid = $heiinfo['hei_sid'];
+        $tempstudent->hei_uii = $hei_uii;
+        $tempstudent->hei_name = $heiinfo['hei_shortname'];
+        $tempstudent->reference_no = $billinginfo['reference_no'];
+        $tempstudent->year_level = $year_level;
+        $tempstudent->semester = $billinginfo['semester'];
+        $tempstudent->tranche = $billinginfo['tranche'];
+        $tempstudent->app_id = '';
 
-        // $tempstudent->save();
+        $tempstudent->save();
     }
 
 
