@@ -234,7 +234,7 @@ function getOSF(){
 
         var arr = [res];
         // console.log(arr);
-        var newArray = arr.filter(function (el)
+        var newArray = arr.array.filter(function (el)
         {
           return el.amount = 300
         }
