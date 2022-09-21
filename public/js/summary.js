@@ -11,8 +11,8 @@ function fetchTempSummary() {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        $("#show_summary").html(response);
-        $("#tbl_summary").DataTable({
+        $(".show_summary").html(response);
+        $(".tbl_summary").DataTable({
           "order": [[3, "des"]],
           orderCellsTop: true,
           fixedHeader: true,

@@ -170,7 +170,7 @@ class BillingController extends Controller
         $output = '';
         $cnt = 1;
         if ($hei_summary->count() > 0) {
-            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
+            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style tbl_summary"
             id="tbl_summary">
             <thead>
                 <tr>
@@ -278,7 +278,7 @@ class BillingController extends Controller
             </table>';
             echo $output;
         } else {
-            echo '<h1 class="text-center text-secondary my-5">No exception reports.</h1>';
+            echo '<h1 class="text-center text-secondary my-5">No exception reports, please run the billing checker again.</h1>';
         }
     }
 
@@ -469,15 +469,15 @@ class BillingController extends Controller
         $course_enrolled = $request->course_enrolled;
         $year_level = $request->year_level;
         $semester = $request->semester;
+        
         if (is_null($course_enrolled) || empty($course_enrolled) || is_null($year_level) || empty($year_level)) {
             return response()->json(0);
-        } else {
-            $otherSchoolFees = SchoolFees::select(DB::raw('reference_no, course_enrolled, year_level, semester, type_of_fee,bs_status , IF(bs_status = 0,0,sum(amount) ) as result'))
+        }else {
+            $otherSchoolFees = SchoolFees::select(DB::raw('*'))
                 ->where('reference_no', $reference_no)
                 ->where('course_enrolled', $course_enrolled)
                 ->where('year_level', $year_level)
                 ->where('semester', $semester)
-                ->groupby('type_of_fee', 'category')
                 ->get();
             return response()->json($otherSchoolFees);
         }

@@ -30,7 +30,7 @@
                     <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
                     <td class="text-center">
                         <?php
-                            if($billing['billing_status']==1): ?>
+                            if($billing['billing_status']==1):?>
                         <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
                         <?php
                             elseif ($billing['billing_status']==2):?>
@@ -61,11 +61,11 @@
                         <?php
                         if ($billing['billing_status']==2):?>
                         <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-outline-primary disabled"
+                            <a class="btn btn-outline-secondary disabled"
                                 role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
                                 title="Edit Grantees" href="{{ route('billings') . '/' . $billing['reference_no'] }}"><i
                                     class="far fa-eye"></i></a>
-                            <a class="btn btn-outline-primary disabled" role="button" data-toggle="tooltip" data-bs-tooltip=""
+                            <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip=""
                                 data-placement="bottom" title="Edit Billing Settings"
                                 href="{{ route('billings') . '/' . $billing['reference_no'] . '/settings' }}"><i
                                     class="fas fa-sliders"></i></a>
