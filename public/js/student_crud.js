@@ -225,12 +225,14 @@ function getOSF(){
             existItem.amount += obj.amount;
             return acc;
           } 
-          console.log(existItem);
           acc.push(obj);
           return acc;
         }, []);
 
-         
+         console.log(res);
+
+         const arr = new Array();
+         arr = res;
 
         // var newArray = fuck.filter(function (el)
         // {
