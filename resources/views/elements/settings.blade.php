@@ -38,13 +38,13 @@ $switchcolor = '';
             <div class="accordion" id="accordion_{{ $yearlevel }}">
                 <div class="card">
                     <div class="card-header" id="heading_{{ $yearlevel }}">
-                        <button class="accordion-button" type="button" data-toggle="collapse"
+                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                             data-target="#coll_accordion_{{ $yearlevel }}" aria-expanded="true"
                             aria-controls="coll_accordion_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
                                 YEAR</strong>
                         </button>
                     </div>
-                    <div id="coll_accordion_{{ $yearlevel }}" class="collapse show"
+                    <div id="coll_accordion_{{ $yearlevel }}" class="collapse"
                         aria-labelledby="heading_{{ $yearlevel }}" data-parent="#accordion_{{ $yearlevel }}">
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
