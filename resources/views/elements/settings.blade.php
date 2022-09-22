@@ -46,10 +46,10 @@ $switchcolor = '';
                         <div class="row my-3">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
                             <div class="col-2">
-                                <div class="custom-control custom-switch text-end">
-                                    <input type="checkbox" class="{{ $switchcolor }} custom-control-input toggleall"
+                                <div class="form-check form-control form-switch text-end">
+                                    <input type="checkbox" class="{{ $switchcolor }} form-check-input toggleall"
                                         id="toggleall_{{ $ctr }}">
-                                    <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle
+                                    <label class="form-check-label" for="toggleall_{{ $ctr }}">Toggle
                                         All</label>
                                 </div>
                             </div>
@@ -64,13 +64,13 @@ $switchcolor = '';
                                             <ul class="list-unstyled">
                                                 @foreach ($typeoffee as $categoryid => $category)
                                                     <li>
-                                                        <div class="custom-control custom-switch">
+                                                        <div class="form-check form-control form-switch">
                                                             <input type="checkbox"
-                                                                class="{{ $switchcolor }} custom-control-input"
+                                                                class="{{ $switchcolor }} form-check-input"
                                                                 id="switch_{{ $checkid }}"
                                                                 value="{{ $category['id'] }}"
                                                                 {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
-                                                            <label class="custom-control-label"
+                                                            <label class="form-check-label"
                                                                 for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
                                                                     class="text-muted"> +
                                                                     {{ $category['amount'] }}</small>
