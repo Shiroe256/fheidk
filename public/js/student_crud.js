@@ -843,10 +843,16 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
   }
 });
 
+$( document ).ready(function() {
+  alert( "ready!" );
+});
+
 //if students is a transferee
 $(document).on('click', 'input[name=checkbox_transferee]', function () {
   if (this.checked){
     $('.input_transferee').removeClass('d-none')
+  }else{
+    $('.input_transferee').addClass('d-none')
   }
 });
 
