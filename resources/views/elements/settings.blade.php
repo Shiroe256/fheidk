@@ -48,15 +48,15 @@ $switchcolor = '';
                                     <div class="col-2">
                                         <div class="custom-control custom-switch text-end">
                                             <input type="checkbox" class="custom-control-input toggleall"
-                                                id="toggleall_{{ $ctr }}">
+                                                id="toggleall_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">
                                             <label class="custom-control-label"
-                                                for="toggleall_{{ $ctr }}">Toggle
+                                                for="toggleall_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">Toggle
                                                 All</label>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="settings_{{ $ctr }}">
+                                <div id="settings_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">
                                     <ul class="list-unstyled card-columns">
                                         @foreach ($sem as $typeoffeename => $typeoffee)
                                             <li>
