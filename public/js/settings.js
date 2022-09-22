@@ -30,12 +30,16 @@ $('[id^="switch_"]').change(function (index) {
 
 function resetCounter(elements) {
     for (const key in elements) {
+        var count = 0;
+        var total = 0;
         if (Object.hasOwnProperty.call(elements, key)) {
             const element = elements[key];
-            console.log(element);
             var identifier = element.id.substring(12) + '_1';
-            var count = $('#settings_' + identifier + ' input:checked').length;
-            var total = $('#settings_' + identifier + ' input:checkbox').length;
+            count += $('#settings_' + identifier + ' input:checked').length;
+            total += $('#settings_' + identifier + ' input:checkbox').length;
+            identifier = element.id.substring(12) + '_2';
+            count += $('#settings_' + identifier + ' input:checked').length;
+            total += $('#settings_' + identifier + ' input:checkbox').length;
             element.innerHTML = count + '/' + total;
         }
     }
