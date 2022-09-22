@@ -28,25 +28,12 @@ $switchcolor = '';
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
-            <?php 
-                            switch ($yearlevel) {
-                                case 1:
-                                    $switchcolor = 'bg-danger';
-                                    break;
-                                case 2
-                                    $switchcolor = 'bg-primary';
-                                    break;
-                                case 3:
-                                    $switchcolor = 'bg-dark';
-                                    break;
-                                case 4:
-                                    $switchcolor = 'bg-sucess';
-                                    break;
-                                default:
-                                    $switchcolor = 'bg-dark';
-                                    break;
-                            }
-                        ?>
+            <?php
+            $yearlevel == '1' ? ($switchcolor = 'bg-danger') : '';
+            $yearlevel == '2' ? ($switchcolor = 'bg-primary') : '';
+            $yearlevel == '3' ? ($switchcolor = 'bg-warning') : '';
+            $yearlevel == '4' ? ($switchcolor = 'bg-dark') : '';
+            ?>
             <div class="card my-3">
                 <div class="card-header">
                     <div class="row">
