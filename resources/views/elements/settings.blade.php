@@ -28,63 +28,71 @@ $switchcolor = '';
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
-            <?php 
-                        $yearlevel==1 ? $switchcolor = 'bg-danger' : '';
-                        $yearlevel==2 ? $switchcolor = 'bg-primary' : '';
-                        $yearlevel==3 ? $switchcolor = 'bg-warning' : '';
-                        $yearlevel==4 ? $switchcolor = 'bg-dark' : '';
-                        ?>
-            <div class="card my-3">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-auto"><strong>{{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+            <?php
+            $yearlevel == 1 ? ($switchcolor = 'bg-danger') : '';
+            $yearlevel == 2 ? ($switchcolor = 'bg-primary') : '';
+            $yearlevel == 3 ? ($switchcolor = 'bg-warning') : '';
+            $yearlevel == 4 ? ($switchcolor = 'bg-dark') : '';
+            ?>
+            <div class="accordion my-3" id="accordion_{{ $yearlevel }}">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading_{{ $yearlevel }}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#coll_accordion_{{ $yearlevel }}" aria-expanded="true"
+                            aria-controls="coll_accordion_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
+                                YEAR</strong>
+                        </button>
+                    </h2>
+                    <div id="coll_accordion_{{ $yearlevel }}" class="accordion-collapse collapse show"
+                        aria-labelledby="heading_{{ $yearlevel }}" data-bs-parent="#accordion_{{ $yearlevel }}">
+                        <div class="accordion-body p-3">
+                            @foreach ($yr as $semname => $sem)
+                                <div class="row my-3 d-flex justify-content-end">
+                                    <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
+                                    <div class="col-2">
+                                        <div class="custom-control custom-switch text-end">
+                                            <input type="checkbox"
+                                                class="{{ $switchcolor }} custom-control-input toggleall"
+                                                id="toggleall_{{ $ctr }}">
+                                            <label class="custom-control-label"
+                                                for="toggleall_{{ $ctr }}">Toggle
+                                                All</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div id="settings_{{ $ctr++ }}">
+                                    <ul class="list-unstyled card-columns">
+                                        @foreach ($sem as $typeoffeename => $typeoffee)
+                                            <li>
+                                                <div class="card p-3">
+                                                    <strong>{{ $typeoffeename }}</strong>
+                                                    <ul class="list-unstyled">
+                                                        @foreach ($typeoffee as $categoryid => $category)
+                                                            <li>
+                                                                <div class="custom-control custom-switch">
+                                                                    <input type="checkbox"
+                                                                        class="{{ $switchcolor }} custom-control-input"
+                                                                        id="switch_{{ $checkid }}"
+                                                                        value="{{ $category['id'] }}"
+                                                                        {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
+                                                                    <label class="custom-control-label"
+                                                                        for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
+                                                                            class="text-muted"> +
+                                                                            {{ $category['amount'] }}</small>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="card-body p-3">
-                    @foreach ($yr as $semname => $sem)
-                        <div class="row my-3 d-flex justify-content-end">
-                            <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
-                            <div class="col-2">
-                                <div class="custom-control custom-switch text-end">
-                                    <input type="checkbox" class="{{ $switchcolor }} custom-control-input toggleall"
-                                        id="toggleall_{{ $ctr }}">
-                                    <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle
-                                        All</label>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div id="settings_{{ $ctr++ }}">
-                            <ul class="list-unstyled card-columns">
-                                @foreach ($sem as $typeoffeename => $typeoffee)
-                                    <li>
-                                        <div class="card p-3">
-                                            <strong>{{ $typeoffeename }}</strong>
-                                            <ul class="list-unstyled">
-                                                @foreach ($typeoffee as $categoryid => $category)
-                                                    <li>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox"
-                                                                class="{{ $switchcolor }} custom-control-input"
-                                                                id="switch_{{ $checkid }}"
-                                                                value="{{ $category['id'] }}"
-                                                                {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
-                                                            <label class="custom-control-label"
-                                                                for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
-                                                                    class="text-muted"> +
-                                                                    {{ $category['amount'] }}</small>
-                                                            </label>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
                 </div>
             </div>
         @endforeach
