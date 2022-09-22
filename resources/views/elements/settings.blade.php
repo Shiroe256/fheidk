@@ -27,13 +27,13 @@ $checkid = 0;
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
-            <div class="card">
+            <div class="card m-3">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-auto"><strong class="">{{ strtoupper(ordinal($yearlevel)) }} Year</strong></div>
+                        <div class="col-auto"><strong class=""><small>{{ strtoupper(ordinal($yearlevel)) }} YEAR</small></strong></div>
                     </div>
                 </div>
-                <div class="card-body p-3 m-3">
+                <div class="card-body p-3">
                     @foreach ($yr as $semname => $sem)
                         <div class="row my-3">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
