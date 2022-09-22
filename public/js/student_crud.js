@@ -845,10 +845,13 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 
 //if students is a transferee
 $(document).on('click', 'input[name=checkbox_transferee]', function () {
-  if (this.checked) {
+  if (this.checked && $('#year_level').val() <= 1) {
     $('.input_transferee').removeClass('d-none')
-  } else {
-    $('.input_transferee').addClass('d-none')
+  }else if(this.checked && $('#year_level').val() > 1) {
+    $('.input_transferee').removeClass('d-none')
+  }
+  else{
+    $('.input_transferee').removeClass('d-none')
   }
 });
 
