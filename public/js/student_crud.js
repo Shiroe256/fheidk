@@ -301,10 +301,12 @@ function getOSF(){
          }
          );
 
-        //display amount
          if(admission_fee.length == 0){
+          //display amount
           $("#admission_fee").val(0);
+          //set max amount
           $("#admission_fee").attr("max", 0);
+          //disable keys if maximum amount is reached
           $('#admission_fee').on('keyup keydown change', function (e) {
             if ($(this).val() > 0
               && e.keyCode !== 46
@@ -315,8 +317,11 @@ function getOSF(){
             }
           });
          }else{
+          //display amount
           $("#admission_fee").val(admission_fee[0].amount);
+          //set max amount
           $("#admission_fee").attr("max", admission_fee[0].amount);
+          //disable keys if maximum amount is reached
           $('#admission_fee').on('keyup keydown change', function (e) {
             if ($(this).val() > admission_fee[0].amount
               && e.keyCode !== 46
@@ -357,193 +362,289 @@ function getOSF(){
          if(computer_fee.length == 0){
           $("#computer_fee").val(0);
           $("#computer_fee").attr("max", 0);
+          $('#computer_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#computer_fee").val(computer_fee[0].amount);
           $("#computer_fee").attr("max", computer_fee[0].amount);
+          $('#computer_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > computer_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(computer_fee[0].amount);
+            }
+          });
          }
 
          if(cultural_fee.length == 0){
           $("#cultural_fee").val(0);
           $("#cultural_fee").attr("max", 0);
+          $('#cultural_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#cultural_fee").val(cultural_fee[0].amount);
           $("#cultural_fee").attr("max", cultural_fee[0].amount);
+          $('#cultural_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > cultural_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(cultural_fee[0].amount);
+            }
+          });
          }
 
          if(development_fee.length == 0){
           $("#development_fee").val(0);
           $("#development_fee").attr("max", 0);
+          $('#development_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#development_fee").val(development_fee[0].amount);
           $("#development_fee").attr("max", development_fee[0].amount);
+          $('#development_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > development_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(development_fee[0].amount);
+            }
+          });
          }
 
          if(entrance_fee.length == 0){
           $("#entrance_fee").val(0);
           $("#entrance_fee").attr("max", 0);
+          $('#entrance_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#entrance_fee").val(entrance_fee[0].amount);
           $("#entrance_fee").attr("max", entrance_fee[0].amount);
+          $('#entrance_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > entrance_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(entrance_fee[0].amount);
+            }
+          });
          }
 
          if(guidance_fee.length == 0){
           $("#guidance_fee").val(0);
           $("#guidance_fee").attr("max", 0);
+          $('#guidance_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#guidance_fee").val(guidance_fee[0].amount);
           $("#guidance_fee").attr("max", guidance_fee[0].amount);
+          $('#guidance_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > guidance_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(guidance_fee[0].amount);
+            }
+          });
          }
          
          if(handbook_fee.length == 0){
           $("#handbook_fee").val(0);
           $("#handbook_fee").attr("max", 0);
+          $('#handbook_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#handbook_fee").val(handbook_fee[0].amount);
           $("#handbook_fee").attr("max", handbook_fee[0].amount);
+          $('#handbook_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > handbook_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(handbook_fee[0].amount);
+            }
+          });
          }
 
          if(laboratory_fee.length == 0){
           $("#laboratory_fee").val(0);
           $("#laboratory_fee").attr("max", 0);
+          $('#laboratory_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#laboratory_fee").val(laboratory_fee[0].amount);
           $("#laboratory_fee").attr("max", laboratory_fee[0].amount);
+          $('#laboratory_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > laboratory_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(laboratory_fee[0].amount);
+            }
+          });
          }
 
          if(library_fee.length == 0){
           $("#library_fee").val(0);
           $("#library_fee").attr("max", 0);
+          $('#library_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#library_fee").val(library_fee[0].amount);
           $("#library_fee").attr("max", library_fee[0].amount);
+          $('#library_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > library_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(library_fee[0].amount);
+            }
+          });
          }
 
          if(medical_dental_fee.length == 0){
           $("#medical_dental_fee").val(0);
           $("#medical_dental_fee").attr("max", 0);
+          $('#medical_dental_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#medical_dental_fee").val(medical_dental_fee[0].amount);
           $("#medical_dental_fee").attr("max", medical_dental_fee[0].amount);
+          $('#medical_dental_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > medical_dental_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(medical_dental_fee[0].amount);
+            }
+          });
          }
 
          if(registration_fee.length == 0){
           $("#registration_fee").val(0);
           $("#registration_fee").attr("max", 0);
+          $('#registration_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#registration_fee").val(registration_fee[0].amount);
           $("#registration_fee").attr("max", registration_fee[0].amount);
+          $('#registration_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > registration_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(registration_fee[0].amount);
+            }
+          });
          }
          
          if(school_id_fee.length == 0){
           $("#school_id_fee").val(0);
           $("#school_id_fee").attr("max", 0);
+          $('#school_id_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > 0
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(0);
+            }
+          });
          }else{
           $("#school_id_fee").val(school_id_fee[0].amount);
           $("#school_id_fee").attr("max", school_id_fee[0].amount);
+          $('#school_id_fee').on('keyup keydown change', function (e) {
+            if ($(this).val() > school_id_fee[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(school_id_fee[0].amount);
+            }
+          });
          }
 
-    //   //disable keys if maximum amount is reached
-     
-      
-    //   $('#computer_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[2].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[2].result);
-    //     }
-    //   });
-    //   $('#cultural_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[3].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[3].result);
-    //     }
-    //   });
-    //   $('#development_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[4].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[4].result);
-    //     }
-    //   });
-    //   $('#entrance_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[5].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[5].result);
-    //     }
-    //   });
-    //   $('#guidance_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[6].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[6].result);
-    //     }
-    //   });
-    //   $('#handbook_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[7].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[7].result);
-    //     }
-    //   });
-    //   $('#laboratory_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[8].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[8].result);
-    //     }
-    //   });
-    //   $('#library_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[9].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[9].result);
-    //     }
-    //   });
-    //   $('#medical_dental_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[10].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[10].result);
-    //     }
-    //   });
-    //   $('#registration_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[11].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[11].result);
-    //     }
-    //   });
-    //   $('#school_id_fee').on('keyup keydown change', function (e) {
-    //     if ($(this).val() > response[12].result
-    //       && e.keyCode !== 46
-    //       && e.keyCode !== 8
-    //     ) {
-    //       e.preventDefault();
-    //       $(this).val(response[12].result);
-    //     }
-    //   });
     }
    }
   });
