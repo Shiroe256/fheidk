@@ -29,13 +29,16 @@ $('[id^="switch_"]').change(function (index) {
 });
 
 function resetCounter(elements) {
-    elements.forEach(element => {
-        console.log(element);
-        var identifier = element.attr("id").substring(12);
-        var count = $('#settings_' + identifier + ' input:checkbox :checked').length;
-        var total = $('#settings_' + identifier + ' input:checkbox').length;
-        element.text(count + '/' + total);
-    });
+    for (const key in elements) {
+        if (Object.hasOwnProperty.call(elements, key)) {
+            const element = elements[key];
+            console.log(element);
+            var identifier = element.id.substring(12) + '_1';
+            var count = $('#settings_' + identifier + ' input:checked').length;
+            var total = $('#settings_' + identifier + ' input:checkbox').length;
+            element.innerHTML = count + '/' + total;
+        }
+    }
 };
 
 $('#btn_save').click(function () {
