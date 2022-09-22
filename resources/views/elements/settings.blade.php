@@ -41,7 +41,7 @@ $switchcolor = '';
                                 </button>
                             </div>
                             <div class="col-3">
-                                <h5 id="checked">30</h5>/<h5 id="total">30</h5>
+                                <strong id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}">30/30</strong>
                             </div>
                         </div>
                     </div>

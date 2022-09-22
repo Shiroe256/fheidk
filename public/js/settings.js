@@ -25,7 +25,18 @@ $('[id^="switch_"]').change(function (index) {
             console.log($(this).val());
         }
     });
+    resetCounter($('[id^="checked_ctr_"'));
 });
+
+function resetCounter(elements) {
+    elements.forEach(element => {
+        console.log(element);
+        var identifier = element.attr("id").substring(12);
+        var count = $('#settings_' + identifier + ' input:checkbox :checked').length;
+        var total = $('#settings_' + identifier + ' input:checkbox').length;
+        element.text(count + '/' + total);
+    });
+};
 
 $('#btn_save').click(function () {
     changes.forEach(element => {
