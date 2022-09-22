@@ -32,11 +32,18 @@ $switchcolor = '';
             @foreach ($course as $yearlevel => $yr)
                 <div class="card">
                     <div class="card-header" id="heading_cs_{{ $ctr }}_{{ $yearlevel }}">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                            data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
-                            aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
-                                YEAR</strong>
-                        </button>
+                        <div class="row d-flex justify-content-end">
+                            <div class="col">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                    data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
+                                    aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
+                                    <strong>{{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+                                </button>
+                            </div>
+                            <div class="col-3">
+                                <h5 id="checked">30</h5>/<h5 id="total">30</h5>
+                            </div>
+                        </div>
                     </div>
                     <div id="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}" class="collapse"
                         aria-labelledby="heading_cs_{{ $ctr }}_{{ $yearlevel }}"
@@ -45,18 +52,18 @@ $switchcolor = '';
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
                                     <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <div class="custom-control custom-switch text-end">
                                             <input type="checkbox" class="custom-control-input toggleall"
-                                                id="toggleall_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">
+                                                id="toggleall_{{ $ctr }}_{{ $yearlevel }}_{{ $semname }}">
                                             <label class="custom-control-label"
-                                                for="toggleall_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">Toggle
+                                                for="toggleall_{{ $ctr }}_{{ $yearlevel }}_{{ $semname }}">Toggle
                                                 All</label>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="settings_{{ $ctr }}_{{$yearlevel}}_{{$semname}}">
+                                <div id="settings_{{ $ctr }}_{{ $yearlevel }}_{{ $semname }}">
                                     <ul class="list-unstyled card-columns">
                                         @foreach ($sem as $typeoffeename => $typeoffee)
                                             <li>
