@@ -34,7 +34,7 @@ $switchcolor = '';
             $yearlevel == 3 ? ($switchcolor = 'bg-warning') : '';
             $yearlevel == 4 ? ($switchcolor = 'bg-dark') : '';
             ?>
-            <div class="accordion my-3" id="accordion_{{ $yearlevel }}">
+            <div class="accordion" id="accordion_{{ $yearlevel }}">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading_{{ $yearlevel }}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
