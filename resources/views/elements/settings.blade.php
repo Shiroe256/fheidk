@@ -30,7 +30,28 @@ $checkid = 0;
             <div class="card my-3">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-auto"><small class="fw-bold">{{ strtoupper(ordinal($yearlevel)) }} YEAR</small></div>
+                        <div class="col-auto"><small class="fw-bold">{{ strtoupper(ordinal($yearlevel)) }} YEAR</small>
+                        </div>
+                        <?php 
+                            $switchcolor = '';
+                            switch ($yearlevel) {
+                                case 1:
+                                    $switchcolor = 'bg-danger';
+                                    break;
+                                case 2
+                                    $switchcolor = 'bg-primary';
+                                    break;
+                                case 3:
+                                    $switchcolor = 'bg-dark';
+                                    break;
+                                case 4:
+                                    $switchcolor = 'bg-sucess';
+                                    break;
+                                default:
+                                    $switchcolor = 'bg-dark';
+                                    break;
+                            }
+                        ?>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -39,7 +60,7 @@ $checkid = 0;
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
                             <div class="col-2">
                                 <div class="custom-control custom-switch text-end">
-                                    <input type="checkbox" class="custom-control-input toggleall"
+                                    <input type="checkbox" class="{{ $switchcolor }} custom-control-input toggleall"
                                         id="toggleall_{{ $ctr }}">
                                     <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle
                                         All</label>
@@ -57,7 +78,8 @@ $checkid = 0;
                                                 @foreach ($typeoffee as $categoryid => $category)
                                                     <li>
                                                         <div class="custom-control custom-switch">
-                                                            <input type="checkbox" class="custom-control-input"
+                                                            <input type="checkbox"
+                                                                class="{{ $switchcolor }} custom-control-input"
                                                                 id="switch_{{ $checkid }}"
                                                                 value="{{ $category['id'] }}"
                                                                 {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
