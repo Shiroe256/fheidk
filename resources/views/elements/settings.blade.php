@@ -41,7 +41,7 @@ $switchcolor = '';
                                 </button>
                             </div>
                             <div class="col-3">
-                                <strong id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}_{{ $semname }}">30/30</strong>
+                                <strong id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}">30/30</strong>
                             </div>
                         </div>
                     </div>
