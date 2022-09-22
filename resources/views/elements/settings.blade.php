@@ -31,22 +31,23 @@ $switchcolor = '';
         <div class="accordion" id="accordion_course_{{ $ctr }}">
             @foreach ($course as $yearlevel => $yr)
                 <div class="card">
-                    <div class="card-header" id="heading_cs_{{$ctr}}_{{ $yearlevel }}">
+                    <div class="card-header" id="heading_cs_{{ $ctr }}_{{ $yearlevel }}">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                            data-target="#coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}"
-                            aria-controls="coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
+                            data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
+                            aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
                                 YEAR</strong>
                         </button>
                     </div>
-                    <div id="coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}" class="collapse" aria-labelledby="heading_cs_{{$ctr}}_{{ $yearlevel }}" data-parent="#accordion_course_{{ $ctr }}">
+                    <div id="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}" class="collapse"
+                        aria-labelledby="heading_cs_{{ $ctr }}_{{ $yearlevel }}"
+                        data-parent="#accordion_course_{{ $ctr }}">
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
                                     <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
                                     <div class="col-2">
                                         <div class="custom-control custom-switch text-end">
-                                            <input type="checkbox"
-                                                class="{{ $switchcolor }} custom-control-input toggleall"
+                                            <input type="checkbox" class="custom-control-input toggleall"
                                                 id="toggleall_{{ $ctr }}">
                                             <label class="custom-control-label"
                                                 for="toggleall_{{ $ctr }}">Toggle
@@ -55,7 +56,7 @@ $switchcolor = '';
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="settings_{{ $ctr++ }}">
+                                <div id="settings_{{ $ctr }}">
                                     <ul class="list-unstyled card-columns">
                                         @foreach ($sem as $typeoffeename => $typeoffee)
                                             <li>
@@ -65,8 +66,7 @@ $switchcolor = '';
                                                         @foreach ($typeoffee as $categoryid => $category)
                                                             <li>
                                                                 <div class="custom-control custom-switch">
-                                                                    <input type="checkbox"
-                                                                        class="{{ $switchcolor }} custom-control-input"
+                                                                    <input type="checkbox" class="custom-control-input"
                                                                         id="switch_{{ $checkid }}"
                                                                         value="{{ $category['id'] }}"
                                                                         {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
@@ -84,6 +84,7 @@ $switchcolor = '';
                                         @endforeach
                                     </ul>
                                 </div>
+                                <?php $ctr++ ?>
                             @endforeach
                         </div>
                     </div>
