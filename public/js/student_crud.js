@@ -845,7 +845,7 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 
 //if students is a freshmen
 $(document).on('change', '#year_level', function () {
-  if ($(this).val() == 1 || ($('input[name=checkbox_transferee]').checked && $(this).val() > 1)) {
+  if ( ($('input[name=checkbox_transferee]').checked && $(this).val() > 1)) {
     $('.input_transferee').removeClass('d-none')
   }else {
     $('.input_transferee').addClass('d-none')
