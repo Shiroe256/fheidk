@@ -850,8 +850,8 @@ $(document).on('click', 'input[name=checkbox_transferee]', function () {
   }else if(this.checked && $('#year_level').val() > 1) {
     $('.input_transferee').removeClass('d-none')
   }
-  else{
-    $('.input_transferee').removeClass('d-none')
+  else if(this.prop('checked', false) && $('#year_level').val() > 1 ){
+    $('.input_transferee').addClass('d-none')
   }
 });
 
