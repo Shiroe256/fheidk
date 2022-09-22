@@ -30,6 +30,7 @@ $('[id^="switch_"]').change(function (index) {
 
 function resetCounter(elements) {
     elements.map(function(element){
+        console.log(element);
         var identifier = element.attr("id").substring(12);
         var count = $('#settings_' + identifier + ' input:checkbox :checked').length;
         var total = $('#settings_' + identifier + ' input:checkbox').length;
