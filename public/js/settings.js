@@ -30,10 +30,10 @@ $('[id^="switch_"]').change(function (index) {
 
 function resetCounter(elements) {
     elements.map(function(element){
-        var identifier = $(this).attr("id").substring(12);
+        var identifier = element.attr("id").substring(12);
         var count = $('#settings_' + identifier + ' input:checkbox :checked').length;
         var total = $('#settings_' + identifier + ' input:checkbox').length;
-        $(this).text(count + '/' + total);
+        element.text(count + '/' + total);
     });
 };
 
