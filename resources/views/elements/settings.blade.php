@@ -25,16 +25,17 @@ $checkid = 0;
 ?>
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
-        <div class="mb-3">
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input toggleall" id="toggleall_{{ $ctr }}">
-                <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
-            </div>
-        </div>
         @foreach ($course as $yearlevel => $yr)
             <div class="card">
-                <div class="card card-header">
-                    <strong class="">{{ ordinal($yearlevel) }} Year</strong>
+                <div class="card-header row">
+                    <div class="col-auto"><strong class="">{{ ordinal($yearlevel) }} Year</strong></div>
+                    <div class="col-2">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input toggleall"
+                                id="toggleall_{{ $ctr }}">
+                            <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body p-3">
                     @foreach ($yr as $semname => $sem)
@@ -55,7 +56,8 @@ $checkid = 0;
                                                                 {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
                                                             <label class="custom-control-label"
                                                                 for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
-                                                                    class="text-muted"> + {{ $category['amount'] }}</small>
+                                                                    class="text-muted"> +
+                                                                    {{ $category['amount'] }}</small>
                                                             </label>
                                                         </div>
                                                     </li>
