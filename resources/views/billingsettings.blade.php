@@ -37,6 +37,7 @@
 {{-- <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script> --}}
 <script type="text/javascript" src="{{ url('js\jquery.min.js') }}"></script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js') }}"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js') }}">
 </script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js') }}"></script>
@@ -53,7 +54,6 @@
 <script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\dateformat.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\settings.js') }}"></script>
 </body>

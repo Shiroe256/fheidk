@@ -30,12 +30,6 @@ $switchcolor = '';
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         <div class="accordion" id="accordion_course_{{ $ctr }}">
             @foreach ($course as $yearlevel => $yr)
-                <?php
-                $yearlevel == 1 ? ($switchcolor = 'bg-danger') : '';
-                $yearlevel == 2 ? ($switchcolor = 'bg-primary') : '';
-                $yearlevel == 3 ? ($switchcolor = 'bg-warning') : '';
-                $yearlevel == 4 ? ($switchcolor = 'bg-dark') : '';
-                ?>
                 <div class="card">
                     <div class="card-header" id="heading_{{ $yearlevel }}">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
@@ -44,9 +38,7 @@ $switchcolor = '';
                                 YEAR</strong>
                         </button>
                     </div>
-                    <div id="coll_accordion_{{ $yearlevel }}" class="collapse"
-                        aria-labelledby="heading_{{ $yearlevel }}"
-                        data-parent="#accordion_course_{{ $ctr }}">
+                    <div id="coll_accordion_{{ $yearlevel }}" class="collapse" aria-labelledby="heading_{{ $yearlevel }}" data-parent="#accordion_course_{{ $ctr }}">
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
