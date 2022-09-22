@@ -845,7 +845,7 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 
 //if students is a freshmen
 $(document).on('change', '#year_level', function () {
-  if ($('#checkbox_transferee').checked == true) {
+  if ($(this).val() == 1 || ($('input[name=checkbox_transferee]').checked && $(this).val() > 1)) {
     $('.input_transferee').removeClass('d-none')
   }else {
     $('.input_transferee').addClass('d-none')
@@ -935,7 +935,8 @@ $(document).on('click', '.btn_update_student', function (e) {
       if (response.transferee == "Yes") {
         $("#edit_checkbox_transferee").prop('checked', true);
       } else {
-        ("#edit_checkbox_transferee").prop('checked', false);
+        ("#edit_checkbox_transferee").p
+        rop('checked', false);
       }
 
       if ($("#edit_nstp_unit").val() !== "") {
