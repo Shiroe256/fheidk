@@ -37,7 +37,7 @@ $switchcolor = '';
             <div class="card my-3">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-auto"><small class="fw-bold">{{ strtoupper(ordinal($yearlevel)) }} YEAR</small>
+                        <div class="col-auto"><strong>{{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
                         </div>
                     </div>
                 </div>
