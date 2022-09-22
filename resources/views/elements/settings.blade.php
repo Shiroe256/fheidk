@@ -30,10 +30,10 @@ $checkid = 0;
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-auto"><strong class="">{{ ordinal($yearlevel) }} Year</strong></div>
+                        <div class="col-auto"><strong class="">{{ strtoupper(ordinal($yearlevel)) }} Year</strong></div>
                     </div>
                 </div>
-                <div class="card-body p-3">
+                <div class="card-body p-3 m-3">
                     @foreach ($yr as $semname => $sem)
                         <div class="row my-3">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
