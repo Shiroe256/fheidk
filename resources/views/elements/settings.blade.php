@@ -84,12 +84,12 @@ $switchcolor = '';
                                         @endforeach
                                     </ul>
                                 </div>
-                                <?php $ctr++ ?>
                             @endforeach
                         </div>
                     </div>
                 </div>
             @endforeach
+            <?php $ctr++; ?>
         </div>
     </div>
 @endforeach
