@@ -23,6 +23,7 @@ $ctr = 0;
 <?php
 $ctr = 0;
 $checkid = 0;
+$switchcolor = '';
 ?>
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
