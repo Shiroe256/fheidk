@@ -144,24 +144,24 @@ $(document).on('change', '#nstp_unit', function (e) {
 if (($('#total_nstp').val() !== null || $('#total_nstp').val() !== '') && typeof str === 'string' && str.length === 0) {
   $(document).on('change', '#course_enrolled', function (e) {
     e.preventDefault();
-  let course = $("#course_enrolled option:selected").text();
-  let nstp_unit = $("#nstp_unit").val();
-  let year_level = $("#year_level").val();
-  $.ajax({
-    url: '/get-nstpfee',
-    method: 'get',
-    data: {
-      course_enrolled: course,
-      nstp_unit: nstp_unit,
-      year_level: year_level,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      console.log(response);
-      $("#total_nstp").val(response);
-    }
+    let course = $("#course_enrolled option:selected").text();
+    let nstp_unit = $("#nstp_unit").val();
+    let year_level = $("#year_level").val();
+    $.ajax({
+      url: '/get-nstpfee',
+      method: 'get',
+      data: {
+        course_enrolled: course,
+        nstp_unit: nstp_unit,
+        year_level: year_level,
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        console.log(response);
+        $("#total_nstp").val(response);
+      }
+    });
   });
-});
 
   $(document).on('change', '#year_level', function (e) {
     e.preventDefault();
@@ -196,13 +196,13 @@ $(document).on('change', '#year_level', function (e) {
   getOSF();
 });
 
-function getOSF(){
+function getOSF() {
   let reference_no = $("#add_reference_no").val();
   let course_enrolled = $("#course_enrolled option:selected").text();
   let year_level = $("#year_level").val();
   let semester = $("#add_semester").val();
-  
-  
+
+
   $.ajax({
     url: '/get-otherschoolfee',
     method: 'get',
@@ -215,93 +215,80 @@ function getOSF(){
     },
     success: function (response) {
       var res = new Array();
-      if(response==0 || response.length==0){
+      if (response == 0 || response.length == 0) {
         console.log('No selected year or course.');
-      }else{
+      } else {
         // console.log(response);
         $("#degree_program").val($("#course_enrolled option:selected").text());
 
-        var res = response.osf.reduce((acc, obj)=>{
+        var res = response.osf.reduce((acc, obj) => {
           var existItem = acc.find(item => item.type_of_fee === obj.type_of_fee && item.coverage === obj.coverage && item.bs_status === obj.bs_status);
-          if(existItem){
+          if (existItem) {
             existItem.amount += obj.amount;
             return acc;
-          } 
+          }
           acc.push(obj);
           return acc;
         }, []);
 
         var other_school_fee = new Array();
-        other_school_fee = {res}
-        // console.log(other_school_fee);
+        other_school_fee = { res }
+        console.log(other_school_fee);
 
-         var admission_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
-         }
-         );
-         var athletic_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Athletic" && el.coverage == "per new student" && el.bs_status == 1
-         }
-         );
-         var computer_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Computer" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var cultural_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Cultural" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var development_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Development" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var entrance_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Entrance" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var guidance_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Guidance" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var handbook_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Handbook" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var laboratory_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Laboratory" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var library_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Library" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var medical_dental_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Medical and Dental" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var registration_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "Registration" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
-         var school_id_fee = other_school_fee.res.filter(function (el)
-         {
-           return el.type_of_fee == "School ID" && el.coverage == "per student" && el.bs_status == 1
-         }
-         );
+        var admission_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Admission" && el.coverage == "per new student" && el.bs_status == 1
+        }
+        );
+        var athletic_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Athletic" && el.coverage == "per new student" && el.bs_status == 1
+        }
+        );
+        var computer_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Computer" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var cultural_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Cultural" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var development_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Development" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var entrance_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Entrance" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var guidance_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Guidance" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var handbook_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Handbook" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var laboratory_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Laboratory" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var library_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Library" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var medical_dental_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Medical and Dental" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var registration_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Registration" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
+        var school_id_fee = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "School ID" && el.coverage == "per student" && el.bs_status == 1
+        }
+        );
 
-         if(admission_fee.length == 0){
+        if (admission_fee.length == 0) {
           //display amount
           $("#admission_fee").val(0);
           //set max amount
@@ -316,7 +303,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           //display amount
           $("#admission_fee").val(admission_fee[0].amount);
           //set max amount
@@ -331,9 +318,9 @@ function getOSF(){
               $(this).val(admission_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(athletic_fee.length == 0){
+        if (athletic_fee.length == 0) {
           $("#athletic_fee").val(0);
           $("#athletic_fee").attr("max", 0);
           $('#athletic_fee').on('keyup keydown change', function (e) {
@@ -345,7 +332,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#athletic_fee").val(athletic_fee[0].amount);
           $("#athletic_fee").attr("max", athletic_fee[0].amount);
           $('#athletic_fee').on('keyup keydown change', function (e) {
@@ -357,9 +344,9 @@ function getOSF(){
               $(this).val(athletic_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(computer_fee.length == 0){
+        if (computer_fee.length == 0) {
           $("#computer_fee").val(0);
           $("#computer_fee").attr("max", 0);
           $('#computer_fee').on('keyup keydown change', function (e) {
@@ -371,7 +358,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#computer_fee").val(computer_fee[0].amount);
           $("#computer_fee").attr("max", computer_fee[0].amount);
           $('#computer_fee').on('keyup keydown change', function (e) {
@@ -383,9 +370,9 @@ function getOSF(){
               $(this).val(computer_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(cultural_fee.length == 0){
+        if (cultural_fee.length == 0) {
           $("#cultural_fee").val(0);
           $("#cultural_fee").attr("max", 0);
           $('#cultural_fee').on('keyup keydown change', function (e) {
@@ -397,7 +384,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#cultural_fee").val(cultural_fee[0].amount);
           $("#cultural_fee").attr("max", cultural_fee[0].amount);
           $('#cultural_fee').on('keyup keydown change', function (e) {
@@ -409,9 +396,9 @@ function getOSF(){
               $(this).val(cultural_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(development_fee.length == 0){
+        if (development_fee.length == 0) {
           $("#development_fee").val(0);
           $("#development_fee").attr("max", 0);
           $('#development_fee').on('keyup keydown change', function (e) {
@@ -423,7 +410,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#development_fee").val(development_fee[0].amount);
           $("#development_fee").attr("max", development_fee[0].amount);
           $('#development_fee').on('keyup keydown change', function (e) {
@@ -435,9 +422,9 @@ function getOSF(){
               $(this).val(development_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(entrance_fee.length == 0){
+        if (entrance_fee.length == 0) {
           $("#entrance_fee").val(0);
           $("#entrance_fee").attr("max", 0);
           $('#entrance_fee').on('keyup keydown change', function (e) {
@@ -449,7 +436,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#entrance_fee").val(entrance_fee[0].amount);
           $("#entrance_fee").attr("max", entrance_fee[0].amount);
           $('#entrance_fee').on('keyup keydown change', function (e) {
@@ -461,9 +448,9 @@ function getOSF(){
               $(this).val(entrance_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(guidance_fee.length == 0){
+        if (guidance_fee.length == 0) {
           $("#guidance_fee").val(0);
           $("#guidance_fee").attr("max", 0);
           $('#guidance_fee').on('keyup keydown change', function (e) {
@@ -475,7 +462,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#guidance_fee").val(guidance_fee[0].amount);
           $("#guidance_fee").attr("max", guidance_fee[0].amount);
           $('#guidance_fee').on('keyup keydown change', function (e) {
@@ -487,9 +474,9 @@ function getOSF(){
               $(this).val(guidance_fee[0].amount);
             }
           });
-         }
-         
-         if(handbook_fee.length == 0){
+        }
+
+        if (handbook_fee.length == 0) {
           $("#handbook_fee").val(0);
           $("#handbook_fee").attr("max", 0);
           $('#handbook_fee').on('keyup keydown change', function (e) {
@@ -501,7 +488,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#handbook_fee").val(handbook_fee[0].amount);
           $("#handbook_fee").attr("max", handbook_fee[0].amount);
           $('#handbook_fee').on('keyup keydown change', function (e) {
@@ -513,9 +500,9 @@ function getOSF(){
               $(this).val(handbook_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(laboratory_fee.length == 0){
+        if (laboratory_fee.length == 0) {
           $("#laboratory_fee").val(0);
           $("#laboratory_fee").attr("max", 0);
           $('#laboratory_fee').on('keyup keydown change', function (e) {
@@ -527,7 +514,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#laboratory_fee").val(laboratory_fee[0].amount);
           $("#laboratory_fee").attr("max", laboratory_fee[0].amount);
           $('#laboratory_fee').on('keyup keydown change', function (e) {
@@ -539,9 +526,9 @@ function getOSF(){
               $(this).val(laboratory_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(library_fee.length == 0){
+        if (library_fee.length == 0) {
           $("#library_fee").val(0);
           $("#library_fee").attr("max", 0);
           $('#library_fee').on('keyup keydown change', function (e) {
@@ -553,7 +540,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#library_fee").val(library_fee[0].amount);
           $("#library_fee").attr("max", library_fee[0].amount);
           $('#library_fee').on('keyup keydown change', function (e) {
@@ -565,9 +552,9 @@ function getOSF(){
               $(this).val(library_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(medical_dental_fee.length == 0){
+        if (medical_dental_fee.length == 0) {
           $("#medical_dental_fee").val(0);
           $("#medical_dental_fee").attr("max", 0);
           $('#medical_dental_fee').on('keyup keydown change', function (e) {
@@ -579,7 +566,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#medical_dental_fee").val(medical_dental_fee[0].amount);
           $("#medical_dental_fee").attr("max", medical_dental_fee[0].amount);
           $('#medical_dental_fee').on('keyup keydown change', function (e) {
@@ -591,9 +578,9 @@ function getOSF(){
               $(this).val(medical_dental_fee[0].amount);
             }
           });
-         }
+        }
 
-         if(registration_fee.length == 0){
+        if (registration_fee.length == 0) {
           $("#registration_fee").val(0);
           $("#registration_fee").attr("max", 0);
           $('#registration_fee').on('keyup keydown change', function (e) {
@@ -605,7 +592,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#registration_fee").val(registration_fee[0].amount);
           $("#registration_fee").attr("max", registration_fee[0].amount);
           $('#registration_fee').on('keyup keydown change', function (e) {
@@ -617,9 +604,9 @@ function getOSF(){
               $(this).val(registration_fee[0].amount);
             }
           });
-         }
-         
-         if(school_id_fee.length == 0){
+        }
+
+        if (school_id_fee.length == 0) {
           $("#school_id_fee").val(0);
           $("#school_id_fee").attr("max", 0);
           $('#school_id_fee').on('keyup keydown change', function (e) {
@@ -631,7 +618,7 @@ function getOSF(){
               $(this).val(0);
             }
           });
-         }else{
+        } else {
           $("#school_id_fee").val(school_id_fee[0].amount);
           $("#school_id_fee").attr("max", school_id_fee[0].amount);
           $('#school_id_fee').on('keyup keydown change', function (e) {
@@ -643,10 +630,9 @@ function getOSF(){
               $(this).val(school_id_fee[0].amount);
             }
           });
-         }
-
+        }
+      }
     }
-   }
   });
 }
 
@@ -817,12 +803,12 @@ $(document).on('change', '#edit_course_enrolled', function (e) {
 //If checkbox_address is checked
 $(document).on('click', 'input[name=checkbox_address]', function () {
   if (this.checked) {
-   $("input[name=permanent_province]").val($("input[name=present_province]").val());
-   $("input[name=permanent_city]").val($("input[name=present_city]").val());
-   $("input[name=permanent_barangay]").val($("input[name=present_barangay]").val());
-   $("input[name=permanent_street]").val($("input[name=present_street]").val());
-   $("input[name=permanent_zipcode]").val($("input[name=present_zipcode]").val());
-  }else{
+    $("input[name=permanent_province]").val($("input[name=present_province]").val());
+    $("input[name=permanent_city]").val($("input[name=present_city]").val());
+    $("input[name=permanent_barangay]").val($("input[name=present_barangay]").val());
+    $("input[name=permanent_street]").val($("input[name=present_street]").val());
+    $("input[name=permanent_zipcode]").val($("input[name=present_zipcode]").val());
+  } else {
     $("input[name=permanent_province]").val('');
     $("input[name=permanent_city]").val('');
     $("input[name=permanent_barangay]").val('');
@@ -834,12 +820,12 @@ $(document).on('click', 'input[name=checkbox_address]', function () {
 //If edit_checkbox_address is checked
 $(document).on('click', 'input[name=edit_checkbox_address]', function () {
   if (this.checked) {
-   $("input[name=edit_permanent_province]").val($("input[name=edit_present_province]").val());
-   $("input[name=edit_permanent_city]").val($("input[name=edit_present_city]").val());
-   $("input[name=edit_permanent_barangay]").val($("input[name=edit_present_barangay]").val());
-   $("input[name=edit_permanent_street]").val($("input[name=edit_present_street]").val());
-   $("input[name=edit_permanent_zipcode]").val($("input[name=edit_present_zipcode]").val());
-  }else{
+    $("input[name=edit_permanent_province]").val($("input[name=edit_present_province]").val());
+    $("input[name=edit_permanent_city]").val($("input[name=edit_present_city]").val());
+    $("input[name=edit_permanent_barangay]").val($("input[name=edit_present_barangay]").val());
+    $("input[name=edit_permanent_street]").val($("input[name=edit_present_street]").val());
+    $("input[name=edit_permanent_zipcode]").val($("input[name=edit_present_zipcode]").val());
+  } else {
     $("input[name=edit_permanent_province]").val('');
     $("input[name=edit_permanent_city]").val('');
     $("input[name=edit_permanent_barangay]").val('');
@@ -852,7 +838,7 @@ $(document).on('click', 'input[name=edit_checkbox_address]', function () {
 $(document).on('click', 'input[name=checkbox_nstp]', function () {
   if (this.checked) {
     $('.input_nstp').removeClass('d-none')
-  }else{
+  } else {
     $('.input_nstp').addClass('d-none')
   }
 });
@@ -861,7 +847,7 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 $(document).on('click', 'input[name=checkbox_transferee]', function () {
   if (this.checked) {
     $('.input_transferee').removeClass('d-none')
-  }else{
+  } else {
     $('.input_transferee').addClass('d-none')
   }
 });
@@ -870,7 +856,7 @@ $(document).on('click', 'input[name=checkbox_transferee]', function () {
 $(document).on('change', '#year_level', function () {
   if ($(this).val() == 1) {
     $('.input_transferee').removeClass('d-none')
-  }else{
+  } else {
     $('.input_transferee').addClass('d-none')
   }
 });
@@ -940,18 +926,18 @@ $(document).on('click', '.btn_update_student', function (e) {
       $("#edit_school_id_fee").val(response.school_id_fee);
       $("#edit_remarks").val(response.remarks);
 
-      if(($("#edit_present_province").val() ==  $("#edit_permanent_province").val()) && ($("#edit_present_city").val() ==  $("#edit_permanent_city").val()) && ($("#edit_present_barangay").val() ==  $("#edit_permanent_barangay").val()) && ($("#edit_present_street").val() ==  $("#edit_permanent_street").val()) && ($("#edit_present_zipcode").val() ==  $("#edit_permanent_zipcode").val())){
+      if (($("#edit_present_province").val() == $("#edit_permanent_province").val()) && ($("#edit_present_city").val() == $("#edit_permanent_city").val()) && ($("#edit_present_barangay").val() == $("#edit_permanent_barangay").val()) && ($("#edit_present_street").val() == $("#edit_permanent_street").val()) && ($("#edit_present_zipcode").val() == $("#edit_permanent_zipcode").val())) {
         $("#edit_checkbox_address").prop('checked', true);
       }
 
-      if(response.transferee == "Yes"){
+      if (response.transferee == "Yes") {
         $("#edit_checkbox_transferee").prop('checked', true);
-      }else{
+      } else {
         ("#edit_checkbox_transferee").p
         rop('checked', false);
       }
 
-      if($("#edit_nstp_unit").val() !== ""){
+      if ($("#edit_nstp_unit").val() !== "") {
         $("#nstp_div").removeClass("d-none");
         $("#edit_with_nstp").prop('checked', true);
       }
@@ -963,7 +949,7 @@ $(document).on('click', '.btn_update_student', function (e) {
 $(document).on('click', '#edit_with_nstp', function () {
   if (this.checked) {
     $("#nstp_div").removeClass("d-none");
-  }else{
+  } else {
     $("#edit_nstp_unit").val("");
     $("#edit_nstp_fee").val("");
 
@@ -1146,18 +1132,18 @@ function selectCampus() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      if(response.length == 1){
+      if (response.length == 1) {
         $('.campus_div').addClass('d-none');
         $('#selected_campus').val(response[0].hei_name);
-      }else{
-      $('.campus_div').removeClass('d-none');
-      for (let index = 0; index < response.length; ++index) {
-        let campus = response[index].hei_name;
-        let hei_uii = response[index].hei_uii;
-        $('#hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
-        $('#applied_hei_campus').append('<option id='+ hei_uii +' value=' + campus + '>' + campus + '</option>');
+      } else {
+        $('.campus_div').removeClass('d-none');
+        for (let index = 0; index < response.length; ++index) {
+          let campus = response[index].hei_name;
+          let hei_uii = response[index].hei_uii;
+          $('#hei_campus').append('<option id=' + hei_uii + ' value=' + campus + '>' + campus + '</option>');
+          $('#applied_hei_campus').append('<option id=' + hei_uii + ' value=' + campus + '>' + campus + '</option>');
+        }
       }
-    }
     }
   });
 }
