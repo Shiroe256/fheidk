@@ -37,11 +37,16 @@ $switchcolor = '';
                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                     data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
                                     aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
-                                    <strong><i class="bi bi-calendar"></i> {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+                                    <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                      </svg>
+                                       {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
                                 </button>
                             </div>
                             <div class="col-1">
-                                <strong class="text-primary" id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"> <i class="bi bi-circle-fill"></i></strong>
+                                <strong class="text-primary" id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="8"/>
+                                  </svg></strong>
                             </div>
                         </div>
                     </div>
@@ -51,7 +56,7 @@ $switchcolor = '';
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
-                                    <div class="col pl-1"><strong>{{ ordinal($semname) }} Semester</strong></div>
+                                    <div class="col pl-3"><strong>{{ ordinal($semname) }} Semester</strong></div>
                                     <div class="col-3">
                                         <div class="custom-control custom-switch text-end">
                                             <input type="checkbox" class="custom-control-input toggleall"
