@@ -43,7 +43,7 @@ $switchcolor = '';
                 </div>
                 <div class="card-body p-3">
                     @foreach ($yr as $semname => $sem)
-                        <div class="row my-3">
+                        <div class="row my-3 d-flex justify-content-end">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
                             <div class="col-2">
                                 <div class="custom-control custom-switch text-end">
