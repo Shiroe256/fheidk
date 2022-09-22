@@ -847,8 +847,10 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 $(document).on('click', 'input[name=checkbox_transferee]', function () {
   if (this.checked && $('#year_level').val() <= 1) {
     $('.input_transferee').removeClass('d-none')
-  } 
-  if(this.checked && $('#year_level').val() > 1) {
+  }else if(this.checked && $('#year_level').val() > 1) {
+    $('.input_transferee').removeClass('d-none')
+  }
+  else{
     $('.input_transferee').removeClass('d-none')
   }
 });
