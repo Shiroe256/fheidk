@@ -27,13 +27,15 @@ $checkid = 0;
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
             <div class="card">
-                <div class="card-header row">
-                    <div class="col-auto"><strong class="">{{ ordinal($yearlevel) }} Year</strong></div>
-                    <div class="col-2">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input toggleall"
-                                id="toggleall_{{ $ctr }}">
-                            <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-auto"><strong class="">{{ ordinal($yearlevel) }} Year</strong></div>
+                        <div class="col-2">
+                            <div class="custom-control custom-switch text-end">
+                                <input type="checkbox" class="custom-control-input toggleall"
+                                    id="toggleall_{{ $ctr }}">
+                                <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
+                            </div>
                         </div>
                     </div>
                 </div>
