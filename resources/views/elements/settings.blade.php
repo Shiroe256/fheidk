@@ -29,10 +29,10 @@ $switchcolor = '';
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
             <?php
-            $yearlevel == '1' ? ($switchcolor = 'bg-danger') : '';
-            $yearlevel == '2' ? ($switchcolor = 'bg-primary') : '';
-            $yearlevel == '3' ? ($switchcolor = 'bg-warning') : '';
-            $yearlevel == '4' ? ($switchcolor = 'bg-dark') : '';
+            $yearlevel == 1 ? ($switchcolor = 'bg-danger') : '';
+            $yearlevel == 2 ? ($switchcolor = 'bg-primary') : '';
+            $yearlevel == 3 ? ($switchcolor = 'bg-warning') : '';
+            $yearlevel == 4 ? ($switchcolor = 'bg-dark') : '';
             ?>
             <div class="card my-3">
                 <div class="card-header">
