@@ -46,7 +46,7 @@ $switchcolor = '';
                         <div class="row my-3">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
                             <div class="col-2">
-                                <div class="form-check form-control form-switch text-end">
+                                <div class="form-check form-control-lg form-switch text-end">
                                     <input type="checkbox" class="{{ $switchcolor }} form-check-input toggleall"
                                         id="toggleall_{{ $ctr }}">
                                     <label class="form-check-label" for="toggleall_{{ $ctr }}">Toggle
@@ -64,7 +64,7 @@ $switchcolor = '';
                                             <ul class="list-unstyled">
                                                 @foreach ($typeoffee as $categoryid => $category)
                                                     <li>
-                                                        <div class="form-check form-control form-switch">
+                                                        <div class="form-check form-control-lg form-switch">
                                                             <input type="checkbox"
                                                                 class="{{ $switchcolor }} form-check-input"
                                                                 id="switch_{{ $checkid }}"
