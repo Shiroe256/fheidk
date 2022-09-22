@@ -847,7 +847,7 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 $(document).on('change', '#year_level', function () {
   if ($(this).val() == 1) {
     $('.input_transferee').removeClass('d-none')
-  }else if($('#checkbox_transferee').checked && $(this).val() > 1){
+  }else if($('input[name=checkbox_transferee]').checked && $(this).val() > 1){
     $('.input_transferee').removeClass('d-none')
   }else {
     $('.input_transferee').addClass('d-none')
