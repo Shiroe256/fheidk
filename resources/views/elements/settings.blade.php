@@ -32,16 +32,17 @@ $switchcolor = '';
             @foreach ($course as $yearlevel => $yr)
                 <div class="card">
                     <div class="card-header" id="heading_cs_{{ $ctr }}_{{ $yearlevel }}">
-                        <div class="row d-flex justify-content-end">
+                        <div class="row d-flex justify-content-end align-items-center">
                             <div class="col">
                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                     data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
                                     aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
-                                    <strong>{{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+                                    <strong>
+                                       {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
                                 </button>
                             </div>
-                            <div class="col-3">
-                                <strong id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}">30/30</strong>
+                            <div class="col-1">
+                                <strong class="text-primary" id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"></strong>
                             </div>
                         </div>
                     </div>
@@ -51,7 +52,7 @@ $switchcolor = '';
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
-                                    <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
+                                    <div class="col pl-3"><strong>{{ ordinal($semname) }} Semester</strong></div>
                                     <div class="col-3">
                                         <div class="custom-control custom-switch text-end">
                                             <input type="checkbox" class="custom-control-input toggleall"
