@@ -2,6 +2,7 @@ var on = [];
 var off = [];
 var changes = [];
 var reference_no = $('#btn_save').val();
+resetCounter($('[id^="checked_ctr_"'));
 $('#select_course').change(function () {
     $(".course-settings").each(function () {
         $(this).addClass("d-none");
