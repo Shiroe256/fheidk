@@ -37,11 +37,11 @@ $switchcolor = '';
                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                     data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
                                     aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
-                                    <strong>{{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+                                    <strong><i class="bi bi-calendar"></i> {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
                                 </button>
                             </div>
                             <div class="col-1">
-                                <strong id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"></strong>
+                                <strong class="text-primary" id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"> <i class="bi bi-circle-fill"></i></strong>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ $switchcolor = '';
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
-                                    <div class="col"><strong>{{ ordinal($semname) }} Semester</strong></div>
+                                    <div class="col pl-1"><strong>{{ ordinal($semname) }} Semester</strong></div>
                                     <div class="col-3">
                                         <div class="custom-control custom-switch text-end">
                                             <input type="checkbox" class="custom-control-input toggleall"
