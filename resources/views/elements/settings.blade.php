@@ -28,12 +28,12 @@ $switchcolor = '';
 @foreach ($otherfees as $coursename => $course)
     <div class="course-settings {{ $ctr == 0 ? '' : 'd-none' }}" id="course_{{ $ctr }}">
         @foreach ($course as $yearlevel => $yr)
-            <?php
-            $yearlevel == 1 ? ($switchcolor = 'bg-danger') : '';
-            $yearlevel == 2 ? ($switchcolor = 'bg-primary') : '';
-            $yearlevel == 3 ? ($switchcolor = 'bg-warning') : '';
-            $yearlevel == 4 ? ($switchcolor = 'bg-dark') : '';
-            ?>
+            <?php 
+                        $yearlevel==1 ? $switchcolor = 'bg-danger' : '';
+                        $yearlevel==2 ? $switchcolor = 'bg-primary' : '';
+                        $yearlevel==3 ? $switchcolor = 'bg-warning' : '';
+                        $yearlevel==4 ? $switchcolor = 'bg-dark' : '';
+                        ?>
             <div class="card my-3">
                 <div class="card-header">
                     <div class="row">
@@ -46,10 +46,10 @@ $switchcolor = '';
                         <div class="row my-3">
                             <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
                             <div class="col-2">
-                                <div class="form-check form-control-lg form-switch text-end">
-                                    <input type="checkbox" class="{{ $switchcolor }} form-check-input toggleall"
+                                <div class="custom-control custom-switch text-end">
+                                    <input type="checkbox" class="{{ $switchcolor }} custom-control-input toggleall"
                                         id="toggleall_{{ $ctr }}">
-                                    <label class="form-check-label" for="toggleall_{{ $ctr }}">Toggle
+                                    <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle
                                         All</label>
                                 </div>
                             </div>
@@ -64,13 +64,13 @@ $switchcolor = '';
                                             <ul class="list-unstyled">
                                                 @foreach ($typeoffee as $categoryid => $category)
                                                     <li>
-                                                        <div class="form-check form-control-lg form-switch">
+                                                        <div class="custom-control custom-switch">
                                                             <input type="checkbox"
-                                                                class="{{ $switchcolor }} form-check-input"
+                                                                class="{{ $switchcolor }} custom-control-input"
                                                                 id="switch_{{ $checkid }}"
                                                                 value="{{ $category['id'] }}"
                                                                 {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
-                                                            <label class="form-check-label"
+                                                            <label class="custom-control-label"
                                                                 for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
                                                                     class="text-muted"> +
                                                                     {{ $category['amount'] }}</small>
