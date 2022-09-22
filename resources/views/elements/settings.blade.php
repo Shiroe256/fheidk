@@ -31,14 +31,14 @@ $switchcolor = '';
         <div class="accordion" id="accordion_course_{{ $ctr }}">
             @foreach ($course as $yearlevel => $yr)
                 <div class="card">
-                    <div class="card-header" id="heading_{{ $yearlevel }}">
+                    <div class="card-header" id="heading_cs_{{$ctr}}_{{ $yearlevel }}">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                            data-target="#coll_accordion_{{ $yearlevel }}"
-                            aria-controls="coll_accordion_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
+                            data-target="#coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}"
+                            aria-controls="coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}"><strong>{{ strtoupper(ordinal($yearlevel)) }}
                                 YEAR</strong>
                         </button>
                     </div>
-                    <div id="coll_accordion_{{ $yearlevel }}" class="collapse" aria-labelledby="heading_{{ $yearlevel }}" data-parent="#accordion_course_{{ $ctr }}">
+                    <div id="coll_accordion_cs_{{$ctr}}_{{ $yearlevel }}" class="collapse" aria-labelledby="heading_cs_{{$ctr}}_{{ $yearlevel }}" data-parent="#accordion_course_{{ $ctr }}">
                         <div class="card-body p-3">
                             @foreach ($yr as $semname => $sem)
                                 <div class="row my-3 d-flex justify-content-end">
