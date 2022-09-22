@@ -11,6 +11,7 @@ function ordinal($number)
 $ctr = 0;
 ?>
 <div class="mb-3">
+    <small class="fw-bold">COURSE</small>
     <select name="" id="select_course" class="custom-select">
         @foreach ($otherfees as $course => $x)
             <option value="{{ $ctr++ }}">{{ $course }} - Last Updated: {{ $course_lastupdated[$course] }}
@@ -30,18 +31,22 @@ $checkid = 0;
                 <div class="card-header">
                     <div class="row">
                         <div class="col-auto"><strong class="">{{ ordinal($yearlevel) }} Year</strong></div>
-                        <div class="col-2">
-                            <div class="custom-control custom-switch text-end">
-                                <input type="checkbox" class="custom-control-input toggleall"
-                                    id="toggleall_{{ $ctr }}">
-                                <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle All</label>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body p-3">
                     @foreach ($yr as $semname => $sem)
-                        <strong class="mb-3">{{ ordinal($semname) }} Semester</strong>
+                        <div class="row my-3">
+                            <div class="col-auto"><strong>{{ ordinal($semname) }} Semester</strong></div>
+                            <div class="col-2">
+                                <div class="custom-control custom-switch text-end">
+                                    <input type="checkbox" class="custom-control-input toggleall"
+                                        id="toggleall_{{ $ctr }}">
+                                    <label class="custom-control-label" for="toggleall_{{ $ctr }}">Toggle
+                                        All</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         <div id="settings_{{ $ctr++ }}">
                             <ul class="list-unstyled card-columns">
                                 @foreach ($sem as $typeoffeename => $typeoffee)
