@@ -1157,13 +1157,10 @@ class BillingController extends Controller
                 $student->remarks = '';
 
                 //fetch duplicates in the masterlist
-                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
-                    array(
-                        'fname' => $student->stud_fname,
-                        'lname' => $student->stud_lname,
-                        'birthdate' => $student->stud_birth_date
-                    )
-                );
+                $duplicateinmasterlist = Student::where('fname',$student->stud_fname)
+                ->where('lname', $student->stud_lname)
+                ->where('birthdate', $student->stud_birth_date)
+                ->first();
 
                 //if there are duplicates in the masterlist add a remark
                 if ($duplicateinmasterlist != NULL) {
