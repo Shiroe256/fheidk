@@ -1168,6 +1168,7 @@ class BillingController extends Controller
                     $fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->fhe_award_no = $fhe_award_no;
                     $remarks .= 'FHE award no. automatically selected from Master table</br>';
+                    printf($fhe_award_no);
                 }
 
                 $duplicates = TemporaryBilling::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
@@ -1175,7 +1176,6 @@ class BillingController extends Controller
                     $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
 
-                printf($fhe_award_no);
                 if ($fhe_award_no != '' && $duplicateinmasterlist != NULL) {
 
                     if ($studentinfo == null) {
