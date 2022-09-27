@@ -1212,6 +1212,7 @@ class BillingController extends Controller
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
                             $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
+                            printf($student->remarks);
                         }
                         //maximum residency end
                     }
@@ -1219,6 +1220,7 @@ class BillingController extends Controller
                 if ($student->remarks != '') {
                     $billing->billing_status = 4;
                 }
+                printf($student->remarks);
                 $student->save();
             }
 
