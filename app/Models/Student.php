@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Student extends Model
+class Student extends Model implements Auditable
 {
-
+    use \OwenIt\Auditing\Auditable;
     protected $table = 'tbl_master_student_blank';
     protected $primaryKey = 'uid';
     protected $fillable = [

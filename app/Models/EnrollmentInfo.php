@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class EnrollmentInfo extends Model
+class EnrollmentInfo extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $table = 'tbl_enrollment_detail_blank';
     protected $primaryKey = 'uid';
     // public $timestamps = false;

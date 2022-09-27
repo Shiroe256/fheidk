@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class TuitionFees extends Model
+class TuitionFees extends Model implements Auditable 
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
+    
     protected $table = 'tbl_tuition_fees';
     public $primaryKey = 'uid';
     protected $fillable = [
