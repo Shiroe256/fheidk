@@ -1164,8 +1164,8 @@ class BillingController extends Controller
                 print_r($duplicateinmasterlist);
 
                 //if there are duplicates in the masterlist add a remark
-                if ($duplicateinmasterlist != NULL) {
-                    $student->fhe_award_no = 0;
+                if (!is_null($duplicateinmasterlist)) {
+                    $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
                 }
 
