@@ -1159,14 +1159,14 @@ class BillingController extends Controller
                 $duplicateinmasterlist = Student::where('fname', $student->stud_fname)
                 ->where('lname', $student->stud_lname)
                 ->where('birthdate', $student->stud_birth_date)
-                ->get();
+                ->first();
                 
                 //if there are duplicates in the masterlist add a remark
-                if (!$duplicateinmasterlist->isEmpty()) {
-                    $fhe_award_no = $duplicateinmasterlist->first()->fhe_award_no;
+                if ($duplicateinmasterlist != null) {
+                    $fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->fhe_award_no = $fhe_award_no;
+                    $studentinfo = Student::where('fhe_award_no', $fhe_award_no)->first();
                     $remarks .= 'FHE award no. automatically selected from Master table</br>';
-                    $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
 
                     if ($studentinfo == null) {
                         continue;
