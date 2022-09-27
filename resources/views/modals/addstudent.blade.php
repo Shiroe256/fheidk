@@ -271,6 +271,14 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
+                                <div class="form-group"><label>Computer Laboratory Unit/s</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Total Amount</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max="" readonly></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
                                 <div class="form-group"><label>Cultural Fee</label><input id="cultural_fee" name="cultural_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
@@ -291,6 +299,14 @@
                             </div>
                             <div class="col">
                                 <div class="form-group"><label>Library Fee</label><input id="library_fee" name="library_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label>Laboratory Unit/s</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label>Total Amount</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max="" readonly></div>
                             </div>
                         </div>
                         <div class="form-row">
