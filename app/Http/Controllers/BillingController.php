@@ -1163,6 +1163,7 @@ class BillingController extends Controller
                 
                 //if there are duplicates in the masterlist add a remark
                 if ($duplicateinmasterlist != null) {
+                    printf('meron');
                     $fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->fhe_award_no = $fhe_award_no;
                     $studentinfo = Student::where('fhe_award_no', $fhe_award_no)->first();
