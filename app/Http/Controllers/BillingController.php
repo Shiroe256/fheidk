@@ -41,7 +41,7 @@ class BillingController extends Controller
 
     public function fetchTempStudent(Request $request)
     {
-        $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); //currency formatter
+        // $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); //currency formatter
         $reference_no  = $request->reference_no;
         $students = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
@@ -85,7 +85,7 @@ class BillingController extends Controller
                     <td class="text-center">' . $student->year_level . '</td>
                     <td class="text-left">' . $student->remarks . '</td>
                     <td class="text-left">' . $student_status . '</td>
-                    <td class="text-left">' . $format->format($total_amount) . '</td>
+                    <td class="text-left">' . $total_amount . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
                             <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
