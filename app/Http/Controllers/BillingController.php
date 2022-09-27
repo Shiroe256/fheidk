@@ -1176,7 +1176,7 @@ class BillingController extends Controller
                     $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
 
-                if ($fhe_award_no != '' && $duplicateinmasterlist != NULL) {
+                if (isset($fhe_award_no) && $duplicateinmasterlist != NULL) {
 
                     if ($studentinfo == null) {
                         continue;
