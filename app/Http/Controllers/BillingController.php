@@ -1174,7 +1174,7 @@ class BillingController extends Controller
                     $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
 
-                if ($student->fhe_award_no != '' && $duplicateinmasterlist != NULL) {
+                if ($student->fhe_award_no != '' && count($duplicateinmasterlist) > 0) {
 
                     if ($studentinfo == null) {
                         continue;
@@ -1222,7 +1222,7 @@ class BillingController extends Controller
                 if ($remarks != '') {
                     $billing->billing_status = 4;
                 }
-                printf($remarks);
+                printf('remarks: ' . $remarks);
                 printf('xXx');
                 $student->remarks = $remarks;
                 $student->save();
