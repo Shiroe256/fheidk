@@ -1157,16 +1157,14 @@ class BillingController extends Controller
                 $student->remarks = '';
 
                 //fetch duplicates in the masterlist
-                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
-                    array(
-                        'fname' => $student->stud_fname,
-                        'lname' => $student->stud_lname,
-                        'birthdate' => $student->stud_birth_date
-                    )
-                );
+                $duplicateinmasterlist = Student::where('fname',$student->stud_fname)
+                ->where('lname', $student->stud_lname)
+                ->where('birthdate', $student->stud_birth_date)
+                ->first();
+                print_r($duplicateinmasterlist);
 
                 //if there are duplicates in the masterlist add a remark
-                if ($duplicateinmasterlist != NULL) {
+                if (!is_null($duplicateinmasterlist)) {
                     $student->fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
                 }
@@ -1192,6 +1190,7 @@ class BillingController extends Controller
                         //compute nstp units
                         if ($nstpunits >= 6) {
                             $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                            printf($student->remarks);
                         }
 
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
@@ -1203,6 +1202,7 @@ class BillingController extends Controller
                                 }
                             }
                         }
+                        printf($student->remarks);
 
                         //maximum residency start
                         //we have yet to get a database of the duration of courses
@@ -1214,6 +1214,7 @@ class BillingController extends Controller
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
                             $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
+                            printf($student->remarks);
                         }
                         //maximum residency end
                     }
@@ -1221,6 +1222,7 @@ class BillingController extends Controller
                 if ($student->remarks != '') {
                     $billing->billing_status = 4;
                 }
+                printf($student->remarks);
                 $student->save();
             }
 
