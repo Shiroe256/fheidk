@@ -211,7 +211,7 @@ class BillingController extends Controller
         $reference_no  = $request->reference_no;
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
-            ->andwhere('remarks', 'FHE award no. automatically selected from Master table</br>')
+            ->where('remarks', 'FHE award no. automatically selected from Master table</br>')
             ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
             ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
             ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
@@ -1157,10 +1157,13 @@ class BillingController extends Controller
                 $student->remarks = '';
 
                 //fetch duplicates in the masterlist
-                $duplicateinmasterlist = Student::where('fname',$student->stud_fname)
-                ->where('lname', $student->stud_lname)
-                ->where('birthdate', $student->stud_birth_date)
-                ->first();
+                $duplicateinmasterlist = $this->getDuplicatesStudentsInMasterList(
+                    array(
+                        'fname' => $student->stud_fname,
+                        'lname' => $student->stud_lname,
+                        'birthdate' => $student->stud_birth_date
+                    )
+                );
 
                 //if there are duplicates in the masterlist add a remark
                 if ($duplicateinmasterlist != NULL) {
