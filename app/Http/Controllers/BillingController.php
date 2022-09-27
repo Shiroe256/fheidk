@@ -1170,7 +1170,7 @@ class BillingController extends Controller
                     printf($student->remarks);
                 }
 
-                $duplicates = $students->where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
+                $duplicates = Student::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
                 if ($duplicates > 1) {
                     $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
@@ -1224,6 +1224,7 @@ class BillingController extends Controller
                     $billing->billing_status = 4;
                 }
                 printf($student->remarks);
+                printf('xXx');
                 $student->save();
             }
 
