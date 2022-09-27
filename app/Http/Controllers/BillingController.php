@@ -1164,7 +1164,7 @@ class BillingController extends Controller
 
                 print_r($duplicateinmasterlist);
                 //if there are duplicates in the masterlist add a remark
-                if ($duplicateinmasterlist != NULL) {
+                if (!$duplicateinmasterlist->isEmpty()) {
                     $fhe_award_no = $duplicateinmasterlist->fhe_award_no;
                     $student->fhe_award_no = $fhe_award_no;
                     $remarks .= 'FHE award no. automatically selected from Master table</br>';
@@ -1176,7 +1176,7 @@ class BillingController extends Controller
                     $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
 
-                if (isset($fhe_award_no) && $duplicateinmasterlist != NULL) {
+                if (isset($fhe_award_no) && !$duplicateinmasterlist->isEmpty()) {
 
                     if ($studentinfo == null) {
                         continue;
