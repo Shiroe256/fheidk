@@ -313,14 +313,14 @@ class BillingController extends Controller
 
             $students = [
                 //static sample data
-                'hei_psg_region' => $request->hei_psg_region,
+                'hei_psg_region' => $request->add_hei_psg_region,
                 'hei_sid' => Auth::user()->hei_sid,
-                'hei_uii' => $request->hei_uii,
-                'hei_name' => $request->selected_campus,
-                'reference_no' => $request->reference_no,
-                'ac_year' => $request->ac_year,
-                'semester' => $request->semester,
-                'tranche' => $request->tranche,
+                'hei_uii' => $request->add_hei_uii,
+                'hei_name' => $request->add_selected_campus,
+                'reference_no' => $request->add_reference_no,
+                'ac_year' => $request->add_ac_year,
+                'semester' => $request->add_semester,
+                'tranche' => $request->add_tranche,
                 'app_id' => '',
                 'fhe_award_no' => '',
                 'stud_id' => $request->stud_id,
