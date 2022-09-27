@@ -1190,6 +1190,7 @@ class BillingController extends Controller
                         //compute nstp units
                         if ($nstpunits >= 6) {
                             $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                            printf($student->remarks);
                         }
 
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
@@ -1201,6 +1202,7 @@ class BillingController extends Controller
                                 }
                             }
                         }
+                        printf($student->remarks);
 
                         //maximum residency start
                         //we have yet to get a database of the duration of courses
