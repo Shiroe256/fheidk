@@ -1154,7 +1154,7 @@ class BillingController extends Controller
                 // $student = TemporaryBilling::find($student['uid']);
                 // get student and enrollment info
                 $studentinfo = Student::where('fhe_award_no', $student->fhe_award_no)->first();
-                $student->remarks = '';
+                $remarks = '';
 
                 //fetch duplicates in the masterlist
                 $duplicateinmasterlist = Student::where('fname',$student->stud_fname)
@@ -1166,13 +1166,13 @@ class BillingController extends Controller
                 //if there are duplicates in the masterlist add a remark
                 if (count($duplicateinmasterlist) > 0) {
                     $student->fhe_award_no = $duplicateinmasterlist->first()->fhe_award_no;
-                    $student->remarks .= 'FHE award no. automatically selected from Master table</br>';
-                    printf($student->remarks);
+                    $remarks .= 'FHE award no. automatically selected from Master table</br>';
+                    printf($remarks);
                 }
 
                 $duplicates = Student::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
                 if ($duplicates > 1) {
-                    $student->remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
+                    $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
 
                 if ($student->fhe_award_no != '' && $duplicateinmasterlist != NULL) {
@@ -1190,20 +1190,20 @@ class BillingController extends Controller
                     if ($studentinfo->count() > 0) {
                         //compute nstp units
                         if ($nstpunits >= 6) {
-                            $student->remarks .= 'Has exceeded the amount of NSTP units.</br>';
-                            printf($student->remarks);
+                            $remarks .= 'Has exceeded the amount of NSTP units.</br>';
+                            printf($remarks);
                         }
 
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                             if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
-                                $student->remarks .= 'Has a duplicate this year and semester already</br>';
+                                $remarks .= 'Has a duplicate this year and semester already</br>';
                                 if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                    $student->remarks .= 'Has a duplicate from other school</br>';
+                                    $remarks .= 'Has a duplicate from other school</br>';
                                 }
                             }
                         }
-                        printf($student->remarks);
+                        printf($remarks);
 
                         //maximum residency start
                         //we have yet to get a database of the duration of courses
@@ -1214,17 +1214,18 @@ class BillingController extends Controller
                         $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
-                            $student->remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
-                            printf($student->remarks);
+                            $remarks .= '</br>Exceeded Maximum Residency with ' . strval($totallength) . ' years</br>';
+                            printf($remarks);
                         }
                         //maximum residency end
                     }
                 }
-                if ($student->remarks != '') {
+                if ($remarks != '') {
                     $billing->billing_status = 4;
                 }
-                printf($student->remarks);
+                printf($remarks);
                 printf('xXx');
+                $student->remarks = $remarks;
                 $student->save();
             }
 
