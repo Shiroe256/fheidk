@@ -1170,7 +1170,7 @@ class BillingController extends Controller
                     printf($remarks);
                 }
 
-                $duplicates = Student::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
+                $duplicates = TemporaryBilling::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
                 if ($duplicates > 1) {
                     $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
                 }
