@@ -935,8 +935,10 @@ class BillingController extends Controller
         $tempstudent->stud_mname = array_key_exists('mid_name', $data) ? $data['mid_name'] : '';
         $tempstudent->stud_ext_name = array_key_exists('ext_name', $data) ? $data['ext_name'] : '';
         $tempstudent->stud_sex = array_key_exists('sex_at_birth', $data) ? $data['sex_at_birth'] : '';
-        $d = new DateTime(str_replace("/", "-", $data['birthdate']));
-        $tempstudent->stud_birth_date = $d->format("Y-m-d");
+        // print_r(date_parse_from_format("m/dY", $data['birthdate']))
+        // $d = new DateTime(str_replace("/", "-", $data['birthdate']));
+        // $tempstudent->stud_birth_date = $d->format("Y-m-d");
+        $tempstudent->stud_birth_date = print_r(date_parse_from_format('m/d/Y', $data['birthdate']));
         $tempstudent->stud_birth_place = array_key_exists('birthplace', $data) ? $data['birthplace'] : '';
         $tempstudent->f_lname = array_key_exists('fathers_lname', $data) ? $data['fathers_lname'] : '';
         $tempstudent->f_fname = array_key_exists('fathers_gname', $data) ? $data['fathers_gname'] : '';
