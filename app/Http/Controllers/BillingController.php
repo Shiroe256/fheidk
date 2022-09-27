@@ -939,7 +939,7 @@ class BillingController extends Controller
         // $d = new DateTime(str_replace("/", "-", $data['birthdate']));
         // $tempstudent->stud_birth_date = $d->format("Y-m-d");
         $d = date_parse_from_format('m/d/Y', $data['birthdate']);
-        $tempstudent->stud_birth_date = $d['year'] + '-' + $d['month'] + '-' + $d['day'];
+        $tempstudent->stud_birth_date = $d['year'] . '-' . $d['month'] . '-' . $d['day'];
         $tempstudent->stud_birth_place = array_key_exists('birthplace', $data) ? $data['birthplace'] : '';
         $tempstudent->f_lname = array_key_exists('fathers_lname', $data) ? $data['fathers_lname'] : '';
         $tempstudent->f_fname = array_key_exists('fathers_gname', $data) ? $data['fathers_gname'] : '';
