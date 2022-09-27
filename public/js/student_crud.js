@@ -380,16 +380,9 @@ function getOSF() {
         if (computer_fee_per_unit.length == 0) {
          
         } else {
-          $("#computer_fee_per_unit").val(computer_fee_per_unit[0].amount);
-          $("#computer_fee_per_unit").attr("max", computer_fee[0].amount);
-          $('#computer_fee_per_unit').on('keyup keydown change', function (e) {
-            if ($(this).val() > computer_fee_per_unit[0].amount
-              && e.keyCode !== 46
-              && e.keyCode !== 8
-            ) {
-              e.preventDefault();
-              $(this).val(computer_fee_per_unit[0].amount);
-            }
+          $(document).on('change', '#computer_fee_per_unit', function (e) {
+            var total_comp_fee = $("#computer_fee_per_unit").val() * computer_fee_per_unit[0].amount
+            $("#computer_fee_per_unit_amount").val(total_comp_fee); 
           });
         }
 
