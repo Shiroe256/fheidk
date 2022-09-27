@@ -1162,21 +1162,11 @@ class BillingController extends Controller
                     ->where('birthdate', $student->stud_birth_date)
                     ->get();
 
-                print_r($duplicateinmasterlist);
                 //if there are duplicates in the masterlist add a remark
                 if (!$duplicateinmasterlist->isEmpty()) {
                     $fhe_award_no = $duplicateinmasterlist->first()->fhe_award_no;
                     $student->fhe_award_no = $fhe_award_no;
                     $remarks .= 'FHE award no. automatically selected from Master table</br>';
-                    printf($fhe_award_no);
-                }
-
-                $duplicates = TemporaryBilling::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
-                if ($duplicates > 1) {
-                    $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
-                }
-
-                if (isset($fhe_award_no) && !$duplicateinmasterlist->isEmpty()) {
 
                     if ($studentinfo == null) {
                         continue;
@@ -1218,6 +1208,12 @@ class BillingController extends Controller
                         //maximum residency end
                     }
                 }
+
+                $duplicates = TemporaryBilling::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
+                if ($duplicates > 1) {
+                    $remarks .= 'Check your spreadsheet. There is a duplicate of this student</br>';
+                }
+
                 if ($remarks != '') {
                     $billing->billing_status = 4;
                 }
