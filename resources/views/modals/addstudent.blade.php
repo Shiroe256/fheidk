@@ -271,10 +271,10 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Computer Laboratory Unit/s</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                                <div class="form-group"><label>Computer Laboratory Unit/s</label><input id="computer_laboratory_unit" name="computer_laboratory_unit" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Total Amount</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max="" readonly></div>
+                                <div class="form-group"><label>Total Amount</label><input id="computer_laboratory_per_unit_amount" name="computer_laboratory_per_unit_amount" class="form-control input-style" type="number" min="0" max="" readonly></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -303,10 +303,10 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Laboratory Unit/s</label><input id="athletic_fee" name="athletic_fee" class="form-control input-style" type="number" min="0" max=""></div>
+                                <div class="form-group"><label>Laboratory Unit/s</label><input id="laboratory_units" name="laboratory_units" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                             <div class="col">
-                                <div class="form-group"><label>Total Amount</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max="" readonly></div>
+                                <div class="form-group"><label>Total Amount</label><input id="laboratory_per_unit_amount" name="laboratory_per_unit_amount" class="form-control input-style" type="number" min="0" max="" readonly></div>
                             </div>
                         </div>
                         <div class="form-row">
