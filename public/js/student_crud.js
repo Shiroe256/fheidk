@@ -247,6 +247,11 @@ function getOSF() {
           return el.type_of_fee == "Computer" && el.coverage == "per student" && el.bs_status == 1
         }
         );
+        var computer_fee_per_unit = other_school_fee.res.filter(function (el) {
+          return el.type_of_fee == "Computer" && el.coverage == "per unit" && el.bs_status == 1
+        }
+        );
+        console.log(computer_fee_per_unit);
         var cultural_fee = other_school_fee.res.filter(function (el) {
           return el.type_of_fee == "Cultural" && el.coverage == "per student" && el.bs_status == 1
         }
@@ -368,6 +373,22 @@ function getOSF() {
             ) {
               e.preventDefault();
               $(this).val(computer_fee[0].amount);
+            }
+          });
+        }
+
+        if (computer_fee_per_unit.length == 0) {
+         
+        } else {
+          $("#computer_fee_per_unit").val(computer_fee_per_unit[0].amount);
+          $("#computer_fee_per_unit").attr("max", computer_fee[0].amount);
+          $('#computer_fee_per_unit').on('keyup keydown change', function (e) {
+            if ($(this).val() > computer_fee_per_unit[0].amount
+              && e.keyCode !== 46
+              && e.keyCode !== 8
+            ) {
+              e.preventDefault();
+              $(this).val(computer_fee_per_unit[0].amount);
             }
           });
         }
