@@ -240,7 +240,7 @@ function getOSF() {
         }
         );
         var athletic_fee = other_school_fee.res.filter(function (el) {
-          return el.type_of_fee == "Athletic" && el.coverage == "per new student" && el.bs_status == 1
+          return el.type_of_fee == "Athletic" && el.coverage == "per student" && el.bs_status == 1
         }
         );
         var computer_fee = other_school_fee.res.filter(function (el) {
