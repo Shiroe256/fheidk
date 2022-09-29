@@ -161,7 +161,7 @@ class BillingController extends Controller
 
     public function fetchTempSummary(Request $request)
     {
-        $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY);
+        $format = new \NumberFormatter('en_PH', NumberFormatter::CURRENCY);
         $reference_no  = $request->reference_no;
         $hei_summary = TemporaryBilling::select(DB::raw('hei_name, COUNT(*) AS total_beneficiaries, (SUM(tuition_fee) + SUM(entrance_fee) + SUM(admission_fee) + SUM(athletic_fee) + SUM(computer_fee) + SUM(cultural_fee) + SUM(development_fee) + SUM(guidance_fee) + SUM(handbook_fee) + SUM(laboratory_fee) + SUM(library_fee) + SUM(medical_dental_fee) + SUM(registration_fee) + SUM(school_id_fee) + SUM(nstp_fee))as total_amount'))
             ->where('reference_no', $reference_no)
@@ -210,7 +210,7 @@ class BillingController extends Controller
     public function fetchTempExceptions(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY);
+        $format = new \NumberFormatter('en_PH', NumberFormatter::CURRENCY);
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
             ->where('remarks', '!=','')
