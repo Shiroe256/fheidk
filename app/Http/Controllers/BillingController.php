@@ -1190,7 +1190,7 @@ class BillingController extends Controller
                             if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
                                 $remarks .= '<span class="badge badge-warning">Duplicate</span>';
                                 if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                    $remarks .= '<span class="badge badge-warning">Dup. Other HEI</span>';
+                                    $remarks .= '<span class="badge badge-Dark">Duplicate HEI</span>';
                                 }
                             }
                         }
@@ -1205,7 +1205,8 @@ class BillingController extends Controller
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
                             //added badge
-                            $remarks .= '<span class="badge badge-danger">' . strval($totallength) . '</span>';
+                            // $remarks .= '<span class="badge badge-danger">' . strval($totallength) . '</span>';
+                            $remarks .= '<span class="badge badge-warning">Exceeded MRR</span>';
                         }
                         //maximum residency end
                     }
