@@ -5,7 +5,7 @@
     @yield('header')
 </head>
 
-<body>
+<body id="particles-js">
     @yield('content')
     @yield('footer')
 </body>
