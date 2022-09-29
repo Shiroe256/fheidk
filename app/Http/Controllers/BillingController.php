@@ -648,11 +648,13 @@ class BillingController extends Controller
         $tranche = 1; //bullshit data lang muna
         $total_beneficaries = 0; //bullshit data lang muna
         $total_amount = 0;
-        $billing_status = 0;
+        $billing_status = 1;
+        $ac_year = $request->ac_year;
+        $semester = $request->semester;
         $created_by = Auth::user()->email;
         $billing = [
-            'ac_year' => $request->ac_year,
-            'semester' => $request->semester,
+            'ac_year' => $ac_year,
+            'semester' => $semester,
             'hei_uii' => $hei_uii,
             'hei_sid' => $hei_sid,
             'hei_psg_region' => $hei_psg_region,
@@ -661,7 +663,7 @@ class BillingController extends Controller
             'total_amount' =>         $total_amount,
             'billing_status' =>         $billing_status,
             'created_by' =>         $created_by,
-            'reference_no' => $this->generateBillingReferenceNumber($hei_psg_region, $hei_sid, $request->ac_year, $request->semester, $tranche)
+            'reference_no' => $this->generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
         ];
         $reference_no = Billing::create($billing)->reference_no;
 
