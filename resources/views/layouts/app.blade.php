@@ -13,7 +13,6 @@
 </head>
 <body class="bg-gradient-primary">
         <main class="py-4">
-                @yield('content')
                 @section('content')
         </main>
 </body>
