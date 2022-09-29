@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body id="particles-js" class="bg-gradient-primary">
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
@@ -73,5 +74,5 @@
             </div>
         </div>
     </div>
-
+</body>
 @endsection

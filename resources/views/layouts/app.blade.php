@@ -12,7 +12,9 @@
     
 </head>
 <body id="particles-js" class="bg-gradient-primary">
-    @yield('content')
+        <main class="py-4">
+                @yield('content')
+        </main>
 </body>
     <script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
     <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script>
