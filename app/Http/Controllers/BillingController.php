@@ -161,6 +161,7 @@ class BillingController extends Controller
 
     public function fetchTempSummary(Request $request)
     {
+        $format = new \NumberFormatter('en_PH', NumberFormatter::CURRENCY);
         $reference_no  = $request->reference_no;
         $hei_summary = TemporaryBilling::select(DB::raw('hei_name, COUNT(*) AS total_beneficiaries, (SUM(tuition_fee) + SUM(entrance_fee) + SUM(admission_fee) + SUM(athletic_fee) + SUM(computer_fee) + SUM(cultural_fee) + SUM(development_fee) + SUM(guidance_fee) + SUM(handbook_fee) + SUM(laboratory_fee) + SUM(library_fee) + SUM(medical_dental_fee) + SUM(registration_fee) + SUM(school_id_fee) + SUM(nstp_fee))as total_amount'))
             ->where('reference_no', $reference_no)
@@ -187,7 +188,7 @@ class BillingController extends Controller
                 <td class="text-center">' . $cnt++ . '</td>
                 <td>' . $summary->hei_name . '</td>
                 <td class="text-center">' . $summary->total_beneficiaries . '</td>
-                <td class="text-center">' . $summary->total_amount . '</td>
+                <td class="text-center">' . $format->format($summary->total_amount) . '</td>
             </tr>';
             }
             $output .= '</tbody>
@@ -209,6 +210,7 @@ class BillingController extends Controller
     public function fetchTempExceptions(Request $request)
     {
         $reference_no  = $request->reference_no;
+        $format = new \NumberFormatter('en_PH', NumberFormatter::CURRENCY);
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
             ->where('remarks', '!=','')
@@ -266,7 +268,7 @@ class BillingController extends Controller
                     <td class="text-center">' . $exception->year_level . '</td>
                     <td class="text-left">' . $exception->remarks . '</td>
                     <td class="text-left">' . $student_status . '</td>
-                    <td class="text-left">' . $total_amount . '</td>
+                    <td class="text-left">' . $format->format($total_amount) . '</td>
                     <td class="text-center">
                         <div class="btn-group btn-group-sm" role="group">
                             <button id="' . $exception->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
