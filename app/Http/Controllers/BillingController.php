@@ -1182,7 +1182,7 @@ class BillingController extends Controller
                     if ($studentinfo->count() > 0) {
                         //compute nstp units
                         if ($nstpunits >= 6) {
-                            $remarks .= '<span class="badge badge-danger">NSTP</span>';
+                            $remarks .= '<span class="badge badge-secondary">NSTP</span>';
                         }
 
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
