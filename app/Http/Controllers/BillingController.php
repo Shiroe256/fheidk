@@ -184,7 +184,9 @@ class BillingController extends Controller
                 </tr>
             </thead>
             <tbody id="tbl_list_of_students_form_1">';
+            $total_total_amount = 0;
             foreach ($hei_summary as $summary) {
+                $total_total_amount += $summary->total_amount;
                 $output .= '<tr>
                 <td class="text-center">' . $cnt++ . '</td>
                 <td>' . $summary->hei_name . '</td>
@@ -197,7 +199,7 @@ class BillingController extends Controller
             <tr>
                 <th colspan="2" class="text-center">GRAND TOTAL</th>
                 <th class="text-center"></th>
-                <th class="text-center"></th>
+                <th class="text-center">' . $format->format($total_total_amount) . '</th>
             </tr>
             </tfoot>
             </table>';
