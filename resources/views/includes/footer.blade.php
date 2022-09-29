@@ -16,6 +16,8 @@
 <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
 <script type="text/javascript" src="{{url('js\datatables.js')}}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="{{url('js\particles\particles.js')}}"></script>
+<script type="text/javascript" src="{{url('js\particles\app.js')}}"></script>
 {{-- END FOOTER --}}
 
  
