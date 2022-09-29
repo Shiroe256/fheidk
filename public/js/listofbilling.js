@@ -13,7 +13,7 @@ document.getElementById('new_billing').onclick = function () {
         type: "PUT",
         data: "ac_year=" + ac + "&semester=" + sem,
         success: function (data) {
-            // window.location.href = data;
+            window.location.href = data;
             // console.log(data);
         }
     });
