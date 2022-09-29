@@ -14,7 +14,7 @@
 
 <body>
     <body class="bg-gradient-primary">
-        <main id="particles-js" class="py-4">
+        <main class="py-4">
             <div id="particles-js">
                 @yield('content')
             </div>
