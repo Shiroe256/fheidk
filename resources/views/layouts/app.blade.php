@@ -15,7 +15,9 @@
 <body>
     <body class="bg-gradient-primary">
         <main id="particles-js" class="py-4">
-            @yield('content')
+            <div id="particles-js">
+                @yield('content')
+            </div>
         </main>
     </div>
     <script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
