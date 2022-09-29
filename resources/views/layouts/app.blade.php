@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome5-overrides.min.css')}}"/>
     
 </head>
-<body class="bg-gradient-primary">
+<body id="particles-js" class="bg-gradient-primary">
     @yield('content')
 </body>
     <script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
