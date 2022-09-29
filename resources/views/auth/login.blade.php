@@ -1,14 +1,6 @@
-<head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" type="text/css" href="{{url('css\bootstrap.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('css\style.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome-all.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('fonts\font-awesome.min.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome5-overrides.min.css')}}"/>
-    
-</head>
-<body id="particles-js" >
+@extends('layouts.app')
+
+@section('content')
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
@@ -81,13 +73,4 @@
             </div>
         </div>
     </div>
-</body>
-<script type="text/javascript" src="{{url('js\jquery.min.js')}}"></script>
-<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script>
-<script type="text/javascript" src="{{url('js\chart.min.js')}}"></script>
-<script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
-<script type="text/javascript" src="{{url('js\bs-init.js')}}"></script>
-<script type="text/javascript" src="{{url('js\bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{url('js\particles\particles.js')}}"></script>
-<script type="text/javascript" src="{{url('js\particles\app.js')}}"></script>
-</html>
+@endsection
