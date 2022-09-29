@@ -192,7 +192,7 @@ class BillingController extends Controller
                 $output .= '<tr>
                 <td class="text-center">' . $cnt++ . '</td>
                 <td>' . $summary->hei_name . '</td>
-                <td class="text-center">' . $summary->total_amount . '</td>
+                <td class="text-center">' . $summary->total_beneficiaries . '</td>
                 <td class="text-center">' . $format->format($summary->total_amount) . '</td>
             </tr>';
             }
