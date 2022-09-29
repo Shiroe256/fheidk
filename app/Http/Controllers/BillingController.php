@@ -311,7 +311,7 @@ class BillingController extends Controller
                 'errors' => $validator->messages(),
             ]);
         } else {
-
+            $total_computer_fee = $request->computer_fee_per_unit_amount + $request->computer_fee;
             $students = [
                 //static sample data
                 'hei_psg_region' => $request->add_hei_psg_region,
@@ -358,15 +358,15 @@ class BillingController extends Controller
                 'transferee' => $request->checkbox_transferee,
                 'degree_program' => $request->degree_program,
                 'year_level' => $request->year_level,
-                'lab_unit' => '1',
-                'comp_lab_unit' => '1',
+                'lab_unit' => $request->laboratory_units,
+                'comp_lab_unit' => $request->computer_fee_per_unit,
                 'academic_unit' => $request->total_unit,
                 'nstp_unit' => $request->nstp_unit,
                 'tuition_fee' => $request->total_tuition,
                 'entrance_fee' => $request->entrance_fee,
                 'admission_fee' => $request->admission_fee,
                 'athletic_fee' => $request->athletic_fee,
-                'computer_fee' => $request->computer_fee,
+                'computer_fee' => $total_computer_fee,
                 'cultural_fee' => $request->cultural_fee,
                 'development_fee' => $request->development_fee,
                 'guidance_fee' => $request->guidance_fee,
