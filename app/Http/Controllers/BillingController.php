@@ -1204,6 +1204,7 @@ class BillingController extends Controller
                         $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
+                            //added badge
                             $remarks .= '<span class="badge badge-danger">' . strval($totallength) . '</span>';
                         }
                         //maximum residency end
