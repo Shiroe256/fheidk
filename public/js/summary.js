@@ -46,7 +46,7 @@ function fetchTempSummary() {
   
         //  // Update footer
         //  $(api.column(2).footer()).html(total2);
-        // }
+         }
         });
       }
     });
