@@ -9,8 +9,6 @@
     <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome-all.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('fonts\font-awesome.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome5-overrides.min.css')}}"/>
-    <script type="text/javascript" src="{{url('js\particles\particles.js')}}"></script>
-    <script type="text/javascript" src="{{url('js\particles\app.js')}}"></script>
     
 </head>
 
@@ -26,7 +24,8 @@
     <script type="text/javascript" src="{{url('js\showandhide.js')}}"></script>
     <script type="text/javascript" src="{{url('js\bs-init.js')}}"></script>
     <script type="text/javascript" src="{{url('js\bootstrap.min.js')}}"></script>
-    
+    <script type="text/javascript" src="{{url('js\particles\particles.js')}}"></script>
+    <script type="text/javascript" src="{{url('js\particles\app.js')}}"></script>
 </body>
 
 </html>
