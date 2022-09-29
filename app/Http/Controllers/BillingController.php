@@ -1182,15 +1182,15 @@ class BillingController extends Controller
                     if ($studentinfo->count() > 0) {
                         //compute nstp units
                         if ($nstpunits >= 6) {
-                            $remarks .= '<span class="badge rounded-pill text-bg-danger">NSTP</span>';
+                            $remarks .= '<span class="badge badge-danger">NSTP</span>';
                         }
 
                         foreach ($enrollmentinfo as $key => $enrollmenti) {
 
                             if ($enrollmenti->ac_year == $billing->ac_year && $enrollmenti->semester == $billing->semester) {
-                                $remarks .= '<span class="badge rounded-pill text-bg-warning">Duplicate</span>';
+                                $remarks .= '<span class="badge badge-warning">Duplicate</span>';
                                 if ($enrollmenti->hei_uii <> $billing->hei_uii) {
-                                    $remarks .= '<span class="badge rounded-pill text-bg-warning">Dup. Other HEI</span>';
+                                    $remarks .= '<span class="badge badge-warning">Dup. Other HEI</span>';
                                 }
                             }
                         }
@@ -1204,7 +1204,7 @@ class BillingController extends Controller
                         $length = (float) $billing->ac_year - (float) $firstyear; //count the number of years since it is half of the number of semesters
                         $totallength = $length - $loainfo->count() / 2 - $firstsem_discrepancy + $lastsem_discrepancy;
                         if ($totallength > $normal_length) {
-                            $remarks .= '<span class="badge rounded-pill text-bg-danger">' . strval($totallength) . '</span>';
+                            $remarks .= '<span class="badge badge-danger">' . strval($totallength) . '</span>';
                         }
                         //maximum residency end
                     }
@@ -1212,7 +1212,7 @@ class BillingController extends Controller
 
                 $duplicates = TemporaryBilling::where('stud_fname', $student->stud_fname)->where('stud_lname', $student->stud_lname)->where('stud_birth_date', $student->stud_birth_date)->count();
                 if ($duplicates > 1) {
-                    $remarks .= '<span class="badge rounded-pill text-bg-danger">Duplicate</span>';
+                    $remarks .= '<span class="badge badge-danger">Duplicate</span>';
                 }
 
                 if ($remarks != '') {
