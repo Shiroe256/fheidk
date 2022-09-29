@@ -273,7 +273,7 @@
                             <div class="col">
                                 <div class="form-group"><label>Computer Laboratory Unit/s</label><input id="computer_fee_per_unit" name="computer_fee_per_unit" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
-                            <div class="col">
+                            <div class="col" style="d-none">
                                 <div class="form-group"><label>Total Amount</label><input id="computer_fee_per_unit_amount" name="computer_fee_per_unit_amount" class="form-control input-style" type="number" min="0" max="" readonly></div>
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                                 <div class="form-group"><label>Library Fee</label><input id="library_fee" name="library_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row" style="d-none">
                             <div class="col">
                                 <div class="form-group"><label>Laboratory Unit/s</label><input id="laboratory_units" name="laboratory_units" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
