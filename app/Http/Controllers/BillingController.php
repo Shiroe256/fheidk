@@ -185,12 +185,14 @@ class BillingController extends Controller
             </thead>
             <tbody id="tbl_list_of_students_form_1">';
             $total_total_amount = 0;
+            $grand_total_beneficiaries= 0;
             foreach ($hei_summary as $summary) {
                 $total_total_amount += $summary->total_amount;
+                $grand_total_beneficiaries += $summary->total_beneficiaries;
                 $output .= '<tr>
                 <td class="text-center">' . $cnt++ . '</td>
                 <td>' . $summary->hei_name . '</td>
-                <td class="text-center">' . $summary->total_beneficiaries . '</td>
+                <td class="text-center">' . $summary->total_amount . '</td>
                 <td class="text-center">' . $format->format($summary->total_amount) . '</td>
             </tr>';
             }
@@ -198,7 +200,7 @@ class BillingController extends Controller
             <tfoot>
             <tr>
                 <th colspan="2" class="text-center">GRAND TOTAL</th>
-                <th class="text-center"></th>
+                <th class="text-center">'.$grand_total_beneficiaries.'</th>
                 <th class="text-center">' . $format->format($total_total_amount) . '</th>
             </tr>
             </tfoot>
@@ -648,13 +650,11 @@ class BillingController extends Controller
         $tranche = 1; //bullshit data lang muna
         $total_beneficaries = 0; //bullshit data lang muna
         $total_amount = 0;
-        $billing_status = 1;
-        $ac_year = $request->ac_year;
-        $semester = $request->semester;
+        $billing_status = 0;
         $created_by = Auth::user()->email;
         $billing = [
-            'ac_year' => $ac_year,
-            'semester' => $semester,
+            'ac_year' => $request->ac_year,
+            'semester' => $request->semester,
             'hei_uii' => $hei_uii,
             'hei_sid' => $hei_sid,
             'hei_psg_region' => $hei_psg_region,
@@ -663,7 +663,7 @@ class BillingController extends Controller
             'total_amount' =>         $total_amount,
             'billing_status' =>         $billing_status,
             'created_by' =>         $created_by,
-            'reference_no' => $this->generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
+            'reference_no' => $this->generateBillingReferenceNumber($hei_psg_region, $hei_sid, $request->ac_year, $request->semester, $tranche)
         ];
         $reference_no = Billing::create($billing)->reference_no;
 
