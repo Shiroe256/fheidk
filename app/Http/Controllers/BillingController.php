@@ -650,7 +650,7 @@ class BillingController extends Controller
         $tranche = 1; //bullshit data lang muna
         $total_beneficaries = 0; //bullshit data lang muna
         $total_amount = 0;
-        $billing_status = 0;
+        $billing_status = 1;
         $created_by = Auth::user()->email;
         $billing = [
             'ac_year' => $request->ac_year,
