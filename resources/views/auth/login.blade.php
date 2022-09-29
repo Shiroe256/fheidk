@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('fonts\fontawesome5-overrides.min.css')}}"/>
     
 </head>
-<body id="particles-js" class="bg-gradient-primary">
+<body id="particles-js" >
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5">
             <div class="card-body p-0">
