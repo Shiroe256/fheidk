@@ -75,4 +75,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{{url('js\particles\particles.js')}}"></script>
+<script type="text/javascript" src="{{url('js\particles\app.js')}}"></script>
     @endsection
