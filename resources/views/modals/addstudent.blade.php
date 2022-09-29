@@ -269,7 +269,7 @@
                                 <div class="form-group"><label>Computer Fee</label><input id="computer_fee" name="computer_fee" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row" style="d-none">
                             <div class="col">
                                 <div class="form-group"><label>Computer Laboratory Unit/s</label><input id="computer_fee_per_unit" name="computer_fee_per_unit" class="form-control input-style" type="number" min="0" max=""></div>
                             </div>

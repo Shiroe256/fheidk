@@ -377,13 +377,13 @@ function getOSF() {
         }
 
         if (computer_fee_per_unit.length >= 0) {
-          $("#computer_fee_per_unit_amount").show(300);
+          $("#computer_fee_per_unit_div").show(300);
           $(document).on('change', '#computer_fee_per_unit', function (e) {
             var total_comp_fee = $("#computer_fee_per_unit").val() * computer_fee_per_unit[0].amount
             $("#computer_fee_per_unit_amount").val(total_comp_fee); 
           });
         }else{
-          $("#computer_fee_per_unit_amount").hide(300);
+          $("#computer_fee_per_unit_div").hide(300);
         }
 
         if (cultural_fee.length == 0) {
