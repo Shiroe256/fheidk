@@ -185,7 +185,7 @@ class BillingController extends Controller
             </thead>
             <tbody id="tbl_list_of_students_form_1">';
             $total_total_amount = 0;
-            $grand_total_beneficiaries= 0;
+            $grand_total_beneficiaries = 0;
             foreach ($hei_summary as $summary) {
                 $total_total_amount += $summary->total_amount;
                 $grand_total_beneficiaries += $summary->total_beneficiaries;
@@ -200,7 +200,7 @@ class BillingController extends Controller
             <tfoot>
             <tr>
                 <th colspan="2" class="text-center">GRAND TOTAL</th>
-                <th class="text-center">'.$grand_total_beneficiaries.'</th>
+                <th class="text-center">' . $grand_total_beneficiaries . '</th>
                 <th class="text-center">' . $format->format($total_total_amount) . '</th>
             </tr>
             </tfoot>
@@ -218,7 +218,7 @@ class BillingController extends Controller
         $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY);
         $exceptions = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
-            ->where('remarks', '!=','')
+            ->where('remarks', '!=', '')
             // ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
             // ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
             // ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
@@ -997,68 +997,76 @@ class BillingController extends Controller
         $Medical_and_Dental = 0;
         $Registration = 0;
         $ID = 0;
-        foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
-            $total_fee = 0;
-            if (is_array($category) === false) { //skip nstp and tuition
-                continue;
-            }
-            foreach ($category as $fee) {
-                if ($fee['COVERAGE'] == 'per unit') {
-                    if ($type_of_fee == 'COMPUTER') {
-                        $unit_multiplier = $comp_lab_unit;
-                    } else {
-                        $unit_multiplier = $lab_unit;
-                    }
-                    $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
-                }
-                if ($fee['COVERAGE'] == 'per student') {
-                    $total_fee += (float) $fee['AMOUNT'];
-                }
-            }
-            switch ($type_of_fee) {
-                case 'ENTRANCE':
-                    $Entrance += $total_fee;
-                    break;
-                case 'ADMISSION':
-                    $Admission += $total_fee;
-                    break;
-                case 'ATHLETIC':
-                    $Athletic += $total_fee;
-                    break;
-                case 'COMPUTER':
-                    $Computer += $total_fee;
-                    break;
-                case 'CULTURAL':
-                    $Cultural += $total_fee;
-                    break;
-                case 'DEVELOPMENT':
-                    $Development += $total_fee;
-                    break;
-                case 'GUIDANCE':
-                    $Guidance += $total_fee;
-                    break;
-                case 'HANDBOOK':
-                    $Handbook += $total_fee;
-                    break;
-                case 'LABORATORY':
-                    $Laboratory += $total_fee;
-                    break;
-                case 'LIBRARY':
-                    $Library += $total_fee;
-                    break;
-                case 'MEDICAL AND DENTAL':
-                    $Medical_and_Dental += $total_fee;
-                    break;
-                case 'REGISTRATION':
-                    $Registration += $total_fee;
-                    break;
-                case 'SCHOOL ID':
-                    $ID += $total_fee;
-                    break;
-            }
-        }
+        $totalTuition = 0;
 
-        $tempstudent->tuition_fee = (float) $json_fees[$course][$year_level]['TUITION'] * (float) $data['acad_u'];
+        //check if exam is passed and if failed computation is skipped
+        $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
+        $exam_result = array_key_exists('exam_result', $data) ? strtoupper($data['exam_result']) : '';
+        if ($exam_result == 'PASSED') {
+            foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
+                $total_fee = 0;
+                if (is_array($category) === false) { //skip nstp and tuition
+                    continue;
+                }
+                foreach ($category as $fee) {
+                    if ($fee['COVERAGE'] == 'per unit') {
+                        if ($type_of_fee == 'COMPUTER') {
+                            $unit_multiplier = $comp_lab_unit;
+                        } else {
+                            $unit_multiplier = $lab_unit;
+                        }
+                        $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
+                    }
+                    if ($fee['COVERAGE'] == 'per student') {
+                        $total_fee += (float) $fee['AMOUNT'];
+                    }
+                }
+                switch ($type_of_fee) {
+                    case 'ENTRANCE':
+                        $Entrance += $total_fee;
+                        break;
+                    case 'ADMISSION':
+                        $Admission += $total_fee;
+                        break;
+                    case 'ATHLETIC':
+                        $Athletic += $total_fee;
+                        break;
+                    case 'COMPUTER':
+                        $Computer += $total_fee;
+                        break;
+                    case 'CULTURAL':
+                        $Cultural += $total_fee;
+                        break;
+                    case 'DEVELOPMENT':
+                        $Development += $total_fee;
+                        break;
+                    case 'GUIDANCE':
+                        $Guidance += $total_fee;
+                        break;
+                    case 'HANDBOOK':
+                        $Handbook += $total_fee;
+                        break;
+                    case 'LABORATORY':
+                        $Laboratory += $total_fee;
+                        break;
+                    case 'LIBRARY':
+                        $Library += $total_fee;
+                        break;
+                    case 'MEDICAL AND DENTAL':
+                        $Medical_and_Dental += $total_fee;
+                        break;
+                    case 'REGISTRATION':
+                        $Registration += $total_fee;
+                        break;
+                    case 'SCHOOL ID':
+                        $ID += $total_fee;
+                        break;
+                }
+            }
+            $tuitionperunit = (float) $json_fees[$course][$year_level]['TUITION'];
+            $totalTuition = $tuitionperunit * (float) $data['acad_u'];
+        }
+        $tempstudent->tuition_fee = $totalTuition;
         $tempstudent->entrance_fee = $Entrance;
         $tempstudent->admission_fee = $Admission;
         $tempstudent->athletic_fee = $Athletic;
@@ -1072,9 +1080,11 @@ class BillingController extends Controller
         $tempstudent->medical_dental_fee = $Medical_and_Dental;
         $tempstudent->registration_fee = $Registration;
         $tempstudent->school_id_fee = $ID;
-        $tempstudent->nstp_fee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
+        $nstpfee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
+        $nstpfee >= $tuitionperunit * 2 ? $nstpfee = $tuitionperunit / 2 : $nstpfee; //nstp fee must be atmost half of tuition per unit
+        $tempstudent->nstp_fee = $nstpfee;
         $tempstudent->stud_cor = 0; //dummydata
-        $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
+
         $tempstudent->exam_result = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
         $tempstudent->remarks = array_key_exists('remarks', $data) ? $data['remarks'] : '';
         $tempstudent->stud_status = 0;
@@ -1161,13 +1171,13 @@ class BillingController extends Controller
                 // $student = TemporaryBilling::find($student['uid']);
                 // get student and enrollment info
                 $remarks = '';
-                
+
                 //fetch duplicates in the masterlist
                 $duplicateinmasterlist = Student::where('fname', $student->stud_fname)
-                ->where('lname', $student->stud_lname)
-                ->where('birthdate', $student->stud_birth_date)
-                ->first();
-                
+                    ->where('lname', $student->stud_lname)
+                    ->where('birthdate', $student->stud_birth_date)
+                    ->first();
+
                 //if there are duplicates in the masterlist add a remark
                 if ($duplicateinmasterlist != null) {
                     printf('meron');
