@@ -56,7 +56,7 @@ Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name(
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');
 
 //route for login
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Enrolled
@@ -78,7 +78,11 @@ Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('sel
 
 //Test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test', function (){
+Route::post('/testtoggle', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
+Route::get('/testgetstudentsettings', function () {
+    return view('modals/studentsettings');
+});
+Route::get('/test', function () {
     return view('afms/dashboard');
 });
 

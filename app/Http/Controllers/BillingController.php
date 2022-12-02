@@ -13,6 +13,7 @@ use App\Models\TuitionFees;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\SchoolFees;
+use App\Models\StudSettings;
 use Illuminate\Support\Facades\Storage;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -707,6 +708,8 @@ class BillingController extends Controller
         abort(401);
     }
 
+    public function getStudentBillingSettings($reference_no, $fhe_award_no)
+    { }
 
     public function getBillingSettings($reference_no)
     {
@@ -764,6 +767,22 @@ class BillingController extends Controller
         $bs_reference_no = $request->reference_no;
         $this->upsertSettings($bs_reference_no, $onsettings, $offsettings);
         echo $bs_reference_no;
+    }
+
+    public function toggleStudentFee(Request $request)
+    {
+
+        $bs_osf_uid = $request->bs_osf_uid;
+        $bs_student = $request->bs_student;
+        $bs_reference_no = $request->bs_reference_no;
+        $bs_status = $request->bs_status;
+
+        $studSettings = StudSettings::updateOrCreate(['bs_osf_uid' => $bs_osf_uid, 'bs_student' => $bs_student, 'bs_reference_no' => $bs_reference_no], ['bs_status' => $bs_status]);
+
+        if ($studSettings->wasChanged('bs_status'))
+            echo $bs_status;
+        else
+            echo 0;
     }
 
     private function upsertSettings($bs_reference_no, $onsettings = array(), $offsettings = array())
