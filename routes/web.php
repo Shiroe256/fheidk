@@ -77,11 +77,11 @@ Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreeProgra
 Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
 
 //Test
+Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
+Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
 Route::post('/testtoggle', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
-Route::get('/testgetstudentsettings', function () {
-    return view('modals/studentsettings');
-});
+Route::post('/testgetstudentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
 Route::get('/test', function () {
     return view('afms/dashboard');
 });

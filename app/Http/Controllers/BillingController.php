@@ -14,6 +14,7 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\SchoolFees;
 use App\Models\StudSettings;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -43,65 +44,34 @@ class BillingController extends Controller
 
     public function fetchTempStudent(Request $request)
     {
-        $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); //currency formatter
+
         $reference_no  = $request->reference_no;
         $students = TemporaryBilling::orderBy('remarks')
             ->where('reference_no', $reference_no)
             ->get();
-        $output = '';
-        if ($students->count() > 0) {
-            $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
-            <thead>
-                <tr>
-                    <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
-                    <th class="text-left">HEI CAMPUS</th>
-                    <th class="text-left">APP ID</th>
-                    <th class="text-left">AWARD NUMBER</th>
-                    <th class="text-left">LASTNAME</th>
-                    <th class="text-left">FIRSTNAME</th>
-                    <th class="text-left">MIDDLENAME</th>
-                    <th>COURSE</th>
-                    <th class="text-center">YEAR</th>
-                    <th class="text-left">REMARKS</th>
-                    <th class="text-left">STATUS</th>
-                    <th class="text-left">AMOUNT BILLED</th>
-                    <th class="text-center">ACTION</th>
-                </tr>
-            </thead>
-            <tbody id="tbl_list_of_students_form_2">';
-            foreach ($students as $student) {
-                $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
-                $student_status = '';
-                if ($student->stud_status == 0) {
-                    $student_status = 'Enrolled';
-                }
-                $output .= '<tr>
-                    <td class="text-center"><input type="checkbox" id="' . $student->uid . '" name="student_checkbox" value="' . $student->uid . '"></td>
-                    <td class="text-left">' . $student->hei_name . '</td>
-                    <td class="text-left">' . $student->app_id . '</td>
-                    <td class="text-left">' . $student->fhe_award_no . '</td>
-                    <td>' . $student->stud_lname . '</td>
-                    <td>' . $student->stud_fname . '</td>
-                    <td>' . $student->stud_mname . '</td>
-                    <td>' . $student->degree_program . '</td>
-                    <td class="text-center">' . $student->year_level . '</td>
-                    <td class="text-left">' . $student->remarks . '</td>
-                    <td class="text-left">' . $student_status . '</td>
-                    <td class="text-left">' . $format->format($total_amount) . '</td>
-                    <td class="text-center">
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button id="' . $student->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>';
-            }
-            $output .= '</tbody>
-            </table>';
-            echo $output;
-        } else {
-            echo '<h1 class="text-center text-secondary my-5">No student records.</h1>';
+
+        $hei_uii = Auth::user()->hei_uii;
+        //verification
+        if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
+            return response('Unauthorized', 401);
         }
+
+        //gather all the categories for everybody in the world
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            ->where('hei_uii', $hei_uii)
+            ->where('bs_reference_no', $reference_no)
+            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status')
+            ->get();
+
+        foreach ($students as $key => $student) {
+            if ($key < 10) {
+                //temporarily put to tuition fee column
+                $student->tuition_fee = $this->computeStudFees($student->uid, $reference_no, $student->year_level, $student->semester, strtoupper($student->degree_program), $otherfees);
+            }
+        }
+        //go back here migs
+        $data['students'] = $students;
+        return view('elements.studenttable', $data);
     }
 
     public function fetchTempApplicants(Request $request)
@@ -446,7 +416,6 @@ class BillingController extends Controller
                 'transferee' => $request->checkbox_transferee,
                 'degree_program' => $request->degree_program_applied,
                 'year_level' => $request->year_level,
-                'year_level' => $request->year_level,
                 'total_exam_taken' => $request->total_exam_taken,
                 'admission_fee' => $request->total_amount,
                 'exam_result' => $request->exam_result,
@@ -708,8 +677,53 @@ class BillingController extends Controller
         abort(401);
     }
 
-    public function getStudentBillingSettings($reference_no, $fhe_award_no)
-    { }
+    public function getStudentBillingSettings(Request $request)
+    {
+        try {
+            $bs_student = $request->bs_student;
+            $course_enrolled = $this->getCourseName($bs_student);
+            $bs_reference_no = $request->bs_reference_no;
+            $hei_uii = Auth::user()->hei_uii;
+            //gather all the categories for everybody in the world
+            $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+                ->where('hei_uii', $hei_uii)
+                ->where('bs_reference_no', $bs_reference_no)
+                ->where('course_enrolled', $course_enrolled)
+                ->where('is_optional', 1)
+                ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,updated_at')
+                ->get();
+
+            $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $bs_reference_no)->get();
+
+            $course_lastupdated = [];
+            $otherfeesresult = [];
+            foreach ($otherfees as $key => $row) {
+                if (!array_key_exists($row->course_enrolled, $course_lastupdated)) {
+                    $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+                }
+                foreach ($studentfees as $key => $studentfee) {
+                    if ($studentfee->bs_osf_uid == $row->uid)
+                        $row->bs_status = $studentfee->bs_status;
+                }
+                //store the shit
+                $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
+                if ($course_lastupdated[$row->course_enrolled] < $row->updated_at) {
+                    $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+                }
+            }
+
+            //package the shit and put it out of a view
+            $data['course_lastupdated'] = $course_lastupdated;
+            $data['otherfees'] = $otherfeesresult;
+
+            // // $data['student'] = $request->student;
+            // // $data['reference_no'] = $reference_no;
+            // echo json_encode($otherfees);
+            return view('elements.studentsettings', $data);
+        } catch (\Throwable $th) {
+            return view('errors.419');
+        }
+    }
 
     public function getBillingSettings($reference_no)
     {
@@ -771,18 +785,35 @@ class BillingController extends Controller
 
     public function toggleStudentFee(Request $request)
     {
+        try {
+            $bs_osf_uid = $request->bs_osf_uid;
+            $bs_reference_no = $request->bs_reference_no;
 
-        $bs_osf_uid = $request->bs_osf_uid;
-        $bs_student = $request->bs_student;
-        $bs_reference_no = $request->bs_reference_no;
-        $bs_status = $request->bs_status;
-
-        $studSettings = StudSettings::updateOrCreate(['bs_osf_uid' => $bs_osf_uid, 'bs_student' => $bs_student, 'bs_reference_no' => $bs_reference_no], ['bs_status' => $bs_status]);
-
-        if ($studSettings->wasChanged('bs_status'))
-            echo $bs_status;
-        else
+            //prepare array
+            foreach ($bs_osf_uid as  $osf) {
+                foreach ($request->bs_student as $student) {
+                    $bs_student[] = array(
+                        'bs_reference_no' => $bs_reference_no,
+                        'bs_student' => $student,
+                        'bs_osf_uid' => $osf['osf'],
+                        'bs_status' => $osf['status']
+                    );
+                }
+            }
+            $studSettings = new StudSettings();
+            $studSettings->upsert(
+                $bs_student,
+                [
+                    'bs_reference_no',
+                    'bs_student',
+                    'bs_osf_uid'
+                ],
+                ['bs_status']
+            );
+            echo 1;
+        } catch (\Throwable $th) {
             echo 0;
+        }
     }
 
     private function upsertSettings($bs_reference_no, $onsettings = array(), $offsettings = array())
@@ -1153,6 +1184,11 @@ class BillingController extends Controller
         $courses = Course::where('hei_uii', $hei_uii)->where('degree_program', $course)->first();
         return $courses->uid;
     }
+    private function getCourseName($bs_student)
+    {
+        $courses = TemporaryBilling::where('uid', $bs_student)->first();
+        return $courses->degree_program;
+    }
 
     public function getSheetTemplate()
     {
@@ -1268,6 +1304,61 @@ class BillingController extends Controller
             Log::info('Billing Transaction with reference number ' . $billing['reference_no'] . ' has been processed');
         }
         echo "done";
+    }
+
+    public function computeStudFees($bs_student, $bs_reference_no, $year_level, $semester, $course, $billing_settings)
+    {
+        $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $bs_reference_no)->get();
+        $sum = 0;
+        foreach ($billing_settings as $billing_setting) {
+            $otherfees[strtoupper($billing_setting->course_enrolled)][$billing_setting->year_level][$billing_setting->semester][] = array('category' => $billing_setting->category, 'id' => $billing_setting->uid, 'amount' => $billing_setting->amount, 'bs_status' => $billing_setting->bs_status);
+        }
+        foreach ($otherfees[$course][$year_level][$semester] as $otherfee) {
+            foreach ($studentfees as $studentfee) {
+                if ($studentfee->bs_osf_uid == $otherfee['id'])
+                    $otherfee['bs_status'] = $studentfee->bs_status;
+            }
+            if ($otherfee['bs_status'] == 1) {
+                $sum += $otherfee['amount'];
+            }
+        }
+
+        return $sum;
+    }
+    public function getStudentFees(Request $request)
+    {
+
+        $bs_student = $request->bs_student;
+        $student = TemporaryBilling::where('uid', $bs_student)->first();
+        $bs_reference_no = $student->reference_no;
+        $year_level = $student->year_level;
+        $semester = $student->semester;
+        $course = $student->course;
+        //gather all the categories for everybody in the world
+        $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $bs_reference_no)->get();
+        $sum = 0;
+        $hei_uii = Auth::user()->hei_uii;
+
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            ->where('hei_uii', $hei_uii)
+            ->where('bs_reference_no', $bs_reference_no)
+            ->where('year_level',$year_level)
+            ->where('semester',$semester)
+            ->where('course_enrolled',$course)
+            ->selectRaw('uid,amount,bs_status')
+            ->get();
+
+        foreach ($otherfees as $otherfee) {
+            foreach ($studentfees as $studentfee) {
+                if ($studentfee->bs_osf_uid == $otherfee->uid)
+                    $otherfee->bs_status = $studentfee->bs_status;
+            }
+            if ($otherfee->bs_status == 1) {
+                $sum += $otherfee->amount;
+            }
+        }
+
+        return $sum;
     }
     private function getDuplicateFHENo($fhe_award_no, $reference_no)
     {

@@ -1,3 +1,180 @@
+//Student Settings
+
+// const toggle = document.getElementById('switch');
+const stud_uid = document.getElementById('stud_uid');
+const csrf = document.head.querySelector('meta[name="csrf-token"][content]').content;
+const mod_stud_settings = new bootstrap.Modal(document.getElementById('mod_stud_settings'));
+const loader = document.getElementById('loader');
+const mod_stud_settings_placeholder = document.getElementById('settings-placeholder');
+const btn_edit_students = document.getElementById('btn_edit_students');
+const btn_close_stud_settings = document.querySelectorAll('#mod_stud_settings div.modal-header button');
+const bs_reference_no = document.getElementById('reference_no');
+const frm_stud_settings_footer = document.getElementById("mod_stud_settings").getElementsByClassName("modal-footer");
+var students = [];
+
+btn_close_stud_settings.forEach(element => {
+  element.onclick = function () {
+    mod_stud_settings.hide();
+  };
+});
+
+let req_update_stud_settings = new XMLHttpRequest();
+let req_get_stud_settings = new XMLHttpRequest();
+let req_get_stud_fees = new XMLHttpRequest();
+
+function updateStudentFee(bs_student, toggle, bs_reference_no) {
+
+  req_update_stud_settings.open("POST", "/testtoggle");
+  req_update_stud_settings.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+  req_update_stud_settings.setRequestHeader("X-CSRF-TOKEN", csrf);
+  req_update_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+  let data = {
+    bs_osf_uid: toggle,
+    bs_student: bs_student,
+    bs_reference_no: bs_reference_no
+  };
+
+  console.log(data);
+  req_update_stud_settings.send(JSON.stringify(data));
+  loader.classList.add('spinner');
+};
+//gets the modal form
+function getStudentSettings(student_uid) {
+  req_get_stud_settings.open("POST", "/testgetstudentsettings");
+  req_get_stud_settings.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+  req_get_stud_settings.setRequestHeader("X-CSRF-TOKEN", csrf);
+  req_get_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  let json = JSON.stringify({
+    bs_student: student_uid,
+    bs_reference_no: bs_reference_no.value
+  });
+  req_get_stud_settings.send(json);
+}
+
+function getStudentFees(bs_student){
+  req_get_stud_fees.open("POST", "/getstudentfees");
+  req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+  req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
+  req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  let json = JSON.stringify({
+    bs_student: student_uid
+  });
+  req_get_stud_fees.send(json);
+}
+
+function editStudents() {
+  const chk_students = document.querySelectorAll(".chk_student:checked");
+  const courses = [];
+  const modal_title = document.getElementById('lbl_name');
+  const frm_stud_settings = document.getElementById('frm_stud_settings');
+
+  loader.className = '';
+  frm_stud_settings.innerHTML = '';
+  mod_stud_settings_placeholder.style.display = 'block';
+  students = [];
+  chk_students.forEach(element => {
+    var std_course = document.getElementById("std_course_" + element.value).innerHTML;
+    students.push(element.value);
+    courses.push(std_course.toUpperCase());
+  });
+  if (checkSimilarCourses(courses) == false) {
+    window.alert("Select students with similar courses only");
+    return 0;
+  }
+
+  modal_title.innerHTML = "(" + chk_students.length + ") Selected Students with course of " + courses[0] + ".";
+  getStudentSettings(chk_students[0].value);
+  frm_stud_settings_footer[0].classList.add('d-none');
+
+  mod_stud_settings.show();
+}
+
+function checkSimilarCourses(courses = []) {
+  const firstCourse = courses[0];
+  for (let i = 1; i < courses.length; i++) {
+    if (courses[i] !== firstCourse) {
+      return false;
+    }
+  }
+  return true;
+}
+
+btn_edit_students.onclick = function () {
+  editStudents();
+};
+
+function setup_Events() {
+  const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
+  const btn_save_student_settings = document.getElementById('btn_save_student_settings');
+  btn_stud_settings.forEach(element => {
+    element.onclick = function () {
+      students = [];
+      mod_stud_settings.show();
+      loader.className = '';
+      frm_stud_settings.innerHTML = '';
+      mod_stud_settings_placeholder.style.display = 'block';
+
+      students.push(element.value);
+      getStudentSettings(students[0]);
+
+      var fname = document.getElementById('std_fname_' + element.value).innerHTML;
+      var lname = document.getElementById('std_lname_' + element.value).innerHTML;
+      var mname = document.getElementById('std_mname_' + element.value).innerHTML;
+
+      const modal_title = document.getElementById('lbl_name');
+
+      modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
+
+      frm_stud_settings_footer[0].classList.add('d-none');
+    };
+  });
+  btn_save_student_settings.onclick = function () {
+    const toggles = document.querySelectorAll('.toggle');
+
+    var osf = [];
+    toggles.forEach(toggle => {
+      toggle.disabled = true;
+      osf.push({ "osf": toggle.value, "status": toggle.checked });
+    });
+    console.log(osf);
+    updateStudentFee(students, osf, bs_reference_no.value);
+  };
+}
+
+req_get_stud_settings.onload = function () {
+  const frm_stud_settings = document.getElementById('frm_stud_settings');
+  frm_stud_settings.innerHTML = req_get_stud_settings.response;
+  mod_stud_settings_placeholder.style.display = 'none';
+
+  frm_stud_settings_footer[0].classList.remove('d-none');
+  document.querySelectorAll('.toggleall').forEach(function (el) {
+    el.addEventListener('change', function () {
+      var toggle = this.checked;
+      var id = this.id.substring(10);
+      var checkboxes = document.querySelectorAll('#settings_' + id + ' input[type=checkbox]');
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = toggle;
+        checkbox.dispatchEvent(new Event('change'));
+      });
+    });
+  });
+}
+
+
+req_update_stud_settings.onload = function () {
+  const toggles = document.querySelectorAll('.toggle');
+  toggles.forEach(toggle => {
+    toggle.disabled = false;
+  });
+  loader.classList.remove('spinner');
+  if (req_update_stud_settings.response == 1)
+    loader.classList.add('check');
+  else
+    loader.classList.add('cross');
+}
+//student settings end
+
 fetchTempStudent();
 selectDegreePrograms();
 selectCampus();
@@ -377,11 +554,11 @@ function getOSF() {
 
         if (computer_fee_per_unit.length == 0) {
           $("#computer_fee_per_unit_div").hide(300);
-        }else{
+        } else {
           $("#computer_fee_per_unit_div").show(300);
           $(document).on('change', '#computer_fee_per_unit', function (e) {
             var total_comp_fee = $("#computer_fee_per_unit").val() * computer_fee_per_unit[0].amount
-            $("#computer_fee_per_unit_amount").val(total_comp_fee); 
+            $("#computer_fee_per_unit_amount").val(total_comp_fee);
           });
         }
 
@@ -1129,18 +1306,18 @@ $(document).on('click', 'input[name=checkbox_nstp]', function () {
 $(document).on('change', '#year_level', function () {
   if ($(this).val() == 1 || ($('input[name=checkbox_transferee]').checked && $(this).val() > 1)) {
     $('.input_transferee').removeClass('d-none')
-  }else {
+  } else {
     $('.input_transferee').addClass('d-none')
   }
 });
 
 //if students is a transferee
 $(document).on('click', 'input[name=checkbox_transferee]', function () {
-  if((this.checked && $('#year_level').val() == 1) || $('#year_level').val() == 1){
+  if ((this.checked && $('#year_level').val() == 1) || $('#year_level').val() == 1) {
     $('.input_transferee').removeClass('d-none')
-  }else if((this.checked && $('#year_level').val() > 1)){
+  } else if ((this.checked && $('#year_level').val() > 1)) {
     $('.input_transferee').removeClass('d-none')
-  }else{
+  } else {
     $('.input_transferee').addClass('d-none')
   }
 });
@@ -1363,10 +1540,20 @@ function btnDeleteToggle() {
   } else {
     $('#btn_delete_students').addClass('d-none');
   }
+  var checkboxes = document.querySelectorAll('input[name="student_checkbox"]:checked');
+  var btn = document.querySelector('#btn_edit_students');
+  if (checkboxes.length > 0) {
+    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
+    btn.classList.remove('d-none');
+  } else {
+    btn.classList.add('d-none');
+  }
 }
 
 //fetch records from the database
 function fetchTempStudent() {
+  document.getElementById("students-placeholder").classList.remove('d-none');
+  document.getElementById("show_all_students").classList.add('d-none');
   let reference_no = $("#reference_no").val();
   $.ajax({
     url: "/get-tempstudents",
@@ -1376,15 +1563,20 @@ function fetchTempStudent() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      document.getElementById("students-placeholder").classList.add('d-none');
+      document.getElementById("show_all_students").classList.remove('d-none');
       $("#show_all_students").html(response);
       $("#tbl_students").DataTable({
-        "order": [[3, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,
         columnDefs: [
-          { orderable: false, targets: [0, -1] }
-        ]
+          { orderable: false, targets: [0, -1] },
+        ],
+        rowGroup: {
+          dataSrc: 7
+        }
       });
+      setup_Events();
     }
   });
 }
