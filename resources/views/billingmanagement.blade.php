@@ -85,43 +85,85 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <td colspan="5"><div class="skeleton skeleton-text skeleton-body"></div></td>
+                                            <td colspan="5">
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
-                                            <td><div class="skeleton skeleton-text skeleton-body"></div></td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
+                                            <td>
+                                                <div class="skeleton skeleton-text skeleton-body"></div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none" role="grid"
-                                aria-describedby="dataTable_info">
+                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none"
+                                role="grid" aria-describedby="dataTable_info">
                                 {{-- STUDENT TABLE HERE --}}
                             </div>
                         </div>
@@ -586,7 +628,8 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.3.1/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.3.1/js/dataTables.fixedHeader.min.js">
+</script>
 <script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.3.0/js/dataTables.rowGroup.min.js"></script>
 <script type="text/javascript" src="{{ url('js\chart.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\bs-init.js') }}"></script>
@@ -605,6 +648,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js">
 </script>
+<script type="text/javascript" src="{{ url('js\toast.js') }}"></script>
 
 
 </body>

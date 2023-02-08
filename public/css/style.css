@@ -177,3 +177,15 @@ body{
 .skeleton-footer {
   width: 30%;
 }
+
+.student_fees{
+  color: #000000;
+  font-weight: bold;
+}
+
+.student_fees:hover{
+  color: #011c6b;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,15 +1,16 @@
 //Student Settings
-
 // const toggle = document.getElementById('switch');
 const stud_uid = document.getElementById('stud_uid');
 const csrf = document.head.querySelector('meta[name="csrf-token"][content]').content;
-const mod_stud_settings = new bootstrap.Modal(document.getElementById('mod_stud_settings'));
+const mod_stud_settings = new bootstrap.Modal(document.getElementById('mod_stud_settings'),{keyboard: false,backdrop: 'static'});
 const loader = document.getElementById('loader');
 const mod_stud_settings_placeholder = document.getElementById('settings-placeholder');
 const btn_edit_students = document.getElementById('btn_edit_students');
 const btn_close_stud_settings = document.querySelectorAll('#mod_stud_settings div.modal-header button');
 const bs_reference_no = document.getElementById('reference_no');
 const frm_stud_settings_footer = document.getElementById("mod_stud_settings").getElementsByClassName("modal-footer");
+const btn_save_student_settings = document.getElementById('btn_save_student_settings');
+let updatedata = {};
 var students = [];
 
 btn_close_stud_settings.forEach(element => {
@@ -24,24 +25,24 @@ let req_get_stud_fees = new XMLHttpRequest();
 
 function updateStudentFee(bs_student, toggle, bs_reference_no) {
 
-  req_update_stud_settings.open("POST", "/testtoggle");
+  req_update_stud_settings.open("POST", "/save-studentfee");
   req_update_stud_settings.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
   req_update_stud_settings.setRequestHeader("X-CSRF-TOKEN", csrf);
   req_update_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-  let data = {
+  updatedata = {
     bs_osf_uid: toggle,
     bs_student: bs_student,
     bs_reference_no: bs_reference_no
   };
 
-  console.log(data);
-  req_update_stud_settings.send(JSON.stringify(data));
+  req_update_stud_settings.send(JSON.stringify(updatedata));
+  btn_save_student_settings.disabled = true;
   loader.classList.add('spinner');
 };
 //gets the modal form
 function getStudentSettings(student_uid) {
-  req_get_stud_settings.open("POST", "/testgetstudentsettings");
+  req_get_stud_settings.open("POST", "/get-studentsettings");
   req_get_stud_settings.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
   req_get_stud_settings.setRequestHeader("X-CSRF-TOKEN", csrf);
   req_get_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -52,19 +53,20 @@ function getStudentSettings(student_uid) {
   req_get_stud_settings.send(json);
 }
 
-function getStudentFees(bs_student){
-  req_get_stud_fees.open("POST", "/getstudentfees");
+function getStudentFees(bs_student) {
+  req_get_stud_fees.open("POST", "/get-studentfees");
   req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
   req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
   req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   let json = JSON.stringify({
-    bs_student: student_uid
+    bs_student: bs_student
   });
   req_get_stud_fees.send(json);
 }
 
-function editStudents() {
+function editStudentsSettings() {
   const chk_students = document.querySelectorAll(".chk_student:checked");
+  const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
   const courses = [];
   const modal_title = document.getElementById('lbl_name');
   const frm_stud_settings = document.getElementById('frm_stud_settings');
@@ -78,6 +80,15 @@ function editStudents() {
     students.push(element.value);
     courses.push(std_course.toUpperCase());
   });
+  //if only one student is selcted in the checkbox
+  if (students.length == 1) {
+    btn_stud_settings.forEach(btn => {
+      if (btn.value == students[0]) {
+        btn.click();
+      }
+    });
+    return 0;
+  }
   if (checkSimilarCourses(courses) == false) {
     window.alert("Select students with similar courses only");
     return 0;
@@ -101,12 +112,18 @@ function checkSimilarCourses(courses = []) {
 }
 
 btn_edit_students.onclick = function () {
-  editStudents();
+  editStudentsSettings();
 };
 
 function setup_Events() {
   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
-  const btn_save_student_settings = document.getElementById('btn_save_student_settings');
+  const student_fees = document.querySelectorAll('.student_fees');
+  student_fees.forEach(element => {
+    element.onclick = function () {
+      element.innerHTML = "Recomputing...";
+      getStudentFees([element.id.substring(10)]);
+    };
+  });
   btn_stud_settings.forEach(element => {
     element.onclick = function () {
       students = [];
@@ -129,17 +146,27 @@ function setup_Events() {
       frm_stud_settings_footer[0].classList.add('d-none');
     };
   });
-  btn_save_student_settings.onclick = function () {
-    const toggles = document.querySelectorAll('.toggle');
+}
+btn_save_student_settings.onclick = function () {
+  const toggles = document.querySelectorAll('.toggle');
+  if (toggles.length < 1) {
+    window.alert("There is nothing to save ._.");
+    return 0;
+  }
+  var osf = [];
+  toggles.forEach(toggle => {
+    toggle.disabled = true;
+    osf.push({ "osf": toggle.value, "status": toggle.checked });
+  });
+  updateStudentFee(students, osf, bs_reference_no.value);
+};
 
-    var osf = [];
-    toggles.forEach(toggle => {
-      toggle.disabled = true;
-      osf.push({ "osf": toggle.value, "status": toggle.checked });
-    });
-    console.log(osf);
-    updateStudentFee(students, osf, bs_reference_no.value);
-  };
+req_get_stud_fees.onload = function () {
+  var fees = JSON.parse(this.response);
+  fees.forEach(fee => {
+    const fee_placeholder = document.getElementById('totalfees_' + fee.bs_student);
+    fee_placeholder.innerHTML = fee.sum;
+  });
 }
 
 req_get_stud_settings.onload = function () {
@@ -161,15 +188,26 @@ req_get_stud_settings.onload = function () {
   });
 }
 
-
 req_update_stud_settings.onload = function () {
   const toggles = document.querySelectorAll('.toggle');
   toggles.forEach(toggle => {
     toggle.disabled = false;
   });
+  btn_save_student_settings.disabled = false;
   loader.classList.remove('spinner');
-  if (req_update_stud_settings.response == 1)
+  if (req_update_stud_settings.response == 1){
     loader.classList.add('check');
+    // $.snack('success','Settings updated succesfully', 5000);
+    mod_stud_settings.hide();
+    const student_fees = document.querySelectorAll('.student_fees');
+    student_fees.forEach(element => {
+      updatedata.bs_student.forEach(student => {
+        if (element.id.substring(10) == student)
+          element.innerHTML = "Recomputing...";
+      });
+    });
+    getStudentFees(updatedata.bs_student);
+  }
   else
     loader.classList.add('cross');
 }
@@ -1566,17 +1604,26 @@ function fetchTempStudent() {
       document.getElementById("students-placeholder").classList.add('d-none');
       document.getElementById("show_all_students").classList.remove('d-none');
       $("#show_all_students").html(response);
-      $("#tbl_students").DataTable({
-        orderCellsTop: true,
-        fixedHeader: true,
-        columnDefs: [
-          { orderable: false, targets: [0, -1] },
-        ],
-        rowGroup: {
-          dataSrc: 7
-        }
-      });
-      setup_Events();
+      //events for settings are set everytime the datatables are redrawn
+      $("#tbl_students").on('order.dt', function () {
+        setup_Events();
+      })
+        .on('search.dt', function () {
+          setup_Events();
+        })
+        .on('page.dt', function () {
+          setup_Events();
+        }).DataTable({
+          orderCellsTop: true,
+          fixedHeader: true,
+          columnDefs: [
+            { orderable: false, targets: [0, -1] },
+          ],
+          rowGroup: {
+            dataSrc: 7
+          }
+        });
+      //load events when rendering table
     }
   });
 }

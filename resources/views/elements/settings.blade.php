@@ -80,8 +80,8 @@ $switchcolor = '';
                                                                         {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
                                                                     <label class="custom-control-label"
                                                                         for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
-                                                                            class="text-muted"> +
-                                                                            {{ $category['amount'] }}</small>
+                                                                            class=""> +
+                                                                            {{ $category['amount'] }} {{$category['is_optional']?' Optional':''}}</small>
                                                                     </label>
                                                                 </div>
                                                             </li>

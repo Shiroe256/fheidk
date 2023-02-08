@@ -14,14 +14,14 @@
                 <th class="text-center">YEAR</th>
                 <th class="text-left">REMARKS</th>
                 <th class="text-left">STATUS</th>
-                <th class="text-left">AMOUNT BILLED</th>
+                <th class="text-left" title="No need to click this after saving. This is just for viewing purposes"
+                    data-placement="bottom">AMOUNT BILLED <i class="fa-solid fa-circle-question"></i></th>
                 <th class="text-center">ACTION</th>
             </tr>
         </thead>
         <tbody id="tbl_list_of_students_form_2">
             <?php
         foreach ($students as $student): 
-            // $total_amount = $student->tuition_fee + $student->entrance_fee + $student->admission_fee + $student->athletic_fee + $student->computer_fee + $student->cultural_fee + $student->development_fee + $student->guidance_fee + $student->handbook_fee + $student->laboratory_fee + $student->library_fee + $student->medical_dental_fee +  $student->registration_fee + $student->school_id_fee + $student->nstp_fee;
             $total_amount = $student->tuition_fee; //temporarily put to tuition fee column
             $student_status = '';
             if ($student->stud_status == 0) {
@@ -40,7 +40,12 @@
                 <td class="text-center">{{ $student->year_level }}</td>
                 <td class="text-left">{!! $student->remarks !!}</td>
                 <td class="text-left">{{ $student_status }}</td>
-                <td class="text-left" id="{{'totalfees_' . $student->uid}}">{{ $format->format($total_amount) }}</td>
+                <td class="text-left">
+                    <p data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to recompute"
+                        class="student_fees" id="{{ 'totalfees_' . $student->uid }}">
+                        {{ $format->format($student->total_osf + $student->total_tuition + $student->total_nstp + $student->total_lab + $student->total_comp_lab) }}
+                    </p>
+                </td>
                 <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group">
                         <button id="{{ $student->uid }}" class="btn btn_update_student btn-outline-primary"
@@ -48,8 +53,8 @@
                             title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i
                                 class="far fa-edit"></i>
                         </button>
-                        <button value="{{ $student->uid }}"
-                            class="btn btn_stud_settings btn-outline-primary btn_stud_settings" type="button"><i
+                        <button value="{{ $student->uid }}" class="btn btn_stud_settings btn-outline-primary"
+                            title="Edit Student Fees" data-placement="bottom" type="button"><i
                                 class="fas fa-wrench"></i>
                         </button>
                     </div>
