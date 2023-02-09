@@ -2,9 +2,10 @@
 // const toggle = document.getElementById('switch');
 const stud_uid = document.getElementById('stud_uid');
 const csrf = document.head.querySelector('meta[name="csrf-token"][content]').content;
-const mod_stud_settings = new bootstrap.Modal(document.getElementById('mod_stud_settings'),{keyboard: false,backdrop: 'static'});
+const mod_stud_settings = new bootstrap.Modal(document.getElementById('mod_stud_settings'), { keyboard: false, backdrop: 'static' });
 const loader = document.getElementById('loader');
 const mod_stud_settings_placeholder = document.getElementById('settings-placeholder');
+const summary_placeholder = document.getElementById('summary_placeholder');
 const btn_edit_students = document.getElementById('btn_edit_students');
 const btn_close_stud_settings = document.querySelectorAll('#mod_stud_settings div.modal-header button');
 const bs_reference_no = document.getElementById('reference_no');
@@ -67,7 +68,7 @@ function getStudentFees(bs_student) {
 function editStudentsSettings() {
   const chk_students = document.querySelectorAll(".chk_student:checked");
   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
-  const courses = [];
+  const courses_year = [];
   const modal_title = document.getElementById('lbl_name');
   const frm_stud_settings = document.getElementById('frm_stud_settings');
 
@@ -77,8 +78,9 @@ function editStudentsSettings() {
   students = [];
   chk_students.forEach(element => {
     var std_course = document.getElementById("std_course_" + element.value).innerHTML;
+    var std_year = document.getElementById("std_year_" + element.value).innerHTML;
     students.push(element.value);
-    courses.push(std_course.toUpperCase());
+    courses_year.push({ course: std_course.toUpperCase(), year: std_year });
   });
   //if only one student is selcted in the checkbox
   if (students.length == 1) {
@@ -89,22 +91,26 @@ function editStudentsSettings() {
     });
     return 0;
   }
-  if (checkSimilarCourses(courses) == false) {
-    window.alert("Select students with similar courses only");
+  if (checkSimilarCoursesYear(courses_year) == false) {
+    window.alert("Select students with similar courses and year levels only");
     return 0;
   }
 
-  modal_title.innerHTML = "(" + chk_students.length + ") Selected Students with course of " + courses[0] + ".";
+  modal_title.innerHTML = "(" + chk_students.length + ") Selected Students with course of " + courses_year[0]['course'] + ".";
   getStudentSettings(chk_students[0].value);
   frm_stud_settings_footer[0].classList.add('d-none');
 
   mod_stud_settings.show();
 }
 
-function checkSimilarCourses(courses = []) {
-  const firstCourse = courses[0];
+function checkSimilarCoursesYear(courses = []) {
+  const firstCourse = courses[0]['course'];
+  const firstYear = courses[0]['year'];
   for (let i = 1; i < courses.length; i++) {
-    if (courses[i] !== firstCourse) {
+    if (courses[i]['course'] !== firstCourse) {
+      return false;
+    }
+    if (courses[i]['year'] !== firstYear) {
       return false;
     }
   }
@@ -120,7 +126,9 @@ function setup_Events() {
   const student_fees = document.querySelectorAll('.student_fees');
   student_fees.forEach(element => {
     element.onclick = function () {
-      element.innerHTML = "Recomputing...";
+      element.classList.add("skeleton");
+      element.classList.add("skeleton-text");
+      element.innerHTML = "";
       getStudentFees([element.id.substring(10)]);
     };
   });
@@ -165,6 +173,8 @@ req_get_stud_fees.onload = function () {
   var fees = JSON.parse(this.response);
   fees.forEach(fee => {
     const fee_placeholder = document.getElementById('totalfees_' + fee.bs_student);
+    fee_placeholder.classList.remove("skeleton");
+    fee_placeholder.classList.remove("skeleton-text");
     fee_placeholder.innerHTML = fee.sum;
   });
 }
@@ -195,15 +205,18 @@ req_update_stud_settings.onload = function () {
   });
   btn_save_student_settings.disabled = false;
   loader.classList.remove('spinner');
-  if (req_update_stud_settings.response == 1){
+  if (req_update_stud_settings.response == 1) {
     loader.classList.add('check');
     // $.snack('success','Settings updated succesfully', 5000);
     mod_stud_settings.hide();
     const student_fees = document.querySelectorAll('.student_fees');
     student_fees.forEach(element => {
       updatedata.bs_student.forEach(student => {
-        if (element.id.substring(10) == student)
-          element.innerHTML = "Recomputing...";
+        if (element.id.substring(10) == student) {
+          element.classList.add("skeleton");
+          element.classList.add("skeleton-text");
+          element.innerHTML = "";
+        }
       });
     });
     getStudentFees(updatedata.bs_student);
@@ -1615,13 +1628,9 @@ function fetchTempStudent() {
           setup_Events();
         }).DataTable({
           orderCellsTop: true,
-          fixedHeader: true,
           columnDefs: [
             { orderable: false, targets: [0, -1] },
-          ],
-          rowGroup: {
-            dataSrc: 7
-          }
+          ]
         });
       //load events when rendering table
     }

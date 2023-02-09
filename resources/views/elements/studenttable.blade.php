@@ -20,49 +20,47 @@
             </tr>
         </thead>
         <tbody id="tbl_list_of_students_form_2">
-            <?php
-        foreach ($students as $student): 
-            $total_amount = $student->tuition_fee; //temporarily put to tuition fee column
-            $student_status = '';
-            if ($student->stud_status == 0) {
-                $student_status = 'Enrolled';
-            } ?>
-            <tr>
-                <td class="text-center"><input type="checkbox" class="chk_student" id="{{ $student->uid }}"
-                        name="student_checkbox" value="{{ $student->uid }}"></td>
-                <td class="text-left">{{ $student->hei_name }}</td>
-                <td class="text-left">{{ $student->app_id }}</td>
-                <td class="text-left">{{ $student->fhe_award_no }}</td>
-                <td id="std_lname_{{ $student->uid }}">{{ $student->stud_lname }}</td>
-                <td id="std_fname_{{ $student->uid }}">{{ $student->stud_fname }}</td>
-                <td id="std_mname_{{ $student->uid }}">{{ $student->stud_mname }}</td>
-                <td id="std_course_{{ $student->uid }}">{{ $student->degree_program }}</td>
-                <td class="text-center">{{ $student->year_level }}</td>
-                <td class="text-left">{!! $student->remarks !!}</td>
-                <td class="text-left">{{ $student_status }}</td>
-                <td class="text-left">
-                    <p data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to recompute"
-                        class="student_fees" id="{{ 'totalfees_' . $student->uid }}">
-                        {{ $format->format($student->total_osf + $student->total_tuition + $student->total_nstp + $student->total_lab + $student->total_comp_lab) }}
-                    </p>
-                </td>
-                <td class="text-center">
-                    <div class="btn-group btn-group-sm" role="group">
-                        <button id="{{ $student->uid }}" class="btn btn_update_student btn-outline-primary"
-                            data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button"
-                            title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i
-                                class="far fa-edit"></i>
-                        </button>
-                        <button value="{{ $student->uid }}" class="btn btn_stud_settings btn-outline-primary"
-                            title="Edit Student Fees" data-placement="bottom" type="button"><i
-                                class="fas fa-wrench"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <?php
-            endforeach;
-        ?>
+            @foreach ($students as $student)
+                <?php
+                $total_amount = $student->tuition_fee; //temporarily put to tuition fee column
+                $student_status = '';
+                if ($student->stud_status == 0) {
+                    $student_status = 'Enrolled';
+                } ?>
+                <tr>
+                    <td class="text-center"><input type="checkbox" class="chk_student" id="{{ $student->uid }}"
+                            name="student_checkbox" value="{{ $student->uid }}"></td>
+                    <td class="text-left">{{ $student->hei_name }}</td>
+                    <td class="text-left">{{ $student->app_id }}</td>
+                    <td class="text-left">{{ $student->fhe_award_no }}</td>
+                    <td id="std_lname_{{ $student->uid }}">{{ $student->stud_lname }}</td>
+                    <td id="std_fname_{{ $student->uid }}">{{ $student->stud_fname }}</td>
+                    <td id="std_mname_{{ $student->uid }}">{{ $student->stud_mname }}</td>
+                    <td id="std_course_{{ $student->uid }}">{{ $student->degree_program }}</td>
+                    <td id="std_year_{{ $student->uid }}" class="text-center">{{ $student->year_level }}</td>
+                    <td class="text-left">{!! $student->remarks !!}</td>
+                    <td class="text-left">{{ $student_status }}</td>
+                    <td class="text-left">
+                        <p data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to recompute"
+                            class="student_fees" id="{{ 'totalfees_' . $student->uid }}">
+                            {{ $format->format($student->total_osf + $student->total_tuition + $student->total_nstp + $student->total_lab + $student->total_comp_lab) }}
+                        </p>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button id="{{ $student->uid }}" class="btn btn_update_student btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button"
+                                title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i
+                                    class="far fa-edit"></i>
+                            </button>
+                            <button value="{{ $student->uid }}" class="btn btn_stud_settings btn-outline-primary"
+                                title="Edit Student Fees" data-placement="bottom" type="button"><i
+                                    class="fas fa-wrench"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @else

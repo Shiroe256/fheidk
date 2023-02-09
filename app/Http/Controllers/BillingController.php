@@ -1353,6 +1353,7 @@ class BillingController extends Controller
             })
             ->where(function ($query) {
                 $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
                     ->orWhere(function ($query) {
                         $query->whereNull('tbl_billing_stud_settings.bs_status')
                             ->where('tbl_billing_settings.bs_status', '=', 1);

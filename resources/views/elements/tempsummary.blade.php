@@ -15,16 +15,18 @@ $cnt = 1;
             <?php
             $total_total_amount = 0;
             $grand_total_beneficiaries = 0;
-            foreach ($hei_summary as $summary):
+            ?>
+            @foreach ($hei_summary as $summary)
+                <?php
                 $total_total_amount += $summary->total_amount;
-                $grand_total_beneficiaries += $summary->total_beneficiaries ?>
-            <tr>
-                <td class="text-center">{{ $cnt++ }}</td>
-                <td>{{ $summary->hei_name }}</td>
-                <td class="text-center">{{ $summary->total_beneficiaries }}</td>
-                <td class="text-center">{{ $format->format($summary->total_amount) }}</td>
-            </tr>
-            <?php endforeach; ?>
+                $grand_total_beneficiaries += $summary->total_beneficiaries; ?>
+                <tr>
+                    <td class="text-center">{{ $cnt++ }}</td>
+                    <td>{{ $summary->hei_name }}</td>
+                    <td class="text-center">{{ $summary->total_beneficiaries }}</td>
+                    <td class="text-center">{{ $format->format($summary->total_amount) }}</td>
+                </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>

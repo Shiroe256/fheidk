@@ -12,6 +12,8 @@ function fetchTempSummary() {
       },
       success: function (response) {
         $(".show_summary").html(response);
+        //hide placeholder
+        document.getElementById("summary_placeholder").classList.add("d-none");
         $(".tbl_summary").DataTable({
           "order": [[3, "des"]],
           orderCellsTop: true,

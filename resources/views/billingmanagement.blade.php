@@ -53,8 +53,39 @@
                         <div class="form-group input-style">
                             <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary
                             </h5>
-                            <div id="show_summary" class="table-responsive table-style mt-2 show_summary" role="grid"
-                                aria-describedby="dataTable_info">
+                            <div id="summary_placeholder">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="skeleton skeleton-text"></p>
+                                    </div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                </div>
+                                <div class="row py-3">
+                                    <div class="col">
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                        <p class="skeleton skeleton-text"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="skeleton skeleton-text skeleton-body"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="show_summary" class="table-responsive table-style mt-2 show_summary"
+                                role="grid" aria-describedby="dataTable_info">
                                 {{-- SUMMARY TABLE HERE --}}
                             </div>
                         </div>
@@ -636,7 +667,7 @@
 <script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\theme.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\datatables.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ url('js\datatables.js') }}"></script> --}}
 <script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\exception_report.js') }}"></script>
@@ -648,8 +679,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js">
 </script>
-<script type="text/javascript" src="{{ url('js\toast.js') }}"></script>
-
 
 </body>
 
