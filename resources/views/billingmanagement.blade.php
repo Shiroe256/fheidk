@@ -667,7 +667,6 @@
 <script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\theme.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
-{{-- <script type="text/javascript" src="{{ url('js\datatables.js') }}"></script> --}}
 <script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\exception_report.js') }}"></script>

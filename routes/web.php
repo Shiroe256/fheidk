@@ -45,10 +45,10 @@ Route::get('/', function () {
 
 //billing CRUD
 Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
-Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
+Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings')->middleware('checkUserHei');
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
-Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement']);
+Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('checkUserHei');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
@@ -60,12 +60,12 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Enrolled
-Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
-Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
-Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
+Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll')->middleware('checkUserHei');
+Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent')->middleware('checkUserHei');
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
-Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
-Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');
+Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
+Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent')->middleware('check.user.hei');
 
 //Autocomplete textbox
 Route::get('/get-tuitionfee', [BillingController::class, 'findTuitionFee'])->name('findTuitionFee');
@@ -77,10 +77,13 @@ Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreeProgra
 Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
 
 //Student Settings
-Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
-Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
-Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
-Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
+//middleware for thottling (limit requests to 20 per min) and authentication
+Route::middleware(['throttle:20,1'])->group(function () {
+    Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
+    Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
+    Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
+    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->middleware('check.user.hei')->name('toggleStudentFee');
+});
 
 //test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');

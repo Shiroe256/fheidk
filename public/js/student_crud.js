@@ -8,7 +8,7 @@ const mod_stud_settings_placeholder = document.getElementById('settings-placehol
 const summary_placeholder = document.getElementById('summary_placeholder');
 const btn_edit_students = document.getElementById('btn_edit_students');
 const btn_close_stud_settings = document.querySelectorAll('#mod_stud_settings div.modal-header button');
-const bs_reference_no = document.getElementById('reference_no');
+const reference_no = document.getElementById('reference_no');
 const frm_stud_settings_footer = document.getElementById("mod_stud_settings").getElementsByClassName("modal-footer");
 const btn_save_student_settings = document.getElementById('btn_save_student_settings');
 let updatedata = {};
@@ -24,7 +24,7 @@ let req_update_stud_settings = new XMLHttpRequest();
 let req_get_stud_settings = new XMLHttpRequest();
 let req_get_stud_fees = new XMLHttpRequest();
 
-function updateStudentFee(bs_student, toggle, bs_reference_no) {
+function updateStudentFee(bs_student, toggle, reference_no) {
 
   req_update_stud_settings.open("POST", "/save-studentfee");
   req_update_stud_settings.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
@@ -34,7 +34,7 @@ function updateStudentFee(bs_student, toggle, bs_reference_no) {
   updatedata = {
     bs_osf_uid: toggle,
     bs_student: bs_student,
-    bs_reference_no: bs_reference_no
+    reference_no: reference_no
   };
 
   req_update_stud_settings.send(JSON.stringify(updatedata));
@@ -49,7 +49,7 @@ function getStudentSettings(student_uid) {
   req_get_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   let json = JSON.stringify({
     bs_student: student_uid,
-    bs_reference_no: bs_reference_no.value
+    reference_no: reference_no.value
   });
   req_get_stud_settings.send(json);
 }
@@ -166,7 +166,7 @@ btn_save_student_settings.onclick = function () {
     toggle.disabled = true;
     osf.push({ "osf": toggle.value, "status": toggle.checked });
   });
-  updateStudentFee(students, osf, bs_reference_no.value);
+  updateStudentFee(students, osf, reference_no.value);
 };
 
 req_get_stud_fees.onload = function () {

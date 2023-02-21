@@ -49,9 +49,9 @@ class BillingController extends Controller
         $reference_no  = $request->reference_no;
 
         //verification
-        if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
-            return response('Unauthorized', 401);
-        }
+        // if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
+        //     return response('Unauthorized', 401);
+        // }
 
         $students = DB::table('tbl_billing_details_temp')
             ->select(
@@ -265,167 +265,165 @@ class BillingController extends Controller
     // handle insert a new student ajax request
     public function newTempStudent(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'last_name' => 'required', //modal field name => validation
-            'first_name' => 'required',
-            'birthplace' => 'required',
-            'present_province' => 'required',
-            'present_city' => 'required',
-            'present_barangay' => 'required',
-            'present_zipcode' => 'required',
-            'permanent_province' => 'required',
-            'permanent_city' => 'required',
-            'permanent_barangay' => 'required',
-            'permanent_zipcode' => 'required',
-            'email_address' => 'required|email',
-            'mobile_number' => 'required|regex:/^(09)\d{9}$/',
-            'course_enrolled' => 'required',
-            'year_level' => 'required'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'last_name' => 'required', //modal field name => validation
+        //     'first_name' => 'required',
+        //     'birthplace' => 'required',
+        //     'present_province' => 'required',
+        //     'present_city' => 'required',
+        //     'present_barangay' => 'required',
+        //     'present_zipcode' => 'required',
+        //     'permanent_province' => 'required',
+        //     'permanent_city' => 'required',
+        //     'permanent_barangay' => 'required',
+        //     'permanent_zipcode' => 'required',
+        //     'email_address' => 'required|email',
+        //     'mobile_number' => 'required|regex:/^(09)\d{9}$/',
+        //     'course_enrolled' => 'required',
+        //     'year_level' => 'required'
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        } else {
-            $total_computer_fee = $request->computer_fee_per_unit_amount + $request->computer_fee;
-            $students = [
-                //static sample data
-                'hei_psg_region' => $request->add_hei_psg_region,
-                'hei_sid' => Auth::user()->hei_sid,
-                'hei_uii' => $request->add_hei_uii,
-                'hei_name' => $request->add_selected_campus,
-                'reference_no' => $request->add_reference_no,
-                'ac_year' => $request->add_ac_year,
-                'semester' => $request->add_semester,
-                'tranche' => $request->add_tranche,
-                'app_id' => '',
-                'fhe_award_no' => '',
-                'stud_id' => $request->stud_id,
-                'lrn_no' => $request->lrn_no,
-                //actual data being collected in the modal
-                'stud_lname' => $request->last_name, //tablename => $request->name of input field
-                'stud_fname' => $request->first_name,
-                'stud_mname' => $request->middle_name,
-                'stud_ext_name' => $request->extension_name,
-                'stud_sex' => $request->sex,
-                'stud_birth_date' => $request->birthdate,
-                'stud_birth_place' => $request->birthplace,
-                'f_lname' => $request->f_lname,
-                'f_fname' => $request->f_fname,
-                'f_mname' => $request->f_mname,
-                'm_lname' => $request->m_lname,
-                'm_fname' => $request->m_fname,
-                'm_mname' => $request->m_mname,
-                'present_prov' => $request->present_province,
-                'present_city' => $request->present_city,
-                'present_barangay' => $request->present_barangay,
-                'present_street' => $request->present_street,
-                'present_zipcode' => $request->present_zipcode,
-                'permanent_prov' => $request->permanent_province,
-                'permanent_city' => $request->permanent_city,
-                'permanent_barangay' => $request->permanent_barangay,
-                'permanent_street' => $request->permanent_street,
-                'permanent_zipcode' => $request->permanent_zipcode,
-                'stud_email' => $request->email_address,
-                'stud_alt_email' => $request->alt_email_address,
-                'stud_phone_no' => $request->mobile_number,
-                'stud_alt_phone_no' => $request->alt_mobile_number,
-                //static
-                'transferee' => $request->checkbox_transferee,
-                'degree_program' => $request->degree_program,
-                'year_level' => $request->year_level,
-                'lab_unit' => $request->laboratory_units,
-                'comp_lab_unit' => $request->computer_fee_per_unit,
-                'academic_unit' => $request->total_unit,
-                'nstp_unit' => $request->nstp_unit,
-                'tuition_fee' => $request->total_tuition,
-                'entrance_fee' => $request->entrance_fee,
-                'admission_fee' => $request->admission_fee,
-                'athletic_fee' => $request->athletic_fee,
-                'computer_fee' => $total_computer_fee,
-                'cultural_fee' => $request->cultural_fee,
-                'development_fee' => $request->development_fee,
-                'guidance_fee' => $request->guidance_fee,
-                'handbook_fee' => $request->handbook_fee,
-                'laboratory_fee' => $request->laboratory_fee,
-                'library_fee' => $request->library_fee,
-                'medical_dental_fee' => $request->medical_dental_fee,
-                'registration_fee' => $request->registration_fee,
-                'school_id_fee' => $request->school_id_fee,
-                'nstp_fee' => $request->total_nstp,
-                'stud_cor' => 'sample',
-                'remarks' => $request->remarks
-            ];
-            TemporaryBilling::create($students);
-            return response()->json([
-                'status' => 200,
-            ]);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'errors' => $validator->messages(),
+        //     ]);
+        // } else {
+        $total_computer_fee = $request->computer_fee_per_unit_amount + $request->computer_fee;
+        $students = [
+            //static sample data
+            'hei_psg_region' => $request->add_hei_psg_region,
+            'hei_sid' => Auth::user()->hei_sid,
+            'hei_uii' => $request->add_hei_uii,
+            'hei_name' => $request->add_selected_campus,
+            'reference_no' => $request->add_reference_no,
+            'ac_year' => $request->add_ac_year,
+            'semester' => $request->add_semester,
+            'tranche' => $request->add_tranche,
+            'app_id' => '',
+            'fhe_award_no' => '',
+            'stud_id' => $request->stud_id,
+            'lrn_no' => $request->lrn_no,
+            //actual data being collected in the modal
+            'stud_lname' => $request->last_name, //tablename => $request->name of input field
+            'stud_fname' => $request->first_name,
+            'stud_mname' => $request->middle_name,
+            'stud_ext_name' => $request->extension_name,
+            'stud_sex' => $request->sex,
+            'stud_birth_date' => $request->birthdate,
+            'stud_birth_place' => $request->birthplace,
+            'f_lname' => $request->f_lname,
+            'f_fname' => $request->f_fname,
+            'f_mname' => $request->f_mname,
+            'm_lname' => $request->m_lname,
+            'm_fname' => $request->m_fname,
+            'm_mname' => $request->m_mname,
+            'present_prov' => $request->present_province,
+            'present_city' => $request->present_city,
+            'present_barangay' => $request->present_barangay,
+            'present_street' => $request->present_street,
+            'present_zipcode' => $request->present_zipcode,
+            'permanent_prov' => $request->permanent_province,
+            'permanent_city' => $request->permanent_city,
+            'permanent_barangay' => $request->permanent_barangay,
+            'permanent_street' => $request->permanent_street,
+            'permanent_zipcode' => $request->permanent_zipcode,
+            'stud_email' => $request->email_address,
+            'stud_alt_email' => $request->alt_email_address,
+            'stud_phone_no' => $request->mobile_number,
+            'stud_alt_phone_no' => $request->alt_mobile_number,
+            //static
+            'transferee' => $request->checkbox_transferee,
+            'degree_program' => $request->degree_program,
+            'year_level' => $request->year_level,
+            'lab_unit' => $request->laboratory_units,
+            'comp_lab_unit' => $request->computer_fee_per_unit,
+            'academic_unit' => $request->total_unit,
+            'nstp_unit' => $request->nstp_unit,
+            'tuition_fee' => $request->total_tuition,
+            'entrance_fee' => $request->entrance_fee,
+            'admission_fee' => $request->admission_fee,
+            'athletic_fee' => $request->athletic_fee,
+            'computer_fee' => $total_computer_fee,
+            'cultural_fee' => $request->cultural_fee,
+            'development_fee' => $request->development_fee,
+            'guidance_fee' => $request->guidance_fee,
+            'handbook_fee' => $request->handbook_fee,
+            'laboratory_fee' => $request->laboratory_fee,
+            'library_fee' => $request->library_fee,
+            'medical_dental_fee' => $request->medical_dental_fee,
+            'registration_fee' => $request->registration_fee,
+            'school_id_fee' => $request->school_id_fee,
+            'nstp_fee' => $request->total_nstp,
+            'stud_cor' => 'sample',
+            'remarks' => $request->remarks
+        ];
+        TemporaryBilling::create($students);
+        return response()->json([
+            'status' => 200,
+        ]);
+        // }
     }
 
     // handle insert a new applicant ajax request
     public function newTempApplicant(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'last_name' => 'required', //modal field name => validation
-            'first_name' => 'required',
-            'birthplace' => 'required',
-            'email_address' => 'required|email',
-            'mobile_number' => 'required|regex:/^(09)\d{9}$/',
-            'degree_program_applied' => 'required',
-            'year_level' => 'required'
+        // $validator = Validator::make($request->all(), [
+        //     'last_name' => 'required', //modal field name => validation
+        //     'first_name' => 'required',
+        //     'birthplace' => 'required',
+        //     'email_address' => 'required|email',
+        //     'mobile_number' => 'required|regex:/^(09)\d{9}$/',
+        //     'degree_program_applied' => 'required',
+        //     'year_level' => 'required'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'errors' => $validator->messages(),
+        //     ]);
+
+        $applicants = [
+            //static sample data
+            'hei_psg_region' => $request->hei_psg_region,
+            'hei_sid' => Auth::user()->hei_sid,
+            'hei_uii' => $request->hei_uii,
+            'hei_name' => $request->applied_selected_campus,
+            'reference_no' => $request->reference_no,
+            'ac_year' => $request->ac_year,
+            'semester' => $request->semester,
+            'tranche' => $request->tranche,
+            'app_id' => '',
+            'fhe_award_no' => '',
+            'stud_id' => $request->stud_id,
+            'lrn_no' => $request->lrn_no,
+            //actual data being collected in the modal
+            'stud_lname' => $request->last_name, //tablename => $request->name of input field
+            'stud_fname' => $request->first_name,
+            'stud_mname' => $request->middle_name,
+            'stud_ext_name' => $request->extension_name,
+            'stud_sex' => $request->sex,
+            'stud_birth_date' => $request->birthdate,
+            'stud_birth_place' => $request->birthplace,
+
+            'stud_email' => $request->email_address,
+            'stud_alt_email' => $request->alt_email_address,
+            'stud_phone_no' => $request->mobile_number,
+            'stud_alt_phone_no' => $request->alt_mobile_number,
+
+            'transferee' => $request->checkbox_transferee,
+            'degree_program' => $request->degree_program_applied,
+            'year_level' => $request->year_level,
+            'total_exam_taken' => $request->total_exam_taken,
+            'admission_fee' => $request->total_amount,
+            'exam_result' => $request->exam_result,
+            'stud_cor' => 'sample',
+        ];
+        TemporaryBilling::create($applicants);
+        return response()->json([
+            'status' => 200,
         ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        } else {
-
-            $applicants = [
-                //static sample data
-                'hei_psg_region' => $request->hei_psg_region,
-                'hei_sid' => Auth::user()->hei_sid,
-                'hei_uii' => $request->hei_uii,
-                'hei_name' => $request->applied_selected_campus,
-                'reference_no' => $request->reference_no,
-                'ac_year' => $request->ac_year,
-                'semester' => $request->semester,
-                'tranche' => $request->tranche,
-                'app_id' => '',
-                'fhe_award_no' => '',
-                'stud_id' => $request->stud_id,
-                'lrn_no' => $request->lrn_no,
-                //actual data being collected in the modal
-                'stud_lname' => $request->last_name, //tablename => $request->name of input field
-                'stud_fname' => $request->first_name,
-                'stud_mname' => $request->middle_name,
-                'stud_ext_name' => $request->extension_name,
-                'stud_sex' => $request->sex,
-                'stud_birth_date' => $request->birthdate,
-                'stud_birth_place' => $request->birthplace,
-
-                'stud_email' => $request->email_address,
-                'stud_alt_email' => $request->alt_email_address,
-                'stud_phone_no' => $request->mobile_number,
-                'stud_alt_phone_no' => $request->alt_mobile_number,
-
-                'transferee' => $request->checkbox_transferee,
-                'degree_program' => $request->degree_program_applied,
-                'year_level' => $request->year_level,
-                'total_exam_taken' => $request->total_exam_taken,
-                'admission_fee' => $request->total_amount,
-                'exam_result' => $request->exam_result,
-                'stud_cor' => 'sample',
-            ];
-            TemporaryBilling::create($applicants);
-            return response()->json([
-                'status' => 200,
-            ]);
-        }
     }
 
     // find the tosf of the students
@@ -508,91 +506,92 @@ class BillingController extends Controller
     // handle update an student ajax request
     public function updateTempStudent(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'edit_last_name' => 'required', //modal field name => validation
-            'edit_first_name' => 'required',
-            'edit_birthplace' => 'required',
-            'edit_present_province' => 'required',
-            'edit_present_city' => 'required',
-            'edit_present_barangay' => 'required',
-            'edit_present_zipcode' => 'required',
-            'edit_permanent_province' => 'required',
-            'edit_permanent_city' => 'required',
-            'edit_permanent_barangay' => 'required',
-            'edit_permanent_zipcode' => 'required',
-            'edit_email_address' => 'required|email',
-            'edit_mobile_number' => 'required|regex:/^(09)\d{9}$/',
-            'edit_course_enrolled' => 'required',
-            'edit_year_level' => 'required'
-        ]);
+        //!validation transferred to middleware
+        // $validator = Validator::make($request->all(), [
+        //     'edit_last_name' => 'required', //modal field name => validation
+        //     'edit_first_name' => 'required',
+        //     'edit_birthplace' => 'required',
+        //     'edit_present_province' => 'required',
+        //     'edit_present_city' => 'required',
+        //     'edit_present_barangay' => 'required',
+        //     'edit_present_zipcode' => 'required',
+        //     'edit_permanent_province' => 'required',
+        //     'edit_permanent_city' => 'required',
+        //     'edit_permanent_barangay' => 'required',
+        //     'edit_permanent_zipcode' => 'required',
+        //     'edit_email_address' => 'required|email',
+        //     'edit_mobile_number' => 'required|regex:/^(09)\d{9}$/',
+        //     'edit_course_enrolled' => 'required',
+        //     'edit_year_level' => 'required'
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'errors' => $validator->messages(),
-            ]);
-        } else {
-            $students = TemporaryBilling::find($request->edit_student_id);
-            $studData = [
-                //actual data being collected in the modal
-                'hei_name' => $request->edit_selected_campus,
-                'stud_lname' => $request->edit_last_name, //tablename => $request->name of input field
-                'stud_fname' => $request->edit_first_name,
-                'stud_mname' => $request->edit_middle_name,
-                'stud_ext_name' => $request->edit_extension_name,
-                'stud_sex' => $request->edit_sex,
-                'stud_birth_date' => $request->edit_birthdate,
-                'stud_birth_place' => $request->edit_birthplace,
-                'f_lname' => $request->edit_f_lname,
-                'f_fname' => $request->edit_f_fname,
-                'f_mname' => $request->edit_f_mname,
-                'm_lname' => $request->edit_m_lname,
-                'm_fname' => $request->edit_m_fname,
-                'm_mname' => $request->edit_m_mname,
-                'present_prov' => $request->edit_present_province,
-                'present_city' => $request->edit_present_city,
-                'present_barangay' => $request->edit_present_barangay,
-                'present_street' => $request->edit_present_street,
-                'present_zipcode' => $request->edit_present_zipcode,
-                'permanent_prov' => $request->edit_permanent_province,
-                'permanent_city' => $request->edit_permanent_city,
-                'permanent_barangay' => $request->edit_permanent_barangay,
-                'permanent_street' => $request->edit_permanent_street,
-                'permanent_zipcode' => $request->edit_permanent_zipcode,
-                'stud_email' => $request->edit_email_address,
-                'stud_alt_email' => $request->edit_alt_email_address,
-                'stud_phone_no' => $request->edit_mobile_number,
-                'alt_stud_phone_no' => $request->edit_alt_mobile_number,
-                'transferee' => $request->edit_checkbox_transferee,
-                'degree_program' => $request->edit_degree_program,
-                'year_level' => $request->edit_year_level,
-                'lab_unit' => '1',
-                'comp_lab_unit' => '1',
-                'academic_unit' => $request->edit_total_unit,
-                'nstp_unit' => $request->edit_nstp_unit,
-                'tuition_fee' => $request->edit_total_tuition,
-                'entrance_fee' => $request->edit_entrance_fee,
-                'admission_fee' => $request->edit_admission_fee,
-                'athletic_fee' => $request->edit_athletic_fee,
-                'computer_fee' => $request->edit_computer_fee,
-                'cultural_fee' => $request->edit_cultural_fee,
-                'development_fee' => $request->edit_development_fee,
-                'guidance_fee' => $request->edit_guidance_fee,
-                'handbook_fee' => $request->edit_handbook_fee,
-                'laboratory_fee' => $request->edit_laboratory_fee,
-                'library_fee' => $request->edit_library_fee,
-                'medical_dental_fee' => $request->edit_medical_dental_fee,
-                'registration_fee' => $request->edit_registration_fee,
-                'school_id_fee' => $request->edit_school_id_fee,
-                'nstp_fee' => $request->edit_total_nstp,
-                'stud_cor' => 'naedit',
-                'remarks' => $request->edit_remarks
-            ];
-            $students->update($studData);
-            return response()->json([
-                'status' => 200,
-            ]);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'errors' => $validator->messages(),
+        //     ]);
+        // } else {
+        $students = TemporaryBilling::find($request->edit_student_id);
+        $studData = [
+            //actual data being collected in the modal
+            'hei_name' => $request->edit_selected_campus,
+            'stud_lname' => $request->edit_last_name, //tablename => $request->name of input field
+            'stud_fname' => $request->edit_first_name,
+            'stud_mname' => $request->edit_middle_name,
+            'stud_ext_name' => $request->edit_extension_name,
+            'stud_sex' => $request->edit_sex,
+            'stud_birth_date' => $request->edit_birthdate,
+            'stud_birth_place' => $request->edit_birthplace,
+            'f_lname' => $request->edit_f_lname,
+            'f_fname' => $request->edit_f_fname,
+            'f_mname' => $request->edit_f_mname,
+            'm_lname' => $request->edit_m_lname,
+            'm_fname' => $request->edit_m_fname,
+            'm_mname' => $request->edit_m_mname,
+            'present_prov' => $request->edit_present_province,
+            'present_city' => $request->edit_present_city,
+            'present_barangay' => $request->edit_present_barangay,
+            'present_street' => $request->edit_present_street,
+            'present_zipcode' => $request->edit_present_zipcode,
+            'permanent_prov' => $request->edit_permanent_province,
+            'permanent_city' => $request->edit_permanent_city,
+            'permanent_barangay' => $request->edit_permanent_barangay,
+            'permanent_street' => $request->edit_permanent_street,
+            'permanent_zipcode' => $request->edit_permanent_zipcode,
+            'stud_email' => $request->edit_email_address,
+            'stud_alt_email' => $request->edit_alt_email_address,
+            'stud_phone_no' => $request->edit_mobile_number,
+            'alt_stud_phone_no' => $request->edit_alt_mobile_number,
+            'transferee' => $request->edit_checkbox_transferee,
+            'degree_program' => $request->edit_degree_program,
+            'year_level' => $request->edit_year_level,
+            'lab_unit' => '1',
+            'comp_lab_unit' => '1',
+            'academic_unit' => $request->edit_total_unit,
+            'nstp_unit' => $request->edit_nstp_unit,
+            'tuition_fee' => $request->edit_total_tuition,
+            'entrance_fee' => $request->edit_entrance_fee,
+            'admission_fee' => $request->edit_admission_fee,
+            'athletic_fee' => $request->edit_athletic_fee,
+            'computer_fee' => $request->edit_computer_fee,
+            'cultural_fee' => $request->edit_cultural_fee,
+            'development_fee' => $request->edit_development_fee,
+            'guidance_fee' => $request->edit_guidance_fee,
+            'handbook_fee' => $request->edit_handbook_fee,
+            'laboratory_fee' => $request->edit_laboratory_fee,
+            'library_fee' => $request->edit_library_fee,
+            'medical_dental_fee' => $request->edit_medical_dental_fee,
+            'registration_fee' => $request->edit_registration_fee,
+            'school_id_fee' => $request->edit_school_id_fee,
+            'nstp_fee' => $request->edit_total_nstp,
+            'stud_cor' => 'naedit',
+            'remarks' => $request->edit_remarks
+        ];
+        $students->update($studData);
+        return response()->json([
+            'status' => 200,
+        ]);
+        // }
     }
 
     //handles delete student information
@@ -661,62 +660,58 @@ class BillingController extends Controller
         return view('listofbillings', $data);
     }
 
-    public function billingmanagement($reference_no)
+    public function billingmanagementpage($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
-        $hei_uii = Auth::user()->hei_uii;
+        // $hei_uii = Auth::user()->hei_uii;
         $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
         $data['reference_no'] = $billings->reference_no;
         $data['billing_status'] = $billings->billing_status;
-        if ($billings && $billings->hei_uii == $hei_uii) {
-            return view('billingmanagement', $data);
-        }
-        abort(401);
+        // if ($billings && $billings->hei_uii == $hei_uii) {
+        return view('billingmanagement', $data);
+        // }
+        // abort(401);
     }
 
     public function getStudentBillingSettings(Request $request)
     {
-        try {
-            $bs_student = $request->bs_student;
-            $course_enrolled = $this->getCourseName($bs_student);
-            $bs_reference_no = $request->bs_reference_no;
-            $hei_uii = Auth::user()->hei_uii;
-            //gather all the categories for everybody in the world
-            $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-                // ->leftJoin('tbl_billing_stud_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_stud_settings.bs_osf_uid')
-                ->leftJoin('tbl_billing_stud_settings', function ($join) use ($bs_student) {
-                    $join->on('tbl_billing_stud_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                        ->where('tbl_billing_stud_settings.bs_student', '=', $bs_student);
-                })
-                ->where('tbl_other_school_fees.hei_uii', $hei_uii)
-                ->where('tbl_billing_settings.bs_reference_no', $bs_reference_no)
-                ->where('tbl_billing_settings.bs_status', 1)
-                ->where('tbl_other_school_fees.course_enrolled', $course_enrolled)
-                // ->where('tbl_billing_stud_settings.bs_student', $bs_student)
-                ->where('tbl_other_school_fees.is_optional', 1)
-                ->selectRaw('tbl_other_school_fees.uid,tbl_other_school_fees.amount,tbl_other_school_fees.course_enrolled,tbl_other_school_fees.type_of_fee,tbl_other_school_fees.category,tbl_other_school_fees.year_level,tbl_other_school_fees.semester,if(tbl_billing_stud_settings.bs_status is not null,tbl_billing_stud_settings.bs_status,tbl_billing_settings.bs_status) as bs_status')
-                ->get();
+        $bs_student = $request->bs_student;
+        $course_enrolled = $this->getCourseName($bs_student);
+        $reference_no = $request->reference_no;
+        $hei_uii = Auth::user()->hei_uii;
+        //gather all the categories for everybody in the world
+        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+            // ->leftJoin('tbl_billing_stud_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_stud_settings.bs_osf_uid')
+            ->leftJoin('tbl_billing_stud_settings', function ($join) use ($bs_student) {
+                $join->on('tbl_billing_stud_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->where('tbl_billing_stud_settings.bs_student', '=', $bs_student);
+            })
+            ->where('tbl_other_school_fees.hei_uii', $hei_uii)
+            ->where('tbl_billing_settings.bs_reference_no', $reference_no)
+            ->where('tbl_billing_settings.bs_status', 1)
+            ->where('tbl_other_school_fees.course_enrolled', $course_enrolled)
+            // ->where('tbl_billing_stud_settings.bs_student', $bs_student)
+            ->where('tbl_other_school_fees.is_optional', 1)
+            ->selectRaw('tbl_other_school_fees.uid,tbl_other_school_fees.amount,tbl_other_school_fees.course_enrolled,tbl_other_school_fees.type_of_fee,tbl_other_school_fees.category,tbl_other_school_fees.year_level,tbl_other_school_fees.semester,if(tbl_billing_stud_settings.bs_status is not null,tbl_billing_stud_settings.bs_status,tbl_billing_settings.bs_status) as bs_status')
+            ->get();
 
-            // $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $bs_reference_no)->get();
+        // $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $reference_no)->get();
 
-            $otherfeesresult = [];
-            foreach ($otherfees as $key => $row) {
-                $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
-            }
-
-            //package the shit and put it out of a view
-            $data['otherfees'] = $otherfeesresult;
-
-            // // $data['student'] = $request->student;
-            // // $data['reference_no'] = $reference_no;
-            // echo json_encode($otherfees);
-            return view('elements.studentsettings', $data);
-        } catch (\Throwable $th) {
-            return view('errors.419');
+        $otherfeesresult = [];
+        foreach ($otherfees as $key => $row) {
+            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'bs_status' => $row->bs_status);
         }
+
+        //package the shit and put it out of a view
+        $data['otherfees'] = $otherfeesresult;
+
+        // // $data['student'] = $request->student;
+        // // $data['reference_no'] = $reference_no;
+        // echo json_encode($otherfees);
+        return view('elements.studentsettings', $data);
     }
 
     public function getBillingSettings($reference_no)
@@ -726,9 +721,9 @@ class BillingController extends Controller
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
         $hei_uii = Auth::user()->hei_uii;
-        if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
-            return response('Unauthorized', 401);
-        }
+        // if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
+        //     return response('Unauthorized', 401);
+        // }
 
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
@@ -756,61 +751,57 @@ class BillingController extends Controller
         return view('billingsettings', $data);
     }
 
-    private function getHeiUiiOfBilling($reference_no)
-    {
-        $hei_uii = Billing::where('reference_no', $reference_no)->first()->hei_uii;
-        return $hei_uii;
-    }
+    // private function getHeiUiiOfBilling($reference_no)
+    // {
+    //     $hei_uii = Billing::where('reference_no', $reference_no)->first()->hei_uii;
+    //     return $hei_uii;
+    // }
 
     public function saveSettings(Request $request)
     {
-        $hei_uii = Auth::user()->hei_uii;
-        if ($hei_uii != $this->getHeiUiiOfBilling($request->reference_no)) {
-            return response('Unauthorized', 401);
-        }
+        // $hei_uii = Auth::user()->hei_uii;
+        // if ($hei_uii != $this->getHeiUiiOfBilling($request->reference_no)) {
+        //     return response('Unauthorized', 401);
+        // }
         //^checks if hei_uii is the same before applying changes
 
         $onsettings = $request->on;
         $offsettings = $request->off;
-        $bs_reference_no = $request->reference_no;
-        $this->upsertSettings($bs_reference_no, $onsettings, $offsettings);
-        echo $bs_reference_no;
+        $reference_no = $request->reference_no;
+        $this->upsertSettings($reference_no, $onsettings, $offsettings);
+        echo $reference_no;
     }
 
     public function toggleStudentFee(Request $request)
     {
-        try {
-            $bs_osf_uid = $request->bs_osf_uid;
-            $bs_reference_no = $request->bs_reference_no;
+        $bs_osf_uid = $request->bs_osf_uid;
+        $reference_no = $request->reference_no;
 
-            //prepare array
-            foreach ($bs_osf_uid as  $osf) {
-                foreach ($request->bs_student as $student) {
-                    $bs_student[] = array(
-                        'bs_reference_no' => $bs_reference_no,
-                        'bs_student' => $student,
-                        'bs_osf_uid' => $osf['osf'],
-                        'bs_status' => $osf['status']
-                    );
-                }
+        //prepare array
+        foreach ($bs_osf_uid as  $osf) {
+            foreach ($request->bs_student as $student) {
+                $bs_student[] = array(
+                    'bs_reference_no' => $reference_no,
+                    'bs_student' => $student,
+                    'bs_osf_uid' => $osf['osf'],
+                    'bs_status' => $osf['status']
+                );
             }
-            $studSettings = new StudSettings();
-            $studSettings->upsert(
-                $bs_student,
-                [
-                    'bs_reference_no',
-                    'bs_student',
-                    'bs_osf_uid'
-                ],
-                ['bs_status']
-            );
-            echo 1;
-        } catch (\Throwable $th) {
-            echo 0;
         }
+        $studSettings = new StudSettings();
+        $studSettings->upsert(
+            $bs_student,
+            [
+                'bs_reference_no',
+                'bs_student',
+                'bs_osf_uid'
+            ],
+            ['bs_status']
+        );
+        echo 1;
     }
 
-    private function upsertSettings($bs_reference_no, $onsettings = array(), $offsettings = array())
+    private function upsertSettings($reference_no, $onsettings = array(), $offsettings = array())
     {
         //mass updates of all the settings that were changed
         //on
@@ -818,7 +809,7 @@ class BillingController extends Controller
         $bs_status = 1;
         if ($onsettings) {
             foreach ($onsettings as $osf_uid) {
-                $ons[] = array('bs_reference_no' => $bs_reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+                $ons[] = array('bs_reference_no' => $reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
             }
         }
         Settings::upsert($ons, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
@@ -827,7 +818,7 @@ class BillingController extends Controller
         $bs_status = 0;
         if ($offsettings) {
             foreach ($offsettings as $osf_uid) {
-                $offs[] = array('bs_reference_no' => $bs_reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+                $offs[] = array('bs_reference_no' => $reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
             }
         }
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
@@ -838,10 +829,11 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
-        if (count($tempstudents) < 1) {
-            return response('Invalid', 400);
-        }
-        $reference_no = $request->reference_no;
+        //!validation is now passed to the middlware
+        // if (count($tempstudents) < 1) {
+        //     return response('Invalid', 400);
+        // }
+        // $reference_no = $request->reference_no;
         $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
         $heiinfo = $this->getHeiInformation($hei_uii);
         // echo $reference_no;
@@ -855,72 +847,73 @@ class BillingController extends Controller
         //     ->selectRaw('course_enrolled,type_of_fee,year_level,SUM(amount) as total_amount')
         //     ->groupBy('course_enrolled', 'type_of_fee', 'year_level')
         //     ->get();
-        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-            ->where('hei_uii', $hei_uii)
-            ->where('bs_reference_no', $reference_no)
-            ->where('semester', $request->semester)
-            ->selectRaw('bs_status,course_enrolled,type_of_fee,year_level,coverage,amount,category')
-            ->get();
+        // $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+        //     ->where('hei_uii', $hei_uii)
+        //     ->where('bs_reference_no', $reference_no)
+        //     ->where('semester', $request->semester)
+        //     ->selectRaw('bs_status,course_enrolled,type_of_fee,year_level,coverage,amount,category')
+        //     ->get();
 
-        $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
+        // $tuitionFees = TuitionFees::where('hei_uii', $hei_uii)->where('semester', 1)->get();
 
-        foreach ($tuitionFees as $tuitionFee) {
-            $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['TUITION'] =  $tuitionFee->tuition_per_unit;
-            $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['NSTP'] =  $tuitionFee->nstp_cost_per_unit;
-        }
-        foreach ($otherfees as $otherfee) {
-            if ($otherfee->bs_status == 1) {
-                if ($otherfee->category == '') {
-                    $category = strtoupper($otherfee->type_of_fee);
-                } else {
-                    $category = strtoupper($otherfee->category);
-                }
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][$category]['AMOUNT'] =  $otherfee->amount;
-                $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][$category]['COVERAGE'] = $otherfee->coverage;
-            }
-        }
-        $json_fees = json_encode($fees);
+        // foreach ($tuitionFees as $tuitionFee) {
+        //     $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['TUITION'] =  $tuitionFee->tuition_per_unit;
+        //     $fees[strtoupper($tuitionFee->course_enrolled)][strtoupper($tuitionFee->year_level)]['NSTP'] =  $tuitionFee->nstp_cost_per_unit;
+        // }
+        // foreach ($otherfees as $otherfee) {
+        //     if ($otherfee->bs_status == 1) {
+        //         if ($otherfee->category == '') {
+        //             $category = strtoupper($otherfee->type_of_fee);
+        //         } else {
+        //             $category = strtoupper($otherfee->category);
+        //         }
+        //         $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][$category]['AMOUNT'] =  $otherfee->amount;
+        //         $fees[strtoupper($otherfee->course_enrolled)][$otherfee->year_level][strtoupper($otherfee->type_of_fee)][$category]['COVERAGE'] = $otherfee->coverage;
+        //     }
+        // }
+        // $json_fees = json_encode($fees);
         //build array for fees and tosf end
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
-        foreach ($tempstudents as $tempstudent) {
-            if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
-        }
+        //!validation has now been passed to the middleware
+        // foreach ($tempstudents as $tempstudent) {
+        //     if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
+        // }
         // echo 'all values are ok';
         //upload all rows if there is no problem
         foreach ($tempstudents as $tempstudent) {
-            $this->newTempStudentBatch($tempstudent, $json_fees, $heiinfo, $billinginfo);
+            $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo);
         }
         return response('Success', 200);
         // echo 'ok';
     }
 
-    private function validateTempStudentFields($tempstudent)
-    {
-        $validator = Validator::make((array) $tempstudent, [
-            'last_name' => 'required|max:255',
-            'given_name' => 'required|max:255',
-            'sex_at_birth' => 'required|max:25',
-            'birthdate' => 'required|date_format:Y-m-d',
-            'birthplace' => 'required|max:255',
-            'mothers_gname' => 'required|max:255', //mother madien fname
-            'mothers_lname' => 'required|max:255', //mother madien lname
-            'pres_prov' => 'required|max:255',
-            'pres_city' => 'required|max:255',
-            'pres_brgy' => 'required|max:255',
-            'pres_zip' => 'required|max:255',
-            'perm_prov' => 'required|max:255',
-            'perm_city' => 'required|max:255',
-            'perm_brgy' => 'required|max:255',
-            'perm_zip' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'contact_number' => 'required|regex:/^(9)\d{9}$/'
-            // 'degree_program' => 'required|max:255'
-        ]);
+    // private function validateTempStudentFields($tempstudent)
+    // {
+    //     $validator = Validator::make((array) $tempstudent, [
+    //         'last_name' => 'required|max:255',
+    //         'given_name' => 'required|max:255',
+    //         'sex_at_birth' => 'required|max:25',
+    //         'birthdate' => 'required|date_format:Y-m-d',
+    //         'birthplace' => 'required|max:255',
+    //         'mothers_gname' => 'required|max:255', //mother madien fname
+    //         'mothers_lname' => 'required|max:255', //mother madien lname
+    //         'pres_prov' => 'required|max:255',
+    //         'pres_city' => 'required|max:255',
+    //         'pres_brgy' => 'required|max:255',
+    //         'pres_zip' => 'required|max:255',
+    //         'perm_prov' => 'required|max:255',
+    //         'perm_city' => 'required|max:255',
+    //         'perm_brgy' => 'required|max:255',
+    //         'perm_zip' => 'required|max:255',
+    //         'email' => 'required|email|max:255',
+    //         'contact_number' => 'required|regex:/^(9)\d{9}$/'
+    //         // 'degree_program' => 'required|max:255'
+    //     ]);
 
-        //return validator failure status
-        return $validator->fails();
-    }
+    //     //return validator failure status
+    //     return $validator->fails();
+    // }
 
     // public function test()
     // {
@@ -962,19 +955,19 @@ class BillingController extends Controller
     //     //School ID
     // }
 
-    public function getDegreeCourseID($course)
-    {
-        $courseid = 0;
-        // $courseid = DB::table('tbl_registry')
-        if (strtoupper($course) == 'BACHELOR OF SCIENCE IN INFORMATION AND TECHNOLOGY') {
-            $courseid = 37895;
-        }
-        return $courseid;
-    }
+    // public function getDegreeCourseID($course)
+    // {
+    //     $courseid = 0;
+    //     // $courseid = DB::table('tbl_registry')
+    //     if (strtoupper($course) == 'BACHELOR OF SCIENCE IN INFORMATION AND TECHNOLOGY') {
+    //         $courseid = 37895;
+    //     }
+    //     return $courseid;
+    // }
 
-    private function newTempStudentBatch($data = array(), $json_fees, $heiinfo, $billinginfo)
+    private function newTempStudentBatch($data = array(), $heiinfo, $billinginfo)
     {
-        $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
+        // $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudent = new TemporaryBilling;
@@ -1027,106 +1020,106 @@ class BillingController extends Controller
         $tempstudent->nstp_unit = $nstp_unit;
 
 
-        //finalized fees
-        $Entrance = 0;
-        $Admission = 0;
-        $Athletic = 0;
-        $Computer = 0;
-        $Cultural = 0;
-        $Development = 0;
-        $Guidance = 0;
-        $Handbook = 0;
-        $Laboratory = 0;
-        $Library = 0;
-        $Medical_and_Dental = 0;
-        $Registration = 0;
-        $ID = 0;
-        $totalTuition = 0;
+        // //finalized fees
+        // $Entrance = 0;
+        // $Admission = 0;
+        // $Athletic = 0;
+        // $Computer = 0;
+        // $Cultural = 0;
+        // $Development = 0;
+        // $Guidance = 0;
+        // $Handbook = 0;
+        // $Laboratory = 0;
+        // $Library = 0;
+        // $Medical_and_Dental = 0;
+        // $Registration = 0;
+        // $ID = 0;
+        // $totalTuition = 0;
 
-        //check if exam is passed and if failed computation is skipped
-        $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
-        $exam_result = array_key_exists('exam_result', $data) ? strtoupper($data['exam_result']) : '';
-        if ($exam_result == 'PASSED') {
-            foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
-                $total_fee = 0;
-                if (is_array($category) === false) { //skip nstp and tuition
-                    continue;
-                }
-                foreach ($category as $fee) {
-                    if ($fee['COVERAGE'] == 'per unit') {
-                        if ($type_of_fee == 'COMPUTER') {
-                            $unit_multiplier = $comp_lab_unit;
-                        } else {
-                            $unit_multiplier = $lab_unit;
-                        }
-                        $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
-                    }
-                    if ($fee['COVERAGE'] == 'per student') {
-                        $total_fee += (float) $fee['AMOUNT'];
-                    }
-                }
-                switch ($type_of_fee) {
-                    case 'ENTRANCE':
-                        $Entrance += $total_fee;
-                        break;
-                    case 'ADMISSION':
-                        $Admission += $total_fee;
-                        break;
-                    case 'ATHLETIC':
-                        $Athletic += $total_fee;
-                        break;
-                    case 'COMPUTER':
-                        $Computer += $total_fee;
-                        break;
-                    case 'CULTURAL':
-                        $Cultural += $total_fee;
-                        break;
-                    case 'DEVELOPMENT':
-                        $Development += $total_fee;
-                        break;
-                    case 'GUIDANCE':
-                        $Guidance += $total_fee;
-                        break;
-                    case 'HANDBOOK':
-                        $Handbook += $total_fee;
-                        break;
-                    case 'LABORATORY':
-                        $Laboratory += $total_fee;
-                        break;
-                    case 'LIBRARY':
-                        $Library += $total_fee;
-                        break;
-                    case 'MEDICAL AND DENTAL':
-                        $Medical_and_Dental += $total_fee;
-                        break;
-                    case 'REGISTRATION':
-                        $Registration += $total_fee;
-                        break;
-                    case 'SCHOOL ID':
-                        $ID += $total_fee;
-                        break;
-                }
-            }
-            $tuitionperunit = (float) $json_fees[$course][$year_level]['TUITION'];
-            $totalTuition = $tuitionperunit * (float) $data['acad_u'];
-        }
-        $tempstudent->tuition_fee = $totalTuition;
-        $tempstudent->entrance_fee = $Entrance;
-        $tempstudent->admission_fee = $Admission;
-        $tempstudent->athletic_fee = $Athletic;
-        $tempstudent->computer_fee = $Computer;
-        $tempstudent->cultural_fee = $Cultural;
-        $tempstudent->development_fee = $Development;
-        $tempstudent->guidance_fee = $Guidance;
-        $tempstudent->handbook_fee = $Handbook;
-        $tempstudent->laboratory_fee = $Laboratory;
-        $tempstudent->library_fee = $Library;
-        $tempstudent->medical_dental_fee = $Medical_and_Dental;
-        $tempstudent->registration_fee = $Registration;
-        $tempstudent->school_id_fee = $ID;
-        $nstpfee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
-        $nstpfee >= $tuitionperunit * 2 ? $nstpfee = $tuitionperunit / 2 : $nstpfee; //nstp fee must be atmost half of tuition per unit
-        $tempstudent->nstp_fee = $nstpfee;
+        // //check if exam is passed and if failed computation is skipped
+        // $tempstudent->total_exam_taken = array_key_exists('exams', $data) ? $data['exams'] : 0;
+        // $exam_result = array_key_exists('exam_result', $data) ? strtoupper($data['exam_result']) : '';
+        // if ($exam_result == 'PASSED') {
+        //     foreach ($json_fees[$course][$year_level] as $type_of_fee => $category) {
+        //         $total_fee = 0;
+        //         if (is_array($category) === false) { //skip nstp and tuition
+        //             continue;
+        //         }
+        //         foreach ($category as $fee) {
+        //             if ($fee['COVERAGE'] == 'per unit') {
+        //                 if ($type_of_fee == 'COMPUTER') {
+        //                     $unit_multiplier = $comp_lab_unit;
+        //                 } else {
+        //                     $unit_multiplier = $lab_unit;
+        //                 }
+        //                 $total_fee += (float) $fee['AMOUNT'] * $unit_multiplier;
+        //             }
+        //             if ($fee['COVERAGE'] == 'per student') {
+        //                 $total_fee += (float) $fee['AMOUNT'];
+        //             }
+        //         }
+        //         switch ($type_of_fee) {
+        //             case 'ENTRANCE':
+        //                 $Entrance += $total_fee;
+        //                 break;
+        //             case 'ADMISSION':
+        //                 $Admission += $total_fee;
+        //                 break;
+        //             case 'ATHLETIC':
+        //                 $Athletic += $total_fee;
+        //                 break;
+        //             case 'COMPUTER':
+        //                 $Computer += $total_fee;
+        //                 break;
+        //             case 'CULTURAL':
+        //                 $Cultural += $total_fee;
+        //                 break;
+        //             case 'DEVELOPMENT':
+        //                 $Development += $total_fee;
+        //                 break;
+        //             case 'GUIDANCE':
+        //                 $Guidance += $total_fee;
+        //                 break;
+        //             case 'HANDBOOK':
+        //                 $Handbook += $total_fee;
+        //                 break;
+        //             case 'LABORATORY':
+        //                 $Laboratory += $total_fee;
+        //                 break;
+        //             case 'LIBRARY':
+        //                 $Library += $total_fee;
+        //                 break;
+        //             case 'MEDICAL AND DENTAL':
+        //                 $Medical_and_Dental += $total_fee;
+        //                 break;
+        //             case 'REGISTRATION':
+        //                 $Registration += $total_fee;
+        //                 break;
+        //             case 'SCHOOL ID':
+        //                 $ID += $total_fee;
+        //                 break;
+        //         }
+        //     }
+        //     $tuitionperunit = (float) $json_fees[$course][$year_level]['TUITION'];
+        //     $totalTuition = $tuitionperunit * (float) $data['acad_u'];
+        // }
+        // $tempstudent->tuition_fee = $totalTuition;
+        // $tempstudent->entrance_fee = $Entrance;
+        // $tempstudent->admission_fee = $Admission;
+        // $tempstudent->athletic_fee = $Athletic;
+        // $tempstudent->computer_fee = $Computer;
+        // $tempstudent->cultural_fee = $Cultural;
+        // $tempstudent->development_fee = $Development;
+        // $tempstudent->guidance_fee = $Guidance;
+        // $tempstudent->handbook_fee = $Handbook;
+        // $tempstudent->laboratory_fee = $Laboratory;
+        // $tempstudent->library_fee = $Library;
+        // $tempstudent->medical_dental_fee = $Medical_and_Dental;
+        // $tempstudent->registration_fee = $Registration;
+        // $tempstudent->school_id_fee = $ID;
+        // $nstpfee = (float) $json_fees[$course][$year_level]['NSTP'] * (float) $nstp_unit;
+        // $nstpfee >= $tuitionperunit * 2 ? $nstpfee = $tuitionperunit / 2 : $nstpfee; //nstp fee must be atmost half of tuition per unit
+        // $tempstudent->nstp_fee = $nstpfee;
         $tempstudent->stud_cor = 0; //dummydata
 
         $tempstudent->exam_result = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
@@ -1300,9 +1293,9 @@ class BillingController extends Controller
         echo "done";
     }
 
-    public function computeStudFees($bs_student, $bs_reference_no, $year_level, $semester, $course, $billing_settings)
+    public function computeStudFees($bs_student, $reference_no, $year_level, $semester, $course, $billing_settings)
     {
-        $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $bs_reference_no)->get();
+        $studentfees = StudSettings::where('bs_student', $bs_student)->where('bs_reference_no', $reference_no)->get();
         $sum = 0;
         foreach ($billing_settings as $billing_setting) {
             $otherfees[strtoupper($billing_setting->course_enrolled)][$billing_setting->year_level][$billing_setting->semester][] = array('category' => $billing_setting->category, 'id' => $billing_setting->uid, 'amount' => $billing_setting->amount, 'bs_status' => $billing_setting->bs_status);
