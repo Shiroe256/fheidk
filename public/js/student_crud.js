@@ -36,7 +36,7 @@ templateReq.onload = function (e) {
           ws.getCell('B1').value = heiinfo.hei_psg_region;
           ws.getCell('B2').value = heiinfo.hei_uii;
           ws.getCell('B3').value = heiinfo.hei_name;
-          ws.getCell('B4').value = reference_no;
+          ws.getCell('B4').value = reference_no.value;
           var crs = workbook.addWorksheet('courses');
           heiinfo.courses.forEach(course => {
               crs.addRow([course.course_enrolled]);
@@ -56,7 +56,7 @@ templateReq.onload = function (e) {
   
                   var url = URL.createObjectURL(data);
                   a.href = url;
-                  a.download = "template_" + reference_no + ".xlsx";
+                  a.download = "template_" + reference_no.value + ".xlsx";
                   document.body.appendChild(a);
                   a.click();
                   setTimeout(function() {
@@ -204,10 +204,10 @@ function queueBilling() {
       url: window.location.origin + "/queueBilling",
       type: "POST",
       data: {
-          reference_no: reference_no
+          reference_no: reference_no.value
       },
       success: function (data) {
-          window.location.href = "/billings?queued=" + reference_no;
+          window.location.href = "/billings?queued=" + reference_no.value;
       },
   });
 }
@@ -382,7 +382,7 @@ function uploadBatch() {
                   type: "POST",
                   data: {
                       payload: JSON.stringify(output),
-                      reference_no: reference_no,
+                      reference_no: reference_no.value,
                       ac_year: ac_year,
                       semester: semester,
                       tranche: tranche
