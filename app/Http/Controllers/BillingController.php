@@ -793,7 +793,7 @@ class BillingController extends Controller
         //!validation has now been passed to the middleware
 
         foreach ($tempstudents as $key => $tempstudent) {
-            $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key);
+            $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         }
         return response('Success', 200);
         // echo 'ok';
@@ -869,7 +869,7 @@ class BillingController extends Controller
         $tempstudent->year_level = $year_level;
         $tempstudent->semester = $billinginfo['semester'];
         $tempstudent->tranche = $billinginfo['tranche'];
-        $tempstudent->app_id = $this->generateAppID($billinginfo['ac_year'], $count);
+        $tempstudent->app_id = $this->generateAppID($count);
 
         $tempstudent->save();
     }
@@ -1174,9 +1174,9 @@ class BillingController extends Controller
         $student->save();
     }
 
-    private function generateAppID($ac_year, $seq)
+    private function generateAppID($seq)
     {
-        $app_id = $ac_year . '-' . date("Ymdsu") . '-' . sprintf("%05d", $seq);
+        $app_id = date("Ymds") . sprintf("%08d",substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
         return $app_id;
     }
 }
