@@ -1176,7 +1176,7 @@ class BillingController extends Controller
 
     private function generateAppID($seq)
     {
-        $app_id = date("Ymds") . sprintf("%08d",substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
+        $app_id = date("YmdHis") . sprintf("%05d",substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
         return $app_id;
     }
 }
