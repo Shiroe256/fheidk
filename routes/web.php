@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 
 
@@ -110,3 +111,7 @@ Route::post('/newtempapplicants', [BillingController::class, 'newTempApplicant']
 
 //Exception Report
 Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempExceptions'])->name('fetchTempExceptions');
+
+
+//pdf shit
+Route::get('/get-pdf', [PdfController::class, 'generatePDF']);

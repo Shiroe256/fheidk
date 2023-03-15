@@ -145,6 +145,7 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
+            'Fpdf\\' => 5,
             'Faker\\' => 6,
             'Facade\\IgnitionContracts\\' => 25,
         ),
@@ -456,6 +457,10 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
+        'Fpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
+        ),
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
@@ -544,6 +549,7 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckUserHei' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckUserHei.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -551,6 +557,10 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\validateNewTempApplicant' => __DIR__ . '/../..' . '/app/Http/Middleware/validateNewTempApplicant.php',
+        'App\\Http\\Middleware\\validateNewTempStudent' => __DIR__ . '/../..' . '/app/Http/Middleware/validateNewTempStudent.php',
+        'App\\Http\\Middleware\\validateTempStudentFields' => __DIR__ . '/../..' . '/app/Http/Middleware/validateTempStudentFields.php',
+        'App\\Http\\Middleware\\validateUpdateTempStudent' => __DIR__ . '/../..' . '/app/Http/Middleware/validateUpdateTempStudent.php',
         'App\\Models\\Billing' => __DIR__ . '/../..' . '/app/Models/Billing.php',
         'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',
         'App\\Models\\EnrollmentInfo' => __DIR__ . '/../..' . '/app/Models/EnrollmentInfo.php',
@@ -558,6 +568,7 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'App\\Models\\OtherSchoolFees' => __DIR__ . '/../..' . '/app/Models/OtherSchoolFees.php',
         'App\\Models\\SchoolFees' => __DIR__ . '/../..' . '/app/Models/SchoolFees.php',
         'App\\Models\\Settings' => __DIR__ . '/../..' . '/app/Models/Settings.php',
+        'App\\Models\\StudSettings' => __DIR__ . '/../..' . '/app/Models/StudSettings.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\TemporaryBilling' => __DIR__ . '/../..' . '/app/Models/TemporaryBilling.php',
         'App\\Models\\TuitionFees' => __DIR__ . '/../..' . '/app/Models/TuitionFees.php',
@@ -1391,6 +1402,9 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Fpdf\\Fpdf' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
+        'Fpdf\\Traits\\MemoryImageSupport\\MemImageTrait' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Traits/MemoryImageSupport/MemImageTrait.php',
+        'Fpdf\\Traits\\MemoryImageSupport\\VariableStream' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Traits/MemoryImageSupport/VariableStream.php',
         'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
