@@ -805,7 +805,7 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : '';
+        $tempstudent->fhe_award_no = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateAppID($count);
         $tempstudent->stud_id = array_key_exists('stud_no', $data) ? $data['stud_no'] : '';
         $tempstudent->lrn_no = array_key_exists('lrnum', $data) ? $data['lrnum'] : '';
         $tempstudent->stud_lname = array_key_exists('last_name', $data) ? $data['last_name'] : '';
@@ -896,6 +896,7 @@ class BillingController extends Controller
         $billing = Billing::where('reference_no', $request->reference_no)->first();
         $billing->billing_status = 2;
         $billing->save();
+        $this->checkBilling();
         return response('Success', 200);
     }
 
@@ -925,7 +926,7 @@ class BillingController extends Controller
         echo json_encode($response);
     }
 
-    public function checkBilling()
+    private function checkBilling()
     {
         //look for billings marked for a checker queue
         $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
@@ -1013,7 +1014,6 @@ class BillingController extends Controller
                     $billing->billing_status = 4;
                 }
                 printf('remarks: ' . $remarks);
-                printf('xXx');
                 $student->remarks = $remarks;
                 $student->save();
             }
@@ -1176,7 +1176,12 @@ class BillingController extends Controller
 
     private function generateAppID($seq)
     {
-        $app_id = date("YmdHis") . sprintf("%05d",substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
+        $app_id = date("YmdHis") . sprintf("%05d", substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
         return $app_id;
+    }
+    private function generateFHEAwardNo($hei_uii, $seq)
+    {
+        $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf('%05d', $seq);
+        return $fhe_award_no;
     }
 }
