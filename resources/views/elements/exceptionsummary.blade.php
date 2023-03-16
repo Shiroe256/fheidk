@@ -1,6 +1,6 @@
 <?php $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); //currency formatter
 ?>
-@if($exceptions->count() > 0):
+@if($exceptions->count() > 0)
     <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_exception_report">
     <thead>
         <tr>
@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody id="tbl_list_of_exceptions">
-    @foreach ($exceptions as $exception) :
+    @foreach ($exceptions as $exception)
         <?php
         $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
 
@@ -37,7 +37,7 @@
             $student_status = '';
         }
         ?>
-        <tr>
+        <tr class="text-danger">
             <td class="text-center"><input type="checkbox" id="{{$exception->uid}}" name="student_checkbox" value="{{$exception->uid}}"></td>
             <td class="text-left">{{$exception->hei_name}}</td>
             <td class="text-left">{{$exception->app_id}}</td>
