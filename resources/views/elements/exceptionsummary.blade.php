@@ -47,7 +47,7 @@
             <td>{{$exception->stud_mname}}</td>
             <td>{{$exception->degree_program}}</td>
             <td class="text-center">{{$exception->year_level}}</td>
-            <td class="text-left">{{$exception->remarks}}</td>
+            <td class="text-left">{!!$exception->remarks!!}</td>
             <td class="text-left">{{$student_status}}</td>
             <td class="text-left">{{$format->format($total_amount)}}</td>
             <td class="text-center">
