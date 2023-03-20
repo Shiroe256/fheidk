@@ -66,7 +66,7 @@ Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->na
 Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent')->middleware('checkUserHei');
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
-Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent')->middleware('check.user.hei');
+Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent')->middleware('checkUserHei');
 
 //Autocomplete textbox
 Route::get('/get-tuitionfee', [BillingController::class, 'findTuitionFee'])->name('findTuitionFee');
@@ -83,7 +83,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
     Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
-    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->middleware('check.user.hei')->name('toggleStudentFee');
+    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->middleware('checkUserHei')->name('toggleStudentFee');
 });
 
 //test
