@@ -20,11 +20,9 @@ class CheckUserHei
     {
         if ($request->route('ref_no'))
             $reference_no = $request->route('ref_no');
-        elseif ($request->reference_no)
+        if ($request->reference_no)
             $reference_no = $request->reference_no;
-        else
-            return response('Unauthorized', 401);
-            
+
         $billing = Billing::where('reference_no', $reference_no)->first();
         $hei_uii = Auth::user()->hei_uii;
         if ($hei_uii != $billing->hei_uii) {

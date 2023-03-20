@@ -1974,6 +1974,7 @@ $(document).on('click', '#btn_delete_students', function () {
         url: '/delete-tempstudent',
         method: 'delete',
         data: {
+          reference_no: reference_no,
           uid: id
         },
         success: function (response) {
