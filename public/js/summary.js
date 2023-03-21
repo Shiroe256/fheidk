@@ -12,6 +12,7 @@ function fetchTempSummary() {
       },
       success: function (response) {
         $(".show_summary").html(response);
+        $("#show_summary_for_billing").html(response);
         //hide placeholder
         document.getElementById("summary_placeholder").classList.add("d-none");
         $(".tbl_summary").DataTable({

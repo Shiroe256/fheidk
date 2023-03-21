@@ -285,7 +285,7 @@
                                     Forms</button></div>
                         </div>
                     </div>
-                    <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary d-none"
+                    <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary"
                         role="grid" aria-describedby="dataTable_info">
                         {{-- SUMMARY TABLE HERE --}}
                     </div>
