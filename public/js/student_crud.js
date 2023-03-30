@@ -16,7 +16,7 @@ var students = [];
 //from batchbilling js
 const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
-const closeButton = document.getElementById("btn_closeupload");
+const btnUploadCloseButton = document.getElementById("btn_closeupload");
 const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
@@ -31,6 +31,9 @@ var heiinfo;
 
 btn_upload.onclick = function (e) {
   mod_upload_batch.show();
+}
+btnUploadCloseButton.onclick = function (e) {
+  mod_upload_batch.hide();
 }
 
 templateReq.onload = function (e) {
@@ -221,7 +224,7 @@ function queueBilling() {
 function resetUploadButton() {
   uploadButton.innerHTML = 'Upload';
   uploadButton.disabled = false;
-  closeButton.disabled = false;
+  btnUploadCloseButton.disabled = false;
   fileInput.disabled = false;
 }
 
@@ -397,7 +400,7 @@ function uploadBatch() {
           complete: function () {
             fileInput.value = '';
             resetUploadButton();
-            closeButton.click();
+            btnUploadCloseButton.click();
             fetchTempStudent();
             fetchTempSummary();
             fetchTempApplicants();
@@ -405,7 +408,7 @@ function uploadBatch() {
           },
           beforeSend: function () {
             uploadButton.disabled = true;
-            closeButton.disabled = true;
+            btnUploadCloseButton.disabled = true;
             fileInput.disabled = true;
             uploadButton.innerHTML = 'Uploading...';
           },

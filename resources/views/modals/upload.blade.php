@@ -17,8 +17,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn_closeupload" class="btn btn-light card-button-style" type="button"
-                        data-bs-dismiss="modal">Close</button>
+                    <button id="btn_closeupload" class="btn btn-light card-button-style" type="button">Close</button>
                     <button id="btn_upload_template" class="btn btn-primary card-button-style" type="button"
                         disabled>Upload</button>
                 </div>
