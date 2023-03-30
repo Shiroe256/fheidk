@@ -6,9 +6,14 @@
                     <h6 class="modal-title">UPLOAD FHE TEMPLATE</h6>
                 </div>
                 <div class="modal-body">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="upload_template">
-                        <label class="custom-file-label" id="upload_template_text">Choose file</label>
+                    <div class="row">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="upload_template">
+                            <label class="custom-file-label" id="upload_template_text">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <small id="upload_status"></small>
                     </div>
                 </div>
                 <div class="modal-footer">
