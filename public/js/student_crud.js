@@ -188,7 +188,7 @@ fileInput.onchange = () => {
         html: 'Please check the name of your Sheet'
       });
     } else {
-      document.getElementById("upload_status").html = item.length + " Students detected";
+      document.getElementById("upload_status").html = output.length + " Students detected";
       resetUploadButton();
       document.getElementById('upload_template_text').innerHTML = selectedFile.name;
     }
