@@ -83,7 +83,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
     Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
-    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->middleware('checkUserHei')->name('toggleStudentFee');
+    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
 });
 
 //test
