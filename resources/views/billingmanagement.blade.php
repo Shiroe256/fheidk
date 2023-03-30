@@ -20,8 +20,7 @@
                     Settings</a>
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
                         class="fas fa-download"></i>&nbsp;Download Template</button>
-                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
-                    data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload
+                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i class="fas fa-file-upload"></i>&nbsp;Upload
                     List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Run Validation</button>
