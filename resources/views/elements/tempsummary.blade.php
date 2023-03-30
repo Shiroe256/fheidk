@@ -42,8 +42,7 @@ $cnt = 1;
         <h5>Upload a student spreadsheet?</h5>
         <button onclick="document.getElementById('btn_download_template').click()"
             class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i>&nbsp;Download Template</button>
-        <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal"
-            data-bs-target="#mod_upload"><i class="fas fa-file-upload"></i>&nbsp;Upload
+        <button onclick="document.getElementById('btn_upload').click()" class="btn btn-outline-primary btn-sm" type="button"><i class="fas fa-file-upload"></i>&nbsp;Upload
             List</button>
     </div>
 @endif
