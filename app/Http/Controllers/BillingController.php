@@ -926,7 +926,7 @@ class BillingController extends Controller
         echo json_encode($response);
     }
 
-    private function checkBilling()
+    public function checkBilling()
     {
         //look for billings marked for a checker queue
         $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue

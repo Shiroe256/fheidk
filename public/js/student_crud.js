@@ -412,7 +412,8 @@ function uploadBatch() {
             fileInput.disabled = true;
             uploadButton.innerHTML = 'Uploading...';
           },
-          success: function () {
+          success: function (result) {
+            console.log(result);
             Swal.fire('Uploading Success',
               'The students in the spreadsheet have been uploaded',
               'success');
