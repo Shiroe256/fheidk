@@ -1,4 +1,4 @@
-@include('includes.header')
+@include('admin.includes.header')
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md clean-navbar">
