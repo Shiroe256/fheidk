@@ -196,5 +196,5 @@
         </section>
     </main>
 
-@include('includes.modal')    
-@include('includes.footer')
+@include('admin.includes.modal')    
+@include('admin.includes.footer')

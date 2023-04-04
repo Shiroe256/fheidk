@@ -1,4 +1,4 @@
-@include('includes.header')
+@include('admin.includes.header')
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md clean-navbar">
@@ -85,5 +85,5 @@
         </section>
     </main>
 
-@include('includes.modal')
-@include('includes.footer')
+@include('admin.includes.modal')
+@include('admin.includes.footer')

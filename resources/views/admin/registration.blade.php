@@ -1,4 +1,4 @@
-@include('includes.header')
+@include('admin.includes.header')
 
 <body>
     <section class="contact-clean">
@@ -21,4 +21,4 @@
         </form>
     </section>
 
-@include('includes.authfooter')
+@include('admin.includes.authfooter')
