@@ -16,6 +16,11 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable;
 
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

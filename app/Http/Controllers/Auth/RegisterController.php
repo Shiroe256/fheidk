@@ -80,6 +80,7 @@ class RegisterController extends Controller
             'contact_no' => $data['contact_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'is_admin' => false,
         ]);
     }
 }
