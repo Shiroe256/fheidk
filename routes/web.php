@@ -46,7 +46,7 @@ Route::get('/', function () {
 
 //billing CRUD
 Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newBilling');
-Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings')->middleware('checkUserHei');
+Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('checkUserHei');
