@@ -937,9 +937,9 @@ class BillingController extends Controller
             $reference_no = $billing['reference_no'];
             echo $reference_no;
             //when the billing has been checked. Save it with a new status.
-            $billing->billing_status = 3; //3 is done queue
+            
             //set billing status but not save it yet. IF there are no errors ayun
-
+            
             //get students of each billing transaction
             $students = TemporaryBilling::all();
             // echo $students;
@@ -1023,6 +1023,7 @@ class BillingController extends Controller
                 $student->save();
             }
             echo "billing done";
+            $billing->billing_status = 3; //3 is done queue
             $billing->save();
 
             //write a success message in the logs
