@@ -928,7 +928,6 @@ class BillingController extends Controller
 
     public function checkBilling()
     {
-        echo "what";
         //look for billings marked for a checker queue
         $billings = Billing::where('billing_status', 2) //2 muna ginamit ko meaning naka queue
             ->get();
