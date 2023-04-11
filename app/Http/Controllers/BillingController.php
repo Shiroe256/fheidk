@@ -940,7 +940,7 @@ class BillingController extends Controller
             //set billing status but not save it yet. IF there are no errors ayun
 
             //get students of each billing transaction
-            $students[] = TemporaryBilling::where('reference_no', $reference_no)->first();
+            $students = TemporaryBilling::where('reference_no', $reference_no)->get();
             // echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
