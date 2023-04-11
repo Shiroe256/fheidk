@@ -805,7 +805,7 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
 
         $tempstudent = new TemporaryBilling;
-        $tempstudent->fhe_award_no = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateFHEAwardNo($hei_uii,$count);
+        $tempstudent->fhe_award_no = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateFHEAwardNo($hei_uii, $count);
         $tempstudent->stud_id = array_key_exists('stud_no', $data) ? $data['stud_no'] : '';
         $tempstudent->lrn_no = array_key_exists('lrnum', $data) ? $data['lrnum'] : '';
         $tempstudent->stud_lname = array_key_exists('last_name', $data) ? $data['last_name'] : '';
@@ -935,6 +935,7 @@ class BillingController extends Controller
         //check each student of each billing
         foreach ($billings as $billing) {
             $reference_no = $billing['reference_no'];
+            echo $reference_no;
             //when the billing has been checked. Save it with a new status.
             $billing->billing_status = 3; //3 is done queue
             //set billing status but not save it yet. IF there are no errors ayun
@@ -943,6 +944,7 @@ class BillingController extends Controller
             $students = TemporaryBilling::where('reference_no', $reference_no)->orderBy('uid')->get();
             //check each student in billing transaction for duplciates in fhe award number
 
+            print_r($students);
             foreach ($students as $student) {
                 // select student for later updates
                 // $student = TemporaryBilling::find($student['uid']);
