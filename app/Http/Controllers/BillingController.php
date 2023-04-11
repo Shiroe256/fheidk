@@ -945,8 +945,8 @@ class BillingController extends Controller
             // echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
-
-            print_r($students);
+            echo "hello";
+            var_dump($students);
             foreach ($students as $student) {
                 // select student for later updates
                 // $student = TemporaryBilling::find($student['uid']);
