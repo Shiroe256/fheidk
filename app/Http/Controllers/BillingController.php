@@ -791,11 +791,11 @@ class BillingController extends Controller
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         //!validation has now been passed to the middleware
-
+        $added = 0;
         foreach ($tempstudents as $key => $tempstudent) {
-            $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
+            $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         }
-        return response('Success', 200);
+        echo $added;
         // echo 'ok';
     }
 
@@ -871,7 +871,7 @@ class BillingController extends Controller
         $tempstudent->tranche = $billinginfo['tranche'];
         $tempstudent->app_id = $this->generateAppID($count);
 
-        $tempstudent->save();
+        return $tempstudent->save();
     }
 
 
