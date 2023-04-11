@@ -935,17 +935,15 @@ class BillingController extends Controller
         //check each student of each billing
         foreach ($billings as $billing) {
             $reference_no = $billing['reference_no'];
-            echo $reference_no;
             //when the billing has been checked. Save it with a new status.
-            
+
             //set billing status but not save it yet. IF there are no errors ayun
-            
+
             //get students of each billing transaction
-            $students = TemporaryBilling::all();
+            $students[] = TemporaryBilling::where('reference_no', $reference_no)->first();
             // echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
-            echo "hello";
             var_dump($students);
             foreach ($students as $student) {
                 // select student for later updates
