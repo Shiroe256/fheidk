@@ -942,7 +942,7 @@ class BillingController extends Controller
 
             //get students of each billing transaction
             $students = TemporaryBilling::where('reference_no','=', $reference_no)->orderBy('uid')->count();
-            echo count($students);
+            echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
 
