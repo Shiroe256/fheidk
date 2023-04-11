@@ -48,11 +48,6 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
 
-        //verification
-        // if ($hei_uii != $this->getHeiUiiOfBilling($reference_no)) {
-        //     return response('Unauthorized', 401);
-        // }
-
         $students = DB::table('tbl_billing_details_temp')
             ->select(
                 'tbl_billing_details_temp.*',
