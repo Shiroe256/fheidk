@@ -13,7 +13,16 @@
                     <li class="nav-item">
                         <div class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="nav-link" href="#">Carlo molina&nbsp;</a>
                             <div class="dropdown-menu"><a class="dropdown-item navbar-dropdown" data-toggle="modal" data-target="#modal_profile" href="#"><i class="fas fa-user"></i>&nbsp; &nbsp;Profile</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item navbar-dropdown" href="index.php"><i class="fas fa-sign-out-alt"></i>&nbsp; &nbsp;Log out</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
+                                {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                             </div>
                         </div>
                     </li>
