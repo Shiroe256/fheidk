@@ -90,7 +90,35 @@
                                             <td>{{ $billing->reference_no }}</td>
                                             <td class="text-right">{{ $billing->total_beneficiaries }}</td>
                                             <td class="text-right">{{ $billing->total_amount }}</td>
-                                            <td>{{ $billing->billing_status }}</td>
+                                            
+                                            <td>
+                                            <?php
+                                                if($billing->billing_status==1):?>
+                                            <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
+                                            <?php
+                                                elseif ($billing->billing_status==2):?>
+                                            <span class="badge badge-pill badge-info span-size">Ongoing Validation, please return once done</span>
+                                            <?php
+                                                elseif ($billing->billing_status==3):?>
+                                            <span class="badge badge-pill badge-primary span-size">Done Validating: Ready For Submission</span>
+                                            <?php
+                                                elseif ($billing->billing_status==4):?>
+                                            <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
+                                            <?php
+                                                elseif ($billing->billing_status==5):?>
+                                            <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing Unit</span>
+                                            <?php
+                                                elseif ($billing->billing_status==6):?>
+                                            <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Admin Unit</span>
+                                            <?php
+                                                elseif ($billing->billing_status==7):?>
+                                            <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                                            <?php
+                                                elseif ($billing->billing_status==8):?>
+                                            <span class="badge badge-pill badge-success span-size">Disbursed</span>
+                                            <?php
+                                                endif;?>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"></i>View</a>
                                             </td>
