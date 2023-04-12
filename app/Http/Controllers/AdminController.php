@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Billing;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,9 +25,9 @@ class AdminController extends Controller
         return view('admin.form3');
     }
 
-    public function managebillinglist(){
-        return view('admin.manage-billing-list');
-    }
+    // public function managebillinglist(){
+    //     return view('admin.manage-billing-list');
+    // }
 
     public function managebillingpage(){
         return view('admin.manage-billing-page');
@@ -37,6 +39,13 @@ class AdminController extends Controller
 
     public function manageuserpage(){
         return view('admin.manage-users-page');
+    }
+
+    public function managebillinglist()
+    {
+        $billings = Billing::all();
+
+        return view('admin.manage-billing-list', compact('billings'));
     }
     
 }

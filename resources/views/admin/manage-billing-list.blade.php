@@ -84,106 +84,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>I- Ilocos Region</td>
-                                        <td>Ilocos Sur Polytechnic College</td>
-                                        <td>01-01040-2021-2022-1</td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456</td>
-                                        <td class="text-right">100,000,000.00</td>
-                                        <td><span class="badge badge-pill badge-success billing-status-badge">Paid via LDDAP-ADA<br></span></td>
-                                        <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="manage-billing-hei-submission-page.php">View</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>II- Cagayan Valley<br></td>
-                                        <td>University of Eastern Pangasinan<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">10,000,000.00</td>
-                                        <td><span class="badge badge-pill badge-primary billing-status-badge">Pre-audit of CHED AFMS<br></span></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>III- Central Luzon<br></td>
-                                        <td>Binalatongan Community College<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">1,000,000.00</td>
-                                        <td><span class="badge badge-pill badge-danger billing-status-badge">With Compliance Issues<br></span></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>IV- Calabarzon<br></td>
-                                        <td>Gordon College<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">100,000,00</td>
-                                        <td><span class="badge badge-pill badge-warning billing-status-badge">Pre-audit of UniFAST Secretariat<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>V- Bicol Region<br></td>
-                                        <td>Limay Polytechnic College<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">10,000.00</td>
-                                        <td><span class="badge badge-pill badge-success billing-status-badge">Paid via LDDAP-ADA<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>VI- Western Visayas<br></td>
-                                        <td>Kolehiyo ng Subic<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">1,000.00</td>
-                                        <td><span class="badge badge-pill badge-warning billing-status-badge">Pre-audit of UniFAST Secretariat<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>VII- Central Visayas</td>
-                                        <td>Airi Satou</td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">100.00</td>
-                                        <td><span class="badge badge-pill badge-success billing-status-badge">Paid via LDDAP-ADA<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>VIII- Eastern Visayas<br></td>
-                                        <td>Eduardo L. Joson Memorial College<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">10.00</td>
-                                        <td><span class="badge badge-pill badge-primary billing-status-badge">Pre-audit of CHED AFMS<br></span><br><span class="badge badge-pill badge-primary billing-status-badge"></span></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>IX- Zamboanga Peninsula<br></td>
-                                        <td>Mabalacat City College<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">1.00</td>
-                                        <td><span class="badge badge-pill badge-success billing-status-badge">Paid via LDDAP-ADA<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>X- Cagayan de Oro<br></td>
-                                        <td>Polytechnic College of the City of Meycauayan<br></td>
-                                        <td>01-01040-2021-2022-1<br></td>
-                                        <td>2008/11/28<br></td>
-                                        <td class="text-right">123,456<br></td>
-                                        <td class="text-right">10.00</td>
-                                        <td><span class="badge badge-pill badge-danger billing-status-badge">With Compliance Issues<br></span><br></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button">View</button></td>
-                                    </tr>
+                                    @foreach ($billings as $billing)
+                                        <tr>
+                                            <td>{{ $billing->reference_no }}</td>
+                                            <td>{{ $billing->hei->hei_name }}</td>
+                                            <td>{{ $billing->ac_year }}</td>
+                                            <td>{{ $billing->semester }}</td>
+                                            <td>{{ $billing->tranche }}</td>
+                                            <td>{{ $billing->total_beneficiaries }}</td>
+                                            <td>{{ $billing->total_amount }}</td>
+                                            <td>{{ $billing->billing_status }}</td>
+                                            <td>{{ $billing->created_by }}</td>
+                                            <td>{{ $billing->created_at }}</td>
+                                            <td>
+                                                <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>

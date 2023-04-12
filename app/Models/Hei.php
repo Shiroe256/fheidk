@@ -13,4 +13,10 @@ class Hei extends Model implements Auditable
     protected $table = 'tbl_heis';
     protected $primaryKey = 'uid';
     public $timestamps = false;
+    protected $fillable = [
+        'hei_psg_region',
+        'hei_sid',
+        'hei_uii',
+        'hei_name',
+    ];
 }

@@ -27,4 +27,9 @@ class Billing extends Model implements Auditable
         'created_by'
     ];
 
+    public function hei()
+    {
+        return $this->belongsTo(Hei::class, 'hei_uii', 'hei_uii');
+    }
+
 }
