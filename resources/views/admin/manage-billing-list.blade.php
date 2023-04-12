@@ -85,7 +85,7 @@
                                 <tbody>
                                     @foreach ($billings as $billing)
                                         <tr>
-                                            <td>{{ $billing->hei_psg_region }}</td>
+                                            <td>{{ $billing->hei->hei_region_nir }}</td>
                                             <td>{{ $billing->hei->hei_name }}</td>
                                             <td>{{ $billing->reference_no }}</td>
                                             <td class="text-right">{{ $billing->total_beneficiaries }}</td>
