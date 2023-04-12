@@ -92,7 +92,7 @@
                                             <td>{{ $billing->total_amount }}</td>
                                             <td>{{ $billing->billing_status }}</td>
                                             <td>
-                                                <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"></i></a>
+                                                <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"></i>View</a>
                                             </td>
                                         </tr>
                                     @endforeach
