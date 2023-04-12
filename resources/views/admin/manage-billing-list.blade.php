@@ -76,7 +76,6 @@
                                         <th>REGION</th>
                                         <th>HEI NAME</th>
                                         <th>REFERENCE NO.</th>
-                                        <th><strong>DATE OF BILLING</strong><br></th>
                                         <th class="text-right">BENEFICIARIES</th>
                                         <th class="text-right">AMOUNT</th>
                                         <th>STATUS</th>
@@ -86,18 +85,14 @@
                                 <tbody>
                                     @foreach ($billings as $billing)
                                         <tr>
-                                            <td>{{ $billing->reference_no }}</td>
+                                            <td>{{ $billing->hei_psg_region }}</td>
                                             <td>{{ $billing->hei->hei_name }}</td>
-                                            <td>{{ $billing->ac_year }}</td>
-                                            <td>{{ $billing->semester }}</td>
-                                            <td>{{ $billing->tranche }}</td>
+                                            <td>{{ $billing->reference_no }}</td>
                                             <td>{{ $billing->total_beneficiaries }}</td>
                                             <td>{{ $billing->total_amount }}</td>
                                             <td>{{ $billing->billing_status }}</td>
-                                            <td>{{ $billing->created_by }}</td>
-                                            <td>{{ $billing->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill"></i></a>
+                                                <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -107,7 +102,6 @@
                                         <td><strong>REGION</strong><br></td>
                                         <td><strong>HEI NAME</strong><br></td>
                                         <td><strong>REFERENCE NO.</strong><br></td>
-                                        <td><strong>DATE OF BILLING</strong></td>
                                         <td class="text-right"><strong>BENEFICIARIES</strong></td>
                                         <td class="text-right"><strong>AMOUNT</strong></td>
                                         <td><strong>STATUS</strong></td>
