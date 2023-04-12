@@ -70,7 +70,7 @@
                                                 <option value="8">Disbursed</option>
                                             </optgroup>
                                         </select></div>
-                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search" class="btn btn-outline-info btn-block border rounded-pill border-info" type="button"><i class="fas fa-search"></i>Search</button></div>
+                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search" class="btn btn-outline-info btn-block border rounded-pill border-info" type="button" onclick="searchBilling()"><i class="fas fa-search"></i>Search</button></div>
                                 </div>
                             </div>
                         </form>
