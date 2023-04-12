@@ -88,8 +88,8 @@
                                             <td>{{ $billing->hei_psg_region }}</td>
                                             <td>{{ $billing->hei->hei_name }}</td>
                                             <td>{{ $billing->reference_no }}</td>
-                                            <td>{{ $billing->total_beneficiaries }}</td>
-                                            <td>{{ $billing->total_amount }}</td>
+                                            <td class="text-right">{{ $billing->total_beneficiaries }}</td>
+                                            <td class="text-right">{{ $billing->total_amount }}</td>
                                             <td>{{ $billing->billing_status }}</td>
                                             <td>
                                                 <a href="{{ route('managebillingpage', $billing->uid) }}" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"></i>View</a>
