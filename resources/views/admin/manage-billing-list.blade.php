@@ -41,36 +41,41 @@
                         <h6 class="font-weight-bold m-0">List of Billings</h6>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="manage_billing_list_form">
                             <div class="form-group">
                                 <div class="form-row">
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Academic Year</label><select class="form-control">
-                                            <optgroup label="This is a group">
-                                                <option value="12" selected="">This is item 1</option>
-                                                <option value="13">This is item 2</option>
-                                                <option value="14">This is item 3</option>
+                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Academic Year</label>
+                                        <select class="form-control" id="select_ac_year">
+                                            <optgroup label="--Select Academic Year--">
+                                                <option value="All" selected="">All</option>
+                                                <option value="2022-2023">2022-2023</option>
                                             </optgroup>
                                         </select></div>
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Semester</label><select class="form-control">
-                                            <optgroup label="This is a group">
-                                                <option value="12" selected="">This is item 1</option>
-                                                <option value="13">This is item 2</option>
-                                                <option value="14">This is item 3</option>
+                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Semester</label>
+                                        <select class="form-control"  id="select_semester">
+                                            <optgroup label="--Select Semester--">
+                                                <option value="All" selected="">All</option>
+                                                <option value="1st">1st</option>
+                                                <option value="2nd">2nd</option>
+                                                <option value="3rd">3rd</option>
                                             </optgroup>
                                         </select></div>
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Billing Status</label><select class="form-control">
-                                            <optgroup label="This is a group">
-                                                <option value="12" selected="">This is item 1</option>
-                                                <option value="13">This is item 2</option>
-                                                <option value="14">This is item 3</option>
+                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Billing Status</label>
+                                        <select class="form-control"  id="select_billing_status">
+                                            <optgroup label="--Select Billing Status--">
+                                                <option value="All" selected="">All</option>
+                                                <option value="5">Submitted to UniFAST: Billing Unit</option>
+                                                <option value="6">Submitted to UniFAST: Admin Unit</option>
+                                                <option value="7">Submitted to CHED-AFMS</option>
+                                                <option value="8">Disbursed</option>
                                             </optgroup>
                                         </select></div>
-                                    <div class="col align-self-end mb-2"><button class="btn btn-outline-info btn-block border rounded-pill border-info" type="button"><i class="fas fa-search"></i>Search</button></div>
+                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search" class="btn btn-outline-info btn-block border rounded-pill border-info" type="button"><i class="fas fa-search"></i>Search</button></div>
                                 </div>
                             </div>
                         </form>
                         <div class="table-responsive table-bordered table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                            <table class="table table-bordered my-0" id="dataTable">
+                            <table class="table table-bordered my-0" id="tbl_manage_billing_list">
                                 <thead>
                                     <tr>
                                         <th>REGION</th>

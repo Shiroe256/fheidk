@@ -38,6 +38,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 <script src="{{url('admin\js\theme.js')}}"></script>
 <script src="{{url('admin\js\showPassword.js')}}"></script>
+<script src="{{url('admin\js\search.js')}}"></script>
 </body>
 
 </html>

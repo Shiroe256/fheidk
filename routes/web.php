@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
 
@@ -108,8 +109,11 @@ Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name(
 Route::get('form1', 'App\Http\Controllers\AdminController@form1')->name('form1');
 Route::get('form2', 'App\Http\Controllers\AdminController@form2')->name('form2');
 Route::get('form3', 'App\Http\Controllers\AdminController@form3')->name('form3');
-Route::get('managebillinglist', 'App\Http\Controllers\AdminController@managebillinglist')->name('managebillinglist');
+// Route::get('managebillinglist', 'App\Http\Controllers\AdminController@managebillinglist')->name('managebillinglist');
 Route::get('managebillingpage', 'App\Http\Controllers\AdminController@managebillingpage')->name('managebillingpage');
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 Route::get('manageuserpage', 'App\Http\Controllers\AdminController@manageuserpage')->name('manageuserpage');
+
+Route::get('/manage-billing', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
+// Route::post('/manage-billing/search', [AdminController::class, 'search'])->name('billing.search');
 });
