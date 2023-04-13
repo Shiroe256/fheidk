@@ -21,7 +21,7 @@ function searchBilling() {
       success: function(response) {
         alert(3);
         // Update the table with the retrieved data
-        $('#dataTable').html(response);
+        $('#tbl_manage_billing_list').html(response);
       }
     });
   }
