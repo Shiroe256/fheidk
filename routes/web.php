@@ -115,5 +115,5 @@ Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageusersl
 Route::get('manageuserpage', 'App\Http\Controllers\AdminController@manageuserpage')->name('manageuserpage');
 
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
-Route::post('/search', [AdminController::class, 'search'])->name('managebillingsearch');
+Route::post('/search', [AdminController::class, 'search']);
 });
