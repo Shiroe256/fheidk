@@ -8,7 +8,7 @@ function searchBilling() {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    
+
     // Send AJAX request to the server
     $.ajax({
       url: "/admin/search",
@@ -17,7 +17,6 @@ function searchBilling() {
         ac_year: acYear,
         semester: semester,
         billing_status: billingStatus,
-        _token: "{{ csrf_token() }}"
       },
       success: function(response) {
         alert(3);
