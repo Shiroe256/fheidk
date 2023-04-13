@@ -11,4 +11,5 @@
     <link rel="stylesheet" href="{{url('admin\fonts\fontawesome-all.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="{{url('admin\css\style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
