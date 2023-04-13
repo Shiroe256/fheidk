@@ -2,8 +2,13 @@ function searchBilling() {
     var acYear = document.getElementById("select_ac_year").value;
     var semester = document.getElementById("select_semester").value;
     var billingStatus = document.getElementById("select_billing_status").value;
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
     
-    alert(1);
     // Send AJAX request to the server
     $.ajax({
       url: "/admin/search",
