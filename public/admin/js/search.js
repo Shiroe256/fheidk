@@ -3,6 +3,7 @@ function searchBilling() {
     var semester = document.getElementById("select_semester").value;
     var billingStatus = document.getElementById("select_billing_status").value;
     
+    alert(1);
     // Send AJAX request to the server
     $.ajax({
       url: "admin/search",
@@ -14,6 +15,7 @@ function searchBilling() {
         _token: "{{ csrf_token() }}"
       },
       success: function(response) {
+        alert(3);
         // Update the table with the retrieved data
         $('#tbl_manage_billing_list').html(response);
       }
