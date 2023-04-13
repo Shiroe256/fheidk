@@ -6,7 +6,7 @@ function searchBilling() {
     alert(1);
     // Send AJAX request to the server
     $.ajax({
-      url: "admin/search",
+      url: "/search",
       type: "POST",
       data: {
         ac_year: acYear,
