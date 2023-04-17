@@ -29,9 +29,9 @@ class AdminController extends Controller
         return view('admin.form3');
     }
 
-    public function managebillinglist(){
-        return view('admin.manage-billing-list');
-    }
+    // public function managebillinglist(){
+    //     return view('admin.manage-billing-list');
+    // }
 
     public function managebillingpage()
     {
@@ -48,12 +48,12 @@ class AdminController extends Controller
         return view('admin.manage-users-page');
     }
 
-    // public function managebillinglist()
-    // {
-    //     $billings = Billing::all();
+    public function managebillinglist()
+    {
+        $billings = Billing::all();
 
-    //     return view('admin.manage-billing-list', compact('billings'));
-    // }
+        return view('admin.manage-billing-list', compact('billings'));
+    }
 
     public function search(Request $request)
     {
