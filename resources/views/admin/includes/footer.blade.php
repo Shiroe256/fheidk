@@ -40,6 +40,7 @@
 <script src="{{url('admin\js\theme.js')}}"></script>
 <script src="{{url('admin\js\showPassword.js')}}"></script>
 <script src="{{url('admin\js\search.js')}}"></script>
+<script src="{{url('admin\js\billinglist.js')}}"></script>
 </body>
 
 </html>
