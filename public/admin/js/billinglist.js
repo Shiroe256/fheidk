@@ -1,4 +1,4 @@
-// fetchBillingListAdmin()
+fetchBillingListAdmin()
 
 //fetch records from the database
 function fetchBillingListAdmin() {
