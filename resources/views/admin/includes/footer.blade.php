@@ -31,6 +31,7 @@
     </div>
 </footer>
 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script src="{{url('admin\js\jquery.min.js')}}"></script>
 <script src="{{url('admin\bootstrap\js\bootstrap.min.js')}}"></script>
 <script src="{{url('admin\js\chart.min.js')}}"></script>
