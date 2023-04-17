@@ -64,17 +64,18 @@ class AdminController extends Controller
         // Query the database to retrieve the data based on the selected values
         $billings = Billing::where(function ($query) use ($acYear) {
             if ($acYear != 'All') {
-                $query->where('ac_year', '=', $acYear);
+                // $query->where('ac_year', '=', $acYear);
+                $query->where('ac_year', '=', '2021-2022');
             }
         })
             ->where(function ($query) use ($semester) {
                 if ($semester != 'All') {
-                    $query->where('semester', '=', $semester);
+                    $query->where('semester', '=', 1);
                 }
             })
             ->where(function ($query) use ($billingStatus) {
                 if ($billingStatus != 'All') {
-                    $query->where('billing_status', '=', $billingStatus);
+                    $query->where('billing_status', '=', 3);
                 }
             })
             ->get();
