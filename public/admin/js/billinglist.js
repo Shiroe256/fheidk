@@ -9,7 +9,9 @@ function fetchBillingListAdmin() {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        $("#tbl_billing_list_admin").html(response);
+        const tbl_billing_list_admin = document.getElementById('tbl_billing_list_admin');
+        tbl_billing_list_admin.innerHTML(response);
+        // $("#tbl_billing_list_admin").html(response);
         $("#tbl_manage_billing_list").DataTable({
           "order": [[0, "asc"]],
           orderCellsTop: true,
