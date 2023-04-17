@@ -48,6 +48,8 @@
                                         <select class="form-control" id="select_ac_year">
                                             <optgroup label="--Select Academic Year--">
                                                 <option value="All" selected="">All</option>
+                                                <option value="2022-2023">2020-2021</option>
+                                                <option value="2022-2023">2021-2022</option>
                                                 <option value="2022-2023">2022-2023</option>
                                             </optgroup>
                                         </select></div>
@@ -64,6 +66,10 @@
                                         <select class="form-control"  id="select_billing_status">
                                             <optgroup label="--Select Billing Status--">
                                                 <option value="All" selected="">All</option>
+                                                <option value="1">Open for Billing Uploads</option>
+                                                <option value="2">Ongoing Validation, please return once done</option>
+                                                <option value="3">Done Validating: Ready For Submission</option>
+                                                <option value="4">Done Validating: For Review</option>
                                                 <option value="5">Submitted to UniFAST: Billing Unit</option>
                                                 <option value="6">Submitted to UniFAST: Admin Unit</option>
                                                 <option value="7">Submitted to CHED-AFMS</option>
