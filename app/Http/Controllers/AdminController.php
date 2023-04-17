@@ -48,7 +48,7 @@ class AdminController extends Controller
         return view('admin.manage-users-page');
     }
     
-    public function manageBillingListPage()
+    public function managebillinglist()
     {
         return view('admin.manage-billing-list');
     }
