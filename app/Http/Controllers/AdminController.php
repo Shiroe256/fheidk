@@ -29,9 +29,9 @@ class AdminController extends Controller
         return view('admin.form3');
     }
 
-    // public function managebillinglist(){
-    //     return view('admin.manage-billing-list');
-    // }
+    public function managebillinglist(){
+        return view('admin.manage-billing-list');
+    }
 
     public function managebillingpage()
     {
