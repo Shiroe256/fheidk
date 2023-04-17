@@ -48,8 +48,8 @@
                                         <select class="form-control" id="select_ac_year">
                                             <optgroup label="--Select Academic Year--">
                                                 <option value="All" selected="">All</option>
-                                                <option value="2022-2023">2020-2021</option>
-                                                <option value="2022-2023">2021-2022</option>
+                                                <option value="2020-2021">2020-2021</option>
+                                                <option value="2021-2022">2021-2022</option>
                                                 <option value="2022-2023">2022-2023</option>
                                             </optgroup>
                                         </select></div>
