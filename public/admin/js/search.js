@@ -21,25 +21,25 @@ function searchBilling() {
   });
 }
 
-function fetchTempStudent() {
-  let reference_no = $("#reference_no").val();
-  $.ajax({
-    url: "/get-tempstudents",
-    method: 'get',
-    data: {
-      reference_no: reference_no,
-      _token: '{{ csrf_token() }}'
-    },
-    success: function (response) {
-      $("#show_all_students").html(response);
-      $("#tbl_students").DataTable({
-        "order": [[3, "asc"]],
-        orderCellsTop: true,
-        fixedHeader: true,
-        columnDefs: [
-          { orderable: false, targets: [0, -1] }
-        ]
-      });
-    }
-  });
-}
+// function fetchTempStudent() {
+//   let reference_no = $("#reference_no").val();
+//   $.ajax({
+//     url: "/get-tempstudents",
+//     method: 'get',
+//     data: {
+//       reference_no: reference_no,
+//       _token: '{{ csrf_token() }}'
+//     },
+//     success: function (response) {
+//       $("#show_all_students").html(response);
+//       $("#tbl_students").DataTable({
+//         "order": [[3, "asc"]],
+//         orderCellsTop: true,
+//         fixedHeader: true,
+//         columnDefs: [
+//           { orderable: false, targets: [0, -1] }
+//         ]
+//       });
+//     }
+//   });
+// }
