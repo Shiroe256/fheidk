@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('manageBillingListPage')}}">Manage Billing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('managebillinglist')}}">Manage Billing</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('manageuserslist')}}">Manage users</a></li>
                 </ul>
                 <ul class="navbar-nav">
