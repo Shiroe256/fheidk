@@ -47,8 +47,13 @@ class AdminController extends Controller
     {
         return view('admin.manage-users-page');
     }
+    
+    public function manageBillingListPage()
+    {
+        return view('admin.manage-billing-list');
+    }
 
-    public function managebillinglist()
+    public function fetchbillinglist()
     {
         $billings = Billing::all();
             

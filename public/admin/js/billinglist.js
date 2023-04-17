@@ -3,7 +3,7 @@
 //fetch records from the database
 function fetchBillingListAdmin() {
     $.ajax({
-      url: "/admin/managebillinglist",
+      url: "/admin/fetchbillinglist",
       method: 'get',
       data: {
         _token: '{{ csrf_token() }}'
