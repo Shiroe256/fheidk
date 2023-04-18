@@ -46,8 +46,8 @@
                             <div class="col-xl-12 offset-xl-0">
                                 <section class="clean-block payment-form">
                                     <div class="container-fluid">
-                                        <div class="table-responsive table-bordered table mt-2" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table table-bordered">
+                                        <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+                                            <table class="table table-bordered table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>BILLING DOCUMENTS</th>
