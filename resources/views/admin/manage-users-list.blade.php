@@ -62,7 +62,7 @@
                                         <td>09120799371<br></td>
                                         <td><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">cmolina.unifast@ched.gov.ph</a></td>
                                         <td><span class="text-success"><i class="fas fa-circle"></i>&nbsp;Online</span></td>
-                                        <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="manage-users-page.php">View</a></td>
+                                        <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="{{route('manageuserspage')}}">View</a></td>
                                     </tr>
                                     <tr>
                                         <td>II- Cagayan Valley</td>
