@@ -31,11 +31,6 @@
     </div>
 </footer>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-
-<!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{url('admin\js\jquery.min.js')}}"></script>
 <script src="{{url('admin\bootstrap\js\bootstrap.min.js')}}"></script>
 <script src="{{url('admin\js\chart.min.js')}}"></script>
