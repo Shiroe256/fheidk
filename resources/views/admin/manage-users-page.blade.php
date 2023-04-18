@@ -93,7 +93,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="assets/img/29513133_2090719884273325_673072045147924405_n.jpg" width="200" height="200"></div>
+                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="{{url('admin/img/29513133_2090719884273325_673072045147924405_n.jpg')}}" width="200" height="200"></div>
                                     <div class="col-lg-7 col-xl-7">
                                         <form>
                                             <div class="form-group">
@@ -131,7 +131,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="assets/img/293228345_5209578979160533_6724701494728557606_n.jpg" width="200" height="200"></div>
+                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="{{url('admin/img/293228345_5209578979160533_6724701494728557606_n.jpg')}}" width="200" height="200"></div>
                                     <div class="col-lg-7 col-xl-7">
                                         <form>
                                             <div class="form-group">
