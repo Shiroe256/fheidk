@@ -15,10 +15,7 @@ function fetchBillingListAdmin() {
         $("#tbl_manage_billing_list").DataTable({
           "order": [[0, "asc"]],
           orderCellsTop: true,
-          fixedHeader: true,
-          columnDefs: [
-            { orderable: false, targets: [0, -1] }
-          ]
+          fixedHeader: true
         });
       }
     });
@@ -50,10 +47,7 @@ function fetchBillingListAdmin() {
         $("#tbl_manage_billing_list").DataTable({
           "order": [[0, "asc"]],
           orderCellsTop: true,
-          fixedHeader: true,
-          columnDefs: [
-            { orderable: false, targets: [0, -1] }
-          ]
+          fixedHeader: true
         });
       }
     });
