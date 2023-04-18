@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col text-center"><img class="rounded-circle" src="assets/img/293228345_5209578979160533_6724701494728557606_n.jpg" width="150" height="150"></div>
+                            <div class="col text-center"><img class="rounded-circle" src="{{url('admin/img/293228345_5209578979160533_6724701494728557606_n.jpg')}}" width="150" height="150"></div>
                         </div>
                         <div class="form-row mt-3">
                             <div class="col text-center">
