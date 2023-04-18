@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="table-responsive table-bordered table mt-2" id="tbl_billing_list_admin" role="grid" aria-describedby="dataTable_info">
+                        <div class="table-responsive table mt-2" id="tbl_billing_list_admin" role="grid" aria-describedby="dataTable_info">
                             <!---Billing List Here--->
                         </div>
                     </div>
