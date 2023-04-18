@@ -86,7 +86,7 @@
                                                         <td><span class="badge badge-pill badge-danger billing-status-badge">Rejected</span></td>
                                                         <td>Did not match with the submitted hard copy</td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_2" title="View Scanned Copy"><i class="far fa-file-alt"></i></button></div>
+                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bss-tooltip="" type="button" data-bs-target="#modal_form_2" title="View Scanned Copy"><i class="far fa-file-alt"></i></button></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
