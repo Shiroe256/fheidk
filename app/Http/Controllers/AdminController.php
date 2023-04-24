@@ -220,7 +220,7 @@ class AdminController extends Controller
 
     public function fetchmanagebillingpage(Request $request)
     {
-        $billing_record_id = $request->_id;
+        $billing_record_id = $request->id;
 
         // Query the database to retrieve the data based on the selected values
         $billings = Billing::where('id', $billing_record_id)
