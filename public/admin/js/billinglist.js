@@ -99,7 +99,7 @@ function fetchBillingListAdmin() {
       data: {
         uid: uid,
       },
-      success: function (response) {
+      success: function (data) {
         // // Update the table with the retrieved data
         // $("#tbl_billing_list_admin").html(response);
         // $("#tbl_manage_billing_list").DataTable({
@@ -107,7 +107,7 @@ function fetchBillingListAdmin() {
         //   orderCellsTop: true,
         //   fixedHeader: true
         // });
-        alert(response);
+        console.log(data);
       }
     });
   });
