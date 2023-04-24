@@ -101,7 +101,7 @@ class AdminController extends Controller
     
                 $output .= '</td>
                     <td>
-                        <a href="' . route("managebillingpage", $billing->uid) . '" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                        <a href="' . route("managebillingpage") . '" id="'.$billing->uid.'" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
                     </td>
                 </tr>';
             }
@@ -126,27 +126,10 @@ class AdminController extends Controller
 
     public function managebillinglistsearch(Request $request)
     {
-        $acYear = $request->input('ac_year');
-        $semester = $request->input('semester');
-        $billingStatus = $request->input('billing_status');
+        $id = $request->btn_view_billing;
 
         // Query the database to retrieve the data based on the selected values
-        $billings = Billing::where(function ($query) use ($acYear) {
-            if ($acYear != 'All') {
-                // $query->where('ac_year', '=', $acYear);
-                $query->where('ac_year', '=', $acYear);
-            }
-        })
-            ->where(function ($query) use ($semester) {
-                if ($semester != 'All') {
-                    $query->where('semester', '=', $semester);
-                }
-            })
-            ->where(function ($query) use ($billingStatus) {
-                if ($billingStatus != 'All') {
-                    $query->where('billing_status', '=', $billingStatus);
-                }
-            })
+        $billings = Billing::where('id', $id)
             ->get();
             
             $output = '';

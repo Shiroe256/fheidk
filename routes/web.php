@@ -110,11 +110,14 @@ Route::get('form1', 'App\Http\Controllers\AdminController@form1')->name('form1')
 Route::get('form2', 'App\Http\Controllers\AdminController@form2')->name('form2');
 Route::get('form3', 'App\Http\Controllers\AdminController@form3')->name('form3');
 // Route::get('managebillinglist', 'App\Http\Controllers\AdminController@managebillinglist')->name('managebillinglist');
-Route::get('managebillingpage', 'App\Http\Controllers\AdminController@managebillingpage')->name('managebillingpage');
+// Route::get('managebillingpage', 'App\Http\Controllers\AdminController@managebillingpage')->name('managebillingpage');
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 Route::get('manageuserpage', 'App\Http\Controllers\AdminController@manageuserpage')->name('manageuserpage');
 
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
 Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
+
+Route::get('/managebillingpage', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
+Route::get('/fetchbillingpage', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
 });
