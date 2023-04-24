@@ -103,7 +103,7 @@ class AdminController extends Controller
                     <td>
                         <a href="' . route("managebillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
 
-                        <button onclick="fetchBillingPageAdmin()" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button"><i class="fas fa-eye"></i>View</button>
+                        <button onclick="fetchBillingPageAdmin()" id="' . $billing->uid . '" name="btn_view_billing_test" class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button"><i class="fas fa-eye"></i>View</button>
                     </td>
                 </tr>';
             }
@@ -225,6 +225,8 @@ class AdminController extends Controller
         // Query the database to retrieve the data based on the selected values
         $billings = Billing::where('id', $billing_record_id)
             ->get();
+
+            return view('listofbillings', $billings);
 
         // $output = '';
         // if ($billings->count() > 0) {
