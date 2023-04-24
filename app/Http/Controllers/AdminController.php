@@ -225,8 +225,8 @@ class AdminController extends Controller
         // Query the database to retrieve the data based on the selected values
         $billings = Billing::where('uid', $billing_record_id)
             ->get();
-
-            return view('admin.manage-billing-page', $billings);
+            $data['billings'] = $billings;
+            return view('admin.manage-billing-page', $data);
 
         // $output = '';
         // if ($billings->count() > 0) {

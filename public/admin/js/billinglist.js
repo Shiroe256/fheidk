@@ -107,7 +107,7 @@ function fetchBillingListAdmin() {
         //   orderCellsTop: true,
         //   fixedHeader: true
         // });
-        alert();
+        alert(response);
       }
     });
   });
