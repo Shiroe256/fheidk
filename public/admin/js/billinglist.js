@@ -85,4 +85,5 @@ function fetchBillingListAdmin() {
   $(document).on('click', '#btn_view_billing_test', function (e) {
     e.preventDefault();
     let id = $(this).attr("id");
+    console.log(id);
   });
