@@ -100,14 +100,14 @@ function fetchBillingListAdmin() {
         id: id,
       },
       success: function (response) {
-        // Update the table with the retrieved data
-        $("#tbl_billing_list_admin").html(response);
-        $("#tbl_manage_billing_list").DataTable({
-          "order": [[0, "asc"]],
-          orderCellsTop: true,
-          fixedHeader: true
-        });
-
+        // // Update the table with the retrieved data
+        // $("#tbl_billing_list_admin").html(response);
+        // $("#tbl_manage_billing_list").DataTable({
+        //   "order": [[0, "asc"]],
+        //   orderCellsTop: true,
+        //   fixedHeader: true
+        // });
+        alert();
       }
     });
   });
