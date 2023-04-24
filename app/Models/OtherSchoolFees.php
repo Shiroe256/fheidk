@@ -23,6 +23,7 @@ class OtherSchoolFees extends Model implements Auditable
         'type_of_fee',
         'category',
         'coverage',
+        'is_optional',
         'amount'
     ];
 }

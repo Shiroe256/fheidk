@@ -12,6 +12,9 @@ function fetchTempSummary() {
       },
       success: function (response) {
         $(".show_summary").html(response);
+        $("#show_summary_for_billing").html(response); //dinagdag ko para dun sa billing summary
+        //hide placeholder
+        document.getElementById("summary_placeholder").classList.add("d-none");
         $(".tbl_summary").DataTable({
           "order": [[3, "des"]],
           orderCellsTop: true,

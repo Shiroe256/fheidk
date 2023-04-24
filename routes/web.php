@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 
 
@@ -49,7 +50,7 @@ Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newB
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
-Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagement']);
+Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('checkUserHei');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
@@ -57,16 +58,16 @@ Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name(
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');
 
 //route for login
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Enrolled
 Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
-Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent');
-Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
+Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent');
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
-Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent');
-Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');
+Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
+Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent')->middleware('checkUserHei');
 
 //Autocomplete textbox
 Route::get('/get-tuitionfee', [BillingController::class, 'findTuitionFee'])->name('findTuitionFee');
@@ -77,9 +78,18 @@ Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('fin
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
 Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
 
-//Test
+//Student Settings
+//middleware for thottling (limit requests to 20 per min) and authentication
+Route::middleware(['throttle:20,1'])->group(function () {
+    Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
+    Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
+    Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
+    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
+});
+
+//test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test', function (){
+Route::get('/test', function () {
     return view('afms/dashboard');
 });
 
@@ -121,3 +131,6 @@ Route::post('/managebillinglistsearch', [AdminController::class, 'managebillingl
 Route::get('/managebillingpage', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
 Route::get('/fetchbillingpage', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
 });
+
+//pdf shit
+Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
