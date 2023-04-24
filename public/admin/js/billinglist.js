@@ -54,7 +54,7 @@ function fetchBillingListAdmin() {
   }
 
   function fetchBillingPageAdmin() {
-    let id = document.getElementById("btn_view_billing_test");
+    let id = document.getElementsByName("btn_view_billing_test");
     console.log(id);
     // $.ajaxSetup({
     //   headers: {
