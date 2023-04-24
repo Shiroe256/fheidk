@@ -55,7 +55,7 @@ function fetchBillingListAdmin() {
 
   function fetchBillingPageAdmin() {
     var id = $("#btn_view_billing_test").attr("id");;
-    alert(id);
+    console.log(id);
     // $.ajaxSetup({
     //   headers: {
     //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
