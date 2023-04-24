@@ -54,7 +54,7 @@ function fetchBillingListAdmin() {
   }
 
   function fetchBillingPageAdmin() {
-    let id = $("btn_view_billing_test").attr("id");
+    let id = $("#btn_view_billing_test").attr("id");
     console.log(id);
     // $.ajaxSetup({
     //   headers: {
@@ -81,3 +81,8 @@ function fetchBillingListAdmin() {
     //   }
     // });
   }
+
+  $(document).on('click', '#btn_view_billing_test', function (e) {
+    e.preventDefault();
+    let id = $(this).attr("id");
+  });
