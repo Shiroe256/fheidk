@@ -126,10 +126,27 @@ class AdminController extends Controller
 
     public function managebillinglistsearch(Request $request)
     {
-        $id = $request->btn_view_billing;
+        $acYear = $request->input('ac_year');
+        $semester = $request->input('semester');
+        $billingStatus = $request->input('billing_status');
 
         // Query the database to retrieve the data based on the selected values
-        $billings = Billing::where('id', $id)
+        $billings = Billing::where(function ($query) use ($acYear) {
+            if ($acYear != 'All') {
+                // $query->where('ac_year', '=', $acYear);
+                $query->where('ac_year', '=', $acYear);
+            }
+        })
+            ->where(function ($query) use ($semester) {
+                if ($semester != 'All') {
+                    $query->where('semester', '=', $semester);
+                }
+            })
+            ->where(function ($query) use ($billingStatus) {
+                if ($billingStatus != 'All') {
+                    $query->where('billing_status', '=', $billingStatus);
+                }
+            })
             ->get();
             
             $output = '';
