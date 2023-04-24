@@ -83,7 +83,7 @@ function fetchBillingListAdmin() {
   }
 
   $(document).on('click', '.btn_view_billing_test', function (e) {
-    let id = $(this).attr("id");
+    let uid = $(this).attr("id");
     console.log(id);
 
     $.ajaxSetup({
@@ -97,7 +97,7 @@ function fetchBillingListAdmin() {
       url: "/admin/fetchbillingpage",
       type: "POST",
       data: {
-        id: id,
+        uid: uid,
       },
       success: function (response) {
         // // Update the table with the retrieved data
