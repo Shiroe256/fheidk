@@ -84,7 +84,7 @@ function fetchBillingListAdmin() {
 
   $(document).on('click', '.btn_view_billing_test', function (e) {
     let uid = $(this).attr("id");
-    console.log(id);
+    console.log(uid);
 
     $.ajaxSetup({
       headers: {
