@@ -218,7 +218,7 @@ class AdminController extends Controller
         }
     }
 
-    public function fetchmanagebillingpage(Request $request)
+    public function fetchbillingpage(Request $request)
     {
         $billing_record_id = $request->id;
 

@@ -94,7 +94,7 @@ function fetchBillingListAdmin() {
     
     // Send AJAX request to the server
     $.ajax({
-      url: "/admin/fetchmanagebillingpage",
+      url: "/admin/fetchbillingpage",
       type: "POST",
       data: {
         id: id,
