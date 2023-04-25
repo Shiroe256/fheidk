@@ -294,6 +294,8 @@ function validateFields(data) {
 //upload batch function used in the ajax request
 function uploadBatch() {
   var file = document.getElementById("upload_template").files;
+  const selectedFile = fileInput.files[0];
+  
   if (file.length < 1) {
     //if there is no file selected
     alert("Please select an XLSX file");

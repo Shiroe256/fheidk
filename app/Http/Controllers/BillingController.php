@@ -87,7 +87,7 @@ class BillingController extends Controller
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->groupBy('tbl_billing_details_temp.uid')
+            ->groupBy('tbl_billing_details_temp.uid')->limit(1000)
             ->get();
 
         // $sql = "SELECT
