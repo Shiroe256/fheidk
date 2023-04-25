@@ -82,33 +82,33 @@ function fetchBillingListAdmin() {
     // });
   }
 
-  $(document).on('click', '.btn_view_billing_test', function (e) {
-    let uid = $(this).attr("id");
-    console.log(uid);
+  // $(document).on('click', '.btn_view_billing_test', function (e) {
+  //   let uid = $(this).attr("id");
+  //   console.log(uid);
 
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
+  //   $.ajaxSetup({
+  //     headers: {
+  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     }
+  //   });
     
-    // Send AJAX request to the server
-    $.ajax({
-      url: "/admin/fetchbillingpage",
-      type: "POST",
-      data: {
-        uid: uid,
-      },
-      success: function (data) {
-        window.location.href = '/admin/managebillingpage';
-        // // Update the table with the retrieved data
-        // $("#tbl_billing_list_admin").html(response);
-        // $("#tbl_manage_billing_list").DataTable({
-        //   "order": [[0, "asc"]],
-        //   orderCellsTop: true,
-        //   fixedHeader: true
-        // });
-        console.log(data);
-      }
-    });
-  });
+  //   // Send AJAX request to the server
+  //   $.ajax({
+  //     url: "/admin/fetchbillingpage",
+  //     type: "POST",
+  //     data: {
+  //       uid: uid,
+  //     },
+  //     success: function (data) {
+  //       window.location.href = '/admin/managebillingpage';
+  //       // // Update the table with the retrieved data
+  //       // $("#tbl_billing_list_admin").html(response);
+  //       // $("#tbl_manage_billing_list").DataTable({
+  //       //   "order": [[0, "asc"]],
+  //       //   orderCellsTop: true,
+  //       //   fixedHeader: true
+  //       // });
+  //       console.log(data);
+  //     }
+  //   });
+  // });
