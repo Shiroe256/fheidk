@@ -227,7 +227,7 @@ class AdminController extends Controller
             ->get();
             $data['billings'] = $billings;
             return response()->json($data);
-            // return view('admin.manage-billing-page', $data);
+            return view('admin.manage-billing-page');
 
         // $output = '';
         // if ($billings->count() > 0) {
