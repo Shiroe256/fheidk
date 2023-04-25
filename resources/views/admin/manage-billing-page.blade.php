@@ -35,7 +35,7 @@
         <section class="clean-block clean-faq dark">
             <div class="container-fluid">
                 <div class="block-heading">
-                    <h4 class="text-left text-info">ILOCOS SUR POLYTECHNIC COLLEGE OF THE PHILIPPINES</h4>
+                    <h4 class="text-left text-info"><?php $data->uid ?></h4>
                 </div>
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -47,16 +47,7 @@
                                 <section class="clean-block payment-form">
                                     <div class="container-fluid">
                                         <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table table-bordered table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>BILLING DOCUMENTS</th>
-                                                        <th>STATUS</th>
-                                                        <th>REMARKS</th>
-                                                        <th class="text-center">ACTION</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                            
                                                     <tr>
                                                         <td>Consolidated Billing Statement (Form 1)</td>
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
