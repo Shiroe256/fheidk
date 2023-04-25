@@ -100,6 +100,7 @@ function fetchBillingListAdmin() {
         uid: uid,
       },
       success: function (data) {
+        window.location.href = '/admin/manage-billing-page';
         // // Update the table with the retrieved data
         // $("#tbl_billing_list_admin").html(response);
         // $("#tbl_manage_billing_list").DataTable({
