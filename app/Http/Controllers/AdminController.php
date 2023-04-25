@@ -220,7 +220,7 @@ class AdminController extends Controller
     {
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('uid', $uid)->first();
-        return redirect()->route('admin.manage-billing-page', $billing->uid);
+        return redirect()->route('admin/managebillingpage', $billing->uid);
     }
 
     // public function fetchbillingpage(Request $request)
