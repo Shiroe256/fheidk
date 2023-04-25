@@ -47,7 +47,16 @@
                                 <section class="clean-block payment-form">
                                     <div class="container-fluid">
                                         <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                                            
+                                            <table class="table table-bordered table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>BILLING DOCUMENTS</th>
+                                                    <th>STATUS</th>
+                                                    <th>REMARKS</th>
+                                                    <th class="text-center">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                              <tbody>
                                                     <tr>
                                                         <td>Consolidated Billing Statement (Form 1)</td>
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
