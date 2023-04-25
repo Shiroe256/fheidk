@@ -226,7 +226,7 @@ class AdminController extends Controller
         $billings = Billing::where('uid', $billing_record_id)
             ->get();
             $data['billings'] = $billings;
-            return response()->json($data);
+            return view('admin.manage-billing-page', $data);
 
         // $output = '';
         // if ($billings->count() > 0) {
