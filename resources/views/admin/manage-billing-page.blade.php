@@ -39,7 +39,7 @@
                 </div>
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6 class="font-weight-bold m-0">Billing Submissions</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillinglist/{uid}')}}">GO TO LIST OF BILLINGS</a>
+                        <h6 class="font-weight-bold m-0">Billing Submissions</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillinglist')}}">GO TO LIST OF BILLINGS</a>
                     </div>
                     <div class="card-body">
                         <div class="row">
