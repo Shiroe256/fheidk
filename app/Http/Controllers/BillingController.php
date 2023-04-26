@@ -86,6 +86,7 @@ class BillingController extends Controller
                     });
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
+            // ->where('tbl_billing_details_temp.reference_no', '=', '01-01040-2021-2022-1-1')
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->groupBy('tbl_billing_details_temp.uid')
             ->get();
@@ -111,8 +112,11 @@ class BillingController extends Controller
         // group by tbl_billing_details_temp.uid";
 
         //go back here migs
-        $data['students'] = $students;
-        echo json_encode($data['students']);
+        $data['data'] = $students;
+        $data['draw'] = 1;
+        $data['recordsFiltered'] = 100;
+        $data['recordsTotal'] = 100;
+        echo json_encode($data);
         // return view('elements.studenttable', $data);
     }
 

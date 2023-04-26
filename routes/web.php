@@ -50,7 +50,7 @@ Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newB
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
-Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('checkUserHei');
+Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
@@ -68,7 +68,7 @@ Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->na
 Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
-Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent')->middleware('checkUserHei');
+Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');
 
 //Autocomplete textbox
 Route::get('/get-tuitionfee', [BillingController::class, 'findTuitionFee'])->name('findTuitionFee');

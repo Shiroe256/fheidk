@@ -2128,10 +2128,12 @@ $(function (e) {
   var table = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
-    ajax: 'get-tempstudents',
-    data: {
-      "_token": csrf,
-      reference_no: reference_no
+    ajax: {
+      url: '/get-tempstudents',
+      data: function (d) {
+        d._token = csrf;
+        d.reference_no = reference_no;
+      },
     },
     columns: [
       { data: "hei_name", name: "hei_name" },
