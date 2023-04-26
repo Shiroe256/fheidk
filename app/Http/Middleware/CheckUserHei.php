@@ -25,10 +25,10 @@ class CheckUserHei
 
         $billing = Billing::where('reference_no', $reference_no)->first();
         $hei_uii = Auth::user()->hei_uii;
-        if ($hei_uii != $billing->hei_uii) {
-            return response('Unauthorized', 401);
-        }
-        $request->merge(['hei_uii' => $hei_uii]);
+        // if ($hei_uii != $billing->hei_uii) {
+        //     return response('Unauthorized', 401);
+        // }
+        // $request->merge(['hei_uii' => $hei_uii]);
         return $next($request);
     }
 }

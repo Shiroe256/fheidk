@@ -2128,7 +2128,10 @@ $(function (e) {
   var table = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
-    ajax: '/get-tempstudents',
+    ajax: 'get-tempstudents',
+    data: {
+      "_token": csrf
+    },
     columns: [
       { data: "hei_name", name: "hei_name" },
       { data: "app_id", name: "app_id" },

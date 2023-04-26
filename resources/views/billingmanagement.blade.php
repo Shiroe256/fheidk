@@ -20,7 +20,8 @@
                     Settings</a>
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
                         class="fas fa-download"></i>&nbsp;Download Template</button>
-                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i class="fas fa-file-upload"></i>&nbsp;Upload
+                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i
+                        class="fas fa-file-upload"></i>&nbsp;Upload
                     List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Run Validation</button>
@@ -111,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="students-placeholder" class="p-3">
+                            <div id="students-placeholder" class="p-3 d-none">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -192,9 +193,12 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none"
+                            <div id="show_all_students" class="table-responsive mt-2 table-style"
                                 role="grid" aria-describedby="dataTable_info">
-                                {{-- STUDENT TABLE HERE --}}
+                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
+                                    id="tbl_students">
+                                    
+                                </table>
                             </div>
                         </div>
                     </form>
@@ -287,29 +291,7 @@
                     <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary"
                         role="grid" aria-describedby="dataTable_info">
                         {{-- SUMMARY TABLE HERE --}}
-                        <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
-                            <thead>
-                                <tr>
-                                    <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
-                                    <th class="text-left">HEI CAMPUS</th>
-                                    <th class="text-left">APP ID</th>
-                                    <th class="text-left">AWARD NUMBER</th>
-                                    <th class="text-left">LASTNAME</th>
-                                    <th class="text-left">FIRSTNAME</th>
-                                    <th class="text-left">MIDDLENAME</th>
-                                    <th>COURSE</th>
-                                    <th class="text-center">YEAR</th>
-                                    <th class="text-left">REMARKS</th>
-                                    <th class="text-left">STATUS</th>
-                                    <th class="text-left" title="No need to click this after saving. This is just for viewing purposes"
-                                        data-placement="bottom">AMOUNT BILLED <i class="fa-solid fa-circle-question"></i></th>
-                                    <th class="text-center">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_list_of_students_form_2">
-                                
-                            </tbody>
-                        </table>
+
                     </div>
                 </div>
             </form>
