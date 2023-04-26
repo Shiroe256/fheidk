@@ -96,7 +96,7 @@ class AdminController extends Controller
 
                 $output .= '</td>
                     <td>
-                        <a href="' . route("managebillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                        <a href="' . route("managebillingpage", ['uid' => $billing->uid]) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
                     </td>
                 </tr>';
             }
