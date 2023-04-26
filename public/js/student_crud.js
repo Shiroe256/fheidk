@@ -2125,13 +2125,28 @@ $(document).on('change', '#edit_hei_campus', function (e) {
 $(function (e) {
   console.log('ready');
 
-  // var table = $('#tbl_students').DataTable({
-  //   processing: true,
-  //   serverSide: true,
-  //   ajax: '',
-  //   columns: [
-  //     { data: '', name: '' },
-  //   ]
-  // });
+  var table = $('#tbl_students').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '/get-tempstudents',
+    columns: [
+      { data: "hei_name", name: "hei_name" },
+      { data: "app_id", name: "app_id" },
+      { data: "fhe_award_no", name: "fhe_award_no" },
+      { data: "stud_lname", name: "stud_lname" },
+      { data: "stud_fname", name: "stud_fname" },
+      { data: "stud_mname", name: "stud_mname" },
+      { data: "degree_program", name: "degree_program" },
+      { data: "ac_year", name: "ac_year" },
+      { data: "year_level", name: "year_level" },
+      { data: "remarks", name: "remarks" },
+      { data: "bs_status", name: "bs_status" },
+      { data: "total_osf", name: "total_osf" },
+      { data: "total_tuition", name: "total_tuition" },
+      { data: "total_nstp", name: "total_nstp" },
+      { data: "total_lab", name: "total_lab" },
+      { data: "total_comp_lab", name: "total_comp_lab" }
+    ]
+  });
 
 });
