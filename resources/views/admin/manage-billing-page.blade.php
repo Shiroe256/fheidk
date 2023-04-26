@@ -35,7 +35,7 @@
         <section class="clean-block clean-faq dark">
             <div class="container-fluid">
                 <div class="block-heading">
-                    <h4 class="text-left text-info">ILOCOS SUR POLYTECHNIC COLLEGE OF THE PHILIPPINES {{ $billing->uid }}</h4>
+                    <h4 class="text-left text-info">{{ $billing->hei_name }}</h4>
                 </div>
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
