@@ -46,7 +46,7 @@ class BillingController extends Controller
     {
 
         $hei_uii = Auth::user()->hei_uii;
-        $reference_no  = $request->reference_no;
+        // $reference_no  = $request->reference_no;
 
         $students = DB::table('tbl_billing_details_temp')
             ->select(
@@ -86,7 +86,8 @@ class BillingController extends Controller
                     });
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
-            ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where('tbl_billing_details_temp.reference_no', '=', '01-01040-2021-2022-1-1')
+            // ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->groupBy('tbl_billing_details_temp.uid')
             ->get();
 
