@@ -46,7 +46,7 @@ class BillingController extends Controller
     {
 
         $hei_uii = Auth::user()->hei_uii;
-        // $reference_no  = $request->reference_no;
+        $reference_no  = $request->reference_no;
 
         $students = DB::table('tbl_billing_details_temp')
             ->select(
