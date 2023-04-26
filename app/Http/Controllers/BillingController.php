@@ -87,7 +87,7 @@ class BillingController extends Controller
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->groupBy('tbl_billing_details_temp.uid')->limit(1000)
+            ->groupBy('tbl_billing_details_temp.uid')
             ->get();
 
         // $sql = "SELECT
@@ -112,7 +112,8 @@ class BillingController extends Controller
 
         //go back here migs
         $data['students'] = $students;
-        return view('elements.studenttable', $data);
+        echo json_encode($data['students']);
+        // return view('elements.studenttable', $data);
     }
 
     public function fetchTempApplicants(Request $request)

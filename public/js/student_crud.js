@@ -295,7 +295,7 @@ function validateFields(data) {
 function uploadBatch() {
   var file = document.getElementById("upload_template").files;
   const selectedFile = fileInput.files[0];
-  
+
   if (file.length < 1) {
     //if there is no file selected
     alert("Please select an XLSX file");
@@ -2023,10 +2023,11 @@ function btnDeleteToggle() {
   }
 }
 
+
 //fetch records from the database
 function fetchTempStudent() {
-  document.getElementById("students-placeholder").classList.remove('d-none');
-  document.getElementById("show_all_students").classList.add('d-none');
+  // document.getElementById("students-placeholder").classList.remove('d-none');
+  // document.getElementById("show_all_students").classList.add('d-none');
   let reference_no = $("#reference_no").val();
   $.ajax({
     url: "/get-tempstudents",
@@ -2036,25 +2037,26 @@ function fetchTempStudent() {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
-      document.getElementById("students-placeholder").classList.add('d-none');
-      document.getElementById("show_all_students").classList.remove('d-none');
-      $("#show_all_students").html(response);
+      console.log(response);
+      // document.getElementById("students-placeholder").classList.add('d-none');
+      // document.getElementById("show_all_students").classList.remove('d-none');
+      // $("#show_all_students").html(response);
       //events for settings are set everytime the datatables are redrawn
-      $("#tbl_students").on('order.dt', function () {
-        setup_Events();
-      })
-        .on('search.dt', function () {
-          setup_Events();
-        })
-        .on('page.dt', function () {
-          setup_Events();
-        }).DataTable({
-          orderCellsTop: true,
-          columnDefs: [
-            { orderable: false, targets: [0, -1] },
-          ]
-        });
-      //load events when rendering table
+      // $("#tbl_students").on('order.dt', function () {
+      //   setup_Events();
+      // })
+      //   .on('search.dt', function () {
+      //     setup_Events();
+      //   })
+      //   .on('page.dt', function () {
+      //     setup_Events();
+      //   }).DataTable({
+      //     orderCellsTop: true,
+      //     columnDefs: [
+      //       { orderable: false, targets: [0, -1] },
+      //     ]
+      //   });
+      // //load events when rendering table
     }
   });
 }
@@ -2118,4 +2120,18 @@ $(document).on('change', '#edit_hei_campus', function (e) {
   let hei_uii = $("#edit_hei_campus option:selected").attr('id');
   $("#edit_selected_campus").val(campus);
   $("#edit_hei_uii").val(hei_uii);
+});
+
+$(function (e) {
+  console.log('ready');
+
+  // var table = $('#tbl_students').DataTable({
+  //   processing: true,
+  //   serverSide: true,
+  //   ajax: '',
+  //   columns: [
+  //     { data: '', name: '' },
+  //   ]
+  // });
+
 });
