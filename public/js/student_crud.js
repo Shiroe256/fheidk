@@ -2128,7 +2128,7 @@ $(function (e) {
   var table = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
-    ajax: 'get-tempstudents',
+    ajax: '/get-tempstudents',
     data: {
       "_token": csrf,
       "reference_no": reference_no
