@@ -2131,7 +2131,7 @@ $(function (e) {
     ajax: 'get-tempstudents',
     data: {
       "_token": csrf,
-      reference_no: reference_no
+      "reference_no": reference_no
     },
     columns: [
       { data: "hei_name", name: "hei_name" },
