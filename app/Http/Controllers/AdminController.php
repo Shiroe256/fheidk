@@ -14,7 +14,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function form1()
+    public function form1($uid)
     {
         return view('admin.form1');
     }
