@@ -2130,7 +2130,8 @@ $(function (e) {
     serverSide: true,
     ajax: 'get-tempstudents',
     data: {
-      "_token": csrf
+      "_token": csrf,
+      reference_no: reference_no
     },
     columns: [
       { data: "hei_name", name: "hei_name" },
