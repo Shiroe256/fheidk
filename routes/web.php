@@ -130,7 +130,7 @@ Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->n
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 
 Route::get('/managebillingpage/{uid}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
-Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
+// Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
 });
 
 //pdf shit
