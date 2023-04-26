@@ -33,11 +33,6 @@ class AdminController extends Controller
     //     return view('admin.manage-billing-list');
     // }
 
-    public function managebillingpage()
-    {
-        return view('admin.manage-billing-page');
-    }
-
     public function manageuserslist()
     {
         return view('admin.manage-users-list');
@@ -101,7 +96,7 @@ class AdminController extends Controller
 
                 $output .= '</td>
                     <td>
-                        <a href="' . route("fetchbillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                        <a href="' . route("managebillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
                     </td>
                 </tr>';
             }
@@ -216,11 +211,10 @@ class AdminController extends Controller
         }
     }
 
-    public function fetchbillingpage(Request $request, $uid)
+    public function managebillingpage($uid)
     {
-        $billing_record_id = $request->$uid;
         // Query the database to retrieve the data based on the selected values
-        $billing = Billing::where('uid', $billing_record_id)->first();
+        $billing = Billing::where('uid', $uid)->first();
 
         $data['billing'] = $billing;
         return view('admin.manage-billing-page', $data);
