@@ -112,11 +112,24 @@ class BillingController extends Controller
         // group by tbl_billing_details_temp.uid";
 
         //go back here migs
-        $data['data'] = $students;
-        $data['draw'] = 1;
-        $data['recordsFiltered'] = 100;
-        $data['recordsTotal'] = 100;
-        echo json_encode($data);
+        // $data['data'] = $students;
+        // $data['draw'] = 1;
+        // $data['recordsFiltered'] = 100;
+        // $data['recordsTotal'] = 100;
+
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $students->skip($start)->take($length);
+        // $filtered = $users->count();
+
+        return response()->json([
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $students->count(),
+            'recordsFiltered' => $students->count(),
+            'data' => $students
+        ]);
+
+        // echo json_encode($data);
         // return view('elements.studenttable', $data);
     }
 

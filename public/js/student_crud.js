@@ -2128,30 +2128,32 @@ $(function (e) {
   var table = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
+    paging: true,
+    pageLength: 10,
     ajax: {
       url: '/get-tempstudents',
       data: function (d) {
         d._token = csrf;
         d.reference_no = reference_no;
-      },
+      }
     },
     columns: [
-      { data: "hei_name", name: "hei_name" },
-      { data: "app_id", name: "app_id" },
-      { data: "fhe_award_no", name: "fhe_award_no" },
-      { data: "stud_lname", name: "stud_lname" },
-      { data: "stud_fname", name: "stud_fname" },
-      { data: "stud_mname", name: "stud_mname" },
-      { data: "degree_program", name: "degree_program" },
-      { data: "ac_year", name: "ac_year" },
-      { data: "year_level", name: "year_level" },
-      { data: "remarks", name: "remarks" },
-      { data: "bs_status", name: "bs_status" },
-      { data: "total_osf", name: "total_osf" },
-      { data: "total_tuition", name: "total_tuition" },
-      { data: "total_nstp", name: "total_nstp" },
-      { data: "total_lab", name: "total_lab" },
-      { data: "total_comp_lab", name: "total_comp_lab" }
+      { data: "hei_name" },
+      { data: "app_id" },
+      { data: "fhe_award_no" },
+      { data: "stud_lname" },
+      { data: "stud_fname" },
+      { data: "stud_mname" },
+      { data: "degree_program" },
+      { data: "ac_year" },
+      { data: "year_level" },
+      { data: "remarks" },
+      { data: "bs_status" },
+      { data: "total_osf" },
+      { data: "total_tuition" },
+      { data: "total_nstp" },
+      { data: "total_lab" },
+      { data: "total_comp_lab" }
     ]
   });
 
