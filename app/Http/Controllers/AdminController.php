@@ -14,11 +14,6 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function form1($uid)
-    {
-        return view('admin.form1');
-    }
-
     public function form2()
     {
         return view('admin.form2');
@@ -218,6 +213,16 @@ class AdminController extends Controller
 
         $data['billing'] = $billing;
         return view('admin.manage-billing-page', $data);
+    }
+
+    public function form1($reference_no)
+    {
+        // Query the database to retrieve the data based on the selected values
+        $billing = Billing::where('reference_no', $reference_no)->first();
+
+        $data['billing'] = $billing;
+
+        return view('admin.form1', $data);
     }
 
     // public function fetchbillingpage(Request $request)
