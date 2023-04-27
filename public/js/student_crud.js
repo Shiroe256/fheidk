@@ -2131,7 +2131,7 @@ $(function (e) {
     paging: true,
     pageLength: 10,
     ajax: {
-      url: '/get-tempstudents',
+      url: '/get-tempstudenttable',
       data: function (d) {
         d._token = csrf;
         d.reference_no = reference_no;
