@@ -123,7 +123,7 @@ class BillingController extends Controller
         // $filtered = $users->count();
 
         return response()->json([
-            'draw' => $request->input('draw'),
+            'draw' => $request->draw,
             'recordsTotal' => $students->count(),
             'recordsFiltered' => $students->count(),
             'data' => $students
