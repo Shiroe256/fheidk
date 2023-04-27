@@ -2132,9 +2132,9 @@ $(function (e) {
     pageLength: 10,
     ajax: {
       url: '/get-tempstudenttable',
-      data: function (d) {
-        d._token = csrf;
-        d.reference_no = reference_no;
+      data: {
+        _token: csrf,
+        reference_no: reference_no
       },
       processData: false
     },
