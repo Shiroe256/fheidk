@@ -2028,37 +2028,68 @@ function btnDeleteToggle() {
 function fetchTempStudent() {
   // document.getElementById("students-placeholder").classList.remove('d-none');
   // document.getElementById("show_all_students").classList.add('d-none');
-  let reference_no = $("#reference_no").val();
-  $.ajax({
-    url: "/get-tempstudents",
-    method: 'get',
-    data: {
-      reference_no: reference_no,
-      _token: '{{ csrf_token() }}'
+  // let reference_no = $("#reference_no").val();
+  var table = $('#tbl_students').DataTable({
+    processing: true,
+    serverSide: true,
+    paging: true,
+    pageLength: 10,
+    ajax: {
+      url: '/get-tempstudenttable',
+      data: {
+        _token: csrf,
+        reference_no: reference_no
+      }
     },
-    success: function (response) {
-      console.log(response);
-      // document.getElementById("students-placeholder").classList.add('d-none');
-      // document.getElementById("show_all_students").classList.remove('d-none');
-      // $("#show_all_students").html(response);
-      //events for settings are set everytime the datatables are redrawn
-      // $("#tbl_students").on('order.dt', function () {
-      //   setup_Events();
-      // })
-      //   .on('search.dt', function () {
-      //     setup_Events();
-      //   })
-      //   .on('page.dt', function () {
-      //     setup_Events();
-      //   }).DataTable({
-      //     orderCellsTop: true,
-      //     columnDefs: [
-      //       { orderable: false, targets: [0, -1] },
-      //     ]
-      //   });
-      // //load events when rendering table
-    }
+    columns: [
+      { data: "hei_name" },
+      { data: "app_id" },
+      { data: "fhe_award_no" },
+      { data: "stud_lname" },
+      { data: "stud_fname" },
+      { data: "stud_mname" },
+      { data: "degree_program" },
+      { data: "ac_year" },
+      { data: "year_level" },
+      { data: "remarks" },
+      { data: "bs_status" },
+      { data: "total_osf" },
+      { data: "total_tuition" },
+      { data: "total_nstp" },
+      { data: "total_lab" },
+      { data: "total_comp_lab" }
+    ]
   });
+  // $.ajax({
+  //   url: "/get-tempstudents",
+  //   method: 'get',
+  //   data: {
+  //     reference_no: reference_no,
+  //     _token: '{{ csrf_token() }}'
+  //   },
+  //   success: function (response) {
+  //     console.log(response);
+  //     // document.getElementById("students-placeholder").classList.add('d-none');
+  //     // document.getElementById("show_all_students").classList.remove('d-none');
+  //     // $("#show_all_students").html(response);
+  //     //events for settings are set everytime the datatables are redrawn
+  //     // $("#tbl_students").on('order.dt', function () {
+  //     //   setup_Events();
+  //     // })
+  //     //   .on('search.dt', function () {
+  //     //     setup_Events();
+  //     //   })
+  //     //   .on('page.dt', function () {
+  //     //     setup_Events();
+  //     //   }).DataTable({
+  //     //     orderCellsTop: true,
+  //     //     columnDefs: [
+  //     //       { orderable: false, targets: [0, -1] },
+  //     //     ]
+  //     //   });
+  //     // //load events when rendering table
+  //   }
+  // });
 }
 
 //fetch all degree programs from the database to select input
@@ -2125,36 +2156,36 @@ $(document).on('change', '#edit_hei_campus', function (e) {
 $(function (e) {
   console.log('ready');
 
-  var table = $('#tbl_students').DataTable({
-    processing: true,
-    serverSide: true,
-    paging: true,
-    pageLength: 10,
-    ajax: {
-      url: '/get-tempstudenttable',
-      data: {
-        _token: csrf,
-        reference_no: reference_no
-      }
-    },
-    columns: [
-      { data: "hei_name" },
-      { data: "app_id" },
-      { data: "fhe_award_no" },
-      { data: "stud_lname" },
-      { data: "stud_fname" },
-      { data: "stud_mname" },
-      { data: "degree_program" },
-      { data: "ac_year" },
-      { data: "year_level" },
-      { data: "remarks" },
-      { data: "bs_status" },
-      { data: "total_osf" },
-      { data: "total_tuition" },
-      { data: "total_nstp" },
-      { data: "total_lab" },
-      { data: "total_comp_lab" }
-    ]
-  });
+  // var table = $('#tbl_students').DataTable({
+  //   processing: true,
+  //   serverSide: true,
+  //   paging: true,
+  //   pageLength: 10,
+  //   ajax: {
+  //     url: '/get-tempstudenttable',
+  //     data: {
+  //       _token: csrf,
+  //       reference_no: reference_no
+  //     }
+  //   },
+  //   columns: [
+  //     { data: "hei_name" },
+  //     { data: "app_id" },
+  //     { data: "fhe_award_no" },
+  //     { data: "stud_lname" },
+  //     { data: "stud_fname" },
+  //     { data: "stud_mname" },
+  //     { data: "degree_program" },
+  //     { data: "ac_year" },
+  //     { data: "year_level" },
+  //     { data: "remarks" },
+  //     { data: "bs_status" },
+  //     { data: "total_osf" },
+  //     { data: "total_tuition" },
+  //     { data: "total_nstp" },
+  //     { data: "total_lab" },
+  //     { data: "total_comp_lab" }
+  //   ]
+  // });
 
 });
