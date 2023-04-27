@@ -2135,7 +2135,8 @@ $(function (e) {
       data: function (d) {
         d._token = csrf;
         d.reference_no = reference_no;
-      }
+      },
+      processData: false
     },
     columns: [
       { data: "hei_name" },
