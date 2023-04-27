@@ -2135,6 +2135,7 @@ $(function (e) {
       data: function (d) {
         d._token = csrf;
         d.reference_no = reference_no;
+        return d;
       }
     },
     columns: [
