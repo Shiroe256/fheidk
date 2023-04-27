@@ -2132,11 +2132,9 @@ $(function (e) {
     // pageLength: 10,
     ajax: {
       url: '/get-tempstudents',
-      type: 'GET',
       data: function (d) {
         d._token = csrf;
         d.reference_no = reference_no;
-        return d;
       }
     },
     // columns: [
