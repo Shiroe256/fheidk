@@ -20,8 +20,7 @@
                     Settings</a>
                 <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
                         class="fas fa-download"></i>&nbsp;Download Template</button>
-                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i
-                        class="fas fa-file-upload"></i>&nbsp;Upload
+                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i class="fas fa-file-upload"></i>&nbsp;Upload
                     List</button>
                 <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
                         class="far fa-edit"></i>&nbsp;Run Validation</button>
@@ -112,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="students-placeholder" class="p-3 d-none">
+                            <div id="students-placeholder" class="p-3">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -193,14 +192,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style"
+                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none"
                                 role="grid" aria-describedby="dataTable_info">
-                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                    id="tbl_students">
-                                    <thead>
-
-                                    </thead>
-                                </table>
+                                {{-- STUDENT TABLE HERE --}}
                             </div>
                         </div>
                     </form>
@@ -293,7 +287,29 @@
                     <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary"
                         role="grid" aria-describedby="dataTable_info">
                         {{-- SUMMARY TABLE HERE --}}
-
+                        <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_students">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
+                                    <th class="text-left">HEI CAMPUS</th>
+                                    <th class="text-left">APP ID</th>
+                                    <th class="text-left">AWARD NUMBER</th>
+                                    <th class="text-left">LASTNAME</th>
+                                    <th class="text-left">FIRSTNAME</th>
+                                    <th class="text-left">MIDDLENAME</th>
+                                    <th>COURSE</th>
+                                    <th class="text-center">YEAR</th>
+                                    <th class="text-left">REMARKS</th>
+                                    <th class="text-left">STATUS</th>
+                                    <th class="text-left" title="No need to click this after saving. This is just for viewing purposes"
+                                        data-placement="bottom">AMOUNT BILLED <i class="fa-solid fa-circle-question"></i></th>
+                                    <th class="text-center">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_list_of_students_form_2">
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>
@@ -652,19 +668,22 @@
     </div>
 </div>
 
-{{-- <script type="text/javascript" src="{{ url('js\jquery.min.js') }}"></script> --}}
-{{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script> --}}
+{{-- <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script> --}}
+<script src="{{ url('js\studsettings.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\jquery.min.js') }}"></script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js') }}"></script>
-<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js') }}">
 </script>
 <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js') }}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="{{ url('js\studsettings.js') }}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.3.1/js/dataTables.fixedHeader.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.3.0/js/dataTables.rowGroup.min.js"></script>
 <script type="text/javascript" src="{{ url('js\chart.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\bs-init.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>

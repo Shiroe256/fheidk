@@ -47,8 +47,6 @@ class BillingController extends Controller
 
         $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
-        $start = $request->start;
-        $length = $request->length;
 
         $students = DB::table('tbl_billing_details_temp')
             ->select(
@@ -88,7 +86,6 @@ class BillingController extends Controller
                     });
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
-            // ->where('tbl_billing_details_temp.reference_no', '=', '01-01040-2021-2022-1-1')
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->groupBy('tbl_billing_details_temp.uid')
             ->get();
@@ -114,22 +111,8 @@ class BillingController extends Controller
         // group by tbl_billing_details_temp.uid";
 
         //go back here migs
-        // $data['data'] = $students;
-        // $data['draw'] = 1;
-        // $data['recordsFiltered'] = 100;
-        // $data['recordsTotal'] = 100;
-
-        // $filtered = $users->count();
-
-        return response()->json([
-            'draw' => $request->input('draw'),
-            'recordsTotal' => $students->count(),
-            'recordsFiltered' => $students->count(),
-            'data' => $students
-        ]);
-
-        // echo json_encode($data);
-        // return view('elements.studenttable', $data);
+        $data['students'] = $students;
+        return view('elements.studenttable', $data);
     }
 
     public function fetchTempApplicants(Request $request)
