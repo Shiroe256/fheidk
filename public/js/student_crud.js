@@ -2128,8 +2128,8 @@ $(function (e) {
   var table = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
-    paging: true,
-    pageLength: 10,
+    // paging: true,
+    // pageLength: 10,
     ajax: {
       url: '/get-tempstudents',
       data: function (d) {
