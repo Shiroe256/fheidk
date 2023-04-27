@@ -89,8 +89,8 @@ class BillingController extends Controller
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
             // ->where('tbl_billing_details_temp.reference_no', '=', '01-01040-2021-2022-1-1')
-            ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->groupBy('tbl_billing_details_temp.uid')->skip($start)->take($length)
+            ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($start)->take($length)
+            ->groupBy('tbl_billing_details_temp.uid')
             ->get();
 
         // $sql = "SELECT
