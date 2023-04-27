@@ -2130,13 +2130,14 @@ $(function (e) {
     serverSide: true,
     // paging: true,
     // pageLength: 10,
-    ajax: {
-      url: '/get-tempstudents',
-      data: function (d) {
-        d._token = csrf;
-        d.reference_no = reference_no;
-      }
-    },
+    ajax: '/get-tempstudents',
+    // ajax: {
+    //   url: '/get-tempstudents',
+    //   data: function (d) {
+    //     d._token = csrf;
+    //     d.reference_no = reference_no;
+    //   }
+    // },
     // columns: [
     //   { data: "hei_name" },
     //   { data: "app_id" },
