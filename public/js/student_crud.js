@@ -2138,24 +2138,24 @@ $(function (e) {
         return d;
       }
     },
-    columns: [
-      { data: "hei_name" },
-      { data: "app_id" },
-      { data: "fhe_award_no" },
-      { data: "stud_lname" },
-      { data: "stud_fname" },
-      { data: "stud_mname" },
-      { data: "degree_program" },
-      { data: "ac_year" },
-      { data: "year_level" },
-      { data: "remarks" },
-      { data: "bs_status" },
-      { data: "total_osf" },
-      { data: "total_tuition" },
-      { data: "total_nstp" },
-      { data: "total_lab" },
-      { data: "total_comp_lab" }
-    ]
+    // columns: [
+    //   { data: "hei_name" },
+    //   { data: "app_id" },
+    //   { data: "fhe_award_no" },
+    //   { data: "stud_lname" },
+    //   { data: "stud_fname" },
+    //   { data: "stud_mname" },
+    //   { data: "degree_program" },
+    //   { data: "ac_year" },
+    //   { data: "year_level" },
+    //   { data: "remarks" },
+    //   { data: "bs_status" },
+    //   { data: "total_osf" },
+    //   { data: "total_tuition" },
+    //   { data: "total_nstp" },
+    //   { data: "total_lab" },
+    //   { data: "total_comp_lab" }
+    // ]
   });
 
 });
