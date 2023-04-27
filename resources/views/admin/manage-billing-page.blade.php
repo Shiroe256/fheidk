@@ -36,6 +36,8 @@
             <div class="container-fluid">
                 <div class="block-heading">
                     <h4 class="text-left text-info">{{ strtoupper($billing->hei->hei_name) }}</h4>
+                    <input type="hidden" name="uid" id="uid" value="{{ $billing->uid }}">
+                    <input type="hidden" name="reference_no" id="reference_no" value="{{ $billing->reference_no }}">
                 </div>
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -62,7 +64,7 @@
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
                                                         <td></td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 1 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1')}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 1 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->uid)}}"><i class="fas fa-list"></i></a></div>
                                                         </td>
                                                     </tr>
                                                     <tr>

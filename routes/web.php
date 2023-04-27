@@ -117,7 +117,7 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 //Admin Pages
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name('dashboard');
-Route::get('form1', 'App\Http\Controllers\AdminController@form1')->name('form1');
+
 Route::get('form2', 'App\Http\Controllers\AdminController@form2')->name('form2');
 Route::get('form3', 'App\Http\Controllers\AdminController@form3')->name('form3');
 // Route::get('managebillinglist', 'App\Http\Controllers\AdminController@managebillinglist')->name('managebillinglist');
@@ -131,6 +131,7 @@ Route::post('/managebillinglistsearch', [AdminController::class, 'managebillingl
 
 Route::get('/managebillingpage/{uid}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
 // Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
+Route::get('/form1/{uid}', [AdminController::class, 'form1'])->name('form1');
 });
 
 //pdf shit
