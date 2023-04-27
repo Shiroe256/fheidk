@@ -64,7 +64,7 @@
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
                                                         <td></td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 1 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->uid)}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 1 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -72,7 +72,7 @@
                                                         <td><span class="badge badge-pill badge-success billing-status-badge">Approved by UniFAST Billing Unit</span></td>
                                                         <td></td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 2 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 2 List" href="{{route('form2')}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 2 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 2 List" href="{{route('form2', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -80,7 +80,7 @@
                                                         <td><span class="badge badge-pill badge-danger billing-status-badge">Rejected</span></td>
                                                         <td>Did not match with the submitted hard copy</td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 3 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 3 List" href="{{route('form3')}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 3 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 3 List" href="{{route('form3', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
                                                         </td>
                                                     </tr>
                                                     <tr>

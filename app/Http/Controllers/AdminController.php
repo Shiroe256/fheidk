@@ -96,7 +96,7 @@ class AdminController extends Controller
 
                 $output .= '</td>
                     <td>
-                        <a href="' . route("managebillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                        <a href="' . route("managebillingpage", $billing->reference_no) . '" id="' . $billing->uid . '" name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
                     </td>
                 </tr>';
             }
@@ -188,7 +188,7 @@ class AdminController extends Controller
 
                 $output .= '</td>
                         <td>
-                            <a href="' . route("managebillingpage", $billing->uid) . '" id="' . $billing->uid . '" name="btn-view-billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                            <a href="' . route("managebillingpage", $billing->reference_no) . '" id="' . $billing->uid . '" name="btn-view-billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
                         </td>
                     </tr>';
             }
@@ -211,10 +211,10 @@ class AdminController extends Controller
         }
     }
 
-    public function managebillingpage($uid)
+    public function managebillingpage($reference_no)
     {
         // Query the database to retrieve the data based on the selected values
-        $billing = Billing::where('uid', $uid)->first();
+        $billing = Billing::where('reference_no', $reference_no)->first();
 
         $data['billing'] = $billing;
         return view('admin.manage-billing-page', $data);
