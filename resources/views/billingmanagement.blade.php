@@ -197,7 +197,9 @@
                                 role="grid" aria-describedby="dataTable_info">
                                 <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
                                     id="tbl_students">
-                                    
+                                    <thead>
+                                        
+                                    </thead>
                                 </table>
                             </div>
                         </div>
