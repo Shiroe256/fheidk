@@ -138,3 +138,6 @@ Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('fo
 
 //pdf shit
 Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
+Route::get('/phpinfo', function() {
+    phpinfo();
+});
