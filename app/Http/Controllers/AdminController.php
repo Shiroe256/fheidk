@@ -333,8 +333,8 @@ public function import(Request $request)
             'type_of_fee' => $data[8],
             'category' => $data[9],
             'coverage' => $data[10],
-            'is_optional' => $data[12],
             'amount' => $data[11],
+            'is_optional' => $data[12],
         ]);
     }
 
