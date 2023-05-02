@@ -250,6 +250,7 @@ class AdminController extends Controller
     // Load the uploaded file using PHPSpreadsheet
     $filePath = $request->file('file')->getRealPath();
     $spreadsheet = IOFactory::load($filePath);
+    dd($filePath); // added line
 
     // Get the first worksheet of the uploaded file
     $worksheet = $spreadsheet->getActiveSheet();
