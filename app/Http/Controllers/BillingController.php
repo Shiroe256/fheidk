@@ -892,7 +892,7 @@ class BillingController extends Controller
         $billing = Billing::where('reference_no', $request->reference_no)->first();
         $billing->billing_status = 2;
         $billing->save();
-        // $this->checkBilling();
+        $this->checkBilling();
         return response('Success', 200);
     }
 
