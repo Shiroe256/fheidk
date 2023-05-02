@@ -4,8 +4,7 @@ namespace App\Imports;
 require '../vendor/autoload.php';
 
 use App\Models\OtherSchoolFees;
-// use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel;
+use Maatwebsite\Excel\Concerns\ToModel;
 
 class OtherSchoolFeesImport implements ToModel
 {
