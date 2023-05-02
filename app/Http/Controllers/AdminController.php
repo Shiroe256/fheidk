@@ -285,7 +285,7 @@ class AdminController extends Controller
         ]);
     }
 
-    return redirect()->back()->with('success', 'File uploaded successfully.');
+    // return redirect()->back()->with('success', 'File uploaded successfully.');
 }
 
 }
