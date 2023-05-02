@@ -253,20 +253,17 @@ class AdminController extends Controller
     // Get the first worksheet of the uploaded file
     $worksheet = $spreadsheet->getActiveSheet();
 
-        // Initialize a flag to indicate whether the current row is the header row
-        $isHeaderRow = true;
-
-        // Loop through the rows of the worksheet and insert the data into the database
-        foreach ($worksheet->getRowIterator() as $row) {
-            if ($isHeaderRow) {
-                // Skip the header row
-                $isHeaderRow = false;
-                continue;
-            }
-    
+    // Initialize a flag to indicate whether the current row is the header row
+    $isHeaderRow = true;
 
     // Loop through the rows of the worksheet and insert the data into the database
     foreach ($worksheet->getRowIterator() as $row) {
+        if ($isHeaderRow) {
+            // Skip the header row
+            $isHeaderRow = false;
+            continue;
+        }
+
         $data = [];
         foreach ($row->getCellIterator() as $cell) {
             $data[] = $cell->getValue();
@@ -283,8 +280,8 @@ class AdminController extends Controller
             'type_of_fee' => $data[8],
             'category' => $data[9],
             'coverage' => $data[10],
-            'amount' => $data[11],
             'is_optional' => $data[12],
+            'amount' => $data[11],
         ]);
     }
 
