@@ -346,7 +346,7 @@
             <div class="modal-header">
                 <h4 class="modal-title">Upload TOSF</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
-            <div class="modal-body"><input type="file">
+            <div class="modal-body"><input type="file" name="file">
                 <div class="input-group"></div>
                 <div class="input-group">
                     <div class="input-group-prepend"></div>
