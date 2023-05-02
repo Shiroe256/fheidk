@@ -3,8 +3,9 @@
 namespace Illuminate\Console\View\Components;
 
 use Symfony\Component\Console\Output\OutputInterface;
-use function Termwind\terminal;
 use Throwable;
+
+use function Termwind\terminal;
 
 class Task extends Component
 {
@@ -38,7 +39,7 @@ class Task extends Component
             throw $e;
         } finally {
             $runTime = $task
-                ? (' '.number_format((microtime(true) - $startTime) * 1000, 2).'ms')
+                ? (' '.number_format((microtime(true) - $startTime) * 1000).'ms')
                 : '';
 
             $runTimeWidth = mb_strlen($runTime);
