@@ -270,20 +270,24 @@ class AdminController extends Controller
             $data[] = $cell->getValue();
         }
 
-        OtherSchoolFees::create([
-            'ac_year' => $data[1],
-            'hei_psg_region' => $data[2],
-            'hei_uii' => $data[3],
-            'hei_name' => $data[4],
-            'year_level' => $data[5],
-            'semester' => $data[6],
-            'course_enrolled' => $data[7],
-            'type_of_fee' => $data[8],
-            'category' => $data[9],
-            'coverage' => $data[10],
-            'is_optional' => $data[12],
-            'amount' => $data[11],
-        ]);
+        try {
+            DB::table('tbl_other_school_fees')->insert([
+                'ac_year' => $data[1],
+                'hei_psg_region' => $data[2],
+                'hei_uii' => $data[3],
+                'hei_name' => $data[4],
+                'year_level' => $data[5],
+                'semester' => $data[6],
+                'course_enrolled' => $data[7],
+                'type_of_fee' => $data[8],
+                'category' => $data[9],
+                'coverage' => $data[10],
+                'is_optional' => $data[12],
+                'amount' => $data[11],
+            ]);
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     return redirect()->back()->with('success', 'File uploaded successfully.');
