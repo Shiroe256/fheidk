@@ -1,6 +1,8 @@
 <?php
 namespace App\Imports;
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use App\Models\OtherSchoolFees;
 use Maatwebsite\Excel\Concerns\ToModel;
 
