@@ -36,6 +36,7 @@ return array(
     'App\\Http\\Middleware\\validateNewTempStudent' => $baseDir . '/app/Http/Middleware/validateNewTempStudent.php',
     'App\\Http\\Middleware\\validateTempStudentFields' => $baseDir . '/app/Http/Middleware/validateTempStudentFields.php',
     'App\\Http\\Middleware\\validateUpdateTempStudent' => $baseDir . '/app/Http/Middleware/validateUpdateTempStudent.php',
+    'App\\Imports\\OtherSchoolFeesImport' => $baseDir . '/app/Imports/OtherSchoolFeesImport.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Billing' => $baseDir . '/app/Models/Billing.php',
     'App\\Models\\Course' => $baseDir . '/app/Models/Course.php',

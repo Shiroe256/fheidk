@@ -570,6 +570,7 @@ class ComposerStaticInit47c48e7614a0a9a231eebb2b005fa103
         'App\\Http\\Middleware\\validateNewTempStudent' => __DIR__ . '/../..' . '/app/Http/Middleware/validateNewTempStudent.php',
         'App\\Http\\Middleware\\validateTempStudentFields' => __DIR__ . '/../..' . '/app/Http/Middleware/validateTempStudentFields.php',
         'App\\Http\\Middleware\\validateUpdateTempStudent' => __DIR__ . '/../..' . '/app/Http/Middleware/validateUpdateTempStudent.php',
+        'App\\Imports\\OtherSchoolFeesImport' => __DIR__ . '/../..' . '/app/Imports/OtherSchoolFeesImport.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Billing' => __DIR__ . '/../..' . '/app/Models/Billing.php',
         'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',
