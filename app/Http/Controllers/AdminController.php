@@ -9,6 +9,8 @@ use App\Models\TemporaryBilling;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\OtherSchoolFeesImport;
+use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AdminController extends Controller
 {
@@ -239,11 +241,42 @@ class AdminController extends Controller
 
     public function import(Request $request)
 {
-    $file = $request->file('file');
+    // Validate the uploaded file
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
 
-    Excel::import(new OtherSchoolFeesImport, $file);
+    // Load the uploaded file using PHPSpreadsheet
+    $filePath = $request->file('file')->getRealPath();
+    $spreadsheet = IOFactory::load($filePath);
 
-    return redirect()->back()->with('success', 'Data imported successfully!');
+    // Get the first worksheet of the uploaded file
+    $worksheet = $spreadsheet->getActiveSheet();
+
+    // Loop through the rows of the worksheet and insert the data into the database
+    foreach ($worksheet->getRowIterator() as $row) {
+        $data = [];
+        foreach ($row->getCellIterator() as $cell) {
+            $data[] = $cell->getValue();
+        }
+
+        DB::table('tbl_other_school_fees')->insert([
+            'ac_year' => $data[1],
+            'hei_psg_region' => $data[2],
+            'hei_uii' => $data[3],
+            'hei_name' => $data[4],
+            'year_level' => $data[5],
+            'semester' => $data[6],
+            'course_enrolled' => $data[7],
+            'type_of_fee' => $data[8],
+            'category' => $data[9],
+            'coverage' => $data[10],
+            'is_optional' => $data[12],
+            'amount' => $data[11],
+        ]);
+    }
+
+    return redirect()->back()->with('success', 'File uploaded successfully.');
 }
 
 }
