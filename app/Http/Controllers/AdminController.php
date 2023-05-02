@@ -323,18 +323,18 @@ public function import(Request $request)
         }
 
         DB::table('tbl_other_school_fees')->insert([
-            'ac_year' => $data[1],
-            'hei_psg_region' => $data[2],
-            'hei_uii' => $data[3],
-            'hei_name' => $data[4],
-            'year_level' => $data[5],
-            'semester' => $data[6],
-            'course_enrolled' => $data[7],
-            'type_of_fee' => $data[8],
-            'category' => $data[9],
-            'coverage' => $data[10],
-            'amount' => $data[11],
-            'is_optional' => $data[12],
+            'ac_year' => $data[0],
+            'hei_psg_region' => $data[1],
+            'hei_uii' => $data[2],
+            'hei_name' => $data[3],
+            'year_level' => $data[4],
+            'semester' => $data[5],
+            'course_enrolled' => $data[6],
+            'type_of_fee' => $data[7],
+            'category' => $data[8],
+            'coverage' => $data[9],
+            'amount' => $data[10],
+            'is_optional' => $data[11],
         ]);
     }
 
