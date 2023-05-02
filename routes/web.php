@@ -134,6 +134,9 @@ Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'manage
 // Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
 Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
 Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
+
+Route::post('/import', [AdminController::class, 'import'])->name('import');
+
 });
 
 //pdf shit

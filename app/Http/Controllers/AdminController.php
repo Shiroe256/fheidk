@@ -7,6 +7,8 @@ use App\Models\Admin;
 use App\Models\Billing;
 use App\Models\TemporaryBilling;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\OtherSchoolFeesImport;
 
 class AdminController extends Controller
 {
@@ -234,5 +236,14 @@ class AdminController extends Controller
 
         return view('admin.form2', $data);
     }
+
+    public function import(Request $request)
+{
+    $file = $request->file('file');
+
+    Excel::import(new OtherSchoolFeesImport, $file);
+
+    return redirect()->back()->with('success', 'Data imported successfully!');
+}
 
 }
