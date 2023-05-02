@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\OtherSchoolFeesImport;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -243,9 +244,14 @@ class AdminController extends Controller
     public function import(Request $request)
 {
     // Validate the uploaded file
-    $request->validate([
+    $validator = Validator::make($request->all(), [
         'file' => 'required|mimes:xlsx,xls,csv'
     ]);
+
+     // If validation fails, redirect back with errors
+     if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+    }
 
     // Load the uploaded file using PHPSpreadsheet
     $filePath = $request->file('file')->getRealPath();
