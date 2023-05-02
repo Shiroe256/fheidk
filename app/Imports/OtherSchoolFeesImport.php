@@ -4,7 +4,7 @@ namespace App\Imports;
 use App\Models\OtherSchoolFees;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-require __DIR__ . '../vendor/autoload.php';
+require_once __DIR__ . '../vendor/autoload.php';
 
 class OtherSchoolFeesImport implements ToModel
 {
