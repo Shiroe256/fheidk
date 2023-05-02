@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Billing;
 use App\Models\TemporaryBilling;
+use App\Models\OtherSchoolFees;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\OtherSchoolFeesImport;
@@ -269,7 +270,7 @@ class AdminController extends Controller
             $data[] = $cell->getValue();
         }
 
-        DB::table('tbl_other_school_fees')->insert([
+        OtherSchoolFees::create([
             'ac_year' => $data[1],
             'hei_psg_region' => $data[2],
             'hei_uii' => $data[3],
@@ -285,7 +286,7 @@ class AdminController extends Controller
         ]);
     }
 
-    // return redirect()->back()->with('success', 'File uploaded successfully.');
+    return redirect()->back()->with('success', 'File uploaded successfully.');
 }
 
 }
