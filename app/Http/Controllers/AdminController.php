@@ -253,6 +253,18 @@ class AdminController extends Controller
     // Get the first worksheet of the uploaded file
     $worksheet = $spreadsheet->getActiveSheet();
 
+        // Initialize a flag to indicate whether the current row is the header row
+        $isHeaderRow = true;
+
+        // Loop through the rows of the worksheet and insert the data into the database
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($isHeaderRow) {
+                // Skip the header row
+                $isHeaderRow = false;
+                continue;
+            }
+    
+
     // Loop through the rows of the worksheet and insert the data into the database
     foreach ($worksheet->getRowIterator() as $row) {
         $data = [];
