@@ -31,12 +31,12 @@
         </div>
     </nav>
 
-    <main class="page faq-page">
+    {{-- <main class="page faq-page">
         <section class="clean-block clean-faq dark">
             <div class="container-fluid">
                 <div class="block-heading">
                     <h4 class="text-left text-info">ILOCOS SUR POLYTECHNIC COLLEGE OF THE PHILIPPINES</h4>
-                </div>
+                </div> --}}
                 @foreach ($worksheetData as $rowNumber => $row)
                 <tr class="{{ isset($errors[$rowNumber]) ? 'bg-danger text-white' : '' }}">
                     @foreach ($row as $column => $cell)
@@ -51,7 +51,7 @@
                 </tr>
             @endforeach
             
-                <div class="card shadow">
+                {{-- <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="font-weight-bold m-0">Billing Form 1 ( Billing Statement)</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillingpage', $billing->reference_no)}}">RETURN TO THE LIST OF SUBMISSIONS</a>
                     </div>
@@ -163,7 +163,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main> --}}
     
 @include('admin.includes.modal')
 @include('admin.includes.footer')
