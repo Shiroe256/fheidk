@@ -275,7 +275,7 @@ class AdminController extends Controller
             'year_level' => 'required|numeric',
             'semester' => 'required|numeric',
             'amount' => 'required|numeric',
-            'is_optional' => 'required|numeric',
+            'is_optional' => 'required|numeric|in:0,1',
         ]);
 
         if ($validator->fails()) {
