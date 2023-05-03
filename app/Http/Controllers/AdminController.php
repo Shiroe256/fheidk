@@ -241,73 +241,64 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
-        ]);
-    
-        // Load the uploaded file using PHPSpreadsheet
-        $filePath = $request->file('file')->getRealPath();
-        $spreadsheet = IOFactory::load($filePath);
-    
-        // Get the first worksheet of the uploaded file
-        $worksheet = $spreadsheet->getActiveSheet();
-    
-        // Initialize a flag to indicate whether the current row is the header row
-        $isHeaderRow = true;
-    
-        // Initialize an array to hold the worksheet data
-        $worksheetData = [];
-    
-        // Loop through the rows of the worksheet and insert the data into the database
-        foreach ($worksheet->getRowIterator() as $row) {
-            if ($isHeaderRow) {
-                // Skip the header row
-                $isHeaderRow = false;
-                continue;
-            }
-    
-            $rowData = [];
-            foreach ($row->getCellIterator() as $cell) {
-                $rowData[] = $cell->getValue();
-            }
-    
-            // Add the row data to the worksheet data array
-            $worksheetData[] = $rowData;
-    
-            // Validate the data before creating the record
-            $validator = Validator::make($rowData, [
-                'year_level' => 'required|numeric',
-                'semester' => 'required|numeric',
-                'amount' => 'required|numeric',
-                'is_optional' => 'required|numeric|in:0,1',
-            ]);
-    
-            if ($validator->fails()) {
-                $errors[] = $validator->errors()->all();
-            } else {
-                OtherSchoolFees::create([
-                    'ac_year' => $rowData[0],
-                    'hei_psg_region' => $rowData[1],
-                    'hei_uii' => $rowData[2],
-                    'hei_name' => $rowData[3],
-                    'year_level' => $rowData[4],
-                    'semester' => $rowData[5],
-                    'course_enrolled' => $rowData[6],
-                    'type_of_fee' => $rowData[7],
-                    'category' => $rowData[8],
-                    'coverage' => $rowData[9],
-                    'amount' => $rowData[10],
-                    'is_optional' => $rowData[11],
-                ]);
-            }
+{
+    // Validate the uploaded file
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
+
+    // Load the uploaded file using PHPSpreadsheet
+    $filePath = $request->file('file')->getRealPath();
+    $spreadsheet = IOFactory::load($filePath);
+
+    // Get the first worksheet of the uploaded file
+    $worksheet = $spreadsheet->getActiveSheet();
+
+    // Initialize a flag to indicate whether the current row is the header row
+    $isHeaderRow = true;
+
+    // Loop through the rows of the worksheet and insert the data into the database
+    foreach ($worksheet->getRowIterator() as $row) {
+        if ($isHeaderRow) {
+            // Skip the header row
+            $isHeaderRow = false;
+            continue;
         }
-    
-        return view('import')->with([
-            'worksheetData' => $worksheetData,
-            'errors' => $errors ?? [],
+
+        $data = [];
+        foreach ($row->getCellIterator() as $cell) {
+            $data[] = $cell->getValue();
+        }
+        // Validate the data before creating the record
+        $validator = Validator::make($data, [
+            'year_level' => 'required|numeric',
+            'semester' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'is_optional' => 'required|numeric|in:0,1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        OtherSchoolFees::create([
+            'ac_year' => $data[0],
+            'hei_psg_region' => $data[1],
+            'hei_uii' => $data[2],
+            'hei_name' => $data[3],
+            'year_level' => $data[4],
+            'semester' => $data[5],
+            'course_enrolled' => $data[6],
+            'type_of_fee' => $data[7],
+            'category' => $data[8],
+            'coverage' => $data[9],
+            'amount' => $data[10],
+            'is_optional' => $data[11],
         ]);
     }
-    
+
+    return redirect()->back()->with('success', 'File uploaded successfully.');
+}
+
+
 }
