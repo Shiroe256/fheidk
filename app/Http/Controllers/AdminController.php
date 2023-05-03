@@ -241,43 +241,52 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
-        ]);
+{
+    // Validate the uploaded file
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
 
-        // Load the uploaded file using PHPSpreadsheet
-        $filePath = $request->file('file')->getRealPath();
-        $spreadsheet = IOFactory::load($filePath);
+    // Load the uploaded file using PHPSpreadsheet
+    $filePath = $request->file('file')->getRealPath();
+    $spreadsheet = IOFactory::load($filePath);
 
-        // Get the first worksheet of the uploaded file
-        $worksheet = $spreadsheet->getActiveSheet();
+    // Get the first worksheet of the uploaded file
+    $worksheet = $spreadsheet->getActiveSheet();
 
-        // Loop through the rows of the worksheet and insert the data into the database
-        foreach ($worksheet->getRowIterator() as $row) {
-            $data = [];
-            foreach ($row->getCellIterator() as $cell) {
-                $data[] = $cell->getValue();
-            }
+    // Initialize a flag to indicate whether the current row is the header row
+    $isHeaderRow = true;
 
-            OtherSchoolFees::create([
-                'ac_year' => $data[0],
-                'hei_psg_region' => $data[1],
-                'hei_uii' => $data[2],
-                'hei_name' => $data[3],
-                'year_level' => $data[4],
-                'semester' => $data[5],
-                'course_enrolled' => $data[6],
-                'type_of_fee' => $data[7],
-                'category' => $data[8],
-                'coverage' => $data[9],
-                'amount' => $data[10],
-                'is_optional' => $data[11],
-            ]);
+    // Loop through the rows of the worksheet and insert the data into the database
+    foreach ($worksheet->getRowIterator() as $row) {
+        if ($isHeaderRow) {
+            // Skip the header row
+            $isHeaderRow = false;
+            continue;
         }
 
-        return redirect()->back()->with('success', 'File uploaded successfully.');
+        $data = [];
+        foreach ($row->getCellIterator() as $cell) {
+            $data[] = $cell->getValue();
+        }
+
+        OtherSchoolFees::create([
+            'ac_year' => $data[0],
+            'hei_psg_region' => $data[1],
+            'hei_uii' => $data[2],
+            'hei_name' => $data[3],
+            'year_level' => $data[4],
+            'semester' => $data[5],
+            'course_enrolled' => $data[6],
+            'type_of_fee' => $data[7],
+            'category' => $data[8],
+            'coverage' => $data[9],
+            'amount' => $data[10],
+            'is_optional' => $data[11],
+        ]);
     }
+
+    return redirect()->back()->with('success', 'File uploaded successfully.');
+}
 
 }
