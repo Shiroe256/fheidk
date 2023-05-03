@@ -36,6 +36,15 @@
                 <div class="block-heading">
                     <h4 class="text-left text-info">MANAGE USERS</h4>
                 </div> 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col">
                         <div class="card shadow mb-4">
