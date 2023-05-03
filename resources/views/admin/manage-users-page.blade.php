@@ -36,20 +36,6 @@
                 <div class="block-heading">
                     <h4 class="text-left text-info">MANAGE USERS</h4>
                 </div> 
-                @foreach ($worksheetData as $rowNumber => $row)
-                <tr class="{{ isset($errors[$rowNumber]) ? 'bg-danger text-white' : '' }}">
-                    @foreach ($row as $column => $cell)
-                        <td>
-                            {{ $cell }}
-                            @if (isset($errors[$rowNumber][$column]))
-                                <br>
-                                <small class="text-danger">{{ $errors[$rowNumber][$column] }}</small>
-                            @endif
-                        </td>
-                    @endforeach
-                </tr>
-            @endforeach
-            
                 <div class="row">
                     <div class="col">
                         <div class="card shadow mb-4">
