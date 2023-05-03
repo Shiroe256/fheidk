@@ -270,6 +270,18 @@ class AdminController extends Controller
             $data[] = $cell->getValue();
         }
 
+        // Validate the data before creating a new record
+        $validator = Validator::make($data, [
+            'year_level' => 'required|integer',
+            'semester' => 'required|integer',
+            'amount' => 'required|numeric',
+            'is_optional' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
         OtherSchoolFees::create([
             'ac_year' => $data[0],
             'hei_psg_region' => $data[1],
@@ -288,5 +300,6 @@ class AdminController extends Controller
 
     return redirect()->back()->with('success', 'File uploaded successfully.');
 }
+
 
 }
