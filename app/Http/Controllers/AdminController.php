@@ -304,7 +304,7 @@ class AdminController extends Controller
         }
     }
 
-    return view('form1', [
+    return view('admin.form1', [
         'errors' => $errors,
         'success' => 'File uploaded successfully.',
     ]);
