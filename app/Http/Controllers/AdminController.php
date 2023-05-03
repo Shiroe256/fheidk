@@ -270,16 +270,16 @@ class AdminController extends Controller
             $data[] = $cell->getValue();
         }
 
-        // Validate the data before creating a new record
+        // Validate the data before creating the record
         $validator = Validator::make($data, [
-            'year_level' => 'required|integer',
-            'semester' => 'required|integer',
+            'year_level' => 'required|numeric',
+            'semester' => 'required|numeric',
             'amount' => 'required|numeric',
             'is_optional' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         OtherSchoolFees::create([
