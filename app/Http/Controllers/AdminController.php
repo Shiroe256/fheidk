@@ -288,35 +288,25 @@ class AdminController extends Controller
 
 public function import(Request $request)
 {
-    // Get the uploaded file
-    $uploadedFile = $request->file('file');
+    // Validate the uploaded file
+    $validator = Validator::make($request->all(), [
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
 
-    // Get the MIME type of the uploaded file
-    $mime = mime_content_type($uploadedFile->getRealPath());
-
-    // Check if the uploaded file has a valid MIME type
-    if ($mime !== 'application/vnd.ms-excel' && $mime !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-        return redirect()->back()->withErrors(['file' => 'Invalid file type. Only .xls, .xlsx, and .csv files are allowed.']);
+    // If validation fails, redirect back with errors
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
     }
 
     // Load the uploaded file using PHPSpreadsheet
-    $filePath = $uploadedFile->getRealPath();
+    $filePath = $request->file('file')->getRealPath();
     $spreadsheet = IOFactory::load($filePath);
 
     // Get the first worksheet of the uploaded file
     $worksheet = $spreadsheet->getActiveSheet();
 
-    // Initialize a flag to indicate whether the current row is the header row
-    $isHeaderRow = true;
-
     // Loop through the rows of the worksheet and insert the data into the database
     foreach ($worksheet->getRowIterator() as $row) {
-        if ($isHeaderRow) {
-            // Skip the header row
-            $isHeaderRow = false;
-            continue;
-        }
-
         $data = [];
         foreach ($row->getCellIterator() as $cell) {
             $data[] = $cell->getValue();
@@ -333,8 +323,8 @@ public function import(Request $request)
             'type_of_fee' => $data[7],
             'category' => $data[8],
             'coverage' => $data[9],
-            'amount' => $data[10],
-            'is_optional' => $data[11],
+            'is_optional' => $data[10],
+            'amount' => $data[12],
         ]);
     }
 
