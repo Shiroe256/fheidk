@@ -277,9 +277,9 @@ class AdminController extends Controller
         //     'is_optional' => 'required|numeric|in:0,1',
         // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         OtherSchoolFees::create([
             'ac_year' => $data[0],
