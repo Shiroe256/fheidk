@@ -271,10 +271,10 @@ class AdminController extends Controller
         }
         // Validate the data before creating the record
         $validator = Validator::make($data, [
-            'year_level' => 'required|numeric',
-            'semester' => 'required|numeric',
-            'amount' => 'required|numeric',
-            'is_optional' => 'required|numeric|in:0,1',
+            'year_level' => 'numeric',
+            'semester' => 'numeric',
+            'amount' => 'numeric',
+            'is_optional' => 'numeric|in:0,1',
         ]);
 
         if ($validator->fails()) {
