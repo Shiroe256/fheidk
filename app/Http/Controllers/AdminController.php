@@ -257,8 +257,11 @@ class AdminController extends Controller
     // Initialize a flag to indicate whether the current row is the header row
     $isHeaderRow = true;
 
+    // Initialize an array to store the errors
+    $errors = [];
+
     // Loop through the rows of the worksheet and insert the data into the database
-    foreach ($worksheet->getRowIterator() as $row) {
+    foreach ($worksheet->getRowIterator() as $rowNumber => $row) {
         if ($isHeaderRow) {
             // Skip the header row
             $isHeaderRow = false;
@@ -269,6 +272,7 @@ class AdminController extends Controller
         foreach ($row->getCellIterator() as $cell) {
             $data[] = $cell->getValue();
         }
+
         // Validate the data before creating the record
         $validator = Validator::make($data, [
             'year_level' => 'required|numeric',
@@ -278,26 +282,32 @@ class AdminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            // Add the error to the errors array
+            foreach ($validator->errors()->toArray() as $field => $messages) {
+                $errors[$rowNumber][$field] = $messages[0];
+            }
+        } else {
+            OtherSchoolFees::create([
+                'ac_year' => $data[0],
+                'hei_psg_region' => $data[1],
+                'hei_uii' => $data[2],
+                'hei_name' => $data[3],
+                'year_level' => $data[4],
+                'semester' => $data[5],
+                'course_enrolled' => $data[6],
+                'type_of_fee' => $data[7],
+                'category' => $data[8],
+                'coverage' => $data[9],
+                'amount' => $data[10],
+                'is_optional' => $data[11],
+            ]);
         }
-
-        OtherSchoolFees::create([
-            'ac_year' => $data[0],
-            'hei_psg_region' => $data[1],
-            'hei_uii' => $data[2],
-            'hei_name' => $data[3],
-            'year_level' => $data[4],
-            'semester' => $data[5],
-            'course_enrolled' => $data[6],
-            'type_of_fee' => $data[7],
-            'category' => $data[8],
-            'coverage' => $data[9],
-            'amount' => $data[10],
-            'is_optional' => $data[11],
-        ]);
     }
 
-    return redirect()->back()->with('success', 'File uploaded successfully.');
+    return view('manage-user-page', [
+        'errors' => $errors,
+        'success' => 'File uploaded successfully.',
+    ]);
 }
 
 
