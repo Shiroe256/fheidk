@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Billing;
+use App\Models\OtherSchoolFees;
 use App\Models\TemporaryBilling;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\OtherSchoolFeesImport;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Validator;
@@ -240,95 +240,44 @@ class AdminController extends Controller
         return view('admin.form2', $data);
     }
 
-// public function import(Request $request)
-// {
-//     // Validate the uploaded file
-//     $validator = Validator::make($request->all(), [
-//         'file' => 'required|mimes:xlsx,xls,csv'
-//     ]);
+    public function import(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
 
-//     // If validation fails, redirect back with errors
-//     if ($validator->fails()) {
-//         return redirect()->back()->withErrors($validator);
-//     }
+        // Load the uploaded file using PHPSpreadsheet
+        $filePath = $request->file('file')->getRealPath();
+        $spreadsheet = IOFactory::load($filePath);
 
-//     // Load the uploaded file using PHPSpreadsheet
-//     $filePath = $request->file('file')->getRealPath();
-//     $spreadsheet = IOFactory::load($filePath);
+        // Get the first worksheet of the uploaded file
+        $worksheet = $spreadsheet->getActiveSheet();
 
-//     // Get the first worksheet of the uploaded file
-//     $worksheet = $spreadsheet->getActiveSheet();
+        // Loop through the rows of the worksheet and insert the data into the database
+        foreach ($worksheet->getRowIterator() as $row) {
+            $data = [];
+            foreach ($row->getCellIterator() as $cell) {
+                $data[] = $cell->getValue();
+            }
 
-//     // Loop through the rows of the worksheet and insert the data into the database
-//     foreach ($worksheet->getRowIterator() as $row) {
-//         $data = [];
-//         foreach ($row->getCellIterator() as $cell) {
-//             $data[] = $cell->getValue();
-//         }
-
-//         DB::table('tbl_other_school_fees')->insert([
-//             'ac_year' => $data[1],
-//             'hei_psg_region' => $data[2],
-//             'hei_uii' => $data[3],
-//             'hei_name' => $data[4],
-//             'year_level' => $data[5],
-//             'semester' => $data[6],
-//             'course_enrolled' => $data[7],
-//             'type_of_fee' => $data[8],
-//             'category' => $data[9],
-//             'coverage' => $data[10],
-//             'is_optional' => $data[12],
-//             'amount' => $data[11],
-//         ]);
-//     }
-
-//     return redirect()->back()->with('success', 'File uploaded successfully.');
-// }
-
-
-public function import(Request $request)
-{
-    // Validate the uploaded file
-    $validator = Validator::make($request->all(), [
-        'file' => 'required|mimes:xlsx,xls,csv'
-    ]);
-
-    // If validation fails, redirect back with errors
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator);
-    }
-
-    // Load the uploaded file using PHPSpreadsheet
-    $filePath = $request->file('file')->getRealPath();
-    $spreadsheet = IOFactory::load($filePath);
-
-    // Get the first worksheet of the uploaded file
-    $worksheet = $spreadsheet->getActiveSheet();
-
-    // Loop through the rows of the worksheet and insert the data into the database
-    foreach ($worksheet->getRowIterator() as $row) {
-        $data = [];
-        foreach ($row->getCellIterator() as $cell) {
-            $data[] = $cell->getValue();
+            OtherSchoolFees::create([
+                'ac_year' => $data[0],
+                'hei_psg_region' => $data[1],
+                'hei_uii' => $data[2],
+                'hei_name' => $data[3],
+                'year_level' => $data[4],
+                'semester' => $data[5],
+                'course_enrolled' => $data[6],
+                'type_of_fee' => $data[7],
+                'category' => $data[8],
+                'coverage' => $data[9],
+                'amount' => $data[10],
+                'is_optional' => $data[11],
+            ]);
         }
 
-        DB::table('tbl_other_school_fees')->insert([
-            'ac_year' => $data[0],
-            'hei_psg_region' => $data[1],
-            'hei_uii' => $data[2],
-            'hei_name' => $data[3],
-            'year_level' => $data[4],
-            'semester' => $data[5],
-            'course_enrolled' => $data[6],
-            'type_of_fee' => $data[7],
-            'category' => $data[8],
-            'coverage' => $data[9],
-            'is_optional' => $data[11],
-            'amount' => $data[10],
-        ]);
+        return redirect()->back()->with('success', 'File uploaded successfully.');
     }
-
-    return redirect()->back()->with('success', 'File uploaded successfully.');
-}
 
 }
