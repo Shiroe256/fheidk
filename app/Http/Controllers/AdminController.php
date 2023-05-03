@@ -241,74 +241,69 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-{
-    // Validate the uploaded file
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv'
-    ]);
-
-    // Load the uploaded file using PHPSpreadsheet
-    $filePath = $request->file('file')->getRealPath();
-    $spreadsheet = IOFactory::load($filePath);
-
-    // Get the first worksheet of the uploaded file
-    $worksheet = $spreadsheet->getActiveSheet();
-
-    // Initialize a flag to indicate whether the current row is the header row
-    $isHeaderRow = true;
-
-    // Initialize an array to store the errors
-    $errors = [];
-
-    // Loop through the rows of the worksheet and insert the data into the database
-    foreach ($worksheet->getRowIterator() as $rowNumber => $row) {
-        if ($isHeaderRow) {
-            // Skip the header row
-            $isHeaderRow = false;
-            continue;
-        }
-
-        $data = [];
-        foreach ($row->getCellIterator() as $cell) {
-            $data[] = $cell->getValue();
-        }
-
-        // Validate the data before creating the record
-        $validator = Validator::make($data, [
-            'year_level' => 'required|numeric',
-            'semester' => 'required|numeric',
-            'amount' => 'required|numeric',
-            'is_optional' => 'required|numeric|in:0,1',
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
         ]);
-
-        if ($validator->fails()) {
-            // Add the error to the errors array
-            foreach ($validator->errors()->toArray() as $field => $messages) {
-                $errors[$rowNumber][$field] = $messages[0];
+    
+        // Load the uploaded file using PHPSpreadsheet
+        $filePath = $request->file('file')->getRealPath();
+        $spreadsheet = IOFactory::load($filePath);
+    
+        // Get the first worksheet of the uploaded file
+        $worksheet = $spreadsheet->getActiveSheet();
+    
+        // Initialize a flag to indicate whether the current row is the header row
+        $isHeaderRow = true;
+    
+        $worksheetData = [];
+    
+        // Loop through the rows of the worksheet and insert the data into the database
+        foreach ($worksheet->getRowIterator() as $row) {
+            if ($isHeaderRow) {
+                // Skip the header row
+                $isHeaderRow = false;
+                continue;
             }
-        } else {
-            OtherSchoolFees::create([
-                'ac_year' => $data[0],
-                'hei_psg_region' => $data[1],
-                'hei_uii' => $data[2],
-                'hei_name' => $data[3],
-                'year_level' => $data[4],
-                'semester' => $data[5],
-                'course_enrolled' => $data[6],
-                'type_of_fee' => $data[7],
-                'category' => $data[8],
-                'coverage' => $data[9],
-                'amount' => $data[10],
-                'is_optional' => $data[11],
+    
+            $rowData = [];
+            foreach ($row->getCellIterator() as $cell) {
+                $rowData[] = $cell->getValue();
+            }
+            
+            $worksheetData[] = $rowData;
+    
+            // Validate the data before creating the record
+            $validator = Validator::make($rowData, [
+                'year_level' => 'required|numeric',
+                'semester' => 'required|numeric',
+                'amount' => 'required|numeric',
+                'is_optional' => 'required|numeric|in:0,1',
             ]);
+    
+            if ($validator->fails()) {
+                $errors[] = $validator->errors()->toArray();
+            } else {
+                OtherSchoolFees::create([
+                    'ac_year' => $rowData[0],
+                    'hei_psg_region' => $rowData[1],
+                    'hei_uii' => $rowData[2],
+                    'hei_name' => $rowData[3],
+                    'year_level' => $rowData[4],
+                    'semester' => $rowData[5],
+                    'course_enrolled' => $rowData[6],
+                    'type_of_fee' => $rowData[7],
+                    'category' => $rowData[8],
+                    'coverage' => $rowData[9],
+                    'amount' => $rowData[10],
+                    'is_optional' => $rowData[11],
+                ]);
+            }
         }
+    
+        return view('admin.form1', compact('worksheetData', 'errors'));
     }
-
-    return view('admin.form1', [
-        'errors' => $errors,
-        'success' => 'File uploaded successfully.',
-    ]);
-}
 
 
 }
