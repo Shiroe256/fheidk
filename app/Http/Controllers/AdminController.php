@@ -269,7 +269,6 @@ class AdminController extends Controller
         foreach ($row->getCellIterator() as $cell) {
             $data[] = $cell->getValue();
         }
-        dd($request->all());
         // Validate the data before creating the record
         $validator = Validator::make($data, [
             'year_level' => 'required|numeric',
