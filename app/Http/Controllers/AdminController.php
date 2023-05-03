@@ -257,11 +257,8 @@ class AdminController extends Controller
         // Initialize a flag to indicate whether the current row is the header row
         $isHeaderRow = true;
     
-        // Initialize a variable to keep track of the current row number
-        $currentRow = 1;
-    
-        // Initialize an array to store the errors and their corresponding row numbers
-        $errors = [];
+        // Initialize an array to hold the worksheet data
+        $worksheetData = [];
     
         // Loop through the rows of the worksheet and insert the data into the database
         foreach ($worksheet->getRowIterator() as $row) {
@@ -271,13 +268,16 @@ class AdminController extends Controller
                 continue;
             }
     
-            $data = [];
+            $rowData = [];
             foreach ($row->getCellIterator() as $cell) {
-                $data[] = $cell->getValue();
+                $rowData[] = $cell->getValue();
             }
     
+            // Add the row data to the worksheet data array
+            $worksheetData[] = $rowData;
+    
             // Validate the data before creating the record
-            $validator = Validator::make($data, [
+            $validator = Validator::make($rowData, [
                 'year_level' => 'required|numeric',
                 'semester' => 'required|numeric',
                 'amount' => 'required|numeric',
@@ -285,34 +285,29 @@ class AdminController extends Controller
             ]);
     
             if ($validator->fails()) {
-                // Add the errors and the current row number to the errors array
-                $errors[$currentRow] = $validator->errors()->all();
+                $errors[] = $validator->errors()->all();
             } else {
                 OtherSchoolFees::create([
-                    'ac_year' => $data[0],
-                    'hei_psg_region' => $data[1],
-                    'hei_uii' => $data[2],
-                    'hei_name' => $data[3],
-                    'year_level' => $data[4],
-                    'semester' => $data[5],
-                    'course_enrolled' => $data[6],
-                    'type_of_fee' => $data[7],
-                    'category' => $data[8],
-                    'coverage' => $data[9],
-                    'amount' => $data[10],
-                    'is_optional' => $data[11],
+                    'ac_year' => $rowData[0],
+                    'hei_psg_region' => $rowData[1],
+                    'hei_uii' => $rowData[2],
+                    'hei_name' => $rowData[3],
+                    'year_level' => $rowData[4],
+                    'semester' => $rowData[5],
+                    'course_enrolled' => $rowData[6],
+                    'type_of_fee' => $rowData[7],
+                    'category' => $rowData[8],
+                    'coverage' => $rowData[9],
+                    'amount' => $rowData[10],
+                    'is_optional' => $rowData[11],
                 ]);
             }
-    
-            $currentRow++;
         }
     
-        // Pass the errors and the worksheet data to the view
         return view('import')->with([
-            'errors' => $errors,
-            'worksheetData' => $worksheet->toArray(),
+            'worksheetData' => $worksheetData,
+            'errors' => $errors ?? [],
         ]);
     }
-
-
+    
 }
