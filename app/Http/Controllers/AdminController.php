@@ -272,10 +272,10 @@ class AdminController extends Controller
 
         // Validate the data before creating a new record
         $validator = Validator::make($data, [
-            'year_level' => 'integer',
-            'semester' => 'integer',
-            'amount' => 'numeric',
-            'is_optional' => 'numeric',
+            'year_level' => 'required|integer',
+            'semester' => 'required|integer',
+            'amount' => 'required|numeric',
+            'is_optional' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
