@@ -787,12 +787,98 @@ class BillingController extends Controller
 
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         //!validation has now been passed to the middleware
-        $added = 0;
-        foreach ($tempstudents as $key => $tempstudent) {
-            $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
-        }
+        // $added = 0;
+        $added = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
+        // foreach ($tempstudents as $key => $tempstudent) {
+        //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
+        // }
         echo $added;
         // echo 'ok';
+    }
+
+    private function parseTempStudentBatch($student = array(), $heiinfo, $billinginfo)
+    {
+        $tempstudent = [];
+        foreach ($student as $key => $data) {
+            // $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
+
+            // $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
+            $hei_uii = Auth::user()->hei_uii;
+
+            // $tempstudent = new TemporaryBilling;
+            $tempstudent['fhe_award_no'] = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateFHEAwardNo($hei_uii, $count);
+            $tempstudent['stud_id'] = array_key_exists('stud_no', $data) ? $data['stud_no'] : '';
+            $tempstudent['lrn_no'] = array_key_exists('lrnum', $data) ? $data['lrnum'] : '';
+            $tempstudent['stud_lname'] = array_key_exists('last_name', $data) ? $data['last_name'] : '';
+            $tempstudent['stud_fname'] = array_key_exists('given_name', $data) ? $data['given_name'] : '';
+            $tempstudent['stud_mname'] = array_key_exists('mid_name', $data) ? $data['mid_name'] : '';
+            $tempstudent['stud_ext_name'] = array_key_exists('ext_name', $data) ? $data['ext_name'] : '';
+            $tempstudent['stud_sex'] = array_key_exists('sex_at_birth', $data) ? $data['sex_at_birth'] : '';
+            $d = date_parse_from_format('m/d/Y', $data['birthdate']);
+            $tempstudent['stud_birth_date'] = $d['year'] . '-' . $d['month'] . '-' . $d['day'];
+            $tempstudent['stud_birth_place'] = array_key_exists('birthplace', $data) ? $data['birthplace'] : '';
+            $tempstudent['f_lname'] = array_key_exists('fathers_lname', $data) ? $data['fathers_lname'] : '';
+            $tempstudent['f_fname'] = array_key_exists('fathers_gname', $data) ? $data['fathers_gname'] : '';
+            $tempstudent['f_mname'] = array_key_exists('fathers_mname', $data) ? $data['fathers_mname'] : '';
+            $tempstudent['m_lname'] = array_key_exists('mothers_lname', $data) ? $data['mothers_lname'] : '';
+            $tempstudent['m_fname'] = array_key_exists('mothers_gname', $data) ? $data['mothers_gname'] : '';
+            $tempstudent['m_mname'] = array_key_exists('mothers_mname', $data) ? $data['mothers_mname'] : '';
+            $tempstudent['permanent_prov'] = array_key_exists('perm_prov', $data) ? $data['perm_prov'] : '';
+            $tempstudent['permanent_city'] = array_key_exists('perm_city', $data) ? $data['perm_city'] : '';
+            $tempstudent['permanent_barangay'] = array_key_exists('perm_brgy', $data) ? $data['perm_brgy'] : '';
+            $tempstudent['permanent_street'] = array_key_exists('perm_street', $data) ? $data['perm_street'] : '';
+            $tempstudent['permanent_zipcode'] = array_key_exists('perm_zip', $data) ? $data['perm_zip'] : '';
+            $tempstudent['present_prov'] = array_key_exists('pres_prov', $data) ? $data['pres_prov'] : '';
+            $tempstudent['present_city'] = array_key_exists('pres_city', $data) ? $data['pres_city'] : '';
+            $tempstudent['present_barangay'] = array_key_exists('pres_brgy', $data) ? $data['pres_brgy'] : '';
+            $tempstudent['present_street'] = array_key_exists('pres_street', $data) ? $data['pres_street'] : '';
+            $tempstudent['present_zipcode'] = array_key_exists('pres_zip', $data) ? $data['pres_zip'] : '';
+            $tempstudent['stud_email'] = array_key_exists('email', $data) ? $data['email'] : '';
+            $tempstudent['stud_alt_email'] = array_key_exists('a_email', $data) ? $data['a_email'] : '';
+            $tempstudent['stud_phone_no'] = array_key_exists('contact_number', $data) ? $data['contact_number'] : '';
+            $tempstudent['stud_alt_phone_no'] = array_key_exists('contact_number_2', $data) ? $data['contact_number_2'] : '';
+            $tempstudent['transferee'] = array_key_exists('is_transferee', $data) ? $data['is_transferee'] : '';
+
+            //dummy data
+            $course = strtoupper($data['degree_course_id']);
+            $year_level = strtoupper($data['year_level']);
+            $tempstudent['degree_program'] = $course;
+            $lab_unit = (float) $data['lab_u'];
+            $tempstudent['lab_unit'] = $lab_unit;
+            $comp_lab_unit = (float) $data['com_lab_u'];
+            $tempstudent['comp_lab_unit'] = $comp_lab_unit;
+            $tempstudent['academic_unit'] = $data['acad_u'];
+            $nstp_unit = array_key_exists('nstp_u', $data) ? $data['nstp_u'] : 0;
+            $tempstudent['nstp_unit'] = $nstp_unit;
+
+            $tempstudent['stud_cor'] = 0; //dummydata
+
+            $tempstudent['exam_result'] = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
+            $tempstudent['remarks'] = array_key_exists('remarks', $data) ? $data['remarks'] : '';
+            $tempstudent['stud_status'] = 0;
+            $tempstudent['uploaded_by'] = Auth::user()->email;
+
+            $tempstudent['ac_year'] = $billinginfo['ac_year'];
+            $tempstudent['hei_psg_region'] = $heiinfo['hei_psg_region'];
+            $tempstudent['hei_sid'] = $heiinfo['hei_sid'];
+            $tempstudent['hei_uii'] = $hei_uii;
+            $tempstudent['hei_name'] = $heiinfo['hei_shortname'];
+            $tempstudent['reference_no'] = $billinginfo['reference_no'];
+            $tempstudent['year_level'] = $year_level;
+            $tempstudent['semester'] = $billinginfo['semester'];
+            $tempstudent['tranche'] = $billinginfo['tranche'];
+            $tempstudent['app_id'] = $this->generateAppID($key + 1);
+
+            $tempstudentforinsert[] = $tempstudent;
+        }
+
+        $tempstudentmodel = new TemporaryBilling;
+        $tempstudentmodel->insert($tempstudentforinsert);
+
+        // return $tempstudent;
+
+        // return $tempstudentforinsert;
+        return $tempstudentmodel->save();
     }
 
     private function newTempStudentBatch($data = array(), $heiinfo, $billinginfo, $count)
