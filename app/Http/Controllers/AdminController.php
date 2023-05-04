@@ -269,37 +269,34 @@ class AdminController extends Controller
             foreach ($row->getCellIterator() as $cell) {
                 $data[] = $cell->getValue();
             }
-            // // Validate the data before creating the record
-            // $validator = Validator::make($data, [
-            //     'year_level' => 'numeric',
-            //     'semester' => 'numeric',
-            //     'amount' => 'numeric',
-            //     'is_optional' => 'numeric|in:0,1',
-            // ]);
+            // Validate the data before creating the record
+            $validator = Validator::make($data, [
+                'year_level' => 'numeric',
+                'semester' => 'numeric',
+                'amount' => 'numeric',
+                'is_optional' => 'numeric|in:0,1',
+            ]);
 
-            // if ($validator->fails()) {
-            //     return redirect()->back()->withErrors($validator)->withInput();
-            // }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
 
-        //     OtherSchoolFees::create([
-        //         'ac_year' => $data[0],
-        //         'hei_psg_region' => $data[1],
-        //         'hei_uii' => $data[2],
-        //         'hei_name' => $data[3],
-        //         'year_level' => $data[4],
-        //         'semester' => $data[5],
-        //         'course_enrolled' => $data[6],
-        //         'type_of_fee' => $data[7],
-        //         'category' => $data[8],
-        //         'coverage' => $data[9],
-        //         'amount' => $data[10],
-        //         'is_optional' => $data[11],
-        //     ]);
-        // }
-
-        // return redirect()->back()->with('success', 'File uploaded successfully.');
-
-        dd($data);
+            OtherSchoolFees::create([
+                'ac_year' => $data[0],
+                'hei_psg_region' => $data[1],
+                'hei_uii' => $data[2],
+                'hei_name' => $data[3],
+                'year_level' => $data[4],
+                'semester' => $data[5],
+                'course_enrolled' => $data[6],
+                'type_of_fee' => $data[7],
+                'category' => $data[8],
+                'coverage' => $data[9],
+                'amount' => $data[10],
+                'is_optional' => $data[11],
+            ]);
         }
+
+        return redirect()->back()->with('success', 'File uploaded successfully.');
     }
 }
