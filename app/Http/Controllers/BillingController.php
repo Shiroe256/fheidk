@@ -873,7 +873,7 @@ class BillingController extends Controller
         }
 
         $tempstudentmodel = new TemporaryBilling;
-        foreach (array_chunk($tempstudentforinsert, 1000) as $t) {
+        foreach (array_chunk($tempstudentforinsert, 1500) as $t) {
             $tempstudentmodel->insert($t);
         }
 
