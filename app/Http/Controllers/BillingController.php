@@ -788,11 +788,11 @@ class BillingController extends Controller
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         //!validation has now been passed to the middleware
         // $added = 0;
-        $added = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
+        $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
         // foreach ($tempstudents as $key => $tempstudent) {
         //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         // }
-        echo $added;
+        echo $result;
         // echo 'ok';
     }
 
@@ -800,9 +800,6 @@ class BillingController extends Controller
     {
         $tempstudent = [];
         foreach ($student as $key => $data) {
-            // $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
-
-            // $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
             $hei_uii = Auth::user()->hei_uii;
 
             // $tempstudent = new TemporaryBilling;
@@ -873,14 +870,13 @@ class BillingController extends Controller
         }
 
         $tempstudentmodel = new TemporaryBilling;
-        foreach (array_chunk($tempstudentforinsert, 1200) as $t) {
-            $tempstudentmodel->insert($t);
+        foreach (array_chunk($tempstudentforinsert, 1200) as $key => $t) {
+            if (!$tempstudentmodel->insert($t)) {
+                return array('batch' => $key, 'inserted' => ($key + 1) * 1200);
+            }
         }
-
-        // return $tempstudent;
-
-        // return $tempstudentforinsert;
-        return 1;
+        
+        return array('batch' => -1, 'inserted' => ($key + 1) * 1200);
     }
 
     private function newTempStudentBatch($data = array(), $heiinfo, $billinginfo, $count)
