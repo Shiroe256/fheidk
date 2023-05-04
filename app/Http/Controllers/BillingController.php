@@ -800,9 +800,6 @@ class BillingController extends Controller
     {
         $tempstudent = [];
         foreach ($student as $key => $data) {
-            // $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
-
-            // $json_fees = json_decode($json_fees, true); //ung true para maging associative array siya
             $hei_uii = Auth::user()->hei_uii;
 
             // $tempstudent = new TemporaryBilling;
