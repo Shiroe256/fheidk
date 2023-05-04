@@ -299,7 +299,7 @@ class AdminController extends Controller
 
         // return redirect()->back()->with('success', 'File uploaded successfully.');
 
-        print_r($data);
+        dd($data);
         }
     }
 }
