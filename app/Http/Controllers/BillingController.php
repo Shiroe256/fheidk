@@ -806,7 +806,7 @@ class BillingController extends Controller
             $hei_uii = Auth::user()->hei_uii;
 
             // $tempstudent = new TemporaryBilling;
-            $tempstudent['fhe_award_no'] = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateFHEAwardNo($hei_uii, $count);
+            $tempstudent['fhe_award_no'] = array_key_exists('fhe_aw_no', $data) ? $data['fhe_aw_no'] : $this->generateFHEAwardNo($hei_uii, $key+1);
             $tempstudent['stud_id'] = array_key_exists('stud_no', $data) ? $data['stud_no'] : '';
             $tempstudent['lrn_no'] = array_key_exists('lrnum', $data) ? $data['lrnum'] : '';
             $tempstudent['stud_lname'] = array_key_exists('last_name', $data) ? $data['last_name'] : '';
