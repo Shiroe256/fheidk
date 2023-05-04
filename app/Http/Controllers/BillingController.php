@@ -873,14 +873,14 @@ class BillingController extends Controller
         }
 
         $tempstudentmodel = new TemporaryBilling;
-        foreach (array_chunk($tempstudentforinsert, 2000) as $t) {
+        foreach (array_chunk($tempstudentforinsert, 1000) as $t) {
             $tempstudentmodel->insert($t);
         }
 
         // return $tempstudent;
 
         // return $tempstudentforinsert;
-        return $tempstudentmodel->save();
+        return 1;
     }
 
     private function newTempStudentBatch($data = array(), $heiinfo, $billinginfo, $count)
