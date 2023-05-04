@@ -258,7 +258,7 @@ class AdminController extends Controller
     $isHeaderRow = true;
 
     // Set the batch size
-    $batchSize = 100;
+    $batchSize = 1000;
 
     // Get the highest row number in the worksheet
     $highestRow = $worksheet->getHighestRow();
