@@ -224,7 +224,6 @@
                                                 <th class="text-left">REMARKS</th>
                                                 <th class="text-right">AMOUNT</th>
                                             </tr>
-                                            @foreach($fees as $fee)
                                             <tr>
                                                 <th colspan="4">{{ $fee->type_of_fee }}</th>
                                             </tr>
