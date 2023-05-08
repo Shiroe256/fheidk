@@ -188,10 +188,10 @@ fileInput.onchange = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        html: 'Please check the name of your Sheet'
+        html: 'Please check the Sheet'
       });
     } else {
-      document.getElementById("upload_status").innerHTML = output.length + " Students detected";
+      document.getElementById("upload_status").innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
       resetUploadButton();
       document.getElementById('upload_template_text').innerHTML = selectedFile.name;
     }
