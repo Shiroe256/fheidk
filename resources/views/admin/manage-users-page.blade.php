@@ -209,6 +209,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr>
+                                                <th colspan="2">BACHELOR OF SCIENCE IN INFORMATION AND TECHNOLOGY</th>
+                                                <th colspan>1ST YEAR</th>
+                                                <th>1ST SEMESTER</th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4">{{ $fee->type_of_fee }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>CATEGORY</th>
+                                                <th>COVERAGE</th>
+                                                <th class="text-left">REMARKS</th>
+                                                <th class="text-right">AMOUNT</th>
+                                            </tr>
                                             @foreach($fees as $fee)
                                             <tr>
                                                 <th colspan="4">{{ $fee->type_of_fee }}</th>
