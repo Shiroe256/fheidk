@@ -201,7 +201,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="table-responsive table-bordered">
+                                <div class="table-responsive table mt-2" id="tbl_user_page_admin" role="grid" aria-describedby="dataTable_info">
                                     <table class="table table-bordered" id="tbl_tosf">
                                         <thead>
                                             <tr>
