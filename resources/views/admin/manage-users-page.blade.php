@@ -178,11 +178,9 @@
                                 <div class="dropdown no-arrow"><button class="btn btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
                                         <p class="text-center dropdown-header">dropdown header:</p>
-                                        <a class="text-dark" data-toggle="modal" data-bss-tooltip="" href="#" title="Upload list of TOSF" data-target="#modal_tosf"><i class="fas fa-upload"></i>
-                                        </a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Upload TOSF</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Upload TOSF</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"> Something else here</a>
+                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Add New Fee</a>
                                     </div>
                                 </div>
                             </div>
