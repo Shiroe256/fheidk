@@ -34,11 +34,6 @@ class AdminController extends Controller
         return view('admin.manage-users-list');
     }
 
-    public function manageuserpage()
-    {
-        return view('admin.manage-users-page');
-    }
-
     public function managebillinglist()
     {
         return view('admin.manage-billing-list');
@@ -241,24 +236,37 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
-        ]);
+{
+    // Validate the uploaded file
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
 
-        // Load the uploaded file using PHPSpreadsheet
-        $filePath = $request->file('file')->getRealPath();
-        $spreadsheet = IOFactory::load($filePath);
+    // Load the uploaded file using PHPSpreadsheet
+    $filePath = $request->file('file')->getRealPath();
+    $spreadsheet = IOFactory::load($filePath);
 
-        // Get the first worksheet of the uploaded file
-        $worksheet = $spreadsheet->getActiveSheet();
+    // Get the first worksheet of the uploaded file
+    $worksheet = $spreadsheet->getActiveSheet();
 
-        // Initialize a flag to indicate whether the current row is the header row
-        $isHeaderRow = true;
+    // Initialize a flag to indicate whether the current row is the header row
+    $isHeaderRow = true;
 
-        // Loop through the rows of the worksheet and insert the data into the database
-        foreach ($worksheet->getRowIterator() as $row) {
+    // Set the batch size
+    $batchSize = 1000;
+
+    // Get the highest row number in the worksheet
+    $highestRow = $worksheet->getHighestRow();
+
+    // Loop through the rows of the worksheet and insert the data into the database in batches
+    for ($i = 1; $i <= $highestRow; $i += $batchSize) {
+        $batch = [];
+        for ($j = $i; $j < $i + $batchSize; $j++) {
+            if ($j > $highestRow) {
+                break;
+            }
+            $row = $worksheet->getRowIterator($j)->current();
+
             if ($isHeaderRow) {
                 // Skip the header row
                 $isHeaderRow = false;
@@ -281,7 +289,7 @@ class AdminController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            OtherSchoolFees::create([
+            $batch[] = [
                 'ac_year' => $data[0],
                 'hei_psg_region' => $data[1],
                 'hei_uii' => $data[2],
@@ -294,9 +302,19 @@ class AdminController extends Controller
                 'coverage' => $data[9],
                 'amount' => $data[10],
                 'is_optional' => $data[11],
-            ]);
+            ];
         }
-
-        return redirect()->back()->with('success', 'File uploaded successfully.');
+        OtherSchoolFees::insert($batch);
     }
+
+    return redirect()->back()->with('success', 'File uploaded successfully.');
+}
+
+public function manageuserpage()
+    { 
+    $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')->get();
+        $data['fees'] = $fees;
+        return view('admin.manage-users-page', $data);
+    }
+
 }
