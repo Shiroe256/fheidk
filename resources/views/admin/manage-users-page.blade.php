@@ -229,7 +229,6 @@
                                                 @else
                                                 <td class="text-left">Optional</td>
                                                 @endif
-                                                <td class="text-left">{{ $fee->is_optional }}</td>
                                                 <td class="text-right">{{ $fee->amount }}</td>
                                             </tr>
                                             @endforeach
