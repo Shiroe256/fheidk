@@ -312,7 +312,7 @@ class AdminController extends Controller
 
 public function manageuserpage()
     { 
-    $fees = OtherSchoolFees::where('hei_name', 'Mabalacat')->get();
+    $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')->get();
         $data['fees'] = $fees;
         return view('admin.manage-users-page', $data);
     }
