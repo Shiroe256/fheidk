@@ -1,6 +1,10 @@
 fetchBillingListAdmin()
 
-let table = new DataTable('#tbl_tosf');
+$("#tbl_tosf").DataTable({
+  "order": [[0, "asc"]],
+  orderCellsTop: true,
+  fixedHeader: true
+});
 
 //fetch records from the database
 function fetchBillingListAdmin() {
