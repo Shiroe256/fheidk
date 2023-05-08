@@ -70,10 +70,11 @@ $('#btn_save').click(function () {
         data: {
             on: on,
             off: off,
-            bs_reference_no: $('#btn_save').val()
+            reference_no: $('#btn_save').val()
         },
         success: function (data) {
             window.location.href = "/billings/" + data;
+            // window.location.href = "/billings/" + data;
         }
     });
 });

@@ -718,8 +718,11 @@ class BillingController extends Controller
         $onsettings = $request->on;
         $offsettings = $request->off;
         $reference_no = $request->reference_no;
+        // echo $reference_no
         $this->upsertSettings($reference_no, $onsettings, $offsettings);
-        echo $reference_no;
+        // echo $reference_no;
+        // print_r($offsettings);
+        // print_r($onsettings);
     }
 
     public function toggleStudentFee(Request $request)
