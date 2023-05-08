@@ -70,7 +70,7 @@ $('#btn_save').click(function () {
         data: {
             on: on,
             off: off,
-            bs_reference_no: reference_no
+            bs_reference_no: $('#btn_save').val()
         },
         success: function (data) {
             window.location.href = "/billings/" + data;
