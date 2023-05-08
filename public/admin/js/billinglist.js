@@ -1,5 +1,7 @@
 fetchBillingListAdmin()
 
+let table = new DataTable('#tbl_tosf');
+
 //fetch records from the database
 function fetchBillingListAdmin() {
     $.ajax({

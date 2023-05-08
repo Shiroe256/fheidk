@@ -202,7 +202,7 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive table-bordered table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table table-bordered my-0" id="dataTable">
+                                    <table class="table table-bordered my-0" id="tbl_tosf">
                                         <thead>
                                             <tr>
                                                 <th class="text-center" colspan="4">TYPE OF FEE</th>
@@ -215,11 +215,8 @@
                                                 <th>{{ $fee->year_level }}</th>
                                                 <th>{{ $fee->semester }}</th>
                                             </tr>
-                                            @endforeach
                                             <tr>
-                                                @foreach($fees as $fee)
                                                 <th colspan="4">{{ $fee->type_of_fee }}</th>
-                                                @endforeach
                                             </tr>
                                             <tr>
                                                 <th>CATEGORY</th>
