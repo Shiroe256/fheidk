@@ -264,7 +264,7 @@ class AdminController extends Controller
     $highestRow = $worksheet->getHighestRow();
 
     // Loop through the rows of the worksheet and insert the data into the database in batches
-    for ($i = 2; $i <= $highestRow; $i += $batchSize) {
+    for ($i = 1; $i <= $highestRow; $i += $batchSize) {
         $batch = [];
         for ($j = $i; $j < $i + $batchSize; $j++) {
             if ($j > $highestRow) {
