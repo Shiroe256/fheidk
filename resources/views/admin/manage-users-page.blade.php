@@ -226,8 +226,7 @@
                                                 <td class="text-left">{{ $fee->coverage }}</td>
                                                 @if( $fee->is_optional == 0)
                                                 <td class="text-left"></td>
-                                                @endif
-                                                @if( $fee->is_optional == 1)
+                                                @else
                                                 <td class="text-left">Optional</td>
                                                 @endif
                                                 <td class="text-left">{{ $fee->is_optional }}</td>
