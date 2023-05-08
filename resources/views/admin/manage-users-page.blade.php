@@ -213,6 +213,7 @@
                                                 <th class="text-left">COVERAGE</th>
                                                 <th class="text-left">REMARKS</th>
                                                 <th class="text-right">AMOUNT</th>
+                                                <th class="text-right">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
