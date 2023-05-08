@@ -232,7 +232,7 @@
                                                 @endif
                                                 <td class="text-right">{{ $fee->amount }}</td>
                                                 <td class="text-center">
-                                                    <div role="group" class="btn-group"><button class="btn btn-primary" type="button"><i class="fas fa-edit"></i></button><button class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button></div>
+                                                    <div role="group" class="btn-group"><button id="btn_edit" class="btn btn-primary" type="button"><i class="fas fa-edit"></i></button><button id="btn_remove" class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button></div>
                                                 </td>
                                             </tr>
                                             @endforeach
