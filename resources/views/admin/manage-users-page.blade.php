@@ -174,12 +174,15 @@
                     <div class="col-xl-12">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6><a class="text-dark" data-toggle="modal" data-bss-tooltip="" href="#" title="Upload list of TOSF" data-target="#modal_tosf"><i class="fas fa-upload"></i>
-                                </a>
+                                <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6>
                                 <div class="dropdown no-arrow"><button class="btn btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                        <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#"> Action</a><a class="dropdown-item" href="#"> Another action</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"> Something else here</a>
+                                        <p class="text-center dropdown-header">dropdown header:</p>
+                                        <a class="text-dark" data-toggle="modal" data-bss-tooltip="" href="#" title="Upload list of TOSF" data-target="#modal_tosf"><i class="fas fa-upload"></i>
+                                        </a>
+                                        <a class="dropdown-item" href="#"> Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"> Something else here</a>
                                     </div>
                                 </div>
                             </div>
