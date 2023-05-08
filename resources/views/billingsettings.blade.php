@@ -6,6 +6,7 @@
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
             {{ $ac_year }}</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">{{ $f->format($semester) }}
             Semester</span> / <span class="badge badge-pill badge-info">{{ $f->format($tranche) }} Tranche</span></h5>
+            <input type="hidden" name="" id="reference_no" value="{{ $reference_no }}">
     <div>
         <div class="card shadow">
             <div class="card-header">
