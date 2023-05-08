@@ -180,7 +180,7 @@
                                         <p class="text-center dropdown-header">dropdown header:</p>
                                         <a class="text-dark" data-toggle="modal" data-bss-tooltip="" href="#" title="Upload list of TOSF" data-target="#modal_tosf"><i class="fas fa-upload"></i>
                                         </a>
-                                        <a class="dropdown-item" href="#"> Another action</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Upload TOSF</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#"> Something else here</a>
                                     </div>
