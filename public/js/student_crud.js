@@ -8,7 +8,7 @@ const mod_stud_settings_placeholder = document.getElementById('settings-placehol
 const summary_placeholder = document.getElementById('summary_placeholder');
 const btn_edit_students = document.getElementById('btn_edit_students');
 const btn_close_stud_settings = document.querySelectorAll('#mod_stud_settings div.modal-header button');
-const reference_no = document.getElementById('reference_no');
+const reference_no = document.getElementById('reference_no').value;
 const frm_stud_settings_footer = document.getElementById("mod_stud_settings").getElementsByClassName("modal-footer");
 const btn_save_student_settings = document.getElementById('btn_save_student_settings');
 let updatedata = {};
@@ -188,10 +188,10 @@ fileInput.onchange = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        html: 'Please check the name of your Sheet'
+        html: 'Please check the Sheet'
       });
     } else {
-      document.getElementById("upload_status").innerHTML = output.length + " Students detected";
+      document.getElementById("upload_status").innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
       resetUploadButton();
       document.getElementById('upload_template_text').innerHTML = selectedFile.name;
     }

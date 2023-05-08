@@ -679,7 +679,7 @@ class BillingController extends Controller
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
-            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,updated_at,is_optional')
+            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,tbl_billing_settings.updated_at,is_optional')
             ->get();
         $course_lastupdated = [];
         $otherfeesresult = [];
