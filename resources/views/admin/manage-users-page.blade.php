@@ -209,42 +209,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($fees as $fee)
                                             <tr>
-                                                <th colspan="4">ADMISSION FEE</th>
+                                                <th colspan="4">{{ $fee->type_of_fee }}</th>
                                             </tr>
                                             <tr>
-                                                <th>CATEGORY</th>
-                                                <th>COVERAGE</th>
-                                                <th class="text-left">REMARKS</th>
-                                                <th class="text-right">AMOUNT</th>
+                                                <td>{{ $fee->category }}</td>
+                                                <td>{{ $fee->coverage }}</td>
+                                                <td class="text-left">{{ $fee->is_optional }}</td>
+                                                <td class="text-right">{{ $fee->amount }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Entrance Exam</td>
-                                                <td>per new student</td>
-                                                <td class="text-left"></td>
-                                                <td class="text-right">300</td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4">ATHLETIC FEE</th>
-                                            </tr>
-                                            <tr>
-                                                <th>CATEGORY</th>
-                                                <th>COVERAGE</th>
-                                                <th class="text-left">REMARKS</th>
-                                                <th class="text-right">AMOUNT</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Alay Lakad</td>
-                                                <td>per new student</td>
-                                                <td class="text-left">optional</td>
-                                                <td class="text-right">150</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sports-Related Trainings</td>
-                                                <td>per new student</td>
-                                                <td class="text-left"></td>
-                                                <td class="text-right">300</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

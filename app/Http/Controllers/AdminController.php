@@ -315,5 +315,10 @@ class AdminController extends Controller
     return redirect()->back()->with('success', 'File uploaded successfully.');
 }
 
+public function tosf()
+{
+    $fees = OtherSchoolFees::all();
+    return view('fees.index', compact('fees'));
+}
 
 }
