@@ -201,43 +201,6 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="table-responsive table-bordered table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table table-bordered my-0" >
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" colspan="4">TYPE OF FEE</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($fees as $fee)
-                                            <tr>
-                                                <th colspan="2">{{ $fee->course_enrolled }}</th>
-                                                <th>{{ $fee->year_level }}</th>
-                                                <th>{{ $fee->semester }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4">{{ $fee->type_of_fee }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th>CATEGORY</th>
-                                                <th>COVERAGE</th>
-                                                <th class="text-left">REMARKS</th>
-                                                <th class="text-right">AMOUNT</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4">{{ $fee->type_of_fee }}</th>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ $fee->category }}</td>
-                                                <td>{{ $fee->coverage }}</td>
-                                                <td class="text-left">{{ $fee->is_optional }}</td>
-                                                <td class="text-right">{{ $fee->amount }}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
                                 <div class="table-responsive table-bordered">
                                     <table class="table table-bordered" id="tbl_tosf">
                                         <thead>
