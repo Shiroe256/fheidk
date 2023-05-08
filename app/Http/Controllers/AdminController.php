@@ -241,88 +241,79 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
-        ]);
-    
-        // Load the uploaded file using PHPSpreadsheet
-        $filePath = $request->file('file')->getRealPath();
-        $spreadsheet = IOFactory::load($filePath);
-    
-        // Get the first worksheet of the uploaded file
-        $worksheet = $spreadsheet->getActiveSheet();
-    
-        // Initialize a flag to indicate whether the current row is the header row
-        $isHeaderRow = true;
-    
-        // Start a transaction
-        DB::beginTransaction();
-    
-        try {
-            // Loop through the rows of the worksheet and insert the data into the database
-            foreach ($worksheet->getRowIterator() as $row) {
-                if ($isHeaderRow) {
-                    // Skip the header row
-                    $isHeaderRow = false;
-                    continue;
-                }
-    
-                $data = [];
-                foreach ($row->getCellIterator() as $cell) {
-                    $data[] = $cell->getValue();
-                }
-    
-                // Validate the data before creating the record
-                $validator = Validator::make($data, [
-                    'year_level' => 'numeric',
-                    'semester' => 'numeric',
-                    'amount' => 'numeric',
-                    'is_optional' => 'numeric|in:0,1',
-                ]);
-    
-                if ($validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
-                }
-    
-                // Create the record
-                $record = OtherSchoolFees::create([
-                    'ac_year' => $data[0],
-                    'hei_psg_region' => $data[1],
-                    'hei_uii' => $data[2],
-                    'hei_name' => $data[3],
-                    'year_level' => $data[4],
-                    'semester' => $data[5],
-                    'course_enrolled' => $data[6],
-                    'type_of_fee' => $data[7],
-                    'category' => $data[8],
-                    'coverage' => $data[9],
-                    'amount' => $data[10],
-                    'is_optional' => $data[11],
-                ]);
-    
-                // Record the changes made to the record using Laravel Audit
-                app('audit')->execute(OtherSchoolFees::class, function($audit) use ($record) {
-                    $audit->setEventType('created');
-                    $audit->setAuditableId($record->id);
-                    $audit->setNewValues($record->getAttributes());
-                });
+{
+    // Validate the uploaded file
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ]);
+
+    // Load the uploaded file using PHPSpreadsheet
+    $filePath = $request->file('file')->getRealPath();
+    $spreadsheet = IOFactory::load($filePath);
+
+    // Get the first worksheet of the uploaded file
+    $worksheet = $spreadsheet->getActiveSheet();
+
+    // Initialize a flag to indicate whether the current row is the header row
+    $isHeaderRow = true;
+
+    // Set the batch size
+    $batchSize = 1000;
+
+    // Get the highest row number in the worksheet
+    $highestRow = $worksheet->getHighestRow();
+
+    // Loop through the rows of the worksheet and insert the data into the database in batches
+    for ($i = 2; $i <= $highestRow; $i += $batchSize) {
+        $batch = [];
+        for ($j = $i; $j < $i + $batchSize; $j++) {
+            if ($j > $highestRow) {
+                break;
             }
-    
-            // Commit the transaction
-            DB::commit();
-    
-            return redirect()->back()->with('success', 'File uploaded successfully.');
-    
-        } catch (\Exception $e) {
-            // Roll back the transaction on exception
-            DB::rollBack();
-    
-            return redirect()->back()->withErrors([$e->getMessage()])->withInput();
+            $row = $worksheet->getRowIterator($j)->current();
+
+            if ($isHeaderRow) {
+                // Skip the header row
+                $isHeaderRow = false;
+                continue;
+            }
+
+            $data = [];
+            foreach ($row->getCellIterator() as $cell) {
+                $data[] = $cell->getValue();
+            }
+            // Validate the data before creating the record
+            $validator = Validator::make($data, [
+                'year_level' => 'numeric',
+                'semester' => 'numeric',
+                'amount' => 'numeric',
+                'is_optional' => 'numeric|in:0,1',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $batch[] = [
+                'ac_year' => $data[0],
+                'hei_psg_region' => $data[1],
+                'hei_uii' => $data[2],
+                'hei_name' => $data[3],
+                'year_level' => $data[4],
+                'semester' => $data[5],
+                'course_enrolled' => $data[6],
+                'type_of_fee' => $data[7],
+                'category' => $data[8],
+                'coverage' => $data[9],
+                'amount' => $data[10],
+                'is_optional' => $data[11],
+            ];
         }
+        OtherSchoolFees::insert($batch);
     }
-    
+
+    return redirect()->back()->with('success', 'File uploaded successfully.');
+}
 
 
 }
