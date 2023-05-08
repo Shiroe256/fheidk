@@ -310,11 +310,11 @@ class AdminController extends Controller
     return redirect()->back()->with('success', 'File uploaded successfully.');
 }
 
-public function tosf()
-{
-    $fees = OtherSchoolFees::all();
-    $data['fees'] = $fees;
-    return view('admin.manage-users-page', $data);
-}
+public function manageuserpage()
+    { 
+        $fees = OtherSchoolFees::all();
+        $data['fees'] = $fees;
+        return view('admin.manage-users-page', $data);
+    }
 
 }
