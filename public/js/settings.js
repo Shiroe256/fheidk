@@ -3,7 +3,7 @@ var off = [];
 var changes = [];
 var reference_no = $('#btn_save').val();
 $( document ).ready(function() {
-    resetCounter($('[id^="checked_ctr_"'));
+    // resetCounter($('[id^="checked_ctr_"'));
 });
 $('#select_course').change(function () {
     $(".course-settings").each(function () {
@@ -28,7 +28,7 @@ $('[id^="switch_"]').change(function (index) {
             console.log($(this).val());
         }
     });
-    resetCounter($('[id^="checked_ctr_"'));
+    // resetCounter($('[id^="checked_ctr_"'));
 });
 
 function resetCounter(elements) {
