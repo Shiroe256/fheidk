@@ -202,7 +202,7 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive table-bordered table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table table-bordered my-0" id="tbl_tosf">
+                                    <table class="table table-bordered my-0" >
                                         <thead>
                                             <tr>
                                                 <th class="text-center" colspan="4">TYPE OF FEE</th>
@@ -237,6 +237,38 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <div class="table-responsive table-bordered">
+                                    <table class="table table-bordered" id="tbl_tosf">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">DEGREE PROGRAM</th>
+                                                <th class="text-center">YEAR LEVEL</th>
+                                                <th class="text-center">SEMESTER</th>
+                                                <th class="text-left">TYPE OF FEE</th>
+                                                <th class="text-left">CATEGORY</th>
+                                                <th class="text-left">COVERAGE</th>
+                                                <th class="text-left">REMARKS</th>
+                                                <th class="text-right">AMOUNT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($fees as $fee)
+                                            <tr>
+                                                <td class="text-left">{{ $fee->course_enrolled }}</td>
+                                                <td class="text-center">{{ $fee->year_level }}</td>
+                                                <td class="text-center">{{ $fee->semester }}</td>
+                                                <td class="text-left">{{ $fee->type_of_fee }}</td>
+                                                <td class="text-left">{{ $fee->category }}</td>
+                                                <td class="text-left">{{ $fee->coverage }}</td>
+                                                <td class="text-left">{{ $fee->is_optional }}</td>
+                                                <td class="text-right">{{ $fee->amount }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
