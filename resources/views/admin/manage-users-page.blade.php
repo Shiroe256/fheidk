@@ -230,6 +230,9 @@
                                                 <td class="text-left">Optional</td>
                                                 @endif
                                                 <td class="text-right">{{ $fee->amount }}</td>
+                                                <td>
+                                                    <a href="https://fhe.unifast.gov.ph/admin/manageuserpage" id="1" name="btn_view_user" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
