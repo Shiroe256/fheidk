@@ -231,8 +231,8 @@
                                                 <td class="text-left">Optional</td>
                                                 @endif
                                                 <td class="text-right">{{ $fee->amount }}</td>
-                                                <td>
-                                                    <a href="https://fhe.unifast.gov.ph/admin/manageuserpage" id="1" name="btn_view_user" class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button"><i class="fas fa-eye"></i>View</a>
+                                                <td class="text-center">
+                                                    <div role="group" class="btn-group"><button class="btn btn-primary" type="button"><i class="fas fa-edit"></i></button><button class="btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button></div>
                                                 </td>
                                             </tr>
                                             @endforeach
