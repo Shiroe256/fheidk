@@ -318,7 +318,8 @@ class AdminController extends Controller
 public function tosf()
 {
     $fees = OtherSchoolFees::all();
-    return view('admin.manage-users-page', compact($fees));
+    $data['fees'] = $fees;
+    return view('admin.manage-users-page', $data);
 }
 
 }
