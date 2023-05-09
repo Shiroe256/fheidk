@@ -174,7 +174,15 @@
                     <div class="col-xl-12">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6><a class="text-dark" data-toggle="modal" data-bss-tooltip="" href="#" title="Upload list of TOSF" data-target="#modal_tosf"><i class="fas fa-upload"></i></a>
+                                <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6>
+                                <div class="dropdown no-arrow"><button class="btn btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
+                                        <p class="dropdown-header">Action:</p>
+                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Upload TOSF</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"> Add New Fee</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <form>
@@ -201,40 +209,8 @@
                                         </div>
                                     </div>
                                 </form>
-                                <div class="table-responsive table mt-2" id="tbl_user_page_admin" role="grid" aria-describedby="dataTable_info">
-                                    <table class="table table-bordered" id="tbl_tosf">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">DEGREE PROGRAM</th>
-                                                <th class="text-center">YEAR LEVEL</th>
-                                                <th class="text-center">SEMESTER</th>
-                                                <th class="text-left">TYPE OF FEE</th>
-                                                <th class="text-left">CATEGORY</th>
-                                                <th class="text-left">COVERAGE</th>
-                                                <th class="text-left">REMARKS</th>
-                                                <th class="text-right">AMOUNT</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($fees as $fee)
-                                            <tr>
-                                                <td class="text-left">{{ $fee->course_enrolled }}</td>
-                                                <td class="text-center">{{ $fee->year_level }}</td>
-                                                <td class="text-center">{{ $fee->semester }}</td>
-                                                <td class="text-left">{{ $fee->type_of_fee }}</td>
-                                                <td class="text-left">{{ $fee->category }}</td>
-                                                <td class="text-left">{{ $fee->coverage }}</td>
-                                                @if( $fee->is_optional == 0)
-                                                <td class="text-left"></td>
-                                                @else
-                                                <td class="text-left">Optional</td>
-                                                @endif
-                                                <td class="text-right">{{ $fee->amount }}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <!--LIST OF TOSF HERE-->
+                                @include('admin.elements.tosflist')
                             </div>
                         </div>
                     </div>
