@@ -344,7 +344,7 @@
             <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
                 @csrf
             <div class="modal-header">
-                <h4 class="modal-title">Upload TOSF</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">UPLOAD TOSF</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body"><input type="file" name="file">
                 <div class="input-group"></div>
@@ -359,7 +359,6 @@
 </div>
 <!---Upload TOSF Modal--->
 
-
 <!---Add TOSF Modal--->
 <div role="dialog" tabindex="-1" class="modal fade show" id="modal_add_tosf">
     <div class="modal-dialog" role="document">
@@ -369,10 +368,10 @@
                     <h4 class="modal-title">ADD TOSF</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>Degree Program</label><input type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input type="number" class="form-control" min="1" max="6" /></div>
+                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_program" name="add_tosf_program" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level" name="add_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
                     <div class="form-group"><label>Semester</label>
-                        <select class="form-control">
+                        <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -381,7 +380,7 @@
                         </select>
                     </div>
                     <div class="form-group"><label>Type of Fee</label>
-                        <select class="form-control">
+                        <select id="add_tosf_type_of_fee" name="add_tosf_type_of_fee" class="form-control">
                             <option selected disabled value="">-- Select Type of Fee --</option>
                             <option value="Admission">Admission</option>
                             <option value="Athletic">Athletic</option>
@@ -400,9 +399,9 @@
                             <option value="NSTP">NSTP</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Category</label><input type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Category</label><input id="add_tosf_category" name="add_tosf_category" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Coverage</label>
-                        <select class="form-control">
+                        <select id="add_tosf_coverage" name="add_tosf_coverage" class="form-control">
                             <option selected disabled value="">-- Select Coverage --</option>
                             <option value="per unit">per unit</option>
                             <option value="per subject">per subject</option>
@@ -412,9 +411,9 @@
                     <div class="form-group">
                         <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="chk_opt" /><label class="custom-control-label" for="chk_opt">Optional</label></div>
                     </div>
-                    <div class="form-group"><label>Amount</label></div><input type="number" class="form-control" min="0" />
+                    <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf" class="btn btn-primary" type="submit">Save</button></div>
             </form>
         </div>
     </div>
