@@ -410,7 +410,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="formCheck-1" /><label class="custom-control-label" for="formCheck-1">Optional</label></div>
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="chk_opt" /><label class="custom-control-label" for="chk_opt">Optional</label></div>
                     </div>
                     <div class="form-group"><label>Amount</label></div><input type="number" class="form-control" min="0" />
                 </div>
