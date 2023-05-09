@@ -358,3 +358,65 @@
     </div>
 </div>
 <!---Upload TOSF Modal--->
+
+
+<!---Add TOSF Modal--->
+<div role="dialog" tabindex="-1" class="modal fade show" id="modal_add_tosf">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">ADD TOSF</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Degree Program</label><input type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Year Level</label><input type="number" class="form-control" min="1" max="6" /></div>
+                    <div class="form-group"><label>Semester</label>
+                        <select class="form-control">
+                            <option selected disabled value="">-- Select Semester --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="Summer">Summer</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Type of Fee</label>
+                        <select class="form-control">
+                            <option selected disabled value="">-- Select Type of Fee --</option>
+                            <option value="Admission">Admission</option>
+                            <option value="Athletic">Athletic</option>
+                            <option value="Computer">Computer</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Development">Development</option>
+                            <option value="Entrance">Entrance</option>
+                            <option value="Guidance">Guidance</option>
+                            <option value="Handbook">Handbook</option>
+                            <option value="Laboratory">Laboratory</option>
+                            <option value="Library">Library</option>
+                            <option value="Medical and Dental">Medical and Dental</option>
+                            <option value="Registration">Registration</option>
+                            <option value="School ID">School ID</option>
+                            <option value="Tuition">Tuition</option>
+                            <option value="NSTP">NSTP</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Category</label><input type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Coverage</label>
+                        <select class="form-control">
+                            <option selected disabled value="">-- Select Coverage --</option>
+                            <option value="per unit">per unit</option>
+                            <option value="per subject">per subject</option>
+                            <option value="per student">per student</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="formCheck-1" /><label class="custom-control-label" for="formCheck-1">Optional</label></div>
+                    </div>
+                    <div class="form-group"><label>Amount</label></div><input type="number" class="form-control" min="0" />
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<!---Add TOSF Modal--->
