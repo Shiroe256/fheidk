@@ -14,8 +14,10 @@
             @foreach($heis as $hei)
             <tr>
                 <td>{{ $hei->hei_region_nir }}</td>
-                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_name }}</td>
-                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_focal }}</td>
+                {{-- <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_name }}</td> --}}
+                <td>{{ $hei->hei_name }}</td>
+                {{-- <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_focal }}</td> --}}
+                <td>{{ $hei->hei_focal }}</td>
                 <td>{{ $hei->hei_focal_contact }}<br></td>
                 <td><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">{{ $hei->hei_focal_email }}</a></td>
                 <td><span class="text-success"><i class="fas fa-circle"></i>&nbsp;Online</span></td>
