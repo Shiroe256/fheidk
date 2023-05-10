@@ -243,7 +243,7 @@ class AdminController extends Controller
         return view('admin.elements.tosflist');
     }
 
-    public function manageuserpage($hei_uii)
+    public function manageuserpage(Request $request, $hei_uii)
     {
         $heis = Hei::where('hei_uii', $hei_uii)
         ->first();
@@ -259,9 +259,9 @@ class AdminController extends Controller
     }
 
 
-    public function fetchtosflist()
+    public function fetchtosflist($hei_uii)
     {
-        $fees = OtherSchoolFees::where('hei_uii', '03236')
+        $fees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->get();
         $data['fees'] = $fees;
         return view('admin.elements.tosflist', $data);
