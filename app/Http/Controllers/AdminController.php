@@ -247,8 +247,7 @@ class AdminController extends Controller
     {
         $heis = Hei::where('hei_uii', $hei_uii)
         ->first();
-        $data['heis'] = $heis;
-        return view('admin.manage-users-page', $data);
+        return view('admin.manage-users-page', $heis);
     }
 
     public function fetchbillinglist()
