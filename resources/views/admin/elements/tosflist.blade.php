@@ -14,24 +14,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($fees as $fee)
-            <tr>
-                <td class="text-left">{{ $fee->course_enrolled }}</td>
-                <td class="text-center">{{ $fee->year_level }}</td>
-                <td class="text-center">{{ $fee->semester }}</td>
-                <td class="text-left">{{ $fee->type_of_fee }}</td>
-                <td class="text-left">{{ $fee->category }}</td>
-                <td class="text-left">{{ $fee->coverage }}</td>
-                @if( $fee->is_optional == 0)
-                <td class="text-left"></td>
-                @else
-                <td class="text-left">Optional</td>
-                @endif
-                <td class="text-right">{{ $fee->amount }}</td>
-                <td class="text-center">
-                    <div role="group" class="btn-group"><button id="btn_edit" class="btn_edit btn btn-primary" type="button"><i class="fas fa-edit"></i></button><button id="btn_remove" class="btn_remove btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button></div>
-                </td>
-            </tr>
+            @foreach ($fees as $fee)
+                <tr>
+                    <td class="text-left">{{ $fee->course_enrolled }}</td>
+                    <td class="text-center">{{ $fee->year_level }}</td>
+                    <td class="text-center">{{ $fee->semester }}</td>
+                    <td class="text-left">{{ $fee->type_of_fee }}</td>
+                    <td class="text-left">{{ $fee->category }}</td>
+                    <td class="text-left">{{ $fee->coverage }}</td>
+                    @if ($fee->is_optional == 0)
+                        <td class="text-left"></td>
+                    @else
+                        <td class="text-left">Optional</td>
+                    @endif
+                    <td class="text-right">{{ $fee->amount }}</td>
+                    <td class="text-center">
+                        <div role="group" class="btn-group"><button id="btn_edit" class="btn_edit btn btn-primary"
+                                type="button"><i class="fas fa-edit"></i></button><button id="btn_remove"
+                                class="btn_remove btn btn-danger" type="button"><i
+                                    class="far fa-trash-alt"></i></button></div>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>

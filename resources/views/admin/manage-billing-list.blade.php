@@ -2,27 +2,35 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md clean-navbar">
-        <div class="container-fluid"><a class="navbar-brand logo" href="#" style="font-weight: bold;"><img width="50px" height="50px" src="{{url('img/UnifastLogo.png')}}">&nbsp;FHE ABS</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand logo" href="#" style="font-weight: bold;"><img
+                    width="50px" height="50px" src="{{ url('img/UnifastLogo.png') }}">&nbsp;FHE ABS</a><button
+                data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{route('managebillinglist')}}">Manage Billing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('manageuserslist')}}">Manage Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('managebillinglist') }}">Manage
+                            Billing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('manageuserslist') }}">Manage Users</a></li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <div class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="nav-link" href="#">Carlo molina&nbsp;</a>
-                            <div class="dropdown-menu"><a class="dropdown-item navbar-dropdown" data-toggle="modal" data-target="#modal_profile" href="#"><i class="fas fa-user"></i>&nbsp; &nbsp;Profile</a>
+                        <div class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="nav-link"
+                                href="#">Carlo molina&nbsp;</a>
+                            <div class="dropdown-menu"><a class="dropdown-item navbar-dropdown" data-toggle="modal"
+                                    data-target="#modal_profile" href="#"><i class="fas fa-user"></i>&nbsp;
+                                    &nbsp;Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
-                                {{ __('Logout') }}
-                        </a>
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();"><i
+                                        class="fas fa-sign-out-alt"></i>
+                                    {{ __('Logout') }}
+                                </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                         </div>
                     </li>
@@ -52,22 +60,25 @@
                                                 <option value="2021-2022">2021-2022</option>
                                                 <option value="2022-2023">2022-2023</option>
                                             </optgroup>
-                                        </select></div>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-3 col-xl-3 mb-2"><label>Semester</label>
-                                        <select class="form-control"  id="select_semester">
+                                        <select class="form-control" id="select_semester">
                                             <optgroup label="--Select Semester--">
                                                 <option value="All" selected="">All</option>
                                                 <option value="1st">1st</option>
                                                 <option value="2nd">2nd</option>
                                                 <option value="3rd">3rd</option>
                                             </optgroup>
-                                        </select></div>
+                                        </select>
+                                    </div>
                                     <div class="col-lg-3 col-xl-3 mb-2"><label>Billing Status</label>
-                                        <select class="form-control"  id="select_billing_status">
+                                        <select class="form-control" id="select_billing_status">
                                             <optgroup label="--Select Billing Status--">
                                                 <option value="All" selected="">All</option>
                                                 <option value="1">Open for Billing Uploads</option>
-                                                <option value="2">Ongoing Validation, please return once done</option>
+                                                <option value="2">Ongoing Validation, please return once done
+                                                </option>
                                                 <option value="3">Done Validating: Ready For Submission</option>
                                                 <option value="4">Done Validating: For Review</option>
                                                 <option value="5">Submitted to UniFAST: Billing Unit</option>
@@ -75,12 +86,17 @@
                                                 <option value="7">Submitted to CHED-AFMS</option>
                                                 <option value="8">Disbursed</option>
                                             </optgroup>
-                                        </select></div>
-                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search" class="btn btn-outline-info btn-block border rounded-pill border-info" type="button" onclick="managebillinglistsearch()"><i class="fas fa-search"></i>Search</button></div>
+                                        </select>
+                                    </div>
+                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search"
+                                            class="btn btn-outline-info btn-block border rounded-pill border-info"
+                                            type="button" onclick="managebillinglistsearch()"><i
+                                                class="fas fa-search"></i>Search</button></div>
                                 </div>
                             </div>
                         </form>
-                        <div class="table-responsive table mt-2" id="tbl_billing_list_admin" role="grid" aria-describedby="dataTable_info">
+                        <div class="table-responsive table mt-2" id="tbl_billing_list_admin" role="grid"
+                            aria-describedby="dataTable_info">
                             <!---Billing List Here--->
                         </div>
                     </div>
@@ -89,5 +105,5 @@
         </section>
     </main>
 
-@include('admin.includes.modal')    
-@include('admin.includes.footer')
+    @include('admin.includes.modal')
+    @include('admin.includes.footer')
