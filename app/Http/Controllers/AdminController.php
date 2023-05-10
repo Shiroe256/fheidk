@@ -40,12 +40,6 @@ class AdminController extends Controller
         return view('admin.manage-billing-list');
     }
 
-    public function fetchbillinglist()
-    {
-        $billings = Billing::all();
-        $data['billings'] = $billings;
-        return view('admin.elements.billinglist', $data);
-    }
 
     public function managebillinglistsearch(Request $request)
     {
@@ -254,9 +248,17 @@ class AdminController extends Controller
         return view('admin.manage-users-page');
     }
 
-    public function fetchtosflist()
+    public function fetchbillinglist()
     {
-        $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')
+        $billings = Billing::all();
+        $data['billings'] = $billings;
+        return view('admin.elements.billinglist', $data);
+    }
+
+
+    public function fetchtosflist($hei_uii)
+    {
+        $fees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->get();
         $data['fees'] = $fees;
         return view('admin.elements.tosflist', $data);

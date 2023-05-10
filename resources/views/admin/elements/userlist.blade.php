@@ -21,7 +21,7 @@
                 <td>{{ $hei->hei_focal_contact }}<br></td>
                 <td><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">{{ $hei->hei_focal_email }}</a></td>
                 <td><span class="text-success"><i class="fas fa-circle"></i>&nbsp;Online</span></td>
-                <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="{{route('manageuserpage')}}">View</a></td>
+                <td class="text-center"><a id="{{ $hei->hei_uii }}"class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="{{route('manageuserpage', $hei->hei_uii)}}">View</a></td>
             </tr>
             @endforeach 
         </tbody>
