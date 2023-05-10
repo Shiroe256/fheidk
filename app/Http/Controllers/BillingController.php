@@ -698,8 +698,7 @@ class BillingController extends Controller
         $data['course_lastupdated'] = $course_lastupdated;
         $data['otherfees'] = $otherfeesresult;
         $data['reference_no'] = $reference_no;
-        print_r($data);
-        // return view('billingsettings', $data);
+        return view('billingsettings', $data);
     }
 
     // private function getHeiUiiOfBilling($reference_no)
