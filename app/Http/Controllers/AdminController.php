@@ -326,6 +326,6 @@ class AdminController extends Controller
         ->where('fhe_benefits', 1)
         ->get();
         $data['heis'] = $heis;
-        return view('admin.elements.userlist', $data);
+        return view('admin.manage-users-list', $data);
     }
 }
