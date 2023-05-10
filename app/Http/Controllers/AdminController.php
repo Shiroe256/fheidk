@@ -325,8 +325,6 @@ class AdminController extends Controller
         $heis = Hei::where('hei_it', 'LUC')
         ->where('fhe_benefits', 1)
         ->get();
-        $data = array();
-    $data['heis'] = $heis;
-        return view('admin.elements.userlist', $data);
+        return view('admin.elements.userlist', ['heis' => $heis]);
     }
 }
