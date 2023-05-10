@@ -594,7 +594,6 @@ class BillingController extends Controller
 
         // echo $reference_no;
         $this->newBillingSettings($reference_no, $hei_uii);
-        echo "/billings/" . $reference_no . "/settings";
     }
 
     private function newBillingSettings($reference_no, $hei_uii)
@@ -608,6 +607,8 @@ class BillingController extends Controller
             $uid[] = $row->uid;
         }
         $this->upsertSettings($reference_no, $uid);
+
+        echo "/billings/" . $reference_no . "/settings";
     }
     public function billingList()
     {
