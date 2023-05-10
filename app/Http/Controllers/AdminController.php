@@ -268,7 +268,7 @@ class AdminController extends Controller
     public function fetchtosflist(Request $request)
     {
         $hei_uii = $request->hei_uii;
-        $fees = OtherSchoolFees::where('hei_uii', '03236')
+        $fees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->get();
         $data['fees'] = $fees;
         return view('admin.elements.tosflist', $data);
