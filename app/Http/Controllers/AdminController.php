@@ -244,12 +244,18 @@ class AdminController extends Controller
     }
 
     public function manageuserpage($hei_uii)
-    {
-        $heis = Hei::where('hei_uii', $hei_uii)
-        ->first();
-        $data['heis'] = $heis;
-        return view('admin.manage-users-page', $data);
+{
+    // Retrieve the corresponding Hei model from the database
+    $heis = Hei::where('hei_uii', $hei_uii)->first();
+
+    // Check if the Hei model exists
+    if (!$heis) {
+        abort(404);
     }
+
+    // Pass the $heis variable to the view
+    return view('admin.manage-users-page', ['heis' => $heis]);
+}
 
     public function fetchbillinglist()
     {
