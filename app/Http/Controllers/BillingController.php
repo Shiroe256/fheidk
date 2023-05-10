@@ -1034,6 +1034,7 @@ class BillingController extends Controller
 
             //check each student in billing transaction for duplciates in fhe award number
             var_dump($students);
+            $billing->billing_status = 3; //3 is done queue
             foreach ($students as $student) {
                 // select student for later updates
                 // $student = TemporaryBilling::find($student['uid']);
@@ -1110,7 +1111,6 @@ class BillingController extends Controller
                 $student->save();
             }
             echo "billing done";
-            $billing->billing_status = 3; //3 is done queue
             $billing->save();
 
             //write a success message in the logs
