@@ -12,15 +12,17 @@
             </tr>
         </thead>
         <tbody>
+            @foreach($heis as $hei)
             <tr>
-                <td>I- Ilocos Region</td>
-                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">Ilocos Sur Polytechnic College</td>
-                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">Carlo Molina</td>
-                <td>09120799371<br></td>
-                <td><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">cmolina.unifast@ched.gov.ph</a></td>
+                <td>{{ $hei->hei_region_nir }}</td>
+                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_name }}</td>
+                <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_focal }}</td>
+                <td>{{ $hei->hei_focal_contact }}<br></td>
+                <td><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com" target="_blank">{{ $hei->hei_focal_email }}</a></td>
                 <td><span class="text-success"><i class="fas fa-circle"></i>&nbsp;Online</span></td>
                 <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="{{route('manageuserpage')}}">View</a></td>
-            </tr> 
+            </tr>
+            @endforeach 
         </tbody>
         <tfoot>
             <tr>
