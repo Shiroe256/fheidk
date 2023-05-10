@@ -2,8 +2,6 @@ fetchBillingListAdmin();
 fetchuserlist();
 fetchtosflist();
 
-$('#tbl_tosf').DataTable();
-
 //fetch records from the database
 function fetchBillingListAdmin() {
     $.ajax({

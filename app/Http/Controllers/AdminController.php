@@ -243,9 +243,12 @@ class AdminController extends Controller
         return view('admin.elements.tosflist');
     }
 
-    public function manageuserpage()
+    public function manageuserpage($hei_uii)
     {
-        return view('admin.manage-users-page');
+        $heis = Hei::where('hei_uii', $hei_uii)
+        ->first();
+        $data['heis'] = $heis;
+        return view('admin.manage-users-page', $data);
     }
 
     public function fetchbillinglist()

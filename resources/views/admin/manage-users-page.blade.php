@@ -54,7 +54,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src=" {{url('admin/img/UP-Seal.png')}}" width="200" height="200">
-                                        <h6 class="font-weight-bold">Governor Mariano E. Villafuerte Community College</h6>
+                                        <h6 class="font-weight-bold">{{ $hei->hei_name }}</h6>
                                     </div>
                                     <div class="col-lg-7 col-xl-7">
                                         <form>
