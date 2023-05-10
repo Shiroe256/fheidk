@@ -129,7 +129,7 @@ Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage
 
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
 Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
-Route::get('/fetchtosflist{hei_uii}', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
+Route::get('/fetchtosflist/{hei_uii}', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
