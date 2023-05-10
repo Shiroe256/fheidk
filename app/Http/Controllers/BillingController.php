@@ -669,36 +669,37 @@ class BillingController extends Controller
 
     public function getBillingSettings($reference_no)
     {
-        $billings = Billing::where('reference_no', $reference_no)->first();
-        $data['ac_year'] = $billings->ac_year;
-        $data['semester'] = $billings->semester;
-        $data['tranche'] = $billings->tranche;
-        $hei_uii = Auth::user()->hei_uii;
+        echo $reference_no;
+        // $billings = Billing::where('reference_no', $reference_no)->first();
+        // $data['ac_year'] = $billings->ac_year;
+        // $data['semester'] = $billings->semester;
+        // $data['tranche'] = $billings->tranche;
+        // $hei_uii = Auth::user()->hei_uii;
 
-        //gather all the categories for everybody in the world
-        $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-            ->where('hei_uii', $hei_uii)
-            ->where('bs_reference_no', $reference_no)
-            ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,tbl_billing_settings.updated_at,is_optional')
-            ->get();
-        $course_lastupdated = [];
-        $otherfeesresult = [];
-        foreach ($otherfees as $key => $row) {
-            if (!array_key_exists($row->course_enrolled, $course_lastupdated)) {
-                $course_lastupdated[$row->course_enrolled] = $row->updated_at;
-            }
-            //store the shit
-            $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'is_optional' => $row->is_optional, 'bs_status' => $row->bs_status);
-            if ($course_lastupdated[$row->course_enrolled] < $row->updated_at) {
-                $course_lastupdated[$row->course_enrolled] = $row->updated_at;
-            }
-        }
+        // //gather all the categories for everybody in the world
+        // $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
+        //     ->where('hei_uii', $hei_uii)
+        //     ->where('bs_reference_no', $reference_no)
+        //     ->selectRaw('uid,amount,course_enrolled,type_of_fee,category,year_level,semester,bs_status,tbl_billing_settings.updated_at,is_optional')
+        //     ->get();
+        // $course_lastupdated = [];
+        // $otherfeesresult = [];
+        // foreach ($otherfees as $key => $row) {
+        //     if (!array_key_exists($row->course_enrolled, $course_lastupdated)) {
+        //         $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+        //     }
+        //     //store the shit
+        //     $otherfeesresult[$row->course_enrolled][$row->year_level][$row->semester][$row->type_of_fee][] = array('category' => $row->category, 'id' => $row->uid, 'amount' => $row->amount, 'is_optional' => $row->is_optional, 'bs_status' => $row->bs_status);
+        //     if ($course_lastupdated[$row->course_enrolled] < $row->updated_at) {
+        //         $course_lastupdated[$row->course_enrolled] = $row->updated_at;
+        //     }
+        // }
 
-        //package the shit and put it out of a view
-        $data['course_lastupdated'] = $course_lastupdated;
-        $data['otherfees'] = $otherfeesresult;
-        $data['reference_no'] = $reference_no;
-        return view('billingsettings', $data);
+        // //package the shit and put it out of a view
+        // $data['course_lastupdated'] = $course_lastupdated;
+        // $data['otherfees'] = $otherfeesresult;
+        // $data['reference_no'] = $reference_no;
+        // return view('billingsettings', $data);
     }
 
     // private function getHeiUiiOfBilling($reference_no)
