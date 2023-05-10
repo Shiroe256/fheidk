@@ -41,7 +41,7 @@ function fetchBillingListAdmin() {
 
   function fetchtosflist() {
     $.ajax({
-      url: "/admin/fetchtosflist",
+      url: "/admin/fetchtosflist/{hei_uii}",
       method: 'get',
       data: {
         _token: '{{ csrf_token() }}'
