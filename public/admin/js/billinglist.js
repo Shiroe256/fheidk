@@ -40,6 +40,24 @@ function fetchBillingListAdmin() {
     });
   }
 
+  function fetchtosflist() {
+    $.ajax({
+      url: "/admin/fetchuserlist",
+      method: 'get',
+      data: {
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        $("#tbl_tosf_div").html(response);
+        $("#tbl_tosf").DataTable({
+          "order": [[0, "asc"]],
+          orderCellsTop: true,
+          fixedHeader: true
+        });
+      }
+    });
+  }
+
   function managebillinglistsearch() {
     var acYear = document.getElementById("select_ac_year").value;
     var semester = document.getElementById("select_semester").value;

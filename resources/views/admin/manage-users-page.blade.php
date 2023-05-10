@@ -209,8 +209,9 @@
                                         </div>
                                     </div>
                                 </form>
+                                <div class="table-responsive table mt-2" id="tbl_tosf_div" role="grid" aria-describedby="dataTable_info">
                                 <!--LIST OF TOSF HERE-->
-                                @include('admin.elements.tosflist')
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -251,9 +251,15 @@ class AdminController extends Controller
 
     public function manageuserpage()
     {
-        $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')->get();
+        return view('admin.manage-users-page');
+    }
+
+    public function fetchtosflist()
+    {
+        $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')
+            ->get();
         $data['fees'] = $fees;
-        return view('admin.manage-users-page', $data);
+        return view('admin.elements.billinglist', $data);
     }
 
     public function fetchuserlist()
