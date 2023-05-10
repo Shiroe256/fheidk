@@ -594,6 +594,7 @@ class BillingController extends Controller
 
         // echo $reference_no;
         $this->newBillingSettings($reference_no, $hei_uii);
+        echo "/billings/" . $reference_no . "/settings";
     }
 
     private function newBillingSettings($reference_no, $hei_uii)
@@ -608,7 +609,7 @@ class BillingController extends Controller
         }
         $this->upsertSettings($reference_no, $uid);
 
-        echo "/billings/" . $reference_no . "/settings";
+        
     }
     public function billingList()
     {
@@ -1034,7 +1035,7 @@ class BillingController extends Controller
             // echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
-            var_dump($students);
+            $billing->billing_status = 3; //3 is done queue
             foreach ($students as $student) {
                 // select student for later updates
                 // $student = TemporaryBilling::find($student['uid']);
@@ -1111,7 +1112,6 @@ class BillingController extends Controller
                 $student->save();
             }
             echo "billing done";
-            $billing->billing_status = 3; //3 is done queue
             $billing->save();
 
             //write a success message in the logs
