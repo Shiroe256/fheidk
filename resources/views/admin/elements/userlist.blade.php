@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($heis as $hei)
+            @foreach($data['heis'] as $hei)
             <tr>
                 <td>{{ $hei->hei_region_nir }}</td>
                 <td><img class="rounded-circle mr-2" width="30" height="30" src="assets/img/UnifastLogo.png">{{ $hei->hei_name }}</td>
