@@ -243,7 +243,7 @@ class AdminController extends Controller
         return view('admin.elements.tosflist');
     }
 
-    public function manageuserpage(Request $request, $hei_uii)
+    public function manageuserpage($hei_uii)
     {
         $heis = Hei::where('hei_uii', $hei_uii)
         ->first();

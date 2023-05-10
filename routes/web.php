@@ -125,11 +125,11 @@ Route::get('form3', 'App\Http\Controllers\AdminController@form3')->name('form3')
 // Route::get('managebillingpage', 'App\Http\Controllers\AdminController@managebillingpage')->name('managebillingpage');
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
-Route::get('manageuserpage', 'App\Http\Controllers\AdminController@manageuserpage')->name('manageuserpage');
+Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
 
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
 Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
-Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
+Route::get('/fetchtosflist{hei_uii}', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
