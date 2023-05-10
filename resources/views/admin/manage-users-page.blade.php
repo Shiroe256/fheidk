@@ -36,7 +36,7 @@
                 <div class="block-heading">
                     <h4 class="text-left text-info">MANAGE USERS</h4>
                 </div> 
-                <input type="hidden" name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
+                <input name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
