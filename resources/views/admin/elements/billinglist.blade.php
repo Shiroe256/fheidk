@@ -10,7 +10,7 @@
             <th class="text-center">ACTION</th>
         </tr>
     </thead>
-    <tbody>';
+    <tbody>
         @foreach ($billings as $billing)
             <tr>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
@@ -44,7 +44,7 @@
                         name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill"
                         role="button"><i class="fas fa-eye"></i>View</a>
                 </td>
-            </tr>';
+            </tr>
         @endforeach
     </tbody>
     <tfoot>
