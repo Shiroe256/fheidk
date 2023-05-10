@@ -1034,7 +1034,6 @@ class BillingController extends Controller
             // echo $students;
 
             //check each student in billing transaction for duplciates in fhe award number
-            var_dump($students);
             $billing->billing_status = 3; //3 is done queue
             foreach ($students as $student) {
                 // select student for later updates
