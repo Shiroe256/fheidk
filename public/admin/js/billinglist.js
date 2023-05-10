@@ -32,7 +32,7 @@ function fetchBillingListAdmin() {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        $("#tbl_user_list_div").html(response);
+        $("#tbl_user_list_div").html(JSON.parse(response));
         $("#tbl_user_list").DataTable({
           "order": [[0, "asc"]],
           orderCellsTop: true,
