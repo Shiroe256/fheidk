@@ -1,5 +1,5 @@
-<div class="table-responsive table mt-2" id="tbl_user_page_admin" role="grid" aria-describedby="dataTable_info">
-    <table class="table table-bordered" id="tbl_tosf">
+<div class="table-responsive table mt-2" id="tbl_tosf_div" role="grid" aria-describedby="dataTable_info">
+    <table class="table table-bordered my-0" id="tbl_tosf">
         <thead>
             <tr>
                 <th class="text-left">DEGREE PROGRAM</th>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Billing;
+use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\TemporaryBilling;
 use Illuminate\Http\Request;
@@ -236,85 +237,95 @@ class AdminController extends Controller
     }
 
     public function import(Request $request)
-{
-    // Validate the uploaded file
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv'
-    ]);
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
 
-    // Load the uploaded file using PHPSpreadsheet
-    $filePath = $request->file('file')->getRealPath();
-    $spreadsheet = IOFactory::load($filePath);
+        // Load the uploaded file using PHPSpreadsheet
+        $filePath = $request->file('file')->getRealPath();
+        $spreadsheet = IOFactory::load($filePath);
 
-    // Get the first worksheet of the uploaded file
-    $worksheet = $spreadsheet->getActiveSheet();
+        // Get the first worksheet of the uploaded file
+        $worksheet = $spreadsheet->getActiveSheet();
 
-    // Initialize a flag to indicate whether the current row is the header row
-    $isHeaderRow = true;
+        // Initialize a flag to indicate whether the current row is the header row
+        $isHeaderRow = true;
 
-    // Set the batch size
-    $batchSize = 1000;
+        // Set the batch size
+        $batchSize = 1000;
 
-    // Get the highest row number in the worksheet
-    $highestRow = $worksheet->getHighestRow();
+        // Get the highest row number in the worksheet
+        $highestRow = $worksheet->getHighestRow();
 
-    // Loop through the rows of the worksheet and insert the data into the database in batches
-    for ($i = 1; $i <= $highestRow; $i += $batchSize) {
-        $batch = [];
-        for ($j = $i; $j < $i + $batchSize; $j++) {
-            if ($j > $highestRow) {
-                break;
+        // Loop through the rows of the worksheet and insert the data into the database in batches
+        for ($i = 1; $i <= $highestRow; $i += $batchSize) {
+            $batch = [];
+            for ($j = $i; $j < $i + $batchSize; $j++) {
+                if ($j > $highestRow) {
+                    break;
+                }
+                $row = $worksheet->getRowIterator($j)->current();
+
+                if ($isHeaderRow) {
+                    // Skip the header row
+                    $isHeaderRow = false;
+                    continue;
+                }
+
+                $data = [];
+                foreach ($row->getCellIterator() as $cell) {
+                    $data[] = $cell->getValue();
+                }
+                // Validate the data before creating the record
+                $validator = Validator::make($data, [
+                    'year_level' => 'numeric',
+                    'semester' => 'numeric',
+                    'amount' => 'numeric',
+                    'is_optional' => 'numeric|in:0,1',
+                ]);
+
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
+
+                $batch[] = [
+                    'ac_year' => $data[0],
+                    'hei_psg_region' => $data[1],
+                    'hei_uii' => $data[2],
+                    'hei_name' => $data[3],
+                    'year_level' => $data[4],
+                    'semester' => $data[5],
+                    'course_enrolled' => $data[6],
+                    'type_of_fee' => $data[7],
+                    'category' => $data[8],
+                    'coverage' => $data[9],
+                    'amount' => $data[10],
+                    'is_optional' => $data[11],
+                ];
             }
-            $row = $worksheet->getRowIterator($j)->current();
-
-            if ($isHeaderRow) {
-                // Skip the header row
-                $isHeaderRow = false;
-                continue;
-            }
-
-            $data = [];
-            foreach ($row->getCellIterator() as $cell) {
-                $data[] = $cell->getValue();
-            }
-            // Validate the data before creating the record
-            $validator = Validator::make($data, [
-                'year_level' => 'numeric',
-                'semester' => 'numeric',
-                'amount' => 'numeric',
-                'is_optional' => 'numeric|in:0,1',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $batch[] = [
-                'ac_year' => $data[0],
-                'hei_psg_region' => $data[1],
-                'hei_uii' => $data[2],
-                'hei_name' => $data[3],
-                'year_level' => $data[4],
-                'semester' => $data[5],
-                'course_enrolled' => $data[6],
-                'type_of_fee' => $data[7],
-                'category' => $data[8],
-                'coverage' => $data[9],
-                'amount' => $data[10],
-                'is_optional' => $data[11],
-            ];
+            OtherSchoolFees::insert($batch);
         }
-        OtherSchoolFees::insert($batch);
+        return response()->json([
+            'status' => 200,
+        ]);
+        return view('admin.elements.tosflist');
     }
 
-    return redirect()->back()->with('success', 'File uploaded successfully.');
-}
-
-public function manageuserpage()
-    { 
-    $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')->get();
+    public function manageuserpage()
+    {
+        $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')->get();
         $data['fees'] = $fees;
         return view('admin.manage-users-page', $data);
     }
 
+    public function fetchuserlist()
+    {
+        $heis = Hei::where('hei_it', 'LUC')
+        ->where('fhe_benefits', 1)
+        ->get();
+        $data['heis'] = $heis;
+        return view('admin.elements.userlist', $data);
+    }
 }

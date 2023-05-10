@@ -1,4 +1,5 @@
 fetchBillingListAdmin()
+fetchuserlist()
 
 $('#tbl_tosf').DataTable();
 
@@ -15,6 +16,24 @@ function fetchBillingListAdmin() {
         // tbl_billing_list_admin.innerHTML(response);
         $("#tbl_billing_list_admin").html(response);
         $("#tbl_manage_billing_list").DataTable({
+          "order": [[0, "asc"]],
+          orderCellsTop: true,
+          fixedHeader: true
+        });
+      }
+    });
+  }
+
+  function fetchuserlist() {
+    $.ajax({
+      url: "/admin/fetchuserlist",
+      method: 'get',
+      data: {
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        $("#tbl_user_list_div").html(response);
+        $("#tbl_user_list").DataTable({
           "order": [[0, "asc"]],
           orderCellsTop: true,
           fixedHeader: true
@@ -80,7 +99,7 @@ $("#btn_save_tosf").submit(function (e) {
       if (response.status == 200) {
         Swal.fire(
           'Added!',
-          'Student Added Successfully!',
+          'New Fee Added Successfully!',
           'success'
         )
         fetchTempStudent();
