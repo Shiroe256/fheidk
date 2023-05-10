@@ -259,7 +259,7 @@ class AdminController extends Controller
         $fees = OtherSchoolFees::where('hei_name', 'Mabalacat City College')
             ->get();
         $data['fees'] = $fees;
-        return view('admin.elements.billinglist', $data);
+        return view('admin.elements.tosflist', $data);
     }
 
     public function fetchuserlist()
