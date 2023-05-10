@@ -41,8 +41,10 @@
                         <h6 class="font-weight-bold m-0">LIST OF USERS</h6>
                     </div>
                     <div class="card-body">
+                        <div class="table-responsive table mt-2" id="tbl_user_list_div" role="grid" aria-describedby="dataTable_info">
                         <!--LIST OF USERS HERE-->
-                        @include('admin.elements.userlist')
+                        {{-- @include('admin.elements.userlist') --}}
+                        </div>
                     </div>
                 </div>
             </div>

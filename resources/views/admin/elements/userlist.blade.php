@@ -1,4 +1,3 @@
-<div class="table-responsive table mt-2" id="tbl_user_list_div" role="grid" aria-describedby="dataTable_info">
     <table class="table table-bordered my-0" id="tbl_user_list">
         <thead>
             <tr>
@@ -36,4 +35,3 @@
             </tr>
         </tfoot>
     </table>
-</div>
