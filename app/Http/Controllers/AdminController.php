@@ -265,8 +265,9 @@ class AdminController extends Controller
     }
 
 
-    public function fetchtosflist($hei_uii)
+    public function fetchtosflist(Request $request)
     {
+        $hei_uii = $request->hei_uii;
         $fees = OtherSchoolFees::where('hei_uii', $hei_uii)
             ->get();
         $data['fees'] = $fees;
