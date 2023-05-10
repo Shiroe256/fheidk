@@ -1,5 +1,6 @@
-fetchBillingListAdmin()
-fetchuserlist()
+fetchBillingListAdmin();
+fetchuserlist();
+fetchtosflist();
 
 $('#tbl_tosf').DataTable();
 
