@@ -42,6 +42,7 @@
                     </div>
                     <div class="card-body">
                         <!--LIST OF USERS HERE-->
+                        @include('admin.elements.userlist')
                     </div>
                 </div>
             </div>
