@@ -40,11 +40,13 @@ function fetchBillingListAdmin() {
   }
 
   function fetchtosflist() {
+    var hei_uii = $('#hei_uii').val();
     $.ajax({
       url: "/admin/fetchtosflist",
       method: 'get',
       data: {
-        _token: '{{ csrf_token() }}'
+        _token: '{{ csrf_token() }}',
+        hei_uii: hei_uii
       },
       success: function (response) {
         $("#tbl_tosf_div").html(response);
