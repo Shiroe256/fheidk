@@ -368,6 +368,8 @@
                     <h5 class="modal-title">ADD TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
                     <div class="form-group"><label>Degree Program</label><input id="add_tosf_program" name="add_tosf_program" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level" name="add_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
                     <div class="form-group"><label>Semester</label>

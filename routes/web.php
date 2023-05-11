@@ -127,17 +127,20 @@ Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageusersl
 Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
 Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
 
+//Routes for Lists
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
 Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
 Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
-Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 
+//Route for TOSF CRUD
+Route::post('/import', [AdminController::class, 'import'])->name('import'); //for bulk uploading
+Route::post('/newfee', [AdminController::class, 'newfee'])->name('newfee'); //for single entry
+
+Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
 // Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
 Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
 Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
-
-Route::post('/import', [AdminController::class, 'import'])->name('import');
 });
 
 //pdf shit

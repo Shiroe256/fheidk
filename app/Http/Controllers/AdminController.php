@@ -282,4 +282,107 @@ class AdminController extends Controller
         $data['heis'] = $heis;
         return view('admin.elements.userlist', $data);
     }
+
+    // handle insert a new student ajax request
+    public function newTempStudent(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'last_name' => 'required', //modal field name => validation
+        //     'first_name' => 'required',
+        //     'birthplace' => 'required',
+        //     'present_province' => 'required',
+        //     'present_city' => 'required',
+        //     'present_barangay' => 'required',
+        //     'present_zipcode' => 'required',
+        //     'permanent_province' => 'required',
+        //     'permanent_city' => 'required',
+        //     'permanent_barangay' => 'required',
+        //     'permanent_zipcode' => 'required',
+        //     'email_address' => 'required|email',
+        //     'mobile_number' => 'required|regex:/^(09)\d{9}$/',
+        //     'course_enrolled' => 'required',
+        //     'year_level' => 'required'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 400,
+        //         'errors' => $validator->messages(),
+        //     ]);
+        // } else {
+        $total_computer_fee = $request->computer_fee_per_unit_amount + $request->computer_fee;
+        $students = [
+            //static sample data
+            'hei_psg_region' => $request->add_hei_psg_region,
+            'hei_sid' => Auth::user()->hei_sid,
+            'hei_uii' => $request->add_hei_uii,
+            'hei_name' => $request->add_selected_campus,
+            'reference_no' => $request->add_reference_no,
+            'ac_year' => $request->add_ac_year,
+            'semester' => $request->add_semester,
+            'tranche' => $request->add_tranche,
+            'app_id' => '',
+            'fhe_award_no' => '',
+            'stud_id' => $request->stud_id,
+            'lrn_no' => $request->lrn_no,
+            //actual data being collected in the modal
+            'stud_lname' => $request->last_name, //tablename => $request->name of input field
+            'stud_fname' => $request->first_name,
+            'stud_mname' => $request->middle_name,
+            'stud_ext_name' => $request->extension_name,
+            'stud_sex' => $request->sex,
+            'stud_birth_date' => $request->birthdate,
+            'stud_birth_place' => $request->birthplace,
+            'f_lname' => $request->f_lname,
+            'f_fname' => $request->f_fname,
+            'f_mname' => $request->f_mname,
+            'm_lname' => $request->m_lname,
+            'm_fname' => $request->m_fname,
+            'm_mname' => $request->m_mname,
+            'present_prov' => $request->present_province,
+            'present_city' => $request->present_city,
+            'present_barangay' => $request->present_barangay,
+            'present_street' => $request->present_street,
+            'present_zipcode' => $request->present_zipcode,
+            'permanent_prov' => $request->permanent_province,
+            'permanent_city' => $request->permanent_city,
+            'permanent_barangay' => $request->permanent_barangay,
+            'permanent_street' => $request->permanent_street,
+            'permanent_zipcode' => $request->permanent_zipcode,
+            'stud_email' => $request->email_address,
+            'stud_alt_email' => $request->alt_email_address,
+            'stud_phone_no' => $request->mobile_number,
+            'stud_alt_phone_no' => $request->alt_mobile_number,
+            //static
+            'transferee' => $request->checkbox_transferee,
+            'degree_program' => $request->degree_program,
+            'year_level' => $request->year_level,
+            'lab_unit' => $request->laboratory_units,
+            'comp_lab_unit' => $request->computer_fee_per_unit,
+            'academic_unit' => $request->total_unit,
+            'nstp_unit' => $request->nstp_unit,
+            'tuition_fee' => $request->total_tuition,
+            'entrance_fee' => $request->entrance_fee,
+            'admission_fee' => $request->admission_fee,
+            'athletic_fee' => $request->athletic_fee,
+            'computer_fee' => $total_computer_fee,
+            'cultural_fee' => $request->cultural_fee,
+            'development_fee' => $request->development_fee,
+            'guidance_fee' => $request->guidance_fee,
+            'handbook_fee' => $request->handbook_fee,
+            'laboratory_fee' => $request->laboratory_fee,
+            'library_fee' => $request->library_fee,
+            'medical_dental_fee' => $request->medical_dental_fee,
+            'registration_fee' => $request->registration_fee,
+            'school_id_fee' => $request->school_id_fee,
+            'nstp_fee' => $request->total_nstp,
+            'stud_cor' => 'sample',
+            'remarks' => $request->remarks
+        ];
+        OtherSchoolFees::create($students);
+        return response()->json([
+            'status' => 200,
+        ]);
+        // }
+    }
 }
