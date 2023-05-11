@@ -297,8 +297,7 @@ class AdminController extends Controller
             'type_of_fee' => $request->add_tosf_type_of_fee,
             'category' => $request->add_tosf_category,
             'coverage' => $request->add_tosf_coverage,
-            'amount' => $request->add_tosf_amount,
-            'is_optional' => $request->add_tosf_chk_opt    
+            'amount' => $request->add_tosf_amount  
         ];
         OtherSchoolFees::create($fee);
         return response()->json([

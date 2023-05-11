@@ -412,9 +412,6 @@
                             <option value="per student">per student</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="add_tosf_chk_opt" name="add_tosf_chk_opt" /><label class="custom-control-label" for="add_tosf_chk_opt">Optional</label></div>
-                    </div>
                     <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf" class="btn btn-primary" type="submit">Save</button></div>
@@ -472,9 +469,6 @@
                             <option value="per subject">per subject</option>
                             <option value="per student">per student</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="chk_opt" /><label class="custom-control-label" for="chk_opt">Optional</label></div>
                     </div>
                     <div class="form-group"><label>Amount</label><input id="update_tosf_amount" name="update_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
