@@ -93,7 +93,7 @@ function fetchBillingListAdmin() {
 
   //add new school fee
   // add new student ajax request
-$("#btn_save_tosf").submit(function (e) {
+$("#frm_add_tosf").submit(function (e) {
   e.preventDefault();
   const fd = new FormData(this);
   $("#btn_save_tosf").text('Adding...');
