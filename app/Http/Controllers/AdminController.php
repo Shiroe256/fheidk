@@ -322,7 +322,7 @@ class AdminController extends Controller
             //actual data being collected in the modal
             'year_level' => $request->update_tosf_year_level,
             'semester' => $request->update_tosf_semester,
-            'course_enrolled' => $request->update_tosf_degree_program,
+            'course_enrolled' => $request->update_tosf_program,
             'type_of_fee' => $request->update_tosf_type_of_fee,
             'category' => $request->update_tosf_category,
             'coverage' => $request->update_tosf_coverage,
