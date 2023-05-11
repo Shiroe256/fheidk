@@ -135,7 +135,8 @@ Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('f
 //Route for TOSF CRUD
 Route::post('/import', [AdminController::class, 'import'])->name('import'); //for bulk uploading
 Route::post('/newfee', [AdminController::class, 'newfee'])->name('newfee'); //for single entry
-
+Route::get('/editfee', [AdminController::class, 'editfee'])->name('editfee');//for single entry
+Route::post('/updatefee', [AdminController::class, 'updatefee'])->name('updatefee');//for single entry
 
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');

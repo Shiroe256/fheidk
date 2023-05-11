@@ -425,15 +425,15 @@
 <div role="dialog" tabindex="-1" class="modal fade show" id="modal_update_tosf">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form>
+            <form id='frm_update_tosf' method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title">UPDATE TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_program" name="add_tosf_program" type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level" name="add_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
+                    <div class="form-group"><label>Degree Program</label><input id="update_tosf_program" name="update_tosf_program" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Year Level</label><input id="update_tosf_year_level" name="update_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
                     <div class="form-group"><label>Semester</label>
-                        <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
+                        <select id="update_tosf_semester" name="update_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -442,7 +442,7 @@
                         </select>
                     </div>
                     <div class="form-group"><label>Type of Fee</label>
-                        <select id="add_tosf_type_of_fee" name="add_tosf_type_of_fee" class="form-control">
+                        <select id="update_tosf_type_of_fee" name="update_tosf_type_of_fee" class="form-control">
                             <option selected disabled value="">-- Select Type of Fee --</option>
                             <option value="Admission">Admission</option>
                             <option value="Athletic">Athletic</option>
@@ -461,9 +461,9 @@
                             <option value="NSTP">NSTP</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Category</label><input id="add_tosf_category" name="add_tosf_category" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Category</label><input id="update_tosf_category" name="update_tosf_category" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Coverage</label>
-                        <select id="add_tosf_coverage" name="add_tosf_coverage" class="form-control">
+                        <select id="update_tosf_coverage" name="update_tosf_coverage" class="form-control">
                             <option selected disabled value="">-- Select Coverage --</option>
                             <option value="per unit">per unit</option>
                             <option value="per subject">per subject</option>
