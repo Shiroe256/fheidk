@@ -175,7 +175,7 @@ $("#frm_update_student").submit(function (e) {
   const fd = new FormData(this);
   $("#btn_update_student").text('Updating...');
   $.ajax({
-    url: '/update-tempstudent',
+    url: '/updatefee',
     method: 'post',
     data: fd,
     cache: false,
@@ -190,9 +190,9 @@ $("#frm_update_student").submit(function (e) {
           'success'
         )
         fetchTempStudent();
-        $("#btn_update_student").text('Update Student');
-        $("#frm_update_student")[0].reset();
-        $("#mod_edit_student_info").modal('hide');
+        $("#btn_update_tosf").text('Update');
+        $("#frm_update_tosf")[0].reset();
+        $("#modal_update_tosf").modal('hide');
       } else if (response.status == 400) {
         let i = 1;
         let errorMessage = '';
@@ -207,7 +207,7 @@ $("#frm_update_student").submit(function (e) {
           icon: 'warning',
 
         })
-        $("#btn_update_student").text('Update Student');
+        $("#btn_update_tosf").text('Update');
       }
     }
   });

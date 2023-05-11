@@ -314,66 +314,21 @@ class AdminController extends Controller
     }
 
     // handle update an student ajax request
-    public function updateTempStudent(Request $request)
+    public function updatefee(Request $request)
     {
         //!validation transferred to middleware
-        $students = TemporaryBilling::find($request->edit_student_id);
-        $studData = [
+        $fee = OtherSchoolFees::find($request->update_tosf_hei_uii);
+        $feeData = [
             //actual data being collected in the modal
-            'hei_name' => $request->edit_selected_campus,
-            'stud_lname' => $request->edit_last_name, //tablename => $request->name of input field
-            'stud_fname' => $request->edit_first_name,
-            'stud_mname' => $request->edit_middle_name,
-            'stud_ext_name' => $request->edit_extension_name,
-            'stud_sex' => $request->edit_sex,
-            'stud_birth_date' => $request->edit_birthdate,
-            'stud_birth_place' => $request->edit_birthplace,
-            'f_lname' => $request->edit_f_lname,
-            'f_fname' => $request->edit_f_fname,
-            'f_mname' => $request->edit_f_mname,
-            'm_lname' => $request->edit_m_lname,
-            'm_fname' => $request->edit_m_fname,
-            'm_mname' => $request->edit_m_mname,
-            'present_prov' => $request->edit_present_province,
-            'present_city' => $request->edit_present_city,
-            'present_barangay' => $request->edit_present_barangay,
-            'present_street' => $request->edit_present_street,
-            'present_zipcode' => $request->edit_present_zipcode,
-            'permanent_prov' => $request->edit_permanent_province,
-            'permanent_city' => $request->edit_permanent_city,
-            'permanent_barangay' => $request->edit_permanent_barangay,
-            'permanent_street' => $request->edit_permanent_street,
-            'permanent_zipcode' => $request->edit_permanent_zipcode,
-            'stud_email' => $request->edit_email_address,
-            'stud_alt_email' => $request->edit_alt_email_address,
-            'stud_phone_no' => $request->edit_mobile_number,
-            'alt_stud_phone_no' => $request->edit_alt_mobile_number,
-            'transferee' => $request->edit_checkbox_transferee,
-            'degree_program' => $request->edit_degree_program,
-            'year_level' => $request->edit_year_level,
-            'lab_unit' => '1',
-            'comp_lab_unit' => '1',
-            'academic_unit' => $request->edit_total_unit,
-            'nstp_unit' => $request->edit_nstp_unit,
-            'tuition_fee' => $request->edit_total_tuition,
-            'entrance_fee' => $request->edit_entrance_fee,
-            'admission_fee' => $request->edit_admission_fee,
-            'athletic_fee' => $request->edit_athletic_fee,
-            'computer_fee' => $request->edit_computer_fee,
-            'cultural_fee' => $request->edit_cultural_fee,
-            'development_fee' => $request->edit_development_fee,
-            'guidance_fee' => $request->edit_guidance_fee,
-            'handbook_fee' => $request->edit_handbook_fee,
-            'laboratory_fee' => $request->edit_laboratory_fee,
-            'library_fee' => $request->edit_library_fee,
-            'medical_dental_fee' => $request->edit_medical_dental_fee,
-            'registration_fee' => $request->edit_registration_fee,
-            'school_id_fee' => $request->edit_school_id_fee,
-            'nstp_fee' => $request->edit_total_nstp,
-            'stud_cor' => 'naedit',
-            'remarks' => $request->edit_remarks
+            'year_level' => $request->update_tosf_year_level,
+            'semester' => $request->update_tosf_semester,
+            'course_enrolled' => $request->update_tosf_degree_program,
+            'type_of_fee' => $request->update_tosf_type_of_fee,
+            'category' => $request->update_tosf_category,
+            'coverage' => $request->update_tosf_coverage,
+            'amount' => $request->update_tosf_amount  
         ];
-        $students->update($studData);
+        $fee->update($feeData);
         return response()->json([
             'status' => 200,
         ]);
