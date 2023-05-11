@@ -230,7 +230,7 @@ $(document).on('click', 'input[name=main_tosf_checkbox]', function () {
 });
 
 //all checkbox in a page is checked
-$(document).on('change', 'input[name="student_checkbox"]', function () {
+$(document).on('change', 'input[name="tosf_checkbox"]', function () {
   if ($('input[name="tosf_checkbox"]').length == $('input[name="tosf_checkbox"]:checked').length) {
     $('input[name="main_tosf_checkbox"]').prop('checked', true);
   } else {
@@ -287,19 +287,11 @@ $(document).on('click', '#btn_delete_students', function () {
 
 //Delete button hide and show
 function btnDeleteToggle() {
-  if ($('input[name="student_checkbox"]:checked').length > 0) {
-    $('#btn_delete_students').html('');
-    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove (' + $('input[name="student_checkbox"]:checked').length + ')').removeClass('d-none');
+  if ($('input[name="tosf_checkbox"]:checked').length > 0) {
+    $('#btn_tosf_remove').html('');
+    $('#btn_tosf_remove').append('<i class="far fa-trash-alt"></i>&nbsp;Remove Fee (' + $('input[name="tosf_checkbox"]:checked').length + ')').removeClass('d-none');
   } else {
-    $('#btn_delete_students').addClass('d-none');
-  }
-  var checkboxes = document.querySelectorAll('input[name="student_checkbox"]:checked');
-  var btn = document.querySelector('#btn_edit_students');
-  if (checkboxes.length > 0) {
-    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
-    btn.classList.remove('d-none');
-  } else {
-    btn.classList.add('d-none');
+    $('#btn_tosf_remove').addClass('d-none');
   }
 }
 
