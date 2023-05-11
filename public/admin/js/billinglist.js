@@ -114,11 +114,11 @@ $("#frm_add_tosf").submit(function (e) {
     dataType: 'json',
     success: function (response) {
       if (response.status == 200) {
-        // Swal.fire(
-        //   'Added!',
-        //   'New Fee Added Successfully!',
-        //   'success'
-        // )
+        Swal.fire(
+          'Added!',
+          'New Fee Added Successfully!',
+          'success'
+        )
 
         alert('successful')
         fetchtosflist();
@@ -126,19 +126,18 @@ $("#frm_add_tosf").submit(function (e) {
         $("#frm_add_tosf")[0].reset();
         $("#modal_add_tosf").modal('hide');
       } else if (response.status == 400) {
-        // let i = 1;
-        // let errorMessage = '';
-        // $.each(response.errors, function (key, err_values) {
-        //   console.log(err_values);
-        //   errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
-        // })
-        // Swal.fire({
-        //   // position: 'top',
-        //   title: 'Oops... you missed something',
-        //   html: errorMessage,
-        //   icon: 'warning',
-
-        // })
+        let i = 1;
+        let errorMessage = '';
+        $.each(response.errors, function (key, err_values) {
+          console.log(err_values);
+          errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+        })
+        Swal.fire({
+          // position: 'top',
+          title: 'Oops... you missed something',
+          html: errorMessage,
+          icon: 'warning',
+        })
         alert('unsuccessful')
         $("#btn_save_tosf").text('Save');
       }
