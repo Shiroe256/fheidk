@@ -158,6 +158,13 @@ $(document).on('click', '.btn_update_fee', function (e) {
     },
     success: function (response) {
       $('#update_tosf_program').val(response.course_enrolled);
+      $('#update_tosf_year_level').val(response.year_level);
+      $('#update_tosf_semester').val(response.semester);
+      $('#update_tosf_type_of_fee').val(response.type_of_fee);
+      $('#update_tosf_category').val(response.category);
+      $('#update_tosf_coverage').val(response.coverage);
+      $('#update_tosf_amount').val(response.amount);
+
     }
   });
 });
