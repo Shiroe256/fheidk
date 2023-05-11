@@ -434,6 +434,7 @@
                     <input type="hidden" name="update_tosf_hei_uii" id="update_tosf_hei_uii" value="{{ $heis->hei_uii }}">
                     <input type="hidden" name="update_tosf_hei_psg_region" id="update_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
                     <input type="hidden" name="update_tosf_hei_name" id="update_tosf_hei_name" value="{{ $heis->hei_name }}">
+                    <input name="update_tosf_id" id="update_tosf_id" />
                     <div class="form-group"><label>Degree Program</label><input id="update_tosf_program" name="update_tosf_program" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Year Level</label><input id="update_tosf_year_level" name="update_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
                     <div class="form-group"><label>Semester</label>

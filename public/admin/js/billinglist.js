@@ -157,6 +157,7 @@ $(document).on('click', '.btn_update_fee', function (e) {
       _token: '{{ csrf_token() }}'
     },
     success: function (response) {
+      $('#update_tosf_id').val(response.uid);
       $('#update_tosf_program').val(response.course_enrolled);
       $('#update_tosf_year_level').val(response.year_level);
       $('#update_tosf_semester').val(response.semester);
