@@ -36,8 +36,9 @@
                 <div class="block-heading">
                     <h4 class="text-left text-info">MANAGE USERS</h4>
                 </div> 
-                <input name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
-                <input name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
+                <input type="hidden" name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
+                <input type="hidden" name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
+                <input type="hidden" name="hei_name" id="hei_name" value="{{ $heis->hei_name }}">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

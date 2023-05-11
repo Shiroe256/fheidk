@@ -105,7 +105,7 @@ $("#btn_save_tosf").submit(function (e) {
   });
 
   $.ajax({
-    url: '/newtempstudent',
+    url: '/admin/newfee',
     method: 'post',
     data: fd,
     cache: false,
@@ -119,26 +119,25 @@ $("#btn_save_tosf").submit(function (e) {
           'New Fee Added Successfully!',
           'success'
         )
-        fetchTempStudent();
-        fetchTempSummary();
-        $("#btn_add_student").text('Add Student');
-        $("#frm_add_student")[0].reset();
-        $("#mod_new_student_info").modal('hide');
+        fetchtosflist();
+        $("#btn_save_tosf").text('Save');
+        $("#frm_add_tosf")[0].reset();
+        $("#modal_add_tosf").modal('hide');
       } else if (response.status == 400) {
-        let i = 1;
-        let errorMessage = '';
-        $.each(response.errors, function (key, err_values) {
-          console.log(err_values);
-          errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
-        })
-        Swal.fire({
-          // position: 'top',
-          title: 'Oops... you missed something',
-          html: errorMessage,
-          icon: 'warning',
+        // let i = 1;
+        // let errorMessage = '';
+        // $.each(response.errors, function (key, err_values) {
+        //   console.log(err_values);
+        //   errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+        // })
+        // Swal.fire({
+        //   // position: 'top',
+        //   title: 'Oops... you missed something',
+        //   html: errorMessage,
+        //   icon: 'warning',
 
-        })
-        $("#btn_add_student").text('Add Student');
+        // })
+        $("#btn_save_tosf").text('Save');
       }
     }
   });

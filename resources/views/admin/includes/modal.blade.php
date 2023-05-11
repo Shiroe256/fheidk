@@ -363,14 +363,15 @@
 <div role="dialog" tabindex="-1" class="modal fade show" id="modal_add_tosf">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form>
+            <form id="frm_add_tosf">
                 <div class="modal-header">
                     <h5 class="modal-title">ADD TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
-                    <input name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
-                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_program" name="add_tosf_program" type="text" class="form-control" /></div>
+                    <input type="hidden" name="add_tosf_hei_uii" id="add_tosf_hei_uii" value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
+                    <input type="hidden" name="add_tosf_hei_name" id="add_tosf_hei_name" value="{{ $heis->hei_name }}">
+                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_degree_program" name="add_tosf_degree_program" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level" name="add_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
                     <div class="form-group"><label>Semester</label>
                         <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
@@ -411,11 +412,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="chk_opt" /><label class="custom-control-label" for="chk_opt">Optional</label></div>
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="add_tosf_chk_opt" name="add_tosf_chk_opt" /><label class="custom-control-label" for="add_tosf_chk_opt">Optional</label></div>
                     </div>
                     <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf" class="btn btn-primary" type="submit">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf" class="btn btn-primary" type="submit">Save</button></div>
             </form>
         </div>
     </div>
@@ -474,9 +475,9 @@
                     <div class="form-group">
                         <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="chk_opt" /><label class="custom-control-label" for="chk_opt">Optional</label></div>
                     </div>
-                    <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount" type="number" class="form-control" min="0" /></div>
+                    <div class="form-group"><label>Amount</label><input id="update_tosf_amount" name="update_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button id="btn_update_tosf" name="btn_update_tosf" class="btn btn-primary" type="submit">Update</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button id="btn_update_tosf" name="btn_update_tosf" class="btn btn-primary" type="submit">Update</button></div>
             </form>
         </div>
     </div>
