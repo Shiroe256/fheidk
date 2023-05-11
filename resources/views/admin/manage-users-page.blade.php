@@ -178,14 +178,6 @@
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6>
-                                <div class="dropdown no-arrow"><button class="btn btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
-                                        <p class="dropdown-header">Action:</p>
-                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_tosf"> Upload TOSF</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"> Add New Fee</a>
-                                    </div>
-                                </div>
                                 <div role="group" class="btn-group">
                                     <button class="btn_upload btn btn-primary" type="button" data-toggle="modal" data-target="#modal_tosf"><i class="fas fa-upload"></i> Upload List</button>
                                     <button class="btn_add btn btn-success" type="button" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"><i class="fas fa-plus"></i> Add New Fee</button>

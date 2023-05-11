@@ -24,10 +24,7 @@
                 <td class="text-left">{{ $fee->coverage }}</td>
                 <td class="text-right">{{ $fee->amount }}</td>
                 <td class="text-center">
-                    <div role="group" class="btn-group">
-                        <button id="{{ $fee->uid }}" class="btn_action btn btn-primary" type="button" data-toggle="modal" data-target="#modal_update_tosf"><i class="fas fa-edit"></i></button>
-                        <button id="{{ $fee->uid }}" class="btn_action btn btn-danger" type="button"><i class="far fa-trash-alt"></i></button>
-                    </div>
+                    <button id="{{ $fee->uid }}" class="btn_action btn btn-primary" type="button" data-toggle="modal" data-target="#modal_update_tosf" title="Edit Fee"><i class="fas fa-pen"></i></button>
                 </td>
             </tr>
         @endforeach
