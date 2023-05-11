@@ -24,7 +24,7 @@
                 <td class="text-left">{{ $fee->coverage }}</td>
                 <td class="text-right">{{ $fee->amount }}</td>
                 <td class="text-center">
-                    <button id="{{ $fee->uid }}" class="btn_update_fee btn btn-info" type="button" data-toggle="modal" data-target="#modal_update_tosf" title="Edit Fee"><i class="fas fa-pen"></i></button>
+                    <button id="{{ $fee->uid }}" class="btn_update_fee btn_edit btn btn-info" type="button" data-toggle="modal" data-target="#modal_update_tosf" title="Edit Fee"><i class="fas fa-pen"></i></button>
                 </td>
             </tr>
         @endforeach
