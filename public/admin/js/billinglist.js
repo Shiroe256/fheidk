@@ -120,8 +120,8 @@ $("#frm_add_tosf").submit(function (e) {
           'success'
         )
 
-        alert('successful')
         fetchtosflist();
+
         $("#btn_save_tosf").text('Save');
         $("#frm_add_tosf")[0].reset();
         $("#modal_add_tosf").modal('hide');
@@ -138,7 +138,6 @@ $("#frm_add_tosf").submit(function (e) {
           html: errorMessage,
           icon: 'warning',
         })
-        alert('unsuccessful')
         $("#btn_save_tosf").text('Save');
       }
     }
