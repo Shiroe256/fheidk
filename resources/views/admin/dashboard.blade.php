@@ -244,5 +244,5 @@
         </section>
     </main>
 
-@include('admin.includes.modal')
+{{-- @include('admin.includes.modal') --}}
 @include('admin.includes.footer')
