@@ -173,7 +173,7 @@ $(document).on('click', '.btn_update_fee', function (e) {
 $("#frm_update_tosf").submit(function (e) {
   e.preventDefault();
   const fd = new FormData(this);
-  $("#btn_update_student").text('Updating...');
+  $("#btn_update_tosf").text('Updating...');
   $.ajax({
     url: '/admin/updatefee',
     method: 'post',
