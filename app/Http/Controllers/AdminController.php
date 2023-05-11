@@ -317,7 +317,7 @@ class AdminController extends Controller
     public function updatefee(Request $request)
     {
         //!validation transferred to middleware
-        $fee = OtherSchoolFees::find($request->update_tosf_hei_uii);
+        $fee = OtherSchoolFees::find($request->update_tosf_id);
         $feeData = [
             //actual data being collected in the modal
             'year_level' => $request->update_tosf_year_level,
