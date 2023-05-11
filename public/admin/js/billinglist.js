@@ -175,7 +175,7 @@ $("#frm_update_student").submit(function (e) {
   const fd = new FormData(this);
   $("#btn_update_student").text('Updating...');
   $.ajax({
-    url: '/updatefee',
+    url: '/admin/updatefee',
     method: 'post',
     data: fd,
     cache: false,
@@ -186,7 +186,7 @@ $("#frm_update_student").submit(function (e) {
       if (response.status == 200) {
         Swal.fire(
           'Updated!',
-          'Student Updated Successfully!',
+          'Fee Updated Successfully!',
           'success'
         )
         fetchTempStudent();
