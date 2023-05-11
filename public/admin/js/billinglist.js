@@ -189,7 +189,7 @@ $("#frm_update_tosf").submit(function (e) {
           'Fee Updated Successfully!',
           'success'
         )
-        fetchTempStudent();
+        fetchtosflist();
         $("#btn_update_tosf").text('Update');
         $("#frm_update_tosf")[0].reset();
         $("#modal_update_tosf").modal('hide');
