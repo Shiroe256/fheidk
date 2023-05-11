@@ -137,6 +137,7 @@ Route::post('/import', [AdminController::class, 'import'])->name('import'); //fo
 Route::post('/newfee', [AdminController::class, 'newfee'])->name('newfee'); //for single entry
 Route::get('/editfee', [AdminController::class, 'editfee'])->name('editfee');//for single entry
 Route::post('/updatefee', [AdminController::class, 'updatefee'])->name('updatefee');//for single entry
+Route::delete('/deletefee', [AdminController::class, 'deletefee'])->name('deletefee');//for single entry
 
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');

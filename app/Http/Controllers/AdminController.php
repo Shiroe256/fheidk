@@ -335,12 +335,12 @@ class AdminController extends Controller
     }
 
     //handles delete student information
-    public function deleteTempStudent(Request $request)
+    public function deletefee(Request $request)
     {
         $id = $request->uid;
         // $students = TemporaryBilling::find($id);
-        $students = TemporaryBilling::whereIn('uid', $id);
-        $students->delete();
+        $fees = OtherSchoolFees::whereIn('uid', $id);
+        $fees->delete();
     }
 
 }

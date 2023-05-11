@@ -240,12 +240,12 @@ $(document).on('change', 'input[name="tosf_checkbox"]', function () {
 });
 
 //Delete data
-$(document).on('click', '#btn_delete_students', function () {
-  var checkedStudents = [];
-  $($('input[name="student_checkbox"]:checked')).each(function () {
-    checkedStudents.push($(this).val());
+$(document).on('click', '#btn_tosf_remove', function () {
+  var checkedFees = [];
+  $($('input[name="tosf_checkbox"]:checked')).each(function () {
+    checkedFees.push($(this).val());
   });
-  let id = checkedStudents;
+  let id = checkedFees;
 
   $.ajaxSetup({
     headers: {
@@ -264,21 +264,20 @@ $(document).on('click', '#btn_delete_students', function () {
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/delete-tempstudent',
+        url: '/admin/deletefee',
         method: 'delete',
         data: {
-          reference_no: reference_no.value,
           uid: id
         },
         success: function (response) {
           console.log(response);
           Swal.fire(
             'Deleted!',
-            'Student record has been deleted.',
+            'Fee has been deleted.',
             'success'
           )
-          $('#btn_delete_students').addClass('d-none');
-          fetchTempStudent();
+          $('#btn_tosf_remove').addClass('d-none');
+          fetchtosflist();
         }
       });
     }
