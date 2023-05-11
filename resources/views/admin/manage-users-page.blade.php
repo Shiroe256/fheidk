@@ -186,6 +186,10 @@
                                         <a class="dropdown-item" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"> Add New Fee</a>
                                     </div>
                                 </div>
+                                <div role="group" class="btn-group">
+                                    <button class="btn_upload btn btn-primary" type="button" data-toggle="modal" data-target="#modal_tosf"><i class="fas fa-upload"></i> Upload List</button>
+                                    <button class="btn_add btn btn-success" type="button" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"><i class="fas fa-plus"></i> Add New Fee</button>
+                                    <button class="btn_remove btn btn-danger" type="button"><i class="far fa-trash-alt"></i> Remove Fee</button></div>
                             </div>
                             <div class="card-body">
                                 <form>

@@ -202,10 +202,18 @@
   font-size: 12px;
 }
 
-.btn_update_fee{
+.btn_edit{
   font-size: 12px;
 }
 
-.btn_remove_fee{
+.btn_remove{
+  font-size: 12px;
+}
+
+.btn_add{
+  font-size: 12px;
+}
+
+.btn_upload{
   font-size: 12px;
 }

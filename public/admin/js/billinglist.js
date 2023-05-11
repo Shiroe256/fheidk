@@ -213,3 +213,95 @@ $("#frm_update_tosf").submit(function (e) {
     }
   });
 });
+
+//Delete function
+//Main check box is checked
+$(document).on('click', 'input[name=main_tosf_checkbox]', function () {
+  if (this.checked) {
+    $('input[name="tosf_checkbox"]').each(function () {
+      this.checked = true;
+    });
+  } else {
+    $('input[name="tosf_checkbox"]').each(function () {
+      this.checked = false;
+    });
+  }
+  btnDeleteToggle();
+});
+
+//all checkbox in a page is checked
+$(document).on('change', 'input[name="student_checkbox"]', function () {
+  if ($('input[name="tosf_checkbox"]').length == $('input[name="tosf_checkbox"]:checked').length) {
+    $('input[name="main_tosf_checkbox"]').prop('checked', true);
+  } else {
+    $('input[name="main_tosf_checkbox"]').prop('checked', false);
+  }
+  btnDeleteToggle();
+});
+
+//Delete data
+$(document).on('click', '#btn_delete_students', function () {
+  var checkedStudents = [];
+  $($('input[name="student_checkbox"]:checked')).each(function () {
+    checkedStudents.push($(this).val());
+  });
+  let id = checkedStudents;
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/delete-tempstudent',
+        method: 'delete',
+        data: {
+          reference_no: reference_no.value,
+          uid: id
+        },
+        success: function (response) {
+          console.log(response);
+          Swal.fire(
+            'Deleted!',
+            'Student record has been deleted.',
+            'success'
+          )
+          $('#btn_delete_students').addClass('d-none');
+          fetchTempStudent();
+        }
+      });
+    }
+  })
+});
+
+//Delete button hide and show
+function btnDeleteToggle() {
+  if ($('input[name="student_checkbox"]:checked').length > 0) {
+    $('#btn_delete_students').html('');
+    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove (' + $('input[name="student_checkbox"]:checked').length + ')').removeClass('d-none');
+  } else {
+    $('#btn_delete_students').addClass('d-none');
+  }
+  var checkboxes = document.querySelectorAll('input[name="student_checkbox"]:checked');
+  var btn = document.querySelector('#btn_edit_students');
+  if (checkboxes.length > 0) {
+    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
+    btn.classList.remove('d-none');
+  } else {
+    btn.classList.add('d-none');
+  }
+}
+
+
+
