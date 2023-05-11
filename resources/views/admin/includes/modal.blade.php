@@ -363,7 +363,7 @@
 <div role="dialog" tabindex="-1" class="modal fade show" id="modal_add_tosf">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="frm_add_tosf">
+            <form id="frm_add_tosf" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title">ADD TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>

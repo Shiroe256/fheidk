@@ -114,11 +114,13 @@ $("#btn_save_tosf").submit(function (e) {
     dataType: 'json',
     success: function (response) {
       if (response.status == 200) {
-        Swal.fire(
-          'Added!',
-          'New Fee Added Successfully!',
-          'success'
-        )
+        // Swal.fire(
+        //   'Added!',
+        //   'New Fee Added Successfully!',
+        //   'success'
+        // )
+
+        alert('successful')
         fetchtosflist();
         $("#btn_save_tosf").text('Save');
         $("#frm_add_tosf")[0].reset();
@@ -137,6 +139,7 @@ $("#btn_save_tosf").submit(function (e) {
         //   icon: 'warning',
 
         // })
+        alert('unsuccessful')
         $("#btn_save_tosf").text('Save');
       }
     }
