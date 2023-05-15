@@ -184,30 +184,6 @@
                                     <button id="btn_tosf_remove" name="btn_tosf_remove" class="btn_remove btn btn-danger d-none" type="button"><i class="far fa-trash-alt"></i></button></div>
                             </div>
                             <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <div class="form-row">
-                                            <div class="col-12 col-md-4 col-lg-3 col-xl-4 mb-2"><label>Degree Program</label><select class="form-control">
-                                                    <option value="" selected="">-- Select Degree Program--</option>
-                                                    <option value="Bachelor of Science in Information and Technology">Bachelor of Science in Information and Technology</option>
-                                                    <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-                                                </select></div>
-                                            <div class="col-12 col-md-4 col-lg-3 col-xl-3 mb-2"><label>Year Level</label><select class="form-control">
-                                                    <option value="undefined" selected="">-- Select Year Level --</option>
-                                                    <option value="1st">1st</option>
-                                                    <option value="2nd">2nd</option>
-                                                    <option value="3rd">3rd</option>
-                                                    <option value="4th Year">4th</option>
-                                                </select></div>
-                                            <div class="col-md-4 col-lg-3 col-xl-3 mb-2"><label>Semester</label><select class="form-control">
-                                                    <option value="">-- Select Semester --</option>
-                                                    <option value="1st">1st</option>
-                                                    <option value="2nd">2nd</option>
-                                                </select></div>
-                                            <div class="col text-center align-self-end mb-2"><button class="btn btn-outline-info btn-block border rounded-pill border-info" type="button"><i class="fas fa-search"></i>Search</button></div>
-                                        </div>
-                                    </div>
-                                </form>
                                 <div class="table-responsive table mt-2" id="tbl_tosf_div" role="grid" aria-describedby="dataTable_info">
                                 <!--LIST OF TOSF HERE-->
                                 </div>
