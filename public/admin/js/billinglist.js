@@ -52,7 +52,7 @@ function fetchtosflist() {
       $("#tbl_tosf_div").html(response);
 
       $('.col_search').each( function (i) {
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input type="text" placeholder="Search" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
             if ( table.column(i).search() !== this.value ) {
