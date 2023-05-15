@@ -54,23 +54,38 @@ function fetchtosflist() {
       //   var title = $(this).text();
       //   $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       // });
-        $("#th_program").html('<input type="text" placeholder="Search Degree Program" />');
+        // $("#th_program").html('<input type="text" placeholder="Search Degree Program" />');
+
+        $('#tbl_tosf thead tr').clone(true).appendTo( '#tbl_tosf thead' );
+    $('#tbl_tosf thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
 
       $("#tbl_tosf").DataTable({
-        initComplete: function () {
-          // Apply the search
-          this.api()
-              .columns()
-              .every(function () {
-                  var that = this;
+      //   initComplete: function () {
+      //     // Apply the search
+      //     this.api()
+      //         .columns()
+      //         .every(function () {
+      //             var that = this;
 
-                  $('input', this.header()).on('keyup change clear', function () {
-                      if (that.search() !== this.value) {
-                          that.search(this.value).draw();
-                      }
-                  });
-              });
-      },
+      //             $('input', this.header()).on('keyup change clear', function () {
+      //                 if (that.search() !== this.value) {
+      //                     that.search(this.value).draw();
+      //                 }
+      //             });
+      //         });
+      // },
         "order": [[1, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
