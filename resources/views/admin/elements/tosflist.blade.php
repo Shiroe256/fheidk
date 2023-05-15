@@ -12,12 +12,12 @@
             <th class="text-right" rowspan="2">ACTION</th>
         </tr>
         <tr>
-            <th class="text-left col_search">DEGREE PROGRAM</th>
-            <th class="text-center col_search">YEAR LEVEL</th>
-            <th class="text-center col_search">SEMESTER</th>
-            <th class="text-left col_search">TYPE OF FEE</th>
-            <th class="text-left col_search">CATEGORY</th>
-            <th class="text-left col_search">COVERAGE</th>
+            <th class="text-left col_search"></th>
+            <th class="text-center col_search"></th>
+            <th class="text-center col_search"></th>
+            <th class="text-left col_search"></th>
+            <th class="text-left col_search"></th>
+            <th class="text-left col_search"></th>
         </tr>
     </thead>
     <tbody>
