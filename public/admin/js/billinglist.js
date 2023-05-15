@@ -71,7 +71,7 @@ function fetchtosflist() {
                   });
               });
       },
-        "order": [[0, "asc"]],
+        "order": [[1, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
       });
