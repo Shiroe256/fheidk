@@ -65,7 +65,7 @@ function fetchtosflist() {
         } );
     } );
 
-      $("#tbl_tosf").DataTable({
+    var table = $("#tbl_tosf").DataTable({
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
