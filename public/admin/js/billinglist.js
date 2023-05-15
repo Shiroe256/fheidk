@@ -54,9 +54,7 @@ function fetchtosflist() {
       //   var title = $(this).text();
       //   $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       // });
-
-        var title = $("#th_program").text();
-        $("#th_program").html('<input type="text" placeholder="Search ' + title + '" />');
+        $("#th_program").html('<input type="text" placeholder="Search ' + program + '" />');
 
       $("#tbl_tosf").DataTable({
         initComplete: function () {
@@ -66,7 +64,7 @@ function fetchtosflist() {
               .every(function () {
                   var that = this;
 
-                  $('input', this.footer()).on('keyup change clear', function () {
+                  $('input', this.header()).on('keyup change clear', function () {
                       if (that.search() !== this.value) {
                           that.search(this.value).draw();
                       }
