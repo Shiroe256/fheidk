@@ -61,14 +61,14 @@ function fetchtosflist() {
       $("#tbl_tosf").DataTable({
         initComplete: function () {
           // Apply the search
-          this.api()
+          $("#th_program").api()
               .columns()
               .every(function () {
-                  var that = this;
+                  var that = $("#th_program");
 
-                  $('input', this).on('keyup change clear', function () {
-                      if (that.search() !== this.value) {
-                          that.search(this.value).draw();
+                  $('input', $("#th_program")).on('keyup change clear', function () {
+                      if (that.search() !== $("#th_program").value) {
+                          that.search($("#th_program").value).draw();
                       }
                   });
               });
