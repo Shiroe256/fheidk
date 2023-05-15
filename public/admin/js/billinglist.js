@@ -54,21 +54,16 @@ function fetchtosflist() {
  
         $("#degree_program").html('<input type="text" placeholder="Search" />');
 
-    var table = $("#tbl_tosf").DataTable ({
-      initComplete: function () {
-        // Apply the search
-        this.api()
-            .columns()
-            .every(function () {
-                var that = this;
+        $( 'input', this ).on( 'keyup change', function () {
+          if ( table.column(i).search() !== this.value ) {
+              table
+                  .column(i)
+                  .search( this.value )
+                  .draw();
+          }
+      } );
 
-                $('input', this.header()).on('keyup change clear', function () {
-                    if (that.search() !== this.value) {
-                        that.search(this.value).draw();
-                    }
-                });
-            });
-    },
+    var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
