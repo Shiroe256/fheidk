@@ -91,6 +91,60 @@ function managebillinglistsearch() {
   });
 }
 
+//upload new school fee
+// upload new fee ajax request
+$("#frm_upload_tosf").submit(function (e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  $("#btn_upload_tosf").text('Uploading...');
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $.ajax({
+    url: '/admin/import',
+    method: 'post',
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire(
+          'Upload!',
+          'New Fees Uploaded Successfully!',
+          'success'
+        )
+
+        fetchtosflist();
+
+        $("#btn_upload_tosf").text('Save');
+        $("#frm_upload_tosf")[0].reset();
+        $("#modal_upload_tosf").modal('hide');
+      } else if (response.status == 400) {
+        let i = 1;
+        let errorMessage = '';
+        $.each(response.errors, function (key, err_values) {
+          console.log(err_values);
+          errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+        })
+        Swal.fire({
+          // position: 'top',
+          title: 'Oops... you missed something',
+          html: errorMessage,
+          icon: 'warning',
+        })
+        $("#btn_upload_tosf").text('Upload');
+      }
+    }
+  });
+});
+//end of upload new fee
+
 //add new school fee
 // add new fee ajax request
 $("#frm_add_tosf").submit(function (e) {

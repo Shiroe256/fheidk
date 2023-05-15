@@ -435,16 +435,19 @@
 <div class="modal fade" role="dialog" tabindex="-1" id="modal_tosf">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
+            <form id="frm_upload_tosf" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">UPLOAD TOSF</h5><button type="button" class="close"
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input name="add_tosf_hei_uii" id="add_tosf_hei_uii" value="{{ $heis->hei_uii }}">
-                    <input name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
-                    <input name="add_tosf_hei_name" id="add_tosf_hei_name" value="{{ $heis->hei_name }}">
+                    <input type="hidden" name="upload_tosf_hei_uii" id="upload_tosf_hei_uii"
+                        value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="upload_tosf_hei_psg_region" id="upload_tosf_hei_psg_region"
+                        value="{{ $heis->hei_psg_region }}">
+                    <input type="hidden" name="upload_tosf_hei_name" id="upload_tosf_hei_name"
+                        value="{{ $heis->hei_name }}">
                     <input type="file" name="file">
                     <div class="input-group"></div>
                     <div class="input-group">
@@ -452,8 +455,8 @@
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-primary"
-                        type="submit">Upload</button></div>
+                        data-dismiss="modal">Close</button><button id="btn_upload_tosf" name="btn_upload_tosf"
+                        class="btn btn-primary" type="submit">Upload</button></div>
             </form>
         </div>
     </div>

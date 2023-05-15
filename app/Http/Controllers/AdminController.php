@@ -167,18 +167,18 @@ class AdminController extends Controller
     }
 
     public function manageuserpage($hei_uii)
-{
-    // Retrieve the corresponding Hei model from the database
-    $heis = Hei::where('hei_uii', $hei_uii)->first();
+    {
+        // Retrieve the corresponding Hei model from the database
+        $heis = Hei::where('hei_uii', $hei_uii)->first();
 
-    // Check if the Hei model exists
-    if (!$heis) {
-        abort(404);
+        // Check if the Hei model exists
+        if (!$heis) {
+            abort(404);
+        }
+
+        // Pass the $heis variable to the view
+        return view('admin.manage-users-page', ['heis' => $heis]);
     }
-
-    // Pass the $heis variable to the view
-    return view('admin.manage-users-page', ['heis' => $heis]);
-}
 
     public function fetchbillinglist()
     {
@@ -220,7 +220,7 @@ class AdminController extends Controller
             'type_of_fee' => $request->add_tosf_type_of_fee,
             'category' => $request->add_tosf_category,
             'coverage' => $request->add_tosf_coverage,
-            'amount' => $request->add_tosf_amount  
+            'amount' => $request->add_tosf_amount
         ];
         OtherSchoolFees::create($fee);
         return response()->json([
@@ -249,7 +249,7 @@ class AdminController extends Controller
             'type_of_fee' => $request->update_tosf_type_of_fee,
             'category' => $request->update_tosf_category,
             'coverage' => $request->update_tosf_coverage,
-            'amount' => $request->update_tosf_amount  
+            'amount' => $request->update_tosf_amount
         ];
         $fee->update($feeData);
         return response()->json([
@@ -266,4 +266,83 @@ class AdminController extends Controller
         $fees->delete();
     }
 
+    public function import(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        // Load the uploaded file using PHPSpreadsheet
+        $filePath = $request->file('file')->getRealPath();
+        $ac_year = "2021-2026";
+        $hei_uii = $request->upload_tosf_hei_uii;
+        $hei_psg_region = $request->upload_tosf_hei_psg_region;
+        $hei_name = $request->upload_tosf_hei_name;
+
+        $spreadsheet = IOFactory::load($filePath);
+
+        // Get the first worksheet of the uploaded file
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Initialize a flag to indicate whether the current row is the header row
+        $isHeaderRow = true;
+
+        // Set the batch size
+        $batchSize = 1000;
+
+        // Get the highest row number in the worksheet
+        $highestRow = $worksheet->getHighestRow();
+
+        // Loop through the rows of the worksheet and insert the data into the database in batches
+        for ($i = 1; $i <= $highestRow; $i += $batchSize) {
+            $batch = [];
+            for ($j = $i; $j < $i + $batchSize; $j++) {
+                if ($j > $highestRow) {
+                    break;
+                }
+                $row = $worksheet->getRowIterator($j)->current();
+
+                if ($isHeaderRow) {
+                    // Skip the header row
+                    $isHeaderRow = false;
+                    continue;
+                }
+
+                $data = [];
+                foreach ($row->getCellIterator() as $cell) {
+                    $data[] = $cell->getValue();
+                }
+                // Validate the data before creating the record
+                $validator = Validator::make($data, [
+                    'year_level' => 'numeric',
+                    'semester' => 'numeric',
+                    'amount' => 'numeric',
+                ]);
+
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
+
+                $batch[] = [
+                    'ac_year' => $ac_year,
+                    'hei_psg_region' => $hei_psg_region,
+                    'hei_uii' => $hei_uii,
+                    'hei_name' => $hei_name,
+                    'year_level' => $data[4],
+                    'semester' => $data[5],
+                    'course_enrolled' => $data[6],
+                    'type_of_fee' => $data[7],
+                    'category' => $data[8],
+                    'coverage' => $data[9],
+                    'amount' => $data[10],
+                ];
+            }
+            OtherSchoolFees::insert($batch);
+        }
+        return response()->json([
+            'status' => 200,
+        ]);
+        return view('admin.elements.tosflist');
+    }
 }
