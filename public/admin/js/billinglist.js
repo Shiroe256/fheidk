@@ -50,19 +50,14 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      $('#degree_program').each( function (i) {
- 
-        $("#degree_program").html('<input type="text" placeholder="Search" />');
+      $('#degree_program').html('<input type="text" />');
 
-        $( 'input', this ).on( 'keyup change', function () {
-          if ( table.column(i).search() !== this.value ) {
-              table
-                  .column(i)
-                  .search( this.value )
-                  .draw();
-          }
-      } );
-    });
+      $('#degree_program input').on( 'keyup change', function () {
+        table
+          .column(2)
+          .search(this.value)
+          .draw();
+      });
 
     var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
