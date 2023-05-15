@@ -50,10 +50,14 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      $('#tbl_tosf tfoot th').each(function () {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-    });
+      // $('#tbl_tosf tfoot th').each(function () {
+      //   var title = $(this).text();
+      //   $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+      // });
+
+        var title = $("#th_program").text();
+        $("#th_program").html('<input type="text" placeholder="Search ' + title + '" />');
+
       $("#tbl_tosf").DataTable({
         initComplete: function () {
           // Apply the search

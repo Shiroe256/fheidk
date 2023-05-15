@@ -32,7 +32,7 @@
     <tfoot>
         <tr>
             <th class="text-center"><input name="main_tosf_checkbox" type="checkbox" data-toggle="tooltip" title="Select All" /></th>
-            <th class="text-left">DEGREE PROGRAM</th>
+            <th class="text-left" id="th_program">DEGREE PROGRAM</th>
             <th class="text-center">YEAR LEVEL</th>
             <th class="text-center">SEMESTER</th>
             <th class="text-left">TYPE OF FEE</th>
