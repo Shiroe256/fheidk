@@ -63,7 +63,7 @@ function fetchtosflist() {
             .every(function () {
                 var that = this;
 
-                $('input', this.head()).on('keyup change clear', function () {
+                $('input', this.header()).on('keyup change clear', function () {
                     if (that.search() !== this.value) {
                         that.search(this.value).draw();
                     }
