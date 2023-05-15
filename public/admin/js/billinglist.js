@@ -51,7 +51,7 @@ function fetchtosflist() {
     success: function (response) {
       $("#tbl_tosf_div").html(response);
 
-      $('#search_degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px; width: 100%; padding: 3px; box-sizing: border-box;" placeholder="SEARCH"/>');
+      $('#search_degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
       $('#search_year_level').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
       $('#search_semester').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
       $('#search_type_of_fee').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
