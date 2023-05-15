@@ -49,13 +49,11 @@ function fetchtosflist() {
       hei_uii: hei_uii
     },
     success: function (response) {
-
+      $("#tbl_tosf_div").html(response);
       $('#tbl_tosf tfoot th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
     });
-
-      $("#tbl_tosf_div").html(response);
       $("#tbl_tosf").DataTable({
         initComplete: function () {
           // Apply the search
