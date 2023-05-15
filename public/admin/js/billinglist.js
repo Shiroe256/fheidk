@@ -65,7 +65,7 @@ function fetchtosflist() {
     // } );
 
 // Setup - add a text input to each footer cell
-$('#tbl_tosf thead tr').clone(true).appendTo( '#tbl_heis thead' );
+$('#tbl_tosf thead tr').clone(true).appendTo( '#tbl_tosf thead' );
 $('#tbl_tosf thead tr:eq(1) th').each( function (i) {
     var title = $(this).text();
     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
