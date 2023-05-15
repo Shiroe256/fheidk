@@ -124,7 +124,7 @@ $("#frm_upload_tosf").submit(function (e) {
 
         $("#btn_upload_tosf").text('Save');
         $("#frm_upload_tosf")[0].reset();
-        $("#modal_upload_tosf").modal('hide');
+        $("#modal_tosf").modal('hide');
       } else if (response.status == 400) {
         let i = 1;
         let errorMessage = '';
