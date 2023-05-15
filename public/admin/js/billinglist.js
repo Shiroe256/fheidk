@@ -50,11 +50,52 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      $('#degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
 
-      $('#degree_program input').on( 'keyup change', function () {
+      $('#search_degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_year_level').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_semester').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_type_of_fee').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_category').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_coverage').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+
+      $('#search_degree_program input').on( 'keyup change', function () {
         table
           .column(1)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_year_level input').on( 'keyup change', function () {
+        table
+          .column(2)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_semester input').on( 'keyup change', function () {
+        table
+          .column(3)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_type_of_fee input').on( 'keyup change', function () {
+        table
+          .column(4)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_category input').on( 'keyup change', function () {
+        table
+          .column(5)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_coverage input').on( 'keyup change', function () {
+        table
+          .column(6)
           .search(this.value)
           .draw();
       });
