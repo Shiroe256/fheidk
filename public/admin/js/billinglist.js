@@ -51,18 +51,34 @@ function fetchtosflist() {
     success: function (response) {
       $("#tbl_tosf_div").html(response);
 
-      $('.col_search').each( function (i) {
-        $(this).html( '<input type="text" placeholder="Search" />' );
+    //   $('.col_search').each( function (i) {
+    //     $(this).html( '<input type="text" placeholder="Search" />' );
  
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
-                table
-                    .column(i)
-                    .search( this.value )
-                    .draw();
-            }
-        } );
+    //     $( 'input', this ).on( 'keyup change', function () {
+    //         if ( table.column(i).search() !== this.value ) {
+    //             table
+    //                 .column(i)
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
+
+// Setup - add a text input to each footer cell
+$('#tbl_tosf thead tr').clone(true).appendTo( '#tbl_heis thead' );
+$('#tbl_tosf thead tr:eq(1) th').each( function (i) {
+    var title = $(this).text();
+    $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+    $( 'input', this ).on( 'keyup change', function () {
+        if ( table.column(i).search() !== this.value ) {
+            table
+                .column(i)
+                .search( this.value )
+                .draw();
+        }
     } );
+} );
 
     var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
