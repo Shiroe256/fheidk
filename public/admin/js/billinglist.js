@@ -62,7 +62,7 @@ function fetchtosflist() {
         
     // } );
 
-    $("#th_program").html( '<input type="text" placeholder="Search '+title+'" />' );
+    $("#th_program").html( '<input type="text" placeholder="Search Degree Program" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
             if ( table.column(i).search() !== this.value ) {
