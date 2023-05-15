@@ -54,7 +54,7 @@ function fetchtosflist() {
       //   var title = $(this).text();
       //   $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       // });
-        $("#th_program").html('<input type="text" placeholder="Search ' + program + '" />');
+        $("#th_program").html('<input type="text" placeholder="Search Degree Program" />');
 
       $("#tbl_tosf").DataTable({
         initComplete: function () {
