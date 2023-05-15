@@ -50,21 +50,28 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      // Setup - add a text input to each footer cell
-      $('.col_search :eq(1) th').each(function (i) {
-        var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search" />');
 
-        $('input', this).on('keyup change', function () {
-          if (table.column(i).search() !== this.value) {
-            table
-              .column(i)
-              .search(this.value)
-              .draw();
-          }
-        });
-      });
+      // Setup - add a text input to each footer cell
+      $('.col_search').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
       $("#tbl_tosf").DataTable({
+        initComplete: function () {
+          // Apply the search
+          this.api()
+              .columns()
+              .every(function () {
+                  var that = this;
+
+                  $('input', this).on('keyup change clear', function () {
+                      if (that.search() !== this.value) {
+                          that.search(this.value).draw();
+                      }
+                  });
+              });
+      },
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
