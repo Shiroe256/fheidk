@@ -1,23 +1,15 @@
 <table class="table table-bordered my-0" id="tbl_tosf">
     <thead>
         <tr>
-            <th class="text-center" rowspan="2"><input name="main_tosf_checkbox" type="checkbox" data-toggle="tooltip" title="Select All" /></th>
+            <th class="text-center"><input name="main_tosf_checkbox" type="checkbox" data-toggle="tooltip" title="Select All" /></th>
             <th class="text-left">DEGREE PROGRAM</th>
             <th class="text-center">YEAR LEVEL</th>
             <th class="text-center">SEMESTER</th>
             <th class="text-left">TYPE OF FEE</th>
             <th class="text-left">CATEGORY</th>
             <th class="text-left">COVERAGE</th>
-            <th class="text-right" rowspan="2">AMOUNT</th>
-            <th class="text-right" rowspan="2">ACTION</th>
-        </tr>
-        <tr>
-            <th class="text-left col_search"></th>
-            <th class="text-center col_search"></th>
-            <th class="text-center col_search"></th>
-            <th class="text-left col_search"></th>
-            <th class="text-left col_search"></th>
-            <th class="text-left col_search"></th>
+            <th class="text-right">AMOUNT</th>
+            <th class="text-right">ACTION</th>
         </tr>
     </thead>
     <tbody>
