@@ -50,7 +50,7 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-
+      $('#degree_program').each( function (i) {
  
         $("#degree_program").html('<input type="text" placeholder="Search" />');
 
@@ -62,6 +62,7 @@ function fetchtosflist() {
                   .draw();
           }
       } );
+    });
 
     var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
