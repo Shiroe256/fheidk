@@ -52,7 +52,7 @@ function fetchtosflist() {
       $("#tbl_tosf_div").html(response);
 
       // Setup - add a text input to each footer cell
-      $('#example theader th').each(function () {
+      $('#tbl_tosf theader th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
     });
