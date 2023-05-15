@@ -103,7 +103,11 @@ function fetchtosflist() {
     var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
         orderCellsTop: true,
-        fixedHeader: true
+        fixedHeader: true,
+        'columnDefs': [ {
+          'targets': [0,8], /* column index */
+          'orderable': false, /* true or false */
+       }]
       });
     }
   });
