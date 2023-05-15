@@ -52,7 +52,7 @@ function fetchtosflist() {
       $("#tbl_tosf_div").html(response);
 
       // Setup - add a text input to each footer cell
-      $('.col_search').each(function () {
+      $('#example theader th').each(function () {
         var title = $(this).text();
         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
     });
@@ -65,7 +65,7 @@ function fetchtosflist() {
               .every(function () {
                   var that = this;
 
-                  $('input', this).on('keyup change clear', function () {
+                  $('input', this.footer()).on('keyup change clear', function () {
                       if (that.search() !== this.value) {
                           that.search(this.value).draw();
                       }
