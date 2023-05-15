@@ -4,12 +4,15 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">PROFILE</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">PROFILE</h4><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col text-center"><img class="rounded-circle" src="{{url('admin/img/293228345_5209578979160533_6724701494728557606_n.jpg')}}" width="150" height="150"></div>
+                            <div class="col text-center"><img class="rounded-circle"
+                                    src="{{ url('admin/img/293228345_5209578979160533_6724701494728557606_n.jpg') }}"
+                                    width="150" height="150"></div>
                         </div>
                         <div class="form-row mt-3">
                             <div class="col text-center">
@@ -20,7 +23,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button></div>
             </form>
         </div>
     </div>
@@ -33,12 +37,17 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">REMARKS</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">REMARKS</h4><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><textarea class="form-control" placeholder="Enter your remarks here. . ."></textarea></div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Enter your remarks here. . ."></textarea>
+                    </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Confirm</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                        type="button">Confirm</button></div>
             </form>
         </div>
     </div>
@@ -51,12 +60,17 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">REMARKS</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">REMARKS</h4><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><textarea class="form-control" placeholder="Enter your remarks here. . .(Optional)"></textarea></div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Enter your remarks here. . .(Optional)"></textarea>
+                    </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Confirm</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                        type="button">Confirm</button></div>
             </form>
         </div>
     </div>
@@ -69,7 +83,8 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">Student Information</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Student Information</h4><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <h5>Campus</h5>
@@ -82,154 +97,208 @@
                     <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input class="form-control" type="date"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input class="form-control"
+                                    type="date"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Mother's Lastname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Mother's Firstname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Mother's Middlename</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Mother's Lastname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Mother's Firstname</label><input
+                                    class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Mother's Middlename</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Father's Lastname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Father's Firstname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Father's Middlename</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Father's Lastname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Father's Firstname</label><input
+                                    class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Father's Middlename</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <h5>Present Address</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
+                                    class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="d-flex">Permanent Address</h5>
-                        <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label" for="formCheck-1">Same with the Present Address?</label></div>
+                        <div class="custom-control custom-checkbox"><input class="custom-control-input"
+                                type="checkbox" id="formCheck-1"><label class="custom-control-label"
+                                for="formCheck-1">Same with the Present Address?</label></div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
+                                    class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Contact Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Alternative Mobile Number</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Alternative Mobile Number</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Alternative Email Address</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Alternative Email Address</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Enrollment Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total No. of Units Enrolled</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Units Enrolled</label><input
+                                    class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
+                                    class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-2"><label class="custom-control-label" for="formCheck-2">With National Service Training Program (NSTP)</label></div>
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input"
+                                        type="checkbox" id="formCheck-2"><label class="custom-control-label"
+                                        for="formCheck-2">With National Service Training Program (NSTP)</label></div>
                             </div>
                             <div class="col-lg-6 col-xl-6">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-3"><label class="custom-control-label" for="formCheck-3">Transferee</label></div>
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input"
+                                        type="checkbox" id="formCheck-3"><label class="custom-control-label"
+                                        for="formCheck-3">Transferee</label></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Admission Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Admission Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Medical and Dental Fee</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Medical and Dental Fee</label><input
+                                    class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Remarks</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-12 col-xl-12"><textarea class="form-control"></textarea></div>
+                            <div class="col-lg-12 col-xl-12">
+                                <textarea class="form-control"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                        type="button">Save</button></div>
             </form>
         </div>
     </div>
@@ -242,7 +311,8 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h4 class="modal-title">Applicant Information</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Applicant Information</h4><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <h5>Campus</h5>
@@ -255,31 +325,42 @@
                     <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input class="form-control" type="date"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input class="form-control"
+                                    type="date"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Contact Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Alternative Mobile Number</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Alternative Mobile Number</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Alternative Email Address</label><input class="form-control" type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Alternative Email Address</label><input
+                                    class="form-control" type="text"></div>
                         </div>
                     </div>
                     <hr>
@@ -287,20 +368,26 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-12">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-3"><label class="custom-control-label" for="formCheck-3">Transferee</label></div>
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input"
+                                        type="checkbox" id="formCheck-3"><label class="custom-control-label"
+                                        for="formCheck-3">Transferee</label></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input class="form-control" type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>No. of times the student has taken the exam</label><input class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Amount</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>No. of times the student has taken the
+                                    exam</label><input class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Amount</label><input class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -314,7 +401,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                        type="button">Save</button></div>
             </form>
         </div>
     </div>
@@ -326,12 +415,17 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title">Scanned Copy</h6><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title">Scanned Copy</h6><button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">
-                <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" allowfullscreen=""></iframe></div>
+                <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item"
+                        src="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                        allowfullscreen=""></iframe></div>
             </div>
-            <div class="modal-footer"><button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#modal_reject">REJECT</button><button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#modal_approve">APPROVE</button></div>
+            <div class="modal-footer"><button class="btn btn-outline-danger" type="button" data-toggle="modal"
+                    data-target="#modal_reject">REJECT</button><button class="btn btn-outline-success" type="button"
+                    data-toggle="modal" data-target="#modal_approve">APPROVE</button></div>
         </div>
     </div>
 </div>
@@ -343,16 +437,23 @@
         <div class="modal-content">
             <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
                 @csrf
-            <div class="modal-header">
-                <h5 class="modal-title">UPLOAD TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body"><input type="file" name="file">
-                <div class="input-group"></div>
-                <div class="input-group">
-                    <div class="input-group-prepend"></div>
+                <div class="modal-header">
+                    <h5 class="modal-title">UPLOAD TOSF</h5><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-            </div>
-            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Upload</button></div>
+                <div class="modal-body">
+                    <input name="add_tosf_hei_uii" id="add_tosf_hei_uii" value="{{ $heis->hei_uii }}">
+                    <input name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
+                    <input name="add_tosf_hei_name" id="add_tosf_hei_name" value="{{ $heis->hei_name }}">
+                    <input type="file" name="file">
+                    <div class="input-group"></div>
+                    <div class="input-group">
+                        <div class="input-group-prepend"></div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                        type="submit">Upload</button></div>
             </form>
         </div>
     </div>
@@ -366,14 +467,21 @@
             <form id="frm_add_tosf" method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">ADD TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h5 class="modal-title">ADD TOSF</h5><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="add_tosf_hei_uii" id="add_tosf_hei_uii" value="{{ $heis->hei_uii }}">
-                    <input type="hidden" name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
-                    <input type="hidden" name="add_tosf_hei_name" id="add_tosf_hei_name" value="{{ $heis->hei_name }}">
-                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_degree_program" name="add_tosf_degree_program" type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level" name="add_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
+                    <input type="hidden" name="add_tosf_hei_uii" id="add_tosf_hei_uii"
+                        value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region"
+                        value="{{ $heis->hei_psg_region }}">
+                    <input type="hidden" name="add_tosf_hei_name" id="add_tosf_hei_name"
+                        value="{{ $heis->hei_name }}">
+                    <div class="form-group"><label>Degree Program</label><input id="add_tosf_degree_program"
+                            name="add_tosf_degree_program" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level"
+                            name="add_tosf_year_level" type="number" class="form-control" min="1"
+                            max="6" /></div>
                     <div class="form-group"><label>Semester</label>
                         <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
@@ -403,7 +511,8 @@
                             <option value="NSTP">NSTP</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Category</label><input id="add_tosf_category" name="add_tosf_category" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Category</label><input id="add_tosf_category"
+                            name="add_tosf_category" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Coverage</label>
                         <select id="add_tosf_coverage" name="add_tosf_coverage" class="form-control">
                             <option selected disabled value="">-- Select Coverage --</option>
@@ -412,9 +521,12 @@
                             <option value="per student">per student</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount" type="number" class="form-control" min="0" /></div>
+                    <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount"
+                            type="number" class="form-control" min="0" /></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf" class="btn btn-primary" type="submit">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="submit"
+                        data-dismiss="modal">Close</button><button id="btn_save_tosf" name="btn_save_tosf"
+                        class="btn btn-primary" type="submit">Save</button></div>
             </form>
         </div>
     </div>
@@ -428,15 +540,22 @@
             <form id='frm_update_tosf' method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">UPDATE TOSF</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h5 class="modal-title">UPDATE TOSF</h5><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="update_tosf_hei_uii" id="update_tosf_hei_uii" value="{{ $heis->hei_uii }}">
-                    <input type="hidden" name="update_tosf_hei_psg_region" id="update_tosf_hei_psg_region" value="{{ $heis->hei_psg_region }}">
-                    <input type="hidden" name="update_tosf_hei_name" id="update_tosf_hei_name" value="{{ $heis->hei_name }}">
+                    <input type="hidden" name="update_tosf_hei_uii" id="update_tosf_hei_uii"
+                        value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="update_tosf_hei_psg_region" id="update_tosf_hei_psg_region"
+                        value="{{ $heis->hei_psg_region }}">
+                    <input type="hidden" name="update_tosf_hei_name" id="update_tosf_hei_name"
+                        value="{{ $heis->hei_name }}">
                     <input type="hidden" name="update_tosf_id" id="update_tosf_id" />
-                    <div class="form-group"><label>Degree Program</label><input id="update_tosf_program" name="update_tosf_program" type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input id="update_tosf_year_level" name="update_tosf_year_level" type="number" class="form-control" min="1" max="6" /></div>
+                    <div class="form-group"><label>Degree Program</label><input id="update_tosf_program"
+                            name="update_tosf_program" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Year Level</label><input id="update_tosf_year_level"
+                            name="update_tosf_year_level" type="number" class="form-control" min="1"
+                            max="6" /></div>
                     <div class="form-group"><label>Semester</label>
                         <select id="update_tosf_semester" name="update_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
@@ -466,7 +585,8 @@
                             <option value="NSTP">NSTP</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Category</label><input id="update_tosf_category" name="update_tosf_category" type="text" class="form-control" /></div>
+                    <div class="form-group"><label>Category</label><input id="update_tosf_category"
+                            name="update_tosf_category" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Coverage</label>
                         <select id="update_tosf_coverage" name="update_tosf_coverage" class="form-control">
                             <option selected disabled value="">-- Select Coverage --</option>
@@ -475,9 +595,12 @@
                             <option value="per student">per student</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Amount</label><input id="update_tosf_amount" name="update_tosf_amount" type="number" class="form-control" min="0" /></div>
+                    <div class="form-group"><label>Amount</label><input id="update_tosf_amount"
+                            name="update_tosf_amount" type="number" class="form-control" min="0" /></div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="submit" data-dismiss="modal">Close</button><button id="btn_update_tosf" name="btn_update_tosf" class="btn btn-primary" type="submit">Update</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="submit"
+                        data-dismiss="modal">Close</button><button id="btn_update_tosf" name="btn_update_tosf"
+                        class="btn btn-primary" type="submit">Update</button></div>
             </form>
         </div>
     </div>
