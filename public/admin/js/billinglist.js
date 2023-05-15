@@ -50,30 +50,22 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      // $('#tbl_tosf tfoot th').each(function () {
-      //   var title = $(this).text();
-      //   $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-      // });
+      // Setup - add a text input to each footer cell
+      $('.col_search').each(function (i) {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
 
-        var program = $("#th_program").text();
-        $("#th_program").html('<input type="text" placeholder="Search ' + program + '" />');
-
+        $('input', this).on('keyup change', function () {
+          if (table.column(i).search() !== this.value) {
+            table
+              .column(i)
+              .search(this.value)
+              .draw();
+          }
+        });
+      });
       $("#tbl_tosf").DataTable({
-        initComplete: function () {
-          // Apply the search
-          $("#th_program").api()
-              .columns()
-              .every(function () {
-                  var that = $("#th_program");
-
-                  $('input', $("#th_program")).on('keyup change clear', function () {
-                      if (that.search() !== $("#th_program").value) {
-                          that.search($("#th_program").value).draw();
-                      }
-                  });
-              });
-      },
-        "order": [[1, "asc"]],
+        "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
       });
