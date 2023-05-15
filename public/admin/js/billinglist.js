@@ -51,8 +51,7 @@ function fetchtosflist() {
     success: function (response) {
       $("#tbl_tosf_div").html(response);
 
-      $('#tbl_tosf thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
+      $('.col_search').each( function (i) {
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
@@ -65,7 +64,7 @@ function fetchtosflist() {
         } );
     } );
 
-    var table = $("#tbl_tosf").DataTable({
+    var table = $("#tbl_tosf").DataTable ({
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
