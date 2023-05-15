@@ -1,4 +1,4 @@
-<table class="table table-bordered my-0" id="tbl_tosf">
+<table class="table table-bordered my-0" id="tbl_tosf" style="width: 100%">
     <thead>
         <tr>
             <th class="text-center" rowspan="2"><input name="main_tosf_checkbox" type="checkbox" data-toggle="tooltip" title="Select All" /></th>
