@@ -59,13 +59,13 @@ function fetchtosflist() {
         // $('#tbl_tosf thead tr').clone(true).appendTo( '#tbl_tosf thead' );
         $('#tbl_tosf thead tr:eq(1) th').each( function (i) {
         var title = $("#th_program").text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $("#th_program").html( '<input type="text" placeholder="Search '+title+'" />' );
  
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
+        $( 'input', "#th_program" ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== $("#th_program").value ) {
                 table
                     .column(i)
-                    .search( this.value )
+                    .search( $("#th_program").value )
                     .draw();
             }
         } );
