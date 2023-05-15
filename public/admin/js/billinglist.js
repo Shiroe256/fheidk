@@ -51,7 +51,7 @@ function fetchtosflist() {
     success: function (response) {
       $("#tbl_tosf_div").html(response);
 
-      $('#search_degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
+      $('#search_degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px; width: 100%; padding: 3px;" placeholder="SEARCH"/>');
       $('#search_year_level').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
       $('#search_semester').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
       $('#search_type_of_fee').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
@@ -108,38 +108,6 @@ function fetchtosflist() {
           'targets': [0,8], /* column index */
           'orderable': false, /* true or false */
        }]
-      });
-    }
-  });
-}
-
-function managebillinglistsearch() {
-  var acYear = document.getElementById("select_ac_year").value;
-  var semester = document.getElementById("select_semester").value;
-  var billingStatus = document.getElementById("select_billing_status").value;
-
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  // Send AJAX request to the server
-  $.ajax({
-    url: "/admin/managebillinglistsearch",
-    type: "POST",
-    data: {
-      ac_year: acYear,
-      semester: semester,
-      billing_status: billingStatus
-    },
-    success: function (response) {
-      // Update the table with the retrieved data
-      $("#tbl_billing_list_admin").html(response);
-      $("#tbl_manage_billing_list").DataTable({
-        "order": [[0, "asc"]],
-        orderCellsTop: true,
-        fixedHeader: true
       });
     }
   });
