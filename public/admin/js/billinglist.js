@@ -54,7 +54,7 @@ function fetchtosflist() {
 
       $('#degree_program input').on( 'keyup change', function () {
         table
-          .column(2)
+          .column(1)
           .search(this.value)
           .draw();
       });
