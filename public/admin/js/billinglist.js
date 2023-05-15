@@ -101,7 +101,7 @@ function fetchtosflist() {
       });
 
     var table = $("#tbl_tosf").DataTable ({
-        "order": [[0, "asc"]],
+        "order": [[1, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,
         'columnDefs': [ {
