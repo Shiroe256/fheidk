@@ -50,7 +50,7 @@ function fetchtosflist() {
     },
     success: function (response) {
       $("#tbl_tosf_div").html(response);
-      $('#degree_program').html('<input class="form-control" type="text" style="font-size: 12px" placeholder="Search"/>');
+      $('#degree_program').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px" placeholder="SEARCH"/>');
 
       $('#degree_program input').on( 'keyup change', function () {
         table
