@@ -49,8 +49,28 @@ function fetchtosflist() {
       hei_uii: hei_uii
     },
     success: function (response) {
+
+      $('#tbl_tosf tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
+
       $("#tbl_tosf_div").html(response);
       $("#tbl_tosf").DataTable({
+        initComplete: function () {
+          // Apply the search
+          this.api()
+              .columns()
+              .every(function () {
+                  var that = this;
+
+                  $('input', this.footer()).on('keyup change clear', function () {
+                      if (that.search() !== this.value) {
+                          that.search(this.value).draw();
+                      }
+                  });
+              });
+      },
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
