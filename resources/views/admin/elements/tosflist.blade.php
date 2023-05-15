@@ -12,7 +12,7 @@
             <th class="text-right" rowspan="2">ACTION</th>
         </tr>
         <tr>
-            <th id="degree_program" class="text-left col_search"></th>
+            <th id="degree_program" class="text-center col_search"></th>
             <th class="text-center col_search"></th>
             <th class="text-center col_search"></th>
             <th class="text-left col_search"></th>
