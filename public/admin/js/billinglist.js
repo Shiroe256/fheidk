@@ -65,9 +65,9 @@ function fetchtosflist() {
     $("#th_program").html( '<input type="text" placeholder="Search Degree Program" />' );
  
         $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
+            if ( table.column(this).search() !== this.value ) {
                 table
-                    .column(i)
+                    .column(this)
                     .search( this.value )
                     .draw();
             }
