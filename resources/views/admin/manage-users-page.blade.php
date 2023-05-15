@@ -267,5 +267,6 @@
         </section>
     </main>
     
+@include('admin.includes.manage-user-page-modal');
 @include('admin.includes.modal')
 @include('admin.includes.footer')
