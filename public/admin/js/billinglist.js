@@ -67,16 +67,16 @@ function fetchuserlist() {
           .draw();
       });
 
-      $('#search_user_hei_email').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+      $('#search_user_email').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
 
-      $('#search_user_hei_email input').on( 'keyup change', function () {
+      $('#search_user_email input').on( 'keyup change', function () {
         table
           .column(4)
           .search(this.value)
           .draw();
       });
 
-      $("#tbl_user_list").DataTable({
+      var table = $("#tbl_user_list").DataTable({
         "order": [[0, 1, "asc"]],
         orderCellsTop: true,
         fixedHeader: true
