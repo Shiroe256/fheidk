@@ -145,8 +145,8 @@
                             <option selected disabled value="">-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
-                            <option value="3">3</option>
                             <option value="Summer">Summer</option>
+                            <option value="Graduation">Graduation</option>
                         </select>
                     </div>
                     <div class="form-group"><label>Type of Fee</label>
