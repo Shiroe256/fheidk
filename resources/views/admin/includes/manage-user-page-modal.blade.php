@@ -5,8 +5,8 @@
             <form id="frm_upload_tosf" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">UPLOAD TOSF</h5><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h5 class="modal-title">UPLOAD TOSF</h5><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="upload_tosf_hei_uii" id="upload_tosf_hei_uii"
@@ -41,25 +41,23 @@
                         aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="add_tosf_hei_uii" id="add_tosf_hei_uii"
-                        value="{{ $heis->hei_uii }}">
+                    <input type="hidden" name="add_tosf_hei_uii" id="add_tosf_hei_uii" value="{{ $heis->hei_uii }}">
                     <input type="hidden" name="add_tosf_hei_psg_region" id="add_tosf_hei_psg_region"
                         value="{{ $heis->hei_psg_region }}">
-                    <input type="hidden" name="add_tosf_hei_name" id="add_tosf_hei_name"
-                        value="{{ $heis->hei_name }}">
+                    <input type="hidden" name="add_tosf_hei_name" id="add_tosf_hei_name" value="{{ $heis->hei_name }}">
                     <div class="form-group"><label>Degree Program</label><input id="add_tosf_degree_program"
                             name="add_tosf_degree_program" type="text" class="form-control" /></div>
                     <div class="form-group"><label>Year Level</label>
-                            <select id="add_tosf_year_level" name="add_tosf_year_level" class="form-control">
-                                <option selected disabled value="">-- Select Year --</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div>
+                        <select id="add_tosf_year_level" name="add_tosf_year_level" class="form-control">
+                            <option selected disabled value="">-- Select Year --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
                     <div class="form-group"><label>Semester</label>
                         <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
@@ -131,9 +129,17 @@
                     <input type="hidden" name="update_tosf_id" id="update_tosf_id" />
                     <div class="form-group"><label>Degree Program</label><input id="update_tosf_program"
                             name="update_tosf_program" type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input id="update_tosf_year_level"
-                            name="update_tosf_year_level" type="number" class="form-control" min="1"
-                            max="6" /></div>
+                    <div class="form-group"><label>Year Level</label>
+                        <select id="update_tosf_year_level" name="update_tosf_year_level" class="form-control">
+                            <option selected disabled value="">-- Select Year --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
                     <div class="form-group"><label>Semester</label>
                         <select id="update_tosf_semester" name="update_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
