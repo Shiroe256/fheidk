@@ -77,7 +77,8 @@ function fetchuserlist() {
       });
 
       var table = $("#tbl_user_list").DataTable({
-        "order": [[0, 1, "asc"]],
+        "order": [[1, "asc"]],
+        "order": [[0, "des"]],
         orderCellsTop: true,
         fixedHeader: true
       });
