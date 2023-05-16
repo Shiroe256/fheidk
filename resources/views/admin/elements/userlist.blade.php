@@ -1,4 +1,4 @@
-    <table class="table table-bordered my-0" id="tbl_user_list">
+    <table class="table table-bordered my-0" id="tbl_user_list" style="width: 100%">
         <thead>
             <tr>
                 <th>REGION</th>
