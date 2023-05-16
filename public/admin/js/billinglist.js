@@ -396,7 +396,6 @@ $(document).on('click', '#btn_tosf_remove', function () {
           uid: id
         },
         success: function (response) {
-          console.log(response);
           Swal.fire(
             'Deleted!',
             'Fee has been deleted.',
