@@ -34,7 +34,7 @@
         <section class="clean-block clean-faq dark">
             <div class="container">
                 <div class="block-heading">
-                    <h4 class="text-left text-info">MANAGE USERS</h4>
+                    <h4 class="text-left text-info">MANAGE USERS / {{ $heis->hei_name }}</h4>
                 </div> 
                 <input type="hidden" name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
                 <input type="hidden" name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="row">
+                <div class="row d-none"><!--Hidden for a while-->
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-none">
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-none">
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-none">
                     <div class="col-xl-12">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
