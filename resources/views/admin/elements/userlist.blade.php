@@ -6,8 +6,15 @@
                 <th>FOCAL PERSON</th>
                 <th>CONTACT NO.</th>
                 <th>EMAIL ADDRESS</th>
-                <th>STATUS</th>
-                <th class="text-center">ACTION</th>
+                <th rowspan="2">STATUS</th>
+                <th class="text-center" rowspan="2">ACTION</th>
+            </tr>
+            <tr>
+                <th id="search_user_region">REGION</th>
+                <th id="search_user_hei_name">HEI NAME</th>
+                <th id="search_user_focal_person">FOCAL PERSON</th>
+                <th id="search_user_contact">CONTACT NO.</th>
+                <th id="search_user_email">EMAIL ADDRESS</th>
             </tr>
         </thead>
         <tbody>
@@ -25,15 +32,4 @@
             </tr>
             @endforeach 
         </tbody>
-        <tfoot>
-            <tr>
-                <td><strong>REGION</strong><br></td>
-                <td><strong>HEI NAME</strong><br></td>
-                <td><strong>FOCAL PERSON</strong><br></td>
-                <td><strong>CONTACT NO.</strong></td>
-                <td><strong>EMAIL ADDRESS</strong></td>
-                <td><strong>STATUS</strong></td>
-                <td class="text-center"><strong>ACTION</strong></td>
-            </tr>
-        </tfoot>
     </table>
