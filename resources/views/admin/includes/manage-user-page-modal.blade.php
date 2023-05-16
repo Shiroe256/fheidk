@@ -49,9 +49,17 @@
                         value="{{ $heis->hei_name }}">
                     <div class="form-group"><label>Degree Program</label><input id="add_tosf_degree_program"
                             name="add_tosf_degree_program" type="text" class="form-control" /></div>
-                    <div class="form-group"><label>Year Level</label><input id="add_tosf_year_level"
-                            name="add_tosf_year_level" type="number" class="form-control" min="1"
-                            max="6" /></div>
+                    <div class="form-group"><label>Year Level</label>
+                            <select id="add_tosf_year_level" name="add_tosf_year_level" class="form-control">
+                                <option selected disabled value="">-- Select Year --</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
                     <div class="form-group"><label>Semester</label>
                         <select id="add_tosf_semester" name="add_tosf_semester" class="form-control">
                             <option selected disabled value="">-- Select Semester --</option>
