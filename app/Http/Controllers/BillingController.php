@@ -123,8 +123,8 @@ class BillingController extends Controller
 
         echo json_encode([
             "draw" => $request->draw,
-            "recordsTotal" => $total,
-            "recordsFiltered" => count($data['students']),
+            "recordsTotal" => count($data['students']),
+            "recordsFiltered" => $total,
             "data" => $data['students']
         ]);
         // return view('elements.studenttable', $data);
