@@ -1802,7 +1802,7 @@ $(document).on('click', '.btn_update_student', function (e) {
     method: 'get',
     data: {
       uid: id,
-      _token: '{{ csrf_token() }}'
+      _token: $('meta[name="csrf-token"]').attr('content')
     },
     success: function (response) {
       $('#edit_selected_campus').val(response.hei_name);
