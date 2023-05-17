@@ -2053,7 +2053,7 @@ function fetchTempStudent() {
         data: 'stud_mname'
       },
       {
-        data: 'stud_degreeprogram'
+        data: 'degree_program'
       },
       {
         data: 'year_level'
