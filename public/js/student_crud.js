@@ -2033,6 +2033,41 @@ function fetchTempStudent() {
   membersDT = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
+    columns: [
+      {
+        data: 'hei_name'
+      },
+      {
+        data: 'app_id'
+      },
+      {
+        data: 'fhe_award_no'
+      },
+      {
+        data: 'stud_lname'
+      },
+      {
+        data: 'stud_fname'
+      },
+      {
+        data: 'stud_mname'
+      },
+      {
+        data: 'stud_degreeprogram'
+      },
+      {
+        data: 'year_level'
+      },
+      {
+        data: 'remarks'
+      },
+      {
+        data: 'stud_status'
+      },
+      {
+        data: 'total_fees'
+      }
+    ],
     ajax: {
       method: 'POST',
       url: '/get-tempstudents',

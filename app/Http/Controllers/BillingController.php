@@ -89,10 +89,15 @@ class BillingController extends Controller
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->skip($request->start)
             ->take($request->length)
-            ->groupBy('tbl_billing_details_temp.uid')
-            ->get();
+            ->groupBy('tbl_billing_details_temp.uid');
 
         // $sql = "SELECT
+        $data['students'] = DB::table(DB::raw("({$students->toSql()}) as students"))
+            ->mergeBindings($students)
+            ->selectRaw('students.hei_name, students.app_id,students.fhe_award_no,students.stud_lname,students.stud_fname,students.stud_mname,students.degree_program,students.year_level,students.remarks,students.stud_status,students.total_osf + students.total_tuition + students.total_nstp +students.total_lab + students.total_comp_lab as total_fees')
+            // ->skip($request->length)
+            // ->skip($request->start)
+            ->get();
         // `tbl_billing_details_temp`.*,
         // tbl_billing_settings.bs_osf_uid,
         // tbl_billing_settings.bs_status,
@@ -113,7 +118,7 @@ class BillingController extends Controller
         // group by tbl_billing_details_temp.uid";
 
         //go back here migs
-        $data['students'] = $students;
+        // $data['students'] = $students;
 
         echo json_encode([
             "draw" => $request->draw,
