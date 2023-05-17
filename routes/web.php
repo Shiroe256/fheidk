@@ -62,7 +62,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Enrolled
-Route::get('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
+Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 // Route::get('/get-tempstudenttable', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent');
