@@ -48,6 +48,7 @@ class BillingController extends Controller
         $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
 
+        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
         $students = DB::table('tbl_billing_details_temp')
             ->select(
                 'tbl_billing_details_temp.*',
@@ -122,7 +123,7 @@ class BillingController extends Controller
 
         echo json_encode([
             "draw" => $request->draw,
-            "recordsTotal" => count($data['students']),
+            "recordsTotal" => $total,
             "recordsFiltered" => count($data['students']),
             "data" => $data['students']
         ]);
