@@ -51,10 +51,10 @@ class BillingController extends Controller
         $students = DB::table('tbl_billing_details_temp')
             ->select(
                 'tbl_billing_details_temp.*',
-                'tbl_billing_settings.bs_osf_uid',
-                'tbl_billing_settings.bs_status',
-                'tbl_billing_stud_settings.bs_osf_uid',
-                'tbl_billing_stud_settings.bs_status',
+                // 'tbl_billing_settings.bs_osf_uid',
+                // 'tbl_billing_settings.bs_status',
+                // 'tbl_billing_stud_settings.bs_osf_uid',
+                // 'tbl_billing_stud_settings.bs_status',
                 DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * tbl_billing_details_temp.academic_unit, 0)) as total_tuition'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * tbl_billing_details_temp.nstp_unit, 0)) as total_nstp'),
