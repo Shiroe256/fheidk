@@ -193,7 +193,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style" role="grid"
+                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none" role="grid"
                                 aria-describedby="dataTable_info">
                                 <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
                                     id="tbl_students">

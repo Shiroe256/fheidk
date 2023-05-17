@@ -2080,9 +2080,8 @@ function fetchTempStudent() {
   });
 
   membersDT.on('draw.dt', function () {
-    /**
-     * Add Event Listener to the custom inputs
-     */
+    document.getElementById("students-placeholder").classList.add('d-none');
+    document.getElementById("show_all_students").classList.remove('d-none');
     setup_Events();
   })
 
