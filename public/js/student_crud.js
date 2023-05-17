@@ -2023,39 +2023,69 @@ function btnDeleteToggle() {
 
 //fetch records from the database
 function fetchTempStudent() {
-  document.getElementById("students-placeholder").classList.remove('d-none');
-  document.getElementById("show_all_students").classList.add('d-none');
   let reference_no = $("#reference_no").val();
-  $.ajax({
-    url: "/get-tempstudents",
-    method: 'get',
-    data: {
-      reference_no: reference_no,
-      _token: '{{ csrf_token() }}'
+
+  var membersDT;
+  /** 
+   * Initializing DataTable
+   * Load Data using Ajax
+  */
+  membersDT = $('#tbl_students').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+      method: 'POST',
+      url: '/get-tempstudents',
+      data: {
+        reference_no: reference_no,
+        _token: '{{ csrf_token() }}'
+      }
     },
-    success: function (response) {
-      document.getElementById("students-placeholder").classList.add('d-none');
-      document.getElementById("show_all_students").classList.remove('d-none');
-      $("#show_all_students").html(response);
-      //events for settings are set everytime the datatables are redrawn
-      $("#tbl_students").on('order.dt', function () {
-        setup_Events();
-      })
-        .on('search.dt', function () {
-          setup_Events();
-        })
-        .on('page.dt', function () {
-          setup_Events();
-        }).DataTable({
-          orderCellsTop: true,
-          columnDefs: [
-            { orderable: false, targets: [0, -1] },
-          ]
-        });
-      //load events when rendering table
-    }
+    lengthMenu: [[10, 20], [10, 20]]
   });
+
+  membersDT.on('draw.dt', function () {
+    /**
+     * Add Event Listener to the custom inputs
+     */
+    setup_Events();
+  })
+
 }
+// function fetchTempStudent() {
+//   document.getElementById("students-placeholder").classList.remove('d-none');
+//   document.getElementById("show_all_students").classList.add('d-none');
+//   let reference_no = $("#reference_no").val();
+//   $.ajax({
+//     url: "/get-tempstudents",
+//     method: 'get',
+//     data: {
+//       reference_no: reference_no,
+//       _token: '{{ csrf_token() }}'
+//     },
+//     success: function (response) {
+//       document.getElementById("students-placeholder").classList.add('d-none');
+//       document.getElementById("show_all_students").classList.remove('d-none');
+//       $("#show_all_students").html(response);
+//       //events for settings are set everytime the datatables are redrawn
+//       $("#tbl_students").on('order.dt', function () {
+//         setup_Events();
+//       })
+//         .on('search.dt', function () {
+//           setup_Events();
+//         })
+//         .on('page.dt', function () {
+//           setup_Events();
+//         }).DataTable({
+//           orderCellsTop: true,
+//           columnDefs: [
+//             { orderable: false, targets: [0, -1] },
+//           ]
+//         });
+//       //load events when rendering table
+//     }
+//   });
+// }
 
 //fetch all degree programs from the database to select input
 function selectDegreePrograms() {

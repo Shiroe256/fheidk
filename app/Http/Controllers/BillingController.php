@@ -87,6 +87,8 @@ class BillingController extends Controller
             })
             ->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii)
             ->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->skip($request->start)
+            ->take($request->length)
             ->groupBy('tbl_billing_details_temp.uid')
             ->get();
 
@@ -112,7 +114,14 @@ class BillingController extends Controller
 
         //go back here migs
         $data['students'] = $students;
-        return view('elements.studenttable', $data);
+
+        echo json_encode([
+            "draw" => $request->draw,
+            "recordsTotal" => count($data['students']),
+            "recordsFiltered" => count($data['students']),
+            "data" => $data['students']
+        ]);
+        // return view('elements.studenttable', $data);
     }
 
     public function fetchTempApplicants(Request $request)
@@ -173,10 +182,17 @@ class BillingController extends Controller
         $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
             ->mergeBindings($students)
             ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
+            // ->skip($request->length)
+            // ->skip($request->start)
             ->get();
 
         // $data['hei_summary'] = TemporaryBilling::selectRaw('COUNT(*) AS total_beneficiaries, 1 as total_amount')->where('reference_no', $reference_no)->get();
-
+        // echo json_encode([
+        //     "draw" => $request->draw,
+        //     "recordsTotal" => $total,
+        //     "recordsFiltered" => $totalFiltered,
+        //     "data" => $data
+        // ]);
         return view('elements.tempsummary', $data);
     }
 
@@ -608,8 +624,6 @@ class BillingController extends Controller
             $uid[] = $row->uid;
         }
         $this->upsertSettings($reference_no, $uid);
-
-        
     }
     public function billingList()
     {
