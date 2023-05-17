@@ -1802,7 +1802,7 @@ $(document).on('click', '.btn_update_student', function (e) {
     method: 'get',
     data: {
       uid: id,
-      _token: $('meta[name="csrf-token"]').attr('content')
+      _token: '{{ csrf_token() }}'
     },
     success: function (response) {
       $('#edit_selected_campus').val(response.hei_name);
@@ -2073,7 +2073,7 @@ function fetchTempStudent() {
       url: '/get-tempstudents',
       data: {
         reference_no: reference_no,
-        _token: '{{ csrf_token() }}'
+        _token: $('meta[name="csrf-token"]').attr('content')
       }
     },
     lengthMenu: [[10, 20], [10, 20]]
