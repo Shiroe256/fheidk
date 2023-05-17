@@ -92,13 +92,13 @@ class BillingController extends Controller
             ->take($request->length)
             ->groupBy('tbl_billing_details_temp.uid');
 
-        // $sql = "SELECT
-        $data['students'] = DB::table(DB::raw("({$students->toSql()}) as students"))
+            $data['students'] = DB::table(DB::raw("({$students->toSql()}) as students"))
             ->mergeBindings($students)
             ->selectRaw('students.hei_name, students.app_id,students.fhe_award_no,students.stud_lname,students.stud_fname,students.stud_mname,students.degree_program,students.year_level,students.remarks,students.stud_status,students.total_osf + students.total_tuition + students.total_nstp +students.total_lab + students.total_comp_lab as total_fees')
             // ->skip($request->length)
             // ->skip($request->start)
             ->get();
+        //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
         // tbl_billing_settings.bs_osf_uid,
         // tbl_billing_settings.bs_status,
