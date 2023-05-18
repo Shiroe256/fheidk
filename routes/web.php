@@ -119,17 +119,14 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name('dashboard');
 
-Route::get('form2', 'App\Http\Controllers\AdminController@form2')->name('form2');
-Route::get('form3', 'App\Http\Controllers\AdminController@form3')->name('form3');
-// Route::get('managebillinglist', 'App\Http\Controllers\AdminController@managebillinglist')->name('managebillinglist');
-// Route::get('managebillingpage', 'App\Http\Controllers\AdminController@managebillingpage')->name('managebillingpage');
-Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
-Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
+// Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
+
 Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
 
 //Routes for Lists
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
 Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
+Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
 Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
 
 //Route for TOSF CRUD
@@ -141,9 +138,11 @@ Route::delete('/deletefee', [AdminController::class, 'deletefee'])->name('delete
 
 Route::post('/managebillinglistsearch', [AdminController::class, 'managebillinglistsearch'])->name('managebillinglistsearch');
 Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
-// Route::get('/fetchbillingpage/{uid}', [AdminController::class, 'fetchbillingpage'])->name('fetchbillingpage');
+
+//formlist
 Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
 Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
+Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
 });
 
 //pdf shit
