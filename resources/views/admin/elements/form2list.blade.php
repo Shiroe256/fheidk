@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         @foreach ($students as $student)
-        {{$fullName = $student->lastname . ' ' . $student->firstname . ' ' . $student->middlename;}}
+        {{$fullName = $student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname;}}
         <tr>
             <td>{{$student->app_id}}</td>
             <td>{{$student->fhe_award_no}}</td>
