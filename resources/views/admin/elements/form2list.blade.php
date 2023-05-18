@@ -14,8 +14,8 @@
     </thead>
     <tbody>
         <tr>
-            @foreach ($fees as $fee)
-            <td>{{$fee->app_id}}</td>
+            @foreach ($students as $student)
+            <td>{{$student->app_id}}</td>
             <td>01-2022-2023-12345</td>
             <td>Molina, Carlo E.</td>
             <td>Bachelor of Science in Information and Technology</td>
