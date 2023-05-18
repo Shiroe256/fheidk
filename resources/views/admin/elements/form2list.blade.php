@@ -19,11 +19,11 @@
             <td>{{$student->app_id}}</td>
             <td>{{$student->fhe_award_no}}</td>
             <td>{{$fullName}}</td>
-            <td>Bachelor of Science in Information and Technology</td>
-            <td class="text-center">1<br></td>
-            <td class="text-left">Valedictorian in High School</td>
-            <td class="text-right">43,000.00</td>
-            <td><span class="badge badge-pill badge-success billing-status-badge">Enrolled<br></span></td>
+            <td>{{$student->degree_program}}</td>
+            <td class="text-center">{{$student->year_level}}<br></td>
+            <td class="text-left">{{$student->remarks}}</td>
+            <td class="text-right">{{$student->total_fees}}</td>
+            <td><span class="badge badge-pill badge-success billing-status-badge">{{$student->stud_status}}<br></span></td>
             <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button></td>
         </tr>
         @endforeach
