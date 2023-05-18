@@ -41,49 +41,9 @@
                         <h6 class="font-weight-bold m-0">Billing Form 2 (Billing Details)</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillingpage', $billing->reference_no)}}">RETURN TO THE LIST OF SUBMISSIONS</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive table-bordered table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                            <table class="table table-bordered my-0" id="dataTable">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center"><input type="checkbox"></th>
-                                        <th>APP ID</th>
-                                        <th>AWARD NO</th>
-                                        <th>FULL NAME</th>
-                                        <th>COURSE APPLIED</th>
-                                        <th class="text-center">YEAR</th>
-                                        <th class="text-left">REMARKS</th>
-                                        <th class="text-right">AMOUNT</th>
-                                        <th>STATUS</th>
-                                        <th class="text-center">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center"><input type="checkbox"></td>
-                                        <td>01-2022-2023-12345</td>
-                                        <td>01-2022-2023-12345</td>
-                                        <td>Molina, Carlo E.</td>
-                                        <td>Bachelor of Science in Information and Technology</td>
-                                        <td class="text-center">1<br></td>
-                                        <td class="text-left">Valedictorian in High School</td>
-                                        <td class="text-right">43,000.00</td>
-                                        <td><span class="badge badge-pill badge-success billing-status-badge">Enrolled<br></span></td>
-                                        <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><input type="checkbox"></td>
-                                        <td>01-2022-2023-12345</td>
-                                        <td>01-2022-2023-12345<br></td>
-                                        <td>Molina, Carlo E.</td>
-                                        <td>Bachelor of Science in Information and Technology</td>
-                                        <td class="text-center">1<br></td>
-                                        <td class="text-left">Valedictorian in High School</td>
-                                        <td class="text-right">43,000.00</td>
-                                        <td><span class="badge badge-pill badge-warning billing-status-badge">On-LOA<br></span></td>
-                                        <td class="text-center"><a class="btn btn-outline-info btn-block btn-sm border rounded-pill" role="button" href="manage-billing-hei-submission-form1.php">View</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="table-responsive table mt-2" id="tbl_form2_div" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                           <!--form2 list here-->
+                           @include('admin.elements.form2list')
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end align-items-end">
