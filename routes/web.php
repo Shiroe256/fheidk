@@ -119,7 +119,7 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name('dashboard');
 
-// Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
+Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 
 Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
 
