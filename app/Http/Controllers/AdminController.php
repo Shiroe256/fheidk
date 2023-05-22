@@ -68,7 +68,8 @@ class AdminController extends Controller
     {
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('reference_no', $reference_no)->first();
-        $students = TemporaryBilling::where('reference_no', $reference_no)->get();
+        $students = TemporaryBilling::where('reference_no', $reference_no)
+        ->whereNotNull('total_exam_taken')->get();
 
         $data = [
             'billing' => $billing,
