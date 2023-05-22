@@ -49,52 +49,6 @@
                         <h6 class="font-weight-bold m-0">List of Billings</h6>
                     </div>
                     <div class="card-body">
-                        <form id="manage_billing_list_form">
-                            <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Academic Year</label>
-                                        <select class="form-control" id="select_ac_year">
-                                            <optgroup label="--Select Academic Year--">
-                                                <option value="All" selected="">All</option>
-                                                <option value="2020-2021">2020-2021</option>
-                                                <option value="2021-2022">2021-2022</option>
-                                                <option value="2022-2023">2022-2023</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Semester</label>
-                                        <select class="form-control" id="select_semester">
-                                            <optgroup label="--Select Semester--">
-                                                <option value="All" selected="">All</option>
-                                                <option value="1st">1st</option>
-                                                <option value="2nd">2nd</option>
-                                                <option value="3rd">3rd</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3 mb-2"><label>Billing Status</label>
-                                        <select class="form-control" id="select_billing_status">
-                                            <optgroup label="--Select Billing Status--">
-                                                <option value="All" selected="">All</option>
-                                                <option value="1">Open for Billing Uploads</option>
-                                                <option value="2">Ongoing Validation, please return once done
-                                                </option>
-                                                <option value="3">Done Validating: Ready For Submission</option>
-                                                <option value="4">Done Validating: For Review</option>
-                                                <option value="5">Submitted to UniFAST: Billing Unit</option>
-                                                <option value="6">Submitted to UniFAST: Admin Unit</option>
-                                                <option value="7">Submitted to CHED-AFMS</option>
-                                                <option value="8">Disbursed</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                    <div class="col align-self-end mb-2"><button id="btn_manage_billing_list_search"
-                                            class="btn btn-outline-info btn-block border rounded-pill border-info"
-                                            type="button" onclick="managebillinglistsearch()"><i
-                                                class="fas fa-search"></i>Search</button></div>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive table mt-2" id="tbl_billing_list_admin" role="grid"
                             aria-describedby="dataTable_info">
                             <!---Billing List Here--->
