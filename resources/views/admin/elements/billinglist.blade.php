@@ -12,16 +12,18 @@
             <th class="text-center" rowspan="2">ACTION</th>
         </tr>
         <tr>
-            <th id="search_academic_year">ACADEMIC YEAR</th>
-            <th id="search_semester">SEMESTER</th>
-            <th id="search_region">REGION</th>
-            <th id="search_hei_name">HEI NAME</th>
-            <th id="search_reference_no">REFERENCE NO.</th>
+            <th id="search_academic_year"></th>
+            <th id="search_semester"></th>
+            <th id="search_region"></th>
+            <th id="search_hei_name"></th>
+            <th id="search_reference_no"></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($billings as $billing)
             <tr>
+                <td>{{ $billing->hei->ac_year }}</td>
+                <td>{{ $billing->hei->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
                 <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
