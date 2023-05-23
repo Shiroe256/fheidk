@@ -50,7 +50,7 @@
                         <span class="badge badge-pill badge-success span-size">Disbursed</span>
                     @endif
                 </td>
-                <td>
+                <td class="text-center">
                     <a href="{{ route('managebillingpage', $billing->reference_no) }}" id="{{ $billing->uid }}"
                         name="btn_view_billing" class="btn_view btn btn-primary" role="button" title="View"><i
                             class="fas fa-eye"></i></a>
