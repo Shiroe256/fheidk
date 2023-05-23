@@ -49,8 +49,6 @@
                         <h6 class="font-weight-bold m-0">List of Billings</h6>
                         <div role="group" class="btn-group btn-group-sm"><button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#mod_open_billing"><i class="fas fa-plus"></i> Open New Billing</button></div>
                     </div>
-                        <h6 class="font-weight-bold m-0">List of Billings</h6>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="tbl_billing_list_admin" role="grid"
                             aria-describedby="dataTable_info">
