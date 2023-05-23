@@ -12,10 +12,24 @@ function fetchBillingListAdmin() {
     },
     success: function (response) {
       $("#tbl_billing_list_admin").html(response);
+
+      $('#search_academic_year').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+
+      $('#search_academic_year input').on( 'keyup change', function () {
+        table
+          .column(0)
+          .search(this.value)
+          .draw();
+      });
+
       $("#tbl_manage_billing_list").DataTable({
         "order": [[0, "asc"]],
         orderCellsTop: true,
-        fixedHeader: true
+        fixedHeader: true,
+        'columnDefs': [ {
+          'targets': [8], /* column index */
+          'orderable': false, /* true or false */
+       }]
       });
     }
   });

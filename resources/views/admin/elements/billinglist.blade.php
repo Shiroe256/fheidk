@@ -1,13 +1,22 @@
 <table class="table table-bordered my-0" id="tbl_manage_billing_list">
     <thead>
         <tr>
+            <th>ACADEMIC YEAR</th>
+            <th>SEMESTER</th>
             <th>REGION</th>
             <th>HEI NAME</th>
             <th>REFERENCE NO.</th>
-            <th class="text-right">BENEFICIARIES</th>
-            <th class="text-right">AMOUNT</th>
-            <th>STATUS</th>
-            <th class="text-center">ACTION</th>
+            <th class="text-right" rowspan="2">BENEFICIARIES</th>
+            <th class="text-right" rowspan="2">AMOUNT</th>
+            <th rowspan="2">STATUS</th>
+            <th class="text-center" rowspan="2">ACTION</th>
+        </tr>
+        <tr>
+            <th id="search_academic_year">ACADEMIC YEAR</th>
+            <th id="search_semester">SEMESTER</th>
+            <th id="search_region">REGION</th>
+            <th id="search_hei_name">HEI NAME</th>
+            <th id="search_reference_no">REFERENCE NO.</th>
         </tr>
     </thead>
     <tbody>
@@ -47,15 +56,4 @@
             </tr>
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <td><strong>REGION</strong><br></td>
-            <td><strong>HEI NAME</strong><br></td>
-            <td><strong>REFERENCE NO.</strong><br></td>
-            <td class="text-right"><strong>BENEFICIARIES</strong></td>
-            <td class="text-right"><strong>AMOUNT</strong></td>
-            <td><strong>STATUS</strong></td>
-            <td class="text-center"><strong>ACTION</strong></td>
-        </tr>
-    </tfoot>
 </table>
