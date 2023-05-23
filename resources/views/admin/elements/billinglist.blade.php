@@ -52,8 +52,7 @@
                 </td>
                 <td>
                     <a href="{{ route('managebillingpage', $billing->reference_no) }}" id="{{ $billing->uid }}"
-                        name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill"
-                        role="button"><i class="fas fa-eye"></i>View</a>
+                        name="btn_view_billing" class="btn btn-primary" role="button" title="View"><i class="fas fa-eye"></i>View</a>
                 </td>
             </tr>
         @endforeach
