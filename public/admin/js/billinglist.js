@@ -58,7 +58,7 @@ function fetchBillingListAdmin() {
           .draw();
       });
 
-      $("#tbl_manage_billing_list").DataTable({
+      var table = $("#tbl_manage_billing_list").DataTable({
         "order": [[0, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,

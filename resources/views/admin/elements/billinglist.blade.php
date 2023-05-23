@@ -22,8 +22,8 @@
     <tbody>
         @foreach ($billings as $billing)
             <tr>
-                <td>{{ $billing->hei->ac_year }}</td>
-                <td>{{ $billing->hei->semester }}</td>
+                <td>{{ $billing->ac_year }}</td>
+                <td>{{ $billing->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
                 <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
