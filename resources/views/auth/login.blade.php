@@ -67,7 +67,8 @@
                         <button class="btn btn-primary btn-block text-white btn-user" role="button" type="submit">Login</button>
                         <hr>
                         <div class="text-center"><a class="small" href="{{ route('password.request') }}">Forgot Password?</a></div>
-                        <div class="text-center"><a class="small" href="{{ route('register') }}">Register</a></div>
+                        <!--Hidden muna-->
+                        <div class="text-center d-none"><a class="small" href="{{ route('register') }}">Register</a></div>
                     </form>
                 </div>
             </div>
