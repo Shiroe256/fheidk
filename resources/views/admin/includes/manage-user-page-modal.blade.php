@@ -95,6 +95,7 @@
                             <option value="per unit">per unit</option>
                             <option value="per subject">per subject</option>
                             <option value="per student">per student</option>
+                            <option value="per new student">per new student</option>
                         </select>
                     </div>
                     <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount"
@@ -177,6 +178,7 @@
                             <option value="per unit">per unit</option>
                             <option value="per subject">per subject</option>
                             <option value="per student">per student</option>
+                            <option value="per new student">per new student</option>
                         </select>
                     </div>
                     <div class="form-group"><label>Amount</label><input id="update_tosf_amount"
