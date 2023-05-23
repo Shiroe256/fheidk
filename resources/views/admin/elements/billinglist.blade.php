@@ -1,8 +1,8 @@
 <table class="table table-bordered my-0" id="tbl_manage_billing_list" style="width: 100%">
     <thead>
         <tr>
-            <th>ACADEMIC YEAR</th>
-            <th>SEMESTER</th>
+            <th class="text-center">ACADEMIC YEAR</th>
+            <th class="text-center">SEMESTER</th>
             <th>REGION</th>
             <th>HEI NAME</th>
             <th>REFERENCE NO.</th>
@@ -22,8 +22,8 @@
     <tbody>
         @foreach ($billings as $billing)
             <tr>
-                <td>{{ $billing->ac_year }}</td>
-                <td>{{ $billing->semester }}</td>
+                <td class="text-center">{{ $billing->ac_year }}</td>
+                <td class="text-center">{{ $billing->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
                 <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
