@@ -13,11 +13,47 @@ function fetchBillingListAdmin() {
     success: function (response) {
       $("#tbl_billing_list_admin").html(response);
 
-      $('#search_academic_year').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+      $('#search_billing_list_academic_year').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
 
-      $('#search_academic_year input').on( 'keyup change', function () {
+      $('#search_billing_list_academic_year input').on( 'keyup change', function () {
         table
           .column(0)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_billing_list_semester').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+
+      $('#search_billing_list_semester input').on( 'keyup change', function () {
+        table
+          .column(1)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_billing_list_region').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+
+      $('#search_billing_list_region input').on( 'keyup change', function () {
+        table
+          .column(2)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_billing_list_hei_name').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+
+      $('#search_billing_list_hei_name input').on( 'keyup change', function () {
+        table
+          .column(3)
+          .search(this.value)
+          .draw();
+      });
+
+      $('#search_billing_list_reference_no').html('<input class="form-control form-control-sm" type="text" style="font-size: 10px;" placeholder="SEARCH"/>');
+
+      $('#search_billing_list_reference_no input').on( 'keyup change', function () {
+        table
+          .column(4)
           .search(this.value)
           .draw();
       });

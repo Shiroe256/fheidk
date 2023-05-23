@@ -1,4 +1,4 @@
-<table class="table table-bordered my-0" id="tbl_manage_billing_list">
+<table class="table table-bordered my-0" id="tbl_manage_billing_list" style="width: 100%">
     <thead>
         <tr>
             <th>ACADEMIC YEAR</th>
@@ -12,11 +12,11 @@
             <th class="text-center" rowspan="2">ACTION</th>
         </tr>
         <tr>
-            <th id="search_academic_year"></th>
-            <th id="search_semester"></th>
-            <th id="search_region"></th>
-            <th id="search_hei_name"></th>
-            <th id="search_reference_no"></th>
+            <th id="search_billing_list_academic_year"></th>
+            <th id="search_billing_list_semester"></th>
+            <th id="search_billing_list_region"></th>
+            <th id="search_billing_list_hei_name"></th>
+            <th id="search_billing_list_reference_no"></th>
         </tr>
     </thead>
     <tbody>
