@@ -430,3 +430,30 @@
     </div>
 </div>
 <!---Scanned Copy Modal--->
+
+<!---Open Billing Modal--->
+<div role="dialog" tabindex="-1" class="modal fade" id="mod_open_billing">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Open New Billing</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>Academic Year</label><select class="form-control">
+                            <option value selected>-- Select Academic Year --</option>
+                            <option value="2023-2024">2023-2024</option>
+                            <option value="2024-2025">2024-2025</option>
+                        </select></div>
+                    <div class="form-group"><label>Semester</label><select class="form-control">
+                            <option value selected>-- Select Semester --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select></div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<!---Open Billing Modal--->

@@ -45,7 +45,10 @@
                     <h4 class="text-left text-info">MANAGE BILLING</h4>
                 </div>
                 <div class="card shadow">
-                    <div class="card-header py-3">
+                    <div class="card-header d-flex justify-content-between align-items-center align-content-center py-3">
+                        <h6 class="font-weight-bold m-0">List of Billings</h6>
+                        <div role="group" class="btn-group btn-group-sm"><button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#mod_open_billing"><i class="fas fa-plus"></i> Open New Billing</button></div>
+                    </div>
                         <h6 class="font-weight-bold m-0">List of Billings</h6>
                     </div>
                     <div class="card-body">
