@@ -279,7 +279,7 @@ class AdminController extends Controller
                 'billing_status' => 1,
             ];
         }
-        Billing::create($newBilling);
+        Billing::create($newBilling[]);
         return response()->json([
             'status' => 200,
         ]);
