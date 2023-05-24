@@ -260,15 +260,19 @@ class AdminController extends Controller
     }
 
     public function openbilling(Request $request)
-    {
-        // Query the database to retrieve the data based on the selected values
-        $heis = Hei::where('fhe_benefits', 1)->get();
+{
+    // Query the database to retrieve the data based on the selected values
+    $heis = Hei::where('fhe_benefits', 1)->get();
 
-        $newBilling = [];
-        
-        foreach ($heis as $data) {
-            $reference_no = $data->hei_psg_region .'-'.$data->hei_uii.'-' .$request->open_billing_ac_year .'-'.$request->open_billing_semester;
+    $newBilling = [];
 
+    foreach ($heis as $data) {
+        $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
+
+        // Check if the data already exists in the Billing table
+        $existingBilling = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$existingBilling) {
             $newBilling[] = [
                 'hei_psg_region' => $data->hei_psg_region,
                 'hei_sid' => $data->hei_sid,
@@ -279,10 +283,15 @@ class AdminController extends Controller
                 'billing_status' => 1,
             ];
         }
-        Billing::insert($newBilling);
-        return response()->json([
-            'status' => 200,
-            'data' => $newBilling
-        ]);
     }
+
+    if (!empty($newBilling)) {
+        Billing::insert($newBilling);
+    }
+
+    return response()->json([
+        'status' => 200,
+        'data' => $newBilling
+    ]);
+}
 }
