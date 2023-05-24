@@ -151,13 +151,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                 DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * tbl_billing_details_temp.comp_lab_unit, 0)) as total_comp_lab')
             )
             ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'tbl_billing_details_temp.reference_no')
-            ->join('tbl_other_school_fees', function ($join) {
+            ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
                     ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
                     ->on('tbl_other_school_fees.semester', '=', 'tbl_billing_details_temp.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'tbl_billing_details_temp.year_level');
             })
-            ->join('tbl_billing_stud_settings', function ($join) {
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
                 $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'tbl_billing_details_temp.reference_no')
                     ->on('tbl_billing_stud_settings.bs_student', '=', 'tbl_billing_details_temp.uid')
                     ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
