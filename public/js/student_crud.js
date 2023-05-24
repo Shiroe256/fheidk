@@ -2097,8 +2097,8 @@ function fetchTempStudent() {
 
       // Modify the ID of the target cell using the data from the AJAX response
       var lname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
-      var fname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
-      var mname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      var fname_Id = 'std_fname_' + data.uid; // Modify this based on your requirements
+      var mname_Id = 'std_mname_' + data.uid; // Modify this based on your requirements
       var course_Id = 'std_course_' + data.uid; // Modify this based on your requirements
       var year_Id = 'std_year_' + data.uid; // Modify this based on your requirements
       cell_lname.attr('id', lname_Id);
