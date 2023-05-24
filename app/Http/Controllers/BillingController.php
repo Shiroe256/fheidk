@@ -14,7 +14,6 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\SchoolFees;
 use App\Models\StudSettings;
-use Illuminate\Database\Eloquent\Model;
 // use App\Models\User;
 // use Illuminate\Support\Facades\Storage;
 // use DateTime;
