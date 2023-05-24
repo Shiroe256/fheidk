@@ -267,7 +267,7 @@ class AdminController extends Controller
         $newBilling = [];
         
         foreach ($heis as $data) {
-            $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . $request->open_billing_semester;
+            $reference_no = $data->hei_psg_region .'-'.$data->hei_uii.'-' .$request->open_billing_ac_year .'-'.$request->open_billing_semester;
 
             $newBilling[] = [
                 'hei_psg_region' => $data->hei_psg_region,
