@@ -131,7 +131,6 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $hei_uii = Auth::user()->hei_uii;
 
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
         //dito jinojoin ung information about the fees and computation
