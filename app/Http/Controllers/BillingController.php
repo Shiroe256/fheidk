@@ -133,7 +133,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $reference_no  = $request->reference_no;
         $billing_record = Billing::where('reference_no', $reference_no)->first();
 
-        $data['hei_summary'][] = ['hei_name' => $billing_record->hei_uii, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
+        $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
         if ($billing_record->total_amount < 1) {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
