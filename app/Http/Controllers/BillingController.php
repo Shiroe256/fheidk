@@ -131,7 +131,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $billing_record = Billing::where('reference_no', $reference_no)->get();
+        $billing_record = Billing::where('reference_no', $reference_no)->first();
 
         $data['hei_summary'][] = ['hei_name' => $billing_record->hei_uii, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
