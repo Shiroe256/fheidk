@@ -469,5 +469,58 @@ function btnDeleteToggle() {
   }
 }
 
+//open billing
+//open billing ajax request
+$("#frm_open_billing").submit(function (e) {
+  e.preventDefault();
+  const fd = new FormData(this);
+  $("#btn_open_billing").text('Opening...');
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $.ajax({
+    url: '/admin/openbilling',
+    method: 'post',
+    data: fd,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function (response) {
+      if (response.status == 200) {
+        Swal.fire(
+          'Opened Billing!',
+          'Opened Billing Successfully!',
+          'success'
+        )
+
+        fetchtosflist();
+
+        $("#btn_open_billing").text('Open');
+        $("#frm_open_billing")[0].reset();
+        $("#mod_open_billing").modal('hide');
+      } else if (response.status == 400) {
+        let i = 1;
+        let errorMessage = '';
+        $.each(response.errors, function (key, err_values) {
+          console.log(err_values);
+          errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+        })
+        Swal.fire({
+          // position: 'top',
+          title: 'Oops... you missed something',
+          html: errorMessage,
+          icon: 'warning',
+        })
+        $("#btn_open_billing").text('Save');
+      }
+    }
+  });
+});
+//end of open billing
 
 
