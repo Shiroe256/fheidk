@@ -214,7 +214,7 @@
                                                 title="No need to click this after saving. This is just for viewing purposes"
                                                 data-placement="bottom">AMOUNT BILLED <i
                                                     class="fa-solid fa-circle-question"></i></th>
-                                            {{-- <th class="text-center">ACTION</th> --}}
+                                            <th class="text-center"></th>
                                         </tr>
                                     </thead>
                                 </table>

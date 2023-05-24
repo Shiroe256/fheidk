@@ -45,12 +45,14 @@ class BillingController extends Controller
     public function fetchTempStudent(Request $request)
     {
 
-        $hei_uii = Auth::user()->hei_uii;
+        // $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
 
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
 
+        //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
+        //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
@@ -108,16 +110,12 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // tbl_billing_details_temp.reference_no = '" . $reference_no . "'
         // group by tbl_billing_details_temp.uid";
 
-        //go back here migs
-        // $data['students'] = $students;
-
         echo json_encode([
             "draw" => $request->draw,
             "recordsTotal" => count($students),
             "recordsFiltered" => $total,
             "data" => $students
         ]);
-        // return view('elements.studenttable', $data);
     }
 
     public function fetchTempApplicants(Request $request)
