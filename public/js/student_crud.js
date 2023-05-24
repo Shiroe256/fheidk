@@ -2089,11 +2089,17 @@ function fetchTempStudent() {
     lengthMenu: [[10, 20], [10, 20]],
     createdRow: function(row, data, dataIndex) {
       // Assuming your server response is in JSON format and has an 'id' property
-      var cell = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
+      var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
+      var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
+      var cell_mname = $(row).find('td:eq(6)'); // Change '0' to the index of the target cell
 
       // Modify the ID of the target cell using the data from the AJAX response
-      var cellId = 'std_lname_' + data.uid; // Modify this based on your requirements
-      cell.attr('id', cellId);
+      var lname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      var fname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      var mname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      cell_lname.attr('id', lname_Id);
+      cell_fname.attr('id', fname_Id);
+      cell_mname.attr('id', mname_Id);
     }
   });
 
