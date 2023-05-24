@@ -2086,7 +2086,15 @@ function fetchTempStudent() {
         _token: $('meta[name="csrf-token"]').attr('content')
       }
     },
-    lengthMenu: [[10, 20], [10, 20]]
+    lengthMenu: [[10, 20], [10, 20]],
+    createdRow: function(row, data, dataIndex) {
+      // Assuming your server response is in JSON format and has an 'id' property
+      var cell = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
+
+      // Modify the ID of the target cell using the data from the AJAX response
+      var cellId = 'std_lname_' + data.uid; // Modify this based on your requirements
+      cell.attr('id', cellId);
+    }
   });
 
   tbl_students.on('draw.dt', function () {
