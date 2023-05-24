@@ -441,14 +441,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group"><label>Academic Year</label>
-                        <select id="open_billing_ac_year" class="form-control">
+                        <select id="open_billing_ac_year" name="open_billing_ac_year"class="form-control">
                             <option value selected>-- Select Academic Year --</option>
                             <option value="2023-2024">2023-2024</option>
                             <option value="2024-2025">2024-2025</option>
                         </select>
                     </div>
                     <div class="form-group"><label>Semester</label>
-                        <select id="open_billing_semester" class="form-control">
+                        <select id="open_billing_semester" name="open_billing_semester" class="form-control">
                             <option value selected>-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>

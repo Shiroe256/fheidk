@@ -491,6 +491,7 @@ $("#frm_open_billing").submit(function (e) {
     processData: false,
     dataType: 'json',
     success: function (response) {
+      console.log(response.data);
       if (response.status == 200) {
         Swal.fire(
           'Opened Billing!',
@@ -498,7 +499,7 @@ $("#frm_open_billing").submit(function (e) {
           'success'
         )
 
-        fetchtosflist();
+        fetchBillingListAdmin();
 
         $("#btn_open_billing").text('Open');
         $("#frm_open_billing")[0].reset();
