@@ -448,7 +448,7 @@
                         </select>
                     </div>
                     <div class="form-group"><label>Semester</label>
-                        <select id="open_billing_semester" name="open_billing_ac_year" class="form-control">
+                        <select id="open_billing_semester" name="open_billing_semester" class="form-control">
                             <option value selected>-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
