@@ -2092,14 +2092,20 @@ function fetchTempStudent() {
       var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
       var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
       var cell_mname = $(row).find('td:eq(6)'); // Change '0' to the index of the target cell
+      var cell_course = $(row).find('td:eq(7)'); // Change '0' to the index of the target cell
+      var cell_year = $(row).find('td:eq(8)'); // Change '0' to the index of the target cell
 
       // Modify the ID of the target cell using the data from the AJAX response
       var lname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
       var fname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
       var mname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      var course_Id = 'std_course_' + data.uid; // Modify this based on your requirements
+      var year_Id = 'std_year_' + data.uid; // Modify this based on your requirements
       cell_lname.attr('id', lname_Id);
       cell_fname.attr('id', fname_Id);
       cell_mname.attr('id', mname_Id);
+      cell_course.attr('id', course_Id);
+      cell_year.attr('id', year_Id);
     }
   });
 
