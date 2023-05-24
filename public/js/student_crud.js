@@ -2080,7 +2080,7 @@ function fetchTempStudent() {
     lengthMenu: [[10, 20], [10, 20]]
   });
 
-  membersDT.on('draw.dt', function () {
+  tbl_students.on('draw.dt', function () {
     document.getElementById("students-placeholder").classList.add('d-none');
     document.getElementById("show_all_students").classList.remove('d-none');
     setup_Events();
