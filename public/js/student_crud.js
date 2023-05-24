@@ -2031,6 +2031,13 @@ function fetchTempStudent() {
     serverSide: true,
     columns: [
       {
+        data: 'uid',
+        render: function (data, type) {
+          return type === 'display' ?
+            '<input type="checkbox" class="chk_student" id="' + data + '" name="student_checkbox" value="' + data + '">' : data
+        }
+      },
+      {
         data: 'hei_name'
       },
       {
@@ -2061,15 +2068,15 @@ function fetchTempStudent() {
         data: 'stud_status'
       },
       {
-        data: 'total_fees',
-        type: 'num-fmt'
+        data: 'total_fees'
       },
-      {data: "uid" , render : function ( data, type, row, meta ) {
-        return type === 'display'  ?
-        '<div class="btn-group btn-group-sm" role="group"><button id="' + data +'" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>' :
-          data;
+      {
+        data: "uid", render: function (data, type, row, meta) {
+          return type === 'display' ?
+            '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>' :
+            data;
+        }
       }
-    }
     ],
     ajax: {
       method: 'POST',
