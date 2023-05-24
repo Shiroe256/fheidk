@@ -282,6 +282,7 @@ class AdminController extends Controller
         Billing::insert($newBilling);
         return response()->json([
             'status' => 200,
+            'data' => $newBilling
         ]);
     }
 }

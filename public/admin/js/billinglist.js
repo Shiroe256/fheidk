@@ -491,6 +491,7 @@ $("#frm_open_billing").submit(function (e) {
     processData: false,
     dataType: 'json',
     success: function (response) {
+      console.log(response.data);
       if (response.status == 200) {
         Swal.fire(
           'Opened Billing!',
