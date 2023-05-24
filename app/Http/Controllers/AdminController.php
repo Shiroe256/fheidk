@@ -69,7 +69,7 @@ class AdminController extends Controller
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('reference_no', $reference_no)->first();
         $students = TemporaryBilling::where('reference_no', $reference_no)
-        ->whereNotNull('total_exam_taken')->get();
+            ->whereNotNull('total_exam_taken')->get();
 
         $data = [
             'billing' => $billing,
@@ -257,5 +257,31 @@ class AdminController extends Controller
             'status' => 200,
         ]);
         return view('admin.elements.tosflist');
+    }
+
+    public function openbilling(Request $request)
+    {
+        // Query the database to retrieve the data based on the selected values
+        $heis = Hei::where('fhe_benefits', 1)->get();
+
+        $newBilling = [];
+        
+        foreach ($heis as $data) {
+            $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . $request->open_billing_semester;
+
+            $newBilling[] = [
+                'hei_psg_region' => $data->hei_psg_region,
+                'hei_sid' => $data->hei_sid,
+                'hei_uii' => $data->hei_uii,
+                'reference_no' => $reference_no,
+                'ac_year' => $request->open_billing_ac_year,
+                'semester' => $request->open_billing_semester,
+                'billing_status' => 1,
+            ];
+        }
+        Billing::create($newBilling);
+        return response()->json([
+            'status' => 200,
+        ]);
     }
 }
