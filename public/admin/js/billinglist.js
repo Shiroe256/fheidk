@@ -470,7 +470,7 @@ function btnDeleteToggle() {
 }
 
 //open billing
-//open billing ajax request
+// open billing ajax request
 $("#frm_open_billing").submit(function (e) {
   e.preventDefault();
   const fd = new FormData(this);
@@ -493,11 +493,19 @@ $("#frm_open_billing").submit(function (e) {
     success: function (response) {
       console.log(response.data);
       if (response.status == 200) {
-        Swal.fire(
-          'Opened Billing!',
-          'Opened Billing Successfully!',
-          'success'
-        )
+        if (response.message) {
+          Swal.fire(
+            'Opened Billing!',
+            'Opened Billing Successfully!' + response.message,
+            'success'
+          );
+        } else {
+          Swal.fire(
+            'Opened Billing!',
+            'Opened Billing Successfully!',
+            'success'
+          );
+        }
 
         fetchBillingListAdmin();
 
@@ -510,13 +518,13 @@ $("#frm_open_billing").submit(function (e) {
         $.each(response.errors, function (key, err_values) {
           console.log(err_values);
           errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
-        })
+        });
         Swal.fire({
           // position: 'top',
           title: 'Oops... you missed something',
           html: errorMessage,
           icon: 'warning',
-        })
+        });
         $("#btn_open_billing").text('Save');
       }
     }
