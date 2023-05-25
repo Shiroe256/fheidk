@@ -10,9 +10,10 @@ use OwenIt\Auditing\Contracts\Auditable;
 class Billing extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
+    use HasFactory;
     protected $table = 'tbl_fhe_billing_records';
     protected $primaryKey = 'uid';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = [
         'hei_psg_region',
         'hei_sid',

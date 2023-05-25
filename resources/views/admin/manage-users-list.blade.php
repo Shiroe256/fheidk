@@ -53,3 +53,7 @@
 
 {{-- @include('admin.includes.modal') --}}
 @include('admin.includes.footer')
+<script src="{{url('admin\js\userlist.js')}}"></script>
+</body>
+
+</html>

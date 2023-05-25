@@ -12,7 +12,7 @@ class Hei extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     protected $table = 'tbl_heis';
     protected $primaryKey = 'uid';
-    public $timestamps = false;
+    // public $timestamps = false;
     protected $fillable = [
         'hei_psg_region',
         'hei_sid',
