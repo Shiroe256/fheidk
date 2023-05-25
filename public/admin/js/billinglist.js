@@ -496,7 +496,7 @@ $("#frm_open_billing").submit(function (e) {
         if (response.message) {
           Swal.fire(
             'Opened Billing!',
-            'Opened Billing Successfully!' + response.message,
+            'Opened Billing Successfully!<br />'+ response.message,
             'success'
           );
         } else {
