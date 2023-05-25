@@ -298,7 +298,11 @@ class AdminController extends Controller
         ];
     
         if (!empty($existingReferences)) {
-            $response['message'] = 'The following reference number(s) already exist: ' . implode(', ', $existingReferences);
+            $message = 'The following reference number(s) already exist:<br>';
+            foreach ($existingReferences as $index => $reference) {
+                $message .= ($index + 1) . '. ' . $reference . '<br>';
+            }
+            $response['message'] = $message;
         }
     
         return response()->json($response);
