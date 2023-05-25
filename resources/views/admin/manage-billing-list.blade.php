@@ -60,5 +60,9 @@
         </section>
     </main>
 
-    @include('admin.includes.modal')
+    @include('admin.includes.manage-billing-list-modal')
     @include('admin.includes.footer')
+    <script src="{{url('admin\js\billinglist.js')}}"></script>
+</body>
+
+</html>

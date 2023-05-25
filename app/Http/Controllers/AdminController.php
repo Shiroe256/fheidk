@@ -297,7 +297,7 @@ class AdminController extends Controller
 
     $response = [
         'status' => 200,
-        'data' => $newBilling
+        // 'data' => $newBilling
     ];
 
     if (!empty($existingReferences)) {

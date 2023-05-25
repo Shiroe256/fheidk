@@ -246,3 +246,7 @@
 @include('admin.includes.manage-user-page-modal');
 @include('admin.includes.modal')
 @include('admin.includes.footer')
+<script src="{{url('admin\js\tosflist.js')}}"></script>
+</body>
+
+</html>
