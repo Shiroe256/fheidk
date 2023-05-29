@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <input name="uid" id="uid" value="{{ $billing->uid }}">
                         <input name="reference_no" id="reference_no" value="{{ $billing->reference_no }}">
-                        <div class="table-responsive table mt-2" id="tbl_form2_div" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                        <div class="table-responsive table mt-2" id="tbl_form2_div" role="grid" aria-describedby="dataTable_info">
                            <!--form2 list here-->
                         </div>
                     </div>
