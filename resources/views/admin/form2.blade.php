@@ -45,7 +45,6 @@
                         <input name="reference_no" id="reference_no" value="{{ $billing->reference_no }}">
                         <div class="table-responsive table mt-2" id="tbl_form2_div" id="dataTable" role="grid" aria-describedby="dataTable_info">
                            <!--form2 list here-->
-                           @include('admin.elements.form2list')
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end align-items-end">

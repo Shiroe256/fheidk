@@ -1,4 +1,4 @@
-<table class="table table-bordered my-0" id="dataTable">
+<table class="table table-bordered my-0" id="tbl_form2">
     <thead>
         <tr>
             <th>APP ID</th>
