@@ -72,15 +72,19 @@ class AdminController extends Controller
     {
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('reference_no', $reference_no)->first();
-        $students = TemporaryBilling::where('reference_no', $reference_no)
-            ->whereNotNull('total_exam_taken')->get();
 
-        $data = [
-            'billing' => $billing,
-            'students' => $students,
-        ];
+        $data['billing'] = $billing;
 
         return view('admin.form3', $data);
+    }
+
+    public function fetchform3list(Request $request){
+        $reference_no = $request->reference_no;
+
+        $students = TemporaryBilling::where('reference_no', $reference_no)
+        ->whereNotNull('total_exam_taken')->get();
+        $data['students'] = $students;
+        return view('admin.elements.form3list', $data);
     }
 
     public function manageuserpage($hei_uii)

@@ -41,9 +41,17 @@
                         <h6 class="font-weight-bold m-0">Billing Form 3 (Admission / Entrance Exam)</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillingpage', $billing->reference_no)}}">RETURN TO THE LIST OF SUBMISSIONS</a>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive table-bordered table mt-2" id="tbl_form2_div" role="grid" aria-describedby="dataTable_info">
-                             <!--form2 list here-->
-                           @include('admin.elements.form3list')
+                        <input type="hidden" name="uid" id="uid" value="{{ $billing->uid }}">
+                        <input type="hidden" name="reference_no" id="reference_no" value="{{ $billing->reference_no }}">
+                        <div class="table-responsive table mt-2" id="tbl_form3_div" role="grid" aria-describedby="dataTable_info">
+                            <div id="loading_indicator" style="display: none;">
+                                <div class="text-center">
+                                    <div class="spinner-grow text-secondary" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                  </div>
+                            </div>
+                           <!--form3 list here-->
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end align-items-end">
@@ -56,3 +64,7 @@
 
 @include('admin.includes.modal')
 @include('admin.includes.footer')
+<script src="{{url('admin\js\form3.js')}}"></script>
+</body>
+
+</html>
