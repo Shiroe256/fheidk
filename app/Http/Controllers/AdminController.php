@@ -64,7 +64,8 @@ class AdminController extends Controller
         $reference_no = $request->reference_no;
 
         $students = TemporaryBilling::where('reference_no', $reference_no)->get();
-        return view('admin.elements.form2list', $students);
+        $data['students'] = $students;
+        return view('admin.elements.form2list', $data);
     }
 
     public function form3($reference_no)
