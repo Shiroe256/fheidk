@@ -8,7 +8,7 @@
                     navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admindashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ route('managebillinglist') }}">Manage
                             Billing</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('manageuserslist') }}">Manage Users</a></li>

@@ -12,7 +12,7 @@
             <div class="form-group">
                 <div class="custom-control text-left custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-1" onclick="myFunction()"><label class="custom-control-label" for="formCheck-1">Show Password<br></label></div>
             </div>
-            <div class="form-group"><a class="btn btn-primary btn-block border rounded" role="button" href="{{route('dashboard')}}">log in</a></div>
+            <div class="form-group"><a class="btn btn-primary btn-block border rounded" role="button" href="{{route('admindashboard')}}">log in</a></div>
             <div class="form-group"><a class="btn btn-success btn-block border rounded" role="button" href="registration.php" style="background: rgb(92, 184, 92);">sign up</a></div>
             <div class="form-group text-center"><a class="contact-clean-link already" href="#">Forgot Password?</a></div>
         </form>
