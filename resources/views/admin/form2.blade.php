@@ -45,8 +45,7 @@
                         <input type="hidden" name="reference_no" id="reference_no" value="{{ $billing->reference_no }}">
                         <div class="table-responsive table mt-2" id="tbl_form2_div" role="grid" aria-describedby="dataTable_info">
                             <div id="loading_indicator" style="display: none;">
-                                <!-- Add your loading indicator here (e.g., spinner or message) -->
-                                Loading...
+                                <span class="sr-only">Loading...</span>
                             </div>
                            <!--form2 list here-->
                         </div>
