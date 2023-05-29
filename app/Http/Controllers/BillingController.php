@@ -803,23 +803,23 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     //batch upload controller
     public function batchTempStudent(Request $request)
     {
-        $hei_uii = Auth::user()->hei_uii;
+        // $hei_uii = Auth::user()->hei_uii;
 
         $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
         //!validation is now passed to the middlware
+        print_r($tempstudents);
+        // $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
+        // $heiinfo = $this->getHeiInformation($hei_uii);
 
-        $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
-        $heiinfo = $this->getHeiInformation($hei_uii);
 
-
-        //pass validation to each item then return an error and cancel the whole uploading if there are errors
-        //!validation has now been passed to the middleware
-        // $added = 0;
-        $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
-        // foreach ($tempstudents as $key => $tempstudent) {
-        //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
-        // }
-        echo $result;
+        // //pass validation to each item then return an error and cancel the whole uploading if there are errors
+        // //!validation has now been passed to the middleware
+        // // $added = 0;
+        // $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
+        // // foreach ($tempstudents as $key => $tempstudent) {
+        // //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
+        // // }
+        // echo $result;
         // echo 'ok';
     }
 
