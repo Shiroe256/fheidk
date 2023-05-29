@@ -6,7 +6,7 @@ function fetchform2list() {
     url: "/admin/fetchform2list",
     method: 'get',
     data: {
-        reference_no : form2_reference_no,
+        reference_no : reference_no,
         _token: '{{ csrf_token() }}'
       },
     success: function (response) {
