@@ -117,7 +117,7 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 
 //Admin Pages
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name('dashboard');
+Route::get('admindashboard', 'App\Http\Controllers\AdminController@admindashboard')->name('admindashboard');
 
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 
