@@ -278,7 +278,8 @@ function validateFields(data) {
     // if (stud['contact_number_2'] === undefined) error.push('Contact number is missing');
     // if (stud['is_transferee'] === undefined) error.push('Contact number is missing');
     if (stud['degree_course_id'] === undefined) error.push('Course is missing');
-    if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('The year level must only be a number or is missing');
+    // if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('The year level must only be a number or is missing');
+    if (stud['year_level'] || stud['year_level'] === undefined) error.push('The year level must only be a number or is missing');
     // stud['lab_u']
     // stud['com_lab_u']
     if (stud['acad_u'] === undefined) error.push('Academic units are missing');
