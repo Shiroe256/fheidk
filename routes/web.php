@@ -151,3 +151,5 @@ Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
 Route::get('/phpinfo', function() {
     phpinfo();
 });
+
+//LETS FUCKING GO!
