@@ -54,7 +54,7 @@ Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementp
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
-Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->name('dashboard')->middleware('auth');
+Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->middleware('auth');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');
 
 //route for login
