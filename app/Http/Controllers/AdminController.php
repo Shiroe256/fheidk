@@ -53,7 +53,7 @@ class AdminController extends Controller
     public function form2($reference_no)
     {
         // Query the database to retrieve the data based on the selected values
-        $billings = Billing::where('reference_no', $reference_no)->first();
+        $billings = Billing::where('reference_no', $reference_no)->get();
 
         $data['billings'] = $billings;
 
