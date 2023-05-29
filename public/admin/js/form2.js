@@ -6,8 +6,9 @@ function fetchform2list() {
     url: "/admin/fetchform2list",
     method: 'get',
     data: {
-      _token: '{{ csrf_token() }}'
-    },
+        reference_no : form2_reference_no,
+        _token: '{{ csrf_token() }}'
+      },
     success: function (response) {
       $("#tbl_form2_div").html(response);
 
