@@ -57,7 +57,7 @@
   
 @include('admin.includes.modal')
 @include('admin.includes.footer')
-<script src="{{url('admin\js\form2list.js')}}"></script>
+<script src="{{url('admin\js\form2.js')}}"></script>
 </body>
 
 </html>
