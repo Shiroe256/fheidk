@@ -13,6 +13,9 @@ function fetchform2list() {
         "data": {
           "reference_no": reference_no,
           "_token": '{{ csrf_token() }}'
+        },
+        "success": function (response) {
+          $("#tbl_form2_div").html(response); // Populate the table container with the HTML response
         }
       },
       "columns": [
