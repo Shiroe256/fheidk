@@ -38,7 +38,7 @@
                 </div>
                 <div class="card shadow">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6 class="font-weight-bold m-0">Billing Form 2 (Billing Details)</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillingpage', $billing->reference_no)}}">RETURN TO THE LIST OF SUBMISSIONS</a>
+                        <h6 class="font-weight-bold m-0">Billing Form 2 (Billing Details)</h6><a class="btn btn-outline-dark btn-sm" role="button" href="{{route('managebillingpage', $billings->reference_no)}}">RETURN TO THE LIST OF SUBMISSIONS</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="tbl_form2_div" id="dataTable" role="grid" aria-describedby="dataTable_info">
