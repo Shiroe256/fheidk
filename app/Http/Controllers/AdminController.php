@@ -50,12 +50,8 @@ class AdminController extends Controller
         return view('admin.form1', $data);
     }
 
-    public function form2()
+    public function form2($reference_no)
     {
-        return view('admin.form2');
-    }
-
-    public function fetchform2list($reference_no){
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('reference_no', $reference_no)->first();
         $students = TemporaryBilling::where('reference_no', $reference_no)->get();
