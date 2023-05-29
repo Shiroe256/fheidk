@@ -61,7 +61,7 @@ class AdminController extends Controller
     }
 
     public function fetchform2list(Request $request){
-        $reference_no = $request->reference_no;
+        $reference_no = $request->form2_reference_no;
 
         $students = TemporaryBilling::where('reference_no', $reference_no)->get();
         $data['students'] = $students;
