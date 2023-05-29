@@ -1,5 +1,6 @@
-fetchform2list();
-
+ // Call fetchform2list to fetch and display data
+ fetchform2list();
+  
 // Fetch records from the database
 function fetchform2list() {
     var reference_no = $("#reference_no").val(); // Get the value of reference_no from the input field
@@ -42,4 +43,6 @@ function fetchform2list() {
       }]
     });
   }
+  
+ 
   
