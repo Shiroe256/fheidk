@@ -65,8 +65,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 // Route::get('/get-tempstudenttable', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
-// Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent');
-Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent');
+// Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
 Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');
