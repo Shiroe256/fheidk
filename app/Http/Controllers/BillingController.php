@@ -819,7 +819,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // foreach ($tempstudents as $key => $tempstudent) {
         //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         // }
-        echo $result;
+        print_r($result);
         // echo 'ok';
     }
 
