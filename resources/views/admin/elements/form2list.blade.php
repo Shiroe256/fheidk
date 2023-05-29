@@ -13,16 +13,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($students as $student)
+        @foreach ($billings as $billing)
         <tr>
-            <td>{{$student->app_id}}</td>
-            <td>{{$student->fhe_award_no}}</td>
-            <td>{{$student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
-            <td>{{$student->degree_program}}</td>
-            <td class="text-center">{{$student->year_level}}<br></td>
-            <td class="text-left">{{$student->remarks}}</td>
-            <td class="text-right">{{$student->total_fees}}</td>
-            <td><span class="badge badge-pill badge-success billing-status-badge">{{$student->stud_status}}<br></span></td>
+            <td>{{$billing->students->app_id}}</td>
+            <td>{{$billing->students->fhe_award_no}}</td>
+            <td>{{$billing->students->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
+            <td>{{$billing->students->degree_program}}</td>
+            <td class="text-center">{{$billing->students->year_level}}<br></td>
+            <td class="text-left">{{$billing->students->remarks}}</td>
+            <td class="text-right">{{$billing->students->total_fees}}</td>
+            <td><span class="badge badge-pill badge-success billing-status-badge">{{$billing->students->stud_status}}<br></span></td>
             <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button></td>
         </tr>
         @endforeach

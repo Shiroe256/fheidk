@@ -33,4 +33,9 @@ class Billing extends Model implements Auditable
         return $this->belongsTo(Hei::class, 'hei_uii', 'hei_uii');
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(TemporaryBilling::class, 'reference_no', 'reference_no');
+    }
+
 }
