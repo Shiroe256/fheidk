@@ -2025,15 +2025,18 @@ function btnDeleteToggle() {
 function fetchTempStudent() {
   let reference_no = $("#reference_no").val();
 
-  var membersDT;
-  /** 
-   * Initializing DataTable
-   * Load Data using Ajax
-  */
-  membersDT = $('#tbl_students').DataTable({
+  var tbl_students;
+  tbl_students = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
     columns: [
+      {
+        data: 'uid',
+        render: function (data, type) {
+          return type === 'display' ?
+            '<input type="checkbox" class="chk_student" id="' + data + '" name="student_checkbox" value="' + data + '">' : data
+        }
+      },
       {
         data: 'hei_name'
       },
@@ -2066,6 +2069,13 @@ function fetchTempStudent() {
       },
       {
         data: 'total_fees'
+      },
+      {
+        data: "uid", render: function (data, type, row, meta) {
+          return type === 'display' ?
+            '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>' :
+            data;
+        }
       }
     ],
     ajax: {
@@ -2076,10 +2086,30 @@ function fetchTempStudent() {
         _token: $('meta[name="csrf-token"]').attr('content')
       }
     },
-    lengthMenu: [[10, 20], [10, 20]]
+    lengthMenu: [[10, 20], [10, 20]],
+    createdRow: function(row, data, dataIndex) {
+      // Assuming your server response is in JSON format and has an 'id' property
+      var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
+      var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
+      var cell_mname = $(row).find('td:eq(6)'); // Change '0' to the index of the target cell
+      var cell_course = $(row).find('td:eq(7)'); // Change '0' to the index of the target cell
+      var cell_year = $(row).find('td:eq(8)'); // Change '0' to the index of the target cell
+
+      // Modify the ID of the target cell using the data from the AJAX response
+      var lname_Id = 'std_lname_' + data.uid; // Modify this based on your requirements
+      var fname_Id = 'std_fname_' + data.uid; // Modify this based on your requirements
+      var mname_Id = 'std_mname_' + data.uid; // Modify this based on your requirements
+      var course_Id = 'std_course_' + data.uid; // Modify this based on your requirements
+      var year_Id = 'std_year_' + data.uid; // Modify this based on your requirements
+      cell_lname.attr('id', lname_Id);
+      cell_fname.attr('id', fname_Id);
+      cell_mname.attr('id', mname_Id);
+      cell_course.attr('id', course_Id);
+      cell_year.attr('id', year_Id);
+    }
   });
 
-  membersDT.on('draw.dt', function () {
+  tbl_students.on('draw.dt', function () {
     document.getElementById("students-placeholder").classList.add('d-none');
     document.getElementById("show_all_students").classList.remove('d-none');
     setup_Events();

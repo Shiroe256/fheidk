@@ -1,18 +1,29 @@
-<table class="table table-bordered my-0" id="tbl_manage_billing_list">
+<table class="table table-bordered my-0" id="tbl_manage_billing_list" style="width: 100%">
     <thead>
         <tr>
+            <th class="text-center">ACADEMIC YEAR</th>
+            <th class="text-center">SEMESTER</th>
             <th>REGION</th>
             <th>HEI NAME</th>
             <th>REFERENCE NO.</th>
-            <th class="text-right">BENEFICIARIES</th>
-            <th class="text-right">AMOUNT</th>
-            <th>STATUS</th>
-            <th class="text-center">ACTION</th>
+            <th class="text-right" rowspan="2">BENEFICIARIES</th>
+            <th class="text-right" rowspan="2">AMOUNT</th>
+            <th rowspan="2">STATUS</th>
+            <th class="text-center" rowspan="2">ACTION</th>
+        </tr>
+        <tr>
+            <th id="search_billing_list_academic_year"></th>
+            <th id="search_billing_list_semester"></th>
+            <th id="search_billing_list_region"></th>
+            <th id="search_billing_list_hei_name"></th>
+            <th id="search_billing_list_reference_no"></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($billings as $billing)
             <tr>
+                <td class="text-center">{{ $billing->ac_year }}</td>
+                <td class="text-center">{{ $billing->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
                 <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
@@ -39,23 +50,12 @@
                         <span class="badge badge-pill badge-success span-size">Disbursed</span>
                     @endif
                 </td>
-                <td>
+                <td class="text-center">
                     <a href="{{ route('managebillingpage', $billing->reference_no) }}" id="{{ $billing->uid }}"
-                        name="btn_view_billing" class="btn btn-outline-info btn-block btn-sm border rounded-pill"
-                        role="button"><i class="fas fa-eye"></i>View</a>
+                        name="btn_view_billing" class="btn_view btn btn-primary" role="button" title="View"><i
+                            class="fas fa-eye"></i></a>
                 </td>
             </tr>
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <td><strong>REGION</strong><br></td>
-            <td><strong>HEI NAME</strong><br></td>
-            <td><strong>REFERENCE NO.</strong><br></td>
-            <td class="text-right"><strong>BENEFICIARIES</strong></td>
-            <td class="text-right"><strong>AMOUNT</strong></td>
-            <td><strong>STATUS</strong></td>
-            <td class="text-center"><strong>ACTION</strong></td>
-        </tr>
-    </tfoot>
 </table>
