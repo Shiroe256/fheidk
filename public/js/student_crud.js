@@ -238,6 +238,7 @@ function validateFields(data) {
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  var transferpattern = /^(Yes|No)|(yes|no)$/;
   for (const stud of data) {
     var error = [];
     // errors[ctr] = [];
@@ -277,9 +278,10 @@ function validateFields(data) {
     if (stud['contact_number'] === undefined) error.push('Contact number is missing');
     // if (stud['contact_number_2'] === undefined) error.push('Contact number is missing');
     // if (stud['is_transferee'] === undefined) error.push('Contact number is missing');
+    if (!transferpattern.test(stud['is_transferee']) || stud['is_transferee'] === undefined) error.push('Incorrect Input');
     if (stud['degree_course_id'] === undefined) error.push('Course is missing');
     // if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('The year level must only be a number or is missing');
-    if (stud['year_level'] || stud['year_level'] === undefined) error.push('The year level must only be a number or is missing');
+    if (!lvlnumpattern.test(stud['year_level'] || stud['year_level'] === undefined)) error.push('The input for the year level should be either a number from 1 to 7');
     // stud['lab_u']
     // stud['com_lab_u']
     if (stud['acad_u'] === undefined) error.push('Academic units are missing');
