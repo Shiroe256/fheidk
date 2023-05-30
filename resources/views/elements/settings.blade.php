@@ -1,6 +1,9 @@
 <?php
 function ordinal($number)
 {
+    if (!is_numeric($number)) {
+        return $number;
+    }
     $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
     if ($number % 100 >= 11 && $number % 100 <= 13) {
         return $number . 'th';
@@ -35,15 +38,17 @@ $switchcolor = '';
                         <div class="card-header" id="heading_cs_{{ $ctr }}_{{ $yearlevel }}">
                             <div class="row d-flex justify-content-end align-items-center">
                                 <div class="col">
-                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                    <button class="btn btn-link btn-block text-left" type="button"
+                                        data-toggle="collapse"
                                         data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
                                         aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
                                         <strong>
-                                           {{ $yearlevel }} YEAR</strong>
+                                            {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
                                     </button>
                                 </div>
                                 <div class="col-1">
-                                    <strong class="text-primary" id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"></strong>
+                                    <strong class="text-primary"
+                                        id="checked_ctr_{{ $ctr }}_{{ $yearlevel }}"></strong>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +58,7 @@ $switchcolor = '';
                             <div class="card-body p-3">
                                 @foreach ($yr as $semname => $sem)
                                     <div class="row my-3 d-flex justify-content-end">
-                                        <div class="col pl-3"><strong>{{ $semname }} Semester</strong></div>
+                                        <div class="col pl-3"><strong>{{ ordinal($semname) }} Semester</strong></div>
                                         <div class="col-3">
                                             <div class="custom-control custom-switch text-end">
                                                 <input type="checkbox" class="custom-control-input toggleall"
@@ -75,14 +80,16 @@ $switchcolor = '';
                                                             @foreach ($typeoffee as $categoryid => $category)
                                                                 <li>
                                                                     <div class="custom-control custom-switch">
-                                                                        <input type="checkbox" class="custom-control-input"
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
                                                                             id="switch_{{ $checkid }}"
                                                                             value="{{ $category['id'] }}"
                                                                             {{ $category['bs_status'] == 1 ? 'checked' : '' }}>
                                                                         <label class="custom-control-label"
                                                                             for="switch_{{ $checkid++ }}">{{ $category['category'] }}<small
                                                                                 class=""> +
-                                                                                {{ $category['amount'] }} {!!$category['is_optional']?' <span class="badge bg-warning">Optional</span>':''!!}</small>
+                                                                                {{ $category['amount'] }}
+                                                                                {!! $category['is_optional'] ? ' <span class="badge bg-warning">Optional</span>' : '' !!}</small>
                                                                         </label>
                                                                     </div>
                                                                 </li>
