@@ -39,7 +39,7 @@ $switchcolor = '';
                                         data-target="#coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}"
                                         aria-controls="coll_accordion_cs_{{ $ctr }}_{{ $yearlevel }}">
                                         <strong>
-                                           {{ strtoupper(ordinal($yearlevel)) }} YEAR</strong>
+                                           {{ $yearlevel }} YEAR</strong>
                                     </button>
                                 </div>
                                 <div class="col-1">
