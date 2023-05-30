@@ -45,7 +45,11 @@ class AdminController extends Controller
         // Query the database to retrieve the data based on the selected values
         $billing = Billing::where('reference_no', $reference_no)->first();
 
+        // Calculate the total amount
+        $totalAmount = TemporaryBilling::sum('total_fees');
+
         $data['billing'] = $billing;
+        $data['totalAmount'] = $totalAmount;
 
         return view('admin.form1', $data);
     }
@@ -60,7 +64,8 @@ class AdminController extends Controller
         return view('admin.form2', $data);
     }
 
-    public function fetchform2list(Request $request){
+    public function fetchform2list(Request $request)
+    {
         $reference_no = $request->reference_no;
 
         $students = TemporaryBilling::where('reference_no', $reference_no)->get();
@@ -78,11 +83,12 @@ class AdminController extends Controller
         return view('admin.form3', $data);
     }
 
-    public function fetchform3list(Request $request){
+    public function fetchform3list(Request $request)
+    {
         $reference_no = $request->reference_no;
 
         $students = TemporaryBilling::where('reference_no', $reference_no)
-        ->whereNotNull('total_exam_taken')->get();
+            ->whereNotNull('total_exam_taken')->get();
         $data['students'] = $students;
         return view('admin.elements.form3list', $data);
     }
@@ -268,55 +274,54 @@ class AdminController extends Controller
     }
 
     public function openbilling(Request $request)
-{
-    // Query the database to retrieve the data based on the selected values
-    $heis = Hei::where('fhe_benefits', 1)->get();
+    {
+        // Query the database to retrieve the data based on the selected values
+        $heis = Hei::where('fhe_benefits', 1)->get();
 
-    $newBilling = [];
-    $existingReferences = [];
+        $newBilling = [];
+        $existingReferences = [];
 
-    foreach ($heis as $data) {
-        $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
+        foreach ($heis as $data) {
+            $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
 
-        // Check if the reference number already exists in the Billing table
-        $existingBilling = Billing::where('reference_no', $reference_no)->first();
+            // Check if the reference number already exists in the Billing table
+            $existingBilling = Billing::where('reference_no', $reference_no)->first();
 
-        if (!$existingBilling) {
-            $newBilling[] = [
-                'hei_psg_region' => $data->hei_psg_region,
-                'hei_sid' => $data->hei_sid,
-                'hei_uii' => $data->hei_uii,
-                'reference_no' => $reference_no,
-                'ac_year' => $request->open_billing_ac_year,
-                'semester' => $request->open_billing_semester,
-                'billing_status' => 1,
-            ];
-        } else {
-            $existingReferences[] = [
-                'reference_no' => $reference_no,
-                'hei_name' => $data->hei_name,
-            ];
+            if (!$existingBilling) {
+                $newBilling[] = [
+                    'hei_psg_region' => $data->hei_psg_region,
+                    'hei_sid' => $data->hei_sid,
+                    'hei_uii' => $data->hei_uii,
+                    'reference_no' => $reference_no,
+                    'ac_year' => $request->open_billing_ac_year,
+                    'semester' => $request->open_billing_semester,
+                    'billing_status' => 1,
+                ];
+            } else {
+                $existingReferences[] = [
+                    'reference_no' => $reference_no,
+                    'hei_name' => $data->hei_name,
+                ];
+            }
         }
-    }
 
-    if (!empty($newBilling)) {
-        Billing::insert($newBilling);
-    }
-
-    $response = [
-        'status' => 200,
-        // 'data' => $newBilling
-    ];
-
-    if (!empty($existingReferences)) {
-        $message = 'The following reference number(s) already exist:<br>';
-        foreach ($existingReferences as $index => $reference) {
-            $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
+        if (!empty($newBilling)) {
+            Billing::insert($newBilling);
         }
-        $response['message'] = $message;
-    }
 
-    return response()->json($response);
-}
-    
+        $response = [
+            'status' => 200,
+            // 'data' => $newBilling
+        ];
+
+        if (!empty($existingReferences)) {
+            $message = 'The following reference number(s) already exist:<br>';
+            foreach ($existingReferences as $index => $reference) {
+                $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
+            }
+            $response['message'] = $message;
+        }
+
+        return response()->json($response);
+    }
 }
