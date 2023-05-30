@@ -52,7 +52,7 @@
                                                 <div class="form-row">
                                                     <div class="col d-flex justify-content-between">
                                                         <p class="item-description font-weight-bold">{{ $billing->hei->hei_name }}</p>
-                                                        <p class="item-description font-weight-bold">{{ $totalAmount }}</p>
+                                                        <p class="item-description font-weight-bold">{{ $totalFees }}</p>
                                                     </div>
                                                 </div>
                                             </div>
