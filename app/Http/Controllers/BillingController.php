@@ -50,8 +50,9 @@ class BillingController extends Controller
 
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
 
+        $temporary_billing_info = new Billing();
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
+        $students_sub = $temporary_billing_info->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
@@ -100,6 +101,12 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                     });
             })
             ->groupBy('students_sub.uid')->get();
+
+        $forFeeUpdate = [];
+        foreach ($students as $key => $student) {
+            $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
+        }
+        $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
