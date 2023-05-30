@@ -46,7 +46,7 @@ class AdminController extends Controller
         $billing = Billing::where('reference_no', $reference_no)->first();
 
         // Calculate the total amount
-        $totalAmount = Billing::sum('total_fees');
+        $totalAmount = TemporaryBilling::sum('total_fees');
 
         $data['billing'] = $billing;
         $data['totalAmount'] = $totalAmount;
