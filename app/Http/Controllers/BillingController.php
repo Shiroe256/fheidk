@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Extension\Table\Table;
 use \NumberFormatter;
 
 class BillingController extends Controller
@@ -52,7 +53,7 @@ class BillingController extends Controller
 
         $temporary_billing_info = new Billing();
         //students sub query. Dito ung pagination
-        $students_sub = $temporary_billing_info->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
