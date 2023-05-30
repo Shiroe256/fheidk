@@ -51,7 +51,7 @@
                                                 <h3 class="title">Billing Statement</h3>
                                                 <div class="form-row">
                                                     <div class="col d-flex justify-content-between">
-                                                        <p class="item-description font-weight-bold">Ilocos Sur Polytechnic College</p>
+                                                        <p class="item-description font-weight-bold">{{ $billing->hei->hei_name }}</p>
                                                         <p class="item-description font-weight-bold">123,456.00</p>
                                                     </div>
                                                 </div>
