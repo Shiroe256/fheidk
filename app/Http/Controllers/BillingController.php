@@ -51,7 +51,7 @@ class BillingController extends Controller
 
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
 
-        $temporary_billing_info = new Billing();
+        $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
