@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Extension\Table\Table;
 use \NumberFormatter;
+use App\Jobs\computeFees;
 
 class BillingController extends Controller
 {
@@ -825,6 +826,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         //!validation has now been passed to the middleware
         // $added = 0;
         $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
+        //!update fees
+        $studentFeesUpdates = TemporaryBilling::where('reference_no', '=', $request->reference_no)->where('total_fees', '=', '')->count();
+
+        for ($i=0; $i < $studentFeesUpdates; $i+=50) { 
+            $this->queueComputationOfFees($request->reference_no,$i,50);
+        }
+
         // foreach ($tempstudents as $key => $tempstudent) {
         //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         // }
@@ -1301,5 +1309,10 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf('%05d', $seq);
         return $fhe_award_no;
+    }
+
+    private function queueComputationOfFees($reference_no, $start, $length)
+    {
+        computeFees::dispatch($reference_no, $start, $length);
     }
 }
