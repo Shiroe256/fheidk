@@ -109,7 +109,19 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         foreach ($students as $key => $student) {
             $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
         }
-        $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
+        // $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
+
+        $idColumn = 'uid';
+
+        $caseStatements = collect($forFeeUpdate)->map(function ($row) use ($idColumn) {
+            return "WHEN {$row[$idColumn]} THEN '{$row['total_fees']}'";
+        })->implode(' ');
+
+        $idValues = implode(',', array_column($forFeeUpdate, $idColumn));
+
+        $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
+
+        DB::statement($query);
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
@@ -829,8 +841,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         //!update fees
         $studentFeesUpdates = TemporaryBilling::where('reference_no', '=', $request->reference_no)->where('total_fees', '=', '')->count();
 
-        for ($i=0; $i < $studentFeesUpdates; $i+=50) { 
-            $this->queueComputationOfFees($request->reference_no,$i,50);
+        for ($i = 0; $i < $studentFeesUpdates; $i += 50) {
+            $this->queueComputationOfFees($request->reference_no, $i, 50);
         }
 
         // foreach ($tempstudents as $key => $tempstudent) {
