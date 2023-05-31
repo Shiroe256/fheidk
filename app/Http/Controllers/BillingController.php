@@ -121,27 +121,29 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
 
         $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
 
+        // echo $query;
+
         DB::statement($query);
 
-        //     $sql = "SELECT
-        // `tbl_billing_details_temp`.*,
-        // tbl_billing_settings.bs_osf_uid,
-        // tbl_billing_settings.bs_status,
-        // tbl_billing_stud_settings.bs_osf_uid,
-        // tbl_billing_stud_settings.bs_status,
-        // sum(if(tbl_other_school_fees.coverage = 'per student',tbl_other_school_fees.amount,0)) as total_amount,
-        // sum(if(tbl_other_school_fees.coverage = 'per unit',tbl_other_school_fees.amount * tbl_billing_details_temp.lab_unit,0)) as lab_amount
-        // FROM
-        // `tbl_billing_details_temp`
-        // JOIN tbl_billing_settings ON tbl_billing_settings.bs_reference_no = tbl_billing_details_temp.reference_no
-        // JOIN tbl_other_school_fees ON tbl_other_school_fees.uid = tbl_billing_settings.bs_osf_uid AND tbl_other_school_fees.course_enrolled = tbl_billing_details_temp.degree_program AND tbl_other_school_fees.semester = tbl_billing_details_temp.semester and tbl_other_school_fees.year_level = tbl_billing_details_temp.year_level
-        // LEFT JOIN tbl_billing_stud_settings ON tbl_billing_stud_settings.bs_reference_no = tbl_billing_details_temp.reference_no AND tbl_billing_stud_settings.bs_student = tbl_billing_details_temp.uid AND tbl_billing_settings.bs_osf_uid = tbl_billing_stud_settings.bs_osf_uid
-        // WHERE
-        // tbl_billing_stud_settings.bs_status = 1 OR 
-        // (tbl_billing_stud_settings.bs_status is null and tbl_billing_settings.bs_status = 1) AND
-        // tbl_billing_details_temp.hei_uii = '" . $hei_uii . "' and 
-        // tbl_billing_details_temp.reference_no = '" . $reference_no . "'
-        // group by tbl_billing_details_temp.uid";
+        // //     $sql = "SELECT
+        // // `tbl_billing_details_temp`.*,
+        // // tbl_billing_settings.bs_osf_uid,
+        // // tbl_billing_settings.bs_status,
+        // // tbl_billing_stud_settings.bs_osf_uid,
+        // // tbl_billing_stud_settings.bs_status,
+        // // sum(if(tbl_other_school_fees.coverage = 'per student',tbl_other_school_fees.amount,0)) as total_amount,
+        // // sum(if(tbl_other_school_fees.coverage = 'per unit',tbl_other_school_fees.amount * tbl_billing_details_temp.lab_unit,0)) as lab_amount
+        // // FROM
+        // // `tbl_billing_details_temp`
+        // // JOIN tbl_billing_settings ON tbl_billing_settings.bs_reference_no = tbl_billing_details_temp.reference_no
+        // // JOIN tbl_other_school_fees ON tbl_other_school_fees.uid = tbl_billing_settings.bs_osf_uid AND tbl_other_school_fees.course_enrolled = tbl_billing_details_temp.degree_program AND tbl_other_school_fees.semester = tbl_billing_details_temp.semester and tbl_other_school_fees.year_level = tbl_billing_details_temp.year_level
+        // // LEFT JOIN tbl_billing_stud_settings ON tbl_billing_stud_settings.bs_reference_no = tbl_billing_details_temp.reference_no AND tbl_billing_stud_settings.bs_student = tbl_billing_details_temp.uid AND tbl_billing_settings.bs_osf_uid = tbl_billing_stud_settings.bs_osf_uid
+        // // WHERE
+        // // tbl_billing_stud_settings.bs_status = 1 OR 
+        // // (tbl_billing_stud_settings.bs_status is null and tbl_billing_settings.bs_status = 1) AND
+        // // tbl_billing_details_temp.hei_uii = '" . $hei_uii . "' and 
+        // // tbl_billing_details_temp.reference_no = '" . $reference_no . "'
+        // // group by tbl_billing_details_temp.uid";
 
         echo json_encode([
             "draw" => $request->draw,
@@ -839,16 +841,16 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // $added = 0;
         $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
         //!update fees
-        $studentFeesUpdates = TemporaryBilling::where('reference_no', '=', $request->reference_no)->where('total_fees', '=', '')->count();
+        // $studentFeesUpdates = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
 
-        for ($i = 0; $i < $studentFeesUpdates; $i += 50) {
-            $this->queueComputationOfFees($request->reference_no, $i, 50);
-        }
+        // for ($i = 0; $i < $studentFeesUpdates; $i += 50) {
+        $this->queueComputationOfFees($request->reference_no, 0, 50);
+        // }
 
         // foreach ($tempstudents as $key => $tempstudent) {
         //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
         // }
-        echo $result;
+        print_r($result);
         // echo 'ok';
     }
 

@@ -22,11 +22,11 @@ class computeFees implements ShouldQueue
      * @return void
      */
 
-     public $reference_no;
-     public $start;
-     public $length;
+    public $reference_no;
+    public $start;
+    public $length;
 
-    public function __construct($reference_no,$start,$length)
+    public function __construct($reference_no, $start, $length)
     {
         $this->reference_no = $reference_no;
         $this->start = $start;
@@ -44,7 +44,7 @@ class computeFees implements ShouldQueue
         $start = $this->start;
         $length = $this->length;
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where('tbl_billing_details_temp.total_fees','=','')->skip($start)->take($length);
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($start)->take($length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
