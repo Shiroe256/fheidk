@@ -52,7 +52,7 @@ class BillingController extends Controller
 
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
 
-        $temporary_billing_info = new TemporaryBilling();
+        // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
@@ -841,17 +841,17 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // $added = 0;
         $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
         //!update fees
-        // $studentFeesUpdates = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
+        $totalItems = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
+        $chunkSize = 50;
+        $offset = 0;
 
-        // for ($i = 0; $i < $studentFeesUpdates; $i += 50) {
-        $this->queueComputationOfFees($request->reference_no, 0, 50);
-        // }
+        while ($offset < $totalItems) {
+            $limit = min($chunkSize, $totalItems - $offset);
+            $this->queueComputationOfFees($request->reference_no, $offset, $limit);
+            $offset += $chunkSize;
+        }
 
-        // foreach ($tempstudents as $key => $tempstudent) {
-        //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
-        // }
         print_r($result);
-        // echo 'ok';
     }
 
     private function parseTempStudentBatch($student = array(), $heiinfo, $billinginfo)
