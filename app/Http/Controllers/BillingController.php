@@ -223,8 +223,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
         $billing_record->save();
         // }
-        print_r($data['hei_summary']);
-        // return view('elements.tempsummary', $data);
+        // print_r($data['hei_summary']);
+        return view('elements.tempsummary', $data);
     }
 
     public function fetchTempExceptions(Request $request)
