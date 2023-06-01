@@ -219,9 +219,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
             ->get();
 
-        $billing_record->total_beneficiaries = $data['hei_summary'][0]->total_beneficiaries;
-        $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
-        $billing_record->save();
+        // $billing_record->total_beneficiaries = $data['hei_summary'][0]->total_beneficiaries;
+        // $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
+        // $billing_record->save();
         // }
         // print_r($data['hei_summary']);
         return view('elements.tempsummary', $data);
