@@ -84,12 +84,15 @@ sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount 
 sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
 sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
             )
-            ->leftJoin('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
             ->leftJoin('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-                    ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->join('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
             })
             ->leftJoin('tbl_billing_stud_settings', function ($join) {
                 $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
