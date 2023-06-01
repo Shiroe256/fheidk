@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\computeStudentFees;
 use App\Models\Billing;
 use App\Models\EnrollmentInfo;
 use App\Models\Hei;
@@ -171,7 +172,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $billing_record = Billing::where('reference_no', $reference_no)->first();
 
         $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
-
+        
         if ($billing_record->total_amount < 1) {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
             //dito jinojoin ung information about the fees and computation
@@ -188,12 +189,15 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                     DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
                     DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab')
                 )
-                ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
                 ->leftJoin('tbl_other_school_fees', function ($join) {
-                    $join->on('tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-                        ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                    $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                })
+                // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                ->join('tbl_billing_settings', function ($join) {
+                    $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
                 })
                 ->leftJoin('tbl_billing_stud_settings', function ($join) {
                     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
@@ -801,6 +805,14 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ],
             ['bs_status']
         );
+
+        //*for ano. Yung update ng fees pag may binagong individual settings.
+        $chunkSize = 50;
+        $chunks = array_chunk($request->bs_student, $chunkSize);
+
+        foreach ($chunks as $chunk) {
+            $this->queueComputationOfFeesPerStudent($reference_no, $chunk);
+        }
         echo 1;
     }
 
@@ -1330,5 +1342,10 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     private function queueComputationOfFees($reference_no, $start, $length)
     {
         computeFees::dispatch($reference_no, $start, $length);
+    }
+    private function queueComputationOfFeesPerStudent($reference_no, $uids)
+    {
+        DB::table('tbl_billing_details_temp')->whereIn('uid', $uids)->update(['total_fees' => -1]);
+        computeStudentFees::dispatch($reference_no, $uids);
     }
 }
