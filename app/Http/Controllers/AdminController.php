@@ -8,6 +8,7 @@ use App\Models\Billing;
 use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\TemporaryBilling;
+use App\Models\StudentDetails;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +69,7 @@ class AdminController extends Controller
     {
         $reference_no = $request->reference_no;
 
-        $students = TemporaryBilling::where('reference_no', $reference_no)->get();
+        $students = StudentDetails::where('reference_no', $reference_no)->get();
         $data['students'] = $students;
         return view('admin.elements.form2list', $data);
     }
