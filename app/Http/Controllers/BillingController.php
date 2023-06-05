@@ -50,12 +50,16 @@ class BillingController extends Controller
 
         // $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
-
+        $search = $request->search['value'];
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
 
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
+            $query->where('stud_fname', 'like', '%' . $search . '%')
+                ->orWhere('stud_lname', 'like', '%' . $search . '%');
+        })
+            ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
@@ -904,7 +908,6 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
         $heiinfo = $this->getHeiInformation($hei_uii);
 
-
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         //!validation has now been passed to the middleware
         // $added = 0;
@@ -1387,7 +1390,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $app_id = date("YmdHis") . sprintf("%05d", substr(microtime(FALSE), 2, 3)) . '-' . sprintf("%05d", $seq);
         return $app_id;
-    }   
+    }
     private function generateFHEAwardNo($hei_uii, $seq)
     {
         $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf("%05d", substr(microtime(FALSE), 2, 3)) . sprintf('%05d', $seq);
