@@ -673,6 +673,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ->select(
                 'students_sub.uid',
                 'students_sub.hei_name',
+                'students_sub.reference_no',
                 'tbl_billing_stud_settings.bs_osf_uid',
                 'tbl_billing_stud_settings.bs_status',
                 DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
