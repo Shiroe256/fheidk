@@ -9,7 +9,6 @@
                     <th class="text-center">REFERENCE NO.</th>
                     <th class="text-center">ACADEMIC YEAR</th>
                     <th class="text-center">SEMESTER</th>
-                    <th class="text-center">TRANCHE</th>
                     <th class="text-center">TOTAL AMOUNT</th>
                     <th class="text-center">TOTAL BENEFICIARIES</th>
                     <th class="text-center">STATUS</th>
@@ -26,7 +25,6 @@
                         </td>
                         <td class="text-center"><strong>{{ $billing['ac_year'] }}</strong></td>
                         <td class="text-center"><strong>{{ $f->format($billing['semester']) }}</strong></td>
-                        <td class="text-center">{{ $f->format($billing['tranche']) }}</td>
                         <td class="text-center">{{ $format->format($billing['total_amount']) }}</td>
                         <td class="text-center">{{ $billing['total_beneficiaries'] }}</td>
                         <td class="text-center">
