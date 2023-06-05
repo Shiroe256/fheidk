@@ -109,27 +109,27 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             })
             ->groupBy('students_sub.uid')->get();
 
-        $forFeeUpdate = [];
-        foreach ($students as $key => $student) {
-            $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
-        }
-        // $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
+        // $forFeeUpdate = [];
+        // foreach ($students as $key => $student) {
+        //     $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
+        // }
+        // // $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
 
-        if ($total > 0) {
-            $idColumn = 'uid';
+        // if ($total > 0) {
+        //     $idColumn = 'uid';
 
-            $caseStatements = collect($forFeeUpdate)->map(function ($row) use ($idColumn) {
-                return "WHEN {$row[$idColumn]} THEN '{$row['total_fees']}'";
-            })->implode(' ');
+        //     $caseStatements = collect($forFeeUpdate)->map(function ($row) use ($idColumn) {
+        //         return "WHEN {$row[$idColumn]} THEN '{$row['total_fees']}'";
+        //     })->implode(' ');
 
-            $idValues = implode(',', array_column($forFeeUpdate, $idColumn));
+        //     $idValues = implode(',', array_column($forFeeUpdate, $idColumn));
 
-            $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
+        //     $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
 
-            // echo $query;
+        //     // echo $query;
 
-            DB::statement($query);
-        }
+        //     DB::statement($query);
+        // }
 
         // //     $sql = "SELECT
         // // `tbl_billing_details_temp`.*,
