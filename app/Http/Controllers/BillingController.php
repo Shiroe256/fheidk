@@ -710,7 +710,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $data['billings'] = DB::table(DB::raw("({$students->toSql()}) as students"))
             ->mergeBindings($students)
             ->selectRaw('tbl_fhe_billing_records.billing_status, tbl_fhe_billing_records.semester,tbl_fhe_billing_records.ac_year, students.reference_no,students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
-            ->join('tbl_fhe_billing_records','students.reference_no','=','tbl_fhe_billing_records.reference_no')
+            ->rightJoin('tbl_fhe_billing_records','students.reference_no','=','tbl_fhe_billing_records.reference_no')
             ->groupBy('students.reference_no')
             ->get();
 
