@@ -809,13 +809,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ['bs_status']
         );
 
-        //*for ano. Yung update ng fees pag may binagong individual settings.
-        $chunkSize = 50;
-        $chunks = array_chunk($request->bs_student, $chunkSize);
+        //*for ano. Yung update ng fees pag may binagong individual settings. DI NA NEED
+        // $chunkSize = 50;
+        // $chunks = array_chunk($request->bs_student, $chunkSize);
 
-        foreach ($chunks as $chunk) {
-            $this->queueComputationOfFeesPerStudent($reference_no, $chunk);
-        }
+        // foreach ($chunks as $chunk) {
+        //     $this->queueComputationOfFeesPerStudent($reference_no, $chunk);
+        // }
         echo 1;
     }
 
@@ -857,16 +857,16 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         //!validation has now been passed to the middleware
         // $added = 0;
         $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
-        //!update fees
-        $totalItems = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
-        $chunkSize = 50;
-        $offset = 0;
+        //!update fees no longer needed KASI ANG BILIS NA OMG
+        // $totalItems = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
+        // $chunkSize = 50;
+        // $offset = 0;
 
-        while ($offset < $totalItems) {
-            $limit = min($chunkSize, $totalItems - $offset);
-            $this->queueComputationOfFees($request->reference_no, $offset, $limit);
-            $offset += $chunkSize;
-        }
+        // while ($offset < $totalItems) {
+        //     $limit = min($chunkSize, $totalItems - $offset);
+        //     $this->queueComputationOfFees($request->reference_no, $offset, $limit);
+        //     $offset += $chunkSize;
+        // }
 
         print_r($result);
     }
