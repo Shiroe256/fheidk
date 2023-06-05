@@ -213,7 +213,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             })
             ->where(function ($query) {
                 $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->andWhere('tbl_billing_settings.bs_status', '=', 1)
                     ->orWhere(function ($query) {
                         $query->whereNull('tbl_billing_stud_settings.bs_status')
                             ->where('tbl_billing_settings.bs_status', '=', 1);
