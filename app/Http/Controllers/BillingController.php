@@ -1338,7 +1338,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     }
     private function generateFHEAwardNo($hei_uii, $seq)
     {
-        $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf('%05d', $seq);
+        $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf("%05d", substr(microtime(FALSE), 2, 3)) . sprintf('%05d', $seq);
         return $fhe_award_no;
     }
 
