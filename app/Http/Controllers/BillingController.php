@@ -85,16 +85,7 @@ class BillingController extends Controller
                 'students_sub.remarks',
                 'students_sub.stud_status',
                 'students_sub.total_fees',
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
-                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
-                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
-                DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
-                DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab'),
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) +
-sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
-sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
-sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
-sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_fees')
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
@@ -198,6 +189,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                 'students_sub.hei_name',
                 'tbl_billing_stud_settings.bs_osf_uid',
                 'tbl_billing_stud_settings.bs_status',
+
+
                 DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
@@ -760,7 +753,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $hei_uii = Auth::user()->hei_uii;
 
         $bs_student_info = TemporaryBilling::find($bs_student);
-        
+
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             // ->leftJoin('tbl_billing_stud_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_stud_settings.bs_osf_uid')
