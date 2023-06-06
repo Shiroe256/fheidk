@@ -140,25 +140,25 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         //     DB::statement($query);
         // }
 
-        // //     $sql = "SELECT
-        // // `tbl_billing_details_temp`.*,
-        // // tbl_billing_settings.bs_osf_uid,
-        // // tbl_billing_settings.bs_status,
-        // // tbl_billing_stud_settings.bs_osf_uid,
-        // // tbl_billing_stud_settings.bs_status,
-        // // sum(if(tbl_other_school_fees.coverage = 'per student',tbl_other_school_fees.amount,0)) as total_amount,
-        // // sum(if(tbl_other_school_fees.coverage = 'per unit',tbl_other_school_fees.amount * tbl_billing_details_temp.lab_unit,0)) as lab_amount
-        // // FROM
-        // // `tbl_billing_details_temp`
-        // // JOIN tbl_billing_settings ON tbl_billing_settings.bs_reference_no = tbl_billing_details_temp.reference_no
-        // // JOIN tbl_other_school_fees ON tbl_other_school_fees.uid = tbl_billing_settings.bs_osf_uid AND tbl_other_school_fees.course_enrolled = tbl_billing_details_temp.degree_program AND tbl_other_school_fees.semester = tbl_billing_details_temp.semester and tbl_other_school_fees.year_level = tbl_billing_details_temp.year_level
-        // // LEFT JOIN tbl_billing_stud_settings ON tbl_billing_stud_settings.bs_reference_no = tbl_billing_details_temp.reference_no AND tbl_billing_stud_settings.bs_student = tbl_billing_details_temp.uid AND tbl_billing_settings.bs_osf_uid = tbl_billing_stud_settings.bs_osf_uid
-        // // WHERE
-        // // tbl_billing_stud_settings.bs_status = 1 OR 
-        // // (tbl_billing_stud_settings.bs_status is null and tbl_billing_settings.bs_status = 1) AND
-        // // tbl_billing_details_temp.hei_uii = '" . $hei_uii . "' and 
-        // // tbl_billing_details_temp.reference_no = '" . $reference_no . "'
-        // // group by tbl_billing_details_temp.uid";
+        //     $sql = "SELECT
+        // `tbl_billing_details_temp`.*,
+        // tbl_billing_settings.bs_osf_uid,
+        // tbl_billing_settings.bs_status,
+        // tbl_billing_stud_settings.bs_osf_uid,
+        // tbl_billing_stud_settings.bs_status,
+        // sum(if(tbl_other_school_fees.coverage = 'per student',tbl_other_school_fees.amount,0)) as total_amount,
+        // sum(if(tbl_other_school_fees.coverage = 'per unit',tbl_other_school_fees.amount * tbl_billing_details_temp.lab_unit,0)) as lab_amount
+        // FROM
+        // `tbl_billing_details_temp`
+        // JOIN tbl_billing_settings ON tbl_billing_settings.bs_reference_no = tbl_billing_details_temp.reference_no
+        // JOIN tbl_other_school_fees ON tbl_other_school_fees.uid = tbl_billing_settings.bs_osf_uid AND tbl_other_school_fees.course_enrolled = tbl_billing_details_temp.degree_program AND tbl_other_school_fees.semester = tbl_billing_details_temp.semester and tbl_other_school_fees.year_level = tbl_billing_details_temp.year_level
+        // LEFT JOIN tbl_billing_stud_settings ON tbl_billing_stud_settings.bs_reference_no = tbl_billing_details_temp.reference_no AND tbl_billing_stud_settings.bs_student = tbl_billing_details_temp.uid AND tbl_billing_settings.bs_osf_uid = tbl_billing_stud_settings.bs_osf_uid
+        // WHERE
+        // tbl_billing_stud_settings.bs_status = 1 OR 
+        // (tbl_billing_stud_settings.bs_status is null and tbl_billing_settings.bs_status = 1) AND
+        // tbl_billing_details_temp.hei_uii = '" . $hei_uii . "' and 
+        // tbl_billing_details_temp.reference_no = '" . $reference_no . "'
+        // group by tbl_billing_details_temp.uid";
 
         echo json_encode([
             "draw" => $request->draw,
@@ -752,6 +752,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $course_enrolled = $this->getCourseName($bs_student);
         $reference_no = $request->reference_no;
         $hei_uii = Auth::user()->hei_uii;
+
+        $bs_student_info = TemporaryBilling::find($bs_student);
+        
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             // ->leftJoin('tbl_billing_stud_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_stud_settings.bs_osf_uid')
@@ -763,6 +766,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ->where('tbl_billing_settings.bs_reference_no', $reference_no)
             ->where('tbl_billing_settings.bs_status', 1)
             ->where('tbl_other_school_fees.course_enrolled', $course_enrolled)
+            ->where('tbl_other_school_fees.year_level', $bs_student_info->year_level)
+            ->where('tbl_other_school_fees.semester', $bs_student_info->semester)
             // ->where('tbl_billing_stud_settings.bs_student', $bs_student)
             ->where('tbl_other_school_fees.is_optional', 1)
             ->selectRaw('tbl_other_school_fees.uid,tbl_other_school_fees.amount,tbl_other_school_fees.course_enrolled,tbl_other_school_fees.type_of_fee,tbl_other_school_fees.category,tbl_other_school_fees.year_level,tbl_other_school_fees.semester,if(tbl_billing_stud_settings.bs_status is not null,tbl_billing_stud_settings.bs_status,tbl_billing_settings.bs_status) as bs_status')
