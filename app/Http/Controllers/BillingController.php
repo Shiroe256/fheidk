@@ -242,18 +242,15 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $reference_no  = $request->reference_no;
         // $search = $request->search['value'];
-        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
-            $query->where('stud_fname', 'like', '%' . $search . '%')
-                ->orWhere('stud_lname', 'like', '%' . $search . '%');
-        })
-            ->where('remarks', '!=', '')->count();
+        // $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
+        //     $query->where('stud_fname', 'like', '%' . $search . '%')
+        //         ->orWhere('stud_lname', 'like', '%' . $search . '%');
+        // })
+        //     ->where('remarks', '!=', '')->count();
 
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
-            $query->where('stud_fname', 'like', '%' . $search . '%')
-                ->orWhere('stud_lname', 'like', '%' . $search . '%');
-        })
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where('remarks', '!=', '')
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
