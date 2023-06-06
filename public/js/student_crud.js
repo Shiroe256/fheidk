@@ -552,6 +552,7 @@ function setup_Events() {
       element.classList.add("skeleton-text");
       element.innerHTML = "";
       tbl_students.ajax.reload();
+      fetchTempSummary();
       // getStudentFees([element.id.substring(10)]);
     };
   });
@@ -643,6 +644,7 @@ req_update_stud_settings.onload = function () {
       });
     });
     tbl_students.ajax.reload();
+    fetchTempSummary();
     // getStudentFees(updatedata.bs_student);
   }
   else
@@ -1916,6 +1918,7 @@ $("#frm_update_student").submit(function (e) {
         )
         // fetchTempStudent();
         tbl_students.ajax.reload();
+        fetchTempSummary();
         $("#btn_update_student").text('Update Student');
         $("#frm_update_student")[0].reset();
         $("#mod_edit_student_info").modal('hide');
@@ -2005,6 +2008,7 @@ $(document).on('click', '#btn_delete_students', function () {
           $('#btn_delete_students').addClass('d-none');
           // fetchTempStudent();
           tbl_students.ajax.reload();
+          fetchTempSummary();
         }
       });
     }
