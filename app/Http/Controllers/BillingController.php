@@ -251,8 +251,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->where('remarks', '!=', '')
-            ->skip($request->start)->take($request->length);
+            ->where('remarks', '!=', '');
         //dito jinojoin ung information about the fees and computation
         $data['exceptions'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
