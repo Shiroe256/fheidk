@@ -48,7 +48,7 @@
             <td class="text-center">{{$exception->year_level}}</td>
             <td class="text-left">{!!$exception->remarks!!}</td>
             <td class="text-left">{{$student_status}}</td>
-            <td class="text-left">{{$format->format($exception->$total_fees)}}</td>
+            <td class="text-left">{{$format->format($exception->total_fees)}}</td>
             <td class="text-center">
                 <div class="btn-group btn-group-sm" role="group">
                     <button id="{{$exception->uid}}" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
