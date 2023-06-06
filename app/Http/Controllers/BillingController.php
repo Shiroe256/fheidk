@@ -736,6 +736,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function billingmanagementpage($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
+        if (isNull($billings)) {
+            return view('errors.404');
+        }
         // $hei_uii = Auth::user()->hei_uii;
         $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
