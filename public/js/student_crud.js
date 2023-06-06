@@ -479,10 +479,11 @@ function getStudentFees(bs_student) {
   req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
   req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
   req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  let json = JSON.stringify({
-    bs_student: bs_student
-  });
-  req_get_stud_fees.send(json);
+  tbl_students.ajax.reload();
+  // let json = JSON.stringify({
+  //   bs_student: bs_student
+  // });
+  // req_get_stud_fees.send(json);
 }
 
 function editStudentsSettings() {
