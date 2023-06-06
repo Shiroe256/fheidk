@@ -25,6 +25,7 @@ const btn_upload = document.getElementById("btn_upload");
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
 const tranche = $('#tranche').val();
+var tbl_students;
 var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
@@ -2025,7 +2026,7 @@ function btnDeleteToggle() {
 function fetchTempStudent() {
   let reference_no = $("#reference_no").val();
 
-  var tbl_students;
+  
   tbl_students = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
