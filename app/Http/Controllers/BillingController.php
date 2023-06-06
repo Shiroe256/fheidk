@@ -85,7 +85,7 @@ class BillingController extends Controller
                 'students_sub.remarks',
                 'students_sub.stud_status',
                 'students_sub.total_fees',
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_fees')
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) + sum(if(tbl_other_school_fees.category = "Tuition Fee", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_fees')
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
