@@ -6,7 +6,7 @@
     <h5 class="text-dark mb-4">FHE Management / <span class="badge badge-pill badge-info">AY
             {{ $ac_year }}</span>&nbsp;/&nbsp;<span class="badge badge-pill badge-info">{{ $f->format($semester) }}
             Semester</span> / <span class="badge badge-pill badge-info">{{ $f->format($tranche) }} Tranche</span></h5>
-            <input type="hidden" name="" id="reference_no" value="{{ $reference_no }}">
+    <input type="hidden" name="" id="reference_no" value="{{ $reference_no }}">
     <div>
         <div class="card shadow">
             <div class="card-header">
@@ -16,7 +16,11 @@
                 Billing "Other School Fees" Settings
             </div>
             <div class="card-body">
-                @include('elements.settings')
+                @if ($otherfees > 1)
+                    @include('elements.settings')
+                @else
+                    <h2>Walang Settings pa na inuupload :)</h2>
+                @endif
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" id="btn_save" value="{{ $reference_no }}">Save All</button>

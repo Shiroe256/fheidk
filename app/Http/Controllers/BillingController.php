@@ -26,6 +26,8 @@ use League\CommonMark\Extension\Table\Table;
 use \NumberFormatter;
 use App\Jobs\computeFees;
 
+use function Symfony\Component\HttpFoundation\isEmpty;
+
 class BillingController extends Controller
 {
 
@@ -789,6 +791,10 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function getBillingSettings($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
+        if ($billings->isEmpty()) {
+            $data['otherfees'] = [];
+            return view('billingsettings', $data);
+        }
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
