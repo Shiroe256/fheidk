@@ -795,9 +795,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function getBillingSettings($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
-        if (isNull($billings)) {
-            return view('errors.404');
-        }
+        // if (isNull($billings)) {
+        //     return view('errors.404');
+        // }
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
