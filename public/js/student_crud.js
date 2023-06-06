@@ -402,7 +402,8 @@ function uploadBatch() {
             fileInput.value = '';
             resetUploadButton();
             btnUploadCloseButton.click();
-            fetchTempStudent();
+            // fetchTempStudent();
+            tbl_students.ajax.reload();
             fetchTempSummary();
             fetchTempApplicants();
             document.getElementById('upload_template_text').innerHTML = selectedFile.name;
@@ -550,7 +551,8 @@ function setup_Events() {
       element.classList.add("skeleton");
       element.classList.add("skeleton-text");
       element.innerHTML = "";
-      getStudentFees([element.id.substring(10)]);
+      tbl_students.ajax.reload();
+      // getStudentFees([element.id.substring(10)]);
     };
   });
   btn_stud_settings.forEach(element => {
@@ -640,14 +642,15 @@ req_update_stud_settings.onload = function () {
         }
       });
     });
-    getStudentFees(updatedata.bs_student);
+    tbl_students.ajax.reload();
+    // getStudentFees(updatedata.bs_student);
   }
   else
     loader.classList.add('cross');
 }
 //student settings end
 
-fetchTempStudent();
+fetchTempStudent(); //initialize the shit lol remnants to ng legacy
 selectDegreePrograms();
 selectCampus();
 
@@ -678,7 +681,8 @@ $("#frm_add_student").submit(function (e) {
           'Student Added Successfully!',
           'success'
         )
-        fetchTempStudent();
+        // fetchTempStudent();
+        tbl_students.ajax.reload();
         fetchTempSummary();
         $("#btn_add_student").text('Add Student');
         $("#frm_add_student")[0].reset();
@@ -1910,7 +1914,8 @@ $("#frm_update_student").submit(function (e) {
           'Student Updated Successfully!',
           'success'
         )
-        fetchTempStudent();
+        // fetchTempStudent();
+        tbl_students.ajax.reload();
         $("#btn_update_student").text('Update Student');
         $("#frm_update_student")[0].reset();
         $("#mod_edit_student_info").modal('hide');
@@ -1998,7 +2003,8 @@ $(document).on('click', '#btn_delete_students', function () {
             'success'
           )
           $('#btn_delete_students').addClass('d-none');
-          fetchTempStudent();
+          // fetchTempStudent();
+          tbl_students.ajax.reload();
         }
       });
     }
