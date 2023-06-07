@@ -176,8 +176,8 @@ class BillingController extends Controller
                 DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken, 0)) as exam_fees')
             )
             ->join('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.year_level', '=', '1')
-                    ->on('tbl_other_school_fees.semester', '=', '1')
+                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
                     ->on('tbl_other_school_fees.coverage', '=', 'per new student');
             })
