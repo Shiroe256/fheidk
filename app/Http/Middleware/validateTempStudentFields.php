@@ -20,7 +20,7 @@ class validateTempStudentFields
         $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $tempstudent)
-            if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
+            // if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
         return $next($request);
     }
 

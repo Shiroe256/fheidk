@@ -65,8 +65,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'checkUserHei' => \App\Http\Middleware\CheckUserHei::class,
-        'validateTempStudent' => \App\Http\Middleware\validateTempStudentFields::class,
+        'validateTempStudentFields' => \App\Http\Middleware\validateTempStudentFields::class,
         'validateNewTempStudent' => \App\Http\Middleware\validateNewTempStudent::class,
+        'validateEditTempStudent' => \App\Http\Middleware\validateEditTempStudent::class,
         'validateUpdateTempStudent' => \App\Http\Middleware\validateUpdateStudentFields::class,
     ];
 }
