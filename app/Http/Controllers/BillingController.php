@@ -54,19 +54,21 @@ class BillingController extends Controller
         // $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
-        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
-            $query->where('stud_fname', 'like', '%' . $search . '%')
-                ->orWhere('stud_lname', 'like', '%' . $search . '%')
-                ->orWhere('stud_mname', 'like', '%' . $search . '%');
-        })->count();
+        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where(function ($query) use ($search) {
+                $query->where('stud_fname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_lname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_mname', 'like', '%' . $search . '%');
+            })->count();
 
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
-            $query->where('stud_fname', 'like', '%' . $search . '%')
-                ->orWhere('stud_lname', 'like', '%' . $search . '%')
-                ->orWhere('stud_mname', 'like', '%' . $search . '%');
-        })
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            // ->where(function ($query) use ($search) {
+            //     $query->where('stud_fname', 'like', '%' . $search . '%')
+            //         ->orWhere('stud_lname', 'like', '%' . $search . '%')
+            //         ->orWhere('stud_mname', 'like', '%' . $search . '%');
+            // })
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
@@ -192,8 +194,6 @@ class BillingController extends Controller
                 'students_sub.hei_name',
                 'tbl_billing_stud_settings.bs_osf_uid',
                 'tbl_billing_stud_settings.bs_status',
-
-
                 DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
                 DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
