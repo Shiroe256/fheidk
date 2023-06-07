@@ -179,7 +179,7 @@ class BillingController extends Controller
                 $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
-                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('per new student'));
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'));
             })
             ->where('reference_no', $reference_no)
             ->whereNotNull('total_exam_taken')
