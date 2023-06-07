@@ -178,19 +178,19 @@ class BillingController extends Controller
         $data['applicants'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
-                'students_sub.uid',
-                'students_sub.app_id',
-                'students_sub.hei_name',
-                'students_sub.stud_lname',
-                'students_sub.stud_fname',
-                'students_sub.stud_mname',
-                'students_sub.fhe_award_no',
-                'students_sub.degree_program',
-                'students_sub.semester',
-                'students_sub.year_level',
-                'students_sub.remarks',
-                'students_sub.stud_status',
-                'students_sub.total_fees',
+                'students_sub.*',
+                // 'students_sub.app_id',
+                // 'students_sub.hei_name',
+                // 'students_sub.stud_lname',
+                // 'students_sub.stud_fname',
+                // 'students_sub.stud_mname',
+                // 'students_sub.fhe_award_no',
+                // 'students_sub.degree_program',
+                // 'students_sub.semester',
+                // 'students_sub.year_level',
+                // 'students_sub.remarks',
+                // 'students_sub.stud_status',
+                // 'students_sub.total_fees',
                 DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees'),
                 DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) + sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
                 sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
@@ -222,7 +222,7 @@ class BillingController extends Controller
             })
             ->whereNotNull('total_exam_taken')
             ->groupBy('students_sub.uid')->get();
-            
+
         return view('elements.applicanttable', $data);
     }
 
