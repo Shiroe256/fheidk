@@ -35,7 +35,7 @@
                 <td class="text-left">{{ $applicant->transferee }}</td>
                 <td class="text-center">{{ $applicant->total_exam_taken }}</td>
                 <td class="text-left">{{ $applicant->exam_result }}<br></td>
-                <td class="text-left">{{ $applicant->total_fees }}<br></td>
+                <td class="text-left">{{ $applicant->exam_fees }}<br></td>
                 <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group">
                         <button id="{{ $applicant->uid }}" class="btn btn_update_student btn-outline-primary"
