@@ -115,6 +115,7 @@ class BillingController extends Controller
                             ->where('tbl_billing_settings.bs_status', '=', 1);
                     });
             })
+            //!kailangan lagyan dito ng para sa mga pumasa lang
             ->groupBy('students_sub.uid')->get();
 
         // $forFeeUpdate = [];
