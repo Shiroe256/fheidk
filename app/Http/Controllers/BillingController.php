@@ -64,11 +64,11 @@ class BillingController extends Controller
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            // ->where(function ($query) use ($search) {
-            //     $query->where('stud_fname', 'like', '%' . $search . '%')
-            //         ->orWhere('stud_lname', 'like', '%' . $search . '%')
-            //         ->orWhere('stud_mname', 'like', '%' . $search . '%');
-            // })
+            ->where(function ($query) use ($search) {
+                $query->where('stud_fname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_lname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_mname', 'like', '%' . $search . '%');
+            })
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
