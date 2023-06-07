@@ -98,7 +98,7 @@ class BillingController extends Controller
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
             })
             // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            ->join('tbl_billing_settings', function ($join) {
+            ->leftJoin('tbl_billing_settings', function ($join) {
                 $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
                     ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
             })
@@ -206,7 +206,7 @@ class BillingController extends Controller
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
             })
             // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            ->join('tbl_billing_settings', function ($join) {
+            ->leftJoin('tbl_billing_settings', function ($join) {
                 $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
                     ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
             })
