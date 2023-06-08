@@ -60,7 +60,10 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
-            ->whereNot('exam_result','=','Failed')
+            // ->where(function ($query) use ($search) {
+            //     $query->andWhere('exam_result','=','Failed');
+            // })
+            ->where('exam_result','!=','Failed')
             ->count();
 
         // $temporary_billing_info = new TemporaryBilling();
@@ -71,7 +74,7 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
-            ->whereNot('exam_result','=','Failed')
+            ->where('exam_result','!=','Failed')
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
