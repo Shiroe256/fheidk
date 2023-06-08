@@ -59,7 +59,10 @@ class BillingController extends Controller
                 $query->where('stud_fname', 'like', '%' . $search . '%')
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
-            })->count();
+            })
+            ->whereNotNull('total_exam_taken')
+            ->whereNot('exam_result','=','Failed')
+            ->count();
 
         // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
@@ -69,6 +72,8 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
+            ->whereNotNull('total_exam_taken')
+            ->whereNot('exam_result','=','Failed')
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
