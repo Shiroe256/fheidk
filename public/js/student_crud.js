@@ -236,6 +236,7 @@ function validateFields(data) {
   var sexpattern = /^(male|Male|Female|female)$/; //final regex pattern
   var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,4}$/;
   var contactnumpattern = /^(9)\d{9}$/;
+  var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var birthlocpattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
   var addresspattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
