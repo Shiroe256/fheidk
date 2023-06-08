@@ -2037,7 +2037,7 @@ function btnDeleteToggle() {
 function fetchTempStudent() {
   let reference_no = $("#reference_no").val();
 
-  
+
   tbl_students = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
@@ -2077,7 +2077,11 @@ function fetchTempStudent() {
         data: 'remarks'
       },
       {
-        data: 'stud_status'
+        data: 'stud_status', render: function (data, type, row, meta) {
+          return type === 'display' ?
+            '<span class="badge badge-primary">' + data == 0 ? 'Enrolled' : '' + '</span>' :
+            data;
+        }
       },
       {
         data: 'total_fees'
@@ -2099,7 +2103,7 @@ function fetchTempStudent() {
       }
     },
     lengthMenu: [[10, 20], [10, 20]],
-    createdRow: function(row, data, dataIndex) {
+    createdRow: function (row, data, dataIndex) {
       // Assuming your server response is in JSON format and has an 'id' property
       var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
       var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
