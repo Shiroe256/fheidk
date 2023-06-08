@@ -60,10 +60,11 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
-            // ->where(function ($query) use ($search) {
-            //     $query->andWhere('exam_result','=','Failed');
-            // })
-            ->where('exam_result','!=','Failed')
+            ->where(function ($query) use ($search) {
+                $query->where('exam_result','=','Failed')
+                ->orWhere('total_exam_taken','IS',DB::raw('NULL'));
+            })
+            // ->where('exam_result','!=','Failed')
             ->count();
 
         // $temporary_billing_info = new TemporaryBilling();
