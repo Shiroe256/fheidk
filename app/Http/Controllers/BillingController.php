@@ -60,7 +60,6 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
-            ->whereNotNull('total_exam_taken')
             ->whereNot('exam_result','=','Failed')
             ->count();
 
@@ -72,7 +71,6 @@ class BillingController extends Controller
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
-            ->whereNotNull('total_exam_taken')
             ->whereNot('exam_result','=','Failed')
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
