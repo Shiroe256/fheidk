@@ -17,33 +17,33 @@ class validateTempStudentFields
      */
     public function handle(Request $request, Closure $next)
     {
-        $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
+        $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $tempstudent)
-            // if ($this->validateTempStudentFields($tempstudent) == FALSE) return response('Invalid', 400);
+            if ($this->validateTempStudentFields($tempstudent) == TRUE) return response('Invalid', 400);
         return $next($request);
     }
 
     private function validateTempStudentFields($tempstudent)
     {
         $validator = Validator::make((array) $tempstudent, [
-            'last_name' => 'required|max:255',
-            'given_name' => 'required|max:255',
-            'sex_at_birth' => 'required|max:25',
-            'birthdate' => 'required|date_format:Y-m-d',
-            'birthplace' => 'required|max:255',
-            'mothers_gname' => 'required|max:255', //mother madien fname
-            'mothers_lname' => 'required|max:255', //mother madien lname
-            'pres_prov' => 'required|max:255',
-            'pres_city' => 'required|max:255',
-            'pres_brgy' => 'required|max:255',
-            'pres_zip' => 'required|max:255',
-            'perm_prov' => 'required|max:255',
-            'perm_city' => 'required|max:255',
-            'perm_brgy' => 'required|max:255',
-            'perm_zip' => 'required|max:255',
-            'email' => 'required|email|max:255',
-            'contact_number' => 'required|regex:/^(9)\d{9}$/'
+            'last_name' => ['required','max:255','regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            'given_name' => ['required','max:255','regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            'sex_at_birth' => ['required','max:25','regex:/^(male|Male|Female|female)$/'],
+            'birthdate' => ['required','date_format:mm-dd-yyyy'],
+            'birthplace' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'mothers_gname' => ['required','max:255','regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
+            'mothers_lname' => ['required','max:255','regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
+            'pres_prov' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'pres_city' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'pres_brgy' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'pres_zip' => ['required','max:255','regex:/^[1-9]\d{3}$/'],
+            'perm_prov' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'perm_city' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'perm_brgy' => ['required','max:255','regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'perm_zip' => ['required','max:255','regex:/^[1-9]\d{3}$/'],
+            'email' => ['required','email','max:255'],
+            'contact_number' => ['required','regex:/^(9)\d{9}$/']
             // 'degree_program' => 'required|max:255'
         ]);
 
