@@ -2078,7 +2078,7 @@ function fetchTempStudent() {
       },
       {
         data: 'stud_status', render: function (data, type, row, meta) {
-          if(data=='enrolled')
+          if(data==0)
             var status = 'Enrolled';
           return type === 'display' ?
             '<span class="badge badge-primary">' + status + '</span>' :
