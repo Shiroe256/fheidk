@@ -34,7 +34,7 @@
                 <td class="text-center">{{ $applicant->year_level }}</td>
                 <td class="text-left">{{ $applicant->transferee }}</td>
                 <td class="text-center">{{ $applicant->total_exam_taken }}</td>
-                <td class="text-left">{{ $applicant->exam_result }}<br></td>
+                <td class="text-left"><span class="badge badge-{{$applicant->exam_result=='Passed'?'success':'danger'}}">{{ $applicant->exam_result }}</span><br></td>
                 <td class="text-left">{{ $applicant->exam_fees }}<br></td>
                 <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group">
