@@ -105,7 +105,8 @@ class BillingController extends Controller
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
             })
             // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
             ->leftJoin('tbl_billing_settings', function ($join) {
@@ -190,7 +191,8 @@ class BillingController extends Controller
                 $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
-                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'));
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
             })
             ->where('reference_no', $reference_no)
             ->whereNotNull('total_exam_taken')
