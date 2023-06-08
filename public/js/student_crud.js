@@ -2078,8 +2078,10 @@ function fetchTempStudent() {
       },
       {
         data: 'stud_status', render: function (data, type, row, meta) {
+          if(data=='enrolled')
+            var status = 'Enrolled';
           return type === 'display' ?
-            '<span class="badge badge-primary">' + data == 0 ? 'Enrolled' : '' + '</span>' :
+            '<span class="badge badge-primary">' + status + '</span>' :
             data;
         }
       },
