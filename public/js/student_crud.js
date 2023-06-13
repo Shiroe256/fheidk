@@ -234,7 +234,7 @@ function validateFields(data) {
   var errors = [];
   var numpattern = /\d/;
   var sexpattern = /^(male|Male|Female|female)$/; //final regex pattern
-  var datepattern = /^\d{1,2}\/\d{1,2}\/\d{1,4}$/;
+  var datepattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/;
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
