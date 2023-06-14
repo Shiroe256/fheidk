@@ -30,7 +30,7 @@
                     Report</button>
                 <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
-                <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button" style="display:none"
+                <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
                     value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize Billing</button>
             </div>
         </div>
