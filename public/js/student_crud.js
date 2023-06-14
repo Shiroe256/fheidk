@@ -37,6 +37,32 @@ btnUploadCloseButton.onclick = function (e) {
   mod_upload_batch.hide();
 }
 
+async function finalizeBilling(reference_no) {
+  try {
+    const payload = JSON.stringify({
+      reference_no: reference_no
+    });
+    const response = await fetch(window.location.origin + '/finalize-billing', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      body: payload
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log('Response:', responseData);
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  } catch (error) {
+    // Handle any errors that occurred during the request
+    console.error('Error:', error.message);
+  }
+}
+
 templateReq.onload = function (e) {
   const workbook = new ExcelJS.Workbook();
 
@@ -2078,7 +2104,7 @@ function fetchTempStudent() {
       },
       {
         data: 'stud_status', render: function (data, type, row, meta) {
-          if(data==0)
+          if (data == 0)
             var status = 'Enrolled';
           return type === 'display' ?
             '<span class="badge badge-primary">' + status + '</span>' :

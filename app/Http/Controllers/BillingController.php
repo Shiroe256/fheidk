@@ -1159,6 +1159,18 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $courses = Course::where('hei_uii', $hei_uii)->where('degree_program', $course)->first();
         return $courses->uid;
     }
+
+    public function finalizeBilling(Request $request)
+    {
+        $billing = Billing::where('reference_no', $request->reference_no)->first();
+        if ($billing->billing_status <> 3) {
+            return response('Not Success', 500);
+        }
+        $billing->billing_status = 4;
+        $billing->save();
+        return response('Success', 200);
+    }
+
     private function getCourseName($bs_student)
     {
         $courses = TemporaryBilling::where('uid', $bs_student)->first();

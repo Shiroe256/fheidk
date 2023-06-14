@@ -30,6 +30,8 @@
                     Report</button>
                 <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
                         class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
+                <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button" style="display:none"
+                    value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize Billing</button>
             </div>
         </div>
 
@@ -193,8 +195,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none" role="grid"
-                                aria-describedby="dataTable_info">
+                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none"
+                                role="grid" aria-describedby="dataTable_info">
                                 <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
                                     id="tbl_students">
                                     <thead>
