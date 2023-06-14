@@ -21,6 +21,7 @@ const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
 const btn_upload = document.getElementById("btn_upload");
+const btn_finalize_billing = document.getElementById("btn_finalize");
 // const reference_no = $('#reference_no').val();
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
@@ -35,6 +36,10 @@ btn_upload.onclick = function (e) {
 }
 btnUploadCloseButton.onclick = function (e) {
   mod_upload_batch.hide();
+}
+
+btn_finalize_billing.onclick = function (e) {
+  finalizeBilling(this.value);
 }
 
 async function finalizeBilling(reference_no) {
