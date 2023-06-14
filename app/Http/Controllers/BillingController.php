@@ -1163,7 +1163,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function finalizeBilling(Request $request)
     {
         $billing = Billing::where('reference_no', $request->reference_no)->first();
-        if ($billing->billing_status <> 3) {
+        if ($billing->billing_status != 3) {
             return response('Not Success', 500);
         }
         $billing->billing_status = 4;
