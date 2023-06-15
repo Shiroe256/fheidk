@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'validateTempStudent' => \App\Http\Middleware\validateTempStudentFields::class,
         'validateNewTempStudent' => \App\Http\Middleware\validateNewTempStudent::class,
         'validateUpdateTempStudent' => \App\Http\Middleware\validateUpdateStudentFields::class,
+        'preventEditingIfSubmitted' => \App\Http\Middleware\PreventEditingIfSubmitted::class,
     ];
 }
