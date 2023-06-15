@@ -59,12 +59,21 @@ async function finalizeBilling(reference_no) {
     if (response.ok) {
       const responseData = await response.json();
       console.log('Response:', responseData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Status Updated',
+        html: 'Billing has been sent for review.'
+      });
     } else {
       throw new Error(`Request failed with status ${response.status}`);
     }
   } catch (error) {
     // Handle any errors that occurred during the request
-    console.error('Error:', error.message);
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      html: error.message
+    });
   }
 }
 
