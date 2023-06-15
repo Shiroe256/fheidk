@@ -39,7 +39,19 @@ btnUploadCloseButton.onclick = function (e) {
 }
 
 btn_finalize_billing.onclick = function (e) {
-  finalizeBilling(this.value);
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to edit the billing unless sent back by the billing unit.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Submit Billing'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      finalizeBilling(this.value);
+    }
+  })
 }
 
 async function finalizeBilling(reference_no) {
