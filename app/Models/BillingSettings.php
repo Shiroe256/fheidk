@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentDetails extends Model
+class BillingSettings extends Model
 {
     use HasFactory;
-    public $table = "vw_billing_details";
-    protected $primaryKey = 'stud_uid';
+    public $table = "view_billing_records";
+    protected $primaryKey = 'reference_no';
 }
