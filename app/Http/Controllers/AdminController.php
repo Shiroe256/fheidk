@@ -90,7 +90,7 @@ class AdminController extends Controller
     {
         $reference_no = $request->reference_no;
 
-        $students = BillingForm2::where('reference_no', $reference_no)->get();
+        $students = BillingForm3::where('reference_no', $reference_no)->get();
         $data['students'] = $students;
         return view('admin.elements.form3list', $data);
     }
