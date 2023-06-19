@@ -79,9 +79,9 @@ class AdminController extends Controller
     public function form3($reference_no)
     {
         // Query the database to retrieve the data based on the selected values
-        $billing = BillingForm3::where('reference_no', $reference_no)->first();
+        $applicants = BillingForm3::where('reference_no', $reference_no)->first();
 
-        $data['billing'] = $billing;
+        $data['applicants'] = $applicants;
 
         return view('admin.form3', $data);
     }
