@@ -18,7 +18,7 @@ function fetchform3list() {
             $("#tbl_form3_div").html(response);
 
             $("#tbl_form3").DataTable({
-                "order": [2, "asc"],
+                "order": [1, "asc"],
                 orderCellsTop: true,
                 fixedHeader: true,
                 'columnDefs': [{
