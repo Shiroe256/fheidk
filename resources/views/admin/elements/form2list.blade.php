@@ -1,7 +1,7 @@
 <table class="table table-bordered my-0" id="tbl_form2">
     <thead>
         <tr>
-            <th>No.</th>
+            <th class="text-center">No.</th>
             <th>AWARD NO</th>
             <th>FULL NAME</th>
             <th>COURSE APPLIED</th>
@@ -15,7 +15,7 @@
     <tbody>
         @foreach ($students as $index => $student)
         <tr>
-            <td>{{ $index + 1 }}</td>
+            <td class="text-center">{{ $index + 1 }}</td>
             <td>{{ $student->fhe_award_no }}</td>
             <td>{{ $student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname }}</td>
             <td>{{ $student->degree_program }}</td>
