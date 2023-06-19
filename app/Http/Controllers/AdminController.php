@@ -9,6 +9,8 @@ use App\Models\Hei;
 use App\Models\OtherSchoolFees;
 use App\Models\TemporaryBilling;
 use App\Models\StudentDetails;
+use App\Models\BillingForm2;
+use App\Models\BillingForm3;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -69,7 +71,7 @@ class AdminController extends Controller
     {
         $reference_no = $request->reference_no;
 
-        $students = StudentDetails::where('reference_no', $reference_no)->get();
+        $students = BillingForm2::where('reference_no', $reference_no)->get();
         $data['students'] = $students;
         return view('admin.elements.form2list', $data);
     }
@@ -77,7 +79,7 @@ class AdminController extends Controller
     public function form3($reference_no)
     {
         // Query the database to retrieve the data based on the selected values
-        $billing = Billing::where('reference_no', $reference_no)->first();
+        $billing = BillingForm3::where('reference_no', $reference_no)->first();
 
         $data['billing'] = $billing;
 
