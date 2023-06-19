@@ -1,7 +1,6 @@
 <table class="table table-bordered my-0" id="tbl_form2">
     <thead>
         <tr>
-            <th class="text-center">No.</th>
             <th>AWARD NO</th>
             <th>FULL NAME</th>
             <th>COURSE APPLIED</th>
@@ -15,16 +14,13 @@
     <tbody>
         @foreach ($students as $index => $student)
         <tr>
-            <td class="text-center">{{ $index + 1 }}</td>
             <td>{{ $student->fhe_award_no }}</td>
             <td>{{ $student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname }}</td>
-            <td>{{ $student->degree_program }}</td>
-            <td class="text-center">{{ $student->year_level }}</td>
+            <td>{{ $student->degree_program }}</td></td>
             <td class="text-left">{{ $student->remarks }}</td>
-            <td class="text-right">{{ $student->total_fees }}</td>
-            <td>
-                <span class="badge badge-pill badge-success billing-status-badge">{{ $student->stud_status }}</span>
-            </td>
+            <td class="text-center">{{ $student->year_level }}
+            <td class="text-right">{{ $student->total_fee }}</td>
+            <td>{{ $student->stud_status }}</td>
             <td class="text-center">
                 <button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button>
             </td>
