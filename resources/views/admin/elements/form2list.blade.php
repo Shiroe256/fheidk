@@ -19,10 +19,8 @@
                 <td>{{ $student->degree_program }}</td>
                 <td class="text-center">{{ $student->year_level }}</td>
                 <td class="text-left">
-                    @if ($student->remarks == '<span class="badge badge-danger">Duplicate</span>')
+                    @if($student->remarks == '<span class="badge badge-danger">Duplicate</span>')
                         <span class="badge badge-danger">Duplicate</span>
-                    @else
-                        {{ $student->remarks }}
                     @endif
                 </td>
                 <td class="text-right">{{ $student->total_fee }}</td>
