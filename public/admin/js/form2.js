@@ -22,7 +22,7 @@ function fetchform2list() {
                 orderCellsTop: true,
                 fixedHeader: true,
                 'columnDefs': [{
-                    'targets': [8], /* column index */
+                    'targets': [7], /* column index */
                     'orderable': false, /* true or false */
                 }]
             });
