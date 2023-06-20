@@ -19,7 +19,7 @@ $(document).on('click', '#btn_forward_to_afms', function () {
     }).then((result) => {
       if (result.isConfirmed) {
         $.ajax({
-          url: '/forwardtoafms',
+          url: '/admin/forwardtoafms',
           method: 'post',
           data: {
             reference_no : id
@@ -30,7 +30,7 @@ $(document).on('click', '#btn_forward_to_afms', function () {
               'This billing is now being reviewed by the CHED-AFMS, please wait for the update.',
               'success'
             ).then(() => {
-                window.location.href = '/managebillinglist'; // Redirect to the order page
+                window.location.href = '/admin/managebillinglist'; // Redirect to the order page
             });
           }
         });
