@@ -1035,7 +1035,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             $tempstudent['reference_no'] = $billinginfo['reference_no'];
             $tempstudent['year_level'] = $year_level;
             $tempstudent['semester'] = $billinginfo['semester'];
-            $tempstudent['tranche'] = $billinginfo['tranche'];
+            // $tempstudent['tranche'] = $billinginfo['tranche'];
             $tempstudent['app_id'] = $this->generateAppID($key + 1);
 
             $tempstudentforinsert[] = $tempstudent;
