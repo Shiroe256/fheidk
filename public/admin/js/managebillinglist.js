@@ -1,7 +1,7 @@
 //Process Order
 $(document).on('click', '#btn_forward_to_afms', function () {
     let id = $("#reference_no").val();
-  
+  alert(id);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
