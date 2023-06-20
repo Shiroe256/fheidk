@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Billing;
 use App\Models\Hei;
 use App\Models\OtherSchoolFees;
+use App\Models\Settings;
 use App\Models\TemporaryBilling;
 use App\Models\StudentDetails;
 use App\Models\BillingForm2;
@@ -371,5 +372,28 @@ class AdminController extends Controller
         $record->update($records);
 
         return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    private function upsertSettings($reference_no, $onsettings = array(), $offsettings = array())
+    {
+        //mass updates of all the settings that were changed
+        //on
+        $ons = array();
+        $bs_status = 1;
+        if ($onsettings) {
+            foreach ($onsettings as $osf_uid) {
+                $ons[] = array('bs_reference_no' => $reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+            }
+        }
+        Settings::upsert($ons, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
+        //off
+        $offs = array();
+        $bs_status = 0;
+        if ($offsettings) {
+            foreach ($offsettings as $osf_uid) {
+                $offs[] = array('bs_reference_no' => $reference_no, 'bs_osf_uid' => $osf_uid, 'bs_status' => $bs_status);
+            }
+        }
+        Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
 }
