@@ -329,7 +329,9 @@ class AdminController extends Controller
 
     public function forwardtoafms(Request $request)
     {
-        $record = Billing::find($request->reference_no);
+        $reference_no = $request->reference_no;
+
+        $record = Billing::find('03-03236-2020-2021-1-1');
 
         if (!$record) {
             return response()->json(['error' => $request->reference_no.'Billing record not found'], 404);
