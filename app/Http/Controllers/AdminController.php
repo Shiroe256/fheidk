@@ -345,4 +345,23 @@ class AdminController extends Controller
 
         return response()->json(['message' => $request->reference_no.' Billing record updated successfully'], 200);
     }
+
+    public function forrevision(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no.' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 6
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no.' Billing record updated successfully'], 200);
+    }
 }

@@ -149,6 +149,7 @@ Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name(
 
 //update billing status
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
+Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
 });
 
 //pdf shit
