@@ -309,6 +309,14 @@ class AdminController extends Controller
 
         if (!empty($newBilling)) {
             Billing::insert($newBilling);
+
+            $otherfees = OtherSchoolFees::selectRaw('uid')
+                ->get();
+            foreach ($otherfees as $row) {
+                //store the shit
+                $uid[] = $row->uid;
+            }
+            $this->upsertSettings($reference_no, $uid);
         }
 
         $response = [
@@ -334,7 +342,7 @@ class AdminController extends Controller
         $record = Billing::where('reference_no', $reference_no)->first();
 
         if (!$record) {
-            return response()->json(['error' => $request->reference_no.' Billing record not found'], 404);
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
         }
 
         $records = [
@@ -343,7 +351,7 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no.' Billing record updated successfully'], 200);
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
     }
 
     public function forrevision(Request $request)
@@ -353,7 +361,7 @@ class AdminController extends Controller
         $record = Billing::where('reference_no', $reference_no)->first();
 
         if (!$record) {
-            return response()->json(['error' => $request->reference_no.' Billing record not found'], 404);
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
         }
 
         $records = [
@@ -362,6 +370,6 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no.' Billing record updated successfully'], 200);
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
     }
 }
