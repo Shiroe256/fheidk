@@ -117,7 +117,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end align-items-end">
                         <div class="btn-group" role="group">
-                            <button id="btn_revision_to_hei" name="btn_revision_to_hei" class="btn btn-outline-danger btn-sm" type="button">FORWARD TO CHED-AFMS</button>
+                            <button id="btn_revision_to_hei" name="btn_revision_to_hei" class="btn btn-outline-danger btn-sm" type="button">FOR REVISION TO HEI</button>
                             <button id="btn_forward_to_afms" name="btn_forward_to_afms" class="btn btn-outline-success btn-sm" type="button">FORWARD TO CHED-AFMS</button>
                         </div>
                     </div>
@@ -128,3 +128,7 @@
     
 @include('admin.includes.modal')
 @include('admin.includes.footer')
+<script src="{{url('admin\js\managebillinglist.js')}}"></script>
+</body>
+
+</html>
