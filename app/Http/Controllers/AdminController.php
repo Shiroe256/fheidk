@@ -332,7 +332,7 @@ class AdminController extends Controller
         $record = Billing::find($request->reference_no);
 
         if (!$record) {
-            return response()->json(['error' => 'Billing record not found'], 404);
+            return response()->json(['error' => $request->reference_no.'Billing record not found'], 404);
         }
 
         $records = [
@@ -341,6 +341,6 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => 'Billing record updated successfully'], 200);
+        return response()->json(['message' => $request->reference_no.'Billing record updated successfully'], 200);
     }
 }
