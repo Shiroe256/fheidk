@@ -329,12 +329,18 @@ class AdminController extends Controller
 
     public function forwardtoafms(Request $request)
     {
-        //!validation transferred to middleware
         $record = Billing::find($request->reference_no);
+
+        if (!$record) {
+            return response()->json(['error' => 'Billing record not found'], 404);
+        }
+
         $records = [
-            //actual data being collected in the modal
             'billing_status' => 7
         ];
+
         $record->update($records);
+
+        return response()->json(['message' => 'Billing record updated successfully'], 200);
     }
 }
