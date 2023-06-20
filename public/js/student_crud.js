@@ -306,13 +306,14 @@ function validateFields(data) {
     // stud['stud_no']
     // stud['lrnum']
     // if(!numpattern.test(stud['seq_no'])) error.push('');
+    var bdate = new Date(stud['birthdate']);
     if (!namepattern.test(stud['given_name']) || stud['given_name'] === undefined) error.push("Invalid given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!namepattern.test(stud['mid_name']) || stud['mid_name'] === undefined) error.push("Invalid middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
     // console.log(stud['birthdate']);
-    if (!datepattern.test(stud['birthdate'])) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
+    if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
     
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
@@ -336,7 +337,7 @@ function validateFields(data) {
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
     // if (stud['contact_number_2'] === undefined) error.push('Contact number is missing');
     //if (transfereepattern.test(stud['is_transferee']) || stud['is_transferee'] === undefined) error.push('Invalid value. Please enter Yes or No.');
-    if (!degreepattern.test(stud['degree_course_id']) || stud['degree_course_id'] === undefined) error.push('Invalid Degree value. Numbers and special characters are not accepted except for hyphen (-).');
+    // if (!degreepattern.test(stud['degree_course_id']) || stud['degree_course_id'] === undefined) error.push('Invalid Degree value. Numbers and special characters are not accepted except for hyphen (-).');
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     // stud['lab_u']
     // stud['com_lab_u']
