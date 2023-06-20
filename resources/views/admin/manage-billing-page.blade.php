@@ -116,7 +116,11 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end align-items-end">
-                        <div class="btn-group" role="group"><a class="btn btn-outline-danger btn-sm" role="button">FOR REVISION OF THE HEI</a><a class="btn btn-outline-success btn-sm" role="button">FORWARD TO CHED-AFMS</a></div>
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-outline-danger btn-sm" role="button">FOR REVISION OF THE HEI</a>
+                            <a class="btn btn-outline-success btn-sm" role="button">FORWARD TO CHED-AFMS</a>
+                            <button id="btn_forward_to_afms" name="btn_forward_to_afms" class="btn btn-outline-success btn-sm" type="button">FORWARD TO CHED-AFMS</button>
+                        </div>
                     </div>
                 </div>
             </div>
