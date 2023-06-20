@@ -298,7 +298,7 @@ function validateFields(data) {
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
   var transfereepattern = /^(yes|no)$/i;
   var degreepattern = /^[a-zA-Z\s.]+$/;
-  var acadpattern = /^\b(\d|40)\b$/;
+  // var acadpattern = /^\b(\d|40)\b$/;
   for (const stud of data) {
     var error = [];
     // errors[ctr] = [];
@@ -312,7 +312,7 @@ function validateFields(data) {
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
     // console.log(stud['birthdate']);
-    if (datepattern.test(stud['birthdate'])) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
+    if (!datepattern.test(stud['birthdate'])) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
     
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
@@ -340,7 +340,7 @@ function validateFields(data) {
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     // stud['lab_u']
     // stud['com_lab_u']
-    if (!acadpattern.test(stud['acad_u']) || stud['acad_u'] === undefined) error.push('Invalid Academic unit value. The academic unit only accepts between 1 to 40.');
+    if (stud['acad_u'] > 40 || stud['acad_u'] === undefined) error.push('Invalid Academic unit value. The academic unit only accepts between 1 to 40.');
     // stud['nstp_u']
     // stud['exams']
     // stud['exam_result']
