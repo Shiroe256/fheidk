@@ -331,7 +331,7 @@ class AdminController extends Controller
     {
         $reference_no = $request->reference_no;
 
-        $record = Billing::find('03-03236-2020-2021-1-1');
+        $record = Billing::where('reference_no', $reference_no)->first;
 
         if (!$record) {
             return response()->json(['error' => $request->reference_no.'Billing record not found'], 404);
