@@ -308,7 +308,7 @@ function validateFields(data) {
     // if(!numpattern.test(stud['seq_no'])) error.push('');
     var bdate = new Date(stud['birthdate']);
     if (!namepattern.test(stud['given_name']) || stud['given_name'] === undefined) error.push("Invalid given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!namepattern.test(stud['mid_name']) || stud['mid_name'] === undefined) error.push("Invalid middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['mid_name'])) error.push("Invalid middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
