@@ -43,7 +43,7 @@
                     @elseif ($billing->billing_status == 5)
                         <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing Unit</span>
                     @elseif ($billing->billing_status == 6)
-                        <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Admin Unit</span>
+                        <span class="badge badge-pill badge-danger span-size">For revision</span>
                     @elseif ($billing->billing_status == 7)
                         <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
                     @elseif ($billing->billing_status == 8)

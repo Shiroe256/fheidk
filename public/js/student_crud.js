@@ -21,10 +21,12 @@ const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
 const btn_upload = document.getElementById("btn_upload");
+const btn_finalize_billing = document.getElementById("btn_finalize");
 // const reference_no = $('#reference_no').val();
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
 const tranche = $('#tranche').val();
+var tbl_students;
 var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
@@ -34,6 +36,57 @@ btn_upload.onclick = function (e) {
 }
 btnUploadCloseButton.onclick = function (e) {
   mod_upload_batch.hide();
+}
+
+btn_finalize_billing.onclick = function (e) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to edit the billing unless sent back by the billing unit.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Submit Billing'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      finalizeBilling(this.value);
+    }
+  })
+}
+
+async function finalizeBilling(reference_no) {
+  try {
+    const payload = JSON.stringify({
+      reference_no: reference_no
+    });
+    const response = await fetch(window.location.origin + '/finalize-billing', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      body: payload
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log('Response:', responseData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Status Updated',
+        html: 'Billing has been sent for review.'
+      });
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  } catch (error) {
+    // Handle any errors that occurred during the request
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      html: error.message
+    });
+  }
 }
 
 templateReq.onload = function (e) {
@@ -408,7 +461,8 @@ function uploadBatch() {
             fileInput.value = '';
             resetUploadButton();
             btnUploadCloseButton.click();
-            fetchTempStudent();
+            // fetchTempStudent();
+            tbl_students.ajax.reload();
             fetchTempSummary();
             fetchTempApplicants();
             document.getElementById('upload_template_text').innerHTML = selectedFile.name;
@@ -481,14 +535,15 @@ function getStudentSettings(student_uid) {
 }
 
 function getStudentFees(bs_student) {
-  req_get_stud_fees.open("POST", "/get-studentfees");
-  req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
-  req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
-  req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  let json = JSON.stringify({
-    bs_student: bs_student
-  });
-  req_get_stud_fees.send(json);
+  // req_get_stud_fees.open("POST", "/get-studentfees");
+  // req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
+  // req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
+  // req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  tbl_students.ajax.reload();
+  // let json = JSON.stringify({
+  //   bs_student: bs_student
+  // });
+  // req_get_stud_fees.send(json);
 }
 
 function editStudentsSettings() {
@@ -555,7 +610,9 @@ function setup_Events() {
       element.classList.add("skeleton");
       element.classList.add("skeleton-text");
       element.innerHTML = "";
-      getStudentFees([element.id.substring(10)]);
+      tbl_students.ajax.reload();
+      fetchTempSummary();
+      // getStudentFees([element.id.substring(10)]);
     };
   });
   btn_stud_settings.forEach(element => {
@@ -645,14 +702,16 @@ req_update_stud_settings.onload = function () {
         }
       });
     });
-    getStudentFees(updatedata.bs_student);
+    tbl_students.ajax.reload();
+    fetchTempSummary();
+    // getStudentFees(updatedata.bs_student);
   }
   else
     loader.classList.add('cross');
 }
 //student settings end
 
-fetchTempStudent();
+fetchTempStudent(); //initialize the shit lol remnants to ng legacy
 selectDegreePrograms();
 selectCampus();
 
@@ -683,7 +742,8 @@ $("#frm_add_student").submit(function (e) {
           'Student Added Successfully!',
           'success'
         )
-        fetchTempStudent();
+        // fetchTempStudent();
+        tbl_students.ajax.reload();
         fetchTempSummary();
         $("#btn_add_student").text('Add Student');
         $("#frm_add_student")[0].reset();
@@ -1915,7 +1975,9 @@ $("#frm_update_student").submit(function (e) {
           'Student Updated Successfully!',
           'success'
         )
-        fetchTempStudent();
+        // fetchTempStudent();
+        tbl_students.ajax.reload();
+        fetchTempSummary();
         $("#btn_update_student").text('Update Student');
         $("#frm_update_student")[0].reset();
         $("#mod_edit_student_info").modal('hide');
@@ -2003,7 +2065,9 @@ $(document).on('click', '#btn_delete_students', function () {
             'success'
           )
           $('#btn_delete_students').addClass('d-none');
-          fetchTempStudent();
+          // fetchTempStudent();
+          tbl_students.ajax.reload();
+          fetchTempSummary();
         }
       });
     }
@@ -2032,7 +2096,7 @@ function btnDeleteToggle() {
 function fetchTempStudent() {
   let reference_no = $("#reference_no").val();
 
-  var tbl_students;
+
   tbl_students = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
@@ -2072,7 +2136,13 @@ function fetchTempStudent() {
         data: 'remarks'
       },
       {
-        data: 'stud_status'
+        data: 'stud_status', render: function (data, type, row, meta) {
+          if (data == 0)
+            var status = 'Enrolled';
+          return type === 'display' ?
+            '<span class="badge badge-primary">' + status + '</span>' :
+            data;
+        }
       },
       {
         data: 'total_fees'
@@ -2094,7 +2164,7 @@ function fetchTempStudent() {
       }
     },
     lengthMenu: [[10, 20], [10, 20]],
-    createdRow: function(row, data, dataIndex) {
+    createdRow: function (row, data, dataIndex) {
       // Assuming your server response is in JSON format and has an 'id' property
       var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
       var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell

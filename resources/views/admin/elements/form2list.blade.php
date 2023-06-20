@@ -1,7 +1,6 @@
-<table class="table table-bordered my-0" id="dataTable">
+<table class="table table-bordered my-0" id="tbl_form2">
     <thead>
         <tr>
-            <th>APP ID</th>
             <th>AWARD NO</th>
             <th>FULL NAME</th>
             <th>COURSE APPLIED</th>
@@ -13,17 +12,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($students as $student)
+        @foreach ($students as $index => $student)
         <tr>
-            <td>{{$student->app_id}}</td>
-            <td>{{$student->fhe_award_no}}</td>
-            <td>{{$student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
-            <td>{{$student->degree_program}}</td>
-            <td class="text-center">{{$student->year_level}}<br></td>
-            <td class="text-left">{{$student->remarks}}</td>
-            <td class="text-right">{{$student->total_fees}}</td>
-            <td><span class="badge badge-pill badge-success billing-status-badge">{{$student->stud_status}}<br></span></td>
-            <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button></td>
+            <td>{{ $student->fhe_award_no }}</td>
+            <td>{{ $student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname }}</td>
+            <td>{{ $student->degree_program }}</td>
+            <td class="text-center">{{ $student->year_level }}</td>
+            <td class="text-left">{!! $student->remarks !!}</td>
+            <td class="text-right">{{ $student->total_fee }}</td>
+            <td>{{ $student->stud_status }}</td>
+            <td class="text-center">
+                <button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button>
+            </td>
         </tr>
         @endforeach
     </tbody>

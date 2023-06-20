@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\computeStudentFees;
 use App\Models\Billing;
 use App\Models\EnrollmentInfo;
 use App\Models\Hei;
@@ -21,7 +22,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Extension\Table\Table;
 use \NumberFormatter;
+use App\Jobs\computeFees;
+
+use function PHPUnit\Framework\isNull;
+use function Symfony\Component\HttpFoundation\isEmpty;
 
 class BillingController extends Controller
 {
@@ -47,11 +53,33 @@ class BillingController extends Controller
 
         // $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
+        $search = $request->search['value'];
+        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where(function ($query) use ($search) {
+                $query->where('stud_fname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_lname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_mname', 'like', '%' . $search . '%');
+            })
+            ->where(function ($query) use ($search) {
+                $query->where('exam_result','!=','Failed')
+                ->orWhere('total_exam_taken','IS',DB::raw('NULL'));
+            })
+            // ->where('exam_result','!=','Failed')
+            ->count();
 
-        $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->count();
-
+        // $temporary_billing_info = new TemporaryBilling();
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->skip($request->start)->take($request->length);
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where(function ($query) use ($search) {
+                $query->where('stud_fname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_lname', 'like', '%' . $search . '%')
+                    ->orWhere('stud_mname', 'like', '%' . $search . '%');
+            })
+            ->where(function ($query) use ($search) {
+                $query->where('exam_result','!=','Failed')
+                ->orWhere('total_exam_taken','IS',DB::raw('NULL'));
+            })
+            ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
@@ -68,23 +96,21 @@ class BillingController extends Controller
                 'students_sub.year_level',
                 'students_sub.remarks',
                 'students_sub.stud_status',
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
-                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
-                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
-                DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
-                DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab'),
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) +
-sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
-sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
-sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
-sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) + sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
+                sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
+                sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
+                sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
             )
-            ->leftJoin('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
             ->leftJoin('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-                    ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->leftJoin('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
             })
             ->leftJoin('tbl_billing_stud_settings', function ($join) {
                 $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
@@ -99,7 +125,30 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                             ->where('tbl_billing_settings.bs_status', '=', 1);
                     });
             })
+            //!kailangan lagyan dito ng para sa mga pumasa lang
             ->groupBy('students_sub.uid')->get();
+
+        // $forFeeUpdate = [];
+        // foreach ($students as $key => $student) {
+        //     $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
+        // }
+        // // $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
+
+        // if ($total > 0) {
+        //     $idColumn = 'uid';
+
+        //     $caseStatements = collect($forFeeUpdate)->map(function ($row) use ($idColumn) {
+        //         return "WHEN {$row[$idColumn]} THEN '{$row['total_fees']}'";
+        //     })->implode(' ');
+
+        //     $idValues = implode(',', array_column($forFeeUpdate, $idColumn));
+
+        //     $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
+
+        //     // echo $query;
+
+        //     DB::statement($query);
+        // }
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
@@ -133,9 +182,22 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $reference_no  = $request->reference_no;
         $data['applicants'] = TemporaryBilling::orderBy('remarks')
+            ->select(
+                'tbl_billing_details_temp.*',
+                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken, 0)) as exam_fees')
+            )
+            ->join('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
+            })
             ->where('reference_no', $reference_no)
             ->whereNotNull('total_exam_taken')
+            ->groupBy('tbl_billing_details_temp.uid')
             ->get();
+
         return view('elements.applicanttable', $data);
     }
 
@@ -146,132 +208,138 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
 
         $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
-        if ($billing_record->total_amount < 1) {
-            $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
-            //dito jinojoin ung information about the fees and computation
-            $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
-                ->mergeBindings($students_sub)
-                ->select(
-                    'students_sub.uid',
-                    'students_sub.hei_name',
-                    'tbl_billing_stud_settings.bs_osf_uid',
-                    'tbl_billing_stud_settings.bs_status',
-                    DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
-                    DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
-                    DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
-                    DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
-                    DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab')
-                )
-                ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                ->leftJoin('tbl_other_school_fees', function ($join) {
-                    $join->on('tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
-                        ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
-                })
-                ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                    $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                        ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                        ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-                })
-                ->where(function ($query) {
-                    $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                        ->where('tbl_billing_settings.bs_status', '=', 1)
-                        ->orWhere(function ($query) {
-                            $query->whereNull('tbl_billing_stud_settings.bs_status')
-                                ->where('tbl_billing_settings.bs_status', '=', 1);
-                        });
-                })
-                ->groupBy('students_sub.uid');
+        // if ($billing_record->total_amount < 1) {
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
+        //dito jinojoin ung information about the fees and computation
+        $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            ->mergeBindings($students_sub)
+            ->select(
+                'students_sub.uid',
+                'students_sub.hei_name',
+                'tbl_billing_stud_settings.bs_osf_uid',
+                'tbl_billing_stud_settings.bs_status',
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
+                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
+                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
+                DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
+                DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab')
+            )
+            ->leftJoin('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->leftJoin('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    // ->andWhere('tbl_billing_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            })
+            ->groupBy('students_sub.uid');
 
-            $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
-                ->mergeBindings($students)
-                ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
-                ->get();
+        $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
+            ->mergeBindings($students)
+            ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
+            ->get();
 
-            $billing_record->total_beneficiaries = $data['hei_summary'][0]->total_beneficiaries;
-            $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
-            $billing_record->save();
-        }
-
+        // $billing_record->total_beneficiaries = $data['hei_summary'][0]->total_beneficiaries;
+        // $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
+        // $billing_record->save();
+        // }
+        // print_r($data['hei_summary']);
         return view('elements.tempsummary', $data);
     }
 
     public function fetchTempExceptions(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $data['exceptions'] = TemporaryBilling::orderBy('remarks')
-            ->where('reference_no', $reference_no)
-            ->where('remarks', '!=', '')
-            // ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
-            // ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
-            // ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
-            // ->orwhere('remarks', 'Has a duplicate from other school</br>')
-            // ->orwhere('remarks', 'like', '%</br>Exceeded Maximum Residency with years</br>%')
-            ->get();
-        return view('elements.exceptionsummary', $data);
-        // if ($exceptions->count() > 0) {
-        //     $output .= '<table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_exception_report">
-        //     <thead>
-        //         <tr>
-        //             <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
-        //             <th class="text-left">HEI CAMPUS</th>
-        //             <th class="text-left">APP ID</th>
-        //             <th class="text-left">AWARD NUMBER</th>
-        //             <th class="text-left">LASTNAME</th>
-        //             <th class="text-left">FIRSTNAME</th>
-        //             <th class="text-left">MIDDLENAME</th>
-        //             <th>COURSE</th>
-        //             <th class="text-center">YEAR</th>
-        //             <th class="text-left">REMARKS</th>
-        //             <th class="text-left">STATUS</th>
-        //             <th class="text-left">AMOUNT BILLED</th>
-        //             <th class="text-center">ACTION</th>
-        //         </tr>
-        //     </thead>
-        //     <tbody id="tbl_list_of_exceptions">';
-        //     foreach ($exceptions as $exception) {
-        //         $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
+        // $search = $request->search['value'];
+        // $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)->where(function ($query) use ($search) {
+        //     $query->where('stud_fname', 'like', '%' . $search . '%')
+        //         ->orWhere('stud_lname', 'like', '%' . $search . '%');
+        // })
+        //     ->where('remarks', '!=', '')->count();
 
-        //         $student_status = '';
-        //         if ($exception->stud_status == 0) {
-        //             $student_status = 'Enrolled';
-        //         } elseif ($exception->stud_status == 1) {
-        //             $student_status = 'On-LOA';
-        //         } elseif ($exception->stud_status == 2) {
-        //             $student_status = 'Dropped';
-        //         } elseif ($exception->stud_status == 3) {
-        //             $student_status = 'Graduated';
-        //         } else {
-        //             $student_status = '';
-        //         }
-        //         $output .= '<tr>
-        //             <td class="text-center"><input type="checkbox" id="' . $exception->uid . '" name="student_checkbox" value="' . $exception->uid . '"></td>
-        //             <td class="text-left">' . $exception->hei_name . '</td>
-        //             <td class="text-left">' . $exception->app_id . '</td>
-        //             <td class="text-left">' . $exception->fhe_award_no . '</td>
-        //             <td>' . $exception->stud_lname . '</td>
-        //             <td>' . $exception->stud_fname . '</td>
-        //             <td>' . $exception->stud_mname . '</td>
-        //             <td>' . $exception->degree_program . '</td>
-        //             <td class="text-center">' . $exception->year_level . '</td>
-        //             <td class="text-left">' . $exception->remarks . '</td>
-        //             <td class="text-left">' . $student_status . '</td>
-        //             <td class="text-left">' . $format->format($total_amount) . '</td>
-        //             <td class="text-center">
-        //                 <div class="btn-group btn-group-sm" role="group">
-        //                     <button id="' . $exception->uid . '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
-        //                     </button>
-        //                 </div>
-        //             </td>
-        //         </tr>';
-        //     }
-        //     $output .= '</tbody>
-        //     </table>';
-        //     echo $output;
-        // } else {
-        //     echo '<h1 class="text-center text-secondary my-5">No exception reports, please run the billing checker again.</h1>';
-        // }
+        // $temporary_billing_info = new TemporaryBilling();
+        //students sub query. Dito ung pagination
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where('remarks', '!=', '');
+        //dito jinojoin ung information about the fees and computation
+        $data['exceptions'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            ->mergeBindings($students_sub)
+            ->select(
+                'students_sub.uid',
+                'students_sub.app_id',
+                'students_sub.hei_name',
+                'students_sub.stud_lname',
+                'students_sub.stud_fname',
+                'students_sub.stud_mname',
+                'students_sub.fhe_award_no',
+                'students_sub.degree_program',
+                'students_sub.semester',
+                'students_sub.year_level',
+                'students_sub.remarks',
+                'students_sub.stud_status',
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
+                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
+                DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
+                DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
+                DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab'),
+                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) +
+sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
+sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
+sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
+sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
+            )
+            ->leftJoin('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->join('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            })
+            ->groupBy('students_sub.uid')->get();
+
+        // $reference_no  = $request->reference_no;
+        // $data['exceptions'] = TemporaryBilling::orderBy('remarks')
+        //     ->where('reference_no', $reference_no)
+        //     ->where('remarks', '!=', '')
+        //     // ->orwhere('remarks', 'Check your spreadsheet. There is a duplicate of this student</br>')
+        //     // ->orwhere('remarks', 'Has exceeded the amount of NSTP units.</br>')
+        //     // ->orwhere('remarks', 'Has a duplicate this year and semester already</br>')
+        //     // ->orwhere('remarks', 'Has a duplicate from other school</br>')
+        //     // ->orwhere('remarks', 'like', '%</br>Exceeded Maximum Residency with years</br>%')
+        //     ->get();
+        return view('elements.exceptionsummary', $data);
     }
 
 
@@ -629,12 +697,67 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function billingList()
     {
         $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
+        // $hei_uii = Auth::user()->hei_uii;
+        // // $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
+
+        // // if ($billing_record->total_amount < 1) {
+        // $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.hei_uii', '=', $hei_uii);
+        // //dito jinojoin ung information about the fees and computation
+        // $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+        //     ->mergeBindings($students_sub)
+        //     ->select(
+        //         'students_sub.uid',
+        //         'students_sub.hei_name',
+        //         'students_sub.reference_no',
+        //         'tbl_billing_stud_settings.bs_osf_uid',
+        //         'tbl_billing_stud_settings.bs_status',
+        //         DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) as total_osf'),
+        //         DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) as total_tuition'),
+        //         DB::raw('sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) as total_nstp'),
+        //         DB::raw('sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) as total_lab'),
+        //         DB::raw('sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_comp_lab')
+        //     )
+        //     ->leftJoin('tbl_other_school_fees', function ($join) {
+        //         $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+        //             ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+        //             ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+        //     })
+        //     // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        //     ->join('tbl_billing_settings', function ($join) {
+        //         $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+        //             ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+        //     })
+        //     ->leftJoin('tbl_billing_stud_settings', function ($join) {
+        //         $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        //             ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+        //             ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+        //     })
+        //     ->where(function ($query) {
+        //         $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+        //             ->where('tbl_billing_settings.bs_status', '=', 1)
+        //             ->orWhere(function ($query) {
+        //                 $query->whereNull('tbl_billing_stud_settings.bs_status')
+        //                     ->where('tbl_billing_settings.bs_status', '=', 1);
+        //             });
+        //     })
+        //     ->groupBy('students_sub.uid');
+
+        // $data['billings'] = DB::table(DB::raw("({$students->toSql()}) as students"))
+        //     ->mergeBindings($students)
+        //     ->selectRaw('tbl_fhe_billing_records.billing_status, tbl_fhe_billing_records.semester,tbl_fhe_billing_records.ac_year, students.reference_no,students.hei_name, COUNT(*) AS total_beneficiaries, sum(students.total_osf) + sum(students.total_tuition) + sum(students.total_nstp) + sum(students.total_lab) + sum(students.total_comp_lab) as total_amount')
+        //     ->rightJoin('tbl_fhe_billing_records','students.reference_no','=','tbl_fhe_billing_records.reference_no')
+        //     ->groupBy('students.reference_no')
+        //     ->get();
+
         return view('listofbillings', $data);
     }
 
     public function billingmanagementpage($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
+        // if (isNull($billings)) {
+        //     return view('errors.404');
+        // }
         // $hei_uii = Auth::user()->hei_uii;
         $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
@@ -654,6 +777,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $course_enrolled = $this->getCourseName($bs_student);
         $reference_no = $request->reference_no;
         $hei_uii = Auth::user()->hei_uii;
+
+        $bs_student_info = TemporaryBilling::find($bs_student);
+
         //gather all the categories for everybody in the world
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             // ->leftJoin('tbl_billing_stud_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_stud_settings.bs_osf_uid')
@@ -665,6 +791,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ->where('tbl_billing_settings.bs_reference_no', $reference_no)
             ->where('tbl_billing_settings.bs_status', 1)
             ->where('tbl_other_school_fees.course_enrolled', $course_enrolled)
+            ->where('tbl_other_school_fees.year_level', $bs_student_info->year_level)
+            ->where('tbl_other_school_fees.semester', $bs_student_info->semester)
             // ->where('tbl_billing_stud_settings.bs_student', $bs_student)
             ->where('tbl_other_school_fees.is_optional', 1)
             ->selectRaw('tbl_other_school_fees.uid,tbl_other_school_fees.amount,tbl_other_school_fees.course_enrolled,tbl_other_school_fees.type_of_fee,tbl_other_school_fees.category,tbl_other_school_fees.year_level,tbl_other_school_fees.semester,if(tbl_billing_stud_settings.bs_status is not null,tbl_billing_stud_settings.bs_status,tbl_billing_settings.bs_status) as bs_status')
@@ -686,6 +814,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function getBillingSettings($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
+        // if (isNull($billings)) {
+        //     return view('errors.404');
+        // }
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
@@ -775,6 +906,14 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ],
             ['bs_status']
         );
+
+        //*for ano. Yung update ng fees pag may binagong individual settings. DI NA NEED
+        // $chunkSize = 50;
+        // $chunks = array_chunk($request->bs_student, $chunkSize);
+
+        // foreach ($chunks as $chunk) {
+        //     $this->queueComputationOfFeesPerStudent($reference_no, $chunk);
+        // }
         echo 1;
     }
 
@@ -811,16 +950,22 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
         $heiinfo = $this->getHeiInformation($hei_uii);
 
-
         //pass validation to each item then return an error and cancel the whole uploading if there are errors
         //!validation has now been passed to the middleware
         // $added = 0;
         $result = $this->parseTempStudentBatch($tempstudents, $heiinfo, $billinginfo);
-        // foreach ($tempstudents as $key => $tempstudent) {
-        //     $added += $this->newTempStudentBatch($tempstudent, $heiinfo, $billinginfo, $key + 1);
+        //!update fees no longer needed KASI ANG BILIS NA OMG
+        // $totalItems = TemporaryBilling::where('reference_no', '=', $request->reference_no)->count();
+        // $chunkSize = 50;
+        // $offset = 0;
+
+        // while ($offset < $totalItems) {
+        //     $limit = min($chunkSize, $totalItems - $offset);
+        //     $this->queueComputationOfFees($request->reference_no, $offset, $limit);
+        //     $offset += $chunkSize;
         // }
+
         print_r($result);
-        // echo 'ok';
     }
 
     private function parseTempStudentBatch($student = array(), $heiinfo, $billinginfo)
@@ -1012,6 +1157,18 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $courses = Course::where('hei_uii', $hei_uii)->where('degree_program', $course)->first();
         return $courses->uid;
     }
+
+    public function finalizeBilling(Request $request)
+    {
+        $billing = Billing::where('reference_no', $request->reference_no)->first();
+        if ($billing->billing_status != 3) {
+            return response('Not Success', 500);
+        }
+        $billing->billing_status = 4;
+        $billing->save();
+        return response('Success', 200);
+    }
+
     private function getCourseName($bs_student)
     {
         $courses = TemporaryBilling::where('uid', $bs_student)->first();
@@ -1290,7 +1447,17 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     }
     private function generateFHEAwardNo($hei_uii, $seq)
     {
-        $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf('%05d', $seq);
+        $fhe_award_no = 'FHE-' . date('Y') . $hei_uii . sprintf("%05d", substr(microtime(FALSE), 2, 3)) . sprintf('%05d', $seq);
         return $fhe_award_no;
+    }
+
+    private function queueComputationOfFees($reference_no, $start, $length)
+    {
+        computeFees::dispatch($reference_no, $start, $length);
+    }
+    private function queueComputationOfFeesPerStudent($reference_no, $uids)
+    {
+        DB::table('tbl_billing_details_temp')->whereIn('uid', $uids)->update(['total_fees' => -1]);
+        computeStudentFees::dispatch($reference_no, $uids);
     }
 }

@@ -1,4 +1,4 @@
-<table class="table table-bordered my-0" id="dataTable">
+<table class="table table-bordered my-0" id="tbl_form3">
     <thead>
         <tr>
             <th>APP ID</th>
@@ -19,10 +19,10 @@
             <td>{{$student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
             <td>{{$student->degree_program}}</td>
             <td class="text-center">{{$student->year_level}}<br></td>
-            <td class="text-left">{{$student->remarks}}</td>
+            <td class="text-left">{!! $student->remarks !!}</td>
             <td class="text-center">{{$student->total_exam_taken}}</td>
-            <td class="text-right">{{$student->total_fees}}</td>
-            <td><span class="badge badge-pill badge-danger billing-status-badge">{{$student->exam_result}}<br></span></td>
+            <td class="text-right">{{$student->entrance_and_admission_fee}}</td>
+            <td>{!! $student->exam_result !!}</td>
             <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal_2">View</button></td>
         </tr>
         @endforeach

@@ -34,7 +34,7 @@ class validateNewTempStudent
             'course_enrolled' => 'required',
             'year_level' => 'required'
         ]);
-        // hello world
+    // hello World
         if ($validator->fails()) {
             return response([
                 'status' => 400,

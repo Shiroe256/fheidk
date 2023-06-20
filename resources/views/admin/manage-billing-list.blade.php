@@ -8,7 +8,7 @@
                     navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admindashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link active" href="{{ route('managebillinglist') }}">Manage
                             Billing</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('manageuserslist') }}">Manage Users</a></li>
@@ -16,7 +16,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <div class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="nav-link"
-                                href="#">Carlo molina&nbsp;</a>
+                                href="#">{{ Auth::user()->fhe_focal_fname . ' ' . Auth::user()->fhe_focal_mname . ' ' . Auth::user()->fhe_focal_lname }}</a>
                             <div class="dropdown-menu"><a class="dropdown-item navbar-dropdown" data-toggle="modal"
                                     data-target="#modal_profile" href="#"><i class="fas fa-user"></i>&nbsp;
                                     &nbsp;Profile</a>

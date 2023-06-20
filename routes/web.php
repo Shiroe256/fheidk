@@ -67,7 +67,11 @@ Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
 Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudentFields');
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
-Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent')->middleware('validateEditTempStudent');
+// Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent')->middleware('validateEditTempStudent');
+// Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudent');
+// Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
+Route::post('/finalize-billing', [BillingController::class, 'finalizeBilling']);
+Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent');
 Route::post('/update-tempstudent', [BillingController::class, 'updateTempStudent'])->name('updateTempStudent')->middleware('validateUpdateTempStudent');
 Route::delete('/delete-tempstudent', [BillingController::class, 'deleteTempStudent'])->name('deleteTempStudent');
 
@@ -117,7 +121,7 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 
 //Admin Pages
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-Route::get('dashboard', 'App\Http\Controllers\AdminController@dashboard')->name('dashboard');
+Route::get('admindashboard', 'App\Http\Controllers\AdminController@admindashboard')->name('admindashboard');
 
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 
@@ -142,7 +146,13 @@ Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'manage
 //formlist
 Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
 Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
+Route::get('/fetchform2list', [AdminController::class, 'fetchform2list'])->name('fetchform2list');
 Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
+Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name('fetchform3list');
+
+//update billing status
+Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
+Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
 });
 
 //pdf shit
@@ -150,3 +160,5 @@ Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
 Route::get('/phpinfo', function() {
     phpinfo();
 });
+
+//LETS FUCKING GO!

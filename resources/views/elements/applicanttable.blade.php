@@ -14,6 +14,7 @@
                 <th class="text-left">REMARKS</th>
                 <th class="text-center">NO. OF EXAM TAKEN</th>
                 <th class="text-left">RESULT</th>
+                <th class="text-left">TOTAL EXAM FEES</th>
                 <th class="text-center">ACTION</th>
             </tr>
         </thead>
@@ -33,7 +34,8 @@
                 <td class="text-center">{{ $applicant->year_level }}</td>
                 <td class="text-left">{{ $applicant->transferee }}</td>
                 <td class="text-center">{{ $applicant->total_exam_taken }}</td>
-                <td class="text-left">{{ $applicant->exam_result }}<br></td>
+                <td class="text-left"><span class="badge badge-{{$applicant->exam_result=='Passed'?'success':'danger'}}">{{ $applicant->exam_result }}</span><br></td>
+                <td class="text-left">{{ $applicant->exam_fees }}<br></td>
                 <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group">
                         <button id="{{ $applicant->uid }}" class="btn btn_update_student btn-outline-primary"

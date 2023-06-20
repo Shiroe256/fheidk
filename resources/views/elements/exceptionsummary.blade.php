@@ -22,7 +22,6 @@
     <tbody id="tbl_list_of_exceptions">
     @foreach ($exceptions as $exception)
         <?php
-        $total_amount = $exception->tuition_fee + $exception->entrance_fee + $exception->admission_fee + $exception->athletic_fee + $exception->computer_fee + $exception->cultural_fee + $exception->development_fee + $exception->guidance_fee + $exception->handbook_fee + $exception->laboratory_fee + $exception->library_fee + $exception->medical_dental_fee +  $exception->registration_fee + $exception->school_id_fee + $exception->nstp_fee;
 
         $student_status = '';
         if ($exception->stud_status == 0) {
@@ -49,7 +48,7 @@
             <td class="text-center">{{$exception->year_level}}</td>
             <td class="text-left">{!!$exception->remarks!!}</td>
             <td class="text-left">{{$student_status}}</td>
-            <td class="text-left">{{$format->format($total_amount)}}</td>
+            <td class="text-left">{{$format->format($exception->total_fees)}}</td>
             <td class="text-center">
                 <div class="btn-group btn-group-sm" role="group">
                     <button id="{{$exception->uid}}" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i>
