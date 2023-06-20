@@ -1020,7 +1020,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             $nstp_unit = array_key_exists('nstp_u', $data) ? $data['nstp_u'] : 0;
             $tempstudent['nstp_unit'] = $nstp_unit;
 
-            $tempstudent['stud_cor'] = 0; //dummydata
+            // $tempstudent['stud_cor'] = 0; //dummydata
 
             $tempstudent['exam_result'] = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
             $tempstudent['remarks'] = array_key_exists('remarks', $data) ? $data['remarks'] : '';
