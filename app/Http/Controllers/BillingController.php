@@ -946,7 +946,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
 
         $tempstudents =  json_decode($request->payload, true); //json decode into array (the second parameter)
         //!validation is now passed to the middlware
-
+        // print_r($tempstudents);
         $billinginfo = array('reference_no' => $request->reference_no, 'ac_year' => $request->ac_year, 'semester' => $request->semester, 'tranche' => $request->tranche);
         $heiinfo = $this->getHeiInformation($hei_uii);
 
