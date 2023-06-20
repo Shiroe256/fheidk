@@ -19,7 +19,7 @@
             <td>{{$student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
             <td>{{$student->degree_program}}</td>
             <td class="text-center">{{$student->year_level}}<br></td>
-            <td class="text-left">{{$student->remarks}}</td>
+            <td class="text-left">{!! $student->remarks !!}</td>
             <td class="text-center">{{$student->total_exam_taken}}</td>
             <td class="text-right">{{$student->entrance_and_admission_fee}}</td>
             <td>{!! $student->exam_result !!}</td>
