@@ -283,10 +283,10 @@ function resetUploadButton() {
 
 //generates a 2d array of all the errors per line
 function validateFields(data) {
-
+  console.log(data);
   var errors = [];
   var numpattern = /\d/;
-  var sexpattern = /^(male|Male|Female|female)$/; //final regex pattern
+  var sexpattern = /^(male|Male|Female|female|MALE|FEMALE)$/; //final regex pattern
   var datepattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/;
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
