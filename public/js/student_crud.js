@@ -431,11 +431,11 @@ function uploadBatch() {
         errorhtml += '</ul></td></tr>';
       });
       errorhtml += '</tbody></table>';
-      if (errorctr > 0) {
+      if (errors.length > 0) {
         fileInput.value = '';
         $('#mod_upload').modal('hide');
         deactivateUploadButton();
-        $('#error_count').html(errorctr);
+        $('#error_count').html(errorsctr);
         $('#error_summary').html(errorhtml);
         $('#mod_errors').modal('show');
       } else if (output.length < 1) {
