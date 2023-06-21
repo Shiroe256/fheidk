@@ -71,8 +71,13 @@ class RegisterController extends Controller
     {
         $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
 
+        if (!$hei) {
+            $message = 'HEI with the given hei_uii does not exist.';
+            return response()->json(['error' => $message], 404);
+        }
+
         return User::create([
-            'hei_sid' => $hei->hei_sid,//default value for testing
+            'hei_sid' => $hei->hei_sid,
             'hei_uii' => $data['hei_uii'],
             'fhe_focal_lname' => $data['fhe_focal_lname'],
             'fhe_focal_fname' => $data['fhe_focal_fname'],
