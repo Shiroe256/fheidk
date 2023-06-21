@@ -43,7 +43,7 @@
                     <td class="text-left">
                         <p data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click to recompute"
                             class="student_fees" id="{{ 'totalfees_' . $student->uid }}">
-                            {{ $format->format($student->total_osf + $student->total_tuition + $student->total_nstp + $student->total_lab + $student->total_comp_lab) }}
+                            {{ $format->format($student->total_fee) }}
                         </p>
                     </td>
                     <td class="text-center">

@@ -96,10 +96,445 @@ class BillingController extends Controller
                 'students_sub.year_level',
                 'students_sub.remarks',
                 'students_sub.stud_status',
-                DB::raw('sum(if(tbl_other_school_fees.coverage = "per student", tbl_other_school_fees.amount, 0)) + sum(if(tbl_other_school_fees.type_of_fee = "Tuition", tbl_other_school_fees.amount * students_sub.academic_unit, 0)) +
-                sum(if(tbl_other_school_fees.type_of_fee = "NSTP", tbl_other_school_fees.amount * students_sub.nstp_unit, 0)) +
-                sum(if(tbl_other_school_fees.category = "Laboratory", tbl_other_school_fees.amount * students_sub.lab_unit, 0)) +
-                sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_fees.amount * students_sub.comp_lab_unit, 0)) as total_fees')
+                DB::raw("(
+                    SUM(
+                        (
+                            CASE WHEN(
+                                (
+                                    `vw_billing_details`.`type_of_fee` = 'tuition'
+                                ) AND(
+                                    (
+                                        `vw_billing_details`.`coverage` = 'per unit'
+                                    ) OR(
+                                        `vw_billing_details`.`coverage` = 'per subject'
+                                    )
+                                )
+                            ) THEN(
+                                `vw_billing_details`.`academic_unit` * `vw_billing_details`.`amount`
+                            ) ELSE 0
+                        END
+                    )
+                ) + SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'tuition'
+                            ) AND(
+                                `vw_billing_details`.`coverage` = 'per student'
+                            )
+                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                    END
+                )
+            )
+            ) AS `tuition_fee`,
+            (
+                SUM(
+                    (
+                        CASE WHEN(
+                            `vw_billing_details`.`type_of_fee` = 'entrance'
+                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'admission'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) AS `entrance_and_admission_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'athletic'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `athletic_fee`,
+            (
+                SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'computer'
+                            ) AND(
+                                (
+                                    `vw_billing_details`.`coverage` = 'per unit'
+                                ) OR(
+                                    `vw_billing_details`.`coverage` = 'per subject'
+                                )
+                            )
+                        ) THEN(
+                            `vw_billing_details`.`comp_lab_unit` * `vw_billing_details`.`amount`
+                        ) ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        (
+                            `vw_billing_details`.`type_of_fee` = 'computer'
+                        ) AND(
+                            `vw_billing_details`.`coverage` = 'per student'
+                        )
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) AS `computer_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'cultural'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `cultural_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'development'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `development_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'guidance'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `guidance_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'handbook'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `handbook_fee`,
+            (
+                SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'laboratory'
+                            ) AND(
+                                (
+                                    `vw_billing_details`.`coverage` = 'per unit'
+                                ) OR(
+                                    `vw_billing_details`.`coverage` = 'per subject'
+                                )
+                            )
+                        ) THEN(
+                            `vw_billing_details`.`lab_unit` * `vw_billing_details`.`amount`
+                        ) ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        (
+                            `vw_billing_details`.`type_of_fee` = 'laboratory'
+                        ) AND(
+                            `vw_billing_details`.`coverage` = 'per student'
+                        )
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) AS `laboratory_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'library'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `library_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'medical and dental'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `medical_and_dental_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'registration'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `registration_fee`,
+            SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'school id'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            ) AS `school_id_fee`,
+            (
+                SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'nstp'
+                            ) AND(
+                                (
+                                    `vw_billing_details`.`coverage` = 'per unit'
+                                ) OR(
+                                    `vw_billing_details`.`coverage` = 'per subject'
+                                )
+                            )
+                        ) THEN(
+                            `vw_billing_details`.`nstp_unit` * `vw_billing_details`.`amount`
+                        ) ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        (
+                            `vw_billing_details`.`type_of_fee` = 'nstp'
+                        ) AND(
+                            `vw_billing_details`.`coverage` = 'per student'
+                        )
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) AS `nstp_fee`,
+            (
+                (
+                    (
+                        (
+                            (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            (
+                                                                (
+                                                                    (
+                                                                        SUM(
+                                                                            (
+                                                                                CASE WHEN(
+                                                                                    (
+                                                                                        `vw_billing_details`.`type_of_fee` = 'tuition'
+                                                                                    ) AND(
+                                                                                        (
+                                                                                            `vw_billing_details`.`coverage` = 'per unit'
+                                                                                        ) OR(
+                                                                                            `vw_billing_details`.`coverage` = 'per subject'
+                                                                                        )
+                                                                                    )
+                                                                                ) THEN(
+                                                                                    `vw_billing_details`.`academic_unit` * `vw_billing_details`.`amount`
+                                                                                ) ELSE 0
+                                                                            END
+                                                                        )
+                                                                    ) + SUM(
+                                                                        (
+                                                                            CASE WHEN(
+                                                                                (
+                                                                                    `vw_billing_details`.`type_of_fee` = 'tuition'
+                                                                                ) AND(
+                                                                                    `vw_billing_details`.`coverage` = 'per student'
+                                                                                )
+                                                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                                        END
+                                                                    )
+                                                                )
+                                                            ) + SUM(
+                                                                (
+                                                                    CASE WHEN(
+                                                                        `vw_billing_details`.`type_of_fee` = 'entrance'
+                                                                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                                END
+                                                            )
+                                                        )
+                                                    ) + SUM(
+                                                        (
+                                                            CASE WHEN(
+                                                                `vw_billing_details`.`type_of_fee` = 'admission'
+                                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                        END
+                                                    )
+                                                )
+                                            ) + SUM(
+                                                (
+                                                    CASE WHEN(
+                                                        `vw_billing_details`.`type_of_fee` = 'athletic'
+                                                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                END
+                                            )
+                                        )
+                                    ) +(
+                                        SUM(
+                                            (
+                                                CASE WHEN(
+                                                    (
+                                                        `vw_billing_details`.`type_of_fee` = 'computer'
+                                                    ) AND(
+                                                        (
+                                                            `vw_billing_details`.`coverage` = 'per unit'
+                                                        ) OR(
+                                                            `vw_billing_details`.`coverage` = 'per subject'
+                                                        )
+                                                    )
+                                                ) THEN(
+                                                    `vw_billing_details`.`comp_lab_unit` * `vw_billing_details`.`amount`
+                                                ) ELSE 0
+                                            END
+                                        )
+                                    ) + SUM(
+                                        (
+                                            CASE WHEN(
+                                                (
+                                                    `vw_billing_details`.`type_of_fee` = 'computer'
+                                                ) AND(
+                                                    `vw_billing_details`.`coverage` = 'per student'
+                                                )
+                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                        END
+                                    )
+                                )
+                            )
+                        ) + SUM(
+                            (
+                                CASE WHEN(
+                                    `vw_billing_details`.`type_of_fee` = 'cultural'
+                                ) THEN `vw_billing_details`.`amount` ELSE 0
+                            END
+                        )
+                    )
+                ) + SUM(
+                    (
+                        CASE WHEN(
+                            `vw_billing_details`.`type_of_fee` = 'development'
+                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                    END
+                )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'guidance'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'handbook'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) +(
+                SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'laboratory'
+                            ) AND(
+                                (
+                                    `vw_billing_details`.`coverage` = 'per unit'
+                                ) OR(
+                                    `vw_billing_details`.`coverage` = 'per subject'
+                                )
+                            )
+                        ) THEN(
+                            `vw_billing_details`.`lab_unit` * `vw_billing_details`.`amount`
+                        ) ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        (
+                            `vw_billing_details`.`type_of_fee` = 'laboratory'
+                        ) AND(
+                            `vw_billing_details`.`coverage` = 'per student'
+                        )
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'library'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'medical and dental'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'registration'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `vw_billing_details`.`type_of_fee` = 'school id'
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            ) +(
+                SUM(
+                    (
+                        CASE WHEN(
+                            (
+                                `vw_billing_details`.`type_of_fee` = 'nstp'
+                            ) AND(
+                                (
+                                    `vw_billing_details`.`coverage` = 'per unit'
+                                ) OR(
+                                    `vw_billing_details`.`coverage` = 'per subject'
+                                )
+                            )
+                        ) THEN(
+                            `vw_billing_details`.`nstp_unit` * `vw_billing_details`.`amount`
+                        ) ELSE 0
+                    END
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        (
+                            `vw_billing_details`.`type_of_fee` = 'nstp'
+                        ) AND(
+                            `vw_billing_details`.`coverage` = 'per student'
+                        )
+                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+            )
+            )
+            ) AS `total_fee`")
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
