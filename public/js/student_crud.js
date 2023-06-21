@@ -2146,7 +2146,7 @@ function fetchTempStudent() {
         }
       },
       {
-        data: 'total_fees'
+        data: 'total_fee'
       },
       {
         data: "uid", render: function (data, type, row, meta) {
