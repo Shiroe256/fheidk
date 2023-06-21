@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -51,7 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'hei_uii' => ['required', 'string', 'max:50'],
+            'hei_uii' => [
+                'required',
+                'string',
+                Rule::exists('hei', 'hei_sid'),
+            ],
             'fhe_focal_lname' => ['required', 'string', 'max:255'],
             'fhe_focal_fname' => ['required', 'string', 'max:255'],
             'fhe_focal_mname' => ['required', 'string', 'max:255'],
@@ -70,12 +75,6 @@ class RegisterController extends Controller
     protected function create(array $data)
 {
     $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
-
-    if (!$hei) {
-        $message = 'HEI with the given hei_uii does not exist.';
-        $script = "swal('Error', '$message', 'error').then(() => { window.history.back(); });";
-        return redirect()->back()->withErrors(['script' => $script]);
-    }
 
     $user = User::create([
         'hei_sid' => $hei->hei_sid,
