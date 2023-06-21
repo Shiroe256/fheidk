@@ -10,11 +10,14 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+
 
 class User extends Authenticatable implements MustVerifyEmail, Auditable 
 {
     use HasApiTokens, HasFactory, Notifiable;
     use \OwenIt\Auditing\Auditable;
+    use AuthenticatableTrait;
 
     public function isAdmin()
     {
