@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Hei;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -69,28 +68,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Check if the HEI with the given hei_uii exists
-        $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
-
-        if (!$hei) {
-            // Handle the case when HEI doesn't exist
-            $message = 'HEI with the given hei_uii does not exist.';
-            $script = "swal('Error', '$message', 'error').then(() => { window.history.back(); });";
-            return response()->json(['script' => $script]);
-        }else{
-            return User::create([
-                'hei_sid' => $hei->hei_sid, // Retrieve hei_sid from the HEI model
-                'hei_uii' => $data['hei_uii'],
-                'fhe_focal_lname' => $data['fhe_focal_lname'],
-                'fhe_focal_fname' => $data['fhe_focal_fname'],
-                'fhe_focal_mname' => $data['fhe_focal_mname'],
-                'contact_no' => $data['contact_number'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'is_admin' => false,
-            ]);
-        }
-        // HEI exists, create the user
-       
+        // $file = $data -> file('avatar');
+		// $fileName = time() . '.' . $file->getClientOriginalExtension();
+		// $file->storeAs('public/images', $fileName);
+        return User::create([
+            'hei_sid' => '01040',//default value for testing
+            'hei_uii' => $data['hei_uii'],
+            'fhe_focal_lname' => $data['fhe_focal_lname'],
+            'fhe_focal_fname' => $data['fhe_focal_fname'],
+            'fhe_focal_mname' => $data['fhe_focal_mname'],
+            'contact_no' => $data['contact_number'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'is_admin' => false,
+        ]);
     }
 }
