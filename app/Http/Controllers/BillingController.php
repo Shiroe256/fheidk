@@ -37,6 +37,445 @@ class BillingController extends Controller
      *
      * @return void
      */
+    private $carlo_columns = "(
+        SUM(
+            (
+                CASE WHEN(
+                    (
+                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                    ) AND(
+                        (
+                            `tbl_other_school_fees`.`coverage` = 'per unit'
+                        ) OR(
+                            `tbl_other_school_fees`.`coverage` = 'per subject'
+                        )
+                    )
+                ) THEN(
+                    `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                ) ELSE 0
+            END
+        )
+    ) + SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                ) AND(
+                    `tbl_other_school_fees`.`coverage` = 'per student'
+                )
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+)
+) AS `tuition_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'admission'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `entrance_and_admission_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `athletic_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'computer'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `computer_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `cultural_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'development'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `development_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `guidance_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `handbook_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `laboratory_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'library'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `library_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `medical_and_dental_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'registration'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `registration_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'school id'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `school_id_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `nstp_fee`,
+(
+    (
+        (
+            (
+                (
+                    (
+                        (
+                            (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            SUM(
+                                                                (
+                                                                    CASE WHEN(
+                                                                        (
+                                                                            `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                                                                        ) AND(
+                                                                            (
+                                                                                `tbl_other_school_fees`.`coverage` = 'per unit'
+                                                                            ) OR(
+                                                                                `tbl_other_school_fees`.`coverage` = 'per subject'
+                                                                            )
+                                                                        )
+                                                                    ) THEN(
+                                                                        `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                                                                    ) ELSE 0
+                                                                END
+                                                            )
+                                                        ) + SUM(
+                                                            (
+                                                                CASE WHEN(
+                                                                    (
+                                                                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                                                                    ) AND(
+                                                                        `tbl_other_school_fees`.`coverage` = 'per student'
+                                                                    )
+                                                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                                            END
+                                                        )
+                                                    )
+                                                ) + SUM(
+                                                    (
+                                                        CASE WHEN(
+                                                            `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+                                                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                                    END
+                                                )
+                                            )
+                                        ) + SUM(
+                                            (
+                                                CASE WHEN(
+                                                    `tbl_other_school_fees`.`type_of_fee` = 'admission'
+                                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                            END
+                                        )
+                                    )
+                                ) + SUM(
+                                    (
+                                        CASE WHEN(
+                                            `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+                                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                    END
+                                )
+                            )
+                        ) +(
+                            SUM(
+                                (
+                                    CASE WHEN(
+                                        (
+                                            `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                                        ) AND(
+                                            (
+                                                `tbl_other_school_fees`.`coverage` = 'per unit'
+                                            ) OR(
+                                                `tbl_other_school_fees`.`coverage` = 'per subject'
+                                            )
+                                        )
+                                    ) THEN(
+                                        `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+                                    ) ELSE 0
+                                END
+                            )
+                        ) + SUM(
+                            (
+                                CASE WHEN(
+                                    (
+                                        `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                                    ) AND(
+                                        `tbl_other_school_fees`.`coverage` = 'per student'
+                                    )
+                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                            END
+                        )
+                    )
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                END
+            )
+        )
+    ) + SUM(
+        (
+            CASE WHEN(
+                `tbl_other_school_fees`.`type_of_fee` = 'development'
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) +(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'library'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'registration'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'school id'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) +(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+)
+) AS `total_fee`";
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
@@ -61,8 +500,8 @@ class BillingController extends Controller
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
             ->where(function ($query) use ($search) {
-                $query->where('exam_result','!=','Failed')
-                ->orWhere('total_exam_taken','IS',DB::raw('NULL'));
+                $query->where('exam_result', '!=', 'Failed')
+                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             })
             // ->where('exam_result','!=','Failed')
             ->count();
@@ -76,8 +515,8 @@ class BillingController extends Controller
                     ->orWhere('stud_mname', 'like', '%' . $search . '%');
             })
             ->where(function ($query) use ($search) {
-                $query->where('exam_result','!=','Failed')
-                ->orWhere('total_exam_taken','IS',DB::raw('NULL'));
+                $query->where('exam_result', '!=', 'Failed')
+                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             })
             ->skip($request->start)->take($request->length);
         //dito jinojoin ung information about the fees and computation
@@ -96,445 +535,7 @@ class BillingController extends Controller
                 'students_sub.year_level',
                 'students_sub.remarks',
                 'students_sub.stud_status',
-                DB::raw("(
-                    SUM(
-                        (
-                            CASE WHEN(
-                                (
-                                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
-                                ) AND(
-                                    (
-                                        `tbl_other_school_fees`.`coverage` = 'per unit'
-                                    ) OR(
-                                        `tbl_other_school_fees`.`coverage` = 'per subject'
-                                    )
-                                )
-                            ) THEN(
-                                `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
-                            ) ELSE 0
-                        END
-                    )
-                ) + SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'tuition'
-                            ) AND(
-                                `tbl_other_school_fees`.`coverage` = 'per student'
-                            )
-                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                    END
-                )
-            )
-            ) AS `tuition_fee`,
-            (
-                SUM(
-                    (
-                        CASE WHEN(
-                            `tbl_other_school_fees`.`type_of_fee` = 'entrance'
-                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'admission'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) AS `entrance_and_admission_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'athletic'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `athletic_fee`,
-            (
-                SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'computer'
-                            ) AND(
-                                (
-                                    `tbl_other_school_fees`.`coverage` = 'per unit'
-                                ) OR(
-                                    `tbl_other_school_fees`.`coverage` = 'per subject'
-                                )
-                            )
-                        ) THEN(
-                            `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
-                        ) ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        (
-                            `tbl_other_school_fees`.`type_of_fee` = 'computer'
-                        ) AND(
-                            `tbl_other_school_fees`.`coverage` = 'per student'
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) AS `computer_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'cultural'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `cultural_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'development'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `development_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'guidance'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `guidance_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'handbook'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `handbook_fee`,
-            (
-                SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
-                            ) AND(
-                                (
-                                    `tbl_other_school_fees`.`coverage` = 'per unit'
-                                ) OR(
-                                    `tbl_other_school_fees`.`coverage` = 'per subject'
-                                )
-                            )
-                        ) THEN(
-                            `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
-                        ) ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        (
-                            `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
-                        ) AND(
-                            `tbl_other_school_fees`.`coverage` = 'per student'
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) AS `laboratory_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'library'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `library_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `medical_and_dental_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'registration'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `registration_fee`,
-            SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            ) AS `school_id_fee`,
-            (
-                SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
-                            ) AND(
-                                (
-                                    `tbl_other_school_fees`.`coverage` = 'per unit'
-                                ) OR(
-                                    `tbl_other_school_fees`.`coverage` = 'per subject'
-                                )
-                            )
-                        ) THEN(
-                            `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
-                        ) ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        (
-                            `tbl_other_school_fees`.`type_of_fee` = 'nstp'
-                        ) AND(
-                            `tbl_other_school_fees`.`coverage` = 'per student'
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) AS `nstp_fee`,
-            (
-                (
-                    (
-                        (
-                            (
-                                (
-                                    (
-                                        (
-                                            (
-                                                (
-                                                    (
-                                                        (
-                                                            (
-                                                                (
-                                                                    (
-                                                                        SUM(
-                                                                            (
-                                                                                CASE WHEN(
-                                                                                    (
-                                                                                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
-                                                                                    ) AND(
-                                                                                        (
-                                                                                            `tbl_other_school_fees`.`coverage` = 'per unit'
-                                                                                        ) OR(
-                                                                                            `tbl_other_school_fees`.`coverage` = 'per subject'
-                                                                                        )
-                                                                                    )
-                                                                                ) THEN(
-                                                                                    `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
-                                                                                ) ELSE 0
-                                                                            END
-                                                                        )
-                                                                    ) + SUM(
-                                                                        (
-                                                                            CASE WHEN(
-                                                                                (
-                                                                                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
-                                                                                ) AND(
-                                                                                    `tbl_other_school_fees`.`coverage` = 'per student'
-                                                                                )
-                                                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                                                                        END
-                                                                    )
-                                                                )
-                                                            ) + SUM(
-                                                                (
-                                                                    CASE WHEN(
-                                                                        `tbl_other_school_fees`.`type_of_fee` = 'entrance'
-                                                                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                                                                END
-                                                            )
-                                                        )
-                                                    ) + SUM(
-                                                        (
-                                                            CASE WHEN(
-                                                                `tbl_other_school_fees`.`type_of_fee` = 'admission'
-                                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                                                        END
-                                                    )
-                                                )
-                                            ) + SUM(
-                                                (
-                                                    CASE WHEN(
-                                                        `tbl_other_school_fees`.`type_of_fee` = 'athletic'
-                                                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                                                END
-                                            )
-                                        )
-                                    ) +(
-                                        SUM(
-                                            (
-                                                CASE WHEN(
-                                                    (
-                                                        `tbl_other_school_fees`.`type_of_fee` = 'computer'
-                                                    ) AND(
-                                                        (
-                                                            `tbl_other_school_fees`.`coverage` = 'per unit'
-                                                        ) OR(
-                                                            `tbl_other_school_fees`.`coverage` = 'per subject'
-                                                        )
-                                                    )
-                                                ) THEN(
-                                                    `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
-                                                ) ELSE 0
-                                            END
-                                        )
-                                    ) + SUM(
-                                        (
-                                            CASE WHEN(
-                                                (
-                                                    `tbl_other_school_fees`.`type_of_fee` = 'computer'
-                                                ) AND(
-                                                    `tbl_other_school_fees`.`coverage` = 'per student'
-                                                )
-                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                                        END
-                                    )
-                                )
-                            )
-                        ) + SUM(
-                            (
-                                CASE WHEN(
-                                    `tbl_other_school_fees`.`type_of_fee` = 'cultural'
-                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                            END
-                        )
-                    )
-                ) + SUM(
-                    (
-                        CASE WHEN(
-                            `tbl_other_school_fees`.`type_of_fee` = 'development'
-                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                    END
-                )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'guidance'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'handbook'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) +(
-                SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
-                            ) AND(
-                                (
-                                    `tbl_other_school_fees`.`coverage` = 'per unit'
-                                ) OR(
-                                    `tbl_other_school_fees`.`coverage` = 'per subject'
-                                )
-                            )
-                        ) THEN(
-                            `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
-                        ) ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        (
-                            `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
-                        ) AND(
-                            `tbl_other_school_fees`.`coverage` = 'per student'
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'library'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'registration'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            ) +(
-                SUM(
-                    (
-                        CASE WHEN(
-                            (
-                                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
-                            ) AND(
-                                (
-                                    `tbl_other_school_fees`.`coverage` = 'per unit'
-                                ) OR(
-                                    `tbl_other_school_fees`.`coverage` = 'per subject'
-                                )
-                            )
-                        ) THEN(
-                            `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
-                        ) ELSE 0
-                    END
-                )
-            ) + SUM(
-                (
-                    CASE WHEN(
-                        (
-                            `tbl_other_school_fees`.`type_of_fee` = 'nstp'
-                        ) AND(
-                            `tbl_other_school_fees`.`coverage` = 'per student'
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
-                END
-            )
-            )
-            )
-            ) AS `total_fee`")
+                DB::raw($this->carlo_columns)
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
