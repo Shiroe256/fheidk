@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'hei_uii' => [
                 'required',
                 'string',
-                Rule::exists('hei', 'hei_sid'),
+                Rule::exists('tbl_heis', 'hei_uii'),
             ],
             'fhe_focal_lname' => ['required', 'string', 'max:255'],
             'fhe_focal_fname' => ['required', 'string', 'max:255'],
