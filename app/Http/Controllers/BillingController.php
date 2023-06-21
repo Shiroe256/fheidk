@@ -101,16 +101,16 @@ class BillingController extends Controller
                         (
                             CASE WHEN(
                                 (
-                                    `vw_billing_details`.`type_of_fee` = 'tuition'
+                                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
                                 ) AND(
                                     (
-                                        `vw_billing_details`.`coverage` = 'per unit'
+                                        `tbl_other_school_fees`.`coverage` = 'per unit'
                                     ) OR(
-                                        `vw_billing_details`.`coverage` = 'per subject'
+                                        `tbl_other_school_fees`.`coverage` = 'per subject'
                                     )
                                 )
                             ) THEN(
-                                `vw_billing_details`.`academic_unit` * `vw_billing_details`.`amount`
+                                `student_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
                             ) ELSE 0
                         END
                     )
@@ -118,11 +118,11 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'tuition'
+                                `tbl_other_school_fees`.`type_of_fee` = 'tuition'
                             ) AND(
-                                `vw_billing_details`.`coverage` = 'per student'
+                                `tbl_other_school_fees`.`coverage` = 'per student'
                             )
-                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                     END
                 )
             )
@@ -131,15 +131,15 @@ class BillingController extends Controller
                 SUM(
                     (
                         CASE WHEN(
-                            `vw_billing_details`.`type_of_fee` = 'entrance'
-                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                            `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                     END
                 )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'admission'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'admission'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -147,8 +147,8 @@ class BillingController extends Controller
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'athletic'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `athletic_fee`,
@@ -157,16 +157,16 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'computer'
+                                `tbl_other_school_fees`.`type_of_fee` = 'computer'
                             ) AND(
                                 (
-                                    `vw_billing_details`.`coverage` = 'per unit'
+                                    `tbl_other_school_fees`.`coverage` = 'per unit'
                                 ) OR(
-                                    `vw_billing_details`.`coverage` = 'per subject'
+                                    `tbl_other_school_fees`.`coverage` = 'per subject'
                                 )
                             )
                         ) THEN(
-                            `vw_billing_details`.`comp_lab_unit` * `vw_billing_details`.`amount`
+                            `student_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -174,11 +174,11 @@ class BillingController extends Controller
                 (
                     CASE WHEN(
                         (
-                            `vw_billing_details`.`type_of_fee` = 'computer'
+                            `tbl_other_school_fees`.`type_of_fee` = 'computer'
                         ) AND(
-                            `vw_billing_details`.`coverage` = 'per student'
+                            `tbl_other_school_fees`.`coverage` = 'per student'
                         )
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -186,32 +186,32 @@ class BillingController extends Controller
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'cultural'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `cultural_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'development'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'development'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `development_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'guidance'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `guidance_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'handbook'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `handbook_fee`,
@@ -220,16 +220,16 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'laboratory'
+                                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
                             ) AND(
                                 (
-                                    `vw_billing_details`.`coverage` = 'per unit'
+                                    `tbl_other_school_fees`.`coverage` = 'per unit'
                                 ) OR(
-                                    `vw_billing_details`.`coverage` = 'per subject'
+                                    `tbl_other_school_fees`.`coverage` = 'per subject'
                                 )
                             )
                         ) THEN(
-                            `vw_billing_details`.`lab_unit` * `vw_billing_details`.`amount`
+                            `student_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -237,11 +237,11 @@ class BillingController extends Controller
                 (
                     CASE WHEN(
                         (
-                            `vw_billing_details`.`type_of_fee` = 'laboratory'
+                            `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
                         ) AND(
-                            `vw_billing_details`.`coverage` = 'per student'
+                            `tbl_other_school_fees`.`coverage` = 'per student'
                         )
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -249,32 +249,32 @@ class BillingController extends Controller
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'library'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'library'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `library_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'medical and dental'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `medical_and_dental_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'registration'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'registration'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `registration_fee`,
             SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'school id'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             ) AS `school_id_fee`,
@@ -283,16 +283,16 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'nstp'
+                                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
                             ) AND(
                                 (
-                                    `vw_billing_details`.`coverage` = 'per unit'
+                                    `tbl_other_school_fees`.`coverage` = 'per unit'
                                 ) OR(
-                                    `vw_billing_details`.`coverage` = 'per subject'
+                                    `tbl_other_school_fees`.`coverage` = 'per subject'
                                 )
                             )
                         ) THEN(
-                            `vw_billing_details`.`nstp_unit` * `vw_billing_details`.`amount`
+                            `student_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -300,11 +300,11 @@ class BillingController extends Controller
                 (
                     CASE WHEN(
                         (
-                            `vw_billing_details`.`type_of_fee` = 'nstp'
+                            `tbl_other_school_fees`.`type_of_fee` = 'nstp'
                         ) AND(
-                            `vw_billing_details`.`coverage` = 'per student'
+                            `tbl_other_school_fees`.`coverage` = 'per student'
                         )
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -328,16 +328,16 @@ class BillingController extends Controller
                                                                             (
                                                                                 CASE WHEN(
                                                                                     (
-                                                                                        `vw_billing_details`.`type_of_fee` = 'tuition'
+                                                                                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
                                                                                     ) AND(
                                                                                         (
-                                                                                            `vw_billing_details`.`coverage` = 'per unit'
+                                                                                            `tbl_other_school_fees`.`coverage` = 'per unit'
                                                                                         ) OR(
-                                                                                            `vw_billing_details`.`coverage` = 'per subject'
+                                                                                            `tbl_other_school_fees`.`coverage` = 'per subject'
                                                                                         )
                                                                                     )
                                                                                 ) THEN(
-                                                                                    `vw_billing_details`.`academic_unit` * `vw_billing_details`.`amount`
+                                                                                    `student_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
                                                                                 ) ELSE 0
                                                                             END
                                                                         )
@@ -345,35 +345,35 @@ class BillingController extends Controller
                                                                         (
                                                                             CASE WHEN(
                                                                                 (
-                                                                                    `vw_billing_details`.`type_of_fee` = 'tuition'
+                                                                                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
                                                                                 ) AND(
-                                                                                    `vw_billing_details`.`coverage` = 'per student'
+                                                                                    `tbl_other_school_fees`.`coverage` = 'per student'
                                                                                 )
-                                                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                                                                         END
                                                                     )
                                                                 )
                                                             ) + SUM(
                                                                 (
                                                                     CASE WHEN(
-                                                                        `vw_billing_details`.`type_of_fee` = 'entrance'
-                                                                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                                        `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+                                                                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                                                                 END
                                                             )
                                                         )
                                                     ) + SUM(
                                                         (
                                                             CASE WHEN(
-                                                                `vw_billing_details`.`type_of_fee` = 'admission'
-                                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                                `tbl_other_school_fees`.`type_of_fee` = 'admission'
+                                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                                                         END
                                                     )
                                                 )
                                             ) + SUM(
                                                 (
                                                     CASE WHEN(
-                                                        `vw_billing_details`.`type_of_fee` = 'athletic'
-                                                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                                                        `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+                                                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                                                 END
                                             )
                                         )
@@ -382,16 +382,16 @@ class BillingController extends Controller
                                             (
                                                 CASE WHEN(
                                                     (
-                                                        `vw_billing_details`.`type_of_fee` = 'computer'
+                                                        `tbl_other_school_fees`.`type_of_fee` = 'computer'
                                                     ) AND(
                                                         (
-                                                            `vw_billing_details`.`coverage` = 'per unit'
+                                                            `tbl_other_school_fees`.`coverage` = 'per unit'
                                                         ) OR(
-                                                            `vw_billing_details`.`coverage` = 'per subject'
+                                                            `tbl_other_school_fees`.`coverage` = 'per subject'
                                                         )
                                                     )
                                                 ) THEN(
-                                                    `vw_billing_details`.`comp_lab_unit` * `vw_billing_details`.`amount`
+                                                    `student_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
                                                 ) ELSE 0
                                             END
                                         )
@@ -399,11 +399,11 @@ class BillingController extends Controller
                                         (
                                             CASE WHEN(
                                                 (
-                                                    `vw_billing_details`.`type_of_fee` = 'computer'
+                                                    `tbl_other_school_fees`.`type_of_fee` = 'computer'
                                                 ) AND(
-                                                    `vw_billing_details`.`coverage` = 'per student'
+                                                    `tbl_other_school_fees`.`coverage` = 'per student'
                                                 )
-                                            ) THEN `vw_billing_details`.`amount` ELSE 0
+                                            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                                         END
                                     )
                                 )
@@ -411,32 +411,32 @@ class BillingController extends Controller
                         ) + SUM(
                             (
                                 CASE WHEN(
-                                    `vw_billing_details`.`type_of_fee` = 'cultural'
-                                ) THEN `vw_billing_details`.`amount` ELSE 0
+                                    `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                             END
                         )
                     )
                 ) + SUM(
                     (
                         CASE WHEN(
-                            `vw_billing_details`.`type_of_fee` = 'development'
-                        ) THEN `vw_billing_details`.`amount` ELSE 0
+                            `tbl_other_school_fees`.`type_of_fee` = 'development'
+                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                     END
                 )
             )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'guidance'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'handbook'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -445,16 +445,16 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'laboratory'
+                                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
                             ) AND(
                                 (
-                                    `vw_billing_details`.`coverage` = 'per unit'
+                                    `tbl_other_school_fees`.`coverage` = 'per unit'
                                 ) OR(
-                                    `vw_billing_details`.`coverage` = 'per subject'
+                                    `tbl_other_school_fees`.`coverage` = 'per subject'
                                 )
                             )
                         ) THEN(
-                            `vw_billing_details`.`lab_unit` * `vw_billing_details`.`amount`
+                            `student_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -462,11 +462,11 @@ class BillingController extends Controller
                 (
                     CASE WHEN(
                         (
-                            `vw_billing_details`.`type_of_fee` = 'laboratory'
+                            `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
                         ) AND(
-                            `vw_billing_details`.`coverage` = 'per student'
+                            `tbl_other_school_fees`.`coverage` = 'per student'
                         )
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -474,32 +474,32 @@ class BillingController extends Controller
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'library'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'library'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'medical and dental'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'registration'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'registration'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
             ) + SUM(
                 (
                     CASE WHEN(
-                        `vw_billing_details`.`type_of_fee` = 'school id'
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
@@ -508,16 +508,16 @@ class BillingController extends Controller
                     (
                         CASE WHEN(
                             (
-                                `vw_billing_details`.`type_of_fee` = 'nstp'
+                                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
                             ) AND(
                                 (
-                                    `vw_billing_details`.`coverage` = 'per unit'
+                                    `tbl_other_school_fees`.`coverage` = 'per unit'
                                 ) OR(
-                                    `vw_billing_details`.`coverage` = 'per subject'
+                                    `tbl_other_school_fees`.`coverage` = 'per subject'
                                 )
                             )
                         ) THEN(
-                            `vw_billing_details`.`nstp_unit` * `vw_billing_details`.`amount`
+                            `student_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -525,11 +525,11 @@ class BillingController extends Controller
                 (
                     CASE WHEN(
                         (
-                            `vw_billing_details`.`type_of_fee` = 'nstp'
+                            `tbl_other_school_fees`.`type_of_fee` = 'nstp'
                         ) AND(
-                            `vw_billing_details`.`coverage` = 'per student'
+                            `tbl_other_school_fees`.`coverage` = 'per student'
                         )
-                    ) THEN `vw_billing_details`.`amount` ELSE 0
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
                 END
             )
             )
