@@ -73,7 +73,8 @@ class RegisterController extends Controller
 
     if (!$hei) {
         $message = 'HEI with the given hei_uii does not exist.';
-        return response()->json(['error' => $message], 404);
+        $script = "swal('Error', '$message', 'error').then(() => { window.history.back(); });";
+        return response()->json(['script' => $script]);
     }
 
     $user = User::create([
@@ -88,13 +89,6 @@ class RegisterController extends Controller
         'is_admin' => false,
     ]);
 
-    // Perform the login after user creation if needed
-    // For example:
-    // auth()->login($user);
-
-    // Return a success response or redirect the user to a success page
-    // You can customize this part based on your application's requirements
-    return response()->json(['success' => true]);
+    return $user;
 }
-
 }
