@@ -110,7 +110,7 @@ class BillingController extends Controller
                                     )
                                 )
                             ) THEN(
-                                `student_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                                `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
                             ) ELSE 0
                         END
                     )
@@ -166,7 +166,7 @@ class BillingController extends Controller
                                 )
                             )
                         ) THEN(
-                            `student_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+                            `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -229,7 +229,7 @@ class BillingController extends Controller
                                 )
                             )
                         ) THEN(
-                            `student_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+                            `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -292,7 +292,7 @@ class BillingController extends Controller
                                 )
                             )
                         ) THEN(
-                            `student_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+                            `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -337,7 +337,7 @@ class BillingController extends Controller
                                                                                         )
                                                                                     )
                                                                                 ) THEN(
-                                                                                    `student_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                                                                                    `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
                                                                                 ) ELSE 0
                                                                             END
                                                                         )
@@ -391,7 +391,7 @@ class BillingController extends Controller
                                                         )
                                                     )
                                                 ) THEN(
-                                                    `student_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+                                                    `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
                                                 ) ELSE 0
                                             END
                                         )
@@ -454,7 +454,7 @@ class BillingController extends Controller
                                 )
                             )
                         ) THEN(
-                            `student_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+                            `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
@@ -517,7 +517,7 @@ class BillingController extends Controller
                                 )
                             )
                         ) THEN(
-                            `student_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+                            `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
                         ) ELSE 0
                     END
                 )
