@@ -1457,6 +1457,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
 
             // $tempstudent['stud_cor'] = 0; //dummydata
 
+            $tempstudent['total_exam_taken'] = array_key_exists('exams', $data) ? $data['exams'] : '';
             $tempstudent['exam_result'] = array_key_exists('exam_result', $data) ? $data['exam_result'] : '';
             $tempstudent['remarks'] = array_key_exists('remarks', $data) ? $data['remarks'] : '';
             $tempstudent['stud_status'] = 0;
