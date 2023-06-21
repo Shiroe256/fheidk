@@ -630,7 +630,7 @@ SUM(
                     ->on('tbl_other_school_fees.form', '=', DB::raw(3));
             })
             ->where('reference_no', $reference_no)
-            ->whereNotNull('total_exam_taken')
+            ->where('total_exam_taken', '!=', 0)
             ->groupBy('tbl_billing_details_temp.uid')
             ->get();
 
