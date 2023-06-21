@@ -77,19 +77,20 @@ class RegisterController extends Controller
             $message = 'HEI with the given hei_uii does not exist.';
             $script = "swal('Error', '$message', 'error').then(() => { window.history.back(); });";
             return response()->json(['script' => $script]);
+        }else{
+            return User::create([
+                'hei_sid' => $hei->hei_sid, // Retrieve hei_sid from the HEI model
+                'hei_uii' => $data['hei_uii'],
+                'fhe_focal_lname' => $data['fhe_focal_lname'],
+                'fhe_focal_fname' => $data['fhe_focal_fname'],
+                'fhe_focal_mname' => $data['fhe_focal_mname'],
+                'contact_no' => $data['contact_number'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'is_admin' => false,
+            ]);
         }
-
         // HEI exists, create the user
-        return User::create([
-            'hei_sid' => $hei->hei_sid, // Retrieve hei_sid from the HEI model
-            'hei_uii' => $data['hei_uii'],
-            'fhe_focal_lname' => $data['fhe_focal_lname'],
-            'fhe_focal_fname' => $data['fhe_focal_fname'],
-            'fhe_focal_mname' => $data['fhe_focal_mname'],
-            'contact_no' => $data['contact_number'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'is_admin' => false,
-        ]);
+       
     }
 }
