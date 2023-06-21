@@ -74,7 +74,7 @@ class RegisterController extends Controller
     if (!$hei) {
         $message = 'HEI with the given hei_uii does not exist.';
         $script = "swal('Error', '$message', 'error').then(() => { window.history.back(); });";
-        return response()->json(['script' => $script]);
+        return redirect()->back()->withErrors(['script' => $script]);
     }
 
     $user = User::create([
