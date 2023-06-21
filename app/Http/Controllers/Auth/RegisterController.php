@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hei;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,11 +69,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $file = $data -> file('avatar');
-		// $fileName = time() . '.' . $file->getClientOriginalExtension();
-		// $file->storeAs('public/images', $fileName);
+        $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
+
         return User::create([
-            'hei_sid' => '01040',//default value for testing
+            'hei_sid' => $hei->hei_sid,//default value for testing
             'hei_uii' => $data['hei_uii'],
             'fhe_focal_lname' => $data['fhe_focal_lname'],
             'fhe_focal_fname' => $data['fhe_focal_fname'],
