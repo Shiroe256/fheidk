@@ -43,6 +43,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
         },
         success: function (response) {
             console.log(response);
+            console.log(response.stud_id);
             $('#student_id').val(response.stud_id);
         }
     });
