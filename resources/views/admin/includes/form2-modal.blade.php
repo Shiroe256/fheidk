@@ -8,13 +8,11 @@
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <h5>Campus</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col"><input class="form-control" type="text"></div>
+                            <div class="col"><input id="student_id" name="student_id" class="form-control" type="text"></div>
                         </div>
                     </div>
-                    <hr>
                     <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
