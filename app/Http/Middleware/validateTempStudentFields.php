@@ -19,14 +19,17 @@ class validateTempStudentFields
      */
     public function handle(Request $request, Closure $next)
     {
-        $trimmedData = collect($request->all())->map(function ($value) {
+        $payload = json_decode($request->payload, true);
+
+        $trimmedPayload = collect($payload)->map(function ($value) {
             if (is_string($value)) {
                 return trim($value);
             }
             return $value;
         })->all();
-        $request->merge($trimmedData);
-        
+
+        $request->merge(['payload' => $trimmedPayload]);
+
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
         $courses = array_values(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get()->toArray());
