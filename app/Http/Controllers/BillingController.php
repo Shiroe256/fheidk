@@ -646,7 +646,7 @@ SUM(
 
         // if ($billing_record->total_amount < 1) {
         $reference_no  = $request->reference_no;
-        $applicants = TemporaryBilling::orderBy('remarks')
+        $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
                 'tbl_billing_details_temp.uid',
                 DB::raw($this->carlo_columns),
