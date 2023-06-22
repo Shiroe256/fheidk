@@ -22,7 +22,7 @@
             <td class="text-right">{{ $student->total_fee }}</td>
             <td>{{ $student->stud_status }}</td>
             <td class="text-center">
-                <button id="{{$student->uid}}" class="btn_view_student_info btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button>
+                <button id="{{$student->stud_uid}}" class="btn_view_student_info btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal">View</button>
             </td>
         </tr>
         @endforeach
