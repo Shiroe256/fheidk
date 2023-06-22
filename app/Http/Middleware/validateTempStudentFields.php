@@ -19,6 +19,14 @@ class validateTempStudentFields
      */
     public function handle(Request $request, Closure $next)
     {
+        $trimmedData = collect($request->all())->map(function ($value) {
+            if (is_string($value)) {
+                return trim($value);
+            }
+            return $value;
+        })->all();
+        $request->merge($trimmedData);
+        
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
         $courses = array_values(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get()->toArray());
@@ -34,23 +42,23 @@ class validateTempStudentFields
     private function validateTempStudentFields($tempstudent)
     {
         $validator = Validator::make((array) $tempstudent, [
-            'last_name' => ['trim','required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
-            'given_name' => ['trim','required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
-            'sex_at_birth' => ['trim','required', 'max:25', 'regex:/^(male|Male|Female|female|MALE|FEMALE)$/'],
-            // 'birthdate' => ['trim','required', 'date_format:mm-dd-yyyy'],
-            // 'birthplace' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'mothers_gname' => ['trim','required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
-            'mothers_lname' => ['trim','required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
-            'pres_prov' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'pres_city' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'pres_brgy' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
-            'pres_zip' => ['trim','required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
-            'perm_prov' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'perm_city' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'perm_brgy' => ['trim','required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
-            'perm_zip' => ['trim','required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
-            'email' => ['trim','required', 'email', 'max:255'],
-            'contact_number' => ['trim','required', 'regex:/^(9)\d{9}$/']
+            'last_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            'given_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            'sex_at_birth' => ['required', 'max:25', 'regex:/^(male|Male|Female|female|MALE|FEMALE)$/'],
+            // 'birthdate' => ['required', 'date_format:mm-dd-yyyy'],
+            // 'birthplace' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'mothers_gname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
+            'mothers_lname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
+            'pres_prov' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'pres_city' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'pres_brgy' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'pres_zip' => ['required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
+            'perm_prov' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'perm_city' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
+            'perm_brgy' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'perm_zip' => ['required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
+            'email' => ['required', 'email', 'max:255'],
+            'contact_number' => ['required', 'regex:/^(9)\d{9}$/']
             // 'degree_program' => 'required|max:255'
         ]);
 
