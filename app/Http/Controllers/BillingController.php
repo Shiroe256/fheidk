@@ -250,20 +250,20 @@ SUM(
 )
 )
 ) AS `nstp_fee`,
-SUM(
-    `tuition_fee`,
-    `entrance_and_admission_fee`,
-    `athletic_fee`,
-    `computer_fee`,
-    `cultural_fee`,
-    `development_fee`,
-    `guidance_fee`,
-    `handbook_fee`,
-    `laboratory_fee`,
-    `library_fee`,
-    `medical_and_dental_fee`,
-    `registration_fee`,
-    `school_id_fee`,
+(
+    `tuition_fee`+
+    `entrance_and_admission_fee`+
+    `athletic_fee`+
+    `computer_fee`+
+    `cultural_fee`+
+    `development_fee`+
+    `guidance_fee`+
+    `handbook_fee`+
+    `laboratory_fee`+
+    `library_fee`+
+    `medical_and_dental_fee`+
+    `registration_fee`+
+    `school_id_fee`+
     `nstp_fee`
 ) AS `total_fee`";
     public function __construct()
