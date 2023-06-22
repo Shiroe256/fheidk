@@ -22,9 +22,7 @@ class validateTempStudentFields
         $payload = json_decode($request->payload, true);
 
         $trimmedPayload = collect($payload)->map(function ($value) {
-            if (is_string($value)) {
-                return trim($value);
-            }
+            trim($value);
             return $value;
         })->all();
 
