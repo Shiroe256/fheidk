@@ -32,7 +32,10 @@ class AdminController extends Controller
 
     public function managebillinglist()
     {
-        $heis = Hei::where('fhe_benefits',1)->get(); // Retrieve all options from the database
+        $heis = Hei::where('fhe_benefits', 1)
+            ->orderBy('hei_name', 'asc') // Sort by hei_name in ascending order
+            ->get();
+    
         $data['heis'] = $heis;
         return view('admin.manage-billing-list', $data);
     }
