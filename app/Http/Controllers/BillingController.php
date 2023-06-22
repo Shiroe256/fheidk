@@ -648,20 +648,20 @@ SUM(
         $reference_no  = $request->reference_no;
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
-                'tbl_billing_details_temp.uid',
+                'students_sub.uid',
                 DB::raw($this->carlo_columns),
-                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken, 0)) as exam_fees')
+                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
             )
             ->join('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
+                    ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
                     ->on('tbl_other_school_fees.form', '=', DB::raw(3));
             })
             ->where('reference_no', $reference_no)
             ->where('total_exam_taken', '!=', 0)
-            ->groupBy('tbl_billing_details_temp.uid');
+            ->groupBy('students_sub.uid');
 
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
         //dito jinojoin ung information about the fees and computation
