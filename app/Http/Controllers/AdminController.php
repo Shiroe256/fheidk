@@ -277,20 +277,30 @@ class AdminController extends Controller
     }
 
     public function openbilling(Request $request)
-    {
-        // Query the database to retrieve the data based on the selected values
-        $heis = Hei::where('fhe_benefits', 1)->get();
+{
+    // Query the database to retrieve the data based on the selected values
+    $heis = Hei::where('fhe_benefits', 1)->get();
 
-        $newBilling = [];
-        $existingReferences = [];
+    $newBilling = [];
+    $existingReferences = [];
+    $schoolsWithoutRecords = [];
 
-        foreach ($heis as $data) {
-            $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
+    foreach ($heis as $data) {
 
-            // Check if the reference number already exists in the Billing table
-            $existingBilling = Billing::where('reference_no', $reference_no)->first();
+        $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
 
-            if (!$existingBilling) {
+        // Check if the reference number already exists in the Billing table
+        $existingBilling = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$existingBilling) {
+            // Check if hei_uii exists in OtherSchoolFees model
+            $existingOtherFee = OtherSchoolFees::where('hei_uii', $data->hei_uii)->first();
+
+            if (!$existingOtherFee) {
+                // hei_uii does not exist, add to schoolsWithoutRecords
+                $schoolsWithoutRecords[] = $data->hei_name;
+                continue;
+            } else {
                 $newBilling[] = [
                     'hei_psg_region' => $data->hei_psg_region,
                     'hei_sid' => $data->hei_sid,
@@ -300,41 +310,52 @@ class AdminController extends Controller
                     'semester' => $request->open_billing_semester,
                     'billing_status' => 1,
                 ];
-            } else {
-                $existingReferences[] = [
-                    'reference_no' => $reference_no,
-                    'hei_name' => $data->hei_name,
-                ];
             }
+        } else {
+            $existingReferences[] = [
+                'reference_no' => $reference_no,
+                'hei_name' => $data->hei_name,
+            ];
         }
-
-        if (!empty($newBilling)) {
-            Billing::insert($newBilling);
-
-            $otherfees = OtherSchoolFees::selectRaw('uid')
-                ->get();
-            foreach ($otherfees as $row) {
-                //store the shit
-                $uid[] = $row->uid;
-            }
-            $this->upsertSettings($reference_no, $uid);
-        }
-
-        $response = [
-            'status' => 200,
-            // 'data' => $newBilling
-        ];
-
-        if (!empty($existingReferences)) {
-            $message = 'The following reference number(s) already exist:<br>';
-            foreach ($existingReferences as $index => $reference) {
-                $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
-            }
-            $response['message'] = $message;
-        }
-
-        return response()->json($response);
     }
+
+    if (!empty($newBilling)) {
+        Billing::insert($newBilling);
+
+        $otherfees = OtherSchoolFees::selectRaw('uid')->get();
+        $uid = [];
+        foreach ($otherfees as $row) {
+            $uid[] = $row->uid;
+        }
+
+        // Upsert the settings using the first reference number from newBilling
+        $firstReference = reset($newBilling);
+        $this->upsertSettings($firstReference['reference_no'], $uid);
+    }
+
+    $response = [
+        'status' => 200,
+        // 'data' => $newBilling
+    ];
+
+    if (!empty($existingReferences)) {
+        $message = 'The following reference number(s) already exist:<br>';
+        foreach ($existingReferences as $index => $reference) {
+            $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
+        }
+        $response['message'] = $message;
+    }
+
+    if (!empty($schoolsWithoutRecords)) {
+        $message = 'The following schools do not have records in OtherSchoolFees model:<br>';
+        foreach ($schoolsWithoutRecords as $index => $school) {
+            $message .= ($index + 1) . '. ' . $school . '<br>';
+        }
+        $response['schoolsWithoutRecords'] = $message;
+    }
+
+    return response()->json($response);
+}
 
     public function forwardtoafms(Request $request)
     {
@@ -396,4 +417,5 @@ class AdminController extends Controller
         }
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
+
 }
