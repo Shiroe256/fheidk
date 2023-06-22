@@ -559,10 +559,6 @@ SUM(
                     ->orWhere(function ($query) {
                         $query->whereNull('tbl_billing_stud_settings.bs_status')
                             ->where('tbl_billing_settings.bs_status', '=', 1);
-                    })
-                    ->orWhere(function ($query) {
-                        $query->where('students_sub.transferee', '!=', '')
-                            ->where();
                     });
             })
             //!kailangan lagyan dito ng para sa mga pumasa lang
