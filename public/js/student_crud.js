@@ -230,7 +230,7 @@ fileInput.onchange = () => {
     });
     errorhtml += '</tbody></table>';
     if (errorctr > 0) {
-      $('#mod_upload').modal('hide');
+      mod_upload_batch.hide();
       fileInput.value = '';
 
       deactivateUploadButton();
@@ -438,7 +438,7 @@ function uploadBatch() {
       errorhtml += '</tbody></table>';
       if (errors.length > 0) {
         fileInput.value = '';
-        $('#mod_upload').modal('hide');
+        mod_upload_batch.hide()
         deactivateUploadButton();
         $('#error_count').html(errorsctr);
         $('#error_summary').html(errorhtml);

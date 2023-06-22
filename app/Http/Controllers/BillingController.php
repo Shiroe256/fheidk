@@ -640,10 +640,11 @@ SUM(
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $billing_record = Billing::where('reference_no', $reference_no)->first();
+        // $billing_record = Billing::where('reference_no', $reference_no)->first();
 
-        $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
+        // $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
+        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result','!=','failed')->count();
         // if ($billing_record->total_amount < 1) {
         $reference_no  = $request->reference_no;
         $applicants = DB::table('tbl_billing_details_temp as students_sub')

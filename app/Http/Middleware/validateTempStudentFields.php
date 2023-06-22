@@ -19,6 +19,19 @@ class validateTempStudentFields
      */
     public function handle(Request $request, Closure $next)
     {
+        $payload = json_decode($request->payload, true);
+
+        $trimmedPayload = collect($payload)->map(function ($item) {
+            return collect($item)->map(function ($value) {
+                if (is_string($value)) {
+                    return trim($value);
+                }
+                return $value;
+            })->all();
+        })->all();
+
+        $request->merge(['payload' => json_encode($trimmedPayload)]);
+
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
         $courses = array_values(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get()->toArray());
@@ -26,7 +39,7 @@ class validateTempStudentFields
         foreach ($tempstudents as $key => $tempstudent) {
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
-            if (!in_array($tempstudent->degree_course_id, $courses)) return response('Invalid Course in Row ' . $key + 1, 400);
+            if (in_array($tempstudent->degree_course_id, $courses)) return response('Invalid Course in Row ' . $key + 1, 400);
         }
         return $next($request);
     }
@@ -34,13 +47,13 @@ class validateTempStudentFields
     private function validateTempStudentFields($tempstudent)
     {
         $validator = Validator::make((array) $tempstudent, [
-            'last_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
-            'given_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            // 'last_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
+            // 'given_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
             'sex_at_birth' => ['required', 'max:25', 'regex:/^(male|Male|Female|female|MALE|FEMALE)$/'],
             // 'birthdate' => ['required', 'date_format:mm-dd-yyyy'],
             // 'birthplace' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'mothers_gname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
-            'mothers_lname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
+            // 'mothers_gname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
+            // 'mothers_lname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
             'pres_prov' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
             'pres_city' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
             'pres_brgy' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],

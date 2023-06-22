@@ -18,11 +18,11 @@ $cnt = 1;
         @foreach ($hei_summary as $summary)
             <?php
             $total_total_amount += $summary->total_amount;
-            $grand_total_beneficiaries += $summary->total_beneficiaries; ?>
+            $grand_total_beneficiaries += $total_beneficiaries; ?>
             <tr>
                 <td class="text-center">{{ $cnt++ }}</td>
                 <td>{{ $summary->hei_name }}</td>
-                <td class="text-center">{{ $summary->total_beneficiaries }}</td>
+                <td class="text-center">{{ $total_beneficiaries }}</td>
                 <td class="text-center">{{ $format->format($summary->total_amount) }}</td>
             </tr>
         @endforeach
