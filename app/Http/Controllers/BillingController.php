@@ -671,7 +671,8 @@ SUM(
             ->select(
                 'students_sub.uid',
                 'students_sub.hei_name',
-                DB::raw($this->carlo_columns)
+                DB::raw($this->carlo_columns),
+                DB::raw('0 as exam_fees')
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
