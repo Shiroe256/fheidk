@@ -24,8 +24,9 @@ class validateTempStudentFields
         $courses = OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get();
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $key => $tempstudent) {
-            if ($this->validateTempStudentFields($tempstudent) == TRUE) return response('Invalid Input in Row ' . $key + 1, 400);
-            if (!in_array($tempstudents['degree_course_id'],array_values($courses))) return response('Invalid Course in Row ' . $key + 1, 400);
+            $error = $this->validateTempStudentFields($tempstudent);
+            if (count($error) > 0) return response('Invalid Input ' . $error[0] . 'in Row ' . $key + 1, 400);
+            if (!in_array($tempstudents['degree_course_id'], array_values($courses))) return response('Invalid Course in Row ' . $key + 1, 400);
         }
         return $next($request);
     }
@@ -54,6 +55,6 @@ class validateTempStudentFields
         ]);
 
         //return validator failure status
-        return $validator->fails();
+        return $validator->errors()->toArray();
     }
 }
