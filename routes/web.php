@@ -148,6 +148,8 @@ Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'manage
 Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
 Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
 Route::get('/fetchform2list', [AdminController::class, 'fetchform2list'])->name('fetchform2list');
+Route::get('/viewstudentinfo', [AdminController::class, 'viewstudentinfo'])->name('viewstudentinfo');
+// Route::post('/updateitemorder', [App\Http\Controllers\PurchaseOrderController::class, 'updateitemorder'])->name('updateitemorder')->middleware('auth');
 Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
 Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name('fetchform3list');
 

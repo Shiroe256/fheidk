@@ -35,21 +35,17 @@ $(document).on('click', '.btn_view_student_info', function (e) {
     e.preventDefault();
     let id = $(this).attr('id');
     alert(id);
-    // $.ajax({
-    //     url: '/editproducts',
-    //     method: 'get',
-    //     data: {
-    //         id: id,
-    //         _token: '{{ csrf_token() }}'
-    //     },
-    //     success: function (response) {
-    //         $('#update_product_id').val(response.id);
-    //         $('#update_product_name').val(response.product_name);
-    //         $('#update_product_description').val(response.product_description);
-    //         $('#update_product_selling_price').val(response.product_selling_price);
-    //         $('#update_product_quantity').val(response.product_quantity);
-    //     }
-    // });
+    $.ajax({
+        url: '/admin/viewstudentinfo',
+        method: 'get',
+        data: {
+            id: id,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function (response) {
+            console.log(response);
+        }
+    });
 });
 
 
