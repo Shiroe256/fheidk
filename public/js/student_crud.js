@@ -22,6 +22,8 @@ const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
 const btn_upload = document.getElementById("btn_upload");
 const btn_finalize_billing = document.getElementById("btn_finalize");
+const lbl_upload_status = document.getElementById("upload_status");
+const lbl_upload_template = document.getElementById('upload_template_text');
 // const reference_no = $('#reference_no').val();
 const ac_year = $('#ac_year').val();
 const semester = $('#semester').val();
@@ -244,9 +246,9 @@ fileInput.onchange = () => {
         html: 'Please check the Sheet'
       });
     } else {
-      document.getElementById("upload_status").innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
+      lbl_upload_status.innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
       resetUploadButton();
-      document.getElementById('upload_template_text').innerHTML = selectedFile.name;
+      lbl_upload_template.innerHTML = selectedFile.name;
     }
   };
   reader.readAsArrayBuffer(fileInput.files[0]);
@@ -277,6 +279,9 @@ function queueBilling() {
 function resetUploadButton() {
   uploadButton.innerHTML = 'Upload';
   uploadButton.disabled = false;
+  fileInput.innerHTML = "";
+  lbl_upload_status.innerHTML = "";
+  lbl_upload_template.innerHTML = "";
   btnUploadCloseButton.disabled = false;
   fileInput.disabled = false;
 }
@@ -460,8 +465,8 @@ function uploadBatch() {
           },
           complete: function () {
             fileInput.value = '';
+            mod_upload_batch.hide();
             resetUploadButton();
-            btnUploadCloseButton.click();
             // fetchTempStudent();
             tbl_students.ajax.reload();
             fetchTempSummary();
@@ -475,15 +480,14 @@ function uploadBatch() {
             uploadButton.innerHTML = 'Uploading...';
           },
           success: function (result) {
-            console.log(result);
             Swal.fire('Uploading Success',
               'The students in the spreadsheet have been uploaded',
               'success');
           },
-          error: function () {
+          error: function (result) {
             deactivateUploadButton();
             Swal.fire('An Error has been encountered',
-              'The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator',
+            result + '. The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator.',
               'error');
           }
         });
