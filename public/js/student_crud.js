@@ -246,8 +246,8 @@ fileInput.onchange = () => {
         html: 'Please check the Sheet'
       });
     } else {
-      lbl_upload_status.innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
       resetUploadButton();
+      lbl_upload_status.innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
       lbl_upload_template.innerHTML = selectedFile.name;
     }
   };
