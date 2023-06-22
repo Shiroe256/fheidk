@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="form-group"><label>Academic Year</label>
                         <select id="open_billing_ac_year" name="open_billing_ac_year"class="form-control" required>
-                            <option disabled selected>-- Select Academic Year --</option>
+                            <option value="" disabled selected>-- Select Academic Year --</option>
                             <option value="2023-2024">2023-2024</option>
                             <option value="2024-2025">2024-2025</option>
                             <option value="2025-2026">2025-2026</option>
@@ -17,14 +17,14 @@
                     </div>
                     <div class="form-group"><label>Semester</label>
                         <select id="open_billing_semester" name="open_billing_semester" class="form-control" required>
-                            <option disabled selected>-- Select Semester --</option>
+                            <option value="" disabled selected>-- Select Semester --</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
                     </div>
                     <div class="form-group"><label>HEI Name</label>
                         <select id="open_billing_hei" name="open_billing_hei" class="form-control" required>
-                            <option disabled selected>-- Select HEI --</option>
+                            <option value="" disabled selected>-- Select HEI --</option>
                             <option value="All">All HEIs</option>
                             @foreach($heis as $hei)
                                 <option value="{{ $hei->hei_uii }}">{{ $hei->hei_name }}</option>
