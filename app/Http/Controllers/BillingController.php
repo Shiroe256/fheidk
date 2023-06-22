@@ -649,6 +649,7 @@ SUM(
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
                 'students_sub.uid',
+                'students_sub.hei_name',
                 DB::raw($this->carlo_columns),
                 DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
             )
@@ -669,6 +670,7 @@ SUM(
             ->mergeBindings($students_sub)
             ->select(
                 'students_sub.uid',
+                'students_sub.hei_name',
                 DB::raw($this->carlo_columns),
                 DB::raw('0 as exam_fees')
             )
@@ -702,10 +704,10 @@ SUM(
         $union = $applicants->union($students);
         $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
             ->mergeBindings($union)
-            ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) + sum(summary.exam_fee) as total_amount')
+            ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) + sum(summary.exam_fees) as total_amount')
             ->get();
-        
-            // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
+
+        // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
         //     ->mergeBindings($students)
         //     ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) as total_amount')
         //     ->get();
