@@ -29,3 +29,69 @@ function fetchform2list() {
         }
     });
 }
+
+//Update Products
+$(document).on('click', '.btn_view_student_info', function (e) {
+    e.preventDefault();
+    let id = $(this).attr('id');
+    alert(id);
+    // $.ajax({
+    //     url: '/editproducts',
+    //     method: 'get',
+    //     data: {
+    //         id: id,
+    //         _token: '{{ csrf_token() }}'
+    //     },
+    //     success: function (response) {
+    //         $('#update_product_id').val(response.id);
+    //         $('#update_product_name').val(response.product_name);
+    //         $('#update_product_description').val(response.product_description);
+    //         $('#update_product_selling_price').val(response.product_selling_price);
+    //         $('#update_product_quantity').val(response.product_quantity);
+    //     }
+    // });
+});
+
+
+// $("#frm_update_products").submit(function (e) {
+//     e.preventDefault();
+//     const fd = new FormData(this);
+//     $("#btn_update_products").text('Updating...');
+//     $.ajax({
+//         url: '/updateproducts',
+//         method: 'post',
+//         data: fd,
+//         cache: false,
+//         contentType: false,
+//         processData: false,
+//         dataType: 'json',
+//         success: function (response) {
+//             if (response.status == 200) {
+//                 Swal.fire(
+//                     'Updated!',
+//                     'Products Updated Successfully!',
+//                     'success'
+//                 )
+//                 fetchproductslist();
+//                 $("#btn_update_products").text('Update');
+//                 $("#frm_update_products")[0].reset();
+//                 $("#mod_update_product").modal('hide');
+//             } else if (response.status == 400) {
+//                 let i = 1;
+//                 let errorMessage = '';
+//                 $.each(response.errors, function (key, err_values) {
+//                     console.log(err_values);
+//                     errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+//                 })
+//                 Swal.fire({
+//                     // position: 'top',
+//                     title: 'Oops... you missed something',
+//                     html: errorMessage,
+//                     icon: 'warning',
+
+//                 })
+//                 $("#btn_update_products").text('Update');
+//             }
+//         }
+//     });
+// });
