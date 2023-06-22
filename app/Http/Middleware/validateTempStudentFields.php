@@ -26,7 +26,7 @@ class validateTempStudentFields
         foreach ($tempstudents as $key => $tempstudent) {
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
-            if (!in_array($tempstudents['degree_course_id'], array_values($courses))) return response('Invalid Course in Row ' . $key + 1, 400);
+            if (!in_array($tempstudent['degree_course_id'], array_values($courses))) return response('Invalid Course in Row ' . $key + 1, 400);
         }
         return $next($request);
     }
