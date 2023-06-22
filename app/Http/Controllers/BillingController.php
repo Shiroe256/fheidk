@@ -702,7 +702,7 @@ SUM(
         $union = $applicants->union($students);
         $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
             ->mergeBindings($union)
-            ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) as total_amount')
+            ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) + sum(summary.exam_fee) as total_amount')
             ->get();
         
             // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
