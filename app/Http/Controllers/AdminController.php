@@ -298,7 +298,7 @@ class AdminController extends Controller
 
             if (!$existingOtherFee) {
                 // hei_uii does not exist, add to schoolsWithoutRecords
-                $schoolsWithoutRecords[] = $data->hei_name;
+                $schoolsWithoutRecords[] = ['hei_name' => $data->hei_name];
                 continue;
             } else {
                 $newBilling[] = [
