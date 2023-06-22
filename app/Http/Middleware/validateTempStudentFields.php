@@ -19,7 +19,7 @@ class validateTempStudentFields
      */
     public function handle(Request $request, Closure $next)
     {
-        $payload = json_decode($request->payload, true);
+        $payload = json_decode($request->payload);
 
         $trimmedPayload = collect($payload)->map(function ($value) {
             if (is_string($value)) {
