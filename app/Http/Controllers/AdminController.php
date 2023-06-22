@@ -32,7 +32,9 @@ class AdminController extends Controller
 
     public function managebillinglist()
     {
-        return view('admin.manage-billing-list');
+        $heis = Hei::where('fhe_benefits',1)->get(); // Retrieve all options from the database
+        $data['heis'] = $heis;
+        return view('admin.manage-billing-list', $data);
     }
 
     public function managebillingpage($reference_no)
