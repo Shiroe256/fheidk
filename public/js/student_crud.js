@@ -484,10 +484,10 @@ function uploadBatch() {
               'The students in the spreadsheet have been uploaded',
               'success');
           },
-          error: function (result) {
+          error: function (xhr, status, error) {
             deactivateUploadButton();
             Swal.fire('An Error has been encountered',
-            result + '. The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator.',
+            xhr.responseText + '. The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator.',
               'error');
           }
         });
