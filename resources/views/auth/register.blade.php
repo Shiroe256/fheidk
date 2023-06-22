@@ -15,6 +15,12 @@
                                 <div class="form-group">
                                     <label class="input-style-tabs">HEI UII</label>
                                     <input class="form-control form-control-user @error('hei_uii') is-invalid @enderror" type="text" id="hei_uii" name="hei_uii" value="{{ old('hei_uii') }}" placeholder="HEI UII">
+
+                                    @error('hei_uii')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group"><label class="input-style-tabs">FULL NAME</label>
                                     <div class="form-row">
