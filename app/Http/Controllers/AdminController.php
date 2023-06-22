@@ -281,7 +281,13 @@ class AdminController extends Controller
     public function openbilling(Request $request)
 {
     // Query the database to retrieve the data based on the selected values
-    $heis = Hei::where('fhe_benefits', 1)->get();
+
+    // Check if open_billing_hei is not equal to 'All'
+    if ($request->open_billing_hei !== 'All') {
+        $heis = Hei::where('hei_uii', $request->open_billing_hei)->get();
+    } else {
+        $heis = Hei::where('fhe_benefits', 1)->get();
+    }
 
     $newBilling = [];
     $existingReferences = [];
