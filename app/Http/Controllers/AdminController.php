@@ -345,7 +345,7 @@ class AdminController extends Controller
         }
         $response['message'] = $message;
     }
-
+    
     if (!empty($schoolsWithoutRecords)) {
         $message = 'The following schools do not have records in TOSF:<br>';
         foreach ($schoolsWithoutRecords as $index => $school) {
