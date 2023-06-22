@@ -699,7 +699,7 @@ SUM(
             })
             ->groupBy('students_sub.uid');
 
-        $data['hei_summary'] = $applicants->union($students)->selectRaw('hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) + sum(exam_fees) as total_amount')->get();
+        $data['hei_summary'] = $applicants->union($students)->selectRaw('students_sub.hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) + sum(exam_fees) as total_amount')->get();
         
             // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
         //     ->mergeBindings($students)
