@@ -62,7 +62,7 @@
         </section>
     </main>
   
-@include('admin.includes.modal')
+@include('admin.includes.form2-modal')
 @include('admin.includes.footer')
 <script src="{{url('admin\js\form2.js')}}"></script>
 </body>

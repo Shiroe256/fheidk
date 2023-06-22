@@ -34,7 +34,6 @@ function fetchform2list() {
 $(document).on('click', '.btn_view_student_info', function (e) {
     e.preventDefault();
     let id = $(this).attr('id');
-    alert(id);
     $.ajax({
         url: '/admin/viewstudentinfo',
         method: 'get',
