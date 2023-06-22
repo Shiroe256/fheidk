@@ -42,6 +42,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             _token: '{{ csrf_token() }}'
         },
         success: function (response) {
+            console.log(response);
             $('#student_id').val(response.stud_id);
         }
     });
