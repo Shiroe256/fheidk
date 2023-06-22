@@ -347,7 +347,7 @@ class AdminController extends Controller
     }
 
     if (!empty($schoolsWithoutRecords)) {
-        $message = 'The following schools do not have records in OtherSchoolFees model:<br>';
+        $message = 'The following schools do not have records in TOSF:<br>';
         foreach ($schoolsWithoutRecords as $index => $school) {
             $message .= ($index + 1) . '. ' . $school['hei_name'] . '<br>';
         }
