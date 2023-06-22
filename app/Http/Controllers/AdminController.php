@@ -351,7 +351,7 @@ class AdminController extends Controller
         foreach ($schoolsWithoutRecords as $index => $school) {
             $message .= ($index + 1) . '. ' . $school['hei_name'] . '<br>';
         }
-        $response['schoolsWithoutRecords'] = $message;
+        $response['message'] = $message;
     }
 
     return response()->json($response);
