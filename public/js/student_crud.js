@@ -330,7 +330,7 @@ function validateFields(data) {
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
     // console.log(stud['birthdate']);
     if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
-    if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
+    // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
