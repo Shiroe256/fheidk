@@ -78,7 +78,10 @@ class AdminController extends Controller
         $reference_no = $request->reference_no;
 
         $students = BillingForm2::where('reference_no', $reference_no)->get();
+        $totalAmount = $students->sum('total_fee');
+
         $data['students'] = $students;
+        $data['totalAmount'] = $totalAmount;
         return view('admin.elements.form2list', $data);
     }
 
