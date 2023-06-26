@@ -332,21 +332,21 @@ function validateFields(data) {
     if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
-    if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!namepattern.test(stud['mothers_mname'] || stud['mothers_mname'] === undefined)) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!namepattern.test(stud['mothers_mname'] || stud['mothers_mname'] === undefined)) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     if (!emailpattern.test(stud['email']) || stud['email'] === undefined) error.push('Invalid email format. Please use this format: name@email.com');
     // if (!emailpattern.test(stud['a_email']) && stud['a_email'] != '') error.push('The alternate email field isn\'t using a valid format');
     // if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
 
-    if (!addresspattern.test(stud['perm_prov']) || stud['perm_prov'] === undefined) error.push("Invalid permanent Province value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!addresspattern.test(stud['perm_city']) || stud['perm_city'] === undefined) error.push("Invalid permanent City value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!brgypattern.test(stud['perm_brgy']) || stud['perm_brgy'] === undefined) error.push("Invalid permanent Baranggay value. Special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!addresspattern.test(stud['perm_prov']) || stud['perm_prov'] === undefined) error.push("Invalid permanent Province value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!addresspattern.test(stud['perm_city']) || stud['perm_city'] === undefined) error.push("Invalid permanent City value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!brgypattern.test(stud['perm_brgy']) || stud['perm_brgy'] === undefined) error.push("Invalid permanent Baranggay value. Special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     // if (stud['perm_street'] === undefined) error.push('There is an address field missing');
     if (!zippattern.test(stud['perm_zip']) || stud['perm_zip'] === undefined) error.push('Invalid permanent Zip Code format. Numbers are only accepted.');
-    if (!addresspattern.test(stud['pres_prov']) || stud['pres_prov'] === undefined) error.push("Invalid present Provice value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!addresspattern.test(stud['pres_city']) || stud['pres_city'] === undefined) error.push("Invalid present City value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!brgypattern.test(stud['pres_brgy']) || stud['pres_brgy'] === undefined) error.push("Invalid present Barangay value. Special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!addresspattern.test(stud['pres_prov']) || stud['pres_prov'] === undefined) error.push("Invalid present Provice value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!addresspattern.test(stud['pres_city']) || stud['pres_city'] === undefined) error.push("Invalid present City value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!brgypattern.test(stud['pres_brgy']) || stud['pres_brgy'] === undefined) error.push("Invalid present Barangay value. Special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     // if (stud['pres_street'] === undefined) error.push('There is an address field missing');
     if (!zippattern.test(stud['pres_zip']) || stud['pres_zip'] === undefined) error.push('Invalid present Zip Code format. Numbers are only accepted.');
 
