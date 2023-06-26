@@ -153,7 +153,7 @@
                                     id="stud_academic_units" name="stud_academic_units" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
-                                    id="stud_tuition_amount" name="stud_tuition_amount" class="form-control text-right"
+                                    id="stud_tuition_amount" name="stud_tuition_amount" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                                     id="stud_comp_lab_units" name="stud_comp_lab_units" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Computer Laboratory</label><input
-                                    id="stud_comp_lab_amount" name="stud_comp_lab_amount" class="form-control text-right"
+                                    id="stud_comp_lab_amount" name="stud_comp_lab_amount" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                 id="stud_lab_units" name="stud_lab_units" class="form-control"
                                 type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Laboratory</label><input
-                                    id="stud_lab_amount" name="stud_lab_amount" class="form-control text-right"
+                                    id="stud_lab_amount" name="stud_lab_amount" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
@@ -196,53 +196,53 @@
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Entrance/Admission Fee</label><input
                                     id="stud_entrance_and_admission_fee" name="stud_entrance_and_admission_fee"
-                                    class="form-control text-right" type="number"></div>
+                                    class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input id="stud_athletic_fee"
-                                    name="stud_athletic_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_athletic_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input id="stud_computer_fee"
-                                    name="stud_computer_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_computer_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input id="stud_cultural_fee"
-                                    name="stud_cultural_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_cultural_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input
-                                    id="stud_development_fee" name="stud_development_fee" class="form-control text-right"
+                                    id="stud_development_fee" name="stud_development_fee" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input id="stud_guidance_fee"
-                                    name="stud_guidance_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_guidance_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input id="stud_handbook_fee"
-                                    name="stud_handbook_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_handbook_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input
-                                    id="stud_laboratory_fee" name="stud_laboratory_fee" class="form-control text-right"
+                                    id="stud_laboratory_fee" name="stud_laboratory_fee" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input id="stud_library_fee"
-                                    name="stud_library_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_library_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Medical and Dental Fee</label><input
                                     id="stud_medical_and_dental_fee" name="stud_medical_and_dental_fee"
-                                    class="form-control text-right" type="number"></div>
+                                    class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input
-                                    id="stud_registration_fee" name="stud_registration_fee" class="form-control text-right"
+                                    id="stud_registration_fee" name="stud_registration_fee" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input id="stud_school_id_fee"
-                                    name="stud_school_id_fee" class="form-control text-right" type="number"></div>
+                                    name="stud_school_id_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <hr>

@@ -78,7 +78,9 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_academic_units').val(response.academic_unit);
             $('#stud_tuition_amount').val(response.tuition_fee);
             $('#stud_comp_lab_units').val(response.comp_lab_unit);
+            $('#stud_comp_lab_amount').val(response.computer_per_unit_fee);
             $('#stud_lab_units').val(response.lab_unit);
+            $('#stud_lab_amount').val(response.laboratory_per_unit_fee);
             $('#stud_entrance_and_admission_fee').val(response.entrance_and_admission_fee);
             $('#stud_athletic_fee').val(response.athletic_fee);
             $('#stud_computer_fee').val(response.computer_fee);
