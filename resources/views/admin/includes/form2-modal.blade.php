@@ -266,7 +266,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="button">Save</button>
+                    <button class="btn btn-primary d-none" type="submit">Save</button>
                 </div>
             </form>
         </div>
