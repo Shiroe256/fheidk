@@ -93,8 +93,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="d-flex">Permanent Address</h5>
                         <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                type="checkbox" id="chk_address" name="chk_address"><label class="custom-control-label"
-                                for="chk_address" disabled>Same with the
+                                type="checkbox" id="chk_address" name="chk_address" disabled><label class="custom-control-label"
+                                for="chk_address">Same with the
                                 Present Address?</label></div>
                     </div>
                     <div class="form-group">
