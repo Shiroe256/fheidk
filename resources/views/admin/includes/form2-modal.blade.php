@@ -66,8 +66,8 @@
                                     name="stud_present_province" class="form-control" type="text"></div>
                             <div class="col-lg-4 col-xl-4"><label>City</label><input id="stud_present_city"
                                     name="stud_present_city" class="form-control" type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input id="stud_present_brgy"
-                                    name="stud_present_brgy" class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input id="stud_present_barangay"
+                                    name="stud_present_barangay" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -75,7 +75,7 @@
                             <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
                                     id="stud_present_street" name="stud_present_street" class="form-control"
                                     type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_present_zip"
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_present_zipcode"
                                     name="stud_present_zip" class="form-control" type="text"></div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
                                     id="stud_permanent_street" name="stud_permanent_street" class="form-control"
                                     type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_permanent_zip"
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_permanent_zipcode"
                                     name="stud_permanent_zip" class="form-control" type="text"></div>
                         </div>
                     </div>
@@ -143,7 +143,8 @@
                                     id="stud_academic_units" name="stud_academic_units" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
-                                    class="form-control" type="number"></div>
+                                    id="stud_tuition_amount" name="stud_tuition_amount" class="form-control"
+                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -163,58 +164,53 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input id="stud_entrance_fee"
-                                    name="stud_entrance_fee" class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Admission Fee</label><input id="stud_admission_fee"
-                                    name="stud_admission_fee" class="form-control" type="number"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input
+                                    id="stud_entrance_and_admission_fee" name="stud_entrance_fee"
+                                    class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input id="stud_athletic_fee"
                                     name="stud_athletic_fee" class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input id="stud_computer_fee"
-                                    name="stud_computer_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input id="stud_computer_fee"
+                                    name="stud_computer_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input id="stud_cultural_fee"
                                     name="stud_cultural_fee" class="form-control" type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input
                                     id="stud_development_fee" name="stud_development_fee" class="form-control"
                                     type="number"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input id="stud_guidance_fee"
                                     name="stud_guidance_fee" class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input id="stud_handbook_fee"
-                                    name="stud_handbook_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input id="stud_handbook_fee"
+                                    name="stud_handbook_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input
                                     id="stud_laboratory_fee" name="stud_laboratory_fee" class="form-control"
                                     type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input id="stud_library_fee"
-                                    name="stud_library_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input id="stud_library_fee"
+                                    name="stud_library_fee" class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Medical and Dental Fee</label><input
                                     id="stud_medical_and_dental_fee" name="stud_medical_and_dental_fee"
                                     class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input
-                                    id="stud_registration_fee" name="stud_registration_fee" class="form-control"
-                                    type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input
+                                    id="stud_registration_fee" name="stud_registration_fee" class="form-control"
+                                    type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input id="stud_school_id_fee"
                                     name="stud_school_id_fee" class="form-control" type="number"></div>
                         </div>
