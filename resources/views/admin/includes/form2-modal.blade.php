@@ -8,9 +8,18 @@
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="col"><input id="stud_id" name="stud_id" class="form-control" type="hidden">
+                    <div class="col"><input id="stud_uid" name="stud_uid" class="form-control" type="hidden">
                     </div>
                     <h5>Personal Information</h5>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>FHE Award No.</label><input
+                                    id="stud_fhe_award_no" name="stud_fhe_award_no" class="form-control"
+                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Student School ID No.</label><input id="stud_id"
+                                    name="stud_id" class="form-control" type="number"></div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-3 col-xl-3"><label>Lastname</label><input id="stud_lname"
