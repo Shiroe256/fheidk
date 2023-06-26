@@ -75,7 +75,18 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_year_level').val(response.year_level);
             $('#stud_academic_units').val(response.academic_unit);
             $('#stud_tuition_amount').val(response.tuition_fee);
-
+            $('#stud_entrance_and_admission_fee').val(response.entrance_and_admission_fee);
+            $('#stud_athletic_fee').val(response.athletic_fee);
+            $('#stud.computer_fee').val(response.computer_fee);
+            $('#stud_cultural_fee').val(response.cultural_fee);
+            $('#stud_development_fee').val(response.development_fee);
+            $('#stud_guidance_fee').val(response.guidance_fee);
+            $('#stud_handbook_fee').val(response.handbook_fee);
+            $('#stud_laboratory_fee').val(response.laboratory_fee);
+            $('#stud_library_fee').val(response.library_fee);
+            $('#stud_medical_and_dental_fee').val(response.medical_and_dental_fee);
+            $('#stud_registration_fee').val(response.registration_fee);
+            $('#stud_school_id_fee').val(response.school_id_fee);
         }
     });
 });
