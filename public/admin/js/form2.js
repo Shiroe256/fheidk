@@ -5,8 +5,8 @@ function fetchform2list() {
     var reference_no = $("#reference_no").val();
     var loadingIndicator = $("#loading_indicator"); // Element for displaying the loading indicator
 
-  // Display the loading indicator
-  loadingIndicator.show();
+    // Display the loading indicator
+    loadingIndicator.show();
     $.ajax({
         url: "/admin/fetchform2list",
         method: 'get',
@@ -98,7 +98,16 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_total_fee').val(response.total_fee);
             if (response.transferee === 1) {
                 $('#stud_transferee').prop('checked', true);
-              }
+            }
+            if ($('#stud_permanent_province').val() === $('#stud_present_province').val() 
+            && $('#stud_permanent_city').val() === $('#stud_present_city').val() 
+            && $('#stud_permanent_barangay').val() === $('#stud_present_barangay').val() 
+            && $('#stud_permanent_street').val() === $('#stud_present_street').val() 
+            && $('#stud_permanent_zipcode').val() === $('#stud_present_zipcode').val()) {
+                $('#chk_address').prop('checked', true);
+            } else {
+                $('#chk_address').prop('checked', false);
+            }
         }
     });
 });
