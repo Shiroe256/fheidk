@@ -204,7 +204,7 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input id="stud_computer_fee"
-                                    name="stud_computer_fee" class="form-contro text-right" type="number"></div>
+                                    name="stud_computer_fee" class="form-control text-right" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input id="stud_cultural_fee"
                                     name="stud_cultural_fee" class="form-control text-right" type="number"></div>
                         </div>
