@@ -429,4 +429,29 @@ class AdminController extends Controller
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
 
+     // handle edit an student ajax request
+     public function viewstudentinfo(Request $request)
+     {
+         $id = $request->id;
+         $viewstudentdetails = BillingForm2::where('stud_uid', $id)->first();
+            return response()->json($viewstudentdetails);
+     }
+ 
+     // handle update an product ajax request
+    //  public function updateitemorder(Request $request)
+    //  {
+    //      //!validation transferred to middleware
+    //      $products = PurchaseOrderDetails::find($request->update_manage_purchase_order_product_id);
+    //      $productsData = [
+    //          //actual data being collected in the modal
+    //          'quantity' => $request->update_manage_purchase_order_product_quantity,
+    //          'total_amount' => $request->update_manage_purchase_order_product_total_amount
+    //      ];
+    //      $products->update($productsData);
+    //      return response()->json([
+    //          'status' => 200,
+    //      ]);
+    //  }
+ 
+
 }
