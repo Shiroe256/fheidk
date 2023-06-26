@@ -77,7 +77,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_tuition_amount').val(response.tuition_fee);
             $('#stud_entrance_and_admission_fee').val(response.entrance_and_admission_fee);
             $('#stud_athletic_fee').val(response.athletic_fee);
-            $('#stud.computer_fee').val(response.computer_fee);
+            $('#stud_computer_fee').val(response.computer_fee);
             $('#stud_cultural_fee').val(response.cultural_fee);
             $('#stud_development_fee').val(response.development_fee);
             $('#stud_guidance_fee').val(response.guidance_fee);
