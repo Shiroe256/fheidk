@@ -10,7 +10,6 @@
                 <div class="modal-body">
                     <div class="col"><input id="stud_uid" name="stud_uid" class="form-control" type="hidden">
                     </div>
-                    <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>FHE Award No.</label><input
@@ -20,6 +19,7 @@
                                     name="stud_id" class="form-control" type="text"></div>
                         </div>
                     </div>
+                    <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-3 col-xl-3"><label>Lastname</label><input id="stud_lname"
