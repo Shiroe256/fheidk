@@ -159,6 +159,26 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Computer Laboratory Units Enrolled</label><input
+                                    id="stud_comp_lab_units" name="stud_comp_lab_units" class="form-control"
+                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Amount of Computer Laboratory</label><input
+                                    id="stud_comp_lab_amount" name="stud_comp_lab_amount" class="form-control"
+                                    type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Laboratory Units Enrolled</label><input
+                                id="stud_lab_units" name="stud_lab_units" class="form-control"
+                                type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Amount of Laboratory</label><input
+                                    id="stud_lab_amount" name="stud_lab_amount" class="form-control"
+                                    type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
                             <div class="col-lg-6 col-xl-6">
                                 <div class="custom-control custom-checkbox"><input id="stud_with_nstp"
                                         name="stud_with_nstp" class="custom-control-input" type="checkbox"><label
