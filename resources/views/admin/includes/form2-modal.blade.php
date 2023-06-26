@@ -17,7 +17,7 @@
                                     id="stud_fhe_award_no" name="stud_fhe_award_no" class="form-control"
                                     type="text"></div>
                             <div class="col-lg-6 col-xl-6"><label>Student ID No.</label><input id="stud_id"
-                                    name="stud_id" class="form-control" type="number"></div>
+                                    name="stud_id" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
