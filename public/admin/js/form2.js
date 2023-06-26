@@ -44,6 +44,13 @@ $(document).on('click', '.btn_view_student_info', function (e) {
         success: function (response) {
             console.log(response);
             console.log(response.stud_id);
+            // Get all input elements within the modal
+            const inputs = document.querySelectorAll('#mod_student_info input');
+
+            // Loop through each input element and set the readonly attribute
+            inputs.forEach((input) => {
+                input.setAttribute('readonly', 'true');
+            });
             $('#stud_uid').val(response.stud_uid);
             $('#stud_fhe_award_no').val(response.fhe_award_no);
             $('#stud_id').val(response.stud_id);
@@ -99,11 +106,11 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             if (response.transferee === 1) {
                 $('#stud_transferee').prop('checked', true);
             }
-            if ($('#stud_permanent_province').val() === $('#stud_present_province').val() 
-            && $('#stud_permanent_city').val() === $('#stud_present_city').val() 
-            && $('#stud_permanent_barangay').val() === $('#stud_present_barangay').val() 
-            && $('#stud_permanent_street').val() === $('#stud_present_street').val() 
-            && $('#stud_permanent_zipcode').val() === $('#stud_present_zipcode').val()) {
+            if ($('#stud_permanent_province').val() === $('#stud_present_province').val()
+                && $('#stud_permanent_city').val() === $('#stud_present_city').val()
+                && $('#stud_permanent_barangay').val() === $('#stud_present_barangay').val()
+                && $('#stud_permanent_street').val() === $('#stud_present_street').val()
+                && $('#stud_permanent_zipcode').val() === $('#stud_present_zipcode').val()) {
                 $('#chk_address').prop('checked', true);
             } else {
                 $('#chk_address').prop('checked', false);

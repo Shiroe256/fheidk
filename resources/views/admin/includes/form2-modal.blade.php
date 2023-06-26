@@ -1,5 +1,5 @@
 <!---Student Information Form 2 Modal--->
-<div class="modal fade" role="dialog" tabindex="-1" id="modal">
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_student_info">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <form>
