@@ -245,6 +245,13 @@
                                     name="stud_school_id_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Total Fee</label><input
+                                    id="stud_total_fee" name="stud_total_fee" class="form-control"
+                                    type="number"></div>
+                        </div>
+                    </div>
                     <hr>
                     <h5 class="d-flex">Remarks</h5>
                     <div class="form-group">
