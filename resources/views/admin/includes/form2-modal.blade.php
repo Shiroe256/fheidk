@@ -249,9 +249,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-lg-6 col-xl-6">
+                        <div class="form-row justify-content-end">
+                            <div class="col-lg-6 col-xl-6 text-right">
                                 <label><strong>Total Fee</strong></label>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
                                 <input id="stud_total_fee" name="stud_total_fee" class="form-control" style="font-weight: bold; color: red;" type="number">
                             </div>
                         </div>
