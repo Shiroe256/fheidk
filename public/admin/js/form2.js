@@ -62,7 +62,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_present_barangay').val(response.present_barangay);
             $('#stud_present_street').val(response.present_street);
             $('#stud_present_zipcode').val(response.present_zipcode);
-            $('#stud_present_province').val(response.present_prov);
+            $('#stud_permanent_province').val(response.present_prov);
             $('#stud_permanent_city').val(response.permanent_city);
             $('#stud_permanent_barangay').val(response.permanent_barangay);
             $('#stud_permanent_street').val(response.permanent_street);
