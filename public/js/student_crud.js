@@ -216,6 +216,14 @@ fileInput.onchange = () => {
       ]
     });
 
+    for (var key in output) {
+      if (typeof output[key] === 'string') {
+        output[key] = output[key].trim();
+      } else if (typeof output[key] === 'object') {
+        trimValues(output[key]); // Recursively process nested objects or arrays
+      }
+    }
+
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
     let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
@@ -320,7 +328,7 @@ function validateFields(data) {
     // console.log(stud['birthdate']);
     if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
-    
+
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (numpattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (numpattern.test(stud['mothers_mname'])) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
@@ -417,6 +425,13 @@ function uploadBatch() {
           "remarks"
         ]
       });
+      for (var key in output) {
+        if (typeof output[key] === 'string') {
+          output[key] = output[key].trim();
+        } else if (typeof output[key] === 'object') {
+          trimValues(output[key]); // Recursively process nested objects or arrays
+        }
+      }
       $.ajaxSetup({
         headers: {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -487,7 +502,7 @@ function uploadBatch() {
           error: function (xhr, status, error) {
             deactivateUploadButton();
             Swal.fire('An Error has been encountered',
-            xhr.responseText + '. The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator.',
+              xhr.responseText + '. The students in the spreadsheet have NOT been uploaded. Please check your XLSX file or contact the administrator.',
               'error');
           }
         });
