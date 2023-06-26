@@ -307,7 +307,7 @@ function validateFields(data) {
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  var birthlocpattern = /^[0-9a-zA-Z][0-9a-zA-ZÑñ\s\'-.]*$/;
+  var birthlocpattern = /^[-/,0-9a-zA-Z][-/,0-9a-zA-ZÑñ\s\'-.]*$/;
   var addresspattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
   var brgypattern = /^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
   var zippattern = /^[1-9]\d{3}$/;
@@ -323,14 +323,14 @@ function validateFields(data) {
     // stud['lrnum']
     // if(!numpattern.test(stud['seq_no'])) error.push('');
     var bdate = new Date(stud['birthdate']);
-    if (!namepattern.test(stud['given_name']) || stud['given_name'] === undefined) error.push("Invalid given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (!namepattern.test(stud['mid_name'])) error.push("Invalid middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['given_name']) || stud['given_name'] === undefined) error.push("Invalid given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
+    if (!namepattern.test(stud['mid_name'])) error.push("Invalid middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
-    if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
     // console.log(stud['birthdate']);
     if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
-    if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
+    // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
