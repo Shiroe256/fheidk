@@ -8,7 +8,7 @@
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="col"><input id="stud_uid" name="stud_uid" class="form-control" type="text">
+                    <div class="col"><input id="stud_uid" name="stud_uid" class="form-control" type="hidden">
                     </div>
                     <h5>Personal Information</h5>
                     <div class="form-group">
