@@ -45,6 +45,9 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             console.log(response);
             console.log(response.stud_id);
             $('#student_id').val(response.stud_uid);
+            $('#student_lname').val(response.stud_lname);
+            $('#student_fname').val(response.stud_fname);
+            $('#student_mname').val(response.stud_mname);
         }
     });
 });

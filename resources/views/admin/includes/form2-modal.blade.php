@@ -8,72 +8,75 @@
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col"><input id="student_id" name="student_id" class="form-control" type="text"></div>
-                        </div>
+                    <div class="col"><input id="student_id" name="student_id" class="form-control" type="hidden">
                     </div>
                     <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Lastname</label><input id="stud_lname"
+                                    name="stud_lname" class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Firstname</label><input id="stud_fname"
+                                    name="stud_fname" class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Middlename</label><input id="stud_mname"
+                                    name="stud_mname" class="form-control" type="text"></div>
+                            <div class="col-lg-3 col-xl-3"><label>Extension</label><input id="stud_extname"
+                                    name="stud_extname" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input class="form-control"
-                                    type="date"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Sex</label><input id="stud_sex" name="stud_sex"
+                                    class="form-control" type="text">
+                            </div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthdate</label><input id="stud_bdate"
+                                    name="stud_bdate" class="form-control" type="date"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Birthplace</label><input id="stud_bplace"
+                                    name="stud_bplace" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Mother's Lastname</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Mother's Lastname</label><input id="stud_mother_lname"
+                                    name="stud_mother_lname" class="form-control" type="text"></div>
                             <div class="col-lg-4 col-xl-4"><label>Mother's Firstname</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_mother_fname" name="stud_mother_fname" class="form-control" type="text">
+                            </div>
                             <div class="col-lg-4 col-xl-4"><label>Mother's Middlename</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_mother_mname" name="stud_mother_mname" class="form-control" type="text">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Father's Lastname</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Father's Lastname</label><input id="stud_father_lname"
+                                    name="stud_father_lname" class="form-control" type="text"></div>
                             <div class="col-lg-4 col-xl-4"><label>Father's Firstname</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_father_fname" name="stud_father_fname" class="form-control" type="text">
+                            </div>
                             <div class="col-lg-4 col-xl-4"><label>Father's Middlename</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_father_mname" name="stud_father_mname" class="form-control" type="text">
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <h5>Present Address</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Province</label><input id="stud_present_province"
+                                    name="stud_present_province" class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>City</label><input id="stud_present_city"
+                                    name="stud_present_city" class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input id="stud_present_brgy"
+                                    name="stud_present_brgy" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
-                                    class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control"
+                                    id="stud_present_street" name="stud_present_street" class="form-control"
                                     type="text"></div>
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_present_zip"
+                                    name="stud_present_zip" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <hr>
@@ -81,58 +84,64 @@
                         <h5 class="d-flex">Permanent Address</h5>
                         <div class="custom-control custom-checkbox"><input class="custom-control-input"
                                 type="checkbox" id="formCheck-1"><label class="custom-control-label"
-                                for="formCheck-1">Same with the Present Address?</label></div>
+                                for="formCheck-1">Same with the
+                                Present Address?</label></div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-4 col-xl-4"><label>Province</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>City</label><input class="form-control"
-                                    type="text"></div>
-                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Province</label><input id="stud_permanent_province"
+                                    name="stud_permanent_province" class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>City</label><input id="stud_permanent_city"
+                                    name="stud_permanent_city" class="form-control" type="text"></div>
+                            <div class="col-lg-4 col-xl-4"><label>Barangay</label><input id="stud_permanent_barangay"
+                                    name="stud_permanent_barangay" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-9 col-xl-8"><label>House/Building No./Street</label><input
-                                    class="form-control" type="text"></div>
-                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input class="form-control"
+                                    id="stud_permanent_street" name="stud_permanent_street" class="form-control"
                                     type="text"></div>
+                            <div class="col-lg-3 col-xl-4"><label>Zip Code</label><input id="stud_permanent_zip"
+                                    name="stud_permanent_zip" class="form-control" type="text"></div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Contact Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Mobile Number</label><input id="stud_contact"
+                                    name="stud_contact" class="form-control" type="text"></div>
                             <div class="col-lg-6 col-xl-6"><label>Alternative Mobile Number</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_alt_contact" name="stud_alt_contact" class="form-control"
+                                    type="text"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Email Address</label><input id="stud_email"
+                                    name="stud_email" class="form-control" type="text"></div>
                             <div class="col-lg-6 col-xl-6"><label>Alternative Email Address</label><input
-                                    class="form-control" type="text"></div>
+                                    id="stud_alt_email" name="stud_alt_email" class="form-control" type="text">
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <h5 class="d-flex">Enrollment Information</h5>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input class="form-control"
+                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input
+                                    id="stud_course_enrolled" name="stud_course_enrolled" class="form-control"
                                     type="text"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input class="form-control"
-                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Year Level</label><input id="stud_year_level"
+                                    name="stud_year_level" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Total No. of Units Enrolled</label><input
-                                    class="form-control" type="number"></div>
+                                    id="stud_academic_units" name="stud_academic_units" class="form-control"
+                                    type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
                                     class="form-control" type="number"></div>
                         </div>
@@ -140,69 +149,74 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                        type="checkbox" id="formCheck-2"><label class="custom-control-label"
-                                        for="formCheck-2">With National Service Training Program (NSTP)</label></div>
+                                <div class="custom-control custom-checkbox"><input id="stud_with_nstp"
+                                        name="stud_with_nstp" class="custom-control-input" type="checkbox"><label
+                                        class="custom-control-label" for="stud_with_nstp">With National Service
+                                        Training Program (NSTP)</label></div>
                             </div>
                             <div class="col-lg-6 col-xl-6">
                                 <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                        type="checkbox" id="formCheck-3"><label class="custom-control-label"
-                                        for="formCheck-3">Transferee</label></div>
+                                        type="checkbox" id="stud_transferee" name="stud_transferee"><label
+                                        class="custom-control-label" for="stud_transferee">Transferee</label></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input class="form-control"
-                                    type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Admission Fee</label><input class="form-control"
+                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input id="stud_entrance_fee"
+                                    name="stud_entrance_fee" class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Admission Fee</label><input id="stud_admission_fee"
+                                    name="stud_admission_fee" class="form-control" type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input id="stud_athletic_fee"
+                                    name="stud_athletic_fee" class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input id="stud_computer_fee"
+                                    name="stud_computer_fee" class="form-control" type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input id="stud_cultural_fee"
+                                    name="stud_cultural_fee" class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input
+                                    id="stud_development_fee" name="stud_development_fee" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input class="form-control"
-                                    type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Computer Fee</label><input class="form-control"
-                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input id="stud_guidance_fee"
+                                    name="stud_guidance_fee" class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input id="stud_handbook_fee"
+                                    name="stud_handbook_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Cultural Fee</label><input class="form-control"
+                            <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input
+                                    id="stud_laboratory_fee" name="stud_laboratory_fee" class="form-control"
                                     type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Development Fee</label><input class="form-control"
-                                    type="number"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Guidance Fee</label><input class="form-control"
-                                    type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Handbook Fee</label><input class="form-control"
-                                    type="number"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Laboratory Fee</label><input class="form-control"
-                                    type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input class="form-control"
-                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Library Fee</label><input id="stud_library_fee"
+                                    name="stud_library_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Medical and Dental Fee</label><input
+                                    id="stud_medical_and_dental_fee" name="stud_medical_and_dental_fee"
                                     class="form-control" type="number"></div>
-                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input class="form-control"
+                            <div class="col-lg-6 col-xl-6"><label>Registration Fee</label><input
+                                    id="stud_registration_fee" name="stud_registration_fee" class="form-control"
                                     type="number"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input class="form-control"
-                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>School ID Fee</label><input id="stud_school_id_fee"
+                                    name="stud_school_id_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <hr>
@@ -210,14 +224,15 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-12 col-xl-12">
-                                <textarea class="form-control"></textarea>
+                                <textarea id="stud_remarks" name="stud_remarks" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-primary"
-                        type="button">Save</button></div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="button">Save</button>
+                </div>
             </form>
         </div>
     </div>
