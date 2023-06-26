@@ -164,8 +164,8 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Entrance Fee</label><input
-                                    id="stud_entrance_and_admission_fee" name="stud_entrance_fee"
+                            <div class="col-lg-6 col-xl-6"><label>Entrance/ Admission Fee</label><input
+                                    id="stud_entrance_and_admission_fee" name="stud_entrance_and_admission_fee"
                                     class="form-control" type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Athletic Fee</label><input id="stud_athletic_fee"
                                     name="stud_athletic_fee" class="form-control" type="number"></div>
