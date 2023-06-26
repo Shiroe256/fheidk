@@ -102,7 +102,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_medical_and_dental_fee').val(response.medical_and_dental_fee);
             $('#stud_registration_fee').val(response.registration_fee);
             $('#stud_school_id_fee').val(response.school_id_fee);
-            $('#stud_total_fee').val(formatNumber(response.total_fee));
+            $('#stud_total_fee').val(parseFloat(response.total_fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
             if (response.transferee === 1) {
                 $('#stud_transferee').prop('checked', true);
             }
@@ -119,9 +119,6 @@ $(document).on('click', '.btn_view_student_info', function (e) {
     });
 });
 
-function formatNumber(number) {
-    return parseFloat(number).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  }
 
 // $("#frm_update_products").submit(function (e) {
 //     e.preventDefault();
