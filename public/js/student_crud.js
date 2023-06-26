@@ -33,6 +33,16 @@ var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
 
+function trimValues(obj) {
+  for (var key in obj) {
+    if (typeof obj[key] === 'string') {
+      obj[key] = obj[key].trim();
+    } else if (typeof obj[key] === 'object') {
+      trimValues(obj[key]);
+    }
+  }
+}
+
 btn_upload.onclick = function (e) {
   mod_upload_batch.show();
 }
@@ -216,13 +226,7 @@ fileInput.onchange = () => {
       ]
     });
 
-    for (var key in output) {
-      if (typeof output[key] === 'string') {
-        output[key] = output[key].trim();
-      } else if (typeof output[key] === 'object') {
-        trimValues(output[key]); // Recursively process nested objects or arrays
-      }
-    }
+    trimValues(output);
 
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
@@ -425,13 +429,7 @@ function uploadBatch() {
           "remarks"
         ]
       });
-      for (var key in output) {
-        if (typeof output[key] === 'string') {
-          output[key] = output[key].trim();
-        } else if (typeof output[key] === 'object') {
-          trimValues(output[key]); // Recursively process nested objects or arrays
-        }
-      }
+      trimValues(output);
       $.ajaxSetup({
         headers: {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
