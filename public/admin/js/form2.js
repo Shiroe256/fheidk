@@ -50,6 +50,13 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_mname').val(response.stud_mname);
             $('#stud_sex').val(response.stud_sex);
             $('#stud_bdate').val(response.stud_birth_date);
+            $('#stud_bplace').val(response.stud_birth_place);
+            $('#stud_mother_lname').val(response.m_lname);
+            $('#stud_mother_fname').val(response.m_fname);
+            $('#stud_mother_mname').val(response.m_mname);
+            $('#stud_father_lname').val(response.f_lname);
+            $('#stud_father_fname').val(response.f_fname);
+            $('#stud_father_mname').val(response.f_mname);
         }
     });
 });
