@@ -250,8 +250,10 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total Fee</label><input id="stud_total_fee"
-                                    name="stud_total_fee" class="form-control" type="number"></div>
+                            <div class="col-lg-6 col-xl-6">
+                                <label><strong>Total Fee</strong></label>
+                                <input id="stud_total_fee" name="stud_total_fee" class="form-control" style="font-weight: bold; color: red;" type="number">
+                            </div>
                         </div>
                     </div>
                     <hr>
