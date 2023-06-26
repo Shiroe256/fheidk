@@ -19,6 +19,7 @@
                                     name="stud_id" class="form-control" type="text"></div>
                         </div>
                     </div>
+                    <hr>
                     <h5>Personal Information</h5>
                     <div class="form-group">
                         <div class="form-row">
