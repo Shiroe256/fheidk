@@ -307,9 +307,9 @@ function validateFields(data) {
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  var birthlocpattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
+  var birthlocpattern = /^[0-9a-zA-Z][0-9a-zA-ZÑñ\s\'-.]*$/;
   var addresspattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
-  var brgypattern = /^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
+  var brgypattern = /^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
   var zippattern = /^[1-9]\d{3}$/;
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
   var transfereepattern = /^(yes|no)$/i;
@@ -333,8 +333,8 @@ function validateFields(data) {
     if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (numpattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
-    if (numpattern.test(stud['mothers_mname'])) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
+    if (!namepattern.test(stud['mothers_mname'] || stud['mothers_mname'] === undefined)) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (').");
     if (!emailpattern.test(stud['email']) || stud['email'] === undefined) error.push('Invalid email format. Please use this format: name@email.com');
     // if (!emailpattern.test(stud['a_email']) && stud['a_email'] != '') error.push('The alternate email field isn\'t using a valid format');
     // if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
