@@ -102,8 +102,11 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_medical_and_dental_fee').val(response.medical_and_dental_fee);
             $('#stud_registration_fee').val(response.registration_fee);
             $('#stud_school_id_fee').val(response.school_id_fee);
-            var totalFee = response.total_fee.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
-            $('#stud_total_fee').val(totalFee);
+            let formatter = new Intl.NumberFormat(undefined, {
+                style: 'currency',
+                currency: 'php',
+            });
+            $('#stud_total_fee').val(formatter.format(response.total_fee));
             if (response.transferee === 1) {
                 $('#stud_transferee').prop('checked', true);
             }
