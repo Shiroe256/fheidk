@@ -57,12 +57,12 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_father_lname').val(response.f_lname);
             $('#stud_father_fname').val(response.f_fname);
             $('#stud_father_mname').val(response.f_mname);
-            $('#stud_present_province').val(response.present_province);
+            $('#stud_present_province').val(response.present_prov);
             $('#stud_present_city').val(response.present_city);
             $('#stud_present_barangay').val(response.present_barangay);
             $('#stud_present_street').val(response.present_street);
             $('#stud_present_zipcode').val(response.present_zipcode);
-            $('#stud_present_province').val(response.present_province);
+            $('#stud_present_province').val(response.present_prov);
             $('#stud_permanent_city').val(response.permanent_city);
             $('#stud_permanent_barangay').val(response.permanent_barangay);
             $('#stud_permanent_street').val(response.permanent_street);
@@ -75,6 +75,7 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_year_level').val(response.year_level);
             $('#stud_academic_units').val(response.academic_unit);
             $('#stud_tuition_amount').val(response.tuition_fee);
+
         }
     });
 });
