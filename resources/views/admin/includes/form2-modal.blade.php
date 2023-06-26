@@ -150,7 +150,7 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6"><label>Total No. of Units Enrolled</label><input
-                                    id="stud_academic_units" name="stud_academic_units" class="form-control"
+                                    id="stud_academic_units" name="stud_academic_units" class="form-control text-left"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
                                     id="stud_tuition_amount" name="stud_tuition_amount" class="form-control"
