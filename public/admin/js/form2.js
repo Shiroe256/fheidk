@@ -44,7 +44,9 @@ $(document).on('click', '.btn_view_student_info', function (e) {
         success: function (response) {
             console.log(response);
             console.log(response.stud_id);
-            $('#stud_id').val(response.stud_uid);
+            $('#stud_uid').val(response.stud_uid);
+            $('#stud_fhe_award_no').val(response.fhe_award_no);
+            $('#stud_id').val(response.stud_id);
             $('#stud_lname').val(response.stud_lname);
             $('#stud_fname').val(response.stud_fname);
             $('#stud_mname').val(response.stud_mname);
