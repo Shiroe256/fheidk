@@ -28,7 +28,7 @@
                     <span class="badge badge-pill badge-danger billing-status-badge">Dropped<br /></span>
                 @endif
             </td>
-            <td class="text-right">{{ $student->total_fee }}</td>
+            <td class="text-right">{{ number_format(doubleval($student->total_fee), 2, '.', ',') }}</td>
             <td class="text-center">
                 <button id="{{$student->stud_uid}}" class="btn_view_student_info btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#mod_student_info">View</button>
             </td>
