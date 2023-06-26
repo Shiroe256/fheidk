@@ -307,9 +307,9 @@ function validateFields(data) {
   var contactnumpattern = /^(9)\d{9}$/;
   var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  var birthlocpattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
+  var birthlocpattern = /^[0-9a-zA-Z][0-9a-zA-ZÑñ\s\'-.]*$/;
   var addresspattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
-  var brgypattern = /^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
+  var brgypattern = /^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
   var zippattern = /^[1-9]\d{3}$/;
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
   var transfereepattern = /^(yes|no)$/i;
