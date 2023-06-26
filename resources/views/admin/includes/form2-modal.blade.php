@@ -94,7 +94,7 @@
                         <h5 class="d-flex">Permanent Address</h5>
                         <div class="custom-control custom-checkbox"><input class="custom-control-input"
                                 type="checkbox" id="chk_address" name="chk_address"><label class="custom-control-label"
-                                for="chk_address" readonly>Same with the
+                                for="chk_address" disabled>Same with the
                                 Present Address?</label></div>
                     </div>
                     <div class="form-group">
@@ -190,7 +190,7 @@
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-6">
                                 <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                        type="checkbox" id="stud_transferee" name="stud_transferee" readonly><label
+                                        type="checkbox" id="stud_transferee" name="stud_transferee" disabled><label
                                         class="custom-control-label" for="stud_transferee">Transferee</label></div>
                             </div>
                         </div>
