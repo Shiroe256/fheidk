@@ -37,8 +37,8 @@
     </tbody>
     <tfoot>
         <tr>
-            <th>TOTAL</th>
-            <th>{{ $totalAmount }}</th>
+            <th colspan="5">TOTAL</th>
+            <th colspan="3">{{ $totalAmount }}</th>
         </tr>
     </tfoot>
 </table>
