@@ -12,9 +12,8 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>FHE Award No.</label><input
-                                    id="stud_fhe_award_no" name="stud_fhe_award_no" class="form-control"
-                                    type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>FHE Award No.</label><input id="stud_fhe_award_no"
+                                    name="stud_fhe_award_no" class="form-control" type="text"></div>
                             <div class="col-lg-6 col-xl-6"><label>Student ID No.</label><input id="stud_id"
                                     name="stud_id" class="form-control" type="text"></div>
                         </div>
@@ -64,7 +63,8 @@
                                     id="stud_father_fname" name="stud_father_fname" class="form-control" type="text">
                             </div>
                             <div class="col-lg-4 col-xl-4"><label>Father's Middlename</label><input
-                                    id="stud_father_mname" name="stud_father_mname" class="form-control" type="text">
+                                    id="stud_father_mname" name="stud_father_mname" class="form-control"
+                                    type="text">
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total No. of Units Enrolled</label><input
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Academic Units</label><input
                                     id="stud_academic_units" name="stud_academic_units" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Tuition Fee</label><input
@@ -159,7 +159,7 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total No. of Computer Laboratory Units Enrolled</label><input
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Computer Laboratory Units</label><input
                                     id="stud_comp_lab_units" name="stud_comp_lab_units" class="form-control"
                                     type="number"></div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Computer Laboratory</label><input
@@ -169,22 +169,25 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total No. of Laboratory Units Enrolled</label><input
-                                id="stud_lab_units" name="stud_lab_units" class="form-control"
-                                type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of Laboratory Units</label><input
+                                    id="stud_lab_units" name="stud_lab_units" class="form-control" type="number">
+                            </div>
                             <div class="col-lg-6 col-xl-6"><label>Amount of Laboratory</label><input
-                                    id="stud_lab_amount" name="stud_lab_amount" class="form-control"
-                                    type="number"></div>
+                                    id="stud_lab_amount" name="stud_lab_amount" class="form-control" type="number">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6">
-                                <div class="custom-control custom-checkbox"><input id="stud_with_nstp"
-                                        name="stud_with_nstp" class="custom-control-input" type="checkbox"><label
-                                        class="custom-control-label" for="stud_with_nstp">With National Service
-                                        Training Program (NSTP)</label></div>
+                            <div class="col-lg-6 col-xl-6"><label>Total No. of NSTP Units</label><input
+                                    id="stud_nstp_units" name="stud_nstp_units" class="form-control" type="number">
                             </div>
+                            <div class="col-lg-6 col-xl-6"><label>Amount of NSTP</label><input id="stud_nstp_amount"
+                                    name="stud_nstp_amount" class="form-control" type="number"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
                             <div class="col-lg-6 col-xl-6">
                                 <div class="custom-control custom-checkbox"><input class="custom-control-input"
                                         type="checkbox" id="stud_transferee" name="stud_transferee"><label
@@ -247,9 +250,8 @@
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Total Fee</label><input
-                                    id="stud_total_fee" name="stud_total_fee" class="form-control"
-                                    type="number"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Total Fee</label><input id="stud_total_fee"
+                                    name="stud_total_fee" class="form-control" type="number"></div>
                         </div>
                     </div>
                     <hr>
