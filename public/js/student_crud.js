@@ -233,9 +233,9 @@ fileInput.onchange = () => {
     let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
     let ctr = 1;
     errors.forEach(item => {
-      if (item.length > 0) ++errorctr;
-      errorhtml += '<tr><td>' + ctr++ + '</td><td><ul>';
-      item.forEach(column => {
+      if (item.error.length > 0) ++errorctr;
+      errorhtml += '<tr><td>' + item.seq_no + '</td><td><ul>';
+      item.error.forEach(column => {
         errorhtml += '<li>' + column + '</li>';
       });
       errorhtml += '</ul></td></tr>';
@@ -300,7 +300,6 @@ function resetUploadButton() {
 
 //generates a 2d array of all the errors per line
 function validateFields(data) {
-  console.log(data);
   var errors = [];
   var numpattern = /\d/;
   var sexpattern = /^(male|Male|Female|female|MALE|FEMALE)$/; //final regex pattern
@@ -364,7 +363,7 @@ function validateFields(data) {
     // stud['exam_result']
     // stud['remarks']
 
-    if (error.length > 0) errors.push(error);
+    if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error});
   }
   return errors;
 }
@@ -439,11 +438,11 @@ function uploadBatch() {
       let errorctr = 0; //counts error
       var errors = validateFields(output); //storefields to validate
       let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
-      let ctr = 1;
+      // let ctr = 1;
       errors.forEach(item => {
-        if (item.length > 0) ++errorctr;
-        errorhtml += '<tr><td>' + ctr++ + '</td><td><ul>';
-        item.forEach(column => {
+        if (item.error.length > 0) ++errorctr;
+        errorhtml += '<tr><td>' + item.seq_no + '</td><td><ul>';
+        item.error.forEach(column => {
           errorhtml += '<li>' + column + '</li>';
         });
         errorhtml += '</ul></td></tr>';
