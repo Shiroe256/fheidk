@@ -48,6 +48,8 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_lname').val(response.stud_lname);
             $('#stud_fname').val(response.stud_fname);
             $('#stud_mname').val(response.stud_mname);
+            $('#stud_sex').val(response.stud_sex);
+            $('#stud_bdate').val(response.stud_birthdate);
         }
     });
 });
