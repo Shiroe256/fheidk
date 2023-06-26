@@ -43,7 +43,6 @@ $(document).on('click', '.btn_view_student_info', function (e) {
         },
         success: function (response) {
             console.log(response);
-            console.log(response.stud_id);
             // Get all input elements within the modal
             const inputs = document.querySelectorAll('#mod_student_info input');
 
