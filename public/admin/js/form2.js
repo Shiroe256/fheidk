@@ -96,6 +96,9 @@ $(document).on('click', '.btn_view_student_info', function (e) {
             $('#stud_registration_fee').val(response.registration_fee);
             $('#stud_school_id_fee').val(response.school_id_fee);
             $('#stud_total_fee').val(response.total_fee);
+            if (response.transferee === 1) {
+                $('#stud_transferee').prop('checked', true);
+              }
         }
     });
 });
