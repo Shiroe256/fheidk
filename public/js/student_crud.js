@@ -234,7 +234,7 @@ fileInput.onchange = () => {
     let ctr = 1;
     errors.forEach(item => {
       if (item.error.length > 0) ++errorctr;
-      errorhtml += '<tr><td>' + item.seq_no + '</td><td><ul>';
+      errorhtml += '<tr><td style="vertical-align: top;">' + item.seq_no + '</td><td><ul>';
       item.error.forEach(column => {
         errorhtml += '<li>' + column + '</li>';
       });
@@ -441,7 +441,7 @@ function uploadBatch() {
       // let ctr = 1;
       errors.forEach(item => {
         if (item.error.length > 0) ++errorctr;
-        errorhtml += '<tr><td>' + item.seq_no + '</td><td><ul>';
+        errorhtml += '<tr><td style="vertical-align: top;">' + item.seq_no + '</td><td><ul>';
         item.error.forEach(column => {
           errorhtml += '<li>' + column + '</li>';
         });
