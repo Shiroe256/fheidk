@@ -30,7 +30,6 @@ function fetchform2list() {
     });
 }
 
-//Update Products
 $(document).on('click', '.btn_view_student_info', function (e) {
     e.preventDefault();
     let id = $(this).attr('id');
