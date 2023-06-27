@@ -266,7 +266,19 @@ fileInput.onchange = () => {
   reader.readAsArrayBuffer(fileInput.files[0]);
 }
 queueButton.onclick = function () {
-  queueBilling();
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to edit the billing till after checking.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Check Billing'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      queueBilling();
+    }
+  })
 }
 function deactivateUploadButton() {
   uploadButton.disabled = true;
@@ -363,7 +375,7 @@ function validateFields(data) {
     // stud['exam_result']
     // stud['remarks']
 
-    if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error});
+    if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error });
   }
   return errors;
 }
