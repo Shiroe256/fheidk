@@ -69,6 +69,9 @@ $(document).on('click', '.btn_view_applicant_info', function (e) {
             $('#applicant_exam_result').val(response.exam_result);
             $('#applicant_status').val(response.stud_status);
             $('#applicant_total_fee').val(parseFloat(response.entrance_and_admission_fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+            if (response.transferee === 1) {
+                $('#applicant_transferee').prop('checked', true);
+            }
         } 
     });
 });

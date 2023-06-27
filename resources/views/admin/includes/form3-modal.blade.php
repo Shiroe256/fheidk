@@ -75,15 +75,15 @@
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-12">
                                 <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                        type="checkbox" id="chk_transferee" name="chk_transferee"><label
+                                        type="checkbox" id="applicant_transferee" name="applicant_transferee"><label
                                         class="custom-control-label" for="chk_transferee">Transferee</label></div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
-                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input id="applicant_course"
-                                    name="applicant_course" class="form-control" type="text"></div>
+                            <div class="col-lg-6 col-xl-6"><label>Course Enrolled</label><input id="applicant_course_enrolled"
+                                    name="applicant_course_enrolled" class="form-control" type="text"></div>
                             <div class="col-lg-6 col-xl-6"><label>Year Level</label><input id="applicant_year_level"
                                     name="applicant_year_level" class="form-control" type="number"></div>
                         </div>
