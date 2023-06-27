@@ -23,7 +23,7 @@
             <td class="text-center">{{$student->total_exam_taken}}</td>
             <td class="text-right">{{$student->entrance_and_admission_fee}}</td>
             <td>{!! $student->exam_result !!}</td>
-            <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#modal_2">View</button></td>
+            <td class="text-center"><button class="btn btn-outline-info btn-block btn-sm border rounded-pill" type="button" data-toggle="modal" data-target="#mod_applicant_info">View</button></td>
         </tr>
         @endforeach
     </tbody>

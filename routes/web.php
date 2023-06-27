@@ -152,6 +152,7 @@ Route::get('/viewstudentinfo', [AdminController::class, 'viewstudentinfo'])->nam
 // Route::post('/updateitemorder', [App\Http\Controllers\PurchaseOrderController::class, 'updateitemorder'])->name('updateitemorder')->middleware('auth');
 Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
 Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name('fetchform3list');
+Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])->name('viewapplicantinfo');
 
 //update billing status
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
