@@ -107,7 +107,7 @@
                                 <input id="applicant_status" name="applicant_status" class="form-control"
                                     type="text">
                             </div>
-                            <div class="col-lg-6 col-xl-6 offset-lg-6">
+                            <div class="col-lg-6 col-xl-6">
                                 <label><strong>Total Fee</strong></label>
                                 <input id="applicant_total_fee" name="applicant_total_fee"
                                     class="form-control text-danger font-weight-bold" type="text">
