@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="form-row">
-                            <input id="stud_uid" name="stud_uid" class="form-control" type="text">
+                            <input id="stud_uid" name="stud_uid" class="form-control" type="hidden">
                             <div class="col-lg-6 col-xl-6">
                                 <label>Application ID</label>
                                 <input id="applicant_app_id" name="applicant_app_id" class="form-control"
