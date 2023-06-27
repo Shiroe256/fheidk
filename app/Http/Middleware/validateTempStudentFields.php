@@ -56,11 +56,11 @@ class validateTempStudentFields
             // 'mothers_lname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
             'pres_prov' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
             'pres_city' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'pres_brgy' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'pres_brgy' => ['required', 'max:255', 'regex:/^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
             'pres_zip' => ['required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
             'perm_prov' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
             'perm_city' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
-            'perm_brgy' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
+            'perm_brgy' => ['required', 'max:255', 'regex:/^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/'],
             'perm_zip' => ['required', 'max:255', 'regex:/^[1-9]\d{3}$/'],
             'email' => ['required', 'email', 'max:255'],
             'contact_number' => ['required', 'regex:/^(9)\d{9}$/']

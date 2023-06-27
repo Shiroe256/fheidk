@@ -1607,7 +1607,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $billing = Billing::where('reference_no', $request->reference_no)->first();
         $billing->billing_status = 2;
         $billing->save();
-        $this->checkBilling();
+        // $this->checkBilling();
         return response('Success', 200);
     }
 
