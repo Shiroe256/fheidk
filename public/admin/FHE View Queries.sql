@@ -1244,4 +1244,107 @@ WHERE
 GROUP BY
     `vw_billing_details`.`stud_uid`
 ORDER BY NULL
-    
+
+
+//Updated Query for tbl_billing_form_3
+SELECT
+    `vw_billing_details`.`stud_uid` AS `stud_uid`,
+    `vw_billing_details`.`reference_no` AS `reference_no`,
+    `vw_billing_details`.`hei_psg_region` AS `hei_psg_region`,
+    `vw_billing_details`.`hei_sid` AS `hei_sid`,
+    `vw_billing_details`.`hei_uii` AS `hei_uii`,
+    `vw_billing_details`.`hei_name` AS `hei_name`,
+    `vw_billing_details`.`ac_year` AS `ac_year`,
+    `vw_billing_details`.`semester` AS `semester`,
+    `vw_billing_details`.`app_id` AS `app_id`,
+    `vw_billing_details`.`fhe_award_no` AS `fhe_award_no`,
+    `vw_billing_details`.`stud_id` AS `stud_id`,
+    `vw_billing_details`.`lrn_no` AS `lrn_no`,
+    `vw_billing_details`.`stud_lname` AS `stud_lname`,
+    `vw_billing_details`.`stud_fname` AS `stud_fname`,
+    `vw_billing_details`.`stud_mname` AS `stud_mname`,
+    `vw_billing_details`.`stud_ext_name` AS `stud_ext_name`,
+    `vw_billing_details`.`stud_sex` AS `stud_sex`,
+    `vw_billing_details`.`stud_birth_date` AS `stud_birth_date`,
+    `vw_billing_details`.`stud_birth_place` AS `stud_birth_place`,
+    `vw_billing_details`.`f_lname` AS `f_lname`,
+    `vw_billing_details`.`f_fname` AS `f_fname`,
+    `vw_billing_details`.`f_mname` AS `f_mname`,
+    `vw_billing_details`.`m_lname` AS `m_lname`,
+    `vw_billing_details`.`m_fname` AS `m_fname`,
+    `vw_billing_details`.`m_mname` AS `m_mname`,
+    `vw_billing_details`.`present_prov` AS `present_prov`,
+    `vw_billing_details`.`present_city` AS `present_city`,
+    `vw_billing_details`.`present_street` AS `present_street`,
+    `vw_billing_details`.`present_zipcode` AS `present_zipcode`,
+    `vw_billing_details`.`permanent_prov` AS `permanent_prov`,
+    `vw_billing_details`.`permanent_city` AS `permanent_city`,
+    `vw_billing_details`.`permanent_street` AS `permanent_street`,
+    `vw_billing_details`.`permanent_zipcode` AS `permanent_zipcode`,
+    `vw_billing_details`.`stud_email` AS `stud_email`,
+    `vw_billing_details`.`stud_alt_email` AS `stud_alt_email`,
+    `vw_billing_details`.`stud_phone_no` AS `stud_phone_no`,
+    `vw_billing_details`.`stud_alt_phone_no` AS `stud_alt_phone_no`,
+    `vw_billing_details`.`transferee` AS `transferee`,
+    `vw_billing_details`.`degree_program` AS `degree_program`,
+    `vw_billing_details`.`year_level` AS `year_level`,
+    `vw_billing_details`.`total_exam_taken` AS `total_exam_taken`,
+    `vw_billing_details`.`exam_result` AS `exam_result`,
+    `vw_billing_details`.`remarks` AS `remarks`,
+    `vw_billing_details`.`stud_status` AS `stud_status`,
+    IF(`vw_billing_details`.`stud_status` = 0,
+        (
+            SUM(
+                (
+                    CASE WHEN(
+                        (`vw_billing_details`.`form` = 3) AND (
+                            `vw_billing_details`.`category` LIKE '%exam%'
+                        )
+                    ) THEN(
+                        `vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`
+                    ) ELSE 0
+                END
+            )
+        ) + SUM(
+            (
+                CASE WHEN(
+                    (`vw_billing_details`.`form` = 3) AND NOT (
+                        (`vw_billing_details`.`category` LIKE '%exam%')
+                    )
+                ) THEN `vw_billing_details`.`amount` ELSE 0
+                END
+            )
+        )
+    ),
+    IF(`vw_billing_details`.`stud_status` = 4,
+        SUM(
+            (
+                CASE WHEN(
+                    (`vw_billing_details`.`form` = 3) AND (
+                        `vw_billing_details`.`category` LIKE '%exam%'
+                    )
+                ) THEN(
+                    `vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`
+                ) ELSE 0
+                END
+            )
+        ),
+        0
+    )
+) AS `entrance_and_admission_fee`
+FROM
+    `unifastgov_fhedev`.`vw_billing_details`
+WHERE
+    (
+        (
+            (`vw_billing_details`.`bs_osf_settings` = 1) OR
+            (`vw_billing_details`.`bs_student_osf_settings` = 1)
+        ) AND
+        (`vw_billing_details`.`form` = 3)
+    ) AND
+    (`vw_billing_details`.`stud_status` IN (0, 4))
+GROUP BY
+    `vw_billing_details`.`stud_uid`
+HAVING
+    (`entrance_and_admission_fee` IS NOT NULL)
+ORDER BY NULL;

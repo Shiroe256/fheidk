@@ -35,7 +35,7 @@ class AdminController extends Controller
         $heis = Hei::where('fhe_benefits', 1)
             ->orderBy('hei_name', 'asc') // Sort by hei_name in ascending order
             ->get();
-    
+
         $data['heis'] = $heis;
         return view('admin.manage-billing-list', $data);
     }
@@ -85,6 +85,14 @@ class AdminController extends Controller
         return view('admin.elements.form2list', $data);
     }
 
+    // handle edit an student ajax request
+    public function viewstudentinfo(Request $request)
+    {
+        $id = $request->id;
+        $viewstudentdetails = BillingForm2::where('stud_uid', $id)->first();
+        return response()->json($viewstudentdetails);
+    }
+
     public function form3($reference_no)
     {
         // Query the database to retrieve the data based on the selected values
@@ -103,6 +111,14 @@ class AdminController extends Controller
         $data['students'] = $students;
         return view('admin.elements.form3list', $data);
     }
+
+    public function viewapplicantinfo(Request $request)
+    {
+        $id = $request->id;
+        $viewapplicantdetails = BillingForm3::where('stud_uid', $id)->first();
+        return response()->json($viewapplicantdetails);
+    }
+
 
     public function manageuserpage($hei_uii)
     {
@@ -285,91 +301,91 @@ class AdminController extends Controller
     }
 
     public function openbilling(Request $request)
-{
-    // Query the database to retrieve the data based on the selected values
+    {
+        // Query the database to retrieve the data based on the selected values
 
-    // Check if open_billing_hei is not equal to 'All'
-    if ($request->open_billing_hei !== 'All') {
-        $heis = Hei::where('hei_uii', $request->open_billing_hei)->get();
-    } else {
-        $heis = Hei::where('fhe_benefits', 1)->get();
-    }
+        // Check if open_billing_hei is not equal to 'All'
+        if ($request->open_billing_hei !== 'All') {
+            $heis = Hei::where('hei_uii', $request->open_billing_hei)->get();
+        } else {
+            $heis = Hei::where('fhe_benefits', 1)->get();
+        }
 
-    $newBilling = [];
-    $existingReferences = [];
-    $schoolsWithoutRecords = [];
+        $newBilling = [];
+        $existingReferences = [];
+        $schoolsWithoutRecords = [];
 
-    foreach ($heis as $data) {
+        foreach ($heis as $data) {
 
-        $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
+            $reference_no = $data->hei_psg_region . '-' . $data->hei_uii . '-' . $request->open_billing_ac_year . '-' . $request->open_billing_semester;
 
-        // Check if the reference number already exists in the Billing table
-        $existingBilling = Billing::where('reference_no', $reference_no)->first();
+            // Check if the reference number already exists in the Billing table
+            $existingBilling = Billing::where('reference_no', $reference_no)->first();
 
-        if (!$existingBilling) {
-            // Check if hei_uii exists in OtherSchoolFees model
-            $existingOtherFee = OtherSchoolFees::where('hei_uii', $data->hei_uii)->first();
+            if (!$existingBilling) {
+                // Check if hei_uii exists in OtherSchoolFees model
+                $existingOtherFee = OtherSchoolFees::where('hei_uii', $data->hei_uii)->first();
 
-            if (!$existingOtherFee) {
-                // hei_uii does not exist, add to schoolsWithoutRecords
-                $schoolsWithoutRecords[] = ['hei_name' => $data->hei_name];
-                continue;
+                if (!$existingOtherFee) {
+                    // hei_uii does not exist, add to schoolsWithoutRecords
+                    $schoolsWithoutRecords[] = ['hei_name' => $data->hei_name];
+                    continue;
+                } else {
+                    $newBilling[] = [
+                        'hei_psg_region' => $data->hei_psg_region,
+                        'hei_sid' => $data->hei_sid,
+                        'hei_uii' => $data->hei_uii,
+                        'reference_no' => $reference_no,
+                        'ac_year' => $request->open_billing_ac_year,
+                        'semester' => $request->open_billing_semester,
+                        'billing_status' => 1,
+                    ];
+                }
             } else {
-                $newBilling[] = [
-                    'hei_psg_region' => $data->hei_psg_region,
-                    'hei_sid' => $data->hei_sid,
-                    'hei_uii' => $data->hei_uii,
+                $existingReferences[] = [
                     'reference_no' => $reference_no,
-                    'ac_year' => $request->open_billing_ac_year,
-                    'semester' => $request->open_billing_semester,
-                    'billing_status' => 1,
+                    'hei_name' => $data->hei_name,
                 ];
             }
-        } else {
-            $existingReferences[] = [
-                'reference_no' => $reference_no,
-                'hei_name' => $data->hei_name,
-            ];
-        }
-    }
-
-    if (!empty($newBilling)) {
-        Billing::insert($newBilling);
-
-        $otherfees = OtherSchoolFees::selectRaw('uid')->get();
-        $uid = [];
-        foreach ($otherfees as $row) {
-            $uid[] = $row->uid;
         }
 
-        // Upsert the settings using the first reference number from newBilling
-        $firstReference = reset($newBilling);
-        $this->upsertSettings($firstReference['reference_no'], $uid);
-    }
+        if (!empty($newBilling)) {
+            Billing::insert($newBilling);
 
-    $response = [
-        'status' => 200,
-        // 'data' => $newBilling
-    ];
+            $otherfees = OtherSchoolFees::selectRaw('uid')->get();
+            $uid = [];
+            foreach ($otherfees as $row) {
+                $uid[] = $row->uid;
+            }
 
-    if (!empty($existingReferences)) {
-        $message = 'The following reference number(s) already exist:<br>';
-        foreach ($existingReferences as $index => $reference) {
-            $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
+            // Upsert the settings using the first reference number from newBilling
+            $firstReference = reset($newBilling);
+            $this->upsertSettings($firstReference['reference_no'], $uid);
         }
-        $response['message'] = $message;
-    }
-    
-    if (!empty($schoolsWithoutRecords)) {
-        $message = 'The following schools do not have records in TOSF and cannot open billing:<br>';
-        foreach ($schoolsWithoutRecords as $index => $school) {
-            $message .= ($index + 1) . '. ' . $school['hei_name'] . '<br>';
-        }
-        $response['message'] = $message;
-    }
 
-    return response()->json($response);
-}
+        $response = [
+            'status' => 200,
+            // 'data' => $newBilling
+        ];
+
+        if (!empty($existingReferences)) {
+            $message = 'The following reference number(s) already exist:<br>';
+            foreach ($existingReferences as $index => $reference) {
+                $message .= ($index + 1) . '. ' . $reference['reference_no'] . ' - ' . $reference['hei_name'] . '<br>';
+            }
+            $response['message'] = $message;
+        }
+
+        if (!empty($schoolsWithoutRecords)) {
+            $message = 'The following schools do not have records in TOSF and cannot open billing:<br>';
+            foreach ($schoolsWithoutRecords as $index => $school) {
+                $message .= ($index + 1) . '. ' . $school['hei_name'] . '<br>';
+            }
+            $response['message'] = $message;
+        }
+
+        return response()->json($response);
+    }
 
     public function forwardtoafms(Request $request)
     {
@@ -432,15 +448,7 @@ class AdminController extends Controller
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
 
-     // handle edit an student ajax request
-     public function viewstudentinfo(Request $request)
-     {
-         $id = $request->id;
-         $viewstudentdetails = BillingForm2::where('stud_uid', $id)->first();
-            return response()->json($viewstudentdetails);
-     }
- 
-     // handle update an product ajax request
+    // handle update an product ajax request
     //  public function updateitemorder(Request $request)
     //  {
     //      //!validation transferred to middleware
@@ -455,6 +463,6 @@ class AdminController extends Controller
     //          'status' => 200,
     //      ]);
     //  }
- 
+
 
 }
