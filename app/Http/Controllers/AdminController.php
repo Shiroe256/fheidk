@@ -77,11 +77,122 @@ class AdminController extends Controller
     {
         $reference_no = $request->reference_no;
 
-        $students = BillingForm2::where('reference_no', $reference_no)->get();
-        $totalAmount = $students->sum('total_fee');
+        // $students = BillingForm2::where('reference_no', $reference_no)->get();
+        // $totalAmount = $students->sum('total_fee');
+
+        $students = DB::table('unifastgov_fhedev.vw_billing_details as bd')
+        ->select(
+        'bd.stud_uid',
+        'bd.reference_no',
+        'bd.hei_psg_region',
+        'bd.hei_sid',
+        'bd.hei_uii',
+        'bd.hei_name',
+        'bd.ac_year',
+        'bd.semester',
+        'bd.app_id',
+        'bd.fhe_award_no',
+        'bd.stud_id',
+        'bd.lrn_no',
+        'bd.stud_lname',
+        'bd.stud_fname',
+        'bd.stud_mname',
+        'bd.stud_ext_name',
+        'bd.stud_sex',
+        'bd.stud_birth_date',
+        'bd.stud_birth_place',
+        'bd.f_lname',
+        'bd.f_fname',
+        'bd.f_mname',
+        'bd.m_lname',
+        'bd.m_fname',
+        'bd.m_mname',
+        'bd.present_prov',
+        'bd.present_city',
+        'bd.present_barangay',
+        'bd.present_street',
+        'bd.present_zipcode',
+        'bd.permanent_prov',
+        'bd.permanent_city',
+        'bd.permanent_barangay',
+        'bd.permanent_street',
+        'bd.permanent_zipcode',
+        'bd.stud_email',
+        'bd.stud_alt_email',
+        'bd.stud_phone_no',
+        'bd.stud_alt_phone_no',
+        'bd.transferee',
+        'bd.degree_program',
+        'bd.year_level',
+        'bd.lab_unit',
+        'bd.comp_lab_unit',
+        'bd.academic_unit',
+        'bd.nstp_unit',
+        'bd.remarks',
+        'bd.stud_status',
+        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.academic_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS tuition_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "entrance" THEN vw_billing_details.amount ELSE 0 END) + SUM(CASE WHEN vw_billing_details.type_of_fee = "admission" THEN vw_billing_details.amount ELSE 0 END) AS entrance_and_admission_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "athletic" THEN vw_billing_details.amount ELSE 0 END) AS athletic_fee'),
+        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS computer_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "cultural" THEN vw_billing_details.amount ELSE 0 END) AS cultural_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "development" THEN vw_billing_details.amount ELSE 0 END) AS development_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "guidance" THEN vw_billing_details.amount ELSE 0 END) AS guidance_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "handbook" THEN vw_billing_details.amount ELSE 0 END) AS handbook_fee'),
+        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.lab_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS laboratory_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "library" THEN vw_billing_details.amount ELSE 0 END) AS library_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "medical and dental" THEN vw_billing_details.amount ELSE 0 END) AS medical_and_dental_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "registration" THEN vw_billing_details.amount ELSE 0 END) AS registration_fee'),
+        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "school id" THEN vw_billing_details.amount ELSE 0 END) AS school_id_fee'),
+        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.nstp_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS nstp_fee'),
+        DB::raw('
+        SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+            THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
+            ELSE 0
+        END) AS tuition_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "entrance" THEN vw_billing_details.amount ELSE 0 END) + SUM(CASE WHEN vw_billing_details.type_of_fee = "admission" THEN vw_billing_details.amount ELSE 0 END) AS entrance_and_admission_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "athletic" THEN vw_billing_details.amount ELSE 0 END) AS athletic_fee,
+        SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+            THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount)
+            ELSE 0
+        END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
+            THEN vw_billing_details.amount
+            ELSE 0
+        END) AS computer_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "cultural" THEN vw_billing_details.amount ELSE 0 END) AS cultural_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "development" THEN vw_billing_details.amount ELSE 0 END) AS development_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "guidance" THEN vw_billing_details.amount ELSE 0 END) AS guidance_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "handbook" THEN vw_billing_details.amount ELSE 0 END) AS handbook_fee,
+        SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+            THEN (vw_billing_details.lab_unit * vw_billing_details.amount)
+            ELSE 0
+        END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
+            THEN vw_billing_details.amount
+            ELSE 0
+        END) AS laboratory_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "library" THEN vw_billing_details.amount ELSE 0 END) AS library_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "medical and dental" THEN vw_billing_details.amount ELSE 0 END) AS medical_and_dental_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "registration" THEN vw_billing_details.amount ELSE 0 END) AS registration_fee,
+        SUM(CASE WHEN vw_billing_details.type_of_fee = "school id" THEN vw_billing_details.amount ELSE 0 END) AS school_id_fee,
+        SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+            THEN (vw_billing_details.nstp_unit * vw_billing_details.amount)
+            ELSE 0
+        END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
+            THEN vw_billing_details.amount
+            ELSE 0
+        END) AS nstp_fee
+    ')
+    )
+    ->where(function ($query) {
+        $query->where('vw_billing_details.bs_osf_settings', 1)
+            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+    })
+    ->where('vw_billing_details.form', 2)
+    ->where('reference_no', $reference_no)
+    ->groupBy('vw_billing_details.stud_uid')
+    ->get();
 
         $data['students'] = $students;
-        $data['totalAmount'] = $totalAmount;
+        // $data['totalAmount'] = $totalAmount;
         return view('admin.elements.form2list', $data);
     }
 
