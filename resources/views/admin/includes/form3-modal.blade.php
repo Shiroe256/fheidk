@@ -75,8 +75,8 @@
                         <div class="form-row">
                             <div class="col-lg-6 col-xl-12">
                                 <div class="custom-control custom-checkbox"><input class="custom-control-input"
-                                        type="checkbox" id="applicant_transferee" name="applicant_transferee"><label
-                                        class="custom-control-label" for="chk_transferee">Transferee</label></div>
+                                        type="checkbox" id="applicant_transferee" name="applicant_transferee" disabled><label
+                                        class="custom-control-label" for="applicant_transferee">Transferee</label></div>
                             </div>
                         </div>
                     </div>
