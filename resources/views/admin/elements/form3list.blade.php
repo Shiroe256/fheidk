@@ -18,6 +18,10 @@
             <td>{{$student->app_id}}</td>
             <td>{{$student->stud_lname . ', ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
             <td>{{$student->degree_program}}</td>
+            <td>{{ $student->stud_sex }}</td>
+            <td>{{ $student->stud_birth_date }}</td>
+            <td>{{ $student->stud_phone_no }}</td>
+            <td>{{ $student->stud_email }}</td>
             <td class="text-center">{{$student->year_level}}<br></td>
             <td class="text-left">{!! $student->remarks !!}</td>
             <td class="text-center">{{$student->total_exam_taken}}</td>
