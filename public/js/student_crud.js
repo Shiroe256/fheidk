@@ -87,6 +87,10 @@ async function finalizeBilling(reference_no) {
         icon: 'success',
         title: 'Status Updated',
         html: 'Billing has been sent for review.'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/billings";
+        }
       });
     } else {
       throw new Error(`Request failed with status ${response.status}`);
