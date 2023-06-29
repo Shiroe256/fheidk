@@ -145,7 +145,7 @@ class AdminController extends Controller
                     THEN vw_billing_details.amount
                 ELSE 0
             END
-        )) AS total_fee')
+         AS total_fee')
     )
     ->where(function ($query) {
         $query->where('vw_billing_details.bs_osf_settings', 1)
