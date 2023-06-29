@@ -1625,7 +1625,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         }
         $billing->billing_status = 5;
         $billing->save();
-        return response('Success', 200);
+        echo json_encode('Success');
+        // return response('Success', 200);
     }
 
     private function getCourseName($bs_student)
