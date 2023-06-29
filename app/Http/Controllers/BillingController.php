@@ -1623,7 +1623,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         if ($billing->billing_status != 3) {
             return response('Not Success', 500);
         }
-        $billing->billing_status = 4;
+        $billing->billing_status = 5;
         $billing->save();
         return response('Success', 200);
     }
