@@ -82,6 +82,7 @@ class AdminController extends Controller
 
         $students = DB::table('vw_billing_details')
         ->select(
+        'vw_billing_details.stud_uid',
         'vw_billing_details.reference_no',
         'vw_billing_details.fhe_award_no',
         'vw_billing_details.stud_id',
