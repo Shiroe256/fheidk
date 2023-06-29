@@ -370,7 +370,70 @@ class AdminController extends Controller
     public function viewapplicantinfo(Request $request)
     {
         $id = $request->id;
-        $viewapplicantdetails = BillingForm3::where('stud_uid', $id)->first();
+        // $viewapplicantdetails = BillingForm3::where('stud_uid', $id)->first();
+        $viewapplicantdetails = DB::table('vw_billing_details')
+        ->select(
+        'vw_billing_details.stud_uid',
+        'vw_billing_details.reference_no',
+        'vw_billing_details.hei_psg_region',
+        'vw_billing_details.hei_sid',
+        'vw_billing_details.hei_uii',
+        'vw_billing_details.hei_name',
+        'vw_billing_details.ac_year',
+        'vw_billing_details.semester',
+        'vw_billing_details.app_id',
+        'vw_billing_details.fhe_award_no',
+        'vw_billing_details.stud_id',
+        'vw_billing_details.lrn_no',
+        'vw_billing_details.stud_lname',
+        'vw_billing_details.stud_fname',
+        'vw_billing_details.stud_mname',
+        'vw_billing_details.stud_ext_name',
+        'vw_billing_details.stud_sex',
+        'vw_billing_details.stud_birth_date',
+        'vw_billing_details.stud_birth_place',
+        'vw_billing_details.f_lname',
+        'vw_billing_details.f_fname',
+        'vw_billing_details.f_mname',
+        'vw_billing_details.m_lname',
+        'vw_billing_details.m_fname',
+        'vw_billing_details.m_mname',
+        'vw_billing_details.present_prov',
+        'vw_billing_details.present_city',
+        'vw_billing_details.present_street',
+        'vw_billing_details.present_zipcode',
+        'vw_billing_details.permanent_prov',
+        'vw_billing_details.permanent_city',
+        'vw_billing_details.permanent_street',
+        'vw_billing_details.permanent_zipcode',
+        'vw_billing_details.stud_email',
+        'vw_billing_details.stud_alt_email',
+        'vw_billing_details.stud_phone_no',
+        'vw_billing_details.stud_alt_phone_no',
+        'vw_billing_details.transferee',
+        'vw_billing_details.degree_program',
+        'vw_billing_details.year_level',
+        'vw_billing_details.total_exam_taken',
+        'vw_billing_details.exam_result',
+        'vw_billing_details.remarks',
+        'vw_billing_details.stud_status',
+        DB::raw('IF(`vw_billing_details`.`stud_status` = 0,
+            (SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END)
+            + SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (NOT (`vw_billing_details`.`category` LIKE "%exam%")) THEN `vw_billing_details`.`amount` ELSE 0 END)),
+            IF(`vw_billing_details`.`stud_status` = 4,
+                SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END),
+                0)) AS entrance_and_admission_fee'
+    ))
+    ->where(function ($query) {
+        $query->where('vw_billing_details.bs_osf_settings', 1)
+            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+    })
+    ->where('vw_billing_details.form', 3)
+    ->where('stud_uid', $id)
+    ->groupBy('vw_billing_details.stud_uid')
+    ->havingNotNull('entrance_and_admission_fee')
+    ->first();
+
         return response()->json($viewapplicantdetails);
     }
 
