@@ -50,24 +50,28 @@ $(document).on('click', '.btn_view_applicant_info', function (e) {
                 input.setAttribute('readonly', 'true');
             });
             $('#stud_uid').val(response.stud_uid);
-            $('#stud_fhe_award_no').val(response.fhe_award_no);
-            $('#stud_id').val(response.stud_id);
-            $('#stud_lname').val(response.stud_lname);
-            $('#stud_fname').val(response.stud_fname);
-            $('#stud_mname').val(response.stud_mname);
-            $('#stud_sex').val(response.stud_sex);
-            $('#stud_bdate').val(response.stud_birth_date);
-            $('#stud_bplace').val(response.stud_birth_place);
-        
-            $('#stud_contact').val(response.stud_phone_no);
-            $('#stud_alt_ontact').val(response.stud_alt_phone_no);
-            $('#stud_email').val(response.stud_email);
-            $('#stud_alt_email').val(response.stud_alt_email);
-            $('#stud_course_enrolled').val(response.degree_program);
-            $('#stud_year_level').val(response.year_level);
-            $('#stud_entrance_and_admission_fee').val(response.entrance_and_admission_fee);
-            
-            $('#stud_total_fee').val(parseFloat(response.total_fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-        }
+            $('#applicant_app_id').val(response.app_id);
+            $('#applicant_fhe_award_no').val(response.fhe_award_no);
+            $('#applicant_lname').val(response.stud_lname);
+            $('#applicant_fname').val(response.stud_fname);
+            $('#applicant_mname').val(response.stud_mname);
+            $('#applicant_mname').val(response.stud_ext_name);
+            $('#applicant_sex').val(response.stud_sex);
+            $('#applicant_bdate').val(response.stud_birth_date);
+            $('#applicant_bplace').val(response.stud_birth_place);
+            $('#applicant_contact').val(response.stud_phone_no);
+            $('#applicant_alt_ontact').val(response.stud_alt_phone_no);
+            $('#applicant_email').val(response.stud_email);
+            $('#applicant_alt_email').val(response.stud_alt_email);
+            $('#applicant_course_enrolled').val(response.degree_program);
+            $('#applicant_year_level').val(response.year_level);
+            $('#applicant_total_exam_taken').val(response.total_exam_taken);
+            $('#applicant_exam_result').val(response.exam_result);
+            $('#applicant_status').val(response.stud_status);
+            $('#applicant_total_fee').val(parseFloat(response.entrance_and_admission_fee).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+            if (response.transferee === 1) {
+                $('#applicant_transferee').prop('checked', true);
+            }
+        } 
     });
 });
