@@ -75,10 +75,11 @@ class AdminController extends Controller
 
     public function fetchform2list(Request $request)
     {
-        $reference_no = $request->reference_no;
 
         // $students = BillingForm2::where('reference_no', $reference_no)->get();
         // $totalAmount = $students->sum('total_fee');
+
+        $reference_no = $request->reference_no;
 
         $students = DB::table('vw_billing_details')
         ->select(
@@ -435,7 +436,67 @@ class AdminController extends Controller
     public function fetchbillinglist()
     {
         $billings = Billing::all();
+
+    $result = DB::table('vw_billing_details')
+    ->join('billings', 'vw_billing_details.reference_no', '=', 'billings.reference_no')
+    ->selectRaw('COUNT(*) as count, SUM(
+        CASE
+            WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
+            WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student")
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "entrance"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "admission"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "athletic"
+                THEN vw_billing_details.amount
+            WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount)
+            WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "cultural"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "development"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "guidance"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "handbook"
+                THEN vw_billing_details.amount
+            WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                THEN (vw_billing_details.lab_unit * vw_billing_details.amount)
+            WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "library"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "medical and dental"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "registration"
+                THEN vw_billing_details.amount
+            WHEN vw_billing_details.type_of_fee = "school id"
+                THEN vw_billing_details.amount
+            WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                THEN (vw_billing_details.nstp_unit * vw_billing_details.amount)
+            WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
+                THEN vw_billing_details.amount
+            ELSE 0
+        END
+    ) AS total_fee')
+    ->where(function ($query) {
+        $query->where('vw_billing_details.bs_osf_settings', 1)
+            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+    })
+    ->where('vw_billing_details.form', 2)
+    ->where('vw_billing_details', 'billings.reference_no')
+    ->groupBy('vw_billing_details.stud_uid')
+    ->get();
+
+    $count = $result->count(); // Count of all rows
+    $totalFeeSum = $result->sum('total_fee'); // Sum of the total_fee
+
         $data['billings'] = $billings;
+        $data['count'] = $count;
+        $data['totalFeeSum'] = $totalFeeSum;
         return view('admin.elements.billinglist', $data);
     }
 
