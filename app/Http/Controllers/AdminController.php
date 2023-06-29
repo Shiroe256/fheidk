@@ -438,7 +438,7 @@ class AdminController extends Controller
     $billings = Billing::all();
 
     $result = DB::table('vw_billing_details')
-    ->join('billings', 'vw_billing_details.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
+    ->join('tbl_fhe_billing_records', 'vw_billing_details.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
     ->selectRaw('COUNT(*) as count, SUM(
         CASE
             WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
