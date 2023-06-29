@@ -235,99 +235,42 @@ class AdminController extends Controller
             CASE
                 WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student")
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "entrance"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "admission"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "athletic"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE
+                WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student")
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "entrance"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "admission"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "athletic"
+                    THEN vw_billing_details.amount
                 WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount)
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "cultural"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "development"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "guidance"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "handbook"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE
+                WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "cultural"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "development"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "guidance"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "handbook"
+                    THEN vw_billing_details.amount
                 WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.lab_unit * vw_billing_details.amount)
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "library"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "medical and dental"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "registration"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN vw_billing_details.type_of_fee = "school id"
-                THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) + SUM(
-            CASE
+                WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "library"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "medical and dental"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "registration"
+                    THEN vw_billing_details.amount
+                WHEN vw_billing_details.type_of_fee = "school id"
+                    THEN vw_billing_details.amount
                 WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.nstp_unit * vw_billing_details.amount)
-                ELSE 0
-            END
-        ) + SUM(
-            CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
-                THEN vw_billing_details.amount
+                WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
+                    THEN vw_billing_details.amount
                 ELSE 0
             END
         ) AS total_fee')
