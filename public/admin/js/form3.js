@@ -55,7 +55,7 @@ $(document).on('click', '.btn_view_applicant_info', function (e) {
             $('#applicant_lname').val(response.stud_lname);
             $('#applicant_fname').val(response.stud_fname);
             $('#applicant_mname').val(response.stud_mname);
-            $('#applicant_mname').val(response.stud_ext_name);
+            $('#applicant_ext_name').val(response.stud_ext_name);
             $('#applicant_sex').val(response.stud_sex);
             $('#applicant_bdate').val(response.stud_birth_date);
             $('#applicant_bplace').val(response.stud_birth_place);
