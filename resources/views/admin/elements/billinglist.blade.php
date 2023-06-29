@@ -25,7 +25,7 @@
                 <td class="text-center">{{ $billing->ac_year }}</td>
                 <td class="text-center">{{ $billing->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
-                <td>{{ $billing->hei->hei_name }}</td>
+                <td></td>
                 <td>{{ $billing->reference_no }}</td>
                 <td class="text-right">{{ $count }}</td>
                 <td class="text-right">{{ $totalFeeSum }}</td>
