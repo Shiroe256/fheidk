@@ -27,8 +27,8 @@
                 <td>{{ $billing->hei->hei_region_nir }}</td>
                 <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
-                <td class="text-right">{{ $billing->total_beneficiaries }}</td>
-                <td class="text-right">{{ $billing->total_amount }}</td>
+                <td class="text-right">{{ $count }}</td>
+                <td class="text-right">{{ $totalFeeSum }}</td>
                 <td>
                     @if ($billing->billing_status == 1)
                         <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
