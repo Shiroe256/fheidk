@@ -435,10 +435,10 @@ class AdminController extends Controller
 
     public function fetchbillinglist()
     {
-        $billings = Billing::all();
+    $billings = Billing::all();
 
     $result = DB::table('vw_billing_details')
-    ->join('billings', 'vw_billing_details.reference_no', '=', 'billings.reference_no')
+    ->join('billings', 'vw_billing_details.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
     ->selectRaw('COUNT(*) as count, SUM(
         CASE
             WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
@@ -487,7 +487,7 @@ class AdminController extends Controller
             ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
     })
     ->where('vw_billing_details.form', 2)
-    ->where('vw_billing_details', 'billings.reference_no')
+    ->where('vw_billing_details', 'tbl_fhe_billing_records.reference_no')
     ->groupBy('vw_billing_details.stud_uid')
     ->get();
 
