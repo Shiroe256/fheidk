@@ -487,7 +487,7 @@ class AdminController extends Controller
             ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
     })
     ->where('vw_billing_details.form', 2)
-    ->where('vw_billing_details', 'tbl_fhe_billing_records.reference_no')
+    ->where('vw_billing_details.reference_no', 'tbl_fhe_billing_records.reference_no')
     ->groupBy('vw_billing_details.stud_uid')
     ->get();
 
