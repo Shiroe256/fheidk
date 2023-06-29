@@ -4,6 +4,10 @@
             <th>AWARD NO</th>
             <th>FULL NAME</th>
             <th>COURSE APPLIED</th>
+            <th>SEX</th>
+            <th>BIRTH DATE</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
             <th class="text-center">YEAR</th>
             <th class="text-left">REMARKS</th>
             <th>STATUS</th>
@@ -15,8 +19,12 @@
         @foreach ($students as $index => $student)
         <tr>
             <td>{{ $student->fhe_award_no }}</td>
-            <td>{{ $student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname }}</td>
+            <td>{{ $student->stud_lname . ', ' . $student->stud_fname . ' ' . $student->stud_mname }}</td>
             <td>{{ $student->degree_program }}</td>
+            <td>{{ $student->sex }}</td>
+            <td>{{ $student->stud_birth_date }}</td>
+            <td>{{ $student->stud_phone_no }}</td>
+            <td>{{ $student->email }}</td>
             <td class="text-center">{{ $student->year_level }}</td>
             <td class="text-left">{!! $student->remarks !!}</td>
             <td>
