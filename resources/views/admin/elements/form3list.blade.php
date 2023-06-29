@@ -16,7 +16,7 @@
         @foreach ($students as $student)
         <tr>
             <td>{{$student->app_id}}</td>
-            <td>{{$student->stud_lname . ' ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
+            <td>{{$student->stud_lname . ', ' . $student->stud_fname . ' ' . $student->stud_mname}}</td>
             <td>{{$student->degree_program}}</td>
             <td class="text-center">{{$student->year_level}}<br></td>
             <td class="text-left">{!! $student->remarks !!}</td>
