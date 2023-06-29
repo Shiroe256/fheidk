@@ -254,8 +254,10 @@ class AdminController extends Controller
     ->groupBy('vw_billing_details.stud_uid')
     ->get();
 
+    $totalAmount = $students->sum('total_fee');
+
         $data['students'] = $students;
-        // $data['totalAmount'] = $totalAmount;
+        $data['totalAmount'] = $totalAmount;
         return view('admin.elements.form2list', $data);
     }
 
