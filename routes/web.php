@@ -65,7 +65,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 // Route::get('/get-tempstudenttable', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
-Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudentFields');
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('PreventEditingIfSubmitted')->middleware('validateTempStudentFields');
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 // Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent')->middleware('validateEditTempStudent');
@@ -91,7 +91,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
     Route::post('/get-studentfees', [BillingController::class, 'getStudentFees'])->name('getStudentFees');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentSettings'])->name('getStudentSettings');
     Route::post('/get-studentsettings', [BillingController::class, 'getStudentBillingSettings'])->name('getStudentBillingSettings');
-    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee');
+    Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee')->middleware('PreventEditingIfSubmitted');
 });
 
 //test

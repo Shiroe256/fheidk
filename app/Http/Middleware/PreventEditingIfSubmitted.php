@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Billing;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class PreventEditingIfSubmitted
     public function handle(Request $request, Closure $next)
     {
         $reference_no = $request->reference_no;
-        if ($reference_no == 4) {
+        $billing_status = Billing::where('reference_no',$reference_no)->first()->billing_status;
+        if ($billing_status != 1 || $billing_status != 3 || $billing_status != 4) {
             return response('Not Success', 500);
         }
         return $next($request);

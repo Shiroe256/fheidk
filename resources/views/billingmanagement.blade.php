@@ -12,27 +12,29 @@
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
-            <div class="btn-group" role="group">
-                <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
-                <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
-                    class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage
-                    Settings</a>
-                <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
-                        class="fas fa-download"></i>&nbsp;Download Template</button>
-                <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i
-                        class="fas fa-file-upload"></i>&nbsp;Upload
-                    List</button>
-                <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
-                        class="far fa-edit"></i>&nbsp;Run Validation</button>
-                <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button" style="display:none"><i
-                        class="fas fa-exclamation-triangle"></i>&nbsp;Exception
-                    Report</button>
-                <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
-                        class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
-                <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
-                    value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
-            </div>
+            @if ($billing_status != 2 || $billing_status < 5)
+                <div class="btn-group" role="group">
+                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
+                    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
+                    <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
+                        class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage
+                        Settings</a>
+                    <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
+                            class="fas fa-download"></i>&nbsp;Download Template</button>
+                    <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i
+                            class="fas fa-file-upload"></i>&nbsp;Upload
+                        List</button>
+                    <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
+                            class="far fa-edit"></i>&nbsp;Run Validation</button>
+                    <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"
+                        style="display:none"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception
+                        Report</button>
+                    <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
+                            class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
+                    <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
+                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
+                </div>
+            @endif
         </div>
 
         @if ($billing_status == 1)
