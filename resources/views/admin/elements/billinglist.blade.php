@@ -25,10 +25,10 @@
                 <td class="text-center">{{ $billing->ac_year }}</td>
                 <td class="text-center">{{ $billing->semester }}</td>
                 <td>{{ $billing->hei->hei_region_nir }}</td>
-                <td></td>
+                <td>{{ $billing->hei->hei_name }}</td>
                 <td>{{ $billing->reference_no }}</td>
-                <td class="text-right">{{ $count }}</td>
-                <td class="text-right">{{ $totalFeeSum }}</td>
+                <td class="text-right">{{ $billing->total_beneficiaries }}</td>
+                <td class="text-right">{{ $billing->total_amount }}</td>
                 <td>
                     @if ($billing->billing_status == 1)
                         <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
