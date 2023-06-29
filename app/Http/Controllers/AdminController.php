@@ -339,6 +339,10 @@ class AdminController extends Controller
     ->groupBy('vw_billing_details.stud_uid')
     ->havingNotNull('entrance_and_admission_fee')
     ->get();
+    
+    $totalAmount = $students->sum('entrance_and_admission_fee');
+
+        $data['totalAmount'] = $totalAmount;
         $data['students'] = $students;
         return view('admin.elements.form3list', $data);
     }

@@ -4,6 +4,10 @@
             <th>APP ID</th>
             <th>FULL NAME</th>
             <th>COURSE APPLIED</th>
+            <th>SEX</th>
+            <th>BIRTH DATE</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
             <th class="text-center">YEAR</th>
             <th class="text-left">REMARKS</th>
             <th class="text-center">TOTAL EXAM</th>
@@ -31,4 +35,10 @@
         </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+            <th class="font-weight-bold h5" colspan="9">TOTAL</th>
+            <th class="text-center text-danger font-weight-bold h5" colspan="3">{{ number_format(doubleval($totalAmount), 2, '.', ',') }}</th>
+        </tr>
+    </tfoot>
 </table>
