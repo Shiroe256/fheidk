@@ -1617,6 +1617,18 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         return $courses->uid;
     }
 
+    // public function submitBilling(Request $request)
+    // {
+    //     $billing = Billing::where('reference_no', $request->reference_no)->first();
+    //     if ($billing->billing_status != 5) {
+    //         return response('Not Success', 500);
+    //     }
+    //     $billing->billing_status = 6;
+    //     $billing->save();
+    //     echo json_encode('Success');
+    //     // return response('Success', 200);
+    // }
+
     public function finalizeBilling(Request $request)
     {
         $billing = Billing::where('reference_no', $request->reference_no)->first();
