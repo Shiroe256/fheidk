@@ -80,6 +80,14 @@
                                         class="fas fa-sliders"></i></a>
                             </div>
                             <?php
+                            elseif ($billing->billing_status==5):?>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a class="btn btn-outline-secondary" role="button" data-toggle="tooltip"
+                                    data-bs-tooltip="" data-placement="bottom" title="Attach Files"
+                                    href="#"><i
+                                        class="far fa-eye"></i></a>
+                            </div>
+                            <?php
                             else:?>
                             <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-primary"
                                     role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
