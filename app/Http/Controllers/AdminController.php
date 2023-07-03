@@ -437,12 +437,7 @@ class AdminController extends Controller
     {
         $billings =  Billing::join('vw_billing_details', 'tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
         ->select(
-            'tbl_fhe_billing_records.hei_psg_region',
-            'tbl_fhe_billing_records.hei_sid',
-            'tbl_fhe_billing_records.hei_uii',
-            'tbl_fhe_billing_records.reference_no',
-            'tbl_fhe_billing_records.ac_year',
-            'tbl_fhe_billing_records.semester',
+            'tbl_fhe_billing_records.*',
             DB::raw('COUNT(vw_billing_details.stud_uid) AS total_beneficiaries'),
             DB::raw('SUM(
                 CASE
