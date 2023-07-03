@@ -435,7 +435,14 @@ class AdminController extends Controller
 
     public function fetchbillinglist()
     {
-        $billings =  Billing::leftjoin('vw_billing_details', 'tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
+        $billings =  Billing::leftJoin('vw_billing_details', function ($join) {
+            $join->on('tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
+                ->where(function ($query) {
+                    $query->where('vw_billing_details.bs_osf_settings', 1)
+                        ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+                })
+                ->where('vw_billing_details.form', 2);
+        })
         ->select(
             'tbl_fhe_billing_records.*',
             DB::raw('COUNT(DISTINCT vw_billing_details.stud_uid) AS total_beneficiaries'),
