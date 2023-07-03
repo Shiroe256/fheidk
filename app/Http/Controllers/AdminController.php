@@ -435,7 +435,72 @@ class AdminController extends Controller
 
     public function fetchbillinglist()
     {
-        $billings = Billing::all();
+        $billings = DB::table('tbl_fhe_billing_records')
+        ->join('vw_billing_details', 'tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
+        ->select(
+            'tbl_fhe_billing_records.hei_psg_region',
+            'tbl_fhe_billing_records.hei_sid',
+            'tbl_fhe_billing_records.hei_uii',
+            'tbl_fhe_billing_records.reference_no',
+            'tbl_fhe_billing_records.ac_year',
+            'tbl_fhe_billing_records.semester',
+            DB::raw('COUNT(vw_billing_details.uid) AS total_beneficiaries'),
+            DB::raw('SUM(
+                CASE
+                    WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                        THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
+                    WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student")
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "entrance"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "admission"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "athletic"
+                        THEN vw_billing_details.amount
+                    WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                        THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount)
+                    WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "cultural"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "development"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "guidance"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "handbook"
+                        THEN vw_billing_details.amount
+                    WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                        THEN (vw_billing_details.lab_unit * vw_billing_details.amount)
+                    WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "library"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "medical and dental"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "registration"
+                        THEN vw_billing_details.amount
+                    WHEN vw_billing_details.type_of_fee = "school id"
+                        THEN vw_billing_details.amount
+                    WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
+                        THEN (vw_billing_details.nstp_unit * vw_billing_details.amount)
+                    WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
+                        THEN vw_billing_details.amount
+                    ELSE 0
+                END
+            ) AS total_amount')
+        )
+        ->where(function ($query) {
+            $query->where('vw_billing_details.bs_osf_settings', 1)
+                ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+        })
+        ->where('vw_billing_details.form', 2)
+        ->groupBy(
+            'tbl_fhe_billing_records.reference_no'
+        )
+        ->get();
+    
+
+        // $billings = Billing::all();
         
         $data['billings'] = $billings;
         return view('admin.elements.billinglist', $data);
