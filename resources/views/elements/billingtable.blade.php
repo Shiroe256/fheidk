@@ -79,7 +79,7 @@
                                         class="fas fa-sliders"></i></a>
                             </div>
                             <?php
-                            elseif ($billing->billing_status==5):?>
+                            elseif ($billing->billing_status===5):?>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a class="btn btn-outline-secondary" role="button" data-toggle="tooltip"
                                     data-bs-tooltip="" data-placement="bottom" title="Attach Files"
