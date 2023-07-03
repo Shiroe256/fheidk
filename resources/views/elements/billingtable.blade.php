@@ -44,12 +44,11 @@
                             <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
                             <?php
                             elseif ($billing->billing_status==5):?>
-                            <span class="badge badge-pill badge-primary span-size">Submitted to UniFAST: Billing
-                                Unit</span>
-                            <?php
+                            <span class="badge badge-pill badge-primary span-size">Finalizing Billing</span>
+                             <?php
                             elseif ($billing->billing_status==6):?>
-                            <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing
-                                Unit</span>
+                            <span class="badge badge-pill badge-primary span-size">Submitted to UniFAST: Billing
+                                Unit</span>    
                             <?php
                             elseif ($billing->billing_status==7):?>
                             <span class="badge badge-pill badge-danger span-size">For Revision</span>
