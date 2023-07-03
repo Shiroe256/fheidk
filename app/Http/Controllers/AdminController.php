@@ -444,7 +444,7 @@ class AdminController extends Controller
             'tbl_fhe_billing_records.reference_no',
             'tbl_fhe_billing_records.ac_year',
             'tbl_fhe_billing_records.semester',
-            DB::raw('COUNT(vw_billing_details.uid) AS total_beneficiaries'),
+            DB::raw('COUNT(vw_billing_details.stud_uid) AS total_beneficiaries'),
             DB::raw('SUM(
                 CASE
                     WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
