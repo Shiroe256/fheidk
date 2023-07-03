@@ -12,7 +12,7 @@
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
-            @if ($billing_status != 2 || $billing_status >= 5)
+            @if ($billing_status != 2 || $billing_status >= 6)
                 <div class="btn-group" role="group">
                     <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                     <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
@@ -285,7 +285,7 @@
     </form>
 </div>
 
-@if ($billing_status == 3)
+@if ($billing_status == 5)
     <div id="summary_billing_div" class="card-body summary_billing_div">
     @else
         <div id="summary_billing_div" class="card-body summary_billing_div" style="display:none">
