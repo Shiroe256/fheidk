@@ -435,7 +435,7 @@ class AdminController extends Controller
 
     public function fetchbillinglist()
     {
-        $billings =  Billing::join('vw_billing_details', 'tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
+        $billings =  Billing::leftjoin('vw_billing_details', 'tbl_fhe_billing_records.reference_no', '=', 'vw_billing_details.reference_no')
         ->select(
             'tbl_fhe_billing_records.*',
             DB::raw('COUNT(DISTINCT vw_billing_details.stud_uid) AS total_beneficiaries'),
