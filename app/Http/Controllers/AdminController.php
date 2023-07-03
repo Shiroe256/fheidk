@@ -75,10 +75,9 @@ class AdminController extends Controller
 
     public function fetchform2list(Request $request)
     {
-
         // $students = BillingForm2::where('reference_no', $reference_no)->get();
         // $totalAmount = $students->sum('total_fee');
-
+        
         $reference_no = $request->reference_no;
 
         $students = DB::table('vw_billing_details')
