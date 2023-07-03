@@ -86,7 +86,7 @@ async function finalizeBilling(reference_no) {
       Swal.fire({
         icon: 'success',
         title: 'Status Updated',
-        html: 'Billing has been sent for review.'
+        html: 'Billing has been finalized.'
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.href = "/billings";

@@ -34,7 +34,7 @@
                      {{-- <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
                         value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button> --}}
                     <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
-                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
+                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize</button>
                 </div>
             @endif
         </div>
