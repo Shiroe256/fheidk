@@ -490,11 +490,6 @@ class AdminController extends Controller
                 END
             ) AS total_amount')
         )
-        ->where(function ($query) {
-            $query->where('vw_billing_details.bs_osf_settings', 1)
-                ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-        })
-        ->where('vw_billing_details.form', 2)
         ->groupBy(
             'tbl_fhe_billing_records.reference_no',
         )
