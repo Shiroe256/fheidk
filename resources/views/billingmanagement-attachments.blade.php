@@ -272,15 +272,6 @@
 </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 
-@include('modals.addstudent')
-@include('modals.editstudent')
-@include('modals.admissionentrance')
-@include('modals.nstpinfo')
-@include('modals.errors')
-@include('modals.upload')
-@include('modals.studentsettings')
-
-
 
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_view_uploaded_file">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
