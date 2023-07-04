@@ -102,7 +102,7 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h6 class="modal-title">ATTACH LINK FOR NOTARIZED REGISTRAR'S CERTIFICATION</h6><button type="button" class="close"
+                    <h6 class="modal-title">ATTACH LINK FOR REGISTRAR'S CERTIFICATION</h6><button type="button" class="close"
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
