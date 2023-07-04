@@ -51,6 +51,7 @@ Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
+Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
