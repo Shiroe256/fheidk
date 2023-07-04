@@ -33,9 +33,10 @@
                 <div class="modal-body">
                     <div class="form-group input-style">
                         <div class="form-row">
-
-                            <div class="form-group"><label>Link</label><input class="form-control input-style"
-                                    type="text"></div>
+                            <div class="col">
+                                <div class="form-group"><label>Link</label><input class="form-control input-style"
+                                        type="text"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
