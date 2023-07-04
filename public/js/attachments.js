@@ -20,12 +20,12 @@ $(document).on('click', '.btn_link_form1', function (e) {
   });
   
   // update students ajax request
-  $("#frm_update_tosf").submit(function (e) {
+  $("#frm_link_form1").submit(function (e) {
     e.preventDefault();
     const fd = new FormData(this);
-    $("#btn_update_tosf").text('Updating...');
+    $("#btn_attach_form1").text('Attaching');
     $.ajax({
-      url: '/updatefee',
+      url: '/updatelinkform1',
       method: 'post',
       data: fd,
       cache: false,
@@ -36,13 +36,13 @@ $(document).on('click', '.btn_link_form1', function (e) {
         if (response.status == 200) {
           Swal.fire(
             'Updated!',
-            'Fee Updated Successfully!',
+            'Link Updated Successfully!',
             'success'
           )
           fetchtosflist();
-          $("#btn_update_tosf").text('Update');
-          $("#frm_update_tosf")[0].reset();
-          $("#modal_update_tosf").modal('hide');
+          $("#btn_attach_form1").text('Update');
+          $("#frm_link_form1")[0].reset();
+          $("#mod_upload_link_form1").modal('hide');
         } else if (response.status == 400) {
           let i = 1;
           let errorMessage = '';
@@ -57,7 +57,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
             icon: 'warning',
   
           })
-          $("#btn_update_tosf").text('Update');
+          $("#btn_attach_form1").text('Attach');
         }
       }
     });

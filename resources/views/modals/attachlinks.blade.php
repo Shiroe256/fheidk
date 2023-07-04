@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        data-dismiss="modal">Close</button><button id="btn_attach_form1" name="btn_attach_form1" class="btn btn-primary card-button-style"
                         type="submit">Attach</button></div>
             </form>
         </div>
