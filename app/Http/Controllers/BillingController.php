@@ -1229,7 +1229,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // abort(401);
     }
 
-    public function billingmanagementattachment($reference_no)
+    public function billingmanagementattachments($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
         // if (isNull($billings)) {
