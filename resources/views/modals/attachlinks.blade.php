@@ -41,7 +41,157 @@
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
                         data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
-                        type="button">Upload</button></div>
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_form2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR FORM 2</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_form3">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR FORM 3</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_nrc">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR NOTARIZED REGISTRAR'S CERTIFICATION</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_cor">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR STUDENT CORs</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_hei_bank_cert">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR HEI CERTIFIED BANK CERTIFICATION</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_bank_cert">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR BANK CERTIFICATION</h6><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
+                        type="button">Attach</button></div>
             </form>
         </div>
     </div>

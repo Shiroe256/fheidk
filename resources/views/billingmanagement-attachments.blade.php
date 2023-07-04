@@ -87,7 +87,7 @@
                                     <div class="btn-group btn-group-sm" role="group"><button
                                             class="btn btn-outline-info" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom" type="button"
-                                            title="View billing submission"
+                                            title="Attach link for form 1"
                                             data-target="#mod_upload_link_form1"><i
                                                 class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
@@ -107,7 +107,12 @@
                                 <td class="text-center"></td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" title="Attach link" data-target="#mod_upload_signed_forms"><i class="fas fa-file-upload"></i></a>
+                                        <button
+                                            class="btn btn-outline-info" data-toggle="modal"
+                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                            title="Attach link for form 2"
+                                            data-target="#mod_upload_link_form2"><i
+                                                class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -123,12 +128,12 @@
                                         Review</span></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group"> <button
+                                        class="btn btn-outline-info" data-toggle="modal"
+                                        data-bs-tooltip="" data-placement="bottom" type="button"
+                                        title="Attach link for form 3"
+                                        data-target="#mod_upload_link_form3"><i
+                                            class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -144,12 +149,13 @@
                                         Review</span></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button
+                                        class="btn btn-outline-info" data-toggle="modal"
+                                        data-bs-tooltip="" data-placement="bottom" type="button"
+                                        title="Attach link for notarized registrar's certification"
+                                        data-target="#mod_upload_link_nrc"><i
+                                            class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -168,11 +174,13 @@
                                         Review</span></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_link_cor"><i class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button
+                                        class="btn btn-outline-info" data-toggle="modal"
+                                        data-bs-tooltip="" data-placement="bottom" type="button"
+                                        title="Attach link for cor"
+                                        data-target="#mod_upload_link_hei_bank_cert"><i
+                                            class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="tooltip"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission"
@@ -191,12 +199,13 @@
                                         Review</span></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button
+                                        class="btn btn-outline-info" data-toggle="modal"
+                                        data-bs-tooltip="" data-placement="bottom" type="button"
+                                        title="Attach link for hei's bank certification"
+                                        data-target="#mod_upload_link_bank_cert"><i
+                                            class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -217,7 +226,7 @@
                                     <div class="btn-group btn-group-sm" role="group"><a
                                             class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
+                                            title="Attach link for bank certification" href="Admin/billinginformation.html"
                                             data-target="#mod_upload_signed_forms"><i
                                                 class="fas fa-file-upload"></i></a>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
