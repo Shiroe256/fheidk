@@ -1970,7 +1970,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         ], 400);
     }
 
-    $record = Billing::find($request->reference_no);
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id);
     $recordData = [
         'form1_link' => $request->link_form1,
         'form1_status' => ($record->form1_status === null || $record->form1_status === 0) ? '0' : '1',
