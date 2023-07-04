@@ -61,7 +61,7 @@
                 <h5 class="text-black-50 mb-4"><i class="fas fa-paperclip"></i></i>&nbsp;Attach Billing Requirements
                 </h5>
 
-                <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
+                <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info" id="tbl_billing_attachments_div">
                     <table class="table table-bordered table-hover dataTable my-0 table-style"
                         id="tbl_billing_attachments">
                         <thead>
@@ -84,8 +84,8 @@
                                 </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><button
-                                            class="btn btn-outline-info" data-toggle="modal"
+                                    <div class="btn-group btn-group-sm" role="group"><button id="{{ $billings->reference_no }}" name="btn_link_form1"
+                                            class="btn_link_form1 btn btn-outline-info" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom" type="button"
                                             title="Attach link for form 1"
                                             data-target="#mod_upload_link_form1"><i
@@ -301,11 +301,7 @@
 <script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\theme.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\student_crud.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\exception_report.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\applicant_crud.js') }}"></script>
-<script type="text/javascript" src="{{ url('js\dateformat.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\attachments.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>

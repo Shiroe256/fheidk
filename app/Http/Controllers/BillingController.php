@@ -1946,4 +1946,39 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         DB::table('tbl_billing_details_temp')->whereIn('uid', $uids)->update(['total_fees' => -1]);
         computeStudentFees::dispatch($reference_no, $uids);
     }
+
+    //attaching links
+    // handle edit an student ajax request
+    public function editlink(Request $request)
+    {
+        $id = $request->uid;
+        $fee = Billing::find($id);
+        return response()->json($fee);
+    }
+
+    public function updatelinkform1(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_form1' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'message' => 'Invalid link provided.',
+        ], 400);
+    }
+
+    $record = Billing::find($request->reference_no);
+    $recordData = [
+        'form1_link' => $request->link_form1,
+        'form1_status' => ($record->form1_status === null || $record->form1_status === 0) ? '0' : '1',
+    ];
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+    
 }
