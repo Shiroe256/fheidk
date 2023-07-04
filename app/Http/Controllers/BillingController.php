@@ -1952,7 +1952,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function editlink(Request $request)
     {
         $id = $request->reference_no;
-        $data = Billing::find('03-03236-2021-2022-1-1');
+        $data = Billing::where('reference_no', '03-03236-2021-2022-1-1');
         return response()->json($data);
     }
 
