@@ -39,10 +39,10 @@ $(document).on('click', '.btn_link_form1', function (e) {
             'Link Updated Successfully!',
             'success'
           )
-          location.reload(); // Reload the current page
           $("#btn_attach_form1").text('Update');
           $("#frm_link_form1")[0].reset();
           $("#mod_upload_link_form1").modal('hide');
+        //   location.reload(); // Reload the current page
         } else if (response.status == 400) {
           let i = 1;
           let errorMessage = '';
