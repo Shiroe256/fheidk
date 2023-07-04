@@ -1951,9 +1951,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     // handle edit an student ajax request
     public function editlink(Request $request)
     {
-        $id = $request->uid;
-        $fee = Billing::find($id);
-        return response()->json($fee);
+        $id = $request->reference_no;
+        $data = Billing::find($id);
+        return response()->json($data);
     }
 
     public function updatelinkform1(Request $request)
