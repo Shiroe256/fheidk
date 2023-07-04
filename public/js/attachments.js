@@ -19,46 +19,50 @@ $(document).on('click', '.btn_link_form1', function (e) {
     });
   });
   
-  // update students ajax request
   $("#frm_link_form1").submit(function (e) {
     e.preventDefault();
     const fd = new FormData(this);
     $("#btn_attach_form1").text('Attaching');
     $.ajax({
-      url: '/updatelinkform1',
-      method: 'post',
-      data: fd,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'json',
-      success: function (response) {
-        if (response.status == 200) {
-          Swal.fire(
-            'Updated!',
-            'Link Updated Successfully!',
-            'success'
-          )
-          $("#btn_attach_form1").text('Update');
-          $("#frm_link_form1")[0].reset();
-          $("#mod_upload_link_form1").modal('hide');
-        //   location.reload(); // Reload the current page
-        } else if (response.status == 400) {
-          let i = 1;
-          let errorMessage = '';
-          $.each(response.errors, function (key, err_values) {
-            console.log(err_values);
-            errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
-          })
-          Swal.fire({
-            // position: 'top',
-            title: 'Oops... you missed something',
-            html: errorMessage,
-            icon: 'warning',
-  
-          })
-          $("#btn_attach_form1").text('Attach');
+        url: '/updatelinkform1',
+        method: 'post',
+        data: fd,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (response) {
+            if (response.status == 200) {
+                Swal.fire(
+                    'Updated!',
+                    'Link Updated Successfully!',
+                    'success'
+                )
+                $("#btn_attach_form1").text('Update');
+                $("#frm_link_form1")[0].reset();
+                $("#mod_upload_link_form1").modal('hide');
+                //   location.reload(); // Reload the current pa
+            } else if (response.status == 400) {
+                let i = 1;
+                let errorMessage = '';
+                $.each(response.errors, function (key, err_values) {
+                    console.log(err_values);
+                    errorMessage = errorMessage + '<br />' + i++ + '. ' + err_values;
+                })
+                Swal.fire({
+                    title: 'Oops... you missed something',
+                    html: errorMessage,
+                    icon: 'warning',
+                })
+                $("#btn_attach_form1").text('Attach');
+            }
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while processing the request.',
+                icon: 'error',
+            });
         }
-      }
     });
-  });
+});
