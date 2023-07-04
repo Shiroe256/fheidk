@@ -11,6 +11,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
       },
       success: function (response) {
         alert();
+        console.log(response);
         $('#link_form1').val(response.form1_link);
       }
     });
