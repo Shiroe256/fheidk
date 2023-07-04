@@ -1971,7 +1971,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     }
 
     $id = $request->reference_no;
-    $record = Billing::where('reference_no', '03-03236-2021-2022-1-1')->first();
+    $record = Billing::where('reference_no', $id)->first();
 
     if (!$record) {
         return response()->json([
