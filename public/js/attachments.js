@@ -3,7 +3,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
     e.preventDefault();
     let reference_no = $(this).attr('id');
     $.ajax({
-      url: '/admin/editlink',
+      url: '/editlink',
       method: 'get',
       data: {
         reference_no: reference_no,
@@ -22,7 +22,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
     const fd = new FormData(this);
     $("#btn_update_tosf").text('Updating...');
     $.ajax({
-      url: '/admin/updatefee',
+      url: '/updatefee',
       method: 'post',
       data: fd,
       cache: false,
