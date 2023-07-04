@@ -84,12 +84,12 @@
                                 </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="Attach link"
+                                    <div class="btn-group btn-group-sm" role="group"><button
+                                            class="btn btn-outline-info" data-toggle="modal"
+                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                            title="View billing submission" href="Admin/billinginformation.html"
                                             data-target="#mod_upload_link_form1"><i
-                                                class="fas fa-paperclip"></i></a>
+                                                class="fas fa-file-upload"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
