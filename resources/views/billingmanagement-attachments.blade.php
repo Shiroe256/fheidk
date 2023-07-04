@@ -87,9 +87,9 @@
                                     <div class="btn-group btn-group-sm" role="group"><button
                                             class="btn btn-outline-info" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom" type="button"
-                                            title="View billing submission" href="Admin/billinginformation.html"
+                                            title="View billing submission"
                                             data-target="#mod_upload_link_form1"><i
-                                                class="fas fa-file-upload"></i></button>
+                                                class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -268,6 +268,7 @@
 </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 
+@include('modals.attachlinks')
 
 {{-- <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script> --}}
 <script src="{{ url('js\studsettings.js') }}"></script>
