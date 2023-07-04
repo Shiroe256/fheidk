@@ -27,16 +27,15 @@
         <div class="modal-content">
             <form>
                 <div class="modal-header">
-                    <h6 class="modal-title">UPLOAD LINK FOR FORM 1</h6><button type="button" class="close"
+                    <h6 class="modal-title">ATTACH LINK FOR FORM 1</h6><button type="button" class="close"
                         data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-style">
                         <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>URL Link</label><input class="form-control input-style"
-                                        type="text" value="https://drive.google.com/drive/u/0/my-drive"></div>
-                            </div>
+
+                            <div class="form-group"><label>Link</label><input class="form-control input-style"
+                                    type="text"></div>
                         </div>
                     </div>
                 </div>
