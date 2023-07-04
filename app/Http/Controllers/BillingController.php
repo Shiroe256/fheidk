@@ -1982,7 +1982,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
 
     $recordData = [
         'form1_link' => $request->link_form1,
-        'form1_status' => ($record->form1_status === null || $record->form1_status === 0) ? '0' : '1',
+        'form1_status' => ($request->link_form1 === null || $request->link_form1 === 0) ? '0' : '1',
     ];
 
     $record->update($recordData);
