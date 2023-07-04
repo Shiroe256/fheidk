@@ -179,7 +179,7 @@
                                         class="btn btn-outline-info" data-toggle="modal"
                                         data-bs-tooltip="" data-placement="bottom" type="button"
                                         title="Attach link for cor"
-                                        data-target="#mod_upload_link_hei_bank_cert"><i
+                                        data-target="#mod_upload_link_cor"><i
                                             class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="tooltip"
                                             data-bs-tooltip="" data-placement="bottom"
@@ -204,7 +204,7 @@
                                         class="btn btn-outline-info" data-toggle="modal"
                                         data-bs-tooltip="" data-placement="bottom" type="button"
                                         title="Attach link for hei's bank certification"
-                                        data-target="#mod_upload_link_bank_cert"><i
+                                        data-target="#mod_upload_link_hei_bank_cert"><i
                                             class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
@@ -223,12 +223,13 @@
                                         Review</span></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="Attach link for bank certification" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button
+                                        class="btn btn-outline-info" data-toggle="modal"
+                                        data-bs-tooltip="" data-placement="bottom" type="button"
+                                        title="Attach link for bank certification"
+                                        data-target="#mod_upload_link_bank_cert"><i
+                                            class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
