@@ -301,6 +301,7 @@
 <script type="text/javascript" src="{{ url('js\bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\theme.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\showandhide.js') }}"></script>
+<script type="text/javascript" src="{{ url('js\summary.js') }}"></script>
 <script type="text/javascript" src="{{ url('js\attachments.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ url('https://unpkg.com/xlsx/dist/xlsx.full.min.js') }}"></script>
