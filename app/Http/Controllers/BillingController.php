@@ -1971,11 +1971,20 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     }
 
     $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id);
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
     $recordData = [
         'form1_link' => $request->link_form1,
         'form1_status' => ($record->form1_status === null || $record->form1_status === 0) ? '0' : '1',
     ];
+
     $record->update($recordData);
 
     return response()->json([
