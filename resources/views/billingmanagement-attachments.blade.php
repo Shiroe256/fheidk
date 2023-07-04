@@ -161,7 +161,7 @@
                                 <td class="text-left">Certificate of Registration of Students (CORs)
                                 </td>
                                 <td class="text-left">
-                                    <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">Link Text</a>
+                                    <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
                                   </td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
