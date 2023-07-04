@@ -2,21 +2,21 @@
 @include('includes.header')
 <div class="container-fluid">
     <h6 class="text-dark mb-4">FHE Management / AY
-        {{ $ac_year }}&nbsp;/&nbsp;{{ $f->format($semester) }}
-        Semester / {{ $f->format($tranche) }} Tranche / Reference No. {{ $reference_no }}</h6>
-    <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
-    <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
-    <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
+        {{ $billings->$ac_year }}&nbsp;/&nbsp;{{ $f->format($billings->$semester) }}
+        Semester / {{ $f->format($tranche) }} Tranche / Reference No. {{ $billings->$reference_no }}</h6>
+    <input type="hidden" name="ac_year" id="ac_year" value="{{ $billings->$ac_year }}">
+    <input type="hidden" name="semester" id="semester" value="{{ $billings->$semester }}">
+    <input type="hidden" name="tranche" id="tranche" value="{{ $billings->$tranche }}">
     <div class="card shadow">
         <div class="card-header d-flex justify-content-between align-items-center"><a
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
                 <div class="btn-group" role="group">
-                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
+                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->$reference_no }}">
+                    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->$billing_status }}">
                     <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
-                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
+                        value="{{ $billings->$reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
                 </div>
         </div>
     <div id="summary_billing_div" class="card-body summary_billing_div">

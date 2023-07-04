@@ -1236,12 +1236,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         //     return view('errors.404');
         // }
         // $hei_uii = Auth::user()->hei_uii;
-        $data['hei_psg_region'] = $billings->hei_psg_region;
-        $data['ac_year'] = $billings->ac_year;
-        $data['semester'] = $billings->semester;
-        $data['tranche'] = $billings->tranche;
-        $data['reference_no'] = $billings->reference_no;
-        $data['billing_status'] = $billings->billing_status;
+        $data['billings'] = $billings;
         // if ($billings && $billings->hei_uii == $hei_uii) {
         return view('billingmanagement-attachments', $data);
         // }
