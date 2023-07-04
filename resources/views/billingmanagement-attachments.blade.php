@@ -12,26 +12,29 @@
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
-            @if ($billing_status != 2 || $billing_status >= 5)
                 <div class="btn-group" role="group">
                     <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
                     <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
-                     <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
+                    <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
                         value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
                 </div>
-            @endif
         </div>
     <div id="summary_billing_div" class="card-body summary_billing_div">
         <div id="summary_billing_div" class="card-body summary_billing_div">
 <div>
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
-                href="#tab-7">GENERATE BILLING FORMS</a></li>
+                href="#generate_billing_forms">GENERATE BILLING FORMS</a></li>
+        {{-- For later use --}}
+        {{-- <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                href="#form2">BILLING DETAILS (FORM 2)</a></li> 
         <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                href="#tab-8">SUBMIT FINAL BILLING</a></li>
+                href="#form2">BILLING DETAILS (FORM 3)</a></li>                --}}
+        <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                href="#submit_billing">SUBMIT FINAL BILLING</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade show active" role="tabpanel" id="tab-7">
+        <div class="tab-pane fade show active" role="tabpanel" id="generate_billing_forms">
             <form class="mt-4">
                 <div class="form-group input-style">
                     <div class="form-row">
@@ -53,9 +56,9 @@
             </form>
         </div>
 
-        <div class="tab-pane fade" role="tabpanel" id="tab-8">
+        <div class="tab-pane fade" role="tabpanel" id="submit_billing">
             <form class="mt-4">
-                <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i>&nbsp;Attach Billing Requirements
+                <h5 class="text-black-50 mb-4"><i class="fas fa-paperclip"></i></i>&nbsp;Attach Billing Requirements
                 </h5>
 
                 <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
@@ -76,8 +79,9 @@
                                 <td class="text-center">1</td>
                                 <td class="text-left">Consolidated Billing Statement (Form 1)</td>
                                 <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
+                                <td class="text-center">
+                                    <span class="badge badge-pill badge-warning input-style">For Review</span>
+                                </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group"><a
@@ -97,8 +101,9 @@
                                 <td class="text-center">2</td>
                                 <td class="text-left">Consolidated Billing Details (Form 2)</td>
                                 <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
+                                <td class="text-center">
+                                    <span class="badge badge-pill badge-warning input-style">For Review</span>
+                                </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
                                     <div class="btn-group btn-group-sm" role="group"><a
@@ -300,6 +305,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_signed_forms">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -332,6 +338,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_cor">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -357,6 +364,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_billing_checker">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
