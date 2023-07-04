@@ -55,7 +55,7 @@
 
         <div class="tab-pane fade" role="tabpanel" id="tab-8">
             <form class="mt-4">
-                <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i>&nbsp;Submit Billing
+                <h5 class="text-black-50 mb-4"><i class="fas fa-paper-plane"></i>&nbsp;Attach Billing Requirements
                 </h5>
 
                 <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info">
@@ -65,6 +65,7 @@
                             <tr>
                                 <th class="text-center">NO.</th>
                                 <th class="text-left">BILLING DOCUMENTS</th>
+                                <th class="text-left">LINK</th>
                                 <th class="text-center">STATUS</th>
                                 <th class="text-center">REMARKS</th>
                                 <th class="text-center">ACTION</th>
@@ -74,6 +75,7 @@
                             <tr>
                                 <td class="text-center">1</td>
                                 <td class="text-left">Consolidated Billing Statement (Form 1)</td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -94,6 +96,7 @@
                             <tr>
                                 <td class="text-center">2</td>
                                 <td class="text-left">Consolidated Billing Details (Form 2)</td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -114,6 +117,7 @@
                             <tr>
                                 <td class="text-center">3</td>
                                 <td class="text-left">Consolidated Billing Details (Form 3)</td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -134,6 +138,7 @@
                             <tr>
                                 <td class="text-center">4</td>
                                 <td class="text-left">Notarized Registrar's Certification</td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -155,6 +160,9 @@
                                 <td class="text-center">5</td>
                                 <td class="text-left">Certificate of Registration of Students (CORs)
                                 </td>
+                                <td class="text-left"><a
+                                    href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                    target="_blank"></a></td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -177,6 +185,7 @@
                                 <td class="text-left">Bank Certification of the HEI Certified by the
                                     HEI
                                 </td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
@@ -199,6 +208,7 @@
                                 <td class="text-left">Bank Certification of the HEI Certified by the
                                     Bank
                                 </td>
+                                <td class="text-left">Link here</td>
                                 <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
                                         Review</span></td>
                                 <td class="text-center"></td>
