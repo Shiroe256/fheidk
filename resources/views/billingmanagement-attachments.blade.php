@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <h6 class="text-dark mb-4">FHE Management / AY
         {{ $billings->ac_year }}&nbsp;/&nbsp;{{ $f->format($billings->semester) }}
-        Semester / {{ $f->format($billings->tranche) }} Tranche / Reference No. {{ $billings->reference_no }}</h6>
+        Semester / Reference No. {{ $billings->reference_no }}</h6>
     <input type="hidden" name="ac_year" id="ac_year" value="{{ $billings->ac_year }}">
     <input type="hidden" name="semester" id="semester" value="{{ $billings->semester }}">
     <input type="hidden" name="tranche" id="tranche" value="{{ $billings->tranche }}">
@@ -87,9 +87,9 @@
                                     <div class="btn-group btn-group-sm" role="group"><a
                                             class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                            title="Attach link"
+                                            data-target="#mod_upload_link_form1"><i
+                                                class="fas fa-paperclip"></i></a>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -106,12 +106,8 @@
                                 </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"><a
-                                            class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_upload_signed_forms"><i
-                                                class="fas fa-file-upload"></i></a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a class="btn btn-outline-info" role="button" data-toggle="modal" data-bs-tooltip="" data-placement="bottom" title="Attach link" data-target="#mod_upload_signed_forms"><i class="fas fa-file-upload"></i></a>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
                                             title="View billing submission" href="Admin/billinginformation.html"
@@ -272,144 +268,6 @@
 </footer>
 </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
 
-
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_view_uploaded_file">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">FHE-UP-2019-2020-1-1-FORM 1</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group input-style">
-                        <div class="form-row">
-                            <div class="col"><iframe
-                                    src="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC022022.pdf"
-                                    width="100%" height="500" style="overflow:hidden" scrolling="yes"
-                                    frameborder="3" allowTransparency="true"></iframe></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer"></div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_signed_forms">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">UPLOAD SIGNED BILLING FORMS</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group input-style">
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>File Name</label><input
-                                        class="form-control input-style" type="text"
-                                        value="FHE-UP-2019-2020-1-1-Form 1"></div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><input type="file" data-toggle="tooltip"
-                                        data-bs-tooltip="" title="Select file to upload"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
-                        type="button">Upload</button></div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_upload_link_cor">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">UPLOAD GDRIVE LINK</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group input-style">
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group"><label>URL Link</label><input class="form-control input-style"
-                                        type="text" value="https://drive.google.com/drive/u/0/my-drive"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-primary card-button-style"
-                        type="button">Upload</button></div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_billing_checker">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">Run Billing Checker Confirmation</h6><button type="button"
-                        class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body"><label>Are you sure you want to run billing checker? This will take
-                        sometime.</label></div>
-                <div class="modal-footer"><button id="btn_no" class="btn btn-danger card-button-style"
-                        type="button" data-dismiss="modal">Cancel</button><button id="btn_yes"
-                        class="btn btn-primary card-button-style" type="button" data-dismiss="modal">Yes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_submit_final_billing">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">Submit Billing Confirmation</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body"><label>Are you sure you want to submit this final billing? This will
-                        disable
-                        you from editing the forms.</label></div>
-                <div class="modal-footer"><button class="btn btn-danger card-button-style" type="button"
-                        data-dismiss="modal">Cancel</button><a class="btn btn-primary card-button-style"
-                        role="button" href="listofbillings.html">Submit</a></div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" tabindex="-1" id="mod_remove">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h6 class="modal-title">Remove Student Confirmation</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body"><label>Are you sure you want to remove this student from the list?</label>
-                </div>
-                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-dismiss="modal">Close</button><button class="btn btn-danger card-button-style"
-                        type="button">Confirm</button></div>
-            </form>
-        </div>
-    </div>
-</div>
 
 {{-- <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js')}}"></script> --}}
 <script src="{{ url('js\studsettings.js') }}"></script>
