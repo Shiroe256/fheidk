@@ -25,6 +25,9 @@ class Billing extends Model implements Auditable
         'total_beneficiaries',
         'total_amount',
         'billing_status',
+        'form1_link',
+        'form1_status',
+        'form1_remarks',
         'created_by'
     ];
 
