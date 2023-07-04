@@ -34,8 +34,7 @@
                     <div class="form-group input-style">
                         <div class="form-row">
                             <div class="col">
-                                <div class="form-group"><label>Link</label><input class="form-control input-style"
-                                        type="text"></div>
+                                <div class="form-group"><input class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
                             </div>
                         </div>
                     </div>
