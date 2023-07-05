@@ -119,11 +119,9 @@
                                                             title="Attach link for form 1"
                                                             data-bs-target="#mod_upload_link_form1"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="modal" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="{{ $billings->form1_link }}" target="_blank"
-                                                            data-target="#mod_view_uploaded_file"><i
+                                                            href="{{ $billings->form1_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
 
                                                     </div>
