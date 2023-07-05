@@ -29,7 +29,7 @@
                 @csrf
                 <div class="modal-header">
                     <h6 class="modal-title">ATTACH LINK FOR FORM 1</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-style">
@@ -55,7 +55,7 @@
             <form>
                 <div class="modal-header">
                     <h6 class="modal-title">ATTACH LINK FOR FORM 2</h6><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group input-style">
