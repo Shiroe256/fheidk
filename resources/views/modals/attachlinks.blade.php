@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div id="mod_upload_link_form1" class="modal" role="dialog" tabindex="-1">
+<div id="mod_upload_link_form1" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="frm_link_form1" method="POST">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-dismiss="modal">Close</button><button id="btn_attach_form1" name="btn_attach_form1" class="btn btn-primary card-button-style"
+                    data-bs-dismiss="modal">Close</button><button id="btn_attach_form1" name="btn_attach_form1" class="btn btn-primary card-button-style"
                         type="submit">Attach</button></div>
             </form>
         </div>
