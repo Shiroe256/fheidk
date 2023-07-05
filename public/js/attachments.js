@@ -40,6 +40,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
                 )
                 $("#btn_attach_form1").text('Attach');
                 $("#frm_link_form1")[0].reset();
+                alert('shan');
                 $("#mod_upload_link_form1").modal('hide');
                 //   location.reload(); // Reload the current pa
             } else if (response.status == 400) {
