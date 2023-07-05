@@ -2,8 +2,7 @@
 $(document).on('click', '.btn_link_form1', function (e) {
     e.preventDefault();
     let reference_no = $(this).attr('id');
-
-    alert(reference_no);
+    // alert(reference_no);
     $.ajax({
       url: '/editlink',
       method: 'get',
@@ -12,8 +11,8 @@ $(document).on('click', '.btn_link_form1', function (e) {
         _token: '{{ csrf_token() }}'
       },
       success: function (response) {
-        alert();
-        console.log(response);
+        // alert();
+        // console.log(response);
         $('#link_form1').val(response.form1_link);
       }
     });
