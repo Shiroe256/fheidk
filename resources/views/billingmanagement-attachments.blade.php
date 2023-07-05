@@ -78,9 +78,9 @@
                             <tr>
                                 <td class="text-center">1</td>
                                 <td class="text-left">Consolidated Billing Statement (Form 1)</td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
+                                <td class="text-left"> <a href="{{ $billings->form1_link }}" target="_blank">{{ $billings->form1_link }}</a></td>
                                 <td class="text-center">
-                                    <span class="badge badge-pill badge-warning input-style">For Review</span>
+                                    <span class="badge badge-pill badge-warning input-style">{{ $billings->form1_remarks }}</span>
                                 </td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
