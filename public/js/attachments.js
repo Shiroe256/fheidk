@@ -42,7 +42,7 @@ $(document).on('click', '.btn_link_form1', function (e) {
                     $("#btn_attach_form1").text('Attach');
                     $("#frm_link_form1")[0].reset();
                     $("#mod_upload_link_form1").modal('hide');
-                    //   location.reload(); // Reload the current page if needed
+                      location.reload(); // Reload the current page if needed
                 });
             } else if (response.status == 400) {
                 let i = 1;
