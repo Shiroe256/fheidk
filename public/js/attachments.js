@@ -38,10 +38,12 @@ $(document).on('click', '.btn_link_form1', function (e) {
                     'Link Updated Successfully!',
                     'success'
                 )
-                $("#btn_attach_form1").text('Attach');
-                $("#frm_link_form1")[0].reset();
-                $("#mod_upload_link_form1").modal('hide');
-                //   location.reload(); // Reload the current pa
+                .then(() => {
+                    $("#btn_attach_form1").text('Attach');
+                    $("#frm_link_form1")[0].reset();
+                    $("#mod_upload_link_form1").modal('hide');
+                    //   location.reload(); // Reload the current page if needed
+                });
             } else if (response.status == 400) {
                 let i = 1;
                 let errorMessage = '';
@@ -54,15 +56,21 @@ $(document).on('click', '.btn_link_form1', function (e) {
                     html: errorMessage,
                     icon: 'warning',
                 })
-                $("#btn_attach_form1").text('Attach');
+                .then(() => {
+                    $("#btn_attach_form1").text('Attach');
+                });
             }
         },
         error: function (xhr, status, error) {
             Swal.fire({
-                title: 'Error',
-                text: 'An error occurred while processing the request.',
+                title: 'Invalid Link',
+                text: 'Please provide a valid link to continue',
                 icon: 'error',
+            })
+            .then(() => {
+                $("#btn_attach_form1").text('Attach');
             });
         }
     });
 });
+
