@@ -87,7 +87,7 @@
                                     <div class="btn-group btn-group-sm" role="group"><button id="{{ $billings->reference_no }}" name="btn_link_form1"
                                             class="btn_link_form1 btn btn-outline-info"  data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button"
                                             title="Attach link for form 1"
-                                            data-target="#mod_upload_link_form1"><i
+                                            data-bs-target="#mod_upload_link_form1"><i
                                                 class="fas fa-paperclip"></i></button>
                                         <a class="btn btn-outline-info" role="button" data-toggle="modal"
                                             data-bs-tooltip="" data-placement="bottom"
