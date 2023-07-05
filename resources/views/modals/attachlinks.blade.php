@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div id="mod_upload_link_form1" class="modal fade" role="dialog" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static">
+<div id="mod_upload_link_form1" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="frm_link_form1" method="POST">
