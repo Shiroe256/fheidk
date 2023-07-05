@@ -12,275 +12,327 @@
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
                 previous page</a>
-                <div class="btn-group" role="group">
-                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
-                    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->billing_status }}">
-                    <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
-                        value="{{ $billings->reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button>
-                </div>
+            <div class="btn-group" role="group">
+                <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
+                <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->billing_status }}">
+                <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
+                    value="{{ $billings->reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for
+                    Review</button>
+            </div>
         </div>
-    <div id="summary_billing_div" class="card-body summary_billing_div">
         <div id="summary_billing_div" class="card-body summary_billing_div">
-<div>
-    <ul class="nav nav-tabs nav-fill">
-        <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
-                href="#generate_billing_forms">GENERATE BILLING FORMS</a></li>
-        {{-- For later use --}}
-        {{-- <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+            <div id="summary_billing_div" class="card-body summary_billing_div">
+                <div>
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab"
+                                data-toggle="tab" href="#generate_billing_forms">GENERATE BILLING FORMS</a></li>
+                        {{-- For later use --}}
+                        {{-- <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                 href="#form2">BILLING DETAILS (FORM 2)</a></li> 
         <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                 href="#form2">BILLING DETAILS (FORM 3)</a></li>                --}}
-        <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                href="#submit_billing">SUBMIT FINAL BILLING</a></li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane fade show active" role="tabpanel" id="generate_billing_forms">
-            <form class="mt-4">
-                <div class="form-group input-style">
-                    <div class="form-row">
-                        <div class="col-lg-3 col-xl-4">
-                            <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i>&nbsp;Billing
-                                Summary</h5>
+                        <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                                href="#submit_billing">SUBMIT FINAL BILLING</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" role="tabpanel" id="generate_billing_forms">
+                            <form class="mt-4">
+                                <div class="form-group input-style">
+                                    <div class="form-row">
+                                        <div class="col-lg-3 col-xl-4">
+                                            <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i>&nbsp;Billing
+                                                Summary</h5>
+                                        </div>
+                                        <div class="col text-right">
+                                            <div class="btn-group" role="group"><button
+                                                    class="btn btn-outline-primary btn-sm" type="button"><i
+                                                        class="fas fa-file-download"></i>&nbsp;Download Generated
+                                                    Forms</button></div>
+                                        </div>
+                                    </div>
+                                    <div id="show_summary_for_billing"
+                                        class="table-responsive table-style mt-2 show_summary" role="grid"
+                                        aria-describedby="dataTable_info">
+                                        {{-- SUMMARY TABLE HERE --}}
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="col text-right">
-                            <div class="btn-group" role="group"><button class="btn btn-outline-primary btn-sm"
-                                    type="button"><i class="fas fa-file-download"></i>&nbsp;Download Generated
-                                    Forms</button></div>
+
+                        <div class="tab-pane fade" role="tabpanel" id="submit_billing">
+                            <form class="mt-4">
+                                <h5 class="text-black-50 mb-4"><i class="fas fa-paperclip"></i></i>&nbsp;Attach Billing
+                                    Requirements
+                                </h5>
+
+                                <div class="table-responsive mt-2 table-style" role="grid"
+                                    aria-describedby="dataTable_info" id="tbl_billing_attachments_div">
+                                    <table class="table table-bordered table-hover dataTable my-0 table-style"
+                                        id="tbl_billing_attachments">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">NO.</th>
+                                                <th class="text-left">BILLING DOCUMENTS</th>
+                                                <th class="text-left">LINK</th>
+                                                <th class="text-center">STATUS</th>
+                                                <th class="text-center">REMARKS</th>
+                                                <th class="text-center">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">1</td>
+                                                <td class="text-left">Consolidated Billing Statement (Form 1)</td>
+                                                <td class="text-left"> <a href="{{ $billings->form1_link }}"
+                                                        target="_blank">{{ $billings->form1_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->form1_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->form1_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->form1_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form1_status == 3)
+                                                        <span class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form1_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->form1_status == 5)
+                                                        <span class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_form1"
+                                                            class="btn_link_form1 btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
+                                                            title="Attach link for form 1"
+                                                            data-bs-target="#mod_upload_link_form1"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="{{ $billings->form1_link }}" target="_blank"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">2</td>
+                                                <td class="text-left">Consolidated Billing Details (Form 2)</td>
+                                                <td class="text-left"> <a
+                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                </td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_form2"
+                                                            class="btn_link_form2 btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
+                                                            title="Attach link for form 2"
+                                                            data-bs-target="#mod_upload_link_form2"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="Admin/billinginformation.html"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">3</td>
+                                                <td class="text-left">Consolidated Billing Details (Form 3)</td>
+                                                <td class="text-left"> <a
+                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center"><span
+                                                        class="badge badge-pill badge-warning input-style">For
+                                                        Review</span></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group"> <button
+                                                            class="btn btn-outline-info" data-toggle="modal"
+                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                            title="Attach link for form 3"
+                                                            data-target="#mod_upload_link_form3"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="Admin/billinginformation.html"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">4</td>
+                                                <td class="text-left">Notarized Registrar's Certification</td>
+                                                <td class="text-left"> <a
+                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center"><span
+                                                        class="badge badge-pill badge-warning input-style">For
+                                                        Review</span></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button class="btn btn-outline-info" data-toggle="modal"
+                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                            title="Attach link for notarized registrar's certification"
+                                                            data-target="#mod_upload_link_nrc"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="Admin/billinginformation.html"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">5</td>
+                                                <td class="text-left">Certificate of Registration of Students (CORs)
+                                                </td>
+                                                <td class="text-left">
+                                                    <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center"><span
+                                                        class="badge badge-pill badge-warning input-style">For
+                                                        Review</span></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button class="btn btn-outline-info" data-toggle="modal"
+                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                            title="Attach link for cor"
+                                                            data-target="#mod_upload_link_cor"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="tooltip" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                            target="_blank"><i class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">6</td>
+                                                <td class="text-left">Bank Certification of the HEI Certified by the
+                                                    HEI
+                                                </td>
+                                                <td class="text-left"> <a
+                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center"><span
+                                                        class="badge badge-pill badge-warning input-style">For
+                                                        Review</span></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button class="btn btn-outline-info" data-toggle="modal"
+                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                            title="Attach link for hei's bank certification"
+                                                            data-target="#mod_upload_link_hei_bank_cert"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="Admin/billinginformation.html"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">7</td>
+                                                <td class="text-left">Bank Certification of the HEI Certified by the
+                                                    Bank
+                                                </td>
+                                                <td class="text-left"> <a
+                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
+                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
+                                                </td>
+                                                <td class="text-center"><span
+                                                        class="badge badge-pill badge-warning input-style">For
+                                                        Review</span></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button class="btn btn-outline-info" data-toggle="modal"
+                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                            title="Attach link for bank certification"
+                                                            data-target="#mod_upload_link_bank_cert"><i
+                                                                class="fas fa-paperclip"></i></button>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="Admin/billinginformation.html"
+                                                            data-target="#mod_view_uploaded_file"><i
+                                                                class="far fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr></tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-xl-12 offset-xl-0">
+                                        <div class="form-group input-style"><label>Remarks</label>
+                                            <textarea class="form-control form-control-lg input-style" placeholder="Type your remarks here. . ."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-xl-12 offset-xl-0">
+                                        <div class="form-group input-style">
+                                            <p class="text-right"><button class="btn btn-outline-primary btn-sm"
+                                                    type="button" data-toggle="modal"
+                                                    data-target="#mod_submit_final_billing"><i
+                                                        class="far fa-paper-plane"></i>&nbsp;Submit Final
+                                                    Billing</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div id="show_summary_for_billing" class="table-responsive table-style mt-2 show_summary"
-                        role="grid" aria-describedby="dataTable_info">
-                        {{-- SUMMARY TABLE HERE --}}
+
                     </div>
                 </div>
-            </form>
+            </div>
+
         </div>
-
-        <div class="tab-pane fade" role="tabpanel" id="submit_billing">
-            <form class="mt-4">
-                <h5 class="text-black-50 mb-4"><i class="fas fa-paperclip"></i></i>&nbsp;Attach Billing Requirements
-                </h5>
-
-                <div class="table-responsive mt-2 table-style" role="grid" aria-describedby="dataTable_info" id="tbl_billing_attachments_div">
-                    <table class="table table-bordered table-hover dataTable my-0 table-style"
-                        id="tbl_billing_attachments">
-                        <thead>
-                            <tr>
-                                <th class="text-center">NO.</th>
-                                <th class="text-left">BILLING DOCUMENTS</th>
-                                <th class="text-left">LINK</th>
-                                <th class="text-center">STATUS</th>
-                                <th class="text-center">REMARKS</th>
-                                <th class="text-center">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-left">Consolidated Billing Statement (Form 1)</td>
-                                <td class="text-left"> <a href="{{ $billings->form1_link }}" target="_blank">{{ $billings->form1_link }}</a></td>
-                                <td class="text-center">
-                                    @if ($billings->form1_status == 0)
-                                    <span class="badge badge-pill badge-secondary input-style">No Attachment</span>
-                                    @elseif ($billings->form1_status == 1)
-                                        <span class="badge badge-pill badge-warning input-style">For Review</span>
-                                    @elseif ($billings->form1_status == 2)
-                                        <span class="badge badge-pill badge-success input-style">Approved by UniFAST Billing Unit</span>
-                                    @elseif ($billings->form1_status == 3)
-                                        <span class="badge badge-pill badge-danger input-style">Rejected by UniFAST Billing Unit</span>
-                                    @elseif ($billings->form1_status == 4)
-                                        <span class="badge badge-pill badge-success input-style">Approved by CHED-AFMS</span>
-                                    @elseif ($billings->form1_status == 5)
-                                        <span class="badge badge-pill badge-danger input-style">Rejected by CHED-AFMS</span>
-                                    @endif
-                                </td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button id="{{ $billings->reference_no }}" name="btn_link_form1"
-                                            class="btn_link_form1 btn btn-outline-info"  data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button"
-                                            title="Attach link for form 1"
-                                            data-bs-target="#mod_upload_link_form1"><i
-                                                class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td class="text-left">Consolidated Billing Details (Form 2)</td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center">
-                                    <span class="badge badge-pill badge-warning input-style">For Review</span>
-                                </td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button id="{{ $billings->reference_no }}" name="btn_link_form2"
-                                            class="btn_link_form2 btn btn-outline-info"  data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button"
-                                            title="Attach link for form 2"
-                                            data-bs-target="#mod_upload_link_form2"><i
-                                                class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td class="text-left">Consolidated Billing Details (Form 3)</td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group"> <button
-                                        class="btn btn-outline-info" data-toggle="modal"
-                                        data-bs-tooltip="" data-placement="bottom" type="button"
-                                        title="Attach link for form 3"
-                                        data-target="#mod_upload_link_form3"><i
-                                            class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">4</td>
-                                <td class="text-left">Notarized Registrar's Certification</td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button
-                                        class="btn btn-outline-info" data-toggle="modal"
-                                        data-bs-tooltip="" data-placement="bottom" type="button"
-                                        title="Attach link for notarized registrar's certification"
-                                        data-target="#mod_upload_link_nrc"><i
-                                            class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">5</td>
-                                <td class="text-left">Certificate of Registration of Students (CORs)
-                                </td>
-                                <td class="text-left">
-                                    <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                  </td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button
-                                        class="btn btn-outline-info" data-toggle="modal"
-                                        data-bs-tooltip="" data-placement="bottom" type="button"
-                                        title="Attach link for cor"
-                                        data-target="#mod_upload_link_cor"><i
-                                            class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="tooltip"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission"
-                                            href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                            target="_blank"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">6</td>
-                                <td class="text-left">Bank Certification of the HEI Certified by the
-                                    HEI
-                                </td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button
-                                        class="btn btn-outline-info" data-toggle="modal"
-                                        data-bs-tooltip="" data-placement="bottom" type="button"
-                                        title="Attach link for hei's bank certification"
-                                        data-target="#mod_upload_link_hei_bank_cert"><i
-                                            class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">7</td>
-                                <td class="text-left">Bank Certification of the HEI Certified by the
-                                    Bank
-                                </td>
-                                <td class="text-left"> <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf" target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a></td>
-                                <td class="text-center"><span class="badge badge-pill badge-warning input-style">For
-                                        Review</span></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button
-                                        class="btn btn-outline-info" data-toggle="modal"
-                                        data-bs-tooltip="" data-placement="bottom" type="button"
-                                        title="Attach link for bank certification"
-                                        data-target="#mod_upload_link_bank_cert"><i
-                                            class="fas fa-paperclip"></i></button>
-                                        <a class="btn btn-outline-info" role="button" data-toggle="modal"
-                                            data-bs-tooltip="" data-placement="bottom"
-                                            title="View billing submission" href="Admin/billinginformation.html"
-                                            data-target="#mod_view_uploaded_file"><i class="far fa-eye"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr></tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="form-row">
-                    <div class="col-xl-12 offset-xl-0">
-                        <div class="form-group input-style"><label>Remarks</label>
-                            <textarea class="form-control form-control-lg input-style" placeholder="Type your remarks here. . ."></textarea>
-                        </div>
-                    </div>
-                </div>
-                    <div class="form-row">
-                        <div class="col-xl-12 offset-xl-0">
-                            <div class="form-group input-style">
-                                <p class="text-right"><button class="btn btn-outline-primary btn-sm" type="button"
-                                        data-toggle="modal" data-target="#mod_submit_final_billing"><i
-                                            class="far fa-paper-plane"></i>&nbsp;Submit Final
-                                        Billing</button>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-            </form>
-        </div>
-
     </div>
-</div>
-</div>
-
-</div>
-</div>
 </div>
 <footer class="bg-white sticky-footer">
     <div class="container my-auto">
