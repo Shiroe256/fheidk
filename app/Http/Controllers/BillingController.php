@@ -1966,9 +1966,10 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     if ($validator->fails()) {
         return response()->json([
             'status' => 400,
-            'message' => 'Invalid link provided.',
+            'errors' => $validator->errors(),
         ], 400);
     }
+
 
     $id = $request->reference_no;
     $record = Billing::where('reference_no', $id)->first();
