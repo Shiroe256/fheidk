@@ -2101,4 +2101,112 @@ public function updatelinknrc(Request $request)
     ]);
 }
     
+public function updatelinkcor(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_cor' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'cor_link' => $request->link_cor,
+        'cor_status' => ($request->link_cor === null || $request->link_cor === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkheibankcert(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_hei_bank_cert' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'hei_bank_cert_link' => $request->link_hei_bank_cert,
+        'hei_bank_cert_status' => ($request->link_hei_bank_cert === null || $request->link_hei_bank_cert === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkbankcert(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_bank_cert' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'bank_cert_link' => $request->link_bank_cert,
+        'bank_cert_status' => ($request->link_bank_cert === null || $request->link_bank_cert === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
 }
