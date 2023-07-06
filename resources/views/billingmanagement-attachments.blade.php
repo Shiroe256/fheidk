@@ -237,7 +237,7 @@
                                                 @elseif ($billings->reg_cert_status == 3)
                                                     <span class="badge badge-pill badge-danger input-style">Rejected
                                                         by UniFAST Billing Unit</span>
-                                                @elseif ($billings->form3_status == 4)
+                                                @elseif ($billings->reg_cert_status == 4)
                                                     <span
                                                         class="badge badge-pill badge-success input-style">Approved
                                                         by CHED-AFMS</span>
@@ -250,11 +250,11 @@
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
                                                         <button id="{{ $billings->reference_no }}"
-                                                            name="btn_link_form3"
-                                                            class="btn_link_form3 btn btn-outline-info"
+                                                            name="btn_link_reg_cert"
+                                                            class="btn_link_reg_cert btn btn-outline-info"
                                                             data-bs-toggle="modal" data-bs-tooltip=""
                                                             data-placement="bottom" type="button"
-                                                            title="Attach link for form registrar's certification"
+                                                            title="Attach link for registrar's certification"
                                                             data-bs-target="#mod_upload_link_reg_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
                                                         <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
@@ -268,26 +268,46 @@
                                                 <td class="text-center">5</td>
                                                 <td class="text-left">Certificate of Registration of Students (CORs)
                                                 </td>
-                                                <td class="text-left">
-                                                    <a href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center"><span
-                                                        class="badge badge-pill badge-warning input-style">For
-                                                        Review</span></td>
+                                                <td class="text-left"> <a href="{{ $billings->cor_link }}"
+                                                    target="_blank">{{ $billings->cor_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->cor_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->cor_status == 1)
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                @elseif ($billings->cor_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->cor_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->cor_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->cor_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
-                                                        <button class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Attach link for cor"
-                                                            data-target="#mod_upload_link_cor"><i
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_cor"
+                                                            class="btn_link_cor btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
+                                                            title="Attach link for student cor's"
+                                                            data-bs-target="#mod_upload_link_cor"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="tooltip" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                            target="_blank"><i class="far fa-eye"></i></a>
+                                                            href="{{ $billings->cor_link }}" target="_blank"><i
+                                                                class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -296,26 +316,45 @@
                                                 <td class="text-left">Bank Certification of the HEI Certified by the
                                                     HEI
                                                 </td>
-                                                <td class="text-left"> <a
-                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center"><span
-                                                        class="badge badge-pill badge-warning input-style">For
-                                                        Review</span></td>
+                                                <td class="text-left"> <a href="{{ $billings->hei_bank_cert_link }}"
+                                                    target="_blank">{{ $billings->hei_bank_cert_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->hei_bank_cert_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->hei_bank_cert_status == 1)
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                @elseif ($billings->hei_bank_cert_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->hei_bank_cert_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->hei_bank_cert_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->hei_bank_cert_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
-                                                        <button class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Attach link for hei's bank certification"
-                                                            data-target="#mod_upload_link_hei_bank_cert"><i
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_hei_bank_cert"
+                                                            class="btn_link_hei_bank_cert btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
+                                                            title="Attach link for hei bank certification"
+                                                            data-bs-target="#mod_upload_link_hei_bank_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="modal" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="Admin/billinginformation.html"
-                                                            data-target="#mod_view_uploaded_file"><i
+                                                            href="{{ $billings->hei_bank_cert_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
@@ -325,26 +364,45 @@
                                                 <td class="text-left">Bank Certification of the HEI Certified by the
                                                     Bank
                                                 </td>
-                                                <td class="text-left"> <a
-                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center"><span
-                                                        class="badge badge-pill badge-warning input-style">For
-                                                        Review</span></td>
+                                                <td class="text-left"> <a href="{{ $billings->bank_cert_link }}"
+                                                    target="_blank">{{ $billings->bank_cert_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->bank_cert_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->bank_cert_status == 1)
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                @elseif ($billings->bank_cert_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->bank_cert_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->bank_cert_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->bank_cert_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
-                                                        <button class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_bank_cert"
+                                                            class="btn_link_bank_cert btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
                                                             title="Attach link for bank certification"
-                                                            data-target="#mod_upload_link_bank_cert"><i
+                                                            data-bs-target="#mod_upload_link_bank_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="modal" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="Admin/billinginformation.html"
-                                                            data-target="#mod_view_uploaded_file"><i
+                                                            href="{{ $billings->bank_cert_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
