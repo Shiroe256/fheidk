@@ -132,6 +132,7 @@
             </form>
         </div>
     </div>
+</div>
 
     <div id="mod_upload_link_hei_bank_certification" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
@@ -158,6 +159,7 @@
                 </form>
             </div>
         </div>
+    </div>
 
         <div id="mod_upload_link_bank_certification" class="modal fade" role="dialog" tabindex="-1">
             <div class="modal-dialog" role="document">
@@ -184,3 +186,4 @@
                     </form>
                 </div>
             </div>
+        </div>
