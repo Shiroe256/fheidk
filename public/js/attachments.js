@@ -469,7 +469,7 @@ $(document).on('click', '.btn_link_bank_cert', function (e) {
       success: function (response) {
         // alert();
         // console.log(response);
-        $('#link_bank_cert').val(response.cor_link);
+        $('#link_bank_cert').val(response.bank_cert_link);
       }
     });
   });
