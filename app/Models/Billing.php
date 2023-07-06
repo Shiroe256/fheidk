@@ -28,6 +28,21 @@ class Billing extends Model implements Auditable
         'form1_link',
         'form1_status',
         'form1_remarks',
+        'form2_link',
+        'form2_status',
+        'form2_remarks',
+        'form3_link',
+        'form3_status',
+        'form3_remarks',
+        'reg_cert_link',
+        'reg_cert_status',
+        'reg_cert_remarks',
+        'hei_bank_cert_link',
+        'hei_bank_cert_status',
+        'hei_bank_cert_remarks',
+        'bank_cert_link',
+        'bank_cert_status',
+        'bank_cert_remarks',
         'created_by'
     ];
 
