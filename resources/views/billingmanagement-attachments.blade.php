@@ -175,26 +175,45 @@
                                             <tr>
                                                 <td class="text-center">3</td>
                                                 <td class="text-left">Consolidated Billing Details (Form 3)</td>
-                                                <td class="text-left"> <a
-                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center"><span
-                                                        class="badge badge-pill badge-warning input-style">For
-                                                        Review</span></td>
+                                                <td class="text-left"> <a href="{{ $billings->form3_link }}"
+                                                    target="_blank">{{ $billings->form3_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->form3_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->form3_status == 1)
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                @elseif ($billings->form3_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->form3_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->form3_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->form3_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" role="group"> <button
-                                                            class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_form3"
+                                                            class="btn_link_form3 btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
                                                             title="Attach link for form 3"
-                                                            data-target="#mod_upload_link_form3"><i
+                                                            data-bs-target="#mod_upload_link_form3"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="modal" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="Admin/billinginformation.html"
-                                                            data-target="#mod_view_uploaded_file"><i
+                                                            href="{{ $billings->form3_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
@@ -202,26 +221,45 @@
                                             <tr>
                                                 <td class="text-center">4</td>
                                                 <td class="text-left">Notarized Registrar's Certification</td>
-                                                <td class="text-left"> <a
-                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center"><span
-                                                        class="badge badge-pill badge-warning input-style">For
-                                                        Review</span></td>
+                                                <td class="text-left"> <a href="{{ $billings->reg_cert_link }}"
+                                                    target="_blank">{{ $billings->reg_cert_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->reg_cert_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->reg_cert_status == 1)
+                                                    <span class="badge badge-pill badge-warning input-style">For
+                                                        Review</span>
+                                                @elseif ($billings->reg_cert_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->reg_cert_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->form3_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->reg_cert_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
-                                                        <button class="btn btn-outline-info" data-toggle="modal"
-                                                            data-bs-tooltip="" data-placement="bottom" type="button"
-                                                            title="Attach link for notarized registrar's certification"
-                                                            data-target="#mod_upload_link_nrc"><i
+                                                        <button id="{{ $billings->reference_no }}"
+                                                            name="btn_link_form3"
+                                                            class="btn_link_form3 btn btn-outline-info"
+                                                            data-bs-toggle="modal" data-bs-tooltip=""
+                                                            data-placement="bottom" type="button"
+                                                            title="Attach link for form registrar's certification"
+                                                            data-bs-target="#mod_upload_link_reg_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button"
-                                                            data-toggle="modal" data-bs-tooltip=""
+                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
-                                                            href="Admin/billinginformation.html"
-                                                            data-target="#mod_view_uploaded_file"><i
+                                                            href="{{ $billings->reg_cert_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
