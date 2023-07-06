@@ -1,5 +1,5 @@
 // edit fee ajax request
-$(document).on('click', '.2', function (e) {
+$(document).on('click', '.btn_link_form1', function (e) {
     e.preventDefault();
     let reference_no = $(this).attr('id');
     // alert(reference_no);
