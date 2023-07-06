@@ -129,14 +129,31 @@
                                             <tr>
                                                 <td class="text-center">2</td>
                                                 <td class="text-left">Consolidated Billing Details (Form 2)</td>
-                                                <td class="text-left"> <a
-                                                        href="https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf"
-                                                        target="_blank">https://unifast.gov.ph/assets/pdf/guidelines/UniFAST_MC012022.pdf</a>
-                                                </td>
-                                                <td class="text-center">
+                                                <td class="text-left"> <a href="{{ $billings->form2_link }}"
+                                                    target="_blank">{{ $billings->form2_link }}</a></td>
+                                            <td class="text-center">
+                                                @if ($billings->form2_status == 0)
+                                                    <span class="badge badge-pill badge-secondary input-style">No
+                                                        Attachment</span>
+                                                @elseif ($billings->form2_status == 1)
                                                     <span class="badge badge-pill badge-warning input-style">For
                                                         Review</span>
-                                                </td>
+                                                @elseif ($billings->form2_status == 2)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->form2_status == 3)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by UniFAST Billing Unit</span>
+                                                @elseif ($billings->form2_status == 4)
+                                                    <span
+                                                        class="badge badge-pill badge-success input-style">Approved
+                                                        by CHED-AFMS</span>
+                                                @elseif ($billings->form2_status == 5)
+                                                    <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        by CHED-AFMS</span>
+                                                @endif
+                                            </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
