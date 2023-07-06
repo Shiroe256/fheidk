@@ -393,7 +393,7 @@ $(document).on('click', '.btn_link_hei_bank_cert', function (e) {
       success: function (response) {
         // alert();
         // console.log(response);
-        $('#link_hei_bank_cert').val(response.cor_link);
+        $('#link_hei_bank_cert').val(response.hei_bank_cert_link);
       }
     });
   });

@@ -134,10 +134,10 @@
     </div>
 </div>
 
-    <div id="mod_upload_link_hei_bank_certification" class="modal fade" role="dialog" tabindex="-1">
+    <div id="mod_upload_link_hei_bank_cert" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="frm_link_hei_bank_certification" method="POST">
+                <form id="frm_link_hei_bank_cert" method="POST">
                     @csrf
                     <div class="modal-header">
                         <h6 class="modal-title">ATTACH LINK FOR HEI BANK CERTIFICATION</h6><button type="button" class="close"
@@ -148,23 +148,23 @@
                             <div class="form-row">
                                 <div class="col">
                                     <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
-                                    <div class="form-group"><input id="link_hei_bank_certification" name="link_hei_bank_certification" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                                    <div class="form-group"><input id="link_hei_bank_cert" name="link_hei_bank_cert" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                        data-bs-dismiss="modal">Close</button><button id="btn_attach_hei_bank_certification" name="btn_attach_hei_bank_certification" class="btn btn-primary card-button-style"
+                        data-bs-dismiss="modal">Close</button><button id="btn_attach_hei_bank_cert" name="btn_attach_hei_bank_cert" class="btn btn-primary card-button-style"
                             type="submit">Attach</button></div>
                 </form>
             </div>
         </div>
     </div>
 
-        <div id="mod_upload_link_bank_certification" class="modal fade" role="dialog" tabindex="-1">
+        <div id="mod_upload_link_bank_cert" class="modal fade" role="dialog" tabindex="-1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form id="frm_link_bank_certification" method="POST">
+                    <form id="frm_link_bank_cert" method="POST">
                         @csrf
                         <div class="modal-header">
                             <h6 class="modal-title">ATTACH LINK FOR HEI BANK CERTIFICATION</h6><button type="button" class="close"
@@ -175,13 +175,13 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
-                                        <div class="form-group"><input id="link_bank_certification" name="link_bank_certification" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                                        <div class="form-group"><input id="link_bank_cert" name="link_bank_cert" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
-                            data-bs-dismiss="modal">Close</button><button id="btn_attach_bank_certification" name="btn_attach_bank_certification" class="btn btn-primary card-button-style"
+                            data-bs-dismiss="modal">Close</button><button id="btn_attach_bank_cert" name="btn_attach_bank_cert" class="btn btn-primary card-button-style"
                                 type="submit">Attach</button></div>
                     </form>
                 </div>
