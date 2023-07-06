@@ -350,7 +350,7 @@
                                                             data-bs-toggle="modal" data-bs-tooltip=""
                                                             data-placement="bottom" type="button"
                                                             title="Attach link for hei bank certification"
-                                                            data-bs-target="#mod_upload_link_hei_bank_cert"><i
+                                                            data-bs-target="#mod_upload_link_hei_bank_certification"><i
                                                                 class="fas fa-paperclip"></i></button>
                                                         <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
@@ -398,7 +398,7 @@
                                                             data-bs-toggle="modal" data-bs-tooltip=""
                                                             data-placement="bottom" type="button"
                                                             title="Attach link for bank certification"
-                                                            data-bs-target="#mod_upload_link_bank_cert"><i
+                                                            data-bs-target="#mod_upload_link_bank_certification"><i
                                                                 class="fas fa-paperclip"></i></button>
                                                         <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
