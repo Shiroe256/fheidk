@@ -16,7 +16,7 @@
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
                 <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->billing_status }}">
                 <button id="btn_submit" class="btn btn-outline-primary btn-sm" type="button"
-                    value="{{ $billings->reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for
+                    value="{{ $billings->reference_no }}"><i class="far fa-paper-plane"></i>&nbsp;Submit for
                     Review</button>
             </div>
         </div>
@@ -417,18 +417,6 @@
                                     <div class="col-xl-12 offset-xl-0">
                                         <div class="form-group input-style"><label>Remarks</label>
                                             <textarea class="form-control form-control-lg input-style" placeholder="Type your remarks here. . ."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-xl-12 offset-xl-0">
-                                        <div class="form-group input-style">
-                                            <p class="text-right"><button class="btn btn-outline-primary btn-sm"
-                                                    type="button" data-toggle="modal"
-                                                    data-target="#mod_submit_final_billing"><i
-                                                        class="far fa-paper-plane"></i>&nbsp;Submit Final
-                                                    Billing</button>
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
