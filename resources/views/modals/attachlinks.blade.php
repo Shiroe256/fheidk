@@ -67,7 +67,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
-                                <div class="form-group"><input id="link_form3" name="link_form2" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                                <div class="form-group"><input id="link_form3" name="link_form3" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
                             </div>
                         </div>
                     </div>
