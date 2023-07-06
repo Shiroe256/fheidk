@@ -1992,5 +1992,41 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         'status' => 200,
     ]);
 }
+
+public function updatelinkform2(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_form2' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'form2_link' => $request->link_form2,
+        'form2_status' => ($request->link_form2 === null || $request->link_form2 === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
     
 }
