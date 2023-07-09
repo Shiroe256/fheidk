@@ -15,8 +15,7 @@
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
                 <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->billing_status }}">
-                <button id="btn_submit" class="btn btn-outline-primary btn-sm d-none" type="button"
-                    value="{{ $billings->reference_no }}"><i class="far fa-paper-plane"></i>&nbsp;Submit for
+                <button id="btn_submit_final_billing" name="btn_submit_final_billing" class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-paper-plane"></i>&nbsp;Submit for
                     Review</button>
             </div>
         </div>

@@ -529,3 +529,33 @@ $(document).on('click', '.btn_link_bank_cert', function (e) {
         }
     });
 });
+
+<script>
+  function myFunction2() {
+    // Get all the status elements
+    var statuses = [
+      {{ $billings->form1_status }},
+      {{ $billings->form2_status }},
+      {{ $billings->form3_status }},
+      {{ $billings->reg_cert_status }},
+      {{ $billings->cor_status }},
+      {{ $billings->hei_bank_cert_status }},
+      {{ $billings->bank_cert_status }}
+    ];
+
+    // Check if all statuses are equal to 1
+    var allStatusesEqualOne = statuses.every(function(status) {
+      return status === 1;
+    });
+
+    // If all statuses are equal to 1, remove the d-none class from the button
+    if (allStatusesEqualOne) {
+      $('#btn_submit').removeClass('d-none');
+    }
+  }
+
+  // Call the function when the document is ready
+  $(document).ready(function() {
+    myFunction2();
+  });
+</script>
