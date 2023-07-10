@@ -138,7 +138,7 @@ class FPDFunifast extends Fpdf
             $headerHeight = $this->GetY();
             $headerHeight = $this->GetY() - $headerHeight;
             $this->Row($headers, 3, $alignments);
-            $this->Cell(0,5,$this->currentCourse);
+            $this->Cell(0, 5, $this->currentCourse, 1, 1);
             // $this->Row(array($this->currentCourse),3,array('L'));
         }
     }

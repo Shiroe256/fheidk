@@ -850,7 +850,7 @@ SUM(
         $pdf->Ln(10);
         $pdf->Cell(320, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 0, 0, 'C', 0);
         $pdf->Ln(5);
-        $pdf->Cell(320, 5, 'Degree Program', 1, 0, 'L', 0);
+        // $pdf->Cell(320, 5, 'Degree Program', 1, 0, 'L', 0);
         $pdf->Ln();
         //set font kasi maliit
         $pdf->SetFont('Arial', '', 6);
@@ -1004,6 +1004,7 @@ SUM(
         // $pdf->Row($rowData, 3, $alignments);
         //!for the first page
         $pdf->currentCourse = $grantees[0]->degree_program;
+        $this->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
             if ($pdf->currentCourse != $grantee->degree_program) {
