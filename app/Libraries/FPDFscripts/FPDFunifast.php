@@ -19,6 +19,7 @@ class FPDFunifast extends Fpdf
         $this->SetFont('Arial', '', 6);
         //headers
         if ($this->PageNo() != 1) {
+            $this->Cell(0, 5, $this->currentCourse, 1, 1);
             $pagetitleheight = $this->GetY();
             $margin = 5;
             $pagetitleheight = $this->GetY() - $pagetitleheight;
