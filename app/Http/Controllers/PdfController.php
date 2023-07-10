@@ -547,65 +547,37 @@ SUM(
         $grantees = $this->getForm2Data($reference_no);
         // print_r($grantees->toArray());
 
-        // $grantees[] =
-        //     array(
-        //         'stud_number' => '202010002',
-        //         'last_name' => 'DELOS REYES',
-        //         'given_name' => 'JAERICK DIONUEL',
-        //         'middle_initial' => 'C',
-        //         'year_level' => '3',
-        //         'sex' => 'M',
-        //         'lab_units' => '0',
-        //         'comp_lab_units' => '0',
-        //         'academic_units' => '15',
-        //         'nstp_units' => '-',
-        //         'tuition_fee' => '99,999.00',
-        //         'nstp_fee' => '-',
-        //         'athletic_fees' => '117.00',
-        //         'computer_fees' => '-',
-        //         'cultural_fees' => '74.00',
-        //         'devt_fees' => '270.00',
-        //         'admission_fees' => '-',
-        //         'guidance_fees' => '146.00',
-        //         'handbook_fees' => '-',
-        //         'laboratory_fees' => '-',
-        //         'library_fee' => '732.00',
-        //         'medical_fees' => '293.00',
-        //         'registration_fees' => '74.00',
-        //         'school_id_fees' => '-',
-        //         'total_tosf' => '999999.00'
-        //     );
-        // $grantees[] =
-        //     array(
-        //         'stud_number' => '202010003',
-        //         'last_name' => 'BOHOL',
-        //         'given_name' => 'FROILAN',
-        //         'middle_initial' => 'L',
-        //         'year_level' => '4',
-        //         'sex' => 'M',
-        //         'lab_units' => '-',
-        //         'comp_lab_units' => '-',
-        //         'academic_units' => '-',
-        //         'nstp_units' => '-',
-        //         'tuition_fee' => '-',
-        //         'nstp_fee' => '-',
-        //         'athletic_fees' => '-',
-        //         'computer_fees' => '-',
-        //         'cultural_fees' => '-',
-        //         'devt_fees' => '-',
-        //         'admission_fees' => '-',
-        //         'guidance_fees' => '-',
-        //         'handbook_fees' => '-',
-        //         'laboratory_fees' => '-',
-        //         'library_fee' => '-',
-        //         'medical_fees' => '-',
-        //         'registration_fees' => '-',
-        //         'school_id_fees' => '-',
-        //         'total_tosf' => '-'
-        //     );
+        $grantees[] =
+            array(
+                'last_name' => 'Bohol',
+                'given_name' => 'Froilan',
+                'middle_initial' => 'L',
+                'sex' => 'M',
+                'birthdate' => 'November 22, 1994',
+                'degree' => 'Bachelor of Science in Information Technology',
+                'year_level' => '4',
+                'email_address' => 'sample@gmail.com',
+                'phone_number' => '09955167998',
+                'admission_fees' => '350.00',
+                'remarks' => 'Passed'
+            );
+        $grantees[] =
+            array(
+                'last_name' => 'Bohol',
+                'given_name' => 'Froilan',
+                'middle_initial' => 'L',
+                'sex' => 'M',
+                'birthdate' => 'November 22, 1994',
+                'degree' => 'Bachelor of Science in Information Technology',
+                'year_level' => '4',
+                'email_address' => 'sample@gmail.com',
+                'phone_number' => '09955167998',
+                'admission_fees' => '350.00',
+                'remarks' => 'Passed'
+            );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories']);
+        $this->generateForm3($hei_info['hei_info'], $hei_info['signatories'],$grantees);
         exit;
     }
 
@@ -685,140 +657,11 @@ SUM(
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $signatories['pos_appr'], 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString() , 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 1, "C");
         $pdf->Output();
     }
-
-    // private function generateForm2($pdf_data, $signatories)
-    // {
-    //     // $pdf = new FPDFunifast();
-    //     // $pdf = new FPDFunifast('L','mm',array(215.9,279.4));
-    //     $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
-    //     $pdf->AliasNbPages();
-    //     $margin = 5;
-    //     $pdf->SetMargins($margin, $margin, $margin);
-    //     $pdf->SetFont('Arial', '', 10);
-    //     $pdf->AddPage('L');
-
-    //     $pagetitleheight = $pdf->GetY();
-    //     $pdf->Cell(0, 5, 'FORM 2', 0, 1, 'R', 0);
-    //     $pdf->Cell(0, 5, 'Republic of the Philippines', 0, 1, 'C', 0);
-    //     $pdf->Cell(0, 5, $pdf_data['college_name'], 0, 1, 'C', 0);
-    //     $pdf->Cell(0, 5, $pdf_data['college_address'], 0, 1, 'C', 0);
-    //     $pdf->Cell(0, 5, 'FREE HIGHER EDUCATION BILLING DETAILS', 0, 1, 'C', 0);
-
-    //     $pdf->Ln(5);
-    //     $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Free HE Billing Details Reference Number:', 0, 0, 'R');
-    //     $pdf->Cell(0, 4, $pdf_data['ref_no'], 0, 1, 'R');
-    //     $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Date:', 0, 0, 'R');
-    //     $pdf->Cell(0, 4, $pdf_data['date'], 0, 1, 'R');
-    //     // $pdf->Ln(10);
-    //     $pdf->Cell(0, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 1, 1, 'L', 0);
-    //     //set font kasi maliit
-    //     $pdf->SetFont('Arial', '', 6);
-    //     //headers
-    //     // $pdf->MultiCell(4, 4, '#', 1, 'C', 0);
-    //     $pagetitleheight = $pdf->GetY() - $pagetitleheight;
-    //     $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
-
-    //     $headers[] = '#';
-    //     $headers[] = 'Stud. Number';
-    //     $headers[] = 'LRN';
-    //     $headers[] = 'Last Name';
-    //     $headers[] = 'Given Name';
-    //     $headers[] = 'Middle Name';
-    //     $headers[] = 'Degree Program';
-    //     $headers[] = 'Year Level';
-    //     $headers[] = 'Sex at Birth';
-    //     $headers[] = 'E-mail address';
-    //     $headers[] = 'Phone Number';
-    //     $headers[] = 'Laboratory Units / subject';
-    //     $headers[] = 'Computer Lab Units/Subject';
-    //     $headers[] = 'Academic Units Enrolled (credit and non-credit courses)';
-    //     $headers[] = 'Academic Units of NSTP Enrolled (credit and non-credit courses)';
-    //     $headers[] = 'Tuition Fee based on enrolled academic units (credit and non-credit courses)';
-    //     $headers[] = 'NSTP Fee based on enrolled academic units (credit and non-credit courses)';
-    //     $headers[] = 'Athletic Fees';
-    //     $headers[] = 'Computer Fees';
-    //     $headers[] = 'Cultural Fees';
-    //     $headers[] = 'Development Fees';
-    //     $headers[] = 'Entrance/Admission Fees*';
-    //     $headers[] = 'Guidance Fees';
-    //     $headers[] = 'Handbook Fees';
-    //     $headers[] = 'Laboratory Fees';
-    //     $headers[] = 'Library Fee';
-    //     $headers[] = 'Medical and Dental Fees';
-    //     $headers[] = 'Registration Fees';
-    //     $headers[] = 'School ID Fees';
-    //     $headers[] = 'TOTAL TOSF';
-
-    //     foreach ($headers as $key => $header) {
-    //         if ($key == 0)
-    //             $widths[] = 4;
-    //         elseif ($key == 1)
-    //             $widths[] = 10;
-    //         elseif ($key == 2)
-    //             $widths[] = 8;
-    //         elseif ($key == 3)
-    //             $widths[] = 13;
-    //         elseif ($key == 4)
-    //             $widths[] = 13;
-    //         elseif ($key == 11)
-    //             $widths[] = 10;
-    //         elseif ($key == 12)
-    //             $widths[] = 10;
-    //         elseif ($key == 13)
-    //             $widths[] = 12;
-    //         elseif ($key == 14)
-    //             $widths[] = 12;
-    //         elseif ($key == 15)
-    //             $widths[] = 13;
-    //         elseif ($key == 16)
-    //             $widths[] = 12;
-    //         elseif ($key == 18)
-    //             $widths[] = 11;
-    //         else
-    //             $widths[] = $pagewidth_withborders / count($headers);
-    //     }
-    //     $pdf->SetWidths($widths);
-    //     $headerHeight = $pdf->GetY();
-    //     $pdf->Row($headers, 3, 'l');
-    //     $headerHeight = $pdf->GetY() - $headerHeight;
-    //     //content
-    //     foreach ($headers as $header)
-    //         $sample[] = '';
-
-    //     // $lastpage = $pdf->PageNo();
-    //     //prints the signature at the bottom always and cuts the page if there are no records in the signature page so laging may records na kasama ung signature
-    //     $total = 87;
-    //     for ($i = 0; $i < $total; $i++) {
-    //         if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
-    //             $pdf->AddPage('L');
-    //             $pdf->Row($headers, 3, 'l');
-    //         } else if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + 10 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
-    //             $pdf->AddPage('L');
-    //             $pdf->Row($headers, 3, 'l');
-    //         } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
-    //             //print headers if a new page will be created by adding a row
-    //             $pdf->Row($headers, 3, 'l');
-    //         }
-    //         $pdf->Row($sample, 3, 'l');
-    //     }
-
-    //     //signature
-    //     $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
-    //     $pdf->SetWidths($sigwidths);
-    //     $pdf->SetY($pdf->GetPageHeight() - 52);
-    //     $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 3, 'L', 0);
-    //     $pdf->RowWithBorder(array('', '', '', ''), 20, 'C', 0);
-    //     $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
-    //     $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 5, 'C', 0);
-
-    //     $pdf->Output();
-    // }
-
     function generateForm2($signatories, $pdf_data, $grantees)
     {
 
@@ -1054,6 +897,144 @@ SUM(
 
         //signature
         $pdf->isLast = true;
+
+        $pdf->Output();
+    }
+
+    function generateForm3($signatories, $pdf_data, $grantees)
+    {
+        $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->AddPage('L');
+        $pdf->AliasNbPages();
+        $margin = 5;
+        $pdf->SetMargins($margin, $margin, $margin);
+        $pdf->SetFont('Arial', '', 10);
+
+        $pagetitleheight = $pdf->GetY();
+        $pdf->Cell(0, 5, 'FORM 3', 0, 1, 'R', 0);
+        $pdf->Cell(0, 5, 'Republic of the Philippines', 0, 1, 'C', 0);
+        $pdf->Cell(0, 5, $pdf_data['college_name'], 0, 1, 'C', 0);
+        $pdf->Cell(0, 5, $pdf_data['college_address'], 0, 1, 'C', 0);
+        $pdf->Cell(0, 5, 'FREE HIGHER EDUCATION BILLING DETAILS', 0, 1, 'C', 0);
+
+        $pdf->Ln(5);
+        $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Free HE Billing Details Reference Number:', 0, 0, 'R');
+        $pdf->Cell(0, 4, $pdf_data['ref_no'], 0, 1, 'R');
+        $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Date:', 0, 0, 'R');
+        $pdf->Cell(0, 4, $pdf_data['date'], 0, 1, 'R');
+        $pdf->Ln(10);
+        $pdf->Cell(320, 5, 'ADMISSION FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 0, 0, 'C', 0);
+        $pdf->Ln();
+        //set font kasi maliit
+        $pdf->SetFont('Arial', '', 6);
+        //headers
+        $pagetitleheight = $pdf->GetY() - $pagetitleheight;
+        $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
+
+
+        $headers[] = 'Seq Number';
+        $headers[] = 'Last Name';
+        $headers[] = 'Given Name';
+        $headers[] = 'Middle Initial';
+        $headers[] = 'Sex';
+        $headers[] = 'Birthdate';
+        $headers[] = 'Degree';
+        $headers[] = 'Year Level';
+        $headers[] = 'Email Address';
+        $headers[] = 'Phone Number';
+        $headers[] = 'Admission/Entrance Fees';
+        $headers[] = 'Remarks (Passed/Failed)';
+
+
+        foreach ($headers as $key => $header) {
+            if ($key == 0)
+                $widths[] = 10; //#
+            elseif ($key == 1)
+                $widths[] = 45; //Last Name
+            elseif ($key == 2)
+                $widths[] = 45; //Given Name
+            elseif ($key == 3)
+                $widths[] = 9; //Middle Initial
+            elseif ($key == 4)
+                $widths[] = 6; //Sex at Birth
+            elseif ($key == 5)
+                $widths[] = 29; //Birthdate
+            elseif ($key == 6)
+                $widths[] = 77; //Degree
+            elseif ($key == 7)
+                $widths[] = 8; //Year Level
+            elseif ($key == 8)
+                $widths[] = 35; //Email Address
+            elseif ($key == 9)
+                $widths[] = 18; //Phone Number
+            elseif ($key == 10)
+                $widths[] = 21; //Entrance/Admission Fees
+            elseif ($key == 11)
+                $widths[] = 17; //Entrance/Admission Fees
+        }
+
+        $pdf->SetWidths($widths);
+
+        $alignments[] = 'L';
+        $alignments[] = 'L';
+        $alignments[] = 'L';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'R';
+        $alignments[] = 'C';
+        $pdf->SetAligns($alignments);
+        $headerHeight = $pdf->GetY();
+        $headerHeight = $pdf->GetY() - $headerHeight;
+        $pdf->Row($headers, 3, $alignments,);
+
+        // Compute Total TOSF
+        $totalFees = 0;
+        $total = count($grantees);
+        $headerHeight = 20;
+        $pagetitleheight = 30;
+        $sequenceNumber = 1;
+        foreach ($grantees as $index => $grantee) {
+            if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
+                $pdf->AddPage('L');
+                $pdf->Row($headers, 3, $alignments);
+            } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
+                $pdf->AddPage('L');
+                $pdf->Row($headers, 3, $alignments);
+            } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
+                // Print headers if a new page will be created by adding a row
+                $pdf->Row($headers, 3, $alignments);
+            }
+            //Sequence Number that start with '0'
+            // $rowData = array_merge([sprintf('%05d', $sequenceNumber++)], array_values($grantee));
+            $rowData = array_merge([$sequenceNumber++], array_values($grantee));
+            $pdf->Row($rowData, 3, $alignments);
+            // Calculate the sum of "TOTAL TOSF"
+            $totalFees += (float) str_replace('', '', $grantee['admission_fees']);
+        };
+
+        // Display the Sum of TOTAL TOSF
+        $pdf->SetFont('Arial', 'BI', 7);
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->Cell(298, 5, 'TOTAL:', 0, 0, 'R', 0);
+        $pdf->Cell(22, 5, number_format($totalFees, 2), 0, 0, 'R', 0);
+
+        //signature
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->SetTextColor(0, 0, 0);
+        $sigwidths = array($pagewidth_withborders / 3, $pagewidth_withborders / 3, $pagewidth_withborders / 3);
+        $pdf->SetWidths($sigwidths);
+        $pdf->SetY($pdf->GetPageHeight() - 50);
+        $pdf->Ln();
+        $pdf->Ln();
+        $pdf->RowWithBorder(array('Prepared & Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
+        $pdf->RowWithBorder(array('', '', ''), 10, 'C', 0);
+        $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2']), 3, 'C', 0);
+        $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2']), 3, 'C', 0);
 
         $pdf->Output();
     }
