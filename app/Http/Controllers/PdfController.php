@@ -522,7 +522,7 @@ SUM(
         $total_amount = DB::table(DB::raw("({$union->toSql()}) AS summary"))
             ->mergeBindings($union)
             ->selectRaw('sum(summary.total_fee) + sum(summary.exam_fees) as total_amount')
-            ->get()->total_amount;
+            ->first()->total_amount;
         return $total_amount;
     }
     function getForm3Data($reference_no)
