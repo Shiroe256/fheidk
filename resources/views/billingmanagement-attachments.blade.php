@@ -42,7 +42,7 @@
                                             <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i>&nbsp;Billing
                                                 Summary</h5>
                                         </div>
-                                        <div class="col text-right">
+                                        <div>
                                             <div class="dropdown no-arrow">
                                                 <button class="btn btn-outline-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
                                                   <i class="far fa-file-pdf"></i> Download Generated Forms
