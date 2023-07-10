@@ -478,6 +478,7 @@ SUM(
             ->where('reference_no', $reference_no)
             ->where('total_exam_taken', '!=', 0)
             ->groupBy('tbl_billing_details_temp.uid')
+            ->orderBy('degree_program')
             ->get();
         return $applicants;
     }
@@ -1034,20 +1035,20 @@ SUM(
             // }
             //Sequence Number that start with '0'
             // $rowData = array_merge([sprintf('%05d', $sequenceNumber++)], array_values($grantee));
-            $granteeRow=
-            array(
-                'last_name' => $grantee->stud_lname,
-                'given_name' => $grantee->stud_fname,
-                'middle_initial' => $grantee->stud_mname,
-                'sex' => $grantee->stud_sex,
-                'birthdate' => $grantee->stud_birth_date,
-                'degree' => $grantee->degree_program,
-                'year_level' => $grantee->year_level,
-                'email_address' => $grantee->stud_email,
-                'phone_number' => $grantee->stud_phone_no,
-                'admission_fees' => number_format($grantee->exam_fees,2),
-                'remarks' => $grantee->exam_result
-            );
+            $granteeRow =
+                array(
+                    'last_name' => $grantee->stud_lname,
+                    'given_name' => $grantee->stud_fname,
+                    'middle_initial' => $grantee->stud_mname != '' ? substr($grantee->stud_mname, 0, 1) : '',
+                    'sex' => substr($grantee->stud_sex, 0, 1),
+                    'birthdate' => $grantee->stud_birth_date,
+                    'degree' => $grantee->degree_program,
+                    'year_level' => $grantee->year_level,
+                    'email_address' => $grantee->stud_email,
+                    'phone_number' => $grantee->stud_phone_no,
+                    'admission_fees' => number_format($grantee->exam_fees, 2),
+                    'remarks' => $grantee->exam_result
+                );
             $rowData = array_merge([$sequenceNumber++], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
