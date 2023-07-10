@@ -604,8 +604,8 @@ SUM(
         //         'total_tosf' => '-'
         //     );
 
-        $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-
+        // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
+        $this->generateForm1($hei_info['signatories']);
         exit;
     }
 
@@ -821,7 +821,7 @@ SUM(
 
     function generateForm2($signatories, $pdf_data, $grantees)
     {
-        
+
 
         // $row[] = "hello world";
         // $row[] = array('term' => "first", 'ay' => '2022');
@@ -1006,7 +1006,7 @@ SUM(
 
         // $rowData = array_merge([$key + 1], array_values($grantees[0]));
         // $pdf->Row($rowData, 3, $alignments);
-        
+
         // $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
@@ -1054,7 +1054,7 @@ SUM(
 
         //signature
         $pdf->isLast = true;
-        
+
         $pdf->Output();
     }
 }
