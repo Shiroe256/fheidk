@@ -1033,7 +1033,7 @@ SUM(
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
-            $totalTosf += (float) str_replace('', '', $grantee->total_tosf);
+            $totalTosf += (float) str_replace('', '', $grantee->total_fee);
         };
         // Display the Sum of TOTAL TOSF
         $pdf->SetFont('Arial', 'BI', 7);
