@@ -19,7 +19,7 @@ class PreventEditingIfSubmitted
     {
         $reference_no = $request->reference_no;
         $billing_status = Billing::where('reference_no',$reference_no)->first()->billing_status;
-        if ($billing_status != 1 || $billing_status != 3 || $billing_status != 4) {
+        if ($billing_status != 1 || $billing_status != 3 || $billing_status >= 5) {
             return response('Not Success', 500);
         }
         return $next($request);

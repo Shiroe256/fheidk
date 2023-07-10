@@ -86,7 +86,7 @@ async function finalizeBilling(reference_no) {
       Swal.fire({
         icon: 'success',
         title: 'Status Updated',
-        html: 'Billing has been sent for review.'
+        html: 'Billing has been finalized.'
       }).then((result) => {
         if (result.isConfirmed) {
           window.location.href = "/billings";
@@ -104,6 +104,45 @@ async function finalizeBilling(reference_no) {
     });
   }
 }
+
+// async function submitBilling(reference_no) {
+//   try {
+//     const payload = JSON.stringify({
+//       reference_no: reference_no
+//     });
+//     const response = await fetch(window.location.origin + '/submit-billing', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'X-CSRF-Token': csrf
+//       },
+//       body: payload
+//     });
+
+//     if (response.ok) {
+//       const responseData = await response.json();
+//       console.log('Response:', responseData);
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Status Updated',
+//         html: 'Billing has been sent for review.'
+//       }).then((result) => {
+//         if (result.isConfirmed) {
+//           window.location.href = "/billings";
+//         }
+//       });
+//     } else {
+//       throw new Error(`Request failed with status ${response.status}`);
+//     }
+//   } catch (error) {
+//     // Handle any errors that occurred during the request
+//     Swal.fire({
+//       icon: 'error',
+//       title: 'Oops...',
+//       html: error.message
+//     });
+//   }
+// }
 
 templateReq.onload = function (e) {
   const workbook = new ExcelJS.Workbook();

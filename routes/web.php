@@ -51,6 +51,7 @@ Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
+Route::get('/billingmanagementattachments/{ref_no?}', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
@@ -84,6 +85,16 @@ Route::get('/get-nstpfee', [BillingController::class, 'findNSTPFee'])->name('fin
 //Select inputs
 Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreePrograms'])->name('selectDegreePrograms');
 Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
+
+//Updating links
+Route::get('/editlink', [BillingController::class, 'editlink'])->name('editlink');//for single entry
+Route::post('/updatelinkform1', [BillingController::class, 'updatelinkform1'])->name('updatelinkform1');//for single entry
+Route::post('/updatelinkform2', [BillingController::class, 'updatelinkform2'])->name('updatelinkform2');//for single entry
+Route::post('/updatelinkform3', [BillingController::class, 'updatelinkform3'])->name('updatelinkform3');//for single entry
+Route::post('/updatelinknrc', [BillingController::class, 'updatelinknrc'])->name('updatelinknrc');//for single entry
+Route::post('/updatelinkcor', [BillingController::class, 'updatelinkcor'])->name('updatelinkcor');//for single entry
+Route::post('/updatelinkheibankcert', [BillingController::class, 'updatelinkheibankcert'])->name('updatelinkheibankcert');//for single entry
+Route::post('/updatelinkbankcert', [BillingController::class, 'updatelinkbankcert'])->name('updatelinkbankcert');//for single entry
 
 //Student Settings
 //middleware for thottling (limit requests to 20 per min) and authentication

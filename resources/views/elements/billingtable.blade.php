@@ -44,49 +44,43 @@
                             <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
                             <?php
                             elseif ($billing->billing_status==5):?>
-                            <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing
-                                Unit</span>
-                            <?php
+                            <span class="badge badge-pill badge-primary span-size">Finalizing Billing</span>
+                             <?php
                             elseif ($billing->billing_status==6):?>
-                            <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Admin
-                                Unit</span>
+                            <span class="badge badge-pill badge-primary span-size">Submitted to UniFAST: Billing
+                                Unit</span>    
                             <?php
                             elseif ($billing->billing_status==7):?>
-                            <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                            <span class="badge badge-pill badge-danger span-size">For Revision</span>
                             <?php
                             elseif ($billing->billing_status==8):?>
+                            <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                            <?php
+                            elseif ($billing->billing_status==9):?>
+                            <span class="badge badge-pill badge-success span-size">Ready for Disbursement</span>
+                            <?php
+                            elseif ($billing->billing_status==10):?>
                             <span class="badge badge-pill badge-success span-size">Disbursed</span>
                             <?php
                             endif;?>
                         </td>
                         <td></td>
                         <td class="text-center">
-                            <?php
-                        if ($billing->billing_status==2 || $billing->billing_status> 4 ):?>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip"
-                                    data-bs-tooltip="" data-placement="bottom" title="Edit Grantees"
-                                    href="#"><i
-                                        class="far fa-eye"></i></a>
-                                <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip"
-                                    data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings"
-                                    href="#' }}"><i
-                                        class="fas fa-sliders"></i></a>
-                            </div>
-                            <?php
-                            else:?>
-                            <div class="btn-group btn-group-sm" role="group"><a class="btn btn-outline-primary"
-                                    role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom"
-                                    title="Edit Grantees"
-                                    href="{{ route('billings') . '/' . $billing->reference_no }}"><i
-                                        class="far fa-eye"></i></a>
-                                <a class="btn btn-outline-primary" role="button" data-toggle="tooltip"
-                                    data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings"
-                                    href="{{ route('billings') . '/' . $billing->reference_no . '/settings' }}"><i
-                                        class="fas fa-sliders"></i></a>
-                            </div>
-                            <?php
-                            endif;?>
+                            <?php if ($billing->billing_status == 2 || $billing->billing_status > 5): ?>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="#' }}"><i class="fas fa-sliders"></i></a>
+                                </div>
+                            <?php elseif ($billing->billing_status === 5): ?>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ route('billingmanagementattachments') . '/' . $billing->reference_no }}"><i class="far fa-eye"></i></a>
+                                </div>
+                            <?php else: ?>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="{{ route('billings') . '/' . $billing->reference_no }}"><i class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="{{ route('billings') . '/' . $billing->reference_no . '/settings' }}"><i class="fas fa-sliders"></i></a>
+                                </div>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 @endforeach

@@ -1229,6 +1229,20 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // abort(401);
     }
 
+    public function billingmanagementattachments($reference_no)
+    {
+        $billings = Billing::where('reference_no', $reference_no)->first();
+        // if (isNull($billings)) {
+        //     return view('errors.404');
+        // }
+        // $hei_uii = Auth::user()->hei_uii;
+        $data['billings'] = $billings;
+        // if ($billings && $billings->hei_uii == $hei_uii) {
+        return view('billingmanagement-attachments', $data);
+        // }
+        // abort(401);
+    }
+
     public function getStudentBillingSettings(Request $request)
     {
         $bs_student = $request->bs_student;
@@ -1617,6 +1631,18 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         return $courses->uid;
     }
 
+    // public function submitBilling(Request $request)
+    // {
+    //     $billing = Billing::where('reference_no', $request->reference_no)->first();
+    //     if ($billing->billing_status != 5) {
+    //         return response('Not Success', 500);
+    //     }
+    //     $billing->billing_status = 6;
+    //     $billing->save();
+    //     echo json_encode('Success');
+    //     // return response('Success', 200);
+    // }
+
     public function finalizeBilling(Request $request)
     {
         $billing = Billing::where('reference_no', $request->reference_no)->first();
@@ -1920,4 +1946,267 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         DB::table('tbl_billing_details_temp')->whereIn('uid', $uids)->update(['total_fees' => -1]);
         computeStudentFees::dispatch($reference_no, $uids);
     }
+
+    //attaching links
+    // handle edit an student ajax request
+    public function editlink(Request $request)
+    {
+        $id = $request->reference_no;
+        $data = Billing::where('reference_no', $id)
+        ->first();
+        return response()->json($data);
+    }
+
+    public function updatelinkform1(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_form1' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'form1_link' => $request->link_form1,
+        'form1_status' => ($request->link_form1 === null || $request->link_form1 === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkform2(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_form2' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'form2_link' => $request->link_form2,
+        'form2_status' => ($request->link_form2 === null || $request->link_form2 === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkform3(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_form3' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'form3_link' => $request->link_form3,
+        'form3_status' => ($request->link_form3 === null || $request->link_form3 === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinknrc(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_reg_cert' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'reg_cert_link' => $request->link_reg_cert,
+        'reg_cert_status' => ($request->link_reg_cert === null || $request->link_reg_cert === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+    
+public function updatelinkcor(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_cor' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'cor_link' => $request->link_cor,
+        'cor_status' => ($request->link_cor === null || $request->link_cor === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkheibankcert(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_hei_bank_cert' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'hei_bank_cert_link' => $request->link_hei_bank_cert,
+        'hei_bank_cert_status' => ($request->link_hei_bank_cert === null || $request->link_hei_bank_cert === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
+public function updatelinkbankcert(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'link_bank_cert' => 'nullable|url',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 400,
+            'errors' => $validator->errors(),
+        ], 400);
+    }
+
+
+    $id = $request->reference_no;
+    $record = Billing::where('reference_no', $id)->first();
+
+    if (!$record) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Record not found.',
+        ], 404);
+    }
+
+    $recordData = [
+        'bank_cert_link' => $request->link_bank_cert,
+        'bank_cert_status' => ($request->link_bank_cert === null || $request->link_bank_cert === 0) ? '0' : '1',
+    ];
+
+    $record->update($recordData);
+
+    return response()->json([
+        'status' => 200,
+    ]);
+}
+
 }
