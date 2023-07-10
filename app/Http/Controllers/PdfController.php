@@ -6,8 +6,8 @@ use Fpdf\Fpdf;
 use FPDFunifast;
 use Illuminate\Http\Request;
 use App\Models\Billing;
+use App\Models\Hei;
 use Illuminate\Support\Facades\DB;
-use app\Models\Hei;
 
 require '../app/Libraries/FPDFscripts/FPDFunifast.php';
 require '../vendor/autoload.php';
