@@ -470,23 +470,20 @@ SUM(
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
-                'students_sub.uid',
-                'students_sub.app_id',
                 'students_sub.stud_id',
-                'students_sub.stud_id',
+                'students_sub.stud_lname',
+                'students_sub.stud_fname',
+                'students_sub.stud_mname',
+                'students_sub.year_level',
+                'students_sub.stud_sex',
                 'students_sub.lab_unit',
                 'students_sub.comp_lab_unit',
                 'students_sub.academic_unit',
                 'students_sub.nstp_unit',
-                'students_sub.stud_sex',
                 'students_sub.hei_name',
                 'students_sub.stud_email',
-                'students_sub.stud_lname',
-                'students_sub.stud_fname',
-                'students_sub.stud_mname',
                 'students_sub.fhe_award_no',
                 'students_sub.degree_program',
-                'students_sub.year_level',
                 DB::raw($this->carlo_columns)
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
@@ -547,7 +544,7 @@ SUM(
         $reference_no = '03-03236-2021-2022-1-1';
         $hei_info = $this->getHEIInfo($reference_no);
         $grantees = $this->getForm2Data($reference_no);
-        print_r($grantees->toArray());
+        // print_r($grantees->toArray());
 
         // $grantees[] =
         //     array(
@@ -606,7 +603,7 @@ SUM(
         //         'total_tosf' => '-'
         //     );
 
-        // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
+        $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
 
         exit;
     }
@@ -1006,10 +1003,37 @@ SUM(
         // $pdf->Row($rowData, 3, $alignments);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
-            $rowData = array_merge([$key + 1], array_values($grantee));
+            $granteeRow =     array(
+                'stud_number' => $grantee->stud_id,
+                'last_name' => $grantee->stud_lname,
+                'given_name' => $grantee->stud_fname,
+                'middle_initial' => $grantee->stud_mname != '' ? substr($grantee->stud_mname, 0, 1) : '',
+                'year_level' => $grantee->year_level,
+                'sex' => substr($grantee->stud_sex, 0, 1),
+                'lab_units' => $grantee->lab_unit,
+                'comp_lab_units' => $grantee->comp_lab_unit,
+                'academic_units' => $grantee->academic_unit,
+                'nstp_units' => $grantee->nstp_unit,
+                'tuition_fee' => $grantee->tuition_fee,
+                'nstp_fee' => $grantee->nstp_fee,
+                'athletic_fees' => $grantee->athletic_fee,
+                'computer_fees' => $grantee->computer_fee,
+                'cultural_fees' => $grantee->cultural_fee,
+                'devt_fees' => $grantee->development_fee,
+                'admission_fees' => $grantee->admission_fee,
+                'guidance_fees' => $grantee->guidance_fee,
+                'handbook_fees' => $grantee->handbook_fee,
+                'laboratory_fees' => $grantee->laboratory_fee,
+                'library_fee' => $grantee->library_fee,
+                'medical_fees' => $grantee->medical_and_dental_fee,
+                'registration_fees' => $grantee->registration_fee,
+                'school_id_fees' => $grantee->school_id_fee,
+                'total_tosf' => $grantee->total_fee
+            );
+            $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
-            $totalTosf += (float) str_replace('', '', $grantee['total_tosf']);
+            $totalTosf += (float) str_replace('', '', $grantee->total_tosf);
         };
         // Display the Sum of TOTAL TOSF
         $pdf->SetFont('Arial', 'BI', 7);
