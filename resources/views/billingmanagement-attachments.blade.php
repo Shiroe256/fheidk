@@ -39,11 +39,18 @@
                                 <div class="form-group input-style">
                                     <div class="col-lg-3 col-xl-12 d-flex justify-content-between">
                                         <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i> Billing Summary</h5>
-                                        <div class="dropdown no no-arrow"><button class="btn btn-outline-primary btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="far fa-file-pdf"></i> Download Generated Forms</button>
+                                        <div class="dropdown no-arrow">
+                                            <button class="btn btn-outline-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+                                              <i class="far fa-file-pdf"></i> Download Generated Forms
+                                            </button>
                                             <div class="dropdown-menu dropdown-menu-right animated--fade-in">
-                                                <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>Form 1 (Billing Summary)</a><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>Form 2 (Billing Details)</a><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>Form 3 (Billing Details)</a>
+                                              <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
+                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a>
+                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a>
+                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a>
                                             </div>
-                                        </div>
+                                          </div>
+                                          
                                     </div>
                                     <div id="show_summary_for_billing"
                                         class="table-responsive table-style mt-2 show_summary" role="grid"
