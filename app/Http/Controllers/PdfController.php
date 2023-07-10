@@ -673,7 +673,7 @@ SUM(
 
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
         $pdf->AddPage('L');
-        $pdf->setHeaderFunction($pdf->form2header());
+        // $pdf->setHeaderFunction($pdf->form2header());
         $pdf->signatories = $signatories;
         $pdf->AliasNbPages();
         $margin = 5;

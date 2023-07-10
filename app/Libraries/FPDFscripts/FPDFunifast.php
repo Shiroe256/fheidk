@@ -15,10 +15,11 @@ class FPDFunifast extends Fpdf
         return $this->rMargin;
     }
 
-    public function setHeaderFunction($function)
+    public function Header()
     {
-        $this->Header() = $function;
+        $this->form2header();
     }
+
     public function form2header()
     {
         //set font kasi maliit
