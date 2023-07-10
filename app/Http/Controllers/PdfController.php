@@ -690,7 +690,7 @@ SUM(
         $pdf->SetX($pdf->GetX() + 130);
         $pdf->Cell(30, 8, 'Account Code', 0, 0, 'C', 0, 0);
         $pdf->Cell(0, 8, 'Amount', 0, 1, 'C', 0, 0);
-        $pdf->SetX($x+130);
+        $pdf->SetX($x+150);
         $pdf->Cell(0, 8, number_format($total_amount, 2), 0, 0, 'C', 0, 0);
         $pdf->SetX($x);
         $pdf->SetY($y);
