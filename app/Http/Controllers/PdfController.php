@@ -1020,7 +1020,7 @@ SUM(
                 'computer_fees' => $grantee->computer_fee,
                 'cultural_fees' => $grantee->cultural_fee,
                 'devt_fees' => $grantee->development_fee,
-                'admission_fees' => $grantee->admission_fee,
+                'admission_fees' => $grantee->entrance_and_admission_fee,
                 'guidance_fees' => $grantee->guidance_fee,
                 'handbook_fees' => $grantee->handbook_fee,
                 'laboratory_fees' => $grantee->laboratory_fee,
