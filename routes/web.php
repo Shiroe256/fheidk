@@ -173,6 +173,9 @@ Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forr
 
 //pdf shit
 Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
+Route::get('/generateForm3', [PdfController::class, 'generateForm3']);
+Route::get('/generateForm2', [PdfController::class, 'generateForm2']);
+Route::get('/generateForm1', [PdfController::class, 'generateForm1']);
 Route::get('/phpinfo', function() {
     phpinfo();
 });
