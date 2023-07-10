@@ -544,7 +544,7 @@ SUM(
     {
         $reference_no = '03-03236-2021-2022-1-1';
         $hei_info = $this->getHEIInfo($reference_no);
-        $grantees = $this->getForm2Data($reference_no);
+        // $grantees = $this->getForm2Data($reference_no);
         // print_r($grantees->toArray());
 
         $grantees[] =
@@ -901,7 +901,7 @@ SUM(
         $pdf->Output();
     }
 
-    function generateForm3($pdf_data, $signatories,  $grantees)
+    function generateForm3($pdf_data, $signatories, $grantees)
     {
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
         $pdf->AddPage('L');
