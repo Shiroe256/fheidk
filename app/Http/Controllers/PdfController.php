@@ -525,7 +525,7 @@ SUM(
 
         $pdf_data['term'] = $billing->semester == 1 ? 'First' : 'Second';
         $pdf_data['ay'] = $billing->ac_year;
-        $pdf_data['date'] = now();
+        $pdf_data['date'] = now()->toDateString();
         $pdf_data['ref_no'] = $billing->reference_no;
         $pdf_data['college_name'] = $heiinfo->hei_name;
         $pdf_data['college_address'] = '(Address of State/ Local University or College)';
