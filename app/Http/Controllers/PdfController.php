@@ -1028,7 +1028,7 @@ SUM(
                 'medical_fees' => number_format($grantee->medical_and_dental_fee,2),
                 'registration_fees' => number_format($grantee->registration_fee,2),
                 'school_id_fees' => number_format($grantee->school_id_fee,2),
-                'total_tosf' => $grantee->total_fee
+                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee,2)
             );
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
