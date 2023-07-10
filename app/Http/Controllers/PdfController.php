@@ -672,9 +672,9 @@ SUM(
         // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
 
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->AddPage('L');
         $pdf->setHeaderFunction($pdf->form2header());
         $pdf->signatories = $signatories;
-        $pdf->AddPage('L');
         $pdf->AliasNbPages();
         $margin = 5;
         $pdf->SetMargins($margin, $margin, $margin);
