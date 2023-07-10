@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TemporaryBilling;
 use Fpdf\Fpdf;
 use FPDFunifast;
 use Illuminate\Http\Request;
@@ -460,6 +461,26 @@ SUM(
         return $cellHeight;
     }
 
+    function getForm3Data($reference_no)
+    {
+        $applicants = TemporaryBilling::orderBy('remarks')
+            ->select(
+                'tbl_billing_details_temp.*',
+                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken, 0)) as exam_fees')
+            )
+            ->join('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
+            })
+            ->where('reference_no', $reference_no)
+            ->where('total_exam_taken', '!=', 0)
+            ->groupBy('tbl_billing_details_temp.uid')
+            ->get();
+        return $applicants;
+    }
     private function getForm2Data($reference_no)
     {
         //students sub query. Dito ung pagination
@@ -544,7 +565,7 @@ SUM(
     {
         $reference_no = '03-03236-2021-2022-1-1';
         $hei_info = $this->getHEIInfo($reference_no);
-        $grantees = $this->getForm2Data($reference_no);
+        $grantees = $this->getForm3Data($reference_no);
         // print_r($grantees->toArray());
 
         // $grantees[] =
@@ -577,7 +598,7 @@ SUM(
         //     );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-        $this->generateForm2($hei_info['hei_info'], $hei_info['signatories'], $grantees);
+        $this->generateForm3($hei_info['hei_info'], $hei_info['signatories'], $grantees);
         exit;
     }
 
@@ -662,7 +683,7 @@ SUM(
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 1, "C");
         $pdf->Output();
     }
-    function generateForm2($pdf_data,$signatories,  $grantees)
+    function generateForm2($pdf_data, $signatories,  $grantees)
     {
 
         // $row[] = "hello world";
@@ -672,6 +693,7 @@ SUM(
         // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
 
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->currentForm = 2;
         $pdf->AddPage('L');
         // $pdf->setHeaderFunction($pdf->form2header());
         $pdf->signatories = $signatories;
@@ -904,6 +926,7 @@ SUM(
     function generateForm3($pdf_data, $signatories, $grantees)
     {
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->currentForm = 3;
         $pdf->AddPage('L');
         $pdf->AliasNbPages();
         $margin = 5;
@@ -999,22 +1022,36 @@ SUM(
         $pagetitleheight = 30;
         $sequenceNumber = 1;
         foreach ($grantees as $index => $grantee) {
-            if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
-                $pdf->AddPage('L');
-                $pdf->Row($headers, 3, $alignments);
-            } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
-                $pdf->AddPage('L');
-                $pdf->Row($headers, 3, $alignments);
-            } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
-                // Print headers if a new page will be created by adding a row
-                $pdf->Row($headers, 3, $alignments);
-            }
+            // if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
+            //     $pdf->AddPage('L');
+            //     $pdf->Row($headers, 3, $alignments);
+            // } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
+            //     $pdf->AddPage('L');
+            //     $pdf->Row($headers, 3, $alignments);
+            // } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
+            //     // Print headers if a new page will be created by adding a row
+            //     $pdf->Row($headers, 3, $alignments);
+            // }
             //Sequence Number that start with '0'
             // $rowData = array_merge([sprintf('%05d', $sequenceNumber++)], array_values($grantee));
-            $rowData = array_merge([$sequenceNumber++], array_values($grantee));
+            $granteeRow=
+            array(
+                'last_name' => $grantee->stud_lname,
+                'given_name' => $grantee->stud_fname,
+                'middle_initial' => $grantee->stud_mname,
+                'sex' => $grantee->stud_sex,
+                'birthdate' => $grantee->stud_birth_date,
+                'degree' => $grantee->degree_program,
+                'year_level' => $grantee->year_level,
+                'email_address' => $grantee->stud_email,
+                'phone_number' => $grantee->stud_phone_no,
+                'admission_fees' => number_format($grantee->exam_fees,2),
+                'remarks' => $grantee->exam_result
+            );
+            $rowData = array_merge([$sequenceNumber++], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
-            $totalFees += (float) str_replace('', '', $grantee['admission_fees']);
+            $totalFees += (float) str_replace('', '', $grantee->exam_fees);
         };
 
         // Display the Sum of TOTAL TOSF
@@ -1038,6 +1075,4 @@ SUM(
 
         $pdf->Output();
     }
-
-
 }
