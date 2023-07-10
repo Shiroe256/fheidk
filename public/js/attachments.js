@@ -530,32 +530,94 @@ $(document).on('click', '.btn_link_bank_cert', function (e) {
     });
 });
 
-<script>
-  function myFunction2() {
-    // Get all the status elements
-    var statuses = [
-      {{ $billings->form1_status }},
-      {{ $billings->form2_status }},
-      {{ $billings->form3_status }},
-      {{ $billings->reg_cert_status }},
-      {{ $billings->cor_status }},
-      {{ $billings->hei_bank_cert_status }},
-      {{ $billings->bank_cert_status }}
-    ];
+$(document).on('click', '#btn_submit_final_billing', function () {
+    let id = $("#reference_no").val();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to access this while being reviewed by the CHED-AFMS.",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, forward to CHED-AFMS'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/admin/forwardtoafms',
+          method: 'post',
+          data: {
+            reference_no : id
+          },
+          success: function (response) {
+            Swal.fire(
+              'Forwarded!',
+              'This billing is now being reviewed by the CHED-AFMS, please wait for the update.',
+              'success'
+            ).then(() => {
+                window.location.href = '/admin/managebillinglist'; // Redirect to the order page
+            });
+          }
+        });
+      }
+    })
+  });
 
-    // Check if all statuses are equal to 1
-    var allStatusesEqualOne = statuses.every(function(status) {
-      return status === 1;
+  //Submit Billing
+$(document).on('click', '#btn_submit_final_billing', function () {
+    let id = $("#reference_no").val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
 
-    // If all statuses are equal to 1, remove the d-none class from the button
-    if (allStatusesEqualOne) {
-      $('#btn_submit').removeClass('d-none');
-    }
-  }
-
-  // Call the function when the document is ready
-  $(document).ready(function() {
-    myFunction2();
-  });
-</script>
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to access this while being reviewed by the UniFAST Billing Unit.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit billing'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/submitbilling',
+                method: 'post',
+                data: {
+                    reference_no: id
+                },
+                success: function (response) {
+                    if (response.hasOwnProperty('error')) {
+                        Swal.fire(
+                            'Error!',
+                            response.error,
+                            'error'
+                        );
+                    } else {
+                        Swal.fire(
+                            'Forwarded!',
+                            response.message,
+                            'success'
+                        ).then(() => {
+                            window.location.href = '/billings';
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire(
+                        'Error!',
+                        'An error occurred while submitting the billing.',
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+});

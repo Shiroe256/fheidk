@@ -53,6 +53,7 @@ Route::get('/billings', [BillingController::class, 'billingList'])->name('billin
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
 Route::get('/billingmanagementattachments/{ref_no?}', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
+Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
 
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->middleware('auth')->name('dashboard');
