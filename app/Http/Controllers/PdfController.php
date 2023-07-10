@@ -860,7 +860,9 @@ SUM(
         $pagetitleheight = $pdf->GetY() - $pagetitleheight;
         $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
 
-
+        //!for the first page
+        $pdf->currentCourse = $grantees[0]->degree_program;
+        $this->Cell(0, 5, $pdf->currentCourse, 1, 1);
         $headers[] = '#';
         $headers[] = 'Stud. Number';
         $headers[] = 'Last Name';
@@ -1004,9 +1006,8 @@ SUM(
 
         // $rowData = array_merge([$key + 1], array_values($grantees[0]));
         // $pdf->Row($rowData, 3, $alignments);
-        //!for the first page
-        $pdf->currentCourse = $grantees[0]->degree_program;
-        $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
+        
+        // $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
             if ($pdf->currentCourse != $grantee->degree_program) {
