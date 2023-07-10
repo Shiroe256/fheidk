@@ -599,7 +599,7 @@ $(document).on('click', '#btn_submit_final_billing', function () {
               'This billing is now being reviewed by the CHED-AFMS, please wait for the update.',
               'success'
             ).then(() => {
-              window.location.href = '/admin/managebillinglist';
+              window.location.href = '/billings';
             });
           }
         });
