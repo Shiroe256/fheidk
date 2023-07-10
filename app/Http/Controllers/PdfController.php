@@ -821,6 +821,7 @@ SUM(
 
     function generateForm2($signatories, $pdf_data, $grantees)
     {
+        
 
         // $row[] = "hello world";
         // $row[] = array('term' => "first", 'ay' => '2022');
@@ -829,6 +830,7 @@ SUM(
         // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
 
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->signatories = $signatories;
         $pdf->AddPage('L');
         $pdf->AliasNbPages();
         $margin = 5;
@@ -1051,7 +1053,7 @@ SUM(
 
         //signature
         $pdf->isLast = true;
-        $pdf->signatories = $signatories;
+        
         $pdf->Output();
     }
 }
