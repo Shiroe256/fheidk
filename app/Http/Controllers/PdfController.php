@@ -1002,8 +1002,14 @@ SUM(
 
         // $rowData = array_merge([$key + 1], array_values($grantees[0]));
         // $pdf->Row($rowData, 3, $alignments);
+        //!for the first page
+        $pdf->currentCourse = $grantees[0]->degree_program;
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
+            if ($pdf->currentCourse != $grantee->degree_program) {
+                $pdf->currentCourse = $grantee->degree_program;
+                $pdf->AddPage();
+            }
             $granteeRow =     array(
                 'stud_number' => $grantee->stud_id,
                 'last_name' => $grantee->stud_lname,

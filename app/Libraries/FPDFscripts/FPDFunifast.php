@@ -5,6 +5,7 @@ use Fpdf\Fpdf;
 require '../vendor/autoload.php';
 class FPDFunifast extends Fpdf
 {
+    public $currentCourse;
     public function getRightMargin()
     {
         return $this->rMargin;
@@ -137,6 +138,7 @@ class FPDFunifast extends Fpdf
             $headerHeight = $this->GetY();
             $headerHeight = $this->GetY() - $headerHeight;
             $this->Row($headers, 3, $alignments);
+            $this->Row(array($this->currentCourse),3,array('L'));
         }
     }
 
