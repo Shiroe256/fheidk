@@ -10,11 +10,6 @@ class FPDFunifast extends Fpdf
     public $signatories;
     private $headerFunction;
 
-    public function Header() {
-        if (is_callable($this->headerFunction)) {
-            $headerContent = call_user_func($this->headerFunction);
-        }
-    }
     public function getRightMargin()
     {
         return $this->rMargin;
