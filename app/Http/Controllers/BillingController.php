@@ -2225,7 +2225,7 @@ public function submitbilling(Request $request)
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+        return response()->json(['message' => $request->reference_no . ' Billing has been submitted for review'], 200);
     }
 
 }
