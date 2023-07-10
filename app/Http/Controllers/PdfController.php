@@ -544,66 +544,67 @@ SUM(
     }
     public function generatePDF()
     {
+        $reference_no = '03-03236-2021-2022-1-1';
+        $hei_info = $this->getHEIInfo($reference_no);
+        $grantees = $this->getForm2Data($reference_no);
+        print_r($grantees);
 
-        $hei_info = $this->getHEIInfo('03-03236-2021-2022-1-1');
-        print_r($hei_info);
-        // $hei_info
-        $grantees[] =
-            array(
-                'stud_number' => '202010002',
-                'last_name' => 'DELOS REYES',
-                'given_name' => 'JAERICK DIONUEL',
-                'middle_initial' => 'C',
-                'year_level' => '3',
-                'sex' => 'M',
-                'lab_units' => '0',
-                'comp_lab_units' => '0',
-                'academic_units' => '15',
-                'nstp_units' => '-',
-                'tuition_fee' => '99,999.00',
-                'nstp_fee' => '-',
-                'athletic_fees' => '117.00',
-                'computer_fees' => '-',
-                'cultural_fees' => '74.00',
-                'devt_fees' => '270.00',
-                'admission_fees' => '-',
-                'guidance_fees' => '146.00',
-                'handbook_fees' => '-',
-                'laboratory_fees' => '-',
-                'library_fee' => '732.00',
-                'medical_fees' => '293.00',
-                'registration_fees' => '74.00',
-                'school_id_fees' => '-',
-                'total_tosf' => '999999.00'
-            );
-        $grantees[] =
-            array(
-                'stud_number' => '202010003',
-                'last_name' => 'BOHOL',
-                'given_name' => 'FROILAN',
-                'middle_initial' => 'L',
-                'year_level' => '4',
-                'sex' => 'M',
-                'lab_units' => '-',
-                'comp_lab_units' => '-',
-                'academic_units' => '-',
-                'nstp_units' => '-',
-                'tuition_fee' => '-',
-                'nstp_fee' => '-',
-                'athletic_fees' => '-',
-                'computer_fees' => '-',
-                'cultural_fees' => '-',
-                'devt_fees' => '-',
-                'admission_fees' => '-',
-                'guidance_fees' => '-',
-                'handbook_fees' => '-',
-                'laboratory_fees' => '-',
-                'library_fee' => '-',
-                'medical_fees' => '-',
-                'registration_fees' => '-',
-                'school_id_fees' => '-',
-                'total_tosf' => '-'
-            );
+        // $grantees[] =
+        //     array(
+        //         'stud_number' => '202010002',
+        //         'last_name' => 'DELOS REYES',
+        //         'given_name' => 'JAERICK DIONUEL',
+        //         'middle_initial' => 'C',
+        //         'year_level' => '3',
+        //         'sex' => 'M',
+        //         'lab_units' => '0',
+        //         'comp_lab_units' => '0',
+        //         'academic_units' => '15',
+        //         'nstp_units' => '-',
+        //         'tuition_fee' => '99,999.00',
+        //         'nstp_fee' => '-',
+        //         'athletic_fees' => '117.00',
+        //         'computer_fees' => '-',
+        //         'cultural_fees' => '74.00',
+        //         'devt_fees' => '270.00',
+        //         'admission_fees' => '-',
+        //         'guidance_fees' => '146.00',
+        //         'handbook_fees' => '-',
+        //         'laboratory_fees' => '-',
+        //         'library_fee' => '732.00',
+        //         'medical_fees' => '293.00',
+        //         'registration_fees' => '74.00',
+        //         'school_id_fees' => '-',
+        //         'total_tosf' => '999999.00'
+        //     );
+        // $grantees[] =
+        //     array(
+        //         'stud_number' => '202010003',
+        //         'last_name' => 'BOHOL',
+        //         'given_name' => 'FROILAN',
+        //         'middle_initial' => 'L',
+        //         'year_level' => '4',
+        //         'sex' => 'M',
+        //         'lab_units' => '-',
+        //         'comp_lab_units' => '-',
+        //         'academic_units' => '-',
+        //         'nstp_units' => '-',
+        //         'tuition_fee' => '-',
+        //         'nstp_fee' => '-',
+        //         'athletic_fees' => '-',
+        //         'computer_fees' => '-',
+        //         'cultural_fees' => '-',
+        //         'devt_fees' => '-',
+        //         'admission_fees' => '-',
+        //         'guidance_fees' => '-',
+        //         'handbook_fees' => '-',
+        //         'laboratory_fees' => '-',
+        //         'library_fee' => '-',
+        //         'medical_fees' => '-',
+        //         'registration_fees' => '-',
+        //         'school_id_fees' => '-',
+        //         'total_tosf' => '-'
+        //     );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
 
