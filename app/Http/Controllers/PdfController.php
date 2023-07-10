@@ -521,7 +521,7 @@ SUM(
     function getHEIInfo($reference_no)
     {
         $billing = Billing::where('reference_no', $reference_no)->first();
-        $heiinfo = Hei::where('hei_uii', $billing->hei_uii);
+        $heiinfo = Hei::where('hei_uii', $billing->hei_uii)->first();
 
         $pdf_data['term'] = $billing->semester == 1 ? 'First' : 'Second';
         $pdf_data['ay'] = $billing->ac_year;
