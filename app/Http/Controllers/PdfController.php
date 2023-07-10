@@ -1022,21 +1022,21 @@ SUM(
                 'comp_lab_units' => $grantee->comp_lab_unit,
                 'academic_units' => $grantee->academic_unit,
                 'nstp_units' => $grantee->nstp_unit,
-                'tuition_fee' => number_format($grantee->tuition_fee,2),
-                'nstp_fee' => number_format($grantee->nstp_fee,2),
-                'athletic_fees' => number_format($grantee->athletic_fee,2),
-                'computer_fees' => number_format($grantee->computer_fee,2),
-                'cultural_fees' => number_format($grantee->cultural_fee,2),
-                'devt_fees' => number_format($grantee->development_fee,2),
-                'admission_fees' => number_format($grantee->entrance_and_admission_fee,2),
-                'guidance_fees' => number_format($grantee->guidance_fee,2),
-                'handbook_fees' => number_format($grantee->handbook_fee,2),
-                'laboratory_fees' => number_format($grantee->laboratory_fee,2),
-                'library_fee' => number_format($grantee->library_fee,2),
-                'medical_fees' => number_format($grantee->medical_and_dental_fee,2),
-                'registration_fees' => number_format($grantee->registration_fee,2),
-                'school_id_fees' => number_format($grantee->school_id_fee,2),
-                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee,2)
+                'tuition_fee' => number_format($grantee->tuition_fee, 2),
+                'nstp_fee' => number_format($grantee->nstp_fee, 2),
+                'athletic_fees' => number_format($grantee->athletic_fee, 2),
+                'computer_fees' => number_format($grantee->computer_fee, 2),
+                'cultural_fees' => number_format($grantee->cultural_fee, 2),
+                'devt_fees' => number_format($grantee->development_fee, 2),
+                'admission_fees' => number_format($grantee->entrance_and_admission_fee, 2),
+                'guidance_fees' => number_format($grantee->guidance_fee, 2),
+                'handbook_fees' => number_format($grantee->handbook_fee, 2),
+                'laboratory_fees' => number_format($grantee->laboratory_fee, 2),
+                'library_fee' => number_format($grantee->library_fee, 2),
+                'medical_fees' => number_format($grantee->medical_and_dental_fee, 2),
+                'registration_fees' => number_format($grantee->registration_fee, 2),
+                'school_id_fees' => number_format($grantee->school_id_fee, 2),
+                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee, 2)
             );
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
@@ -1050,18 +1050,8 @@ SUM(
         $pdf->Cell(22, 5, number_format($totalTosf, 2), 0, 0, 'R', 0);
 
         //signature
-        $pdf->SetFont('Arial', '', 8);
-        $pdf->SetTextColor(0, 0, 0);
-        $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
-        $pdf->SetWidths($sigwidths);
-        $pdf->SetY($pdf->GetPageHeight() - 50);
-        $pdf->Ln();
-        $pdf->Ln();
-        $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
-        $pdf->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
-        $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
-        $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 3, 'C', 0);
-
+        $pdf->isLast = true;
+        $pdf->signatories = $signatories;
         $pdf->Output();
     }
 }

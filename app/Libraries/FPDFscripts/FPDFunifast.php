@@ -6,6 +6,8 @@ require '../vendor/autoload.php';
 class FPDFunifast extends Fpdf
 {
     public $currentCourse;
+    public $isLast = false;
+    public $signatories;
     public function getRightMargin()
     {
         return $this->rMargin;
@@ -145,6 +147,19 @@ class FPDFunifast extends Fpdf
 
     function Footer()
     {
+        $signatories = $this->signatories;
+        $pagewidth_withborders = $this->GetPageWidth() - 5 * 2;
+        $this->SetFont('Arial', '', 8);
+        $this->SetTextColor(0, 0, 0);
+        $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
+        $this->SetWidths($sigwidths);
+        $this->SetY($this->GetPageHeight() - 50);
+        $this->Ln();
+        $this->Ln();
+        $this->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
+        $this->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
+        $this->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
+        $this->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 3, 'C', 0);
         $this->SetFont('Arial', '', 8);
         $this->SetY(-10);
         $this->cell(0, 5, 'Page ' . $this->PageNo() . ' of {nb}', 0, 1, 'R');
