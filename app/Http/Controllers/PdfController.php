@@ -849,7 +849,7 @@ SUM(
         $pdf->Ln(10);
         $pdf->Cell(320, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 0, 0, 'C', 0);
         $pdf->Ln(5);
-        $pdf->Cell(320, 5, $pdf_data['degree_program'], 1, 0, 'L', 0);
+        $pdf->Cell(320, 5, 'Degree Program', 1, 0, 'L', 0);
         $pdf->Ln();
         //set font kasi maliit
         $pdf->SetFont('Arial', '', 6);
