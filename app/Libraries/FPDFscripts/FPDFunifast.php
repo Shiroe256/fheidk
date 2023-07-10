@@ -12,21 +12,139 @@ class FPDFunifast extends Fpdf
 
     public function Header()
     {
-        // $this->SetFont('Arial', '', 10);
-        // $this->Cell(0, 5, 'FORM 1', 0, 1, 'R', 0);
-        // $this->Cell(0, 5, 'Republic of the Philippines', 0, 1, 'C', 0);
-        // $this->Cell(0, 5, '(Name of State / Local University or College)', 0, 1, 'C', 0);
-        // $this->Cell(0, 5, '(Address of State/ Local University or College)', 0, 1, 'C', 0);
-        // $this->Cell(0, 5, 'CONSOLIDATED FREE HE BILLING DETAILS', 0, 1, 'C', 0);
-        // // Line break
-        // $this->Ln(10);
+        //set font kasi maliit
+        $this->SetFont('Arial', '', 6);
+        //headers
+        if ($this->PageNo() != 1) {
+            $pagetitleheight = $this->GetY();
+            $margin = 5;
+            $pagetitleheight = $this->GetY() - $pagetitleheight;
+            $pagewidth_withborders = $this->GetPageWidth() - $margin * 2;
+
+
+            $headers[] = '#';
+            $headers[] = 'Stud. Number';
+            $headers[] = 'Last Name';
+            $headers[] = 'Given Name';
+            $headers[] = 'Middle Initial';
+            $headers[] = 'Year Level';
+            $headers[] = 'Sex';
+            $headers[] = 'Lab Units';
+            $headers[] = 'Comp Lab Units';
+            $headers[] = 'Academic Units';
+            $headers[] = 'NSTP Units';
+            $headers[] = 'Tuition Fee';
+            $headers[] = 'NSTP Fee';
+            $headers[] = 'Athletic Fees';
+            $headers[] = 'Computer Fees';
+            $headers[] = 'Cultural Fees';
+            $headers[] = 'Devt. Fees';
+            $headers[] = 'Admission/Entrance Fees';
+            $headers[] = 'Guidance Fees';
+            $headers[] = 'Handbook Fees';
+            $headers[] = 'Laboratory Fees';
+            $headers[] = 'Library Fee';
+            $headers[] = 'Medical Fees';
+            $headers[] = 'Registration Fees';
+            $headers[] = 'School ID Fees';
+            $headers[] = 'TOTAL TOSF';
+
+            foreach ($headers as $key => $header) {
+                if ($key == 0)
+                    $widths[] = 9; //#
+                elseif ($key == 1)
+                    $widths[] = 13; //Stud. Number
+                elseif ($key == 2)
+                    $widths[] = 25; //Last Name
+                elseif ($key == 3)
+                    $widths[] = 24.4; //Given Name
+                elseif ($key == 4)
+                    $widths[] = 9; //Middle Name
+                elseif ($key == 5)
+                    $widths[] = 8; //Year Level
+                elseif ($key == 6)
+                    $widths[] = 6; //Sex at Birth
+                elseif ($key == 7)
+                    $widths[] = 7; //Labo Units
+                elseif ($key == 8)
+                    $widths[] = 11; //Comp Lab Units
+                elseif ($key == 9)
+                    $widths[] = 12; //Academic Units
+                elseif ($key == 10)
+                    $widths[] = 9; //NSTP Units
+                elseif ($key == 11)
+                    $widths[] = 13; //Tuition Fee'
+                elseif ($key == 12)
+                    $widths[] = 12.3; //NSTP Fee
+                elseif ($key == 13)
+                    $widths[] = 14; //Athletic Fees
+                elseif ($key == 14)
+                    $widths[] = 12; //Computer Fees
+                elseif ($key == 15)
+                    $widths[] = 12; //Cultural Fees
+                elseif ($key == 16)
+                    $widths[] = 12; //Development Fees
+                elseif ($key == 17)
+                    $widths[] = 12; //Admission Fees
+                elseif ($key == 18)
+                    $widths[] = 12; //Guidance Fees
+                elseif ($key == 19)
+                    $widths[] = 12; //Handbook Fees
+                elseif ($key == 20)
+                    $widths[] = 13; //Laboratory Fees
+                elseif ($key == 21)
+                    $widths[] = 12; //Library Fee
+                elseif ($key == 22)
+                    $widths[] = 12; //Medical Fees
+                elseif ($key == 23)
+                    $widths[] = 14; //Registration Fees
+                elseif ($key == 24)
+                    $widths[] = 12; //School ID Fees  
+                else
+                    $widths[] = $pagewidth_withborders / count($headers);
+            }
+
+            $this->SetWidths($widths);
+
+            // $values[] = ['data' => '1', 'alignment' => 'L'];
+            $alignments[] = 'L';
+            $alignments[] = 'L';
+            $alignments[] = 'L';
+            $alignments[] = 'L';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $alignments[] = 'R';
+            $this->SetAligns($alignments);
+            $headerHeight = $this->GetY();
+            $headerHeight = $this->GetY() - $headerHeight;
+            $this->Row($headers, 3, $alignments);
+        }
     }
 
     function Footer()
     {
-        $this->SetFont('Arial','',8);
+        $this->SetFont('Arial', '', 8);
         $this->SetY(-10);
-        $this->cell(0,5, 'Page ' . $this->PageNo() . ' of {nb}',0,1,'R');
+        $this->cell(0, 5, 'Page ' . $this->PageNo() . ' of {nb}', 0, 1, 'R');
     }
 
     protected $widths;
@@ -44,7 +162,8 @@ class FPDFunifast extends Fpdf
         $this->aligns = $a;
     }
 
-    function GetPageBreakTrigger(){
+    function GetPageBreakTrigger()
+    {
         return $this->PageBreakTrigger;
     }
     function Row($data, $lineheight, $a)
