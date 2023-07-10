@@ -5,12 +5,453 @@ namespace App\Http\Controllers;
 use Fpdf\Fpdf;
 use FPDFunifast;
 use Illuminate\Http\Request;
+use App\Models\Billing;
+use Illuminate\Support\Facades\DB;
 
 require '../app/Libraries/FPDFscripts/FPDFunifast.php';
 require '../vendor/autoload.php';
 
 class PdfController extends Controller
 {
+    private $carlo_columns = "(
+        SUM(
+            (
+                CASE WHEN(
+                    (
+                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                    ) AND(
+                        (
+                            `tbl_other_school_fees`.`coverage` = 'per unit'
+                        ) OR(
+                            `tbl_other_school_fees`.`coverage` = 'per subject'
+                        )
+                    )
+                ) THEN(
+                    `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                ) ELSE 0
+            END
+        )
+    ) + SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                ) AND(
+                    `tbl_other_school_fees`.`coverage` = 'per student'
+                )
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+)
+) AS `tuition_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'admission'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `entrance_and_admission_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `athletic_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'computer'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `computer_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `cultural_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'development'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `development_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `guidance_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `handbook_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `laboratory_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'library'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `library_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `medical_and_dental_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'registration'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `registration_fee`,
+SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'school id'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+) AS `school_id_fee`,
+(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) AS `nstp_fee`,
+(
+    (
+        (
+            (
+                (
+                    (
+                        (
+                            (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    (
+                                                        (
+                                                            SUM(
+                                                                (
+                                                                    CASE WHEN(
+                                                                        (
+                                                                            `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                                                                        ) AND(
+                                                                            (
+                                                                                `tbl_other_school_fees`.`coverage` = 'per unit'
+                                                                            ) OR(
+                                                                                `tbl_other_school_fees`.`coverage` = 'per subject'
+                                                                            )
+                                                                        )
+                                                                    ) THEN(
+                                                                        `students_sub`.`academic_unit` * `tbl_other_school_fees`.`amount`
+                                                                    ) ELSE 0
+                                                                END
+                                                            )
+                                                        ) + SUM(
+                                                            (
+                                                                CASE WHEN(
+                                                                    (
+                                                                        `tbl_other_school_fees`.`type_of_fee` = 'tuition'
+                                                                    ) AND(
+                                                                        `tbl_other_school_fees`.`coverage` = 'per student'
+                                                                    )
+                                                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                                            END
+                                                        )
+                                                    )
+                                                ) + SUM(
+                                                    (
+                                                        CASE WHEN(
+                                                            `tbl_other_school_fees`.`type_of_fee` = 'entrance'
+                                                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                                    END
+                                                )
+                                            )
+                                        ) + SUM(
+                                            (
+                                                CASE WHEN(
+                                                    `tbl_other_school_fees`.`type_of_fee` = 'admission'
+                                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                            END
+                                        )
+                                    )
+                                ) + SUM(
+                                    (
+                                        CASE WHEN(
+                                            `tbl_other_school_fees`.`type_of_fee` = 'athletic'
+                                        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                                    END
+                                )
+                            )
+                        ) +(
+                            SUM(
+                                (
+                                    CASE WHEN(
+                                        (
+                                            `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                                        ) AND(
+                                            (
+                                                `tbl_other_school_fees`.`coverage` = 'per unit'
+                                            ) OR(
+                                                `tbl_other_school_fees`.`coverage` = 'per subject'
+                                            )
+                                        )
+                                    ) THEN(
+                                        `students_sub`.`comp_lab_unit` * `tbl_other_school_fees`.`amount`
+                                    ) ELSE 0
+                                END
+                            )
+                        ) + SUM(
+                            (
+                                CASE WHEN(
+                                    (
+                                        `tbl_other_school_fees`.`type_of_fee` = 'computer'
+                                    ) AND(
+                                        `tbl_other_school_fees`.`coverage` = 'per student'
+                                    )
+                                ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                            END
+                        )
+                    )
+                )
+            ) + SUM(
+                (
+                    CASE WHEN(
+                        `tbl_other_school_fees`.`type_of_fee` = 'cultural'
+                    ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+                END
+            )
+        )
+    ) + SUM(
+        (
+            CASE WHEN(
+                `tbl_other_school_fees`.`type_of_fee` = 'development'
+            ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+        END
+    )
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'guidance'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) +(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`lab_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'laboratory'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'library'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'medical and dental'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'registration'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) + SUM(
+    (
+        CASE WHEN(
+            `tbl_other_school_fees`.`type_of_fee` = 'school id'
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+) +(
+    SUM(
+        (
+            CASE WHEN(
+                (
+                    `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+                ) AND(
+                    (
+                        `tbl_other_school_fees`.`coverage` = 'per unit'
+                    ) OR(
+                        `tbl_other_school_fees`.`coverage` = 'per subject'
+                    )
+                )
+            ) THEN(
+                `students_sub`.`nstp_unit` * `tbl_other_school_fees`.`amount`
+            ) ELSE 0
+        END
+    )
+) + SUM(
+    (
+        CASE WHEN(
+            (
+                `tbl_other_school_fees`.`type_of_fee` = 'nstp'
+            ) AND(
+                `tbl_other_school_fees`.`coverage` = 'per student'
+            )
+        ) THEN `tbl_other_school_fees`.`amount` ELSE 0
+    END
+)
+)
+)
+) AS `total_fee`";
     function computeCellHeight(Fpdf $pdf, $text, $cellWidth, $fontFamily = '', $fontSize = 0)
     {
         $pdf->SetFont($fontFamily, '', $fontSize);
@@ -18,6 +459,65 @@ class PdfController extends Controller
         return $cellHeight;
     }
 
+    private function getForm2Data(Request $request)
+    {
+        $reference_no  = $request->reference_no;
+        $search = $request->search['value'];
+
+        //students sub query. Dito ung pagination
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where(function ($query) use ($search) {
+                $query->where('exam_result', '!=', 'Failed')
+                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+            });
+        //dito jinojoin ung information about the fees and computation
+        $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            ->mergeBindings($students_sub)
+            ->select(
+                'students_sub.uid',
+                'students_sub.app_id',
+                'students_sub.hei_name',
+                'students_sub.stud_email',
+                'students_sub.stud_lname',
+                'students_sub.stud_fname',
+                'students_sub.stud_mname',
+                'students_sub.fhe_award_no',
+                'students_sub.degree_program',
+                'students_sub.semester',
+                'students_sub.year_level',
+                'students_sub.remarks',
+                'students_sub.stud_status',
+                DB::raw($this->carlo_columns)
+            )
+            ->leftJoin('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->leftJoin('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            })
+            //!kailangan lagyan dito ng para sa mga pumasa lang
+            ->groupBy('students_sub.uid')->get();
+
+        return $students;
+    }
     public function generatePDF()
     {
 
@@ -29,6 +529,7 @@ class PdfController extends Controller
         $pdf_data['college_address'] = '(Address of State/ Local University or College)';
         $pdf_data['printed_name'] = "";
 
+        $pdf_data['degree_program'] = "Bachelor of Science in Information and Technology";
         // $this->generateForm1($pdf_data);
         $signatories['prep1'] = 'Jason A. Bahil';
         $signatories['cert1'] = 'Jason A. Bahil';
@@ -39,7 +540,64 @@ class PdfController extends Controller
         $signatories['pos_cert2'] = 'Project Technical Assistant III';
         $signatories['pos_appr'] = 'Project Technical Assistant III';
 
-        $this->generateForm2($pdf_data, $signatories);
+        $grantees[] =
+            array(
+                'stud_number' => '202010002',
+                'last_name' => 'DELOS REYES',
+                'given_name' => 'JAERICK DIONUEL',
+                'middle_initial' => 'C',
+                'year_level' => '3',
+                'sex' => 'M',
+                'lab_units' => '0',
+                'comp_lab_units' => '0',
+                'academic_units' => '15',
+                'nstp_units' => '-',
+                'tuition_fee' => '99,999.00',
+                'nstp_fee' => '-',
+                'athletic_fees' => '117.00',
+                'computer_fees' => '-',
+                'cultural_fees' => '74.00',
+                'devt_fees' => '270.00',
+                'admission_fees' => '-',
+                'guidance_fees' => '146.00',
+                'handbook_fees' => '-',
+                'laboratory_fees' => '-',
+                'library_fee' => '732.00',
+                'medical_fees' => '293.00',
+                'registration_fees' => '74.00',
+                'school_id_fees' => '-',
+                'total_tosf' => '999999.00'
+            );
+        $grantees[] =
+            array(
+                'stud_number' => '202010003',
+                'last_name' => 'BOHOL',
+                'given_name' => 'FROILAN',
+                'middle_initial' => 'L',
+                'year_level' => '4',
+                'sex' => 'M',
+                'lab_units' => '-',
+                'comp_lab_units' => '-',
+                'academic_units' => '-',
+                'nstp_units' => '-',
+                'tuition_fee' => '-',
+                'nstp_fee' => '-',
+                'athletic_fees' => '-',
+                'computer_fees' => '-',
+                'cultural_fees' => '-',
+                'devt_fees' => '-',
+                'admission_fees' => '-',
+                'guidance_fees' => '-',
+                'handbook_fees' => '-',
+                'laboratory_fees' => '-',
+                'library_fee' => '-',
+                'medical_fees' => '-',
+                'registration_fees' => '-',
+                'school_id_fees' => '-',
+                'total_tosf' => '-'
+            );
+
+        $this->generateForm2($signatories, $pdf_data,  $grantees);
 
         exit;
     }
@@ -126,16 +684,149 @@ class PdfController extends Controller
         $pdf->Output();
     }
 
-    private function generateForm2($pdf_data, $signatories)
+    // private function generateForm2($pdf_data, $signatories)
+    // {
+    //     // $pdf = new FPDFunifast();
+    //     // $pdf = new FPDFunifast('L','mm',array(215.9,279.4));
+    //     $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+    //     $pdf->AliasNbPages();
+    //     $margin = 5;
+    //     $pdf->SetMargins($margin, $margin, $margin);
+    //     $pdf->SetFont('Arial', '', 10);
+    //     $pdf->AddPage('L');
+
+    //     $pagetitleheight = $pdf->GetY();
+    //     $pdf->Cell(0, 5, 'FORM 2', 0, 1, 'R', 0);
+    //     $pdf->Cell(0, 5, 'Republic of the Philippines', 0, 1, 'C', 0);
+    //     $pdf->Cell(0, 5, $pdf_data['college_name'], 0, 1, 'C', 0);
+    //     $pdf->Cell(0, 5, $pdf_data['college_address'], 0, 1, 'C', 0);
+    //     $pdf->Cell(0, 5, 'FREE HIGHER EDUCATION BILLING DETAILS', 0, 1, 'C', 0);
+
+    //     $pdf->Ln(5);
+    //     $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Free HE Billing Details Reference Number:', 0, 0, 'R');
+    //     $pdf->Cell(0, 4, $pdf_data['ref_no'], 0, 1, 'R');
+    //     $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Date:', 0, 0, 'R');
+    //     $pdf->Cell(0, 4, $pdf_data['date'], 0, 1, 'R');
+    //     // $pdf->Ln(10);
+    //     $pdf->Cell(0, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 1, 1, 'L', 0);
+    //     //set font kasi maliit
+    //     $pdf->SetFont('Arial', '', 6);
+    //     //headers
+    //     // $pdf->MultiCell(4, 4, '#', 1, 'C', 0);
+    //     $pagetitleheight = $pdf->GetY() - $pagetitleheight;
+    //     $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
+
+    //     $headers[] = '#';
+    //     $headers[] = 'Stud. Number';
+    //     $headers[] = 'LRN';
+    //     $headers[] = 'Last Name';
+    //     $headers[] = 'Given Name';
+    //     $headers[] = 'Middle Name';
+    //     $headers[] = 'Degree Program';
+    //     $headers[] = 'Year Level';
+    //     $headers[] = 'Sex at Birth';
+    //     $headers[] = 'E-mail address';
+    //     $headers[] = 'Phone Number';
+    //     $headers[] = 'Laboratory Units / subject';
+    //     $headers[] = 'Computer Lab Units/Subject';
+    //     $headers[] = 'Academic Units Enrolled (credit and non-credit courses)';
+    //     $headers[] = 'Academic Units of NSTP Enrolled (credit and non-credit courses)';
+    //     $headers[] = 'Tuition Fee based on enrolled academic units (credit and non-credit courses)';
+    //     $headers[] = 'NSTP Fee based on enrolled academic units (credit and non-credit courses)';
+    //     $headers[] = 'Athletic Fees';
+    //     $headers[] = 'Computer Fees';
+    //     $headers[] = 'Cultural Fees';
+    //     $headers[] = 'Development Fees';
+    //     $headers[] = 'Entrance/Admission Fees*';
+    //     $headers[] = 'Guidance Fees';
+    //     $headers[] = 'Handbook Fees';
+    //     $headers[] = 'Laboratory Fees';
+    //     $headers[] = 'Library Fee';
+    //     $headers[] = 'Medical and Dental Fees';
+    //     $headers[] = 'Registration Fees';
+    //     $headers[] = 'School ID Fees';
+    //     $headers[] = 'TOTAL TOSF';
+
+    //     foreach ($headers as $key => $header) {
+    //         if ($key == 0)
+    //             $widths[] = 4;
+    //         elseif ($key == 1)
+    //             $widths[] = 10;
+    //         elseif ($key == 2)
+    //             $widths[] = 8;
+    //         elseif ($key == 3)
+    //             $widths[] = 13;
+    //         elseif ($key == 4)
+    //             $widths[] = 13;
+    //         elseif ($key == 11)
+    //             $widths[] = 10;
+    //         elseif ($key == 12)
+    //             $widths[] = 10;
+    //         elseif ($key == 13)
+    //             $widths[] = 12;
+    //         elseif ($key == 14)
+    //             $widths[] = 12;
+    //         elseif ($key == 15)
+    //             $widths[] = 13;
+    //         elseif ($key == 16)
+    //             $widths[] = 12;
+    //         elseif ($key == 18)
+    //             $widths[] = 11;
+    //         else
+    //             $widths[] = $pagewidth_withborders / count($headers);
+    //     }
+    //     $pdf->SetWidths($widths);
+    //     $headerHeight = $pdf->GetY();
+    //     $pdf->Row($headers, 3, 'l');
+    //     $headerHeight = $pdf->GetY() - $headerHeight;
+    //     //content
+    //     foreach ($headers as $header)
+    //         $sample[] = '';
+
+    //     // $lastpage = $pdf->PageNo();
+    //     //prints the signature at the bottom always and cuts the page if there are no records in the signature page so laging may records na kasama ung signature
+    //     $total = 87;
+    //     for ($i = 0; $i < $total; $i++) {
+    //         if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
+    //             $pdf->AddPage('L');
+    //             $pdf->Row($headers, 3, 'l');
+    //         } else if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + 10 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
+    //             $pdf->AddPage('L');
+    //             $pdf->Row($headers, 3, 'l');
+    //         } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
+    //             //print headers if a new page will be created by adding a row
+    //             $pdf->Row($headers, 3, 'l');
+    //         }
+    //         $pdf->Row($sample, 3, 'l');
+    //     }
+
+    //     //signature
+    //     $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
+    //     $pdf->SetWidths($sigwidths);
+    //     $pdf->SetY($pdf->GetPageHeight() - 52);
+    //     $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 3, 'L', 0);
+    //     $pdf->RowWithBorder(array('', '', '', ''), 20, 'C', 0);
+    //     $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
+    //     $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 5, 'C', 0);
+
+    //     $pdf->Output();
+    // }
+
+    function generateForm2($signatories, $pdf_data, $grantees)
     {
-        // $pdf = new FPDFunifast();
-        // $pdf = new FPDFunifast('L','mm',array(215.9,279.4));
+
+        // $row[] = "hello world";
+        // $row[] = array('term' => "first", 'ay' => '2022');
+        // $row[] = array('term' => "first", 'ay' => '2022');
+
+        // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
+
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->AddPage('L');
         $pdf->AliasNbPages();
         $margin = 5;
         $pdf->SetMargins($margin, $margin, $margin);
         $pdf->SetFont('Arial', '', 10);
-        $pdf->AddPage('L');
 
         $pagetitleheight = $pdf->GetY();
         $pdf->Cell(0, 5, 'FORM 2', 0, 1, 'R', 0);
@@ -149,107 +840,186 @@ class PdfController extends Controller
         $pdf->Cell(0, 4, $pdf_data['ref_no'], 0, 1, 'R');
         $pdf->Cell($pdf->GetPageWidth() - $margin - 60, 4, 'Date:', 0, 0, 'R');
         $pdf->Cell(0, 4, $pdf_data['date'], 0, 1, 'R');
-        // $pdf->Ln(10);
-        $pdf->Cell(0, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 1, 1, 'L', 0);
+        $pdf->Ln(10);
+        $pdf->Cell(320, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 0, 0, 'C', 0);
+        $pdf->Ln(5);
+        $pdf->Cell(320, 5, $pdf_data['degree_program'], 1, 0, 'L', 0);
+        $pdf->Ln();
         //set font kasi maliit
         $pdf->SetFont('Arial', '', 6);
         //headers
-        // $pdf->MultiCell(4, 4, '#', 1, 'C', 0);
         $pagetitleheight = $pdf->GetY() - $pagetitleheight;
         $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
 
+
         $headers[] = '#';
         $headers[] = 'Stud. Number';
-        $headers[] = 'LRN';
         $headers[] = 'Last Name';
         $headers[] = 'Given Name';
-        $headers[] = 'Middle Name';
-        $headers[] = 'Degree Program';
+        $headers[] = 'Middle Initial';
         $headers[] = 'Year Level';
-        $headers[] = 'Sex at Birth';
-        $headers[] = 'E-mail address';
-        $headers[] = 'Phone Number';
-        $headers[] = 'Laboratory Units / subject';
-        $headers[] = 'Computer Lab Units/Subject';
-        $headers[] = 'Academic Units Enrolled (credit and non-credit courses)';
-        $headers[] = 'Academic Units of NSTP Enrolled (credit and non-credit courses)';
-        $headers[] = 'Tuition Fee based on enrolled academic units (credit and non-credit courses)';
-        $headers[] = 'NSTP Fee based on enrolled academic units (credit and non-credit courses)';
+        $headers[] = 'Sex';
+        $headers[] = 'Lab Units';
+        $headers[] = 'Comp Lab Units';
+        $headers[] = 'Academic Units';
+        $headers[] = 'NSTP Units';
+        $headers[] = 'Tuition Fee';
+        $headers[] = 'NSTP Fee';
         $headers[] = 'Athletic Fees';
         $headers[] = 'Computer Fees';
         $headers[] = 'Cultural Fees';
-        $headers[] = 'Development Fees';
-        $headers[] = 'Entrance/Admission Fees*';
+        $headers[] = 'Devt. Fees';
+        $headers[] = 'Admission/Entrance Fees';
         $headers[] = 'Guidance Fees';
         $headers[] = 'Handbook Fees';
         $headers[] = 'Laboratory Fees';
         $headers[] = 'Library Fee';
-        $headers[] = 'Medical and Dental Fees';
+        $headers[] = 'Medical Fees';
         $headers[] = 'Registration Fees';
         $headers[] = 'School ID Fees';
         $headers[] = 'TOTAL TOSF';
 
         foreach ($headers as $key => $header) {
             if ($key == 0)
-                $widths[] = 4;
+                $widths[] = 9; //#
             elseif ($key == 1)
-                $widths[] = 10;
+                $widths[] = 13; //Stud. Number
             elseif ($key == 2)
-                $widths[] = 8;
+                $widths[] = 25; //Last Name
             elseif ($key == 3)
-                $widths[] = 13;
+                $widths[] = 24.4; //Given Name
             elseif ($key == 4)
-                $widths[] = 13;
+                $widths[] = 9; //Middle Name
+            elseif ($key == 5)
+                $widths[] = 8; //Year Level
+            elseif ($key == 6)
+                $widths[] = 6; //Sex at Birth
+            elseif ($key == 7)
+                $widths[] = 7; //Labo Units
+            elseif ($key == 8)
+                $widths[] = 11; //Comp Lab Units
+            elseif ($key == 9)
+                $widths[] = 12; //Academic Units
+            elseif ($key == 10)
+                $widths[] = 9; //NSTP Units
             elseif ($key == 11)
-                $widths[] = 10;
+                $widths[] = 13; //Tuition Fee'
             elseif ($key == 12)
-                $widths[] = 10;
+                $widths[] = 12.3; //NSTP Fee
             elseif ($key == 13)
-                $widths[] = 12;
+                $widths[] = 14; //Athletic Fees
             elseif ($key == 14)
-                $widths[] = 12;
+                $widths[] = 12; //Computer Fees
             elseif ($key == 15)
-                $widths[] = 13;
+                $widths[] = 12; //Cultural Fees
             elseif ($key == 16)
-                $widths[] = 12;
+                $widths[] = 12; //Development Fees
+            elseif ($key == 17)
+                $widths[] = 12; //Admission Fees
             elseif ($key == 18)
-                $widths[] = 11;
+                $widths[] = 12; //Guidance Fees
+            elseif ($key == 19)
+                $widths[] = 12; //Handbook Fees
+            elseif ($key == 20)
+                $widths[] = 13; //Laboratory Fees
+            elseif ($key == 21)
+                $widths[] = 12; //Library Fee
+            elseif ($key == 22)
+                $widths[] = 12; //Medical Fees
+            elseif ($key == 23)
+                $widths[] = 14; //Registration Fees
+            elseif ($key == 24)
+                $widths[] = 12; //School ID Fees  
             else
                 $widths[] = $pagewidth_withborders / count($headers);
         }
-        $pdf->SetWidths($widths);
-        $headerHeight = $pdf->GetY();
-        $pdf->Row($headers, 3, 'l');
-        $headerHeight = $pdf->GetY() - $headerHeight;
-        //content
-        foreach ($headers as $header)
-            $sample[] = '';
 
-        // $lastpage = $pdf->PageNo();
+        $pdf->SetWidths($widths);
+
+        // $values[] = ['data' => '1', 'alignment' => 'L'];
+        $alignments[] = 'L';
+        $alignments[] = 'L';
+        $alignments[] = 'L';
+        $alignments[] = 'L';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'C';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $alignments[] = 'R';
+        $pdf->SetAligns($alignments);
+        $headerHeight = $pdf->GetY();
+        $headerHeight = $pdf->GetY() - $headerHeight;
+        $pdf->Row($headers, 3, $alignments);
+
+        // Compute Total TOSF
+        $totalTosf = 0;
         //prints the signature at the bottom always and cuts the page if there are no records in the signature page so laging may records na kasama ung signature
-        $total = 87;
-        for ($i = 0; $i < $total; $i++) {
-            if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
-                $pdf->AddPage('L');
-                $pdf->Row($headers, 3, 'l');
-            } else if ($pdf->GetY() + 32 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + 10 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
-                $pdf->AddPage('L');
-                $pdf->Row($headers, 3, 'l');
-            } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
-                //print headers if a new page will be created by adding a row
-                $pdf->Row($headers, 3, 'l');
-            }
-            $pdf->Row($sample, 3, 'l');
-        }
+        // $total = count($grantees);
+        // $grantees = array();
+
+        // for ($i = 0; $i < $total; $i++) {
+        //     if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
+        //         $pdf->AddPage('L');
+        //         $pdf->Row($headers, 3, $alignments);
+        //     } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
+        //         $pdf->AddPage('L');
+        //         $pdf->Row($headers, 3, $alignments);
+        //     } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
+        //         //print headers if a new page will be created by adding a row
+        //         $pdf->Row($headers, 3, $alignments);
+        //     }
+        //     // // Sequence Number
+        //     // $rowData = array_merge([$sequenceNumber], $grantee_info);
+        //     // $pdf->Row($rowData, 3, $alignments);
+        //     // $sequenceNumber++;
+        //     // // Calculate the sum of "TOTAL TOSF"
+        //     // $totalTosf += (float) str_replace('', '', $grantee_info[24]);
+        // }
+
+        // $rowData = array_merge([$key + 1], array_values($grantees[0]));
+        // $pdf->Row($rowData, 3, $alignments);
+        foreach ($grantees as $key => $grantee) {
+            // $rowData = array_merge([$sequenceNumber], $grantees);
+            $rowData = array_merge([$key + 1], array_values($grantee));
+            $pdf->Row($rowData, 3, $alignments);
+            // Calculate the sum of "TOTAL TOSF"
+            $totalTosf += (float) str_replace('', '', $grantee['total_tosf']);
+        };
+        // Display the Sum of TOTAL TOSF
+        $pdf->SetFont('Arial', 'BI', 7);
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->Cell(298, 5, 'TOTAL:', 0, 0, 'R', 0);
+        $pdf->Cell(22, 5, number_format($totalTosf, 2), 0, 0, 'R', 0);
 
         //signature
+        $pdf->SetFont('Arial', '', 8);
+        $pdf->SetTextColor(0, 0, 0);
         $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
         $pdf->SetWidths($sigwidths);
-        $pdf->SetY($pdf->GetPageHeight() - 52);
-        $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 3, 'L', 0);
-        $pdf->RowWithBorder(array('', '', '', ''), 20, 'C', 0);
+        $pdf->SetY($pdf->GetPageHeight() - 50);
+        $pdf->Ln();
+        $pdf->Ln();
+        $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
+        $pdf->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
         $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
-        $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 5, 'C', 0);
+        $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 3, 'C', 0);
 
         $pdf->Output();
     }
