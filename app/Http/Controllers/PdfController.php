@@ -604,12 +604,12 @@ SUM(
         //         'total_tosf' => '-'
         //     );
 
-        $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-
+        // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
+        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories']);
         exit;
     }
 
-    private function generateForm1($pdf_data)
+    private function generateForm1($pdf_data, $signatories)
     {
         // $pdf_dataterm = "First";
         // $pdf_dataay = "2022";
@@ -675,19 +675,19 @@ SUM(
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Printed Name", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $pdf_data['printed_name'], 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, strtoupper($signatories['cert2']), 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Printed Name", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $pdf_data['printed_name'], 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, strtoupper($signatories['appr']), 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Position", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "Accountant", 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Position", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $signatories['pos_appr'], 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString() , 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 1, "C");
         $pdf->Output();
     }
 
@@ -822,6 +822,7 @@ SUM(
     function generateForm2($signatories, $pdf_data, $grantees)
     {
 
+
         // $row[] = "hello world";
         // $row[] = array('term' => "first", 'ay' => '2022');
         // $row[] = array('term' => "first", 'ay' => '2022');
@@ -829,6 +830,7 @@ SUM(
         // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
 
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
+        $pdf->signatories = $signatories;
         $pdf->AddPage('L');
         $pdf->AliasNbPages();
         $margin = 5;
@@ -850,7 +852,7 @@ SUM(
         $pdf->Ln(10);
         $pdf->Cell(320, 5, 'TUITION AND OTHER SCHOOL FEES (Based on Section 7, Rule II of the IRR of RA 10931)', 0, 0, 'C', 0);
         $pdf->Ln(5);
-        $pdf->Cell(320, 5, 'Degree Program', 1, 0, 'L', 0);
+        // $pdf->Cell(320, 5, 'Degree Program', 1, 0, 'L', 0);
         $pdf->Ln();
         //set font kasi maliit
         $pdf->SetFont('Arial', '', 6);
@@ -858,7 +860,9 @@ SUM(
         $pagetitleheight = $pdf->GetY() - $pagetitleheight;
         $pagewidth_withborders = $pdf->GetPageWidth() - $margin * 2;
 
-
+        //!for the first page
+        $pdf->currentCourse = $grantees[0]->degree_program;
+        $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         $headers[] = '#';
         $headers[] = 'Stud. Number';
         $headers[] = 'Last Name';
@@ -1002,8 +1006,14 @@ SUM(
 
         // $rowData = array_merge([$key + 1], array_values($grantees[0]));
         // $pdf->Row($rowData, 3, $alignments);
+
+        // $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
+            if ($pdf->currentCourse != $grantee->degree_program) {
+                $pdf->currentCourse = $grantee->degree_program;
+                $pdf->AddPage();
+            }
             $granteeRow =     array(
                 'stud_number' => $grantee->stud_id,
                 'last_name' => $grantee->stud_lname,
@@ -1015,21 +1025,21 @@ SUM(
                 'comp_lab_units' => $grantee->comp_lab_unit,
                 'academic_units' => $grantee->academic_unit,
                 'nstp_units' => $grantee->nstp_unit,
-                'tuition_fee' => number_format($grantee->tuition_fee,2),
-                'nstp_fee' => number_format($grantee->nstp_fee,2),
-                'athletic_fees' => number_format($grantee->athletic_fee,2),
-                'computer_fees' => number_format($grantee->computer_fee,2),
-                'cultural_fees' => number_format($grantee->cultural_fee,2),
-                'devt_fees' => number_format($grantee->development_fee,2),
-                'admission_fees' => number_format($grantee->entrance_and_admission_fee,2),
-                'guidance_fees' => number_format($grantee->guidance_fee,2),
-                'handbook_fees' => number_format($grantee->handbook_fee,2),
-                'laboratory_fees' => number_format($grantee->laboratory_fee,2),
-                'library_fee' => number_format($grantee->library_fee,2),
-                'medical_fees' => number_format($grantee->medical_and_dental_fee,2),
-                'registration_fees' => number_format($grantee->registration_fee,2),
-                'school_id_fees' => number_format($grantee->school_id_fee,2),
-                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee,2)
+                'tuition_fee' => number_format($grantee->tuition_fee, 2),
+                'nstp_fee' => number_format($grantee->nstp_fee, 2),
+                'athletic_fees' => number_format($grantee->athletic_fee, 2),
+                'computer_fees' => number_format($grantee->computer_fee, 2),
+                'cultural_fees' => number_format($grantee->cultural_fee, 2),
+                'devt_fees' => number_format($grantee->development_fee, 2),
+                'admission_fees' => number_format($grantee->entrance_and_admission_fee, 2),
+                'guidance_fees' => number_format($grantee->guidance_fee, 2),
+                'handbook_fees' => number_format($grantee->handbook_fee, 2),
+                'laboratory_fees' => number_format($grantee->laboratory_fee, 2),
+                'library_fee' => number_format($grantee->library_fee, 2),
+                'medical_fees' => number_format($grantee->medical_and_dental_fee, 2),
+                'registration_fees' => number_format($grantee->registration_fee, 2),
+                'school_id_fees' => number_format($grantee->school_id_fee, 2),
+                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee, 2)
             );
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
@@ -1043,17 +1053,7 @@ SUM(
         $pdf->Cell(22, 5, number_format($totalTosf, 2), 0, 0, 'R', 0);
 
         //signature
-        $pdf->SetFont('Arial', '', 8);
-        $pdf->SetTextColor(0, 0, 0);
-        $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
-        $pdf->SetWidths($sigwidths);
-        $pdf->SetY($pdf->GetPageHeight() - 50);
-        $pdf->Ln();
-        $pdf->Ln();
-        $pdf->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
-        $pdf->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
-        $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
-        $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 3, 'C', 0);
+        $pdf->isLast = true;
 
         $pdf->Output();
     }

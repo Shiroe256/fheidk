@@ -5,6 +5,9 @@ use Fpdf\Fpdf;
 require '../vendor/autoload.php';
 class FPDFunifast extends Fpdf
 {
+    public $currentCourse;
+    public $isLast = false;
+    public $signatories;
     public function getRightMargin()
     {
         return $this->rMargin;
@@ -16,6 +19,7 @@ class FPDFunifast extends Fpdf
         $this->SetFont('Arial', '', 6);
         //headers
         if ($this->PageNo() != 1) {
+            $this->Cell(0, 5, $this->currentCourse, 1, 1);
             $pagetitleheight = $this->GetY();
             $margin = 5;
             $pagetitleheight = $this->GetY() - $pagetitleheight;
@@ -137,11 +141,28 @@ class FPDFunifast extends Fpdf
             $headerHeight = $this->GetY();
             $headerHeight = $this->GetY() - $headerHeight;
             $this->Row($headers, 3, $alignments);
+            // $this->Cell(0, 5, $this->currentCourse, 1, 1);
+            // $this->Row(array($this->currentCourse),3,array('L'));
         }
     }
 
     function Footer()
     {
+        if ($this->isLast) {
+            $signatories = $this->signatories;
+            $pagewidth_withborders = $this->GetPageWidth() - 5 * 2;
+            $this->SetFont('Arial', '', 8);
+            $this->SetTextColor(0, 0, 0);
+            $sigwidths = array($pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4, $pagewidth_withborders / 4);
+            $this->SetWidths($sigwidths);
+            $this->SetY($this->GetPageHeight() - 50);
+            $this->Ln();
+            $this->Ln();
+            $this->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
+            $this->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
+            $this->RowWithBorder(array(strtoupper($signatories['prep1']), strtoupper($signatories['cert1']), strtoupper($signatories['cert2']), strtoupper($signatories['appr'])), 3, 'C', 0);
+            $this->RowWithBorder(array(strtoupper($signatories['pos_prep1']), strtoupper($signatories['pos_cert1']), strtoupper($signatories['pos_cert2']), strtoupper($signatories['pos_appr'])), 3, 'C', 0);
+        }
         $this->SetFont('Arial', '', 8);
         $this->SetY(-10);
         $this->cell(0, 5, 'Page ' . $this->PageNo() . ' of {nb}', 0, 1, 'R');
