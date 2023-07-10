@@ -1004,7 +1004,7 @@ SUM(
         // $pdf->Row($rowData, 3, $alignments);
         //!for the first page
         $pdf->currentCourse = $grantees[0]->degree_program;
-        $this->Cell(0, 5, $pdf->currentCourse, 1, 1);
+        $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
             // $rowData = array_merge([$sequenceNumber], $grantees);
             if ($pdf->currentCourse != $grantee->degree_program) {
