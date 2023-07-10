@@ -577,7 +577,7 @@ SUM(
             );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-        $this->generateForm3($hei_info['hei_info'], $hei_info['signatories'],$grantees);
+        $this->generateForm3($hei_info['hei_info'], $hei_info['signatories'], $grantees);
         exit;
     }
 
@@ -901,7 +901,7 @@ SUM(
         $pdf->Output();
     }
 
-    function generateForm3($signatories, $pdf_data, $grantees)
+    function generateForm3($pdf_data, $signatories,  $grantees)
     {
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
         $pdf->AddPage('L');
