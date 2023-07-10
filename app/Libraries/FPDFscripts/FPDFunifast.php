@@ -17,7 +17,7 @@ class FPDFunifast extends Fpdf
 
     public function setHeaderFunction($function)
     {
-        $this->headerFunction = $function;
+        $this->Header() = $function;
     }
     public function form2header()
     {
