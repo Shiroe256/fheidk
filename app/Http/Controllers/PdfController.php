@@ -562,43 +562,30 @@ SUM(
 
         return array('hei_info' => $pdf_data, 'signatories' => $signatories);
     }
-    public function generatePDF()
+    public function generatePDFForm1($reference_no)
     {
-        $reference_no = '03-03236-2021-2022-1-1';
+        // $reference_no = $request->reference_no;
+        $hei_info = $this->getHEIInfo($reference_no);
+        // $grantees = $this->getForm3Data($reference_no);
+
+        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories']);
+        exit;
+    }
+    public function generatePDFForm2($reference_no)
+    {
+        // $reference_no = $request->reference_no;
+        $hei_info = $this->getHEIInfo($reference_no);
+        $grantees = $this->getForm2Data($reference_no);
+
+        $this->generateForm2($hei_info['hei_info'], $hei_info['signatories'], $grantees);
+        exit;
+    }
+    public function generatePDFForm3($reference_no)
+    {
+        // $reference_no = $request->reference_no;
         $hei_info = $this->getHEIInfo($reference_no);
         $grantees = $this->getForm3Data($reference_no);
-        // print_r($grantees->toArray());
 
-        // $grantees[] =
-        //     array(
-        //         'last_name' => 'Bohol',
-        //         'given_name' => 'Froilan',
-        //         'middle_initial' => 'L',
-        //         'sex' => 'M',
-        //         'birthdate' => 'November 22, 1994',
-        //         'degree' => 'Bachelor of Science in Information Technology',
-        //         'year_level' => '4',
-        //         'email_address' => 'sample@gmail.com',
-        //         'phone_number' => '09955167998',
-        //         'admission_fees' => '350.00',
-        //         'remarks' => 'Passed'
-        //     );
-        // $grantees[] =
-        //     array(
-        //         'last_name' => 'Bohol',
-        //         'given_name' => 'Froilan',
-        //         'middle_initial' => 'L',
-        //         'sex' => 'M',
-        //         'birthdate' => 'November 22, 1994',
-        //         'degree' => 'Bachelor of Science in Information Technology',
-        //         'year_level' => '4',
-        //         'email_address' => 'sample@gmail.com',
-        //         'phone_number' => '09955167998',
-        //         'admission_fees' => '350.00',
-        //         'remarks' => 'Passed'
-        //     );
-
-        // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
         $this->generateForm3($hei_info['hei_info'], $hei_info['signatories'], $grantees);
         exit;
     }

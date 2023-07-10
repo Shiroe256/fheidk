@@ -45,9 +45,9 @@
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right animated--fade-in">
                                               <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a>
+                                              <a class="dropdown-item" href="{{ Request::url() . '/form1' }}"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a>
+                                              <a class="dropdown-item" href="{{ Request::url() . '/form2' }}"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a>
+                                              <a class="dropdown-item" href="{{ Request::url() . '/form3' }}"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a>
                                             </div>
                                           </div>
                                           
