@@ -572,38 +572,52 @@ $(document).on('click', '#btn_submit_final_billing', function () {
 $(document).on('click', '#btn_submit_final_billing', function () {
     let id = $("#reference_no").val();
     $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-  
+
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to access this while being reviewed by the UniFAST Billing Unit.",
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, submit billing'
+        title: 'Are you sure?',
+        text: "You won't be able to access this while being reviewed by the UniFAST Billing Unit.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit billing'
     }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          url: '/submitbilling',
-          method: 'post',
-          data: {
-            reference_no: id
-          },
-          success: function (response) {
-            Swal.fire(
-              'Forwarded!',
-              'This billing is now being reviewed by the CHED-AFMS, please wait for the update.',
-              'success'
-            ).then(() => {
-              window.location.href = '/billings';
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/submitbilling',
+                method: 'post',
+                data: {
+                    reference_no: id
+                },
+                success: function (response) {
+                    if (response.hasOwnProperty('error')) {
+                        Swal.fire(
+                            'Error!',
+                            response.error,
+                            'error'
+                        );
+                    } else {
+                        Swal.fire(
+                            'Forwarded!',
+                            response.message,
+                            'success'
+                        ).then(() => {
+                            window.location.href = '/billings';
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire(
+                        'Error!',
+                        'An error occurred while submitting the billing.',
+                        'error'
+                    );
+                }
             });
-          }
-        });
-      }
-    })
-  });
-  
+        }
+    });
+});
