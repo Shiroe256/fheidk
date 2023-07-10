@@ -862,7 +862,7 @@ SUM(
 
         //!for the first page
         $pdf->currentCourse = $grantees[0]->degree_program;
-        $this->Cell(0, 5, $pdf->currentCourse, 1, 1);
+        $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         $headers[] = '#';
         $headers[] = 'Stud. Number';
         $headers[] = 'Last Name';
