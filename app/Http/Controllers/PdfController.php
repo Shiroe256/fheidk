@@ -7,6 +7,7 @@ use FPDFunifast;
 use Illuminate\Http\Request;
 use App\Models\Billing;
 use Illuminate\Support\Facades\DB;
+use app\Models\Hei;
 
 require '../app/Libraries/FPDFscripts/FPDFunifast.php';
 require '../vendor/autoload.php';
@@ -459,23 +460,25 @@ SUM(
         return $cellHeight;
     }
 
-    private function getForm2Data(Request $request)
+    private function getForm2Data($reference_no)
     {
-        $reference_no  = $request->reference_no;
-        $search = $request->search['value'];
-
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->where(function ($query) use ($search) {
-                $query->where('exam_result', '!=', 'Failed')
-                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-            });
+            ->where('exam_result', '!=', 'Failed')
+            ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
         //dito jinojoin ung information about the fees and computation
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
                 'students_sub.uid',
                 'students_sub.app_id',
+                'students_sub.stud_id',
+                'students_sub.stud_id',
+                'students_sub.lab_unit',
+                'students_sub.comp_lab_unit',
+                'students_sub.academic_unit',
+                'students_sub.nstp_unit',
+                'students_sub.stud_sex',
                 'students_sub.hei_name',
                 'students_sub.stud_email',
                 'students_sub.stud_lname',
@@ -483,10 +486,7 @@ SUM(
                 'students_sub.stud_mname',
                 'students_sub.fhe_award_no',
                 'students_sub.degree_program',
-                'students_sub.semester',
                 'students_sub.year_level',
-                'students_sub.remarks',
-                'students_sub.stud_status',
                 DB::raw($this->carlo_columns)
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
@@ -518,28 +518,36 @@ SUM(
 
         return $students;
     }
+    function getHEIInfo($reference_no)
+    {
+        $billing = Billing::where('reference_no', $reference_no)->first();
+        $heiinfo = Hei::where('hei_uii', $billing->hei_uii);
+
+        $pdf_data['term'] = $billing->semester == 1 ? 'First' : 'Second';
+        $pdf_data['ay'] = $billing->ac_year;
+        $pdf_data['date'] = now();
+        $pdf_data['ref_no'] = $billing->reference_no;
+        $pdf_data['college_name'] = $heiinfo->hei_name;
+        $pdf_data['college_address'] = '(Address of State/ Local University or College)';
+        $pdf_data['printed_name'] = "??";
+
+        $signatories['prep1'] = $heiinfo->hei_focal;
+        $signatories['pos_prep1'] = 'Project Technical Assistant I';
+        $signatories['cert1'] = $heiinfo->hei_ao_name;
+        $signatories['pos_cert1'] = 'Project Technical Assistant II';
+        $signatories['cert2'] = $heiinfo->hei_ac_name;
+        $signatories['pos_cert2'] = 'Project Technical Assistant III';
+        $signatories['appr'] = $heiinfo->hei_head;
+        $signatories['pos_appr'] = $heiinfo->hei_head_pos;
+
+        return array('hei_info' => $pdf_data, 'signatories' => $signatories);
+    }
     public function generatePDF()
     {
 
-        $pdf_data['term'] = "First";
-        $pdf_data['ay'] = "2022";
-        $pdf_data['date'] = "2023/1/12";
-        $pdf_data['ref_no'] = 'XX - XXXXXX - 2018 - X - X';
-        $pdf_data['college_name'] = '(Name of State / Local University or College)';
-        $pdf_data['college_address'] = '(Address of State/ Local University or College)';
-        $pdf_data['printed_name'] = "";
-
-        $pdf_data['degree_program'] = "Bachelor of Science in Information and Technology";
-        // $this->generateForm1($pdf_data);
-        $signatories['prep1'] = 'Jason A. Bahil';
-        $signatories['cert1'] = 'Jason A. Bahil';
-        $signatories['cert2'] = 'Jason A. Bahil';
-        $signatories['appr'] = 'Jason A. Bahil';
-        $signatories['pos_prep1'] = 'Project Technical Assistant III';
-        $signatories['pos_cert1'] = 'Project Technical Assistant III';
-        $signatories['pos_cert2'] = 'Project Technical Assistant III';
-        $signatories['pos_appr'] = 'Project Technical Assistant III';
-
+        $hei_info = $this->getHEIInfo('03-03236-2021-2022-1-1');
+        print_r($hei_info);
+        // $hei_info
         $grantees[] =
             array(
                 'stud_number' => '202010002',
@@ -597,7 +605,7 @@ SUM(
                 'total_tosf' => '-'
             );
 
-        $this->generateForm2($signatories, $pdf_data,  $grantees);
+        // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
 
         exit;
     }
