@@ -605,11 +605,11 @@ SUM(
         //     );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-        $this->generateForm1($hei_info['hei_info']);
+        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories']);
         exit;
     }
 
-    private function generateForm1($pdf_data)
+    private function generateForm1($pdf_data, $signatories)
     {
         // $pdf_dataterm = "First";
         // $pdf_dataay = "2022";
@@ -675,19 +675,19 @@ SUM(
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Printed Name", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $pdf_data['printed_name'], 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, strtoupper($signatories['cert2']), 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Printed Name", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $pdf_data['printed_name'], 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, strtoupper($signatories['appr']), 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Position", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "Accountant", 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Position", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, $signatories['pos_appr'], 1, 1, "C");
         //signature
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 0, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString() , 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
-        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, "", 1, 1, "C");
+        $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 1, "C");
         $pdf->Output();
     }
 
