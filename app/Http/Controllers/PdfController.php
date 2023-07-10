@@ -547,7 +547,7 @@ SUM(
         $reference_no = '03-03236-2021-2022-1-1';
         $hei_info = $this->getHEIInfo($reference_no);
         $grantees = $this->getForm2Data($reference_no);
-        print_r($grantees);
+        print_r($grantees->toArray());
 
         // $grantees[] =
         //     array(
