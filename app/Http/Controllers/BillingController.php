@@ -646,7 +646,6 @@ SUM(
 
         $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result','!=','failed')->count();
         // if ($billing_record->total_amount < 1) {
-        $reference_no  = $request->reference_no;
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
                 'students_sub.uid',

@@ -461,6 +461,70 @@ SUM(
         return $cellHeight;
     }
 
+    function getForm1Data($reference_no)
+    {
+        $applicants = DB::table('tbl_billing_details_temp as students_sub')
+            ->select(
+                'students_sub.uid',
+                'students_sub.hei_name',
+                DB::raw($this->carlo_columns),
+                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
+            )
+            ->join('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
+            })
+            ->where('reference_no', $reference_no)
+            ->where('total_exam_taken', '!=', 0)
+            ->groupBy('students_sub.uid');
+
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no);
+        //dito jinojoin ung information about the fees and computation
+        $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            ->mergeBindings($students_sub)
+            ->select(
+                'students_sub.uid',
+                'students_sub.hei_name',
+                DB::raw($this->carlo_columns),
+                DB::raw('0 as exam_fees')
+            )
+            ->leftJoin('tbl_other_school_fees', function ($join) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
+            })
+            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            ->leftJoin('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    // ->andWhere('tbl_billing_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            })
+            ->groupBy('students_sub.uid');
+
+        $union = $applicants->union($students);
+        $total_amount = DB::table(DB::raw("({$union->toSql()}) AS summary"))
+            ->mergeBindings($union)
+            ->selectRaw('sum(summary.total_fee) + sum(summary.exam_fees) as total_amount')
+            ->get()->total_amount;
+        return $total_amount;
+    }
     function getForm3Data($reference_no)
     {
         $applicants = TemporaryBilling::orderBy('remarks')
@@ -566,9 +630,9 @@ SUM(
     {
         // $reference_no = $request->reference_no;
         $hei_info = $this->getHEIInfo($reference_no);
-        // $grantees = $this->getForm3Data($reference_no);
+        $total_amount = $this->getForm1Data($reference_no);
 
-        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories']);
+        $this->generateForm1($hei_info['hei_info'], $hei_info['signatories'], $total_amount);
         exit;
     }
     public function generatePDFForm2($reference_no)
@@ -590,7 +654,7 @@ SUM(
         exit;
     }
 
-    private function generateForm1($pdf_data, $signatories)
+    private function generateForm1($pdf_data, $signatories, $total_amount)
     {
         // $pdf_dataterm = "First";
         // $pdf_dataay = "2022";
@@ -625,7 +689,8 @@ SUM(
         $y = $pdf->GetY();
         $pdf->SetX($pdf->GetX() + 130);
         $pdf->Cell(30, 8, 'Account Code', 0, 0, 'C', 0, 0);
-        $pdf->Cell(0, 8, 'Amount', 0, 0, 'C', 0, 0);
+        $pdf->Cell(0, 8, 'Amount', 0, 0, 'C', 1, 0);
+        $pdf->Cell(0, 8, number_format($total_amount, 2), 0, 0, 'C', 0, 0);
         $pdf->SetX($x);
         $pdf->SetY($y);
         $pdf->MultiCell(30, 5, 'Responsibility Center', 0, 'C', 0);
