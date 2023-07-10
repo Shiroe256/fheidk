@@ -160,8 +160,8 @@ class FPDFunifast extends Fpdf
             $this->Ln();
             $this->RowWithBorder(array('Prepared By:', 'Certified By:', 'Certified By:', 'Approved By:'), 2, 'L', 0);
             $this->RowWithBorder(array('', '', '', ''), 10, 'C', 0);
-            $this->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2'], $signatories['appr']), 3, 'C', 0);
-            $this->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2'], $signatories['pos_appr']), 3, 'C', 0);
+            $this->RowWithBorder(array(strtoupper($signatories['prep1']), strtoupper($signatories['cert1']), strtoupper($signatories['cert2']), strtoupper($signatories['appr'])), 3, 'C', 0);
+            $this->RowWithBorder(array(strtoupper($signatories['pos_prep1']), strtoupper($signatories['pos_cert1']), strtoupper($signatories['pos_cert2']), strtoupper($signatories['pos_appr'])), 3, 'C', 0);
         }
         $this->SetFont('Arial', '', 8);
         $this->SetY(-10);
