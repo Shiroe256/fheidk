@@ -20,8 +20,7 @@ class FPDFunifast extends Fpdf
     {
         if ($this->currentForm == 2) {
             $this->form2header();
-        }
-        elseif ($this->currentForm == 3) {
+        } elseif ($this->currentForm == 3) {
             $this->form3header();
         }
     }
@@ -175,7 +174,6 @@ class FPDFunifast extends Fpdf
         $this->SetFont('Arial', '', 6);
         //headers
         if ($this->PageNo() != 1) {
-            $this->Cell(0, 5, $this->currentCourse, 1, 1);
             $pagetitleheight = $this->GetY();
             $margin = 5;
             $pagetitleheight = $this->GetY() - $pagetitleheight;
@@ -183,64 +181,64 @@ class FPDFunifast extends Fpdf
 
 
             $headers[] = 'Seq Number';
-        $headers[] = 'Last Name';
-        $headers[] = 'Given Name';
-        $headers[] = 'Middle Initial';
-        $headers[] = 'Sex';
-        $headers[] = 'Birthdate';
-        $headers[] = 'Degree';
-        $headers[] = 'Year Level';
-        $headers[] = 'Email Address';
-        $headers[] = 'Phone Number';
-        $headers[] = 'Admission/Entrance Fees';
-        $headers[] = 'Remarks (Passed/Failed)';
+            $headers[] = 'Last Name';
+            $headers[] = 'Given Name';
+            $headers[] = 'Middle Initial';
+            $headers[] = 'Sex';
+            $headers[] = 'Birthdate';
+            $headers[] = 'Degree';
+            $headers[] = 'Year Level';
+            $headers[] = 'Email Address';
+            $headers[] = 'Phone Number';
+            $headers[] = 'Admission/Entrance Fees';
+            $headers[] = 'Remarks (Passed/Failed)';
 
 
-        foreach ($headers as $key => $header) {
-            if ($key == 0)
-                $widths[] = 10; //#
-            elseif ($key == 1)
-                $widths[] = 45; //Last Name
-            elseif ($key == 2)
-                $widths[] = 45; //Given Name
-            elseif ($key == 3)
-                $widths[] = 9; //Middle Initial
-            elseif ($key == 4)
-                $widths[] = 6; //Sex at Birth
-            elseif ($key == 5)
-                $widths[] = 29; //Birthdate
-            elseif ($key == 6)
-                $widths[] = 77; //Degree
-            elseif ($key == 7)
-                $widths[] = 8; //Year Level
-            elseif ($key == 8)
-                $widths[] = 35; //Email Address
-            elseif ($key == 9)
-                $widths[] = 18; //Phone Number
-            elseif ($key == 10)
-                $widths[] = 21; //Entrance/Admission Fees
-            elseif ($key == 11)
-                $widths[] = 17; //Entrance/Admission Fees
-        }
+            foreach ($headers as $key => $header) {
+                if ($key == 0)
+                    $widths[] = 10; //#
+                elseif ($key == 1)
+                    $widths[] = 45; //Last Name
+                elseif ($key == 2)
+                    $widths[] = 45; //Given Name
+                elseif ($key == 3)
+                    $widths[] = 9; //Middle Initial
+                elseif ($key == 4)
+                    $widths[] = 6; //Sex at Birth
+                elseif ($key == 5)
+                    $widths[] = 29; //Birthdate
+                elseif ($key == 6)
+                    $widths[] = 77; //Degree
+                elseif ($key == 7)
+                    $widths[] = 8; //Year Level
+                elseif ($key == 8)
+                    $widths[] = 35; //Email Address
+                elseif ($key == 9)
+                    $widths[] = 18; //Phone Number
+                elseif ($key == 10)
+                    $widths[] = 21; //Entrance/Admission Fees
+                elseif ($key == 11)
+                    $widths[] = 17; //Entrance/Admission Fees
+            }
 
-        $this->SetWidths($widths);
+            $this->SetWidths($widths);
 
-        $alignments[] = 'L';
-        $alignments[] = 'L';
-        $alignments[] = 'L';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'C';
-        $alignments[] = 'R';
-        $alignments[] = 'C';
-        $this->SetAligns($alignments);
-        $headerHeight = $this->GetY();
-        $headerHeight = $this->GetY() - $headerHeight;
-        $this->Row($headers, 3, $alignments,);
+            $alignments[] = 'L';
+            $alignments[] = 'L';
+            $alignments[] = 'L';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'C';
+            $alignments[] = 'R';
+            $alignments[] = 'C';
+            $this->SetAligns($alignments);
+            $headerHeight = $this->GetY();
+            $headerHeight = $this->GetY() - $headerHeight;
+            $this->Row($headers, 3, $alignments,);
             // $this->Cell(0, 5, $this->currentCourse, 1, 1);
             // $this->Row(array($this->currentCourse),3,array('L'));
         }
