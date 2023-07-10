@@ -605,7 +605,7 @@ SUM(
         //     );
 
         // $this->generateForm2($hei_info['signatories'], $hei_info['hei_info'],  $grantees);
-        $this->generateForm1($hei_info['signatories']);
+        $this->generateForm1($hei_info['hei_info']);
         exit;
     }
 
