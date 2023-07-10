@@ -47,12 +47,12 @@
                                                 <button class="btn btn-outline-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
                                                   <i class="far fa-file-pdf"></i> Download Generated Forms
                                                 </button>
-                                                <div class="dropdown-menu">
-                                                  <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
-                                                  <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a>
-                                                  <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a>
-                                                  <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a>
-                                                </div>
+                                                <ul class="dropdown-menu dropdown-menu-right animated--fade-in">
+                                                  <li><h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6></li>
+                                                  <li><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a></li>
+                                                  <li><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a></li>
+                                                  <li><a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a></li>
+                                                </ul>
                                               </div>
                                         </div>
                                     </div>
