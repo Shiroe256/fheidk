@@ -62,11 +62,17 @@
                                               <tbody>
                                                     <tr>
                                                         <td>Consolidated Billing Statement (Form 1)</td>
-                                                        <td>{{ $billing->form1_link }}</td>
+                                                        <td><a href="{{ $billings->form1_link }}"
+                                                            target="_blank">{{ $billings->form1_link }}</a></td>
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
                                                         <td></td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 1 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group">
+                                                                <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
+                                                                data-placement="bottom" title="View billing submission"
+                                                                href="{{ $billings->form1_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                                <a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->reference_no)}}"><i class="fas fa-list"></i></a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
