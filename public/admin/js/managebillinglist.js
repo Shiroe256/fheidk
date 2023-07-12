@@ -517,7 +517,7 @@ $(document).on('click', '#btn_approve_hei_bank_cert', function () {
 });
 
 //Process Billing
-$(document).on('click', '#btn_reject_hei_bank_certification', function () {
+$(document).on('click', '#btn_reject_hei_bank_cert', function () {
   let id = $("#reference_no").val();
   $.ajaxSetup({
     headers: {
@@ -597,7 +597,7 @@ $(document).on('click', '#btn_approve_bank_cert', function () {
 });
 
 //Process Billing
-$(document).on('click', '#btn_reject_bank_certification', function () {
+$(document).on('click', '#btn_reject_bank_cert', function () {
   let id = $("#reference_no").val();
   $.ajaxSetup({
     headers: {
