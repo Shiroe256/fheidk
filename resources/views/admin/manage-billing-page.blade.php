@@ -56,7 +56,7 @@
                                                     <th>LINK</th>
                                                     <th>STATUS</th>
                                                     <th>REMARKS</th>
-                                                    <th class="text-center">ACTION</th>
+                                                    <th class="text-center">VIEW</th>
                                                 </tr>
                                             </thead>
                                               <tbody>
@@ -95,6 +95,9 @@
                                                                 href="{{ $billing->form1_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                                 <a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->reference_no)}}"><i class="fas fa-list"></i></a>
                                                             </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm"><button class="btn btn-outline-success btn-sm" data-toggle="modal" type="button" data-target="#modal_form_2" title="View Form 1 Scanned Copy"><i class="fas fa-check"></i></button><a class="btn btn-outline-danger btn-sm" role="button" data-toggle="tooltip" title="View Form 1 List" href="manage-billing-hei-submission-form1.html"><i class="fas fa-times"></i></a></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
