@@ -62,15 +62,15 @@
                                               <tbody>
                                                     <tr>
                                                         <td>Consolidated Billing Statement (Form 1)</td>
-                                                        <td><a href="{{ $billings->form1_link }}"
-                                                            target="_blank">{{ $billings->form1_link }}</a></td>
+                                                        <td><a href="{{ $billing->form1_link }}"
+                                                            target="_blank">{{ $billing->form1_link }}</a></td>
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
                                                         <td></td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" role="group">
                                                                 <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                                 data-placement="bottom" title="View billing submission"
-                                                                href="{{ $billings->form1_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                                href="{{ $billing->form1_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                                 <a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 1 List" href="{{route('form1', $billing->reference_no)}}"><i class="fas fa-list"></i></a>
                                                             </div>
                                                         </td>
