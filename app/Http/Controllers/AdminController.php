@@ -758,7 +758,7 @@ class AdminController extends Controller
         }
 
         $records = [
-            'billing_status' => 7
+            'billing_status' => 8
         ];
 
         $record->update($records);
@@ -777,7 +777,7 @@ class AdminController extends Controller
         }
 
         $records = [
-            'billing_status' => 6
+            'billing_status' => 7
         ];
 
         $record->update($records);
