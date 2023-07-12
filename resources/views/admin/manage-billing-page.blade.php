@@ -64,7 +64,29 @@
                                                         <td>Consolidated Billing Statement (Form 1)</td>
                                                         <td><a href="{{ $billing->form1_link }}"
                                                             target="_blank">{{ $billing->form1_link }}</a></td>
-                                                        <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
+                                                        <td>
+                                                        @if ($billing->form1_status == 0)
+                                                            <span class="badge badge-pill badge-secondary input-style">No
+                                                                Attachment</span>
+                                                        @elseif ($billing->form1_status == 1)
+                                                            <span class="badge badge-pill badge-warning input-style">For
+                                                                Review</span>
+                                                        @elseif ($billing->form1_status == 2)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->form1_status == 3)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->form1_status == 4)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by CHED-AFMS</span>
+                                                        @elseif ($billing->form1_status == 5)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by CHED-AFMS</span>
+                                                        @endif
+                                                        </td>
                                                         <td></td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" role="group">
