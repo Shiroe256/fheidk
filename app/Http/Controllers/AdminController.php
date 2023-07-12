@@ -1073,5 +1073,43 @@ class AdminController extends Controller
         }
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
+
+    public function readyfordisbursement(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 9
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    public function disbursement(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 10
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
     
 }

@@ -364,7 +364,9 @@
                         @if ($billing->billing_status == 6)
                             <button id="btn_forward_to_afms" name="btn_forward_to_afms" class="btn btn-outline-success btn-sm" type="button">FORWARD TO CHED-AFMS</button>
                         @elseif ($billing->billing_status == 8)
-                            <button id="btn_forward_to_afms" name="btn_forward_to_afms" class="btn btn-outline-success btn-sm" type="button">FORWARD TO CHED-AFMS</button>
+                            <button id="btn_ready_for_disbursement" name="btn_ready_for_disbursement" class="btn btn-outline-success btn-sm" type="button">READY FOR DISBURSEMENT</button>
+                        @elseif ($billing->billing_status == 9)
+                            <button id="btn_disbursement" name="btn_disbursed" class="btn btn-outline-success btn-sm" type="button">DISBURSED</button>
                         @endif   
                         </div>
                     </div>

@@ -635,3 +635,81 @@ $(document).on('click', '#btn_reject_bank_cert', function () {
     }
   })
 });
+
+//Process Billing
+$(document).on('click', '#btn_ready_for_disbursement', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Prepare for disbursement.",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, prepare for disbursement'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/readyfordisbursement',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Ready for disbursement!',
+            'This billing is now ready for disbursement.',
+            'success'
+          ).then(() => {
+            window.location.href = '/admin/managebillinglist';
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_disbursement', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Disburse Billing.",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, disburse billing to the HEI'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/disbursement',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Disburse!',
+            'This billing is now disbursed to the HEI.',
+            'success'
+          ).then(() => {
+            window.location.href = '/admin/managebillinglist';
+          });
+        }
+      });
+    }
+  })
+});

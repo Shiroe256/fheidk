@@ -172,7 +172,8 @@ Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])-
 //update billing status
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
-
+Route::post('/readyfordisbursement', [AdminController::class, 'readyfordisbursement'])->name('readyfordisbursement');
+Route::post('/disbursement', [AdminController::class, 'disbursement'])->name('disbursement');
 Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
 Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
 Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
