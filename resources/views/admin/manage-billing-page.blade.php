@@ -171,27 +171,27 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Notarized Registrar's Certification</td>
-                                                        <td class="text-left"> <a href="{{ $billings->reg_cert_link }}"
-                                                            target="_blank">{{ $billings->reg_cert_link }}</a></td>
+                                                        <td class="text-left"> <a href="{{ $billing->reg_cert_link }}"
+                                                            target="_blank">{{ $billing->reg_cert_link }}</a></td>
                                                     <td class="text-center">
-                                                        @if ($billings->reg_cert_status == 0)
+                                                        @if ($billing->reg_cert_status == 0)
                                                             <span class="badge badge-pill badge-secondary input-style">No
                                                                 Attachment</span>
-                                                        @elseif ($billings->reg_cert_status == 1)
+                                                        @elseif ($billing->reg_cert_status == 1)
                                                             <span class="badge badge-pill badge-warning input-style">For
                                                                 Review</span>
-                                                        @elseif ($billings->reg_cert_status == 2)
+                                                        @elseif ($billing->reg_cert_status == 2)
                                                             <span
                                                                 class="badge badge-pill badge-success input-style">Approved
                                                                 by UniFAST Billing Unit</span>
-                                                        @elseif ($billings->reg_cert_status == 3)
+                                                        @elseif ($billing->reg_cert_status == 3)
                                                             <span class="badge badge-pill badge-danger input-style">Rejected
                                                                 by UniFAST Billing Unit</span>
-                                                        @elseif ($billings->reg_cert_status == 4)
+                                                        @elseif ($billing->reg_cert_status == 4)
                                                             <span
                                                                 class="badge badge-pill badge-success input-style">Approved
                                                                 by CHED-AFMS</span>
-                                                        @elseif ($billings->reg_cert_status == 5)
+                                                        @elseif ($billing->reg_cert_status == 5)
                                                             <span class="badge badge-pill badge-danger input-style">Rejected
                                                                 by CHED-AFMS</span>
                                                         @endif
@@ -205,27 +205,27 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Certificate of Registration of Students (CORs)</td>
-                                                        <td class="text-left"> <a href="{{ $billings->cor_link }}"
-                                                            target="_blank">{{ $billings->cor_link }}</a></td>
+                                                        <td class="text-left"> <a href="{{ $billing->cor_link }}"
+                                                            target="_blank">{{ $billing->cor_link }}</a></td>
                                                     <td class="text-center">
-                                                        @if ($billings->cor_status == 0)
+                                                        @if ($billing->cor_status == 0)
                                                             <span class="badge badge-pill badge-secondary input-style">No
                                                                 Attachment</span>
-                                                        @elseif ($billings->cor_status == 1)
+                                                        @elseif ($billing->cor_status == 1)
                                                             <span class="badge badge-pill badge-warning input-style">For
                                                                 Review</span>
-                                                        @elseif ($billings->cor_status == 2)
+                                                        @elseif ($billing->cor_status == 2)
                                                             <span
                                                                 class="badge badge-pill badge-success input-style">Approved
                                                                 by UniFAST Billing Unit</span>
-                                                        @elseif ($billings->cor_status == 3)
+                                                        @elseif ($billing->cor_status == 3)
                                                             <span class="badge badge-pill badge-danger input-style">Rejected
                                                                 by UniFAST Billing Unit</span>
-                                                        @elseif ($billings->cor_status == 4)
+                                                        @elseif ($billing->cor_status == 4)
                                                             <span
                                                                 class="badge badge-pill badge-success input-style">Approved
                                                                 by CHED-AFMS</span>
-                                                        @elseif ($billings->cor_status == 5)
+                                                        @elseif ($billing->cor_status == 5)
                                                             <span class="badge badge-pill badge-danger input-style">Rejected
                                                                 by CHED-AFMS</span>
                                                         @endif
