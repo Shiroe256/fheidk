@@ -155,3 +155,83 @@ $(document).on('click', '#btn_reject_form1', function () {
     }
   })
 });
+
+//Process Billing
+$(document).on('click', '#btn_approve_form2', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve Billing Form 2",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, return approve form 2'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approveform2',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved Form 2!',
+            'Form 2 has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_reject_form2', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject Billing Form 2",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, return reject form 2'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectform2',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected Form 2!',
+            'Form 2 has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});

@@ -174,6 +174,8 @@ Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
 Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
 Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
+Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
+Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
 });
 
 //pdf shit

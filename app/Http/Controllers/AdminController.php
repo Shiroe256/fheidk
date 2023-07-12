@@ -823,6 +823,44 @@ class AdminController extends Controller
         return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 1'], 200);
     }
 
+    public function approveform2(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form2_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 2'], 200);
+    }
+
+    public function rejectform2(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 2'], 200);
+    }
+
     private function upsertSettings($reference_no, $onsettings = array(), $offsettings = array())
     {
         //mass updates of all the settings that were changed
