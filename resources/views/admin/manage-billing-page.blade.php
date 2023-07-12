@@ -48,8 +48,8 @@
                             <div class="col-xl-12 offset-xl-0">
                                 <section class="clean-block payment-form">
                                     <div class="container-fluid">
-                                        <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table table-bordered table-bordered">
+                                        <div id="tbl_billing_attachments_div" name="tbl_billing_attachments_div" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+                                            <table id="tbl_billing_attachments_div" name="tbl_billing_attachments_div" class="table table-bordered table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>BILLING DOCUMENTS</th>
