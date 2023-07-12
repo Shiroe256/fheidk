@@ -140,6 +140,12 @@
                                                                 <a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 2 List" href="{{route('form2', $billing->reference_no)}}"><i class="fas fa-list"></i></a>
                                                             </div>
                                                         </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Consolidated Billing Details (Form 3)</td>
@@ -175,6 +181,12 @@
                                                                 data-placement="bottom" title="View billing submission"
                                                                 href="{{ $billing->form3_link }}" target="_blank"><i class="far fa-file-alt"></i></a><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 3 List" href="{{route('form3', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
                                                         </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Notarized Registrar's Certification</td>
@@ -208,6 +220,12 @@
                                                             <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
                                                             href="{{ $billing->reg_cert_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -243,6 +261,12 @@
                                                             data-placement="bottom" title="View billing submission"
                                                             href="{{ $billing->cor_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                         </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Bank Certification of the HEI Certified by the HEI</td>
@@ -277,6 +301,12 @@
                                                             data-placement="bottom" title="View billing submission"
                                                             href="{{ $billing->hei_bank_cert_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                         </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Bank Certification of the HEI Certified by the Bank</td>
@@ -310,6 +340,12 @@
                                                             <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
                                                             data-placement="bottom" title="View billing submission"
                                                             href="{{ $billing->bank_cert_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 </tbody>
