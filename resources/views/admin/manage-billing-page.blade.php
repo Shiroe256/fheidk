@@ -99,8 +99,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_form1" name="btn_approve_form1" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_form1" name="btn_reject_form1" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_form1_afms" name="btn_approve_form1_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_form1_afms" name="btn_reject_form1_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>

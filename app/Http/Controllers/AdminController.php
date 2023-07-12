@@ -1111,5 +1111,44 @@ class AdminController extends Controller
 
         return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
     }
+
+    public function approveform1afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 1'], 200);
+    }
+
+    public function rejectform1afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 1'], 200);
+    }
+
     
 }

@@ -174,8 +174,24 @@ Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
 Route::post('/readyfordisbursement', [AdminController::class, 'readyfordisbursement'])->name('readyfordisbursement');
 Route::post('/disbursement', [AdminController::class, 'disbursement'])->name('disbursement');
+
 Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
 Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
+Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
+Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
+Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
+Route::post('/rejectform3', [AdminController::class, 'rejectform3'])->name('rejectform3');
+Route::post('/approveregcert', [AdminController::class, 'approveregcert'])->name('approveregcert');
+Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
+Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
+Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
+Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
+Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
+Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
+Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name('rejectbankcert');
+
+Route::post('/approveform1afms', [AdminController::class, 'approveform1afms'])->name('approveform1afms');
+Route::post('/rejectform1afms', [AdminController::class, 'rejectform1afms'])->name('rejectform1afms');
 Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
 Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
 Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
