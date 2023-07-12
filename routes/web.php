@@ -172,6 +172,7 @@ Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])-
 //update billing status
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
+Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
 });
 
 //pdf shit
