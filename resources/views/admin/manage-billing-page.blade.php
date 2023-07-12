@@ -57,6 +57,7 @@
                                                     <th>STATUS</th>
                                                     <th>REMARKS</th>
                                                     <th class="text-center">VIEW</th>
+                                                    <th class="text-center">ACTION</th>
                                                 </tr>
                                             </thead>
                                               <tbody>
@@ -97,7 +98,10 @@
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
-                                                            <div role="group" class="btn-group btn-group-sm"><button class="btn btn-outline-success btn-sm" data-toggle="modal" type="button" data-target="#modal_form_2" title="View Form 1 Scanned Copy"><i class="fas fa-check"></i></button><a class="btn btn-outline-danger btn-sm" role="button" data-toggle="tooltip" title="View Form 1 List" href="manage-billing-hei-submission-form1.html"><i class="fas fa-times"></i></a></div>
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                <button class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
