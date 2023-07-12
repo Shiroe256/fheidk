@@ -107,7 +107,8 @@ $(document).on('click', '#btn_approve_form1', function () {
             'Form 1 is now approved for billing.',
             'success'
           ).then(() => {
-            window.location.href = '/admin/managebillinglist';
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
           });
         }
       });
