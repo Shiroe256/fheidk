@@ -53,6 +53,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>BILLING DOCUMENTS</th>
+                                                    <th>LINK</th>
                                                     <th>STATUS</th>
                                                     <th>REMARKS</th>
                                                     <th class="text-center">ACTION</th>
@@ -61,6 +62,7 @@
                                               <tbody>
                                                     <tr>
                                                         <td>Consolidated Billing Statement (Form 1)</td>
+                                                        <td>{{ $billing->form1_link }}</td>
                                                         <td><span class="badge badge-pill badge-warning billing-status-badge">For Review</span></td>
                                                         <td></td>
                                                         <td class="text-center">
