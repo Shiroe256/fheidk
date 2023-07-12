@@ -853,7 +853,7 @@ class AdminController extends Controller
         }
 
         $records = [
-            'form1_status' => 3
+            'form2_status' => 3
         ];
 
         $record->update($records);
