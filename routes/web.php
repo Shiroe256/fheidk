@@ -192,18 +192,18 @@ Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name
 
 Route::post('/approveform1afms', [AdminController::class, 'approveform1afms'])->name('approveform1afms');
 Route::post('/rejectform1afms', [AdminController::class, 'rejectform1afms'])->name('rejectform1afms');
-Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
-Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
-Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
-Route::post('/rejectform3', [AdminController::class, 'rejectform3'])->name('rejectform3');
-Route::post('/approveregcert', [AdminController::class, 'approveregcert'])->name('approveregcert');
-Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
-Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
-Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
-Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
-Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
-Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
-Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name('rejectbankcert');
+Route::post('/approveform2_afms', [AdminController::class, 'approveform2_afms'])->name('approveform2_afms');
+Route::post('/rejectform2_afms', [AdminController::class, 'rejectform2_afms'])->name('rejectform2_afms');
+Route::post('/approveform3_afms', [AdminController::class, 'approveform3_afms'])->name('approveform3_afms');
+Route::post('/rejectform3_afms', [AdminController::class, 'rejectform3_afms'])->name('rejectform3_afms');
+Route::post('/approveregcert_afms', [AdminController::class, 'approveregcert_afms'])->name('approveregcert_afms');
+Route::post('/rejectregcert_afms', [AdminController::class, 'rejectregcert_afms'])->name('rejectregcert_afms');
+Route::post('/approvecor_afms', [AdminController::class, 'approvecor_afms'])->name('approvecor_afms');
+Route::post('/rejectcor_afms', [AdminController::class, 'rejectcor_afms'])->name('rejectcor_afms');
+Route::post('/approveheibankcert_afms', [AdminController::class, 'approveheibankcert_afms'])->name('approveheibankcert_afms');
+Route::post('/rejectheibankcert_afms', [AdminController::class, 'rejectheibankcert_afms'])->name('rejectheibankcert_afms');
+Route::post('/approvebankcert_afms', [AdminController::class, 'approvebankcert_afms'])->name('approvebankcert_afms');
+Route::post('/rejectbankcert_afms', [AdminController::class, 'rejectbankcert_afms'])->name('rejectbankcert_afms');
 
 });
 

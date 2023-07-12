@@ -148,8 +148,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_form2" name="btn_approve_form2" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_form2" name="btn_reject_form2" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_form2_afms" name="btn_approve_form2_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_form2_afms" name="btn_reject_form2_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -189,8 +195,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_form3" name="btn_approve_form3" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_form3" name="btn_reject_form3" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_form3_afms" name="btn_approve_form3_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_form3_afms" name="btn_reject_form3_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -229,8 +241,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_reg_cert" name="btn_approve_reg_cert" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_reg_cert" name="btn_reject_reg_cert" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_reg_cert_afms" name="btn_approve_reg_cert_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_reg_cert_afms" name="btn_reject_reg_cert_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -269,8 +287,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_cor" name="btn_approve_cor" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_cor" name="btn_reject_cor" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_cor_afms" name="btn_approve_cor_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_cor_afms" name="btn_reject_cor_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -308,9 +332,15 @@
                                                             href="{{ $billing->hei_bank_cert_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                         </td>
                                                         <td class="text-center">
-                                                            <div role="group" class="btn-group btn-group-sm">
+                                                            <div role="group" class="btn-group btn-group-sm">  
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_hei_bank_cert" name="btn_approve_hei_bank_cert" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_hei_bank_cert" name="btn_reject_hei_bank_cert" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_hei_bank_cert_afms" name="btn_approve_hei_bank_cert_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_hei_bank_cert_afms" name="btn_reject_hei_bank_cert_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -349,8 +379,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
                                                                 <button id="btn_approve_bank_cert" name="btn_approve_bank_cert" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
                                                                 <button id="btn_reject_bank_cert" name="btn_reject_bank_cert" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_bank_cert_afms" name="btn_approve_bank_cert_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_bank_cert_afms" name="btn_reject_bank_cert_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
                                                             </div>
                                                         </td>
                                                     </tr>
