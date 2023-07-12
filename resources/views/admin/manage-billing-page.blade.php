@@ -171,10 +171,70 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Notarized Registrar's Certification</td>
-                                                        <td><span class="badge badge-pill badge-danger billing-status-badge">Rejected</span></td>
-                                                        <td>Did not match with the submitted hard copy</td>
+                                                        <td class="text-left"> <a href="{{ $billings->reg_cert_link }}"
+                                                            target="_blank">{{ $billings->reg_cert_link }}</a></td>
+                                                    <td class="text-center">
+                                                        @if ($billings->reg_cert_status == 0)
+                                                            <span class="badge badge-pill badge-secondary input-style">No
+                                                                Attachment</span>
+                                                        @elseif ($billings->reg_cert_status == 1)
+                                                            <span class="badge badge-pill badge-warning input-style">For
+                                                                Review</span>
+                                                        @elseif ($billings->reg_cert_status == 2)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billings->reg_cert_status == 3)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billings->reg_cert_status == 4)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by CHED-AFMS</span>
+                                                        @elseif ($billings->reg_cert_status == 5)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by CHED-AFMS</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $billing->reg_cert_remarks }}</td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Scanned Copy"><i class="far fa-file-alt"></i></button></div>
+                                                            <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="{{ $billing->reg_cert_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Certificate of Registration of Students (CORs)</td>
+                                                        <td class="text-left"> <a href="{{ $billings->cor_link }}"
+                                                            target="_blank">{{ $billings->cor_link }}</a></td>
+                                                    <td class="text-center">
+                                                        @if ($billings->cor_status == 0)
+                                                            <span class="badge badge-pill badge-secondary input-style">No
+                                                                Attachment</span>
+                                                        @elseif ($billings->cor_status == 1)
+                                                            <span class="badge badge-pill badge-warning input-style">For
+                                                                Review</span>
+                                                        @elseif ($billings->cor_status == 2)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billings->cor_status == 3)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billings->cor_status == 4)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by CHED-AFMS</span>
+                                                        @elseif ($billings->cor_status == 5)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by CHED-AFMS</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $billing->cor_remarks }}</td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="{{ $billing->cor_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
