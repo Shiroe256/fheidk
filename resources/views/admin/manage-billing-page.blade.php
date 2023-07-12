@@ -87,7 +87,7 @@
                                                                 by CHED-AFMS</span>
                                                         @endif
                                                         </td>
-                                                        <td></td>
+                                                        <td>{{ $billing->form1_remarks }}</td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" role="group">
                                                                 <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
@@ -99,10 +99,39 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Consolidated Billing Details (Form 2)</td>
-                                                        <td><span class="badge badge-pill badge-success billing-status-badge">Approved by UniFAST Billing Unit</span></td>
-                                                        <td></td>
+                                                        <td><a href="{{ $billing->form2_link }}"
+                                                            target="_blank">{{ $billing->form2_link }}</a></td>
+                                                        <td>
+                                                        @if ($billing->form2_status == 0)
+                                                            <span class="badge badge-pill badge-secondary input-style">No
+                                                                Attachment</span>
+                                                        @elseif ($billing->form2_status == 1)
+                                                            <span class="badge badge-pill badge-warning input-style">For
+                                                                Review</span>
+                                                        @elseif ($billing->form2_status == 2)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->form2_status == 3)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->form2_status == 4)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by CHED-AFMS</span>
+                                                        @elseif ($billing->form2_status == 5)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by CHED-AFMS</span>
+                                                        @endif
+                                                        </td>
+                                                        <td>{{ $billing->form2_remarks }}</td>
                                                         <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" role="group"><button class="btn btn-outline-info btn-sm" data-toggle="modal" data-bss-tooltip="" type="button" data-target="#modal_form_1" title="View Form 2 Scanned Copy"><i class="far fa-file-alt"></i></button><a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 2 List" href="{{route('form2', $billing->reference_no)}}"><i class="fas fa-list"></i></a></div>
+                                                            <div class="btn-group btn-group-sm" role="group">
+                                                                <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
+                                                                data-placement="bottom" title="View billing submission"
+                                                                href="{{ $billing->form2_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                                <a class="btn btn-outline-info btn-sm" role="button" data-toggle="tooltip" data-bss-tooltip="" title="View Form 2 List" href="{{route('form2', $billing->reference_no)}}"><i class="fas fa-list"></i></a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
