@@ -173,6 +173,7 @@ Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])-
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
 Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
+Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
 });
 
 //pdf shit
