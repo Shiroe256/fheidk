@@ -801,7 +801,7 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 1'], 200);
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 1'], 200);
     }
 
     public function rejectform1(Request $request)
@@ -839,7 +839,7 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 2'], 200);
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 2'], 200);
     }
 
     public function rejectform2(Request $request)
@@ -877,7 +877,7 @@ class AdminController extends Controller
 
         $record->update($records);
 
-        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 3'], 200);
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 3'], 200);
     }
 
     public function rejectform3(Request $request)
@@ -897,6 +897,158 @@ class AdminController extends Controller
         $record->update($records);
 
         return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 3'], 200);
+    }
+
+    public function approveregcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Registar Certification'], 200);
+    }
+
+    public function rejectregcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Registar Certification'], 200);
+    }
+
+    public function approvecor(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved COR'], 200);
+    }
+
+    public function rejectcor(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected COR'], 200);
+    }
+
+    public function approveheibankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved HEI Bank Cert'], 200);
+    }
+
+    public function rejectheibankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected HEI Bank Cert'], 200);
+    }
+
+    public function approvebankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Bank Cert'], 200);
+    }
+
+    public function rejectbankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Bank Cert'], 200);
     }
 
     private function upsertSettings($reference_no, $onsettings = array(), $offsettings = array())

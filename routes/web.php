@@ -179,6 +179,15 @@ Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('ap
 Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
 Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
 Route::post('/rejectform3', [AdminController::class, 'rejectform3'])->name('rejectform3');
+Route::post('/approveregcert', [AdminController::class, 'approveregcert'])->name('approveregcert');
+Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
+Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
+Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
+Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
+Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
+Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
+Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name('rejectbankcert');
+
 });
 
 //pdf shit

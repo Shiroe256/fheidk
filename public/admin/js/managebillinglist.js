@@ -92,7 +92,7 @@ $(document).on('click', '#btn_approve_form1', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return approve form 1'
+    confirmButtonText: 'Yes, approve form 1'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -132,7 +132,7 @@ $(document).on('click', '#btn_reject_form1', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return reject form 1'
+    confirmButtonText: 'Yes, reject form 1'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -172,7 +172,7 @@ $(document).on('click', '#btn_approve_form2', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return approve form 2'
+    confirmButtonText: 'Yes, approve form 2'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -212,7 +212,7 @@ $(document).on('click', '#btn_reject_form2', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return reject form 2'
+    confirmButtonText: 'Yes, reject form 2'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -252,7 +252,7 @@ $(document).on('click', '#btn_approve_form3', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return approve form 3'
+    confirmButtonText: 'Yes, approve form 3'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -292,7 +292,7 @@ $(document).on('click', '#btn_reject_form3', function () {
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, return reject form 3'
+    confirmButtonText: 'Yes, reject form 3'
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -305,6 +305,326 @@ $(document).on('click', '#btn_reject_form3', function () {
           Swal.fire(
             'Rejected Form 3!',
             'Form 3 has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_approve_reg_cert', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve Registrar Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, approve registrar certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approveregcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved Registrar Certification!',
+            'Registrar certification has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_reject_reg_cert', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject Registrar Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, reject registrar certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectregcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected Registrar Certification!',
+            'Registration certification has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_approve_cor', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve COR",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, approve cor'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approvecor',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved COR!',
+            'COR has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_reject_cor', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject COR",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, reject cor'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectcor',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected COR!',
+            'COR has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_approve_hei_bank_cert', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve HEI Bank Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, approve hei bank certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approveheibankcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved HEI Bank Certification!',
+            'HEI Bank Certification has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_reject_hei_bank_certification', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject HEI Bank Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, reject hei bank certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectheibankcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected HEI Bank Certification!',
+            'HEI Bank Certification has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_approve_bank_cert', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve Bank Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, approve bank certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approvebankcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved Bank Certification!',
+            'Bank Certification has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
+$(document).on('click', '#btn_reject_bank_certification', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject Bank Certification",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, reject bank certification'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectbankcert',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected Bank Certification!',
+            'Bank Certification has been rejected for billing.',
             'success'
           ).then(() => {
             // Reload the specific div
