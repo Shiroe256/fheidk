@@ -142,6 +142,7 @@ Route::get('admindashboard', 'App\Http\Controllers\AdminController@admindashboar
 Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 
 Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
+Route::get('/artisanclear', Artisan::call('route:clear'));
 
 //Routes for Lists
 Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
