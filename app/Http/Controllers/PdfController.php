@@ -10,8 +10,8 @@ use App\Models\Billing;
 use App\Models\Hei;
 use Illuminate\Support\Facades\DB;
 
-require '../app/Libraries/FPDFscripts/FPDFunifast.php';
-require '../vendor/autoload.php';
+// require '../app/Libraries/FPDFscripts/FPDFunifast.php';
+// require '../vendor/autoload.php';
 
 class PdfController extends Controller
 {
