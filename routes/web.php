@@ -70,7 +70,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 // Route::get('/get-tempstudenttable', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
-Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('preventEditingIfSubmitted')->middleware('validateTempStudentFields');
+Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudentFields');
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 // Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent']);
 // Route::get('/edit-tempstudent', [BillingController::class, 'editTempStudent'])->name('editTempStudent')->middleware('validateEditTempStudent');
@@ -172,39 +172,6 @@ Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])-
 //update billing status
 Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
 Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
-Route::post('/readyfordisbursement', [AdminController::class, 'readyfordisbursement'])->name('readyfordisbursement');
-Route::post('/disbursement', [AdminController::class, 'disbursement'])->name('disbursement');
-
-Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
-Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
-Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
-Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
-Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
-Route::post('/rejectform3', [AdminController::class, 'rejectform3'])->name('rejectform3');
-Route::post('/approveregcert', [AdminController::class, 'approveregcert'])->name('approveregcert');
-Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
-Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
-Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
-Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
-Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
-Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
-Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name('rejectbankcert');
-
-Route::post('/approveform1afms', [AdminController::class, 'approveform1afms'])->name('approveform1afms');
-Route::post('/rejectform1afms', [AdminController::class, 'rejectform1afms'])->name('rejectform1afms');
-Route::post('/approveform2afms', [AdminController::class, 'approveform2afms'])->name('approveform2afms');
-Route::post('/rejectform2afms', [AdminController::class, 'rejectform2afms'])->name('rejectform2afms');
-Route::post('/approveform3afms', [AdminController::class, 'approveform3afms'])->name('approveform3afms');
-Route::post('/rejectform3afms', [AdminController::class, 'rejectform3afms'])->name('rejectform3afms');
-Route::post('/approveregcertafms', [AdminController::class, 'approveregcertafms'])->name('approveregcertafms');
-Route::post('/rejectregcertafms', [AdminController::class, 'rejectregcertafms'])->name('rejectregcertafms');
-Route::post('/approvecorafms', [AdminController::class, 'approvecorafms'])->name('approvecorafms');
-Route::post('/rejectcorafms', [AdminController::class, 'rejectcorafms'])->name('rejectcorafms');
-Route::post('/approveheibankcertafms', [AdminController::class, 'approveheibankcertafms'])->name('approveheibankcertafms');
-Route::post('/rejectheibankcertafms', [AdminController::class, 'rejectheibankcertafms'])->name('rejectheibankcertafms');
-Route::post('/approvebankcertafms', [AdminController::class, 'approvebankcertafms'])->name('approvebankcertafms');
-Route::post('/rejectbankcertafms', [AdminController::class, 'rejectbankcertafms'])->name('rejectbankcertafms');
-
 });
 
 //pdf shit
