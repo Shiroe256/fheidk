@@ -10,6 +10,8 @@
                     <div class="form-group"><label>Academic Year</label>
                         <select id="open_billing_ac_year" name="open_billing_ac_year"class="form-control" required>
                             <option value="" disabled selected>-- Select Academic Year --</option>
+                            <option value="2023-2024">2021-2022</option>
+                            <option value="2024-2025">2022-2023</option>
                             <option value="2023-2024">2023-2024</option>
                             <option value="2024-2025">2024-2025</option>
                             <option value="2025-2026">2025-2026</option>
