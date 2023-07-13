@@ -137,42 +137,73 @@ Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempException
 
 //Admin Pages
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-Route::get('admindashboard', 'App\Http\Controllers\AdminController@admindashboard')->name('admindashboard');
+    Route::get('admindashboard', 'App\Http\Controllers\AdminController@admindashboard')->name('admindashboard');
 
-Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
+    Route::get('manageuserslist', 'App\Http\Controllers\AdminController@manageuserslist')->name('manageuserslist');
 
-Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
-// Route::get('/artisanclear', Artisan::call('route:clear'));
+    Route::get('/manageuserpage/{hei_uii}', [AdminController::class, 'manageuserpage'])->name('manageuserpage');
 
-//Routes for Lists
-Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
-Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
-Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
-Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
+    //Routes for Lists
+    Route::get('/managebillinglist', [AdminController::class, 'managebillinglist'])->name('managebillinglist');
+    Route::get('/fetchbillinglist', [AdminController::class, 'fetchbillinglist'])->name('fetchbillinglist');
+    Route::get('/fetchuserlist', [AdminController::class, 'fetchuserlist'])->name('fetchuserlist');
+    Route::get('/fetchtosflist', [AdminController::class, 'fetchtosflist'])->name('fetchtosflist');
 
-//Route for TOSF CRUD
-Route::post('/import', [AdminController::class, 'import'])->name('import'); //for bulk uploading
-Route::post('/newfee', [AdminController::class, 'newfee'])->name('newfee'); //for single entry
-Route::get('/editfee', [AdminController::class, 'editfee'])->name('editfee');//for single entry
-Route::post('/updatefee', [AdminController::class, 'updatefee'])->name('updatefee');//for single entry
-Route::delete('/deletefee', [AdminController::class, 'deletefee'])->name('deletefee');//for single entry
+    //Route for TOSF CRUD
+    Route::post('/import', [AdminController::class, 'import'])->name('import'); //for bulk uploading
+    Route::post('/newfee', [AdminController::class, 'newfee'])->name('newfee'); //for single entry
+    Route::get('/editfee', [AdminController::class, 'editfee'])->name('editfee'); //for single entry
+    Route::post('/updatefee', [AdminController::class, 'updatefee'])->name('updatefee'); //for single entry
+    Route::delete('/deletefee', [AdminController::class, 'deletefee'])->name('deletefee'); //for single entry
 
-Route::post('/openbilling', [AdminController::class, 'openbilling'])->name('openbilling');
-Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
+    Route::post('/openbilling', [AdminController::class, 'openbilling'])->name('openbilling');
+    Route::get('/managebillingpage/{reference_no}', [AdminController::class, 'managebillingpage'])->name('managebillingpage');
 
-//formlist
-Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
-Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
-Route::get('/fetchform2list', [AdminController::class, 'fetchform2list'])->name('fetchform2list');
-Route::get('/viewstudentinfo', [AdminController::class, 'viewstudentinfo'])->name('viewstudentinfo');
-// Route::post('/updateitemorder', [App\Http\Controllers\PurchaseOrderController::class, 'updateitemorder'])->name('updateitemorder')->middleware('auth');
-Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
-Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name('fetchform3list');
-Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])->name('viewapplicantinfo');
+    //formlist
+    Route::get('/form1/{reference_no}', [AdminController::class, 'form1'])->name('form1');
+    Route::get('/form2/{reference_no}', [AdminController::class, 'form2'])->name('form2');
+    Route::get('/fetchform2list', [AdminController::class, 'fetchform2list'])->name('fetchform2list');
+    Route::get('/viewstudentinfo', [AdminController::class, 'viewstudentinfo'])->name('viewstudentinfo');
+    // Route::post('/updateitemorder', [App\Http\Controllers\PurchaseOrderController::class, 'updateitemorder'])->name('updateitemorder')->middleware('auth');
+    Route::get('/form3/{reference_no}', [AdminController::class, 'form3'])->name('form3');
+    Route::get('/fetchform3list', [AdminController::class, 'fetchform3list'])->name('fetchform3list');
+    Route::get('/viewapplicantinfo', [AdminController::class, 'viewapplicantinfo'])->name('viewapplicantinfo');
 
-//update billing status
-Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
-Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
+    //update billing status
+    Route::post('/forwardtoafms', [AdminController::class, 'forwardtoafms'])->name('forwardtoafms');
+    Route::post('/forrevision', [AdminController::class, 'forrevision'])->name('forrevision');
+    Route::post('/readyfordisbursement', [AdminController::class, 'readyfordisbursement'])->name('readyfordisbursement');
+    Route::post('/disbursement', [AdminController::class, 'disbursement'])->name('disbursement');
+
+    Route::post('/approveform1', [AdminController::class, 'approveform1'])->name('approveform1');
+    Route::post('/rejectform1', [AdminController::class, 'rejectform1'])->name('rejectform1');
+    Route::post('/approveform2', [AdminController::class, 'approveform2'])->name('approveform2');
+    Route::post('/rejectform2', [AdminController::class, 'rejectform2'])->name('rejectform2');
+    Route::post('/approveform3', [AdminController::class, 'approveform3'])->name('approveform3');
+    Route::post('/rejectform3', [AdminController::class, 'rejectform3'])->name('rejectform3');
+    Route::post('/approveregcert', [AdminController::class, 'approveregcert'])->name('approveregcert');
+    Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
+    Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
+    Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
+    Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
+    Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
+    Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
+    Route::post('/rejectbankcert', [AdminController::class, 'rejectbankcert'])->name('rejectbankcert');
+
+    Route::post('/approveform1afms', [AdminController::class, 'approveform1afms'])->name('approveform1afms');
+    Route::post('/rejectform1afms', [AdminController::class, 'rejectform1afms'])->name('rejectform1afms');
+    Route::post('/approveform2afms', [AdminController::class, 'approveform2afms'])->name('approveform2afms');
+    Route::post('/rejectform2afms', [AdminController::class, 'rejectform2afms'])->name('rejectform2afms');
+    Route::post('/approveform3afms', [AdminController::class, 'approveform3afms'])->name('approveform3afms');
+    Route::post('/rejectform3afms', [AdminController::class, 'rejectform3afms'])->name('rejectform3afms');
+    Route::post('/approveregcertafms', [AdminController::class, 'approveregcertafms'])->name('approveregcertafms');
+    Route::post('/rejectregcertafms', [AdminController::class, 'rejectregcertafms'])->name('rejectregcertafms');
+    Route::post('/approvecorafms', [AdminController::class, 'approvecorafms'])->name('approvecorafms');
+    Route::post('/rejectcorafms', [AdminController::class, 'rejectcorafms'])->name('rejectcorafms');
+    Route::post('/approveheibankcertafms', [AdminController::class, 'approveheibankcertafms'])->name('approveheibankcertafms');
+    Route::post('/rejectheibankcertafms', [AdminController::class, 'rejectheibankcertafms'])->name('rejectheibankcertafms');
+    Route::post('/approvebankcertafms', [AdminController::class, 'approvebankcertafms'])->name('approvebankcertafms');
+    Route::post('/rejectbankcertafms', [AdminController::class, 'rejectbankcertafms'])->name('rejectbankcertafms');
 });
 
 //pdf shit
