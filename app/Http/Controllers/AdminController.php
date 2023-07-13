@@ -747,44 +747,6 @@ class AdminController extends Controller
         return response()->json($response);
     }
 
-    public function forwardtoafms(Request $request)
-    {
-        $reference_no = $request->reference_no;
-
-        $record = Billing::where('reference_no', $reference_no)->first();
-
-        if (!$record) {
-            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
-        }
-
-        $records = [
-            'billing_status' => 7
-        ];
-
-        $record->update($records);
-
-        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
-    }
-
-    public function forrevision(Request $request)
-    {
-        $reference_no = $request->reference_no;
-
-        $record = Billing::where('reference_no', $reference_no)->first();
-
-        if (!$record) {
-            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
-        }
-
-        $records = [
-            'billing_status' => 6
-        ];
-
-        $record->update($records);
-
-        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
-    }
-
     private function upsertSettings($reference_no, $onsettings = array(), $offsettings = array())
     {
         //mass updates of all the settings that were changed
@@ -807,5 +769,615 @@ class AdminController extends Controller
         }
         Settings::upsert($offs, ['bs_reference_no', 'bs_osf_uid'], ['bs_status']);
     }
+
+    public function forwardtoafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 8
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    public function forrevision(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 7
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    public function approveform1(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 1'], 200);
+    }
+
+    public function rejectform1(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 1'], 200);
+    }
+
+    public function approveform2(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form2_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 2'], 200);
+    }
+
+    public function rejectform2(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form2_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 2'], 200);
+    }
+
+    public function approveform3(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form3_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 3'], 200);
+    }
+
+    public function rejectform3(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form3_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 3'], 200);
+    }
+
+    public function approveregcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Registar Certification'], 200);
+    }
+
+    public function rejectregcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Registar Certification'], 200);
+    }
+
+    public function approvecor(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved COR'], 200);
+    }
+
+    public function rejectcor(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected COR'], 200);
+    }
+
+    public function approveheibankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved HEI Bank Cert'], 200);
+    }
+
+    public function rejectheibankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected HEI Bank Cert'], 200);
+    }
+
+    public function approvebankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 2
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Bank Cert'], 200);
+    }
+
+    public function rejectbankcert(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 3
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Bank Cert'], 200);
+    }
+
+
+    public function readyfordisbursement(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 9
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    public function disbursement(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'billing_status' => 10
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Billing record updated successfully'], 200);
+    }
+
+    public function approveform1afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 1'], 200);
+    }
+
+    public function rejectform1afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form1_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 1'], 200);
+    }
+
+    public function approveform2afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form2_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 2'], 200);
+    }
+
+    public function rejectform2afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form2_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 2'], 200);
+    }
+
+    public function approveform3afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form3_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Billing Form 3'], 200);
+    }
+
+    public function rejectform3afms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'form3_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Billing Form 3'], 200);
+    }
+
+    public function approveregcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Registar Certification'], 200);
+    }
+
+    public function rejectregcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'reg_cert_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Registar Certification'], 200);
+    }
+
+    public function approvecorafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved COR'], 200);
+    }
+
+    public function rejectcorafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'cor_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected COR'], 200);
+    }
+
+    public function approveheibankcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved HEI Bank Cert'], 200);
+    }
+
+    public function rejectheibankcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'hei_bank_cert_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected HEI Bank Cert'], 200);
+    }
+
+    public function approvebankcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Bank Cert'], 200);
+    }
+
+    public function rejectbankcertafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'bank_cert_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Bank Cert'], 200);
+    }
+
     
 }
