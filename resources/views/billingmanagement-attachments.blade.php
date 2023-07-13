@@ -15,7 +15,9 @@
             <div class="btn-group" role="group">
                 <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
                 <input type="hidden" id="billing_status" name="billing_status" value="{{ $billings->billing_status }}">
-                <button id="btn_submit_final_billing" name="btn_submit_final_billing" class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-paper-plane"></i>&nbsp;Submit for
+                <button id="btn_submit_final_billing" name="btn_submit_final_billing"
+                    class="btn btn-outline-primary btn-sm" type="button"><i class="far fa-paper-plane"></i>&nbsp;Submit
+                    for
                     Review</button>
             </div>
         </div>
@@ -38,18 +40,26 @@
                             <form class="mt-4">
                                 <div class="form-group input-style">
                                     <div class="col-lg-3 col-xl-12 d-flex justify-content-between">
-                                        <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i> Billing Summary</h5>
+                                        <h5 class="text-black-50 mb-4"><i class="fas fa-suitcase"></i> Billing Summary
+                                        </h5>
                                         <div class="dropdown no-arrow">
-                                            <button class="btn btn-outline-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
-                                              <i class="far fa-file-pdf"></i> Download Generated Forms
+                                            <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+                                                aria-expanded="false" data-bs-toggle="dropdown" type="button">
+                                                <i class="far fa-file-pdf"></i> Download Generated Forms
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right animated--fade-in">
-                                              <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 1 (Billing Summary)</a>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 2 (Billing Details)</a>
-                                              <a class="dropdown-item" href="#"><i class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i> Form 3 (Billing Details)</a>
+                                                <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
+                                                <a class="dropdown-item" href="{{ Request::url() . '/form1' }}" target="_blank" ><i
+                                                        class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Form 1 (Billing Summary)</a>
+                                                <a class="dropdown-item" href="{{ Request::url() . '/form2' }}" target="_blank"><i
+                                                        class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Form 2 (Billing Details)</a>
+                                                <a class="dropdown-item" href="{{ Request::url() . '/form3' }}" target="_blank"><i
+                                                        class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Form 3 (Billing Details)</a>
                                             </div>
-                                          </div>                                          
+                                        </div>
                                     </div>
                                     <div id="show_summary_for_billing"
                                         class="table-responsive table-style mt-2 show_summary" role="grid"
@@ -98,14 +108,16 @@
                                                             class="badge badge-pill badge-success input-style">Approved
                                                             by UniFAST Billing Unit</span>
                                                     @elseif ($billings->form1_status == 3)
-                                                        <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
                                                             by UniFAST Billing Unit</span>
                                                     @elseif ($billings->form1_status == 4)
                                                         <span
                                                             class="badge badge-pill badge-success input-style">Approved
                                                             by CHED-AFMS</span>
                                                     @elseif ($billings->form1_status == 5)
-                                                        <span class="badge badge-pill badge-danger input-style">Rejected
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
                                                             by CHED-AFMS</span>
                                                     @endif
                                                 </td>
@@ -120,8 +132,9 @@
                                                             title="Attach link for form 1"
                                                             data-bs-target="#mod_upload_link_form1"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->form1_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
@@ -131,30 +144,32 @@
                                                 <td class="text-center">2</td>
                                                 <td class="text-left">Consolidated Billing Details (Form 2)</td>
                                                 <td class="text-left"> <a href="{{ $billings->form2_link }}"
-                                                    target="_blank">{{ $billings->form2_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->form2_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->form2_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->form2_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->form2_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->form2_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->form2_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->form2_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->form2_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->form2_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->form2_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form2_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form2_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->form2_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -166,8 +181,9 @@
                                                             title="Attach link for form 2"
                                                             data-bs-target="#mod_upload_link_form2"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->form2_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
@@ -177,30 +193,32 @@
                                                 <td class="text-center">3</td>
                                                 <td class="text-left">Consolidated Billing Details (Form 3)</td>
                                                 <td class="text-left"> <a href="{{ $billings->form3_link }}"
-                                                    target="_blank">{{ $billings->form3_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->form3_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->form3_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->form3_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->form3_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->form3_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->form3_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->form3_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->form3_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->form3_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->form3_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form3_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->form3_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->form3_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -212,8 +230,9 @@
                                                             title="Attach link for form 3"
                                                             data-bs-target="#mod_upload_link_form3"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->form3_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
@@ -223,30 +242,32 @@
                                                 <td class="text-center">4</td>
                                                 <td class="text-left">Notarized Registrar's Certification</td>
                                                 <td class="text-left"> <a href="{{ $billings->reg_cert_link }}"
-                                                    target="_blank">{{ $billings->reg_cert_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->reg_cert_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->reg_cert_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->reg_cert_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->reg_cert_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->reg_cert_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->reg_cert_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->reg_cert_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->reg_cert_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->reg_cert_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->reg_cert_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->reg_cert_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->reg_cert_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->reg_cert_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -258,8 +279,9 @@
                                                             title="Attach link for registrar's certification"
                                                             data-bs-target="#mod_upload_link_reg_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->reg_cert_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
@@ -270,30 +292,32 @@
                                                 <td class="text-left">Certificate of Registration of Students (CORs)
                                                 </td>
                                                 <td class="text-left"> <a href="{{ $billings->cor_link }}"
-                                                    target="_blank">{{ $billings->cor_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->cor_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->cor_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->cor_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->cor_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->cor_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->cor_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->cor_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->cor_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->cor_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->cor_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->cor_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->cor_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->cor_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -305,8 +329,9 @@
                                                             title="Attach link for student cor's"
                                                             data-bs-target="#mod_upload_link_cor"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->cor_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
@@ -318,30 +343,32 @@
                                                     HEI
                                                 </td>
                                                 <td class="text-left"> <a href="{{ $billings->hei_bank_cert_link }}"
-                                                    target="_blank">{{ $billings->hei_bank_cert_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->hei_bank_cert_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->hei_bank_cert_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->hei_bank_cert_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->hei_bank_cert_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->hei_bank_cert_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->hei_bank_cert_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->hei_bank_cert_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->hei_bank_cert_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->hei_bank_cert_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->hei_bank_cert_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->hei_bank_cert_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->hei_bank_cert_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->hei_bank_cert_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -353,10 +380,11 @@
                                                             title="Attach link for hei bank certification"
                                                             data-bs-target="#mod_upload_link_hei_bank_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
-                                                            href="{{ $billings->hei_bank_cert_link }}" target="_blank"><i
-                                                                class="far fa-eye"></i></a>
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
+                                                            href="{{ $billings->hei_bank_cert_link }}"
+                                                            target="_blank"><i class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -366,30 +394,32 @@
                                                     Bank
                                                 </td>
                                                 <td class="text-left"> <a href="{{ $billings->bank_cert_link }}"
-                                                    target="_blank">{{ $billings->bank_cert_link }}</a></td>
-                                            <td class="text-center">
-                                                @if ($billings->bank_cert_status == 0)
-                                                    <span class="badge badge-pill badge-secondary input-style">No
-                                                        Attachment</span>
-                                                @elseif ($billings->bank_cert_status == 1)
-                                                    <span class="badge badge-pill badge-warning input-style">For
-                                                        Review</span>
-                                                @elseif ($billings->bank_cert_status == 2)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->bank_cert_status == 3)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by UniFAST Billing Unit</span>
-                                                @elseif ($billings->bank_cert_status == 4)
-                                                    <span
-                                                        class="badge badge-pill badge-success input-style">Approved
-                                                        by CHED-AFMS</span>
-                                                @elseif ($billings->bank_cert_status == 5)
-                                                    <span class="badge badge-pill badge-danger input-style">Rejected
-                                                        by CHED-AFMS</span>
-                                                @endif
-                                            </td>
+                                                        target="_blank">{{ $billings->bank_cert_link }}</a></td>
+                                                <td class="text-center">
+                                                    @if ($billings->bank_cert_status == 0)
+                                                        <span class="badge badge-pill badge-secondary input-style">No
+                                                            Attachment</span>
+                                                    @elseif ($billings->bank_cert_status == 1)
+                                                        <span class="badge badge-pill badge-warning input-style">For
+                                                            Review</span>
+                                                    @elseif ($billings->bank_cert_status == 2)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->bank_cert_status == 3)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by UniFAST Billing Unit</span>
+                                                    @elseif ($billings->bank_cert_status == 4)
+                                                        <span
+                                                            class="badge badge-pill badge-success input-style">Approved
+                                                            by CHED-AFMS</span>
+                                                    @elseif ($billings->bank_cert_status == 5)
+                                                        <span
+                                                            class="badge badge-pill badge-danger input-style">Rejected
+                                                            by CHED-AFMS</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-center"></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
@@ -401,8 +431,9 @@
                                                             title="Attach link for bank certification"
                                                             data-bs-target="#mod_upload_link_bank_cert"><i
                                                                 class="fas fa-paperclip"></i></button>
-                                                        <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
-                                                            data-placement="bottom" title="View billing submission"
+                                                        <a class="btn btn-outline-info" role="button"
+                                                            data-bs-tooltip="" data-placement="bottom"
+                                                            title="View billing submission"
                                                             href="{{ $billings->bank_cert_link }}" target="_blank"><i
                                                                 class="far fa-eye"></i></a>
                                                     </div>
