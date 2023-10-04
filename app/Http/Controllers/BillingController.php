@@ -490,7 +490,7 @@ SUM(
     public function fetchTempStudent(Request $request)
     {
 
-        // $hei_uii = Auth::user()->hei_uii;
+        $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
@@ -538,31 +538,31 @@ SUM(
                 'students_sub.stud_status',
                 DB::raw($this->carlo_columns)
             )
-            ->leftJoin('tbl_other_school_fees', function ($join) {
+            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                    ->on('tbl_other_school_fees.hei_uii', '=', 'students_sub.hei_uii')
+                    ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
             })
             // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            ->leftJoin('tbl_billing_settings', function ($join) {
-                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-            })
-            ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-            })
-            ->where(function ($query) {
-                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                    ->where('tbl_billing_settings.bs_status', '=', 1)
-                    ->orWhere(function ($query) {
-                        $query->whereNull('tbl_billing_stud_settings.bs_status')
-                            ->where('tbl_billing_settings.bs_status', '=', 1);
-                    });
-            })
+            // ->leftJoin('tbl_billing_settings', function ($join) {
+            //     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+            //         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            // })
+            // ->leftJoin('tbl_billing_stud_settings', function ($join) {
+            //     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            //         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+            //         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            // })
+            // ->where(function ($query) {
+            //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+            //         ->where('tbl_billing_settings.bs_status', '=', 1)
+            //         ->orWhere(function ($query) {
+            //             $query->whereNull('tbl_billing_stud_settings.bs_status')
+            //                 ->where('tbl_billing_settings.bs_status', '=', 1);
+            //         });
+            // })
             //!kailangan lagyan dito ng para sa mga pumasa lang
             ->groupBy('students_sub.uid')->get();
 
@@ -642,11 +642,12 @@ SUM(
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
+        $hei_uii = Auth::user()->hei_uii;
         // $billing_record = Billing::where('reference_no', $reference_no)->first();
 
         // $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
-        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result','!=','failed')->count();
+        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no',$reference_no)->count();
         // if ($billing_record->total_amount < 1) {
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
@@ -655,10 +656,10 @@ SUM(
                 DB::raw($this->carlo_columns),
                 DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
             )
-            ->join('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+            ->join('tbl_other_school_fees', function ($join) use ($hei_uii) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
                     ->on('tbl_other_school_fees.form', '=', DB::raw(3));
             })
@@ -683,24 +684,24 @@ SUM(
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
             })
             // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            ->leftJoin('tbl_billing_settings', function ($join) {
-                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-            })
-            ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-            })
-            ->where(function ($query) {
-                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                    // ->andWhere('tbl_billing_settings.bs_status', '=', 1)
-                    ->where('tbl_billing_settings.bs_status', '=', 1)
-                    ->orWhere(function ($query) {
-                        $query->whereNull('tbl_billing_stud_settings.bs_status')
-                            ->where('tbl_billing_settings.bs_status', '=', 1);
-                    });
-            })
+            // ->leftJoin('tbl_billing_settings', function ($join) {
+            //     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+            //         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            // })
+            // ->leftJoin('tbl_billing_stud_settings', function ($join) {
+            //     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+            //         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+            //         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            // })
+            // ->where(function ($query) {
+            //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+            //         // ->andWhere('tbl_billing_settings.bs_status', '=', 1)
+            //         ->where('tbl_billing_settings.bs_status', '=', 1)
+            //         ->orWhere(function ($query) {
+            //             $query->whereNull('tbl_billing_stud_settings.bs_status')
+            //                 ->where('tbl_billing_settings.bs_status', '=', 1);
+            //         });
+            // })
             ->groupBy('students_sub.uid');
 
         $union = $applicants->union($students);
@@ -1954,263 +1955,263 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $id = $request->reference_no;
         $data = Billing::where('reference_no', $id)
-        ->first();
+            ->first();
         return response()->json($data);
     }
 
     public function updatelinkform1(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_form1' => 'nullable|url',
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'link_form1' => 'nullable|url',
+        ]);
 
-    if ($validator->fails()) {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
+
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'form1_link' => $request->link_form1,
+            'form1_status' => ($request->link_form1 === null || $request->link_form1 === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
+            'status' => 200,
+        ]);
     }
 
+    public function updatelinkform2(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_form2' => 'nullable|url',
+        ]);
 
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    if (!$record) {
+
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
+
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'form2_link' => $request->link_form2,
+            'form2_status' => ($request->link_form2 === null || $request->link_form2 === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
+            'status' => 200,
+        ]);
     }
 
-    $recordData = [
-        'form1_link' => $request->link_form1,
-        'form1_status' => ($request->link_form1 === null || $request->link_form1 === 0) ? '0' : '1',
-    ];
+    public function updatelinkform3(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_form3' => 'nullable|url',
+        ]);
 
-    $record->update($recordData);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    return response()->json([
-        'status' => 200,
-    ]);
-}
 
-public function updatelinkform2(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_form2' => 'nullable|url',
-    ]);
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
 
-    if ($validator->fails()) {
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'form3_link' => $request->link_form3,
+            'form3_status' => ($request->link_form3 === null || $request->link_form3 === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
+            'status' => 200,
+        ]);
     }
 
+    public function updatelinknrc(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_reg_cert' => 'nullable|url',
+        ]);
 
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    if (!$record) {
+
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
+
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'reg_cert_link' => $request->link_reg_cert,
+            'reg_cert_status' => ($request->link_reg_cert === null || $request->link_reg_cert === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
+            'status' => 200,
+        ]);
     }
 
-    $recordData = [
-        'form2_link' => $request->link_form2,
-        'form2_status' => ($request->link_form2 === null || $request->link_form2 === 0) ? '0' : '1',
-    ];
+    public function updatelinkcor(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_cor' => 'nullable|url',
+        ]);
 
-    $record->update($recordData);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    return response()->json([
-        'status' => 200,
-    ]);
-}
 
-public function updatelinkform3(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_form3' => 'nullable|url',
-    ]);
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
 
-    if ($validator->fails()) {
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'cor_link' => $request->link_cor,
+            'cor_status' => ($request->link_cor === null || $request->link_cor === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
+            'status' => 200,
+        ]);
     }
 
+    public function updatelinkheibankcert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_hei_bank_cert' => 'nullable|url',
+        ]);
 
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    if (!$record) {
+
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
+
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'hei_bank_cert_link' => $request->link_hei_bank_cert,
+            'hei_bank_cert_status' => ($request->link_hei_bank_cert === null || $request->link_hei_bank_cert === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
+            'status' => 200,
+        ]);
     }
 
-    $recordData = [
-        'form3_link' => $request->link_form3,
-        'form3_status' => ($request->link_form3 === null || $request->link_form3 === 0) ? '0' : '1',
-    ];
+    public function updatelinkbankcert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_bank_cert' => 'nullable|url',
+        ]);
 
-    $record->update($recordData);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-    return response()->json([
-        'status' => 200,
-    ]);
-}
 
-public function updatelinknrc(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_reg_cert' => 'nullable|url',
-    ]);
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
 
-    if ($validator->fails()) {
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'bank_cert_link' => $request->link_bank_cert,
+            'bank_cert_status' => ($request->link_bank_cert === null || $request->link_bank_cert === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
         return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
+            'status' => 200,
+        ]);
     }
 
-
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
-
-    if (!$record) {
-        return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
-    }
-
-    $recordData = [
-        'reg_cert_link' => $request->link_reg_cert,
-        'reg_cert_status' => ($request->link_reg_cert === null || $request->link_reg_cert === 0) ? '0' : '1',
-    ];
-
-    $record->update($recordData);
-
-    return response()->json([
-        'status' => 200,
-    ]);
-}
-    
-public function updatelinkcor(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_cor' => 'nullable|url',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
-    }
-
-
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
-
-    if (!$record) {
-        return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
-    }
-
-    $recordData = [
-        'cor_link' => $request->link_cor,
-        'cor_status' => ($request->link_cor === null || $request->link_cor === 0) ? '0' : '1',
-    ];
-
-    $record->update($recordData);
-
-    return response()->json([
-        'status' => 200,
-    ]);
-}
-
-public function updatelinkheibankcert(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_hei_bank_cert' => 'nullable|url',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
-    }
-
-
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
-
-    if (!$record) {
-        return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
-    }
-
-    $recordData = [
-        'hei_bank_cert_link' => $request->link_hei_bank_cert,
-        'hei_bank_cert_status' => ($request->link_hei_bank_cert === null || $request->link_hei_bank_cert === 0) ? '0' : '1',
-    ];
-
-    $record->update($recordData);
-
-    return response()->json([
-        'status' => 200,
-    ]);
-}
-
-public function updatelinkbankcert(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'link_bank_cert' => 'nullable|url',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => 400,
-            'errors' => $validator->errors(),
-        ], 400);
-    }
-
-
-    $id = $request->reference_no;
-    $record = Billing::where('reference_no', $id)->first();
-
-    if (!$record) {
-        return response()->json([
-            'status' => 404,
-            'message' => 'Record not found.',
-        ], 404);
-    }
-
-    $recordData = [
-        'bank_cert_link' => $request->link_bank_cert,
-        'bank_cert_status' => ($request->link_bank_cert === null || $request->link_bank_cert === 0) ? '0' : '1',
-    ];
-
-    $record->update($recordData);
-
-    return response()->json([
-        'status' => 200,
-    ]);
-}
-
-public function submitbilling(Request $request)
+    public function submitbilling(Request $request)
     {
         $reference_no = $request->reference_no;
 
@@ -2228,5 +2229,4 @@ public function submitbilling(Request $request)
 
         return response()->json(['message' => $request->reference_no . ' Billing has been submitted for review'], 200);
     }
-
 }
