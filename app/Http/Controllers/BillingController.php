@@ -526,6 +526,7 @@ SUM(
                 'students_sub.uid',
                 'students_sub.app_id',
                 'students_sub.hei_name',
+                'students_sub.hei_uii',
                 'students_sub.stud_lname',
                 'students_sub.stud_fname',
                 'students_sub.stud_mname',
@@ -539,6 +540,7 @@ SUM(
             )
             ->leftJoin('tbl_other_school_fees', function ($join) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.hei_uii', '=', 'students_sub.hei_uii')
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
