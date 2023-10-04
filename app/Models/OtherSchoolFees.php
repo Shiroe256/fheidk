@@ -24,6 +24,7 @@ class OtherSchoolFees extends Model implements Auditable
         'category',
         'coverage',
         'amount',
-        'is_optional'
+        'is_optional',
+        'form'
     ];
 }

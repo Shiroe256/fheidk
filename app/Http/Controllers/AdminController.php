@@ -650,6 +650,7 @@ class AdminController extends Controller
                     'category' => $data[8],
                     'coverage' => $data[9],
                     'amount' => $data[10],
+                    'form' => $data[11],
                 ];
             }
             OtherSchoolFees::insert($batch);
