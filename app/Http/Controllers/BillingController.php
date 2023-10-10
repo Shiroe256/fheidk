@@ -27,6 +27,7 @@ use \NumberFormatter;
 use App\Jobs\computeFees;
 
 use function PHPUnit\Framework\isNull;
+use function Symfony\Component\HttpFoundation\getStatusCode;
 use function Symfony\Component\HttpFoundation\isEmpty;
 
 class BillingController extends Controller
@@ -487,12 +488,8 @@ SUM(
         return $reference_number;
     }
 
-    public function fetchTempStudent(Request $request)
+    private function getTotalGrantees($search, $reference_no)
     {
-
-        $hei_uii = Auth::user()->hei_uii;
-        $reference_no  = $request->reference_no;
-        $search = $request->search['value'];
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
                 $query->where('stud_fname', 'like', '%' . $search . '%')
@@ -503,12 +500,13 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             })
-            // ->where('exam_result','!=','Failed')
             ->count();
+        return $total;
+    }
 
-        // $temporary_billing_info = new TemporaryBilling();
-        //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+    private function getStudentSubquery($search, $reference_no, $start = "", $length = "")
+    {
+        $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
                 $query->where('stud_fname', 'like', '%' . $search . '%')
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
@@ -518,8 +516,11 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             })
-            ->skip($request->start)->take($request->length);
-        //dito jinojoin ung information about the fees and computation
+            ->skip($start)->take($length);
+        return $student_sub;
+    }
+    private function joinStudentFees($students_sub) {
+        $hei_uii = Auth::user()->hei_uii;
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
@@ -563,31 +564,24 @@ SUM(
             //                 ->where('tbl_billing_settings.bs_status', '=', 1);
             //         });
             // })
-            //!kailangan lagyan dito ng para sa mga pumasa lang
             ->groupBy('students_sub.uid')->get();
+        return $students;
+    }
+    public function fetchTempStudent(Request $request)
+    {
 
-        // $forFeeUpdate = [];
-        // foreach ($students as $key => $student) {
-        //     $forFeeUpdate[] = ['uid' => $student->uid, 'total_fees' => $student->total_fees];
-        // }
-        // // $temporary_billing_info->upsert($forFeeUpdate, ['uid'], ['total_fees']);
+        $hei_uii = Auth::user()->hei_uii;
+        $reference_no  = $request->reference_no;
+        $search = $request->search['value'];
+        $total = $this->getTotalGrantees($search, $reference_no);
 
-        // if ($total > 0) {
-        //     $idColumn = 'uid';
-
-        //     $caseStatements = collect($forFeeUpdate)->map(function ($row) use ($idColumn) {
-        //         return "WHEN {$row[$idColumn]} THEN '{$row['total_fees']}'";
-        //     })->implode(' ');
-
-        //     $idValues = implode(',', array_column($forFeeUpdate, $idColumn));
-
-        //     $query = "UPDATE tbl_billing_details_temp SET total_fees = (CASE {$idColumn} {$caseStatements} END) WHERE {$idColumn} IN ({$idValues})";
-
-        //     // echo $query;
-
-        //     DB::statement($query);
-        // }
-
+        //students sub query. Dito ung pagination
+        $students_sub = $this->getStudentSubquery($search, $reference_no, $request->start, $request->length);
+        //dito jinojoin ung information about the fees and computation
+        $students = $this->joinStudentFees($students_sub);
+            
+            //!kailangan lagyan dito ng para sa mga pumasa lang
+  
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
         // tbl_billing_settings.bs_osf_uid,
@@ -647,7 +641,7 @@ SUM(
 
         // $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
 
-        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no',$reference_no)->count();
+        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no', $reference_no)->count();
         // if ($billing_record->total_amount < 1) {
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
@@ -658,7 +652,7 @@ SUM(
             )
             ->join('tbl_other_school_fees', function ($join) use ($hei_uii) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+                    ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
                     ->on('tbl_other_school_fees.form', '=', DB::raw(3));
