@@ -34,7 +34,7 @@ class validateTempStudentFields
 
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
-        $courses = array_column(OtherSchoolFees::select('course_enrolled')->where('hei_uii', '07174')->groupBy('hei_uii', 'course_enrolled')->get()->toArray(),'course_enrolled'); 
+        $courses = array_column(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get()->toArray(),'course_enrolled'); 
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $key => $tempstudent) {
             if (!in_array($tempstudent->degree_course_id, $courses)) return response('Invalid Course in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF', 400);
