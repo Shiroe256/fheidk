@@ -507,7 +507,7 @@ SUM(
     { 
         $reference_no = '07-07174-2025-2026-1';
         $students_sub = $this->getStudentSubquery($reference_no);
-        $students = $this->joinStudentFees($students_sub)->get();
+        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->get()->toArray();
         print_r($students);
     }
     private function getStudentSubquery($reference_no, $search = "", $start = "", $length = "")
