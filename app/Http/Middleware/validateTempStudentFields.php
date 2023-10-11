@@ -41,7 +41,7 @@ class validateTempStudentFields
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
         }
-        // return $next($request);
+        return $next($request);
     }
 
     private function validateTempStudentFields($tempstudent)
