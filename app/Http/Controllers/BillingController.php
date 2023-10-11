@@ -488,7 +488,7 @@ SUM(
         return $reference_number;
     }
 
-    private function getTotalGrantees($search, $reference_no)
+    private function getTotalGrantees($reference_no, $search = "")
     {
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
@@ -503,8 +503,14 @@ SUM(
             ->count();
         return $total;
     }
-
-    private function getStudentSubquery($search, $reference_no, $start = "", $length = "")
+    public function Test()
+    { 
+        $reference_no = '07-07174-2025-2026-1';
+        $students_sub = $this->getStudentSubquery($reference_no);
+        $students = $this->joinStudentFees($students_sub)->get();
+        print_r($students);
+    }
+    private function getStudentSubquery($reference_no, $search = "", $start = "", $length = "")
     {
         $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
@@ -519,7 +525,8 @@ SUM(
             ->skip($start)->take($length);
         return $student_sub;
     }
-    private function joinStudentFees($students_sub) {
+    private function joinStudentFees($students_sub)
+    {
         $hei_uii = Auth::user()->hei_uii;
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
@@ -545,43 +552,42 @@ SUM(
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
-            })
-            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            // ->leftJoin('tbl_billing_settings', function ($join) {
-            //     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-            //         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-            // })
-            // ->leftJoin('tbl_billing_stud_settings', function ($join) {
-            //     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            //         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-            //         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-            // })
-            // ->where(function ($query) {
-            //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-            //         ->where('tbl_billing_settings.bs_status', '=', 1)
-            //         ->orWhere(function ($query) {
-            //             $query->whereNull('tbl_billing_stud_settings.bs_status')
-            //                 ->where('tbl_billing_settings.bs_status', '=', 1);
-            //         });
-            // })
-            ->groupBy('students_sub.uid')->get();
+            });
+        // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        // ->leftJoin('tbl_billing_settings', function ($join) {
+        //     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+        //         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+        // })
+        // ->leftJoin('tbl_billing_stud_settings', function ($join) {
+        //     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        //         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+        //         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+        // })
+        // ->where(function ($query) {
+        //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+        //         ->where('tbl_billing_settings.bs_status', '=', 1)
+        //         ->orWhere(function ($query) {
+        //             $query->whereNull('tbl_billing_stud_settings.bs_status')
+        //                 ->where('tbl_billing_settings.bs_status', '=', 1);
+        //         });
+        // })
+        // ->groupBy('students_sub.uid')->get();
         return $students;
     }
     public function fetchTempStudent(Request $request)
     {
 
-        $hei_uii = Auth::user()->hei_uii;
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
-        $total = $this->getTotalGrantees($search, $reference_no);
+        $total = $this->getTotalGrantees($reference_no, $search);
 
         //students sub query. Dito ung pagination
-        $students_sub = $this->getStudentSubquery($search, $reference_no, $request->start, $request->length);
+        $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
+        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->get();
         //dito jinojoin ung information about the fees and computation
-        $students = $this->joinStudentFees($students_sub);
-            
-            //!kailangan lagyan dito ng para sa mga pumasa lang
-  
+
+        //!kailangan lagyan dito ng para sa mga pumasa lang
+
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
         // tbl_billing_settings.bs_osf_uid,
@@ -637,11 +643,9 @@ SUM(
     {
         $reference_no  = $request->reference_no;
         $hei_uii = Auth::user()->hei_uii;
-        // $billing_record = Billing::where('reference_no', $reference_no)->first();
 
-        // $data['hei_summary'][] = ['hei_name' => $billing_record->hei->hei_name, 'total_beneficiaries' => $billing_record->total_beneficiaries, 'total_amount' => $billing_record->total_amount];
-
-        $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no', $reference_no)->count();
+        $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
+        // $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no', $reference_no)->count();
         // if ($billing_record->total_amount < 1) {
         $applicants = DB::table('tbl_billing_details_temp as students_sub')
             ->select(
