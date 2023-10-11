@@ -37,7 +37,7 @@ class validateTempStudentFields
         $courses = array_column(OtherSchoolFees::select('course_enrolled')->where('hei_uii', '07174')->groupBy('hei_uii', 'course_enrolled')->get()->toArray(),'course_enrolled'); 
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $key => $tempstudent) {
-            if (!in_array($tempstudent->degree_course_id, $courses)) return response('Invalid Course in Row ' . $key + 1, 400);
+            if (!in_array($tempstudent->degree_course_id, $courses)) return response('Invalid Course in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF', 400);
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
         }
