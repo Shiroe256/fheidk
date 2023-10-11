@@ -107,9 +107,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
 
 //test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test', function () {
-    return view('afms/dashboard');
-});
+Route::get('/test', [BillingController::class, 'Test'])->name('Test');
 
 //Billing Checker
 Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
