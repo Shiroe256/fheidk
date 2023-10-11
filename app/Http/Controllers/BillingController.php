@@ -507,20 +507,11 @@ SUM(
     {
         $reference_no = '07-07174-2025-2026-1';
         $search = '';
-        $students_sub = $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->where(function ($query) use ($search) {
-                $query->where('stud_fname', 'like', '%' . $search . '%')
-                    ->orWhere('stud_lname', 'like', '%' . $search . '%')
-                    ->orWhere('stud_mname', 'like', '%' . $search . '%');
-            })
-            ->where(function ($query) use ($search) {
-                $query->where('exam_result', '!=', 'Failed')
-                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-            });
+        $students_sub = $this->getStudentSubquery($reference_no);
         $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->get()->toArray();
         print_r($students);
     }
-    private function getStudentSubquery($reference_no, $search = "", $start = "", $length = "")
+    private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = 0)
     {
         $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
