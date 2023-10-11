@@ -511,7 +511,7 @@ SUM(
         $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->get()->toArray();
         print_r($students);
     }
-    private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = 0)
+    private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = PHP_INT_MAX)
     {
         $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
