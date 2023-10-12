@@ -482,6 +482,36 @@ SUM(
         $this->middleware(['auth', 'verified']);
     }
 
+    public function fetchStudentFees($uid)
+    {
+        $hei_uii = Auth::user()->hei_uii;
+        $students_sub = DB::table('tbl_billing_details_temp')->where('uid', '=', $uid);
+        $student = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            ->mergeBindings($students_sub)
+            ->select(
+                'students_sub.uid',
+                'students_sub.app_id',
+                'students_sub.hei_name',
+                'students_sub.hei_uii',
+                'students_sub.stud_lname',
+                'students_sub.stud_fname',
+                'students_sub.stud_mname',
+                'students_sub.fhe_award_no',
+                'students_sub.degree_program',
+                'students_sub.semester',
+                'students_sub.year_level',
+                'students_sub.remarks',
+                'students_sub.stud_status',
+                DB::raw($this->carlo_columns)
+            )
+            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+            })->get()->toArray();
+        echo json_encode($student);
+    }
     private function generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
     {
         $reference_number = $hei_psg_region . "-" . $hei_sid . "-" . $ac_year . "-" . $semester . "-" . $tranche;
@@ -512,7 +542,7 @@ SUM(
     }
     private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = PHP_INT_MAX)
     {
-        $student_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
                 $query->where('stud_fname', 'like', '%' . $search . '%')
                     ->orWhere('stud_lname', 'like', '%' . $search . '%')
@@ -523,7 +553,7 @@ SUM(
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             })
             ->skip($start)->take($length);
-        return $student_sub;
+        return $students_sub;
     }
     private function joinStudentFees($students_sub)
     {

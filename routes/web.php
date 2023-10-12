@@ -107,7 +107,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
 
 //test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test', [BillingController::class, 'Test'])->name('Test');
+Route::get('/test/{uid}', [BillingController::class, 'fetchStudentFees'])->name('Test');
 
 //Billing Checker
 Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
