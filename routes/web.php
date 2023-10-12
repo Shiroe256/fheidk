@@ -57,7 +57,7 @@ Route::get('/billingmanagementattachments/{ref_no?}/form2', [PdfController::clas
 Route::get('/billingmanagementattachments/{ref_no?}/form3', [PdfController::class, 'generatePDFForm3']);
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
-
+Route::get('/fees/{uid}', [BillingController::class, 'fetchStudentFees'])->name('fetchStudentFees'); //student fees
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');
 Route::get('dashboard', 'App\Http\Controllers\Pagescontroller@dashboard')->middleware('auth')->name('dashboard');
 Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('profile')->middleware('auth');
@@ -107,7 +107,6 @@ Route::middleware(['throttle:20,1'])->group(function () {
 
 //test
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
-Route::get('/test/{uid}', [BillingController::class, 'fetchStudentFees'])->name('Test');
 
 //Billing Checker
 Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');

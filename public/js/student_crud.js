@@ -20,6 +20,7 @@ const btnUploadCloseButton = document.getElementById("btn_closeupload");
 const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
+const mod_student_fees = new bootstrap.Modal(document.getElementById('mod_studfees'), { keyboard: false, backdrop: 'static' });
 const btn_upload = document.getElementById("btn_upload");
 const btn_finalize_billing = document.getElementById("btn_finalize");
 const lbl_upload_status = document.getElementById("upload_status");
@@ -40,6 +41,34 @@ function trimValues(obj) {
     } else if (typeof obj[key] === 'object') {
       trimValues(obj[key]);
     }
+  }
+}
+
+async function showStudentFees(studid) {
+  try {
+    const response = await fetch(window.location.origin + '/fees/' + studid, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log('Response:', responseData);
+      document.getElementById('tuition_fee').innerHTML = responseData;
+      mod_student_fees.show();
+    } else {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+  } catch (error) {
+    // Handle any errors that occurred during the request
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      html: error.message
+    });
   }
 }
 
@@ -606,18 +635,6 @@ function getStudentSettings(student_uid) {
   req_get_stud_settings.send(json);
 }
 
-function getStudentFees(bs_student) {
-  // req_get_stud_fees.open("POST", "/get-studentfees");
-  // req_get_stud_fees.setRequestHeader("X-Requested-With", 'XMLHttpRequest');
-  // req_get_stud_fees.setRequestHeader("X-CSRF-TOKEN", csrf);
-  // req_get_stud_fees.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  tbl_students.ajax.reload();
-  // let json = JSON.stringify({
-  //   bs_student: bs_student
-  // });
-  // req_get_stud_fees.send(json);
-}
-
 function editStudentsSettings() {
   const chk_students = document.querySelectorAll(".chk_student:checked");
   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
@@ -677,6 +694,14 @@ btn_edit_students.onclick = function () {
 function setup_Events() {
   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
   const student_fees = document.querySelectorAll('.student_fees');
+  const fee_buttons = document.querySelectorAll('.fee');
+
+  fee_buttons.forEach(element => {
+    element.onclick = function () {
+      showStudentFees(element.id.substring(4));
+    };
+  });
+
   student_fees.forEach(element => {
     element.onclick = function () {
       element.classList.add("skeleton");
@@ -2217,7 +2242,10 @@ function fetchTempStudent() {
         }
       },
       {
-        data: 'total_fee'
+        data: 'total_fee', render: function (data, type, row, meta) {
+          return type === 'display' ?
+            '<div class="fee" id="fee_' + data + '">' + data + '</div>' : data
+        }
       },
       {
         data: "uid", render: function (data, type, row, meta) {
