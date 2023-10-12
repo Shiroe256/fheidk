@@ -505,9 +505,9 @@ SUM(
     }
     public function Test()
     {
-        $reference_no = '07-07174-2025-2026-1';
+        $reference_no = '04-04280-2025-2026-1';
         $students_sub = $this->getStudentSubquery($reference_no);
-        $students = $this->joinStudentFees($students_sub)->where('students_sub.uid', '=', 897)->get();
+        $students = $this->joinStudentFees($students_sub)->get();
         echo json_encode($students);
     }
     private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = PHP_INT_MAX)
