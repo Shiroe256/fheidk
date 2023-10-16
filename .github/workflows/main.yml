@@ -25,5 +25,5 @@ jobs:
         port: 22
         script: |
           cd /www/wwwroot/dev3.unifast.gov.ph
-          git pull origin main
+          git pull
           git status
