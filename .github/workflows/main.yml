@@ -15,10 +15,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:   
-    - name: Set who I am
-      run: |
-        git config --global user.email "ictunit.unifast@ched.gov.ph"
-        git config --global user.name "unifastph"
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
@@ -28,6 +24,8 @@ jobs:
         key: ${{ secrets.DEVSSHKEY }}
         port: 22
         script: |
+          git config --global user.email "ictunit.unifast@ched.gov.ph"
+          git config --global user.name "unifastph"
           cd /www/wwwroot/dev3.unifast.gov.ph
           git pull
           git status
