@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:       
+    steps:   
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
@@ -24,6 +24,11 @@ jobs:
         key: ${{ secrets.DEVSSHKEY }}
         port: 22
         script: |
+          cd .ssh
+          eval "$(ssh-agent -s)"
+          ssh-add unifastdev
+          git config --global user.email "ictunit.unifast@ched.gov.ph"
+          git config --global user.name "unifastph"
           cd /www/wwwroot/dev3.unifast.gov.ph
-          git pull origin main
+          git pull
           git status
