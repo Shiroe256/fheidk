@@ -30,5 +30,5 @@ jobs:
           git config --global user.email "ictunit.unifast@ched.gov.ph"
           git config --global user.name "unifastph"
           cd /www/wwwroot/dev3.unifast.gov.ph
-          git pull
+          sudo git pull
           git status
