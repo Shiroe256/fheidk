@@ -2244,7 +2244,7 @@ function fetchTempStudent() {
       {
         data: 'total_fee', render: function (data, type, row, meta) {
           return type === 'display' ?
-            '<div class="fee" id="fee_' + data + '">' + data + '</div>' : data
+            '<div class="fee" id="fee_' + row[0] + '"><strong>' + data + '</strong></div>' : data
         }
       },
       {
