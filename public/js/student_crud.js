@@ -67,20 +67,20 @@ async function showStudentFees(studid) {
       //acads
       //tuition
       document.getElementById('tuition_fee').innerHTML = fees.tuition_fee;
-      document.getElementById('academic_unit').innerHTML = fees.academic_unit;
-      document.getElementById('lab_unit').innerHTML = fees.lab_unit;
+      // document.getElementById('academic_unit').innerHTML = fees.academic_unit;
+      // document.getElementById('lab_unit').innerHTML = fees.lab_unit;
       document.getElementById('laboratory_fee').innerHTML = fees.laboratory_fee;
-      document.getElementById('comp_lab_unit').innerHTML = fees.comp_lab_unit;
+      // document.getElementById('comp_lab_unit').innerHTML = fees.comp_lab_unit;
       //nstp
       document.getElementById('nstp_fee').innerHTML = fees.nstp_fee;
-      document.getElementById('nstp_unit').innerHTML = fees.nstp_unit;
+      // document.getElementById('nstp_unit').innerHTML = fees.nstp_unit;
       //tosf
       document.getElementById('athletic_fee').innerHTML = fees.athletic_fee;
       document.getElementById('computer_fee').innerHTML = fees.computer_fee;
       document.getElementById('cultural_fee').innerHTML = fees.cultural_fee;
       document.getElementById('development_fee').innerHTML = fees.development_fee;
       document.getElementById('entrance_and_admission_fee').innerHTML = fees.entrance_and_admission_fee;
-      document.getElementById('total_exam_taken').innerHTML = fees.total_exam_taken;
+      // document.getElementById('total_exam_taken').innerHTML = fees.total_exam_taken;
       document.getElementById('guidance_fee').innerHTML = fees.guidance_fee;
       document.getElementById('handbook_fee').innerHTML = fees.handbook_fee;
       document.getElementById('library_fee').innerHTML = fees.library_fee;
