@@ -694,13 +694,6 @@ btn_edit_students.onclick = function () {
 function setup_Events() {
   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
   const student_fees = document.querySelectorAll('.student_fees');
-  const fee_buttons = document.querySelectorAll('.fee');
-
-  fee_buttons.forEach(element => {
-    element.onclick = function () {
-      showStudentFees(element.id.substring(4));
-    };
-  });
 
   student_fees.forEach(element => {
     element.onclick = function () {
@@ -2199,10 +2192,8 @@ function fetchTempStudent() {
     serverSide: true,
     columns: [
       {
-        data: 'uid',
-        render: function (data, type) {
-          return type === 'display' ?
-            '<input type="checkbox" class="chk_student" id="' + data + '" name="student_checkbox" value="' + data + '">' : data
+        data: 'uid', render: function (data, type, row, meta) {
+          return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
         }
       },
       {
@@ -2243,7 +2234,7 @@ function fetchTempStudent() {
       },
       {
         data: 'total_fee', render: function (data, type, row, meta) {
-          return '<div class="fee" id="fee_' + row[0] + '"><strong>' + data + '</strong></div>'
+          return '<div class="fee" id="fee_' + row[0] + '"><strong>' + data.toLocaleString('en-US', {maximumFractionDigits:2}) + '</strong></div>'
         }
       },
       {
