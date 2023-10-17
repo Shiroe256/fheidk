@@ -2253,7 +2253,7 @@ function fetchTempStudent() {
       },
       {
         data: 'uid', render: function (data) {
-          '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>';
         }
       }
     ],
