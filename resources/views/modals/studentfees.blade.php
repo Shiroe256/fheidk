@@ -5,8 +5,10 @@
                 <h6 class="modal-title">UPLOAD FHE TEMPLATE</h6>
             </div>
             <div class="modal-body">
-                <h2 id="studfee_stud_name"></h2>
-                <h3 id="studfee_enrollment_info"></h3>
+                <div class="row">
+                    <h2 id="studfee_stud_name"></h2>
+                    <h3 id="studfee_enrollment_info"></h3>
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <table>
@@ -59,7 +61,6 @@
                                     <td>School ID</td>
                                     <td id="studfee_school_id_fee"></td>
                                 </tr>
-                                <hr>
                             </tbody>
                         </table>
                     </div>
