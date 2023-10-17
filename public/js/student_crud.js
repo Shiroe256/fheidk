@@ -2234,8 +2234,8 @@ function fetchTempStudent() {
       },
       {
         data: 'total_fee', render: function (data, type, row, meta) {
-          console.log(row);
-          return '<div class="fee" id="fee_' + row[0] + '"><strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong></div>'
+          let uid = row.uid;
+          return '<div class="fee" id="fee_' + uid + '"><strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong></div>'
         }
       },
       {
