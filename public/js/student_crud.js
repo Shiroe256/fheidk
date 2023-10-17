@@ -2243,7 +2243,7 @@ function fetchTempStudent() {
       },
       {
         data: 'total_fee', render: function (data, type, row, meta) {
-            '<div class="fee" id="fee_' + row[0] + '"><strong>' + data + '</strong></div>'
+          return '<div class="fee" id="fee_' + row[0] + '"><strong>' + data + '</strong></div>'
         }
       },
       {
