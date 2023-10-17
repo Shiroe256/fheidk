@@ -1,6 +1,9 @@
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_studfees">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-header">
+            <h6 class="modal-title">UPLOAD FHE TEMPLATE</h6>
+        </div>
+        <div class="modal-body">
             <table>
                 <tbody>
                     <tr>
@@ -65,6 +68,9 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="modal-footer">
+            <button id="btn_closeupload" class="btn btn-light card-button-style" type="button">Close</button>
         </div>
     </div>
 </div>
