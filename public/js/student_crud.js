@@ -2267,10 +2267,10 @@ function fetchTempStudent() {
     },
     lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
-      // let fee = document.getElementById('fee_' + data.uid);
-      // fee.onclick = function () {
-      //   showStudentFees('fee_' + data.uid);
-      // };
+      var fee = row.querySelector('#fee_' + data.uid);
+      fee.onclick = function () {
+        showStudentFees(data.uid);
+      };
       // Assuming your server response is in JSON format and has an 'id' property
       // var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
       // var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
