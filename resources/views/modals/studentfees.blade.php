@@ -4,14 +4,14 @@
             <div class="modal-header">
                 <h6 class="modal-title">UPLOAD FHE TEMPLATE</h6>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-3">
                 <div class="row">
                     <h2 id="studfee_stud_name"></h2>
                     <h3 id="studfee_enrollment_info"></h3>
                 </div>
-                <div class="row">
+                <div class="row">   
                     <div class="col-6">
-                        <table>
+                        <table class="table">
                             <tbody>
                                 <tr>
                                     <td>Entrance and Admission Fees</td>
@@ -65,7 +65,7 @@
                         </table>
                     </div>
                     <div class="col-6">
-                        <table>
+                        <table class="table">
                             <tr>
                                 <td>Tuition Fees</td>
                                 <td id="studfee_tuition_fee"></td>
