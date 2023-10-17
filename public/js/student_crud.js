@@ -57,7 +57,7 @@ async function showStudentFees(studid) {
     if (response.ok) {
       const responseData = await response.json();
       console.log('Response:', responseData);
-      document.getElementById('tuition_fee').innerHTML = responseData;
+      document.getElementById('tuition_fee').innerHTML = JSON.stringify(responseData);
       mod_student_fees.show();
     } else {
       throw new Error(`Request failed with status ${response.status}`);
