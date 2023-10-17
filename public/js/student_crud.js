@@ -58,7 +58,7 @@ async function showStudentFees(studid) {
     if (response.ok) {
       const responseData = await response.json();
       console.log('Response:', responseData);
-      var fees = JSON.stringify(responseData);
+      var fees = responseData;
       document.getElementById('fee_enrollment_info').innerHTML = fees.year_level + ' ' + fees.semester + ' ' + fees.degree_program;
       document.getElementById('fee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname + ', ' + fees.stud_ext_name;
       
