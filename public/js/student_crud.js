@@ -17,6 +17,7 @@ var students = [];
 const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
 const btnUploadCloseButton = document.getElementById("btn_closeupload");
+const btnFeesCloseButton = document.getElementById("btn_closefees");
 const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
@@ -57,7 +58,38 @@ async function showStudentFees(studid) {
     if (response.ok) {
       const responseData = await response.json();
       console.log('Response:', responseData);
-      document.getElementById('tuition_fee').innerHTML = JSON.stringify(responseData);
+      var fees = JSON.stringify(responseData);
+      document.getElementById('fee_enrollment_info').innerHTML = fees.year_level + ' ' + fees.semester + ' ' + fees.degree_program;
+      document.getElementById('fee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname.substring(0,1) + ', ' + fees.stud_ext_name;
+      
+      // document.getElementById('app_id').innerHTML = fees.app_id;
+      // document.getElementById('fhe_award_no').innerHTML = fees.fhe_award_no;
+      //acads
+      //tuition
+      document.getElementById('tuition_fee').innerHTML = fees.tuition_fee;
+      document.getElementById('academic_unit').innerHTML = fees.academic_unit;
+      document.getElementById('lab_unit').innerHTML = fees.lab_unit;
+      document.getElementById('laboratory_fee').innerHTML = fees.laboratory_fee;
+      document.getElementById('comp_lab_unit').innerHTML = fees.comp_lab_unit;
+      //nstp
+      document.getElementById('nstp_fee').innerHTML = fees.nstp_fee;
+      document.getElementById('nstp_unit').innerHTML = fees.nstp_unit;
+      //tosf
+      document.getElementById('athletic_fee').innerHTML = fees.athletic_fee;
+      document.getElementById('computer_fee').innerHTML = fees.computer_fee;
+      document.getElementById('cultural_fee').innerHTML = fees.cultural_fee;
+      document.getElementById('development_fee').innerHTML = fees.development_fee;
+      document.getElementById('entrance_and_admission_fee').innerHTML = fees.entrance_and_admission_fee;
+      document.getElementById('total_exam_taken').innerHTML = fees.total_exam_taken;
+      document.getElementById('guidance_fee').innerHTML = fees.guidance_fee;
+      document.getElementById('handbook_fee').innerHTML = fees.handbook_fee;
+      document.getElementById('library_fee').innerHTML = fees.library_fee;
+      document.getElementById('medical_and_dental_fee').innerHTML = fees.medical_and_dental_fee;
+      document.getElementById('registration_fee').innerHTML = fees.registration_fee;
+      document.getElementById('school_id_fee').innerHTML = fees.school_id_fee;
+      
+      document.getElementById('total_fee').innerHTML = fees.total_fee;
+
       mod_student_fees.show();
     } else {
       throw new Error(`Request failed with status ${response.status}`);
@@ -77,6 +109,9 @@ btn_upload.onclick = function (e) {
 }
 btnUploadCloseButton.onclick = function (e) {
   mod_upload_batch.hide();
+}
+btnFeesCloseButton.onclick = function (e) {
+  mod_student_fees.hide();
 }
 
 btn_finalize_billing.onclick = function (e) {
