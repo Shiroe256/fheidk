@@ -59,36 +59,36 @@ async function showStudentFees(studid) {
       const responseData = await response.json();
       console.log('Response:', responseData);
       var fees = responseData[0];
-      document.getElementById('fee_enrollment_info').innerHTML = fees.year_level + ' ' + fees.semester + ' ' + fees.degree_program;
-      document.getElementById('fee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname + ', ' + fees.stud_ext_name;
+      document.getElementById('studfee_enrollment_info').innerHTML = fees.year_level + ' ' + fees.semester + ' ' + fees.degree_program;
+      document.getElementById('studfee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname + ', ' + fees.stud_ext_name;
       
-      // document.getElementById('app_id').innerHTML = fees.app_id;
-      // document.getElementById('fhe_award_no').innerHTML = fees.fhe_award_no;
+      // document.getElementById('studfee_app_id').innerHTML = fees.app_id;
+      // document.getElementById('studfee_fhe_award_no').innerHTML = fees.fhe_award_no;
       //acads
       //tuition
-      document.getElementById('tuition_fee').innerHTML = fees.tuition_fee;
-      // document.getElementById('academic_unit').innerHTML = fees.academic_unit;
-      // document.getElementById('lab_unit').innerHTML = fees.lab_unit;
-      document.getElementById('laboratory_fee').innerHTML = fees.laboratory_fee;
-      // document.getElementById('comp_lab_unit').innerHTML = fees.comp_lab_unit;
+      document.getElementById('studfee_tuition_fee').innerHTML = fees.tuition_fee;
+      // document.getElementById('studfee_academic_unit').innerHTML = fees.academic_unit;
+      // document.getElementById('studfee_lab_unit').innerHTML = fees.lab_unit;
+      document.getElementById('studfee_laboratory_fee').innerHTML = fees.laboratory_fee;
+      // document.getElementById('studfee_comp_lab_unit').innerHTML = fees.comp_lab_unit;
       //nstp
-      document.getElementById('nstp_fee').innerHTML = fees.nstp_fee;
-      // document.getElementById('nstp_unit').innerHTML = fees.nstp_unit;
+      document.getElementById('studfee_nstp_fee').innerHTML = fees.nstp_fee;
+      // document.getElementById('studfee_nstp_unit').innerHTML = fees.nstp_unit;
       //tosf
-      document.getElementById('athletic_fee').innerHTML = fees.athletic_fee;
-      document.getElementById('computer_fee').innerHTML = fees.computer_fee;
-      document.getElementById('cultural_fee').innerHTML = fees.cultural_fee;
-      document.getElementById('development_fee').innerHTML = fees.development_fee;
-      document.getElementById('entrance_and_admission_fee').innerHTML = fees.entrance_and_admission_fee;
-      // document.getElementById('total_exam_taken').innerHTML = fees.total_exam_taken;
-      document.getElementById('guidance_fee').innerHTML = fees.guidance_fee;
-      document.getElementById('handbook_fee').innerHTML = fees.handbook_fee;
-      document.getElementById('library_fee').innerHTML = fees.library_fee;
-      document.getElementById('medical_and_dental_fee').innerHTML = fees.medical_and_dental_fee;
-      document.getElementById('registration_fee').innerHTML = fees.registration_fee;
-      document.getElementById('school_id_fee').innerHTML = fees.school_id_fee;
+      document.getElementById('studfee_athletic_fee').innerHTML = fees.athletic_fee;
+      document.getElementById('studfee_computer_fee').innerHTML = fees.computer_fee;
+      document.getElementById('studfee_cultural_fee').innerHTML = fees.cultural_fee;
+      document.getElementById('studfee_development_fee').innerHTML = fees.development_fee;
+      document.getElementById('studfee_entrance_and_admission_fee').innerHTML = fees.entrance_and_admission_fee;
+      // document.getElementById('studfee_total_exam_taken').innerHTML = fees.total_exam_taken;
+      document.getElementById('studfee_guidance_fee').innerHTML = fees.guidance_fee;
+      document.getElementById('studfee_handbook_fee').innerHTML = fees.handbook_fee;
+      document.getElementById('studfee_library_fee').innerHTML = fees.library_fee;
+      document.getElementById('studfee_medical_and_dental_fee').innerHTML = fees.medical_and_dental_fee;
+      document.getElementById('studfee_registration_fee').innerHTML = fees.registration_fee;
+      document.getElementById('studfee_school_id_fee').innerHTML = fees.school_id_fee;
       
-      document.getElementById('total_fee').innerHTML = fees.total_fee;
+      document.getElementById('studfee_total_fee').innerHTML = fees.total_fee;
 
       mod_student_fees.show();
     } else {
