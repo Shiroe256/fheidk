@@ -2252,7 +2252,7 @@ function fetchTempStudent() {
         }
       },
       {
-        data: "uid", render: function (data) {
+        data: 'uid', render: function (data) {
           '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>';
         }
       }
@@ -2267,10 +2267,10 @@ function fetchTempStudent() {
     },
     lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
-      // let fee = document.getElementById('fee_' + data.uid);
-      // fee.onclick = function () {
-      //   showStudentFees('fee_' + data.uid);
-      // };
+      let fee = document.getElementById('fee_' + data.uid);
+      fee.onclick = function () {
+        showStudentFees('fee_' + data.uid);
+      };
       // Assuming your server response is in JSON format and has an 'id' property
       // var cell_lname = $(row).find('td:eq(4)'); // Change '0' to the index of the target cell
       // var cell_fname = $(row).find('td:eq(5)'); // Change '0' to the index of the target cell
