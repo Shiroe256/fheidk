@@ -27,7 +27,7 @@ jobs:
         script: |
           cd .ssh
           eval "$(ssh-agent -s)"
-          ssh-add unifastdev
+          ssh-add unifastph
           git config --global user.email "ictunit.unifast@ched.gov.ph"
           git config --global user.name "unifastph"
           cd /www/wwwroot/fhe.unifast.gov.ph
