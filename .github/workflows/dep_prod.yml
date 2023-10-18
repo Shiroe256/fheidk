@@ -21,7 +21,8 @@ jobs:
         host: ${{ secrets.PRODHOST }}
         username: ${{ secrets.PROD_USER }}
         passphrase: ${{ secrets.PASSWORD }}
-        key: ${{ secrets.PRODSSHKEY }}
+        key: ${{ secrets.PROD_SSHKEY }}
+
         port: 22
         script: |
           cd .ssh
