@@ -20,13 +20,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use League\CommonMark\Extension\Table\Table;
 use \NumberFormatter;
 use App\Jobs\computeFees;
 
-use function PHPUnit\Framework\isNull;
-use function Symfony\Component\HttpFoundation\getStatusCode;
-use function Symfony\Component\HttpFoundation\isEmpty;
+require '../app/Libraries/FPDFscripts/FPDFunifast.php';
+require '../vendor/autoload.php';
 
 class BillingController extends Controller
 {
