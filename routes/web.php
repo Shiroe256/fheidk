@@ -52,9 +52,9 @@ Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
 Route::get('/billingmanagementattachments/{ref_no?}', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
-Route::get('/billingmanagementattachments/{ref_no?}/form1', [PdfController::class, 'generatePDFForm1']);
-Route::get('/billingmanagementattachments/{ref_no?}/form2', [PdfController::class, 'generatePDFForm2']);
-Route::get('/billingmanagementattachments/{ref_no?}/form3', [PdfController::class, 'generatePDFForm3']);
+Route::get('/billingmanagementattachments/{ref_no?}/form1', [BillingController::class, 'generatePDFForm1']);
+Route::get('/billingmanagementattachments/{ref_no?}/form2', [BillingController::class, 'generatePDFForm2']);
+Route::get('/billingmanagementattachments/{ref_no?}/form3', [BillingController::class, 'generatePDFForm3']);
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
 Route::get('/fees/{uid}', [BillingController::class, 'fetchStudentFees'])->name('fetchStudentFees'); //student fees
