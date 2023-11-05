@@ -72,22 +72,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-{
-    $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
+    /*disabled muna*/
+//     protected function create(array $data)
+// {
+//     $hei = Hei::where('hei_uii', $data['hei_uii'])->first();
 
-    $user = User::create([
-        'hei_sid' => $hei->hei_sid,
-        'hei_uii' => $data['hei_uii'],
-        'fhe_focal_lname' => $data['fhe_focal_lname'],
-        'fhe_focal_fname' => $data['fhe_focal_fname'],
-        'fhe_focal_mname' => $data['fhe_focal_mname'],
-        'contact_no' => $data['contact_number'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-        'is_admin' => false,
-    ]);
+//     $user = User::create([
+//         'hei_sid' => $hei->hei_sid,
+//         'hei_uii' => $data['hei_uii'],
+//         'fhe_focal_lname' => $data['fhe_focal_lname'],
+//         'fhe_focal_fname' => $data['fhe_focal_fname'],
+//         'fhe_focal_mname' => $data['fhe_focal_mname'],
+//         'contact_no' => $data['contact_number'],
+//         'email' => $data['email'],
+//         'password' => Hash::make($data['password']),
+//         'is_admin' => false,
+//     ]);
 
-    return $user;
-}
+//     return $user;
+// }
 }
