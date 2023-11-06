@@ -31,10 +31,7 @@
                                     <td><strong>
                                             Total Fees</strong>
                                     </td>
-                                    <td>
-                                        <h3 id="studfee_total_fee">
-                                        </h3>
-                                    </td>
+                                    <td id="studfee_total_fee"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Cultural Fees</strong></td>
