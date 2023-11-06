@@ -34,7 +34,7 @@ class BillingController extends Controller
      *
      * @return void
      */
-    
+
     private $carlo_columns = "(
         SUM(
             (
@@ -568,56 +568,55 @@ SUM(
     private function getForm2Data($reference_no)
     {
         //students sub query. Dito ung pagination
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
-            ->where('exam_result', '!=', 'Failed')
-            ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+        $students_sub = $this->getStudentSubquery($reference_no);
         //dito jinojoin ung information about the fees and computation
-        $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
-            ->mergeBindings($students_sub)
-            ->select(
-                'students_sub.stud_id',
-                'students_sub.stud_lname',
-                'students_sub.stud_fname',
-                'students_sub.stud_mname',
-                'students_sub.year_level',
-                'students_sub.stud_sex',
-                'students_sub.lab_unit',
-                'students_sub.comp_lab_unit',
-                'students_sub.academic_unit',
-                'students_sub.nstp_unit',
-                'students_sub.hei_name',
-                'students_sub.stud_email',
-                'students_sub.fhe_award_no',
-                'students_sub.degree_program',
-                DB::raw($this->carlo_columns)
-            )
-            ->leftJoin('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
-                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
-            })
-            // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-            ->leftJoin('tbl_billing_settings', function ($join) {
-                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-            })
-            ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-            })
-            ->where(function ($query) {
-                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                    ->where('tbl_billing_settings.bs_status', '=', 1)
-                    ->orWhere(function ($query) {
-                        $query->whereNull('tbl_billing_stud_settings.bs_status')
-                            ->where('tbl_billing_settings.bs_status', '=', 1);
-                    });
-            })
-            ->orderBy('degree_program')
-            //!kailangan lagyan dito ng para sa mga pumasa lang
-            ->groupBy('students_sub.uid')->get();
+        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
+        // DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+        //     ->mergeBindings($students_sub)
+        //     ->select(
+        //         'students_sub.stud_id',
+        //         'students_sub.stud_lname',
+        //         'students_sub.stud_fname',
+        //         'students_sub.stud_mname',
+        //         'students_sub.year_level',
+        //         'students_sub.stud_sex',
+        //         'students_sub.lab_unit',
+        //         'students_sub.comp_lab_unit',
+        //         'students_sub.academic_unit',
+        //         'students_sub.nstp_unit',
+        //         'students_sub.hei_name',
+        //         'students_sub.stud_email',
+        //         'students_sub.fhe_award_no',
+        //         'students_sub.degree_program',
+        //         DB::raw($this->carlo_columns)
+        //     )
+        //     ->leftJoin('tbl_other_school_fees', function ($join) {
+        //         $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+        //             ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+        //             ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+        //             ->on('tbl_other_school_fees.form', '=', DB::raw(2));
+        //     })
+        //     // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        //     ->leftJoin('tbl_billing_settings', function ($join) {
+        //         $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+        //             ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+        //     })
+        //     ->leftJoin('tbl_billing_stud_settings', function ($join) {
+        //         $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+        //             ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+        //             ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+        //     })
+        //     ->where(function ($query) {
+        //         $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+        //             ->where('tbl_billing_settings.bs_status', '=', 1)
+        //             ->orWhere(function ($query) {
+        //                 $query->whereNull('tbl_billing_stud_settings.bs_status')
+        //                     ->where('tbl_billing_settings.bs_status', '=', 1);
+        //             });
+        //     })
+        //     ->orderBy('degree_program')
+        //     //!kailangan lagyan dito ng para sa mga pumasa lang
+        //     ->groupBy('students_sub.uid')->get();
 
         return $students;
     }
@@ -709,7 +708,7 @@ SUM(
         $pdf->SetX($pdf->GetX() + 130);
         $pdf->Cell(30, 8, 'Account Code', 0, 0, 'C', 0, 0);
         $pdf->Cell(0, 8, 'Amount', 0, 1, 'C', 0, 0);
-        $pdf->SetX($x+160);
+        $pdf->SetX($x + 160);
         $pdf->Cell(0, 8, number_format($total_amount, 2), 0, 0, 'C', 0, 0);
         $pdf->SetX($x);
         $pdf->SetY($y);
@@ -1248,7 +1247,7 @@ SUM(
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
-            });       
+            });
         return $students;
     }
     public function fetchTempStudent(Request $request)
@@ -1260,7 +1259,7 @@ SUM(
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->get();
+        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
         //dito jinojoin ung information about the fees and computation
 
         //!kailangan lagyan dito ng para sa mga pumasa lang
