@@ -758,13 +758,6 @@ SUM(
     }
     function generateForm2($pdf_data, $signatories,  $grantees)
     {
-
-        // $row[] = "hello world";
-        // $row[] = array('term' => "first", 'ay' => '2022');
-        // $row[] = array('term' => "first", 'ay' => '2022');
-
-        // echo $row[1]['ay'] lalabas ung acad year lang sa row index 1 (or ung pangalawa kasi arrays start at index 0)
-
         $pdf = new FPDFunifast('L', 'mm', array(215.9, 330.2));
         $pdf->currentForm = 2;
         $pdf->AddPage('L');
@@ -1255,26 +1248,7 @@ SUM(
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw(2));
-            });
-        // ->join('tbl_billing_settings', 'tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no')
-        // ->leftJoin('tbl_billing_settings', function ($join) {
-        //     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-        //         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-        // })
-        // ->leftJoin('tbl_billing_stud_settings', function ($join) {
-        //     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-        //         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-        //         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-        // })
-        // ->where(function ($query) {
-        //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-        //         ->where('tbl_billing_settings.bs_status', '=', 1)
-        //         ->orWhere(function ($query) {
-        //             $query->whereNull('tbl_billing_stud_settings.bs_status')
-        //                 ->where('tbl_billing_settings.bs_status', '=', 1);
-        //         });
-        // })
-        // ->groupBy('students_sub.uid')->get();
+            });       
         return $students;
     }
     public function fetchTempStudent(Request $request)

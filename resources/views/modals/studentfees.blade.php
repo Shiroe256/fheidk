@@ -10,8 +10,8 @@
                     <h3 id="studfee_enrollment_info"></h3>
                 </div>
                 <div class="row">   
-                    <div class="col-6">
-                        <table class="table">
+                    <div class="col-6 p-0">
+                        <table class="table table-sm">
                             <tbody>
                                 <tr>
                                     <td>Entrance and Admission Fees</td>
@@ -64,8 +64,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-6">
-                        <table class="table">
+                    <div class="col-6 p-0">
+                        <table class="table table-sm">
                             <tr>
                                 <td>Tuition Fees</td>
                                 <td id="studfee_tuition_fee"></td>
