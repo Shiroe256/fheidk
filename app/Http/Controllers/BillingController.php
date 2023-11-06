@@ -1227,18 +1227,7 @@ SUM(
             ->mergeBindings($students_sub)
             ->select(
                 'students_sub.uid',
-                'students_sub.app_id',
-                'students_sub.hei_name',
-                'students_sub.hei_uii',
-                'students_sub.stud_lname',
-                'students_sub.stud_fname',
-                'students_sub.stud_mname',
-                'students_sub.fhe_award_no',
-                'students_sub.degree_program',
-                'students_sub.semester',
-                'students_sub.year_level',
-                'students_sub.remarks',
-                'students_sub.stud_status',
+                'students_sub.*',
                 DB::raw($this->carlo_columns)
             )
             ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
