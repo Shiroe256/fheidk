@@ -8,9 +8,11 @@
             <div class="modal-body p-3">
                 <div class="row">
                     <div class="col p-0">
-                        <small id="studfee_enrollment_info"></small>
                         <table class="table table-sm table-borderless">
                             <tbody>
+                                <tr class="table-active">
+                                    <td colspan="4" id="studfee_enrollment_info"></td>
+                                </tr>
                                 <tr>
                                     <td><strong>Entrance and Admission Fees</strong></td>
                                     <td id="studfee_entrance_and_admission_fee"></td>
