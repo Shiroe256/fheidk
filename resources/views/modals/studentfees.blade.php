@@ -2,7 +2,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 id="studfee_stud_name"></h4></br>
+                <h6 id="studfee_stud_name"></h6>
+                </br>
                 <p id="studfee_enrollment_info"></p>
             </div>
             <div class="modal-body p-3">
