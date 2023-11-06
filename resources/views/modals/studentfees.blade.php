@@ -2,7 +2,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 id="studfee_stud_name"></h6>
+                <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="close"
+                    data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </br>
                 <p id="studfee_enrollment_info"></p>
             </div>
