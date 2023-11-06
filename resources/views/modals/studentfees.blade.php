@@ -1,5 +1,5 @@
 <div class="modal fade" role="dialog" tabindex="-1" id="mod_studfees">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="close"
@@ -8,7 +8,7 @@
             <div class="modal-body p-3">
                 <div class="row">
                     <div class="col p-0">
-                        <p id="studfee_enrollment_info"></p>
+                        <small id="studfee_enrollment_info"></small>
                         <table class="table table-sm table-borderless">
                             <tbody>
                                 <tr>
