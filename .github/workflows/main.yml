@@ -32,3 +32,4 @@ jobs:
           cd /www/wwwroot/dev3.unifast.gov.ph
           git pull
           git status
+          sudo chown -R www:www *
