@@ -18,10 +18,10 @@ jobs:
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.DEVHOST }}
-        username: ${{ secrets.DEV_USER }}
-        passphrase: ${{ secrets.PASSWORD }}
-        key: ${{ secrets.DEVSSHKEY }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
           cd .ssh
@@ -29,7 +29,7 @@ jobs:
           ssh-add unifastdev
           git config --global user.email "ictunit.unifast@ched.gov.ph"
           git config --global user.name "unifastph"
-          cd /www/wwwroot/dev3.unifast.gov.ph
+          cd /www/wwwroot/fhe.unifast.gov.ph
           git pull
           git status
           sudo chown -R www:www *
