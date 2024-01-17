@@ -84,7 +84,6 @@
                         </td>
                     </tr>
                 @endforeach
-                {{-- sample shit --}}
 
             </tbody>
         </table>

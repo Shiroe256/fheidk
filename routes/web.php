@@ -53,7 +53,7 @@ Route::get('/billings', [BillingController::class, 'billingList'])->name('billin
 Route::get('/billings/{ref_no}/attachments/form1', [BillingController::class, 'generatePDFForm1']);
 Route::get('/billings/{ref_no}/attachments/form2', [BillingController::class, 'generatePDFForm2']);
 Route::get('/billings/{ref_no}/attachments/form3', [BillingController::class, 'generatePDFForm3']);
-Route::get('/billings/{ref_no}/attachments', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
+Route::get('/billings/{ref_no?}/attachments', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
 Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
