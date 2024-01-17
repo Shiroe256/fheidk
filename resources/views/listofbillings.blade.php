@@ -17,11 +17,6 @@
                     </button>
                 </div>
             @endif
-            <div class="row">
-                <div class="col text-right"><button class="btn btn-outline-primary btn-sm" type="button"
-                        data-toggle="modal" data-target="#mod_add_new_ay"><i class="fas fa-plus"></i>&nbsp;New
-                        Billing</button></div>
-            </div>
             @include('elements.billingtable')
         </div>
     </div>
