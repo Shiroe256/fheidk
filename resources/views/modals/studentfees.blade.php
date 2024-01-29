@@ -2,8 +2,8 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="btn_closefees"
-                    data-bs-dismiss="mod_studfees" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button"
+                    class="btn_closefees" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body p-3">
                 <div class="row">
@@ -75,7 +75,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="" class="btn_closefees btn btn-light card-button-style" type="button">Close</button>
+                <button id="" class="btn_closefees btn btn-light card-button-style"
+                    type="button">Close</button>
             </div>
         </div>
     </div>
