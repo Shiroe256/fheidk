@@ -1294,7 +1294,7 @@ SUM(
         //     ->where('reference_no', $reference_no)
         //     ->where('total_exam_taken', '!=', 0)
         //     ->groupBy('students_sub.uid');
-        $applicants = $this->joinStudentFees($this->getStudentSubquery($reference_no, "", $request->start, $request->length));
+        $applicants = $this->joinStudentFees($this->getStudentSubquery($reference_no, "", $request->start, $request->length, 1));
         $students_sub = $this->getStudentSubquery($reference_no, "", $request->start, $request->length);
         $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program');
 
