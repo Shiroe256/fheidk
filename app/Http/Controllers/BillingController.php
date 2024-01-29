@@ -1173,8 +1173,10 @@ SUM(
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
                 ->where(function ($query) {
-                    $query->where('year_level', '=', 1)
-                        ->where('semester', '=', 1)
+                    $query->where(function ($query2) {
+                        $query2->where('year_level', '=', 1)
+                            ->where('semester', '=', 1);
+                    })
                         ->orWhere('transferee', '=', 1);
                 })
                 ->where(function ($query) {
