@@ -1277,31 +1277,31 @@ SUM(
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
         // $data['total_beneficiaries'] = DB::table('tbl_billing_details_temp')->where('exam_result', '!=', 'failed')->where('reference_no', $reference_no)->count();
         // if ($billing_record->total_amount < 1) {
-        $applicants = DB::table('tbl_billing_details_temp as students_sub')
-            ->select(
-                'students_sub.uid',
-                'students_sub.hei_name',
-                DB::raw($this->carlo_columns),
-                DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
-            )
-            ->join('tbl_other_school_fees', function ($join) use ($hei_uii) {
-                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                    ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
-                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
-            })
-            ->where('reference_no', $reference_no)
-            ->where('total_exam_taken', '!=', 0)
-            ->groupBy('students_sub.uid');
-
+        // $applicants = DB::table('tbl_billing_details_temp as students_sub')
+        //     ->select(
+        //         'students_sub.uid',
+        //         'students_sub.hei_name',
+        //         DB::raw($this->carlo_columns),
+        //         DB::raw('sum(if(tbl_other_school_fees.category = "ENTRANCE OR ADMISSION EXAM", tbl_other_school_fees.amount * students_sub.total_exam_taken, 0)) as exam_fees')
+        //     )
+        //     ->join('tbl_other_school_fees', function ($join) use ($hei_uii) {
+        //         $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+        //             ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+        //             ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
+        //             ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+        //             ->on('tbl_other_school_fees.form', '=', DB::raw(3));
+        //     })
+        //     ->where('reference_no', $reference_no)
+        //     ->where('total_exam_taken', '!=', 0)
+        //     ->groupBy('students_sub.uid');
+        $applicants = $this->joinStudentFees($this->getStudentSubquery($reference_no, "", $request->start, $request->length));
         $students_sub = $this->getStudentSubquery($reference_no, "", $request->start, $request->length);
         $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program');
 
         $union = $applicants->union($students);
         $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
             ->mergeBindings($union)
-            ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) + sum(summary.exam_fees) as total_amount')
+            ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) as total_amount')
             ->get();
 
         // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
