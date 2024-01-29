@@ -17,7 +17,7 @@ var students = [];
 const fileInput = document.getElementById('upload_template');
 const uploadButton = document.getElementById('btn_upload_template');
 const btnUploadCloseButton = document.getElementById("btn_closeupload");
-const btnFeesCloseButton = document.getElementById("btn_closefees");
+const btnFeesCloseButton = document.querySelectorAll("btn_closefees");
 const queueButton = document.getElementById("btn_queue");
 const templateButton = document.getElementById("btn_download_template");
 const mod_upload_batch = new bootstrap.Modal(document.getElementById('mod_upload'), { keyboard: false, backdrop: 'static' });
@@ -60,7 +60,7 @@ async function showStudentFees(studid) {
       var fees = responseData[0];
       document.getElementById('studfee_enrollment_info').innerHTML = fees.year_level + ' Year ' + fees.semester + ' Semester ' + fees.degree_program;
       document.getElementById('studfee_stud_name').innerHTML = fees.stud_lname + ', ' + fees.stud_fname + ' ' + fees.stud_mname + ' ' + fees.stud_ext_name;
-      
+
       // document.getElementById('studfee_app_id').innerHTML = fees.app_id;
       // document.getElementById('studfee_fhe_award_no').innerHTML = fees.fhe_award_no;
       //acads
@@ -86,7 +86,7 @@ async function showStudentFees(studid) {
       document.getElementById('studfee_medical_and_dental_fee').innerHTML = fees.medical_and_dental_fee;
       document.getElementById('studfee_registration_fee').innerHTML = fees.registration_fee;
       document.getElementById('studfee_school_id_fee').innerHTML = fees.school_id_fee;
-      
+
       document.getElementById('studfee_total_fee').innerHTML = fees.total_fee;
 
       mod_student_fees.show();
@@ -109,9 +109,11 @@ btn_upload.onclick = function (e) {
 btnUploadCloseButton.onclick = function (e) {
   mod_upload_batch.hide();
 }
-btnFeesCloseButton.onclick = function (e) {
-  mod_student_fees.hide();
-}
+btnFeesCloseButton.forEach(element => {
+  element.onclick = function (e) {
+    mod_student_fees.hide();
+  }
+});
 
 btn_finalize_billing.onclick = function (e) {
   Swal.fire({

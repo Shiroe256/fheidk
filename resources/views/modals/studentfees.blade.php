@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn_closefees" class="btn btn-light card-button-style" type="button">Close</button>
+                <button id="" class="btn_closefees btn btn-light card-button-style" type="button">Close</button>
             </div>
         </div>
     </div>
