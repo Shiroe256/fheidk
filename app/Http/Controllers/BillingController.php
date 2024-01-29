@@ -1182,7 +1182,7 @@ SUM(
                 ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
                         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                });
+                }); 
                 // ->skip($start)->take($length);
         } else {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
