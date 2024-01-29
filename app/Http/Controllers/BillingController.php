@@ -1299,7 +1299,7 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $summary = $this->joinStudentFees($students_sub)->groupBy('reference_no')->get();
+        $summary = $this->joinStudentFees($students_sub)->groupBy('reference_no')->first();
         $data['total_fee'] = $summary->total_fee;
         $data['hei_name'] = $summary->hei_name;
         $data['hei_uii'] = $summary->hei_uii;
