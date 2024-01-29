@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="close"
-                    data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    data-bs-dismiss="mod_studfees" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body p-3">
                 <div class="row">
