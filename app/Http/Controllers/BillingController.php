@@ -1287,7 +1287,7 @@ SUM(
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
                     ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.coverage', '=', DB::raw("per new student"))
+                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
                     ->on('tbl_other_school_fees.form', '=', DB::raw(3));
             })
             ->where('reference_no', $reference_no)
