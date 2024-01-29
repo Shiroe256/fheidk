@@ -1294,25 +1294,25 @@ SUM(
         //     ->where('reference_no', $reference_no)
         //     ->where('total_exam_taken', '!=', 0)
         //     ->groupBy('students_sub.uid');
-        $applicants = $this->joinStudentFees($this->getStudentSubquery($reference_no, "", $request->start, $request->length, 1));
-        $students_sub = $this->getStudentSubquery($reference_no, "", $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program');
-
-        $union = $applicants->union($students);
-        $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
-            ->mergeBindings($union)
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where(function ($query) {
+                $query->where('exam_result', '!=', 'Failed')
+                    ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+            });
+        $data['hei_summary'] = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')
             ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) as total_amount')
             ->get();
+
+        // $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
+        //     ->mergeBindings($union)
+        //     ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) as total_amount')
+        //     ->get();
 
         // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
         //     ->mergeBindings($students)
         //     ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) as total_amount')
         //     ->get();
 
-        // $billing_record->total_beneficiaries = $data['hei_summary'][0]->total_beneficiaries;
-        // $billing_record->total_amount = $data['hei_summary'][0]->total_amount;
-        // $billing_record->save();
-        // }
         // print_r($data['hei_summary']);
         return view('elements.tempsummary', $data);
     }
