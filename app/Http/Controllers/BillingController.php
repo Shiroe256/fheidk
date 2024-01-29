@@ -1176,8 +1176,10 @@ SUM(
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
             })->get()->toArray();
         $f = new NumberFormatter('en', NumberFormatter::ORDINAL);
-        $student[0]['semester'] = $f->format($student[0]['semester']);
-        $student[0]['year_level'] = $f->format($student[0]['year_level']);
+        foreach($student as $stud){
+            $stud->semester = $f->format($stud->semester);
+            $stud->year_level = $f->format($stud->year_level);
+        }
         echo json_encode($student);
     }
     private function generateBillingReferenceNumber($hei_psg_region, $hei_sid, $ac_year, $semester, $tranche)
