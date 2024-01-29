@@ -1173,6 +1173,11 @@ SUM(
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
                 ->where(function ($query) {
+                    $query->where('year_level', '=', 1)
+                        ->where('semester', '=', 1)
+                        ->orWhere('transferee', '=', 1);
+                })
+                ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
                         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
                 })
@@ -1183,11 +1188,6 @@ SUM(
                     $query->where('stud_fname', 'like', '%' . $search . '%')
                         ->orWhere('stud_lname', 'like', '%' . $search . '%')
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
-                })
-                ->where(function ($query) {
-                    $query->where('year_level', '=', '1')
-                        ->where('semester', '=', '1')
-                        ->orWhere('transferee', '=', '1');
                 })
                 ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
