@@ -494,23 +494,26 @@ SUM(
     }
     function getForm3Data($reference_no)
     {
-        $applicants = TemporaryBilling::orderBy('remarks')
-            ->select(
-                'tbl_billing_details_temp.*',
-                DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees')
-            )
-            ->join('tbl_other_school_fees', function ($join) {
-                $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
-                    ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
-                    ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
-                    ->on('tbl_other_school_fees.form', '=', DB::raw(3));
-            })
-            ->where('reference_no', $reference_no)
-            ->where('total_exam_taken', '!=', 0)
-            ->groupBy('tbl_billing_details_temp.uid')
-            ->orderBy('degree_program')
-            ->get();
+        // $applicants = TemporaryBilling::orderBy('remarks')
+        //     ->select(
+        //         'tbl_billing_details_temp.*',
+        //         DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees')
+        //     )
+        //     ->join('tbl_other_school_fees', function ($join) {
+        //         $join->on('tbl_other_school_fees.year_level', '=', DB::raw('1'))
+        //             ->on('tbl_other_school_fees.semester', '=', DB::raw('1'))
+        //             ->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
+        //             ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
+        //             ->on('tbl_other_school_fees.form', '=', DB::raw(3));
+        //     })
+        //     ->where('reference_no', $reference_no)
+        //     ->where('total_exam_taken', '!=', 0)
+        //     ->groupBy('tbl_billing_details_temp.uid')
+        //     ->orderBy('degree_program')
+        //     ->get();
+
+        $students_sub = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
+        $applicants = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
         return $applicants;
     }
     private function getForm2Data($reference_no)
