@@ -34,6 +34,7 @@ var tbl_students;
 var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
+function nth(n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"};
 
 function trimValues(obj) {
   for (var key in obj) {
@@ -57,9 +58,8 @@ async function showStudentFees(studid) {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log('Response:', responseData);
       var fees = responseData[0];
-      document.getElementById('studfee_enrollment_info').innerHTML = fees.year_level + ' ' + fees.semester + ' ' + fees.degree_program;
+      document.getElementById('studfee_enrollment_info').innerHTML = nth(fees.year_level) + ' Year ' + nth(fees.semester) + ' Semester ' + fees.degree_program;
       document.getElementById('studfee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname + ', ' + fees.stud_ext_name;
       
       // document.getElementById('studfee_app_id').innerHTML = fees.app_id;
