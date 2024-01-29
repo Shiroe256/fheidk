@@ -59,7 +59,7 @@ async function showStudentFees(studid) {
       const responseData = await response.json();
       var fees = responseData[0];
       document.getElementById('studfee_enrollment_info').innerHTML = fees.year_level + ' Year ' + fees.semester + ' Semester ' + fees.degree_program;
-      document.getElementById('studfee_stud_name').innerHTML = fees.stud_fname + ' ' + fees.stud_fname + ' ' + fees.stud_mname + ', ' + fees.stud_ext_name;
+      document.getElementById('studfee_stud_name').innerHTML = fees.stud_lname + ', ' + fees.stud_fname + ' ' + fees.stud_mname + ' ' + fees.stud_ext_name;
       
       // document.getElementById('studfee_app_id').innerHTML = fees.app_id;
       // document.getElementById('studfee_fhe_award_no').innerHTML = fees.fhe_award_no;
