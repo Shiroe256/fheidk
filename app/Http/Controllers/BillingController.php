@@ -1299,7 +1299,7 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $data['hei_summary'] = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')
+        $data['hei_summary'] = $this->joinStudentFees($students_sub)
             ->selectRaw('students_sub.hei_name, COUNT(*) AS total_beneficiaries')
             ->get();
 
@@ -1314,7 +1314,8 @@ SUM(
         //     ->get();
 
         // print_r($data['hei_summary']);
-        return view('elements.tempsummary', $data);
+        print_r($data);
+        // return view('elements.tempsummary', $data);
     }
 
     public function fetchTempExceptions(Request $request)
