@@ -1304,8 +1304,8 @@ SUM(
         $data['hei_name'] = $summary->hei_name;
         $data['hei_uii'] = $summary->hei_uii;
 
-        print_r($data);
-        // return view('elements.tempsummary', $data);
+        // print_r($data);
+        return view('elements.tempsummary', $data);
     }
 
     public function fetchTempExceptions(Request $request)
