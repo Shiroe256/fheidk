@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="close"
+                <h6 class="modal-title text-primary" id="studfee_stud_name"></h6><button type="button" class="btn_closefees"
                     data-bs-dismiss="mod_studfees" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body p-3">
