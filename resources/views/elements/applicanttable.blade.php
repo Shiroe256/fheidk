@@ -35,8 +35,7 @@
                 <td class="text-left">{{ $applicant->transferee }}</td>
                 <td class="text-center">{{ $applicant->total_exam_taken }}</td>
                 <td class="text-left"><span class="badge badge-{{$applicant->exam_result=='Passed'?'success':'danger'}}">{{ $applicant->exam_result }}</span><br></td>
-                {{-- <td class="text-left">{{ $applicant->total_fees }}<br></td> --}}
-                <td class="text-left">{{ "" }}<br></td>
+                <td class="text-left">{{ $applicant->total_fees }}<br></td>
                 <td class="text-center">
                     <div class="btn-group btn-group-sm" role="group">
                         <button id="{{ $applicant->uid }}" class="btn btn_update_student btn-outline-primary"

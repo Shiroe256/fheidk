@@ -1182,8 +1182,8 @@ SUM(
                 ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
                         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                }); 
-                // ->skip($start)->take($length);
+                });
+            // ->skip($start)->take($length);
         } else {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
                 ->where(function ($query) use ($search) {
@@ -1264,8 +1264,7 @@ SUM(
     {
         $reference_no  = $request->reference_no;
         $students_sub = $this->getStudentSubquery($reference_no, "", $request->start, $request->length, 1);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program');
-        $data['applicants'] = $students->get();
+        $data['applicants'] = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
 
         return view('elements.applicanttable', $data);
     }
