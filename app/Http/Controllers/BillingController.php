@@ -1299,20 +1299,11 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $data['hei_summary'] = $this->joinStudentFees($students_sub)->selectRaw('count(*) as total_beneficiaries')->groupBy('reference_no')
-            ->get();
+        $summary = $this->joinStudentFees($students_sub)->groupBy('reference_no')->get();
+        $data['total_fee'] = $summary->total_fee;
+        $data['hei_name'] = $summary->hei_name;
+        $data['hei_uii'] = $summary->hei_uii;
 
-        // $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
-        //     ->mergeBindings($union)
-        //     ->selectRaw('summary.hei_name, COUNT(*) AS total_beneficiaries, sum(summary.total_fee) as total_amount')
-        //     ->get();
-
-        // $data['hei_summary'] = DB::table(DB::raw("({$students->toSql()}) as students"))
-        //     ->mergeBindings($students)
-        //     ->selectRaw('students.hei_name, COUNT(*) AS total_beneficiaries, sum(total_fee) as total_amount')
-        //     ->get();
-
-        // print_r($data['hei_summary']);
         print_r($data);
         // return view('elements.tempsummary', $data);
     }
