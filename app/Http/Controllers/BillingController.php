@@ -1300,7 +1300,7 @@ SUM(
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
         $data['hei_summary'] = $this->joinStudentFees($students_sub)
-            ->selectRaw('students_sub.hei_name, COUNT(*) AS total_beneficiaries')
+            ->selectRaw('students_sub.hei_name, SUM(total_fee)')->groupBy('reference_no')
             ->get();
 
         // $data['hei_summary'] = DB::table(DB::raw("({$union->toSql()}) AS summary"))
