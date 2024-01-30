@@ -481,6 +481,7 @@ function validateFields(data) {
     // stud['nstp_u']
     // stud['exams']
     // stud['exam_result']
+    if(stud['exam_result'] != 'PASSED' || stud['exam_result'] != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
     // stud['remarks']
 
     if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error });
