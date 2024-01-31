@@ -453,7 +453,7 @@ function validateFields(data) {
       error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     } else {
       var today = new Date();
-      var age = today.getFullYear() - birthDate.getFullYear();
+      var age = today.getFullYear() - bdate.getFullYear();
       var m = today.getMonth() - bdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
       if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
