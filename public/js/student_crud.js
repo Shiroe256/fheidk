@@ -449,7 +449,15 @@ function validateFields(data) {
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
     // console.log(stud['birthdate']);
-    if (isNaN(bdate)) error.push('Invalid date format. Please use this format: mm/dd/yyyy');
+    if (isNaN(bdate)) {
+      error.push('Invalid date format. Please use this format: mm/dd/yyyy');
+    } else {
+      var today = new Date();
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - bdate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
+      if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
+    }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
@@ -478,7 +486,7 @@ function validateFields(data) {
     if (stud['acad_u'] > 40 || stud['acad_u'] === undefined) error.push('Invalid Academic unit value. The academic unit only accepts between 1 to 40.');
     if (stud['nstp_u'] > 40 || stud['nstp_u'] === undefined) error.push('Invalid NSTP unit value. The NSTP unit only accepts between 1 to 40.');
     if (stud['exams'] > 40 || stud['exams'] === undefined) error.push('Invalid exams value. Please input only how many times the student has taken the exam in whole numbers.');
-    if(stud['exam_result'] != 'PASSED' || stud['exam_result'] != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
+    if (stud['exam_result'] != 'PASSED' || stud['exam_result'] != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
     // stud['remarks']
 
     if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error });
