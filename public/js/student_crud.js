@@ -457,7 +457,7 @@ function validateFields(data) {
       var m = today.getMonth() - bdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
       if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
-      console.log('age: ' + age);
+      console.log('age: ' + age + " year:" + bdate.toDateString());
     }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
