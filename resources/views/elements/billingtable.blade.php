@@ -68,16 +68,16 @@
                         <td class="text-center">
                             <?php if ($billing->billing_status == 2 || $billing->billing_status > 5): ?>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i class="far fa-edit"></i></a>
                                     <a class="btn btn-outline-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="#' }}"><i class="fas fa-sliders"></i></a>
                                 </div>
                             <?php elseif ($billing->billing_status === 5): ?>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ route('billingmanagementattachments') . '/' . $billing->reference_no }}"><i class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ route('billingmanagementattachments') . '/' . $billing->reference_no }}"><i class="far fa-edit"></i></a>
                                 </div>
                             <?php else: ?>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="{{ route('billings') . '/' . $billing->reference_no }}"><i class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="{{ route('billings') . '/' . $billing->reference_no }}"><i class="far fa-edit"></i></a>
                                     <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="{{ route('billings') . '/' . $billing->reference_no . '/settings' }}"><i class="fas fa-sliders"></i></a>
                                 </div>
                             <?php endif; ?>

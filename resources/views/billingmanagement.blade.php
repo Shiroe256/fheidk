@@ -25,7 +25,7 @@
                             class="fas fa-file-upload"></i>&nbsp;Upload
                         List</button>
                     <button id="btn_queue" class="btn btn-outline-primary btn-sm" type="button"><i
-                            class="far fa-edit"></i>&nbsp;Run Validation</button>
+                            class="far fa-check-square"></i>&nbsp;Run Validation</button>
                     <button id="btn_exceptions" class="btn btn-outline-danger btn-sm" type="button"
                         style="display:none"><i class="fas fa-exclamation-triangle"></i>&nbsp;Exception
                         Report</button>
