@@ -452,12 +452,12 @@ function validateFields(data) {
     if (isNaN(bdate)) {
       error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     } else {
-      console.log('hit');
       var today = new Date();
       var age = today.getFullYear() - bdate.getFullYear();
       var m = today.getMonth() - bdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
       if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
+      console.log('age: ' + age);
     }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
@@ -479,7 +479,7 @@ function validateFields(data) {
     if (!zippattern.test(stud['pres_zip']) || stud['pres_zip'] === undefined) error.push('Invalid present Zip Code format. Numbers are only accepted.');
 
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
-    if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
+    if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid alternate contact number format. Please use this format: 9#########');
     if (transfereepattern.test(stud['is_transferee']) || stud['is_transferee'] === undefined) error.push('Invalid value. Please enter Yes or No.');
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 1 to 40.');
