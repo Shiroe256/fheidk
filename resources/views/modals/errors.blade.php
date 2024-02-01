@@ -14,7 +14,7 @@
                         <br>
                         <h1>Oh Sheet! >_< </h1>
                                 <h3>There are errors in your Spreadsheet.</h3>
-                                <p><u><b id='error_count'>3</b> lines</u> on your spreadsheet have errors or are missing
+                                <p><u><b id='error_count'>3</b> line/s</u> on your spreadsheet have errors or are missing
                                     data.</p>
                                 <small class="text-muted">Pull your sheet together.</small>
                     </div>
