@@ -432,11 +432,11 @@ function validateFields(data) {
   var brgypattern = /^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
   var zippattern = /^[1-9]\d{3}$/;
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
-  var transfereepattern = /^(yes|no)$/i;
   var degreepattern = /^[a-zA-Z\s.]+$/;
   // var acadpattern = /^\b(\d|40)\b$/;
   for (const stud of data) {
     var error = [];
+    var row = 7;
     // errors[ctr] = [];
     // stud['fhe_aw_no']
     // stud['stud_no']
@@ -480,7 +480,7 @@ function validateFields(data) {
 
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid alternate contact number format. Please use this format: 9#########');
-    if (transfereepattern.test(stud['is_transferee']) || stud['is_transferee'] === undefined) error.push('Invalid value. Please enter Yes or No.');
+    if (stud['is_transferee'] == 'yes' || stud['is_transferee'] == 'no' || stud['is_transferee'] === undefined) error.push('Invalid value. Please enter Yes or No.');
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 1 to 40.');
     if (stud['com_lab_u'] > 40 || stud['com_lab_u'] === undefined) error.push('Invalid Computer Lab unit value. The Computer Lab unit only accepts between 1 to 40.');
@@ -490,7 +490,8 @@ function validateFields(data) {
     if (stud['exam_result'] != 'PASSED' || stud['exam_result'] != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
     // stud['remarks']
 
-    if (error.length > 0) errors.push({ seq_no: stud['seq_no'], error: error });
+    if (error.length > 0) errors.push({ seq_no: row, error: error });
+    row++;
   }
   return errors;
 }
