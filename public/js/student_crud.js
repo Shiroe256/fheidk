@@ -445,7 +445,6 @@ function validateFields(data) {
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
-    // console.log(stud['birthdate']);
     if (isNaN(bdate)) {
       error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     } else {
@@ -454,7 +453,6 @@ function validateFields(data) {
       var m = today.getMonth() - bdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
       if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
-      console.log('age: ' + age + " year:" + bdate.toDateString() + "stubdate" + stud['birthdate']);
     }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
@@ -478,14 +476,13 @@ function validateFields(data) {
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid alternate contact number format. Please use this format: 9#########');
     if (stud['is_transferee'] != "YES" && stud['is_transferee'] != "NO") error.push('Invalid value for Transferee Column. Please enter YES or NO.');
-    console.log(stud['is_transferee']);
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 1 to 40.');
     if (stud['com_lab_u'] > 40 || stud['com_lab_u'] === undefined) error.push('Invalid Computer Lab unit value. The Computer Lab unit only accepts between 1 to 40.');
     if (stud['acad_u'] > 40 || stud['acad_u'] === undefined) error.push('Invalid Academic unit value. The academic unit only accepts between 1 to 40.');
     if (stud['nstp_u'] > 40 || stud['nstp_u'] === undefined) error.push('Invalid NSTP unit value. The NSTP unit only accepts between 1 to 40.');
     if (stud['exams'] > 40 || stud['exams'] === undefined) error.push('Invalid exams value. Please input only how many times the student has taken the exam in whole numbers.');
-    if (stud['exam_result'].toUpperCase != 'PASSED' || stud['exam_result'].toUpperCase != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
+    if (stud['exam_result'].toUpperCase != 'PASSED' && stud['exam_result'].toUpperCase != 'FAILED') error.push('Invalid exam result. Please enter only PASSED or FAILED');
     // stud['remarks']
 
     if (error.length > 0) errors.push({ seq_no: row, error: error });
