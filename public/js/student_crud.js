@@ -478,6 +478,7 @@ function validateFields(data) {
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid alternate contact number format. Please use this format: 9#########');
     if (stud['is_transferee'].toUpperCase != 'YES' || stud['is_transferee'].toUpperCase != 'NO' || stud['is_transferee'] === undefined) error.push('Invalid value for Transferee Column. Please enter YES or NO.');
+    console.log(stud['is_transferee']);
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 1 to 40.');
     if (stud['com_lab_u'] > 40 || stud['com_lab_u'] === undefined) error.push('Invalid Computer Lab unit value. The Computer Lab unit only accepts between 1 to 40.');
