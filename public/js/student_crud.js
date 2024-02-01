@@ -436,7 +436,7 @@ function validateFields(data) {
   // var acadpattern = /^\b(\d|40)\b$/;
   for (const stud of data) {
     var error = [];
-    var row = 7;
+    var row = 8;
     // errors[ctr] = [];
     // stud['fhe_aw_no']
     // stud['stud_no']
