@@ -423,16 +423,13 @@ function validateFields(data) {
   var errors = [];
   var numpattern = /\d/;
   var sexpattern = /^(male|Male|Female|female|MALE|FEMALE)$/; //final regex pattern
-  var datepattern = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/;
   var contactnumpattern = /^(9)\d{9}$/;
-  var lvlnumpattern = /^[1-7]$/;
   var emailpattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var birthlocpattern = /^[-/,0-9a-zA-Z][-/,0-9a-zA-ZÑñ\s\'-.]*$/;
   var addresspattern = /^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/;
   var brgypattern = /^[0-9a-zA-Z][a-zA-ZÑñ0-9\s\'-.]*$/;
   var zippattern = /^[1-9]\d{3}$/;
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
-  var degreepattern = /^[a-zA-Z\s.]+$/;
   // var acadpattern = /^\b(\d|40)\b$/;
   for (const stud of data) {
     var error = [];
@@ -480,7 +477,7 @@ function validateFields(data) {
 
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number'] === undefined) error.push('Invalid contact number format. Please use this format: 9#########');
     if (!contactnumpattern.test(stud['contact_number']) || stud['contact_number_2'] === undefined) error.push('Invalid alternate contact number format. Please use this format: 9#########');
-    if (stud['is_transferee'] != 'yes' || stud['is_transferee'] != 'no' || stud['is_transferee'] === undefined) error.push('Invalid value for Transferee Column. Please enter Yes or No.');
+    if (stud['is_transferee'].toUpperCase != 'yes' || stud['is_transferee'].toUpperCase != 'no' || stud['is_transferee'] === undefined) error.push('Invalid value for Transferee Column. Please enter Yes or No.');
     if (!numpattern.test(stud['year_level']) || stud['year_level'] === undefined) error.push('Invalid Year level value. Please enter 1-7.');
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 1 to 40.');
     if (stud['com_lab_u'] > 40 || stud['com_lab_u'] === undefined) error.push('Invalid Computer Lab unit value. The Computer Lab unit only accepts between 1 to 40.');
