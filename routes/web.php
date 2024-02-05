@@ -64,7 +64,7 @@ Route::get('profile', 'App\Http\Controllers\Pagescontroller@profile')->name('pro
 
 //route for login
 Auth::routes(['verify' => true]);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //CRUD Enrolled
 Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
