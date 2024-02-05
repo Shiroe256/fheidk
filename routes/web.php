@@ -42,7 +42,7 @@ use App\Http\Controllers\UserController;
 // Route::resource('blog', 'App\Http\Controllers\Pagescontroller'); 
 
 Route::get('/', function () {
-    return redirect('/billings');
+    return redirect()->route('billings');
 })->middleware('auth');
 
 //billing CRUD
