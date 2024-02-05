@@ -367,7 +367,7 @@ fileInput.onchange = () => {
       });
     } else {
       resetUploadButton();
-      lbl_upload_status.innerHTML = "<strong>" + output.length + " Students detected. Click on Upload." + "</strong>";
+      lbl_upload_status.innerHTML = "<strong>" + output.length + " Student/s on Spreadsheet. Click on Upload to continue." + "</strong>";
       lbl_upload_template.innerHTML = selectedFile.name;
     }
   };
