@@ -460,7 +460,7 @@ function validateFields(data) {
     if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     if (!namepattern.test(stud['mothers_mname'] || stud['mothers_mname'] === undefined)) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     if (!emailpattern.test(stud['email']) || stud['email'] === undefined) error.push('The email field isn\'t using a valid email format');
-    if (!emailpattern.test(stud['a_email']) || stud['a_email'] !== undefined) error.push('The alternate email field isn\'t using a valid email format');
+    if (!emailpattern.test(stud['a_email']) && stud['a_email'] !== undefined) error.push('The alternate email field isn\'t using a valid email format');
     // if (!contactnumpattern.test(stud['contact_number'])) error.push('The contact number is invalid');
     // if (!addresspattern.test(stud['perm_prov']) || stud['perm_prov'] === undefined) error.push("Invalid permanent Province value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     // if (!addresspattern.test(stud['perm_city']) || stud['perm_city'] === undefined) error.push("Invalid permanent City value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
