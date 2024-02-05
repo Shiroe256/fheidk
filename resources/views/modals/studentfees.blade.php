@@ -62,7 +62,7 @@
                                     <td id="studfee_medical_and_dental_fee"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Restration Fees</strong></td>
+                                    <td><strong>Registration Fees</strong></td>
                                     <td id="studfee_registration_fee"></td>
                                 </tr>
                                 <tr>
