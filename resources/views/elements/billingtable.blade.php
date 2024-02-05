@@ -73,7 +73,7 @@
                                 </div>
                             <?php elseif ($billing->billing_status === 5): ?>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ route('billingmanagementattachments') . '/' . $billing->reference_no }}"><i class="far fa-edit"></i></a>
+                                    <a class="btn btn-outline-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ 'billings/' . $billing->reference_no . '/attachments' }}"><i class="far fa-edit"></i></a>
                                 </div>
                             <?php else: ?>
                                 <div class="btn-group btn-group-sm" role="group">
