@@ -42,7 +42,7 @@ use App\Http\Controllers\UserController;
 // Route::resource('blog', 'App\Http\Controllers\Pagescontroller'); 
 
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect('/billings');
 })->middleware('auth');
 
 //billing CRUD
@@ -87,14 +87,14 @@ Route::get('/get-degreeprograms', [BillingController::class, 'selectDegreeProgra
 Route::get('/get-campus', [BillingController::class, 'selectCampus'])->name('selectCampus');
 
 //Updating links
-Route::get('/editlink', [BillingController::class, 'editlink'])->name('editlink');//for single entry
-Route::post('/updatelinkform1', [BillingController::class, 'updatelinkform1'])->name('updatelinkform1');//for single entry
-Route::post('/updatelinkform2', [BillingController::class, 'updatelinkform2'])->name('updatelinkform2');//for single entry
-Route::post('/updatelinkform3', [BillingController::class, 'updatelinkform3'])->name('updatelinkform3');//for single entry
-Route::post('/updatelinknrc', [BillingController::class, 'updatelinknrc'])->name('updatelinknrc');//for single entry
-Route::post('/updatelinkcor', [BillingController::class, 'updatelinkcor'])->name('updatelinkcor');//for single entry
-Route::post('/updatelinkheibankcert', [BillingController::class, 'updatelinkheibankcert'])->name('updatelinkheibankcert');//for single entry
-Route::post('/updatelinkbankcert', [BillingController::class, 'updatelinkbankcert'])->name('updatelinkbankcert');//for single entry
+Route::get('/editlink', [BillingController::class, 'editlink'])->name('editlink'); //for single entry
+Route::post('/updatelinkform1', [BillingController::class, 'updatelinkform1'])->name('updatelinkform1'); //for single entry
+Route::post('/updatelinkform2', [BillingController::class, 'updatelinkform2'])->name('updatelinkform2'); //for single entry
+Route::post('/updatelinkform3', [BillingController::class, 'updatelinkform3'])->name('updatelinkform3'); //for single entry
+Route::post('/updatelinknrc', [BillingController::class, 'updatelinknrc'])->name('updatelinknrc'); //for single entry
+Route::post('/updatelinkcor', [BillingController::class, 'updatelinkcor'])->name('updatelinkcor'); //for single entry
+Route::post('/updatelinkheibankcert', [BillingController::class, 'updatelinkheibankcert'])->name('updatelinkheibankcert'); //for single entry
+Route::post('/updatelinkbankcert', [BillingController::class, 'updatelinkbankcert'])->name('updatelinkbankcert'); //for single entry
 
 //Student Settings
 //middleware for thottling (limit requests to 20 per min) and authentication
@@ -204,7 +204,7 @@ Route::get('/get-pdf', [PdfController::class, 'generatePDF']);
 Route::get('/generateForm3', [PdfController::class, 'generateForm3']);
 Route::get('/generateForm2', [PdfController::class, 'generateForm2']);
 Route::get('/generateForm1', [PdfController::class, 'generateForm1']);
-Route::get('/phpinfo', function() {
+Route::get('/phpinfo', function () {
     phpinfo();
 });
 
