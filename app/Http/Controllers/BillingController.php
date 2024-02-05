@@ -2455,16 +2455,6 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         return $fhe_award_no;
     }
 
-    private function queueComputationOfFees($reference_no, $start, $length)
-    {
-        computeFees::dispatch($reference_no, $start, $length);
-    }
-    private function queueComputationOfFeesPerStudent($reference_no, $uids)
-    {
-        DB::table('tbl_billing_details_temp')->whereIn('uid', $uids)->update(['total_fees' => -1]);
-        computeStudentFees::dispatch($reference_no, $uids);
-    }
-
     //attaching links
     // handle edit an student ajax request
     public function editlink(Request $request)
