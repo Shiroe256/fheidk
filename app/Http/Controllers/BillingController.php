@@ -1214,7 +1214,7 @@ SUM(
 
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
-        $total = $this->getTotalGrantees($reference_no, $search,1);
+        $total = $this->getTotalGrantees($reference_no, $search, 1);
 
         //students sub query. Dito ung pagination
         // $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
@@ -1242,7 +1242,7 @@ SUM(
     {
         $reference_no  = $request->reference_no;
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
-        if ($data['total_beneficiaries']< 1) {
+        if ($data['total_beneficiaries'] < 1) {
             return 0;
         }
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
