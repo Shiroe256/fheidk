@@ -513,7 +513,7 @@ SUM(
         //     ->get();
 
         $students_sub = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
-        $applicants = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
+        $applicants = $this->joinStudentFees($students_sub, 3)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
         return $applicants;
     }
     private function getForm2Data($reference_no)
@@ -991,18 +991,6 @@ SUM(
         $pagetitleheight = 30;
         $sequenceNumber = 1;
         foreach ($grantees as $index => $grantee) {
-            // if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
-            //     $pdf->AddPage('L');
-            //     $pdf->Row($headers, 3, $alignments);
-            // } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $index) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
-            //     $pdf->AddPage('L');
-            //     $pdf->Row($headers, 3, $alignments);
-            // } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
-            //     // Print headers if a new page will be created by adding a row
-            //     $pdf->Row($headers, 3, $alignments);
-            // }
-            //Sequence Number that start with '0'
-            // $rowData = array_merge([sprintf('%05d', $sequenceNumber++)], array_values($grantee));
             $granteeRow =
                 array(
                     'last_name' => $grantee->stud_lname,
@@ -1134,8 +1122,8 @@ SUM(
                 ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
                         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                });
-            // ->skip($start)->take($length);
+                })
+                ->skip($start)->take($length);
         } else {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
                 ->where(function ($query) use ($search) {
@@ -1151,7 +1139,7 @@ SUM(
         }
         return $students_sub;
     }
-    private function joinStudentFees($students_sub)
+    private function joinStudentFees($students_sub, $form = 2)
     {
         $hei_uii = Auth::user()->hei_uii;
         $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
@@ -1161,12 +1149,12 @@ SUM(
                 'students_sub.*',
                 DB::raw($this->carlo_columns)
             )
-            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
+            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
-                    ->on('tbl_other_school_fees.form', '=', DB::raw(2));
+                    ->on('tbl_other_school_fees.form', '=', DB::raw($form));
             });
         return $students;
     }
@@ -1221,7 +1209,7 @@ SUM(
         //students sub query. Dito ung pagination
         // $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
+        $students = $this->joinStudentFees($students_sub, 3)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
 
         echo json_encode([
             "draw" => $request->draw,
