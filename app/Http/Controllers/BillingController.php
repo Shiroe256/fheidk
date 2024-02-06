@@ -1218,7 +1218,8 @@ SUM(
         $total = $this->getTotalGrantees($reference_no, $search);
 
         //students sub query. Dito ung pagination
-        $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
+        // $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
+        $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1);
         $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
 
         echo json_encode([
