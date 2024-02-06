@@ -339,6 +339,7 @@ fileInput.onchange = () => {
       var bdate = new Date(row.birthdate);
       var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
       row.bdate = new_bdate;
+      console.log(row.bdate);
     });
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
