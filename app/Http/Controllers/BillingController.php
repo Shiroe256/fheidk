@@ -1067,6 +1067,7 @@ SUM(
                 'students_sub.comp_lab_unit',
                 'students_sub.nstp_unit',
                 'students_sub.total_exam_taken',
+                'students_sub.exam_result',
                 'students_sub.semester',
                 'students_sub.year_level',
                 'students_sub.remarks',
