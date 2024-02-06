@@ -445,6 +445,7 @@ function validateFields(data) {
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
+    console.log(stud['birthdate']);
     console.log(bdate);
     if (isNaN(bdate)) {
       error.push('Invalid date format. Please use this format: mm/dd/yyyy');
