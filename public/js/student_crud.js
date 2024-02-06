@@ -335,7 +335,11 @@ fileInput.onchange = () => {
     });
 
     trimValues(output);
-
+    output.forEach(row => {
+      var bdate = new Date(row.birthdate);
+      var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+      row.bdate = new_bdate;
+    });
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
     let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
