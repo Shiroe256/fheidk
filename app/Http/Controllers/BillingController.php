@@ -512,7 +512,7 @@ SUM(
         //     ->orderBy('degree_program')
         //     ->get();
 
-        $students_sub = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
+        $students_sub = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
         $applicants = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
         return $applicants;
     }
