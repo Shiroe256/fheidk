@@ -1241,9 +1241,10 @@ SUM(
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
-        $hei_uii = Auth::user()->hei_uii;
-
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
+        if ($data['total_beneficiaries']< 1) {
+            return 0;
+        }
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
