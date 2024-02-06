@@ -1,4 +1,4 @@
-fetchTempApplicants();
+// fetchTempApplicants();
 
 // add new applicant ajax request
 $("#frm_add_applicant").submit(function (e) {

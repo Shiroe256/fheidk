@@ -31,7 +31,7 @@
                         Report</button>
                     <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
                             class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
-                     {{-- <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
+                    {{-- <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
                         value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button> --}}
                     <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
                         value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize</button>
@@ -39,7 +39,7 @@
             @endif
         </div>
 
-        @if ($billing_status == 1 || $billing_status =3)
+        @if ($billing_status == 1 || ($billing_status = 3))
             <div id="billing_forms_div" class="card-body billing_forms_div">
             @else
                 <div id="billing_forms_div" class="card-body billing_forms_div" style="display:none">
@@ -251,6 +251,28 @@
                             </div>
                             <div id="show_all_applicants" class="table-responsive mt-2 table-style" role="grid"
                                 aria-describedby="dataTable_info">
+                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
+                                    id="tbl_applicants">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center"><input type="checkbox"></th>
+                                            <th class="text-left">HEI CAMPUS</th>
+                                            <th class="text-left">APP ID</th>
+                                            <th class="text-left">LASTNAME</th>
+                                            <th class="text-left">FIRSTNAME</th>
+                                            <th class="text-left">MIDDLENAME</th>
+                                            <th>COURSE</th>
+                                            <th class="text-center">YEAR</th>
+                                            <th class="text-left">REMARKS</th>
+                                            <th class="text-center">NO. OF EXAM TAKEN</th>
+                                            <th class="text-left">RESULT</th>
+                                            <th class="text-left">TOTAL EXAM FEES</th>
+                                            <th class="text-center">ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbl_list_of_students_form_3">
+                                    </tbody>
+                                </table>
                                 {{-- APPLICANTS TABLE HERE --}}
                             </div>
                         </div>
