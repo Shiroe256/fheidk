@@ -564,7 +564,12 @@ function uploadBatch() {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         }
       });
-
+      output.forEach(row => {
+        var bdate = new Date(row.birthdate);
+        var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+        row.bdate = new_bdate;
+        console.log(row.bdate);
+      });
       let errorctr = 0; //counts error
       var errors = validateFields(output); //storefields to validate
       let errorhtml = "<table style='text-align: left; vertical-align:top'><tbody>";
