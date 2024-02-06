@@ -1081,7 +1081,7 @@ SUM(
         return $reference_number;
     }
 
-    private function getTotalGrantees($reference_no, $search = "")
+    private function getTotalGrantees($reference_no, $search = "", $for_applicant = 0)
     {
         $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) use ($search) {
@@ -1092,9 +1092,19 @@ SUM(
             ->where(function ($query) use ($search) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-            })
-            ->count();
-        return $total;
+            });
+
+        if ($for_applicant) {
+            $total = $total->where(function ($query) {
+                $query->where(function ($query2) {
+                    $query2->where('year_level', '=', 1)
+                        ->where('semester', '=', 1);
+                })
+                    ->orWhere('transferee', '=', 1);
+            });
+        }
+
+        return $total->count();
     }
     public function Test()
     {
@@ -1204,7 +1214,7 @@ SUM(
 
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
-        $total = $this->getTotalGrantees($reference_no, $search);
+        $total = $this->getTotalGrantees($reference_no, $search,1);
 
         //students sub query. Dito ung pagination
         // $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length, 1)->selectRaw(DB::raw('sum(tbl_other_school_fees.amount * tbl_billing_details_temp.total_exam_taken) as exam_fees'));
