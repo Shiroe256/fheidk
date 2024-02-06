@@ -1014,13 +1014,13 @@ SUM(
                     'year_level' => $grantee->year_level,
                     'email_address' => $grantee->stud_email,
                     'phone_number' => $grantee->stud_phone_no,
-                    'admission_fees' => number_format($grantee->exam_fees, 2),
+                    'admission_fees' => number_format($grantee->amount, 2),
                     'remarks' => $grantee->exam_result
                 );
             $rowData = array_merge([$sequenceNumber++], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
-            $totalFees += (float) str_replace('', '', $grantee->exam_fees);
+            $totalFees += (float) str_replace('', '', $grantee->amount);
         };
 
         // Display the Sum of TOTAL TOSF
