@@ -2339,7 +2339,7 @@ function initializeTables() {
       fee.onclick = function () {
         showStudentFees(data.uid);
       };
-      var btn_sett = row.querySelector("btn_sett_" + data.uid);
+      var btn_sett = row.querySelector("#btn_sett_" + data.uid);
       btn_sett.onclick = function () {
         students = [];
         mod_stud_settings.show();
