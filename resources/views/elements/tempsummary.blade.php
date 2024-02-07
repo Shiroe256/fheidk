@@ -14,9 +14,9 @@ $cnt = 1;
         <tbody id="tbl_list_of_students_form_1">
                 <tr>
                     <td class="text-center"></td>
-                    <td><h3>{{ $hei_name }}</h3></td>
-                    <td class="text-center"><h3>{{ $total_beneficiaries }}</h3></td>
-                    <td class="text-center">{{ $format->format($total_fee) }}</td>
+                    <td><h4>{{ $hei_name }}</h4></td>
+                    <td class="text-center"><h4>{{ $total_beneficiaries }}</h4></td>
+                    <td class="text-center"><h4>{{ $format->format($total_fee) }}</h4></td>
                 </tr>
         </tbody>
     </table>
