@@ -90,8 +90,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="show_summary" class="table-responsive" role="grid"
-                                aria-describedby="dataTable_info">
+                            <div id="show_summary" class="table-responsive table-style mt-2 show_summary"
+                                role="grid" aria-describedby="dataTable_info">
                                 {{-- SUMMARY TABLE HERE --}}
                             </div>
                         </div>
