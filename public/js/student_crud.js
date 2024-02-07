@@ -2332,7 +2332,6 @@ function initializeTables() {
         _token: $('meta[name="csrf-token"]').attr('content')
       }
     },
-    lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
       var fee = row.querySelector('#btn_view_' + data.uid);
       fee.onclick = function () {
@@ -2449,7 +2448,6 @@ function initializeTables() {
         _token: $('meta[name="csrf-token"]').attr('content')
       }
     },
-    lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
       var fee = row.querySelector('#btn_view_' + data.uid);
       fee.onclick = function () {
