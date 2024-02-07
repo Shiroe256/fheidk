@@ -2321,7 +2321,7 @@ function initializeTables() {
       },
       {
         data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="'  + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button></div>';
         }
       }
     ],
@@ -2338,6 +2338,27 @@ function initializeTables() {
       var fee = row.querySelector('#fee_' + data.uid);
       fee.onclick = function () {
         showStudentFees(data.uid);
+      };
+      var btn_sett = row.querySelector("btn_sett_" + data.uid);
+      btn_sett.onclick = function () {
+        students = [];
+        mod_stud_settings.show();
+        loader.className = '';
+        frm_stud_settings.innerHTML = '';
+        mod_stud_settings_placeholder.style.display = 'block';
+
+        students.push(btn_sett.value);
+        getStudentSettings(students[0]);
+
+        var fname = data.stud_fname;
+        var lname = data.stud_lname;
+        var mname = data.stud_mname;
+
+        const modal_title = document.getElementById('lbl_name');
+
+        modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
+
+        frm_stud_settings_footer[0].classList.add('d-none');
       };
     }
   });
