@@ -90,8 +90,8 @@
     </div>
 @else
     <div class="card p-3">
-        <div class="row text-center">
-            <h1 class="pb-5">There are no billings yet.</h1>
+        <div class="row text-center justify-content-center p-3">
+            <h3>There are no billings yet.</h3>
         </div>
      </div>
 @endif
