@@ -259,9 +259,9 @@ tbl_applicants = $('#tbl_applicants').DataTable({
 //delete button toggle remake
 tbl_students.on('select deselect', function (e, type, indexes) {
   var selectedRowCount = tbl_students.rows({ selected: true }).count();
-  var btn = document.querySelector('#btn_edit_students');
+  var btn = document.querySelector('#btn_delete_students');
   if (selectedRowCount > 0) {
-    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + selectedRowCount + ')';
+    btn.innerHTML = '<i class="fas fa-trash"></i>&nbsp;Edit (' + selectedRowCount + ')';
     btn.classList.remove('d-none');
   }
   else {
