@@ -258,7 +258,7 @@ tbl_applicants = $('#tbl_applicants').DataTable({
 });
 //delete button toggle remake
 tbl_students.on('select deselect', function (e, type, indexes) {
-  var selectedRowCount = table.rows({ selected: true }).count();
+  var selectedRowCount = tbl_students.rows({ selected: true }).count();
   var btn = document.querySelector('#btn_edit_students');
   if (selectedRowCount > 0) {
     btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
