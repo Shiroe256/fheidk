@@ -55,6 +55,7 @@ Route::get('/billings/{ref_no}/attachments/form2', [BillingController::class, 'g
 Route::get('/billings/{ref_no}/attachments/form3', [BillingController::class, 'generatePDFForm3']);
 Route::get('/billings/{ref_no?}/attachments', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
 Route::get('/billings/{ref_no}/settings', [BillingController::class, 'getBillingSettings'])->name('getBillingSettings');
+Route::get('/billings/{ref_no?}/test', [BillingController::class, 'Test']); //testing
 Route::get('/billings/{ref_no?}', [BillingController::class, 'billingmanagementpage']);
 Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
 Route::get('/fees/{uid}', [BillingController::class, 'fetchStudentFees'])->name('fetchStudentFees'); //student fees
