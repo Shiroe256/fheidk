@@ -458,7 +458,7 @@ templateReq.onload = function (e) {
       ws.getCell('B1').value = heiinfo.hei_psg_region;
       ws.getCell('B2').value = heiinfo.hei_uii;
       ws.getCell('B3').value = heiinfo.hei_name;
-      ws.getCell('B4').value = reference_no.value;
+      ws.getCell('B4').value = reference_no;
       var crs = workbook.addWorksheet('courses');
       heiinfo.courses.forEach(course => {
         crs.addRow([course.course_enrolled]);
@@ -478,7 +478,7 @@ templateReq.onload = function (e) {
 
           var url = URL.createObjectURL(data);
           a.href = url;
-          a.download = "template_" + reference_no.value + ".xlsx";
+          a.download = "template_" + reference_no + ".xlsx";
           document.body.appendChild(a);
           a.click();
           setTimeout(function () {
@@ -646,10 +646,10 @@ function queueBilling() {
     url: window.location.origin + "/queueBilling",
     type: "POST",
     data: {
-      reference_no: reference_no.value
+      reference_no: reference_no
     },
     success: function (data) {
-      window.location.href = "/billings?queued=" + reference_no.value;
+      window.location.href = "/billings?queued=" + reference_no;
     },
   });
 }
@@ -847,7 +847,7 @@ function uploadBatch() {
           type: "POST",
           data: {
             payload: JSON.stringify(output),
-            reference_no: reference_no.value,
+            reference_no: reference_no,
             ac_year: ac_year,
             semester: semester,
             tranche: tranche
@@ -922,7 +922,7 @@ function getStudentSettings(student_uid) {
   req_get_stud_settings.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   let json = JSON.stringify({
     bs_student: student_uid,
-    reference_no: reference_no.value
+    reference_no: reference_no
   });
   req_get_stud_settings.send(json);
 }
@@ -1031,7 +1031,7 @@ btn_save_student_settings.onclick = function () {
     toggle.disabled = true;
     osf.push({ "osf": toggle.value, "status": toggle.checked });
   });
-  updateStudentFee(students, osf, reference_no.value);
+  updateStudentFee(students, osf, reference_no);
 };
 
 req_get_stud_fees.onload = function () {
@@ -2433,7 +2433,7 @@ $(document).on('click', '#btn_delete_students', function () {
         url: '/delete-tempstudent',
         method: 'delete',
         data: {
-          reference_no: reference_no.value,
+          reference_no: reference_no,
           uid: id
         },
         success: function (response) {
