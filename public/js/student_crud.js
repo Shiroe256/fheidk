@@ -2320,7 +2320,7 @@ function initializeTables() {
       },
       {
         data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
         }
       }
     ],
@@ -2437,7 +2437,7 @@ function initializeTables() {
       },
       {
         data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
         }
       }
     ],
