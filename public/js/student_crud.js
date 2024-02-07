@@ -289,6 +289,7 @@ fileInput.onchange = () => {
     var output = XLSX.utils.sheet_to_json(sheet, {
       range: 7,
       raw: false,
+      dateNF:"mm-dd-yyyy",
       header: [
         "seq_no",
         "fhe_aw_no",
@@ -335,12 +336,12 @@ fileInput.onchange = () => {
     });
 
     trimValues(output);
-    output.forEach(row => {
-      var bdate = new Date(row.birthdate);
-      var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
-      row.bdate = new_bdate;
-      console.log(row.bdate);
-    });
+    // output.forEach(row => {
+    //   var bdate = new Date(row.birthdate);
+    //   var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+    //   row.bdate = new_bdate;
+    //   console.log(row.bdate);
+    // });
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
     let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
@@ -514,6 +515,7 @@ function uploadBatch() {
       var output = XLSX.utils.sheet_to_json(sheet, {
         range: 7,
         raw: false,
+        dateNF:"mm-dd-yyyy",
         header: [
           "seq_no",
           "fhe_aw_no",
@@ -564,10 +566,13 @@ function uploadBatch() {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         }
       });
+      // output.forEach(row => {
+      //   var bdate = new Date(row.birthdate);
+      //   var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+      //   row.bdate = new_bdate;
+      //   console.log(row.bdate);
+      // });
       output.forEach(row => {
-        var bdate = new Date(row.birthdate);
-        var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
-        row.bdate = new_bdate;
         console.log(row.bdate);
       });
       let errorctr = 0; //counts error
