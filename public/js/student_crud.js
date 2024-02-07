@@ -977,9 +977,9 @@ function checkSimilarCoursesYear(courses = []) {
   return true;
 }
 
-btn_edit_students.onclick = function () {
-  editStudentsSettings();
-};
+// btn_edit_students.onclick = function () {
+//   editStudentsSettings();
+// };
 
 // function setup_Events() {
 //   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');

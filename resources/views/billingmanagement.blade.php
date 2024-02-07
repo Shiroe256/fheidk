@@ -90,8 +90,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="show_summary" class="table-responsive table-style mt-2 show_summary"
-                                role="grid" aria-describedby="dataTable_info">
+                            <div id="show_summary" class="table-responsive" role="grid"
+                                aria-describedby="dataTable_info">
                                 {{-- SUMMARY TABLE HERE --}}
                             </div>
                         </div>
@@ -197,8 +197,6 @@
                                 <table class="table table-hover w-100" id="tbl_students">
                                     <thead>
                                         <tr>
-                                            {{-- <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
-                                            <th class="text-left">HEI CAMPUS</th> --}}
                                             <th class="text-left">APP ID</th>
                                             <th class="text-left">AWARD NUMBER</th>
                                             <th class="text-left">LASTNAME</th>
@@ -208,9 +206,7 @@
                                             <th class="text-center">YEAR</th>
                                             <th class="text-left">REMARKS</th>
                                             <th class="text-left">STATUS</th>
-                                            <th class="text-left"
-                                                title="No need to click this after saving. This is just for viewing purposes"
-                                                data-placement="bottom">AMOUNT BILLED <i
+                                            <th class="text-left" data-placement="bottom">AMOUNT BILLED <i
                                                     class="fa-solid fa-circle-question"></i></th>
                                             <th class="text-center">ACTIONS</th>
                                         </tr>
@@ -234,8 +230,6 @@
                                 <table class="table table-hover w-100" id="tbl_applicants">
                                     <thead>
                                         <tr>
-                                            {{-- <th class="text-center"><input type="checkbox"></th>
-                                            <th class="text-left">HEI CAMPUS</th> --}}
                                             <th class="text-left">APP ID</th>
                                             <th class="text-left">LASTNAME</th>
                                             <th class="text-left">FIRSTNAME</th>
