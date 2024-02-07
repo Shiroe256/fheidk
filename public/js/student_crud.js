@@ -289,7 +289,7 @@ fileInput.onchange = () => {
     var output = XLSX.utils.sheet_to_json(sheet, {
       range: 7,
       raw: false,
-      dateNF:"mm-dd-yyyy",
+      dateNF: "mm-dd-yyyy",
       header: [
         "seq_no",
         "fhe_aw_no",
@@ -451,8 +451,6 @@ function validateFields(data) {
     // if(numpattern.test(stud['ext_name'])) error.push('There are invalid characters in the First Name Field');
     if (!namepattern.test(stud['last_name']) || stud['last_name'] === undefined) error.push("Invalid last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing..");
     if (!sexpattern.test(stud['sex_at_birth']) || stud['sex_at_birth'] === undefined) error.push('Incorrect sex at birth value. Please enter Male or Female.'); //Changed error message
-    console.log(stud['birthdate']);
-    console.log(bdate);
     if (isNaN(bdate)) {
       error.push('Invalid date format. Please use this format: mm/dd/yyyy');
     } else {
@@ -515,7 +513,7 @@ function uploadBatch() {
       var output = XLSX.utils.sheet_to_json(sheet, {
         range: 7,
         raw: false,
-        dateNF:"mm-dd-yyyy",
+        dateNF: "mm-dd-yyyy",
         header: [
           "seq_no",
           "fhe_aw_no",
@@ -566,14 +564,14 @@ function uploadBatch() {
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      // output.forEach(row => {
-      //   var bdate = new Date(row.birthdate);
-      //   var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
-      //   row.bdate = new_bdate;
-      //   console.log(row.bdate);
-      // });
       output.forEach(row => {
+        var bdate = new Date(row.birthdate);
+        var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+        row.bdate = new_bdate;
         console.log(row.bdate);
+      });
+      output.forEach(row => {
+        console.log(row.birthdate);
       });
       let errorctr = 0; //counts error
       var errors = validateFields(output); //storefields to validate
