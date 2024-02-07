@@ -1215,9 +1215,9 @@ SUM(
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        // $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
-        $students = $this->joinStudentFees($students_sub);
-        $students_sett = $this->joinSettings($students)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
+        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
+        // $students = $this->joinStudentFees($students_sub);
+        // $students_sett = $this->joinSettings($students)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
         //dito jinojoin ung information about the fees and computation
 
         //!kailangan lagyan dito ng para sa mga pumasa lang
@@ -1244,9 +1244,9 @@ SUM(
 
         echo json_encode([
             "draw" => $request->draw,
-            "recordsTotal" => count($students_sett),
+            "recordsTotal" => count($students),
             "recordsFiltered" => $total,
-            "data" => $students_sett
+            "data" => $students
         ]);
     }
     public function fetchTempApplicantJSON(Request $request)
