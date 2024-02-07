@@ -616,7 +616,6 @@ function uploadBatch() {
             fileInput.value = '';
             mod_upload_batch.hide();
             resetUploadButton();
-            // fetchTempStudent();
             tbl_students.ajax.reload();
             fetchTempSummary();
             fetchTempApplicants();
@@ -854,7 +853,7 @@ req_update_stud_settings.onload = function () {
 }
 //student settings end
 
-fetchTempStudent(); //initialize the shit lol remnants to ng legacy
+initializeTables(); //initialize the shit lol remnants to ng legacy
 selectDegreePrograms();
 selectCampus();
 
@@ -885,7 +884,6 @@ $("#frm_add_student").submit(function (e) {
           'Student Added Successfully!',
           'success'
         )
-        // fetchTempStudent();
         tbl_students.ajax.reload();
         fetchTempSummary();
         $("#btn_add_student").text('Add Student');
@@ -2118,7 +2116,6 @@ $("#frm_update_student").submit(function (e) {
           'Student Updated Successfully!',
           'success'
         )
-        // fetchTempStudent();
         tbl_students.ajax.reload();
         fetchTempSummary();
         $("#btn_update_student").text('Update Student');
@@ -2208,7 +2205,6 @@ $(document).on('click', '#btn_delete_students', function () {
             'success'
           )
           $('#btn_delete_students').addClass('d-none');
-          // fetchTempStudent();
           tbl_students.ajax.reload();
           fetchTempSummary();
         }
@@ -2236,14 +2232,32 @@ function btnDeleteToggle() {
 }
 
 //fetch records from the database
-function fetchTempStudent() {
+function initializeTables() {
   let reference_no = $("#reference_no").val();
 
 
   tbl_students = $('#tbl_students').DataTable({
+    rowId: 'uid',
+    stateSave: true,
+    buttons: [
+      {
+        text: 'Select all',
+        action: function () {
+          table.rows().select();
+        }
+      },
+      {
+        text: 'Select none',
+        action: function () {
+          table.rows().deselect();
+        }
+      }
+    ],
     processing: true,
     serverSide: true,
-    select: true,
+    select: {
+      style: 'multi'
+    },
     columns: [
       {
         data: 'uid', render: function (data, type, row, meta) {
@@ -2329,6 +2343,22 @@ function fetchTempStudent() {
   });
   //tbl applicants data table
   tbl_applicants = $('#tbl_applicants').DataTable({
+    rowId: 'uid',
+    stateSave: true,
+    buttons: [
+      {
+        text: 'Select all',
+        action: function () {
+          table.rows().select();
+        }
+      },
+      {
+        text: 'Select none',
+        action: function () {
+          table.rows().deselect();
+        }
+      }
+    ],
     processing: true,
     serverSide: true,
     select: true,
