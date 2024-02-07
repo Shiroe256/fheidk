@@ -272,7 +272,6 @@ tbl_students.on('select deselect', function (e, type, indexes) {
 tbl_students.on('draw.dt', function () {
   document.getElementById("students-placeholder").classList.add('d-none');
   document.getElementById("show_all_students").classList.remove('d-none');
-  setup_Events();
 })
 
 function trimValues(obj) {
