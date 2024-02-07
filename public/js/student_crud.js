@@ -567,8 +567,8 @@ function uploadBatch() {
       output.forEach(row => {
         var bdate = new Date(row.birthdate);
         var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
-        row.bdate = new_bdate;
-        console.log(row.bdate);
+        row.birthdate = new_bdate;
+        console.log(row.birthdate);
       });
       output.forEach(row => {
         console.log(row.birthdate);
