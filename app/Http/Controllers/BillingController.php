@@ -1185,6 +1185,27 @@ SUM(
 
         return $students;
     }
+    private function joinSettings($student_sub)
+    {
+        $student_fee_sett = $student_sub->join('tbl_billing_settings', function ($join) {
+            $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+        })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            });
+        return $student_fee_sett;
+    }
     public function fetchTempStudent(Request $request)
     {
 
@@ -1194,7 +1215,9 @@ SUM(
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
+        // $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
+        $students = $this->joinStudentFees($students_sub);
+        $students_sett = $this->joinSettings($students)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
         //dito jinojoin ung information about the fees and computation
 
         //!kailangan lagyan dito ng para sa mga pumasa lang
@@ -1221,9 +1244,9 @@ SUM(
 
         echo json_encode([
             "draw" => $request->draw,
-            "recordsTotal" => count($students),
+            "recordsTotal" => count($students_sett),
             "recordsFiltered" => $total,
-            "data" => $students
+            "data" => $students_sett
         ]);
     }
     public function fetchTempApplicantJSON(Request $request)
