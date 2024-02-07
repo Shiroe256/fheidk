@@ -121,7 +121,7 @@ tbl_students = $('#tbl_students').DataTable({
     url: '/get-tempstudents',
     data: {
       reference_no: reference_no,
-      _token: $('meta[name="csrf-token"]').attr('content')
+      _token: csrf
     }
   },
   createdRow: function (row, data, dataIndex) {
@@ -231,7 +231,7 @@ tbl_applicants = $('#tbl_applicants').DataTable({
     url: '/get-tempapplicants',
     data: {
       reference_no: reference_no,
-      _token: $('meta[name="csrf-token"]').attr('content')
+      _token: csrf
     }
   },
   createdRow: function (row, data, dataIndex) {
@@ -859,7 +859,6 @@ function uploadBatch() {
             tbl_students.ajax.reload();
             fetchTempSummary();
             fetchTempApplicants();
-            document.getElementById('upload_template_text').innerHTML = selectedFile.name;
           },
           beforeSend: function () {
             uploadButton.disabled = true;
