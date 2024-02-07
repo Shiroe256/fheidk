@@ -2334,16 +2334,17 @@ function initializeTables() {
     },
     createdRow: function (row, data, dataIndex) {
       var fee = row.querySelector('#btn_view_' + data.uid);
-      fee.onclick = function () {
+      fee.onclick = function (e) {
         showStudentFees(data.uid);
+        e.stopPropagation();
       };
       var btn_sett = row.querySelector("#btn_sett_" + data.uid);
-      btn_sett.onclick = function () {
+      btn_sett.onclick = function (e) {
         students = [];
         mod_stud_settings.show();
         loader.className = '';
         mod_stud_settings_placeholder.style.display = 'block';
-
+        
         students.push(btn_sett.value);
         getStudentSettings(students[0]);
         const modal_title = document.getElementById('lbl_name');
@@ -2351,6 +2352,7 @@ function initializeTables() {
         modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
 
         frm_stud_settings_footer[0].classList.add('d-none');
+        e.stopPropagation();
       };
     }
   });
