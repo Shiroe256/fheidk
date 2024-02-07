@@ -2404,6 +2404,7 @@ $(document).on('change', 'input[name="student_checkbox"]', function () {
 
 //Delete data
 $(document).on('click', '#btn_delete_students', function () {
+  // var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
   var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
   // $($('input[name="student_checkbox"]:checked')).each(function () {
   //   checkedStudents.push($(this).val());
@@ -2435,7 +2436,6 @@ $(document).on('click', '#btn_delete_students', function () {
           uid: id
         },
         success: function (response) {
-          console.log(response);
           Swal.fire(
             'Deleted!',
             'Student record has been deleted.',
@@ -2443,6 +2443,7 @@ $(document).on('click', '#btn_delete_students', function () {
           )
           $('#btn_delete_students').addClass('d-none');
           tbl_students.ajax.reload();
+          tbl_applicants.ajax.reload();
           fetchTempSummary();
         }
       });
