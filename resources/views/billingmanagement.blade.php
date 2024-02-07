@@ -200,7 +200,7 @@
                                 </table>
                             </div>
                             <div id="show_all_students" class="table-responsive">
-                                <table class="table table-hover" id="tbl_students">
+                                <table class="table table-hover w-100" id="tbl_students">
                                     <thead>
                                         <tr>
                                             {{-- <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
@@ -247,7 +247,7 @@
                                 </div>
                             </div>
                             <div id="show_all_applicants" class="table-responsive">
-                                <table class="table table-hover" id="tbl_applicants">
+                                <table class="table table-hover w-100" id="tbl_applicants">
                                     <thead>
                                         <tr>
                                             {{-- <th class="text-center"><input type="checkbox"></th>
