@@ -338,7 +338,7 @@ fileInput.onchange = () => {
     trimValues(output);
     output.forEach(row => {
       var bdate = new Date(row.birthdate);
-      var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+      var new_bdate = (bdate.getMonth() + 1) + '-' + bdate.getDate() + '-' + bdate.getFullYear();
       row.birthdate = new_bdate;
     });
     let errorctr = 0; //counts error
@@ -565,7 +565,7 @@ function uploadBatch() {
       });
       output.forEach(row => {
         var bdate = new Date(row.birthdate);
-        var new_bdate = bdate.getMonth() + '-' + bdate.getDate() + '-' + bdate.getFullYear();
+        var new_bdate = (bdate.getMonth() + 1) + '-' + bdate.getDate() + '-' + bdate.getFullYear();
         row.birthdate = new_bdate;
         console.log(row.birthdate);
       });
