@@ -107,14 +107,8 @@
                                 </div>
                                 <div class="col text-right">
                                     <div class="btn-group" role="group"><button
-                                            class="btn btn-outline-primary btn-sm" type="button"
-                                            data-bs-toggle="modal" data-bs-target="#mod_new_student_info"><i
-                                                class="fas fa-user-plus"></i>&nbsp;Add
-                                            Student</button><button class="btn btn-outline-danger btn-sm d-none"
-                                            id="btn_delete_students" type="button"></button>
-                                        <button class="btn btn-outline-primary btn-sm d-none" id="btn_edit_students"
-                                            type="button">Edit
-                                            Students</button>
+                                            class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
+                                            type="button"></button>
                                     </div>
                                 </div>
                             </div>
@@ -234,16 +228,6 @@
                                     <h5 class="text-black-50 mb-4"><i
                                             class="fas fa-pencil-ruler"></i>&nbsp;Entrance/Admission
                                         Exam</h5>
-                                </div>
-                                <div class="col text-right">
-                                    <div class="btn-group" role="group"><button
-                                            class="btn btn-outline-primary btn-sm" type="button" data-toggle="modal"
-                                            data-target="#mod_admission_entrance"><i
-                                                class="fas fa-user-plus"></i>&nbsp;Add
-                                            Applicant</button><button
-                                            class="btn btn_delete_student btn-outline-danger btn-sm" type="button"><i
-                                                class="fas fa-user-minus"></i>&nbsp;Remove</button>
-                                    </div>
                                 </div>
                             </div>
                             <div id="show_all_applicants" class="table-responsive">
