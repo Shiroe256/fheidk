@@ -858,6 +858,7 @@ function uploadBatch() {
             resetUploadButton();
             tbl_students.ajax.reload();
             tbl_applicants.ajax.reload();
+            fetchTempSummary();
           },
           beforeSend: function () {
             uploadButton.disabled = true;
@@ -981,43 +982,43 @@ btn_edit_students.onclick = function () {
   editStudentsSettings();
 };
 
-function setup_Events() {
-  const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
-  const student_fees = document.querySelectorAll('.student_fees');
+// function setup_Events() {
+//   const btn_stud_settings = document.querySelectorAll('.btn_stud_settings');
+//   const student_fees = document.querySelectorAll('.student_fees');
 
-  student_fees.forEach(element => {
-    element.onclick = function () {
-      element.classList.add("skeleton");
-      element.classList.add("skeleton-text");
-      element.innerHTML = "";
-      tbl_students.ajax.reload();
-      fetchTempSummary();
-      // getStudentFees([element.id.substring(10)]);
-    };
-  });
-  // btn_stud_settings.forEach(element => {
-  //   element.onclick = function () {
-  //     students = [];
-  //     mod_stud_settings.show();
-  //     loader.className = '';
-  //     frm_stud_settings.innerHTML = '';
-  //     mod_stud_settings_placeholder.style.display = 'block';
+//   student_fees.forEach(element => {
+//     element.onclick = function () {
+//       element.classList.add("skeleton");
+//       element.classList.add("skeleton-text");
+//       element.innerHTML = "";
+//       tbl_students.ajax.reload();
+//       fetchTempSummary();
+//       // getStudentFees([element.id.substring(10)]);
+//     };
+//   });
+//   // btn_stud_settings.forEach(element => {
+//   //   element.onclick = function () {
+//   //     students = [];
+//   //     mod_stud_settings.show();
+//   //     loader.className = '';
+//   //     frm_stud_settings.innerHTML = '';
+//   //     mod_stud_settings_placeholder.style.display = 'block';
 
-  //     students.push(element.value);
-  //     getStudentSettings(students[0]);
+//   //     students.push(element.value);
+//   //     getStudentSettings(students[0]);
 
-  //     var fname = document.getElementById('std_fname_' + element.value).innerHTML;
-  //     var lname = document.getElementById('std_lname_' + element.value).innerHTML;
-  //     var mname = document.getElementById('std_mname_' + element.value).innerHTML;
+//   //     var fname = document.getElementById('std_fname_' + element.value).innerHTML;
+//   //     var lname = document.getElementById('std_lname_' + element.value).innerHTML;
+//   //     var mname = document.getElementById('std_mname_' + element.value).innerHTML;
 
-  //     const modal_title = document.getElementById('lbl_name');
+//   //     const modal_title = document.getElementById('lbl_name');
 
-  //     modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
+//   //     modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
 
-  //     frm_stud_settings_footer[0].classList.add('d-none');
-  //   };
-  // });
-}
+//   //     frm_stud_settings_footer[0].classList.add('d-none');
+//   //   };
+//   // });
+// }
 btn_save_student_settings.onclick = function () {
   const toggles = document.querySelectorAll('.toggle');
   if (toggles.length < 1) {
