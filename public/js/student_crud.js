@@ -2259,14 +2259,14 @@ function initializeTables() {
       style: 'multi'
     },
     columns: [
-      {
-        data: 'uid', render: function (data, type, row, meta) {
-          return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
-        }
-      },
-      {
-        data: 'hei_name'
-      },
+      // {
+      //   data: 'uid', render: function (data, type, row, meta) {
+      //     return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
+      //   }
+      // },
+      // {
+      //   data: 'hei_name'
+      // },
       {
         data: 'app_id'
       },
@@ -2365,14 +2365,14 @@ function initializeTables() {
       style: 'multi'
     },
     columns: [
-      {
-        data: 'uid', render: function (data, type, row, meta) {
-          return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
-        }
-      },
-      {
-        data: 'hei_name'
-      },
+      // {
+      //   data: 'uid', render: function (data, type, row, meta) {
+      //     return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
+      //   }
+      // },
+      // {
+      //   data: 'hei_name'
+      // },
       {
         data: 'app_id'
       },

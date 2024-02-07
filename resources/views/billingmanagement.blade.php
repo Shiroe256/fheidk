@@ -205,8 +205,8 @@
                                     id="tbl_students">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
-                                            <th class="text-left">HEI CAMPUS</th>
+                                            {{-- <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
+                                            <th class="text-left">HEI CAMPUS</th> --}}
                                             <th class="text-left">APP ID</th>
                                             <th class="text-left">AWARD NUMBER</th>
                                             <th class="text-left">LASTNAME</th>
@@ -255,8 +255,8 @@
                                     id="tbl_applicants">
                                     <thead>
                                         <tr>
-                                            <th class="text-center"><input type="checkbox"></th>
-                                            <th class="text-left">HEI CAMPUS</th>
+                                            {{-- <th class="text-center"><input type="checkbox"></th>
+                                            <th class="text-left">HEI CAMPUS</th> --}}
                                             <th class="text-left">APP ID</th>
                                             <th class="text-left">LASTNAME</th>
                                             <th class="text-left">FIRSTNAME</th>
