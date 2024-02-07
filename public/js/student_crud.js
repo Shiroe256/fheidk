@@ -2072,8 +2072,7 @@ $(document).on('click', '.btn_update_student', function (e) {
       if (response.transferee == "Yes") {
         $("#edit_checkbox_transferee").prop('checked', true);
       } else {
-        ("#edit_checkbox_transferee").p
-        rop('checked', false);
+        ("#edit_checkbox_transferee").prop('checked', false);
       }
 
       if ($("#edit_nstp_unit").val() !== "") {
@@ -2316,12 +2315,12 @@ function initializeTables() {
       {
         data: 'total_fee', render: function (data, type, row, meta) {
           let uid = row.uid;
-          return '<div class="fee" id="fee_' + uid + '"><strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong></div>'
+          return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
         }
       },
       {
         data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="'  + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button><button value="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
         }
       }
     ],
@@ -2335,7 +2334,7 @@ function initializeTables() {
     },
     lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
-      var fee = row.querySelector('#fee_' + data.uid);
+      var fee = row.querySelector('#btn_view_' + data.uid);
       fee.onclick = function () {
         showStudentFees(data.uid);
       };
@@ -2344,19 +2343,13 @@ function initializeTables() {
         students = [];
         mod_stud_settings.show();
         loader.className = '';
-        frm_stud_settings.innerHTML = '';
         mod_stud_settings_placeholder.style.display = 'block';
 
         students.push(btn_sett.value);
         getStudentSettings(students[0]);
-
-        var fname = data.stud_fname;
-        var lname = data.stud_lname;
-        var mname = data.stud_mname;
-
         const modal_title = document.getElementById('lbl_name');
 
-        modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
+        modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
 
         frm_stud_settings_footer[0].classList.add('d-none');
       };
@@ -2439,12 +2432,12 @@ function initializeTables() {
       {
         data: 'total_fee', render: function (data, type, row, meta) {
           let uid = row.uid;
-          return '<div class="fee" id="fee_' + uid + '"><strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong></div>'
+          return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
         }
       },
       {
         data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button value="' + data + '" class="btn btn_stud_settings btn-outline-primary" title="Edit Student Fees" data-placement="bottom" type="button"><i class="fas fa-wrench"></i></button></div>';
+          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-outline-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-outline-primary"type="button"><i class="fas fa-wrench"></i></button><button value="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
         }
       }
     ],
@@ -2458,9 +2451,24 @@ function initializeTables() {
     },
     lengthMenu: [[10, 20], [10, 20]],
     createdRow: function (row, data, dataIndex) {
-      var fee = row.querySelector('#fee_' + data.uid);
+      var fee = row.querySelector('#btn_view_' + data.uid);
       fee.onclick = function () {
         showStudentFees(data.uid);
+      };
+      var btn_sett = row.querySelector("#btn_sett_" + data.uid);
+      btn_sett.onclick = function () {
+        students = [];
+        mod_stud_settings.show();
+        loader.className = '';
+        mod_stud_settings_placeholder.style.display = 'block';
+
+        students.push(btn_sett.value);
+        getStudentSettings(students[0]);
+        const modal_title = document.getElementById('lbl_name');
+
+        modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
+
+        frm_stud_settings_footer[0].classList.add('d-none');
       };
     }
   });
