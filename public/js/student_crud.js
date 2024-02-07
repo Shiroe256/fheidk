@@ -256,6 +256,18 @@ tbl_applicants = $('#tbl_applicants').DataTable({
     };
   }
 });
+//delete button toggle remake
+tbl_students.on('select deselect', function (e, type, indexes) {
+  var selectedRowCount = table.rows({ selected: true }).count();
+  var btn = document.querySelector('#btn_edit_students');
+  if (selectedRowCount > 0) {
+    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
+    btn.classList.remove('d-none');
+  }
+  else {
+    btn.classList.add('d-none');
+  }
+});
 
 tbl_students.on('draw.dt', function () {
   document.getElementById("students-placeholder").classList.add('d-none');
@@ -2394,10 +2406,11 @@ $(document).on('change', 'input[name="student_checkbox"]', function () {
 
 //Delete data
 $(document).on('click', '#btn_delete_students', function () {
-  var checkedStudents = [];
-  $($('input[name="student_checkbox"]:checked')).each(function () {
-    checkedStudents.push($(this).val());
-  });
+  var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
+  // $($('input[name="student_checkbox"]:checked')).each(function () {
+  //   checkedStudents.push($(this).val());
+  // });
+
   let id = checkedStudents;
 
   $.ajaxSetup({
@@ -2440,22 +2453,22 @@ $(document).on('click', '#btn_delete_students', function () {
 });
 
 //Delete button hide and show
-function btnDeleteToggle() {
-  if ($('input[name="student_checkbox"]:checked').length > 0) {
-    $('#btn_delete_students').html('');
-    $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove (' + $('input[name="student_checkbox"]:checked').length + ')').removeClass('d-none');
-  } else {
-    $('#btn_delete_students').addClass('d-none');
-  }
-  var checkboxes = document.querySelectorAll('input[name="student_checkbox"]:checked');
-  var btn = document.querySelector('#btn_edit_students');
-  if (checkboxes.length > 0) {
-    btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
-    btn.classList.remove('d-none');
-  } else {
-    btn.classList.add('d-none');
-  }
-}
+// function btnDeleteToggle() {
+//   if ($('input[name="student_checkbox"]:checked').length > 0) {
+//     $('#btn_delete_students').html('');
+//     $('#btn_delete_students').append('<i class="fas fa-user-minus"></i>&nbsp;Remove (' + $('input[name="student_checkbox"]:checked').length + ')').removeClass('d-none');
+//   } else {
+//     $('#btn_delete_students').addClass('d-none');
+//   }
+//   var checkboxes = document.querySelectorAll('input[name="student_checkbox"]:checked');
+//   var btn = document.querySelector('#btn_edit_students');
+//   if (checkboxes.length > 0) {
+//     btn.innerHTML = '<i class="fas fa-wrench"></i>&nbsp;Edit (' + checkboxes.length + ')';
+//     btn.classList.remove('d-none');
+//   } else {
+//     btn.classList.add('d-none');
+//   }
+// }
 
 //fetch all degree programs from the database to select input
 function selectDegreePrograms() {
