@@ -1165,6 +1165,22 @@ SUM(
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                     ->on('tbl_other_school_fees.form', '=', DB::raw($form));
             });
+        if ($form == 0) {
+            $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+                ->mergeBindings($students_sub)
+                ->select(
+                    'students_sub.uid',
+                    'students_sub.*',
+                    DB::raw($this->carlo_columns)
+                )
+                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                    $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                        ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                });
+        }
+
         return $students;
     }
     public function fetchTempStudent(Request $request)
