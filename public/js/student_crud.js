@@ -2243,6 +2243,7 @@ function fetchTempStudent() {
   tbl_students = $('#tbl_students').DataTable({
     processing: true,
     serverSide: true,
+    select: true,
     columns: [
       {
         data: 'uid', render: function (data, type, row, meta) {
@@ -2330,6 +2331,7 @@ function fetchTempStudent() {
   tbl_applicants = $('#tbl_applicants').DataTable({
     processing: true,
     serverSide: true,
+    select: true,
     columns: [
       {
         data: 'uid', render: function (data, type, row, meta) {
