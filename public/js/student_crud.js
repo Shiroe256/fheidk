@@ -757,28 +757,28 @@ function setup_Events() {
       // getStudentFees([element.id.substring(10)]);
     };
   });
-  btn_stud_settings.forEach(element => {
-    element.onclick = function () {
-      students = [];
-      mod_stud_settings.show();
-      loader.className = '';
-      frm_stud_settings.innerHTML = '';
-      mod_stud_settings_placeholder.style.display = 'block';
+  // btn_stud_settings.forEach(element => {
+  //   element.onclick = function () {
+  //     students = [];
+  //     mod_stud_settings.show();
+  //     loader.className = '';
+  //     frm_stud_settings.innerHTML = '';
+  //     mod_stud_settings_placeholder.style.display = 'block';
 
-      students.push(element.value);
-      getStudentSettings(students[0]);
+  //     students.push(element.value);
+  //     getStudentSettings(students[0]);
 
-      var fname = document.getElementById('std_fname_' + element.value).innerHTML;
-      var lname = document.getElementById('std_lname_' + element.value).innerHTML;
-      var mname = document.getElementById('std_mname_' + element.value).innerHTML;
+  //     var fname = document.getElementById('std_fname_' + element.value).innerHTML;
+  //     var lname = document.getElementById('std_lname_' + element.value).innerHTML;
+  //     var mname = document.getElementById('std_mname_' + element.value).innerHTML;
 
-      const modal_title = document.getElementById('lbl_name');
+  //     const modal_title = document.getElementById('lbl_name');
 
-      modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
+  //     modal_title.innerHTML = lname + ', ' + fname + ' ' + mname;
 
-      frm_stud_settings_footer[0].classList.add('d-none');
-    };
-  });
+  //     frm_stud_settings_footer[0].classList.add('d-none');
+  //   };
+  // });
 }
 btn_save_student_settings.onclick = function () {
   const toggles = document.querySelectorAll('.toggle');
