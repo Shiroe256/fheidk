@@ -2361,7 +2361,9 @@ function initializeTables() {
     ],
     processing: true,
     serverSide: true,
-    select: true,
+    select: {
+      style: 'multi'
+    },
     columns: [
       {
         data: 'uid', render: function (data, type, row, meta) {
