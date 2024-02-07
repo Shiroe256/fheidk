@@ -199,10 +199,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="show_all_students" class="table-responsive mt-2 table-style d-none"
-                                role="grid" aria-describedby="dataTable_info">
-                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                    id="tbl_students">
+                            <div id="show_all_students" class="table-responsive">
+                                <table class="table table-bordered table-hover" id="tbl_students">
                                     <thead>
                                         <tr>
                                             {{-- <th class="text-center"><input type="checkbox" name="main_checkbox"></th>
@@ -224,7 +222,6 @@
                                         </tr>
                                     </thead>
                                 </table>
-                                {{-- STUDENT TABLE HERE --}}
                             </div>
                         </div>
                     </form>
@@ -249,10 +246,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="show_all_applicants" class="table-responsive mt-2 table-style" role="grid"
-                                aria-describedby="dataTable_info">
-                                <table class="table table-bordered table-hover table-sm dataTable my-0 table-style"
-                                    id="tbl_applicants">
+                            <div id="show_all_applicants" class="table-responsive">
+                                <table class="table table-bordered table-hover" id="tbl_applicants">
                                     <thead>
                                         <tr>
                                             {{-- <th class="text-center"><input type="checkbox"></th>
@@ -273,7 +268,6 @@
                                     <tbody id="tbl_list_of_students_form_3">
                                     </tbody>
                                 </table>
-                                {{-- APPLICANTS TABLE HERE --}}
                             </div>
                         </div>
                     </form>
