@@ -1242,7 +1242,7 @@ SUM(
         $reference_no  = $request->reference_no;
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
         if ($data['total_beneficiaries'] < 1) {
-            return 0;
+            return "Please Upload first";
         }
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) {
