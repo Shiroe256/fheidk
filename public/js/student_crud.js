@@ -857,8 +857,7 @@ function uploadBatch() {
             mod_upload_batch.hide();
             resetUploadButton();
             tbl_students.ajax.reload();
-            fetchTempSummary();
-            fetchTempApplicants();
+            tbl_applicants.ajax.reload();
           },
           beforeSend: function () {
             uploadButton.disabled = true;
