@@ -1151,20 +1151,7 @@ SUM(
     private function joinStudentFees($students_sub, $form = 2)
     {
         $hei_uii = Auth::user()->hei_uii;
-        $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
-            ->mergeBindings($students_sub)
-            ->select(
-                'students_sub.uid',
-                'students_sub.*',
-                DB::raw($this->carlo_columns)
-            )
-            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
-                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                    ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
-                    ->on('tbl_other_school_fees.form', '=', DB::raw($form));
-            });
+
         if ($form == 0) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
@@ -1178,6 +1165,21 @@ SUM(
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                         ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                });
+        } else {
+            $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+                ->mergeBindings($students_sub)
+                ->select(
+                    'students_sub.uid',
+                    'students_sub.*',
+                    DB::raw($this->carlo_columns)
+                )
+                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                    $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                        ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                        ->on('tbl_other_school_fees.form', '=', DB::raw($form));
                 });
         }
 
@@ -1265,7 +1267,7 @@ SUM(
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $summary = $this->joinStudentFees($students_sub)->groupBy('reference_no')->first();
+        $summary = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->first();
         $data['total_fee'] = $summary->total_fee;
         $data['hei_name'] = $summary->hei_name;
         $data['hei_uii'] = $summary->hei_uii;
