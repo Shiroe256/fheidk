@@ -2379,33 +2379,33 @@ $("#frm_update_student").submit(function (e) {
 
 //Delete function
 //Main check box is checked
-$(document).on('click', 'input[name=main_checkbox]', function () {
-  if (this.checked) {
-    $('input[name="student_checkbox"]').each(function () {
-      this.checked = true;
-    });
-  } else {
-    $('input[name="student_checkbox"]').each(function () {
-      this.checked = false;
-    });
-  }
-  btnDeleteToggle();
-});
+// $(document).on('click', 'input[name=main_checkbox]', function () {
+//   if (this.checked) {
+//     $('input[name="student_checkbox"]').each(function () {
+//       this.checked = true;
+//     });
+//   } else {
+//     $('input[name="student_checkbox"]').each(function () {
+//       this.checked = false;
+//     });
+//   }
+//   btnDeleteToggle();
+// });
 
 //all checkbox in a page is checked
-$(document).on('change', 'input[name="student_checkbox"]', function () {
-  if ($('input[name="student_checkbox"]').length == $('input[name="student_checkbox"]:checked').length) {
-    $('input[name="main_checkbox"]').prop('checked', true);
-  } else {
-    $('input[name="main_checkbox"]').prop('checked', false);
-  }
-  btnDeleteToggle();
-});
+// $(document).on('change', 'input[name="student_checkbox"]', function () {
+//   if ($('input[name="student_checkbox"]').length == $('input[name="student_checkbox"]:checked').length) {
+//     $('input[name="main_checkbox"]').prop('checked', true);
+//   } else {
+//     $('input[name="main_checkbox"]').prop('checked', false);
+//   }
+//   btnDeleteToggle();
+// });
 
 //Delete data
 $(document).on('click', '#btn_delete_students', function () {
   // var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
-  var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
+  var checkedStudents = tbl_students.rows({ selected: true }).data().toArray().map(row => row.uid); // checked students now that ano na no more checkboxes
   // $($('input[name="student_checkbox"]:checked')).each(function () {
   //   checkedStudents.push($(this).val());
   // });
