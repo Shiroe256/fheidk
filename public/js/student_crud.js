@@ -35,6 +35,236 @@ var templateReq = new XMLHttpRequest();
 var templateData = new XMLHttpRequest();
 var heiinfo;
 
+
+//fetch records from the database
+tbl_students = $('#tbl_students').DataTable({
+  rowId: 'uid',
+  stateSave: true,
+  buttons: [
+    {
+      text: 'Select all',
+      action: function () {
+        table.rows().select();
+      }
+    },
+    {
+      text: 'Select none',
+      action: function () {
+        table.rows().deselect();
+      }
+    }
+  ],
+  processing: true,
+  serverSide: true,
+  select: {
+    style: 'multi'
+  },
+  columns: [
+    {
+      data: 'app_id'
+    },
+    {
+      data: 'fhe_award_no'
+    },
+    {
+      data: 'stud_lname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_lname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'stud_fname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_fname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'stud_mname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_mname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'degree_program', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_course_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'year_level', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_year_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'remarks'
+    },
+    {
+      data: 'stud_status', render: function (data, type, row, meta) {
+        if (data == 0)
+          var status = 'Enrolled';
+        return '<span class="badge badge-primary">' + status + '</span>';
+      }
+    },
+    {
+      data: 'total_fee', render: function (data, type, row, meta) {
+        let uid = row.uid;
+        return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
+      }
+    },
+    {
+      data: 'uid', render: function (data) {
+        return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+      }
+    }
+  ],
+  ajax: {
+    method: 'POST',
+    url: '/get-tempstudents',
+    data: {
+      reference_no: reference_no,
+      _token: $('meta[name="csrf-token"]').attr('content')
+    }
+  },
+  createdRow: function (row, data, dataIndex) {
+    var fee = row.querySelector('#btn_view_' + data.uid);
+    fee.onclick = function (e) {
+      showStudentFees(data.uid);
+      e.stopPropagation();
+    };
+    var btn_sett = row.querySelector("#btn_sett_" + data.uid);
+    btn_sett.onclick = function (e) {
+      students = [];
+      mod_stud_settings.show();
+      loader.className = '';
+      mod_stud_settings_placeholder.style.display = 'block';
+
+      students.push(btn_sett.value);
+      getStudentSettings(students[0]);
+      const modal_title = document.getElementById('lbl_name');
+
+      modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
+
+      frm_stud_settings_footer[0].classList.add('d-none');
+      e.stopPropagation();
+    };
+  }
+});
+//tbl applicants data table
+tbl_applicants = $('#tbl_applicants').DataTable({
+  rowId: 'uid',
+  stateSave: true,
+  buttons: [
+    {
+      text: 'Select all',
+      action: function () {
+        table.rows().select();
+      }
+    },
+    {
+      text: 'Select none',
+      action: function () {
+        table.rows().deselect();
+      }
+    }
+  ],
+  processing: true,
+  serverSide: true,
+  select: {
+    style: 'multi'
+  },
+  columns: [
+    {
+      data: 'app_id'
+    },
+    {
+      data: 'stud_lname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_lname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'stud_fname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_fname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'stud_mname', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_mname_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'degree_program', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_course_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'year_level', render: function (data, type, row) {
+        let uid = row.uid;
+        return '<div id="std_year_' + uid + '">' + data + '</div>'
+      }
+    },
+    {
+      data: 'remarks'
+    },
+    {
+      data: 'total_exam_taken'
+    },
+    {
+      data: 'exam_result'
+    },
+    {
+      data: 'total_fee', render: function (data, type, row, meta) {
+        let uid = row.uid;
+        return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
+      }
+    },
+    {
+      data: 'uid', render: function (data) {
+        return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+      }
+    }
+  ],
+  ajax: {
+    method: 'POST',
+    url: '/get-tempapplicants',
+    data: {
+      reference_no: reference_no,
+      _token: $('meta[name="csrf-token"]').attr('content')
+    }
+  },
+  createdRow: function (row, data, dataIndex) {
+    var fee = row.querySelector('#btn_view_' + data.uid);
+    fee.onclick = function () {
+      showStudentFees(data.uid);
+    };
+    var btn_sett = row.querySelector("#btn_sett_" + data.uid);
+    btn_sett.onclick = function () {
+      students = [];
+      mod_stud_settings.show();
+      loader.className = '';
+      mod_stud_settings_placeholder.style.display = 'block';
+
+      students.push(btn_sett.value);
+      getStudentSettings(students[0]);
+      const modal_title = document.getElementById('lbl_name');
+
+      modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
+
+      frm_stud_settings_footer[0].classList.add('d-none');
+    };
+  }
+});
+
+tbl_students.on('draw.dt', function () {
+  document.getElementById("students-placeholder").classList.add('d-none');
+  document.getElementById("show_all_students").classList.remove('d-none');
+  setup_Events();
+})
+
 function trimValues(obj) {
   for (var key in obj) {
     if (typeof obj[key] === 'string') {
@@ -2228,257 +2458,6 @@ function btnDeleteToggle() {
   } else {
     btn.classList.add('d-none');
   }
-}
-
-//fetch records from the database
-function initializeTables() {
-  let reference_no = $("#reference_no").val();
-
-
-  tbl_students = $('#tbl_students').DataTable({
-    rowId: 'uid',
-    stateSave: true,
-    buttons: [
-      {
-        text: 'Select all',
-        action: function () {
-          table.rows().select();
-        }
-      },
-      {
-        text: 'Select none',
-        action: function () {
-          table.rows().deselect();
-        }
-      }
-    ],
-    processing: true,
-    serverSide: true,
-    select: {
-      style: 'multi'
-    },
-    columns: [
-      // {
-      //   data: 'uid', render: function (data, type, row, meta) {
-      //     return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
-      //   }
-      // },
-      // {
-      //   data: 'hei_name'
-      // },
-      {
-        data: 'app_id'
-      },
-      {
-        data: 'fhe_award_no'
-      },
-      {
-        data: 'stud_lname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_lname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'stud_fname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_fname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'stud_mname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_mname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'degree_program', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_course_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'year_level', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_year_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'remarks'
-      },
-      {
-        data: 'stud_status', render: function (data, type, row, meta) {
-          if (data == 0)
-            var status = 'Enrolled';
-          return '<span class="badge badge-primary">' + status + '</span>';
-        }
-      },
-      {
-        data: 'total_fee', render: function (data, type, row, meta) {
-          let uid = row.uid;
-          return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
-        }
-      },
-      {
-        data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
-        }
-      }
-    ],
-    ajax: {
-      method: 'POST',
-      url: '/get-tempstudents',
-      data: {
-        reference_no: reference_no,
-        _token: $('meta[name="csrf-token"]').attr('content')
-      }
-    },
-    createdRow: function (row, data, dataIndex) {
-      var fee = row.querySelector('#btn_view_' + data.uid);
-      fee.onclick = function (e) {
-        showStudentFees(data.uid);
-        e.stopPropagation();
-      };
-      var btn_sett = row.querySelector("#btn_sett_" + data.uid);
-      btn_sett.onclick = function (e) {
-        students = [];
-        mod_stud_settings.show();
-        loader.className = '';
-        mod_stud_settings_placeholder.style.display = 'block';
-        
-        students.push(btn_sett.value);
-        getStudentSettings(students[0]);
-        const modal_title = document.getElementById('lbl_name');
-
-        modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
-
-        frm_stud_settings_footer[0].classList.add('d-none');
-        e.stopPropagation();
-      };
-    }
-  });
-  //tbl applicants data table
-  tbl_applicants = $('#tbl_applicants').DataTable({
-    rowId: 'uid',
-    stateSave: true,
-    buttons: [
-      {
-        text: 'Select all',
-        action: function () {
-          table.rows().select();
-        }
-      },
-      {
-        text: 'Select none',
-        action: function () {
-          table.rows().deselect();
-        }
-      }
-    ],
-    processing: true,
-    serverSide: true,
-    select: {
-      style: 'multi'
-    },
-    columns: [
-      // {
-      //   data: 'uid', render: function (data, type, row, meta) {
-      //     return '<input type = "checkbox" class= "chk_student" id="' + data + '" name="student_checkbox" value="' + data + '" > ';
-      //   }
-      // },
-      // {
-      //   data: 'hei_name'
-      // },
-      {
-        data: 'app_id'
-      },
-      {
-        data: 'stud_lname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_lname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'stud_fname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_fname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'stud_mname', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_mname_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'degree_program', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_course_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'year_level', render: function (data, type, row) {
-          let uid = row.uid;
-          return '<div id="std_year_' + uid + '">' + data + '</div>'
-        }
-      },
-      {
-        data: 'remarks'
-      },
-      {
-        data: 'total_exam_taken'
-      },
-      {
-        data: 'exam_result'
-      },
-      {
-        data: 'total_fee', render: function (data, type, row, meta) {
-          let uid = row.uid;
-          return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
-        }
-      },
-      {
-        data: 'uid', render: function (data) {
-          return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
-        }
-      }
-    ],
-    ajax: {
-      method: 'POST',
-      url: '/get-tempapplicants',
-      data: {
-        reference_no: reference_no,
-        _token: $('meta[name="csrf-token"]').attr('content')
-      }
-    },
-    createdRow: function (row, data, dataIndex) {
-      var fee = row.querySelector('#btn_view_' + data.uid);
-      fee.onclick = function () {
-        showStudentFees(data.uid);
-      };
-      var btn_sett = row.querySelector("#btn_sett_" + data.uid);
-      btn_sett.onclick = function () {
-        students = [];
-        mod_stud_settings.show();
-        loader.className = '';
-        mod_stud_settings_placeholder.style.display = 'block';
-
-        students.push(btn_sett.value);
-        getStudentSettings(students[0]);
-        const modal_title = document.getElementById('lbl_name');
-
-        modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
-
-        frm_stud_settings_footer[0].classList.add('d-none');
-      };
-    }
-  });
-
-  tbl_students.on('draw.dt', function () {
-    document.getElementById("students-placeholder").classList.add('d-none');
-    document.getElementById("show_all_students").classList.remove('d-none');
-    setup_Events();
-  })
-
 }
 
 //fetch all degree programs from the database to select input
