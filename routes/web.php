@@ -122,7 +122,7 @@ Route::get('/get-heis', [UserController::class, 'fetchHeis'])->name('fetchHeis')
 Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
 
 //Summary
-// Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');
+Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');
 
 //CRUD Applicants
 // Route::get('/get-tempapplicants', [BillingController::class, 'fetchTempApplicants'])->name('fetchTempApplicants');
