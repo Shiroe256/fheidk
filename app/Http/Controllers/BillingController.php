@@ -1710,8 +1710,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         // $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
         $hei_uii = Auth::user()->hei_uii;
         $data['billings'] = DB::table('tbl_billing_details_temp')
-            ->selectRaw($this->carlo_columns)
-            ->select('tbl_billing_details_temp.reference_no', 'tbl_billing_details_temp.ac_year', 'tbl_billing_details_temp.semester', 'tbl_fhe_billing_records.billing_status')
+            ->select(DB::raw($this->carlo_columns),'tbl_billing_details_temp.reference_no', 'tbl_billing_details_temp.ac_year', 'tbl_billing_details_temp.semester', 'tbl_fhe_billing_records.billing_status')
             ->join('tbl_fhe_billing_records', 'tbl_billing_details_temp.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
             ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
