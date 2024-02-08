@@ -25,8 +25,8 @@
                         </td>
                         <td class="text-center"><strong>{{ $billing->ac_year }}</strong></td>
                         <td class="text-center"><strong>{{ $f->format($billing->semester) }}</strong></td>
-                        <td class="text-center">{{ $format->format($billing->total_amount) }}</td>
-                        <td class="text-center">{{ $billing->total_beneficiaries }}</td>
+                        <td class="text-center">{{ $format->format($billing->total_fee) }}</td>
+                        <td class="text-center">{{ "..." }}</td>
                         <td class="text-center">
                             <?php
                             if($billing->billing_status==1):?>
