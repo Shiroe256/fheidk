@@ -1156,7 +1156,6 @@ SUM(
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
-                    'students_sub.uid',
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
@@ -1170,7 +1169,6 @@ SUM(
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
-                    'students_sub.uid',
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
