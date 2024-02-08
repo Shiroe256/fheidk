@@ -2,7 +2,7 @@
 <?php $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); ?>
 @if (count($billings) > 0)
     <div class="table-responsive mt-2">
-        <table class="table table-hover table-lg" id="tbl_listofbillings">
+        <table class="table table-hover" id="tbl_listofbillings">
             <thead>
                 <tr>
                     <th class="text-center">NO.</th>
