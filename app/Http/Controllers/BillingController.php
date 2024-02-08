@@ -1267,15 +1267,6 @@ SUM(
         ]);
     }
 
-    public function fetchTempApplicants(Request $request)
-    {
-        $reference_no  = $request->reference_no;
-        $students_sub = $this->getStudentSubquery($reference_no, "", $request->start, $request->length, 1);
-        $data['applicants'] = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
-
-        return view('elements.applicanttable', $data);
-    }
-
     public function fetchTempSummary(Request $request)
     {
         $reference_no  = $request->reference_no;
@@ -1296,6 +1287,18 @@ SUM(
         return view('elements.tempsummary', $data);
     }
 
+    public function fetchTempExceptionsJSON(Request $request)
+    {
+        $reference_no  = $request->reference_no;
+        $search = $request->search['value'];
+        $total = $this->getTotalGrantees($reference_no, $search, 1);
+        
+        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+            ->where('remarks', '!=', '');
+        //dito jinojoin ung information about the fees and computation
+        
+        return view('elements.exceptionsummary', $data);
+    }
     public function fetchTempExceptions(Request $request)
     {
         $reference_no  = $request->reference_no;
@@ -1734,34 +1737,21 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function billingmanagementpage($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
-        // if (isNull($billings)) {
-        //     return view('errors.404');
-        // }
-        // $hei_uii = Auth::user()->hei_uii;
+ 
         $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
         $data['tranche'] = $billings->tranche;
         $data['reference_no'] = $billings->reference_no;
         $data['billing_status'] = $billings->billing_status;
-        // if ($billings && $billings->hei_uii == $hei_uii) {
         return view('billingmanagement', $data);
-        // }
-        // abort(401);
     }
 
     public function billingmanagementattachments($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
-        // if (isNull($billings)) {
-        //     return view('errors.404');
-        // }
-        // $hei_uii = Auth::user()->hei_uii;
         $data['billings'] = $billings;
-        // if ($billings && $billings->hei_uii == $hei_uii) {
         return view('billingmanagement-attachments', $data);
-        // }
-        // abort(401);
     }
 
     public function getStudentBillingSettings(Request $request)

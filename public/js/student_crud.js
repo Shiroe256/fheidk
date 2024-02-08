@@ -258,6 +258,113 @@ tbl_applicants = $('#tbl_applicants').DataTable({
     };
   }
 });
+tbl_exceptions = $('#tbl_exception_report').DataTable({
+  rowId: 'uid',
+  stateSave: true,
+  buttons: [
+    {
+      text: 'Select all',
+      action: function () {
+        table.rows().select();
+      }
+    },
+    {
+      text: 'Select none',
+      action: function () {
+        table.rows().deselect();
+      }
+    }
+  ],
+  processing: true,
+  serverSide: true,
+  select: {
+    style: 'multi'
+  },
+  columns: [
+    {
+      data: 'app_id'
+    },
+    {
+      data: 'fhe_award_no'
+    },
+    {
+      data: 'stud_lname'
+    },
+    {
+      data: 'stud_fname'
+    },
+    {
+      data: 'stud_mname'
+    },
+    {
+      data: 'degree_program'
+    },
+    {
+      data: 'year_level'
+    },
+    {
+      data: 'remarks'
+    },
+    {
+      data: 'stud_status', render: function (data, type, row, meta) {
+        var student_status = '';
+        if (data == 0) {
+          student_status = 'Enrolled';
+        } else if (data == 1) {
+          student_status = 'On-LOA';
+        } else if (data == 2) {
+          student_status = 'Dropped';
+        } else if (data == 3) {
+          student_status = 'Graduated';
+        } else {
+          student_status = '';
+        }
+        return student_status;
+      }
+    },
+    {
+      data: 'total_fee', render: function (data, type, row, meta) {
+        let uid = row.uid;
+        return '<strong>' + data.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</strong>'
+      }
+    },
+    {
+      data: 'uid', render: function (data) {
+        // return '<div class="btn-group btn-group-sm" role="group"><button id="' + data + '" class="btn btn_update_student btn-primary" data-bs-toggle="modal" data-bs-tooltip="" data-placement="bottom" type="button" title="Edit Student Information" data-bs-target="#mod_edit_student_info"><i class="far fa-edit"></i></button><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+        return '<div class="btn-group btn-group-sm" role="group"><button id="btn_sett_' + data + '" value="' + data + '" class="btn btn_stud_settings btn-primary"type="button"><i class="fas fa-wrench"></i></button><button id="btn_view_' + data + '" class="btn btn-secondary" type="button"><i class="fas fa-file-text"></i></button></div>';
+      }
+    }
+  ],
+  ajax: {
+    method: 'POST',
+    url: '/get-tempexceptions',
+    data: {
+      reference_no: reference_no,
+      _token: csrf
+    }
+  },
+  createdRow: function (row, data, dataIndex) {
+    var fee = row.querySelector('#btn_view_' + data.uid);
+    fee.onclick = function () {
+      showStudentFees(data.uid);
+    };
+    var btn_sett = row.querySelector("#btn_sett_" + data.uid);
+    btn_sett.onclick = function () {
+      students = [];
+      mod_stud_settings.show();
+      loader.className = '';
+      mod_stud_settings_placeholder.style.display = 'block';
+
+      students.push(btn_sett.value);
+      getStudentSettings(students[0]);
+      const modal_title = document.getElementById('lbl_name');
+
+      modal_title.innerHTML = data.stud_lname + ', ' + data.stud_fname + ' ' + data.stud_mname;
+
+      frm_stud_settings_footer[0].classList.add('d-none');
+    };
+  }
+});
 //delete button toggle remake
 tbl_students.on('select deselect', function (e, type, indexes) {
   var selectedRowCount = tbl_students.rows({ selected: true }).count();

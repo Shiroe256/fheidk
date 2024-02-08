@@ -273,9 +273,28 @@
                                 class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                 </div>
             </div>
-            <div id="show_all_exceptions" class="table-responsive mt-2 table-style" role="grid"
+            <div id="show_all_exceptions" class="table-responsive mt-2" role="grid"
                 aria-describedby="dataTable_info">
                 {{-- EXCEPTIONS TABLE HERE --}}
+                <table class="table table-hover" id="tbl_exception_report">
+                    <thead>
+                        <tr>
+                            <th class="text-left">APP ID</th>
+                            <th class="text-left">AWARD NUMBER</th>
+                            <th class="text-left">LASTNAME</th>
+                            <th class="text-left">FIRSTNAME</th>
+                            <th class="text-left">MIDDLENAME</th>
+                            <th>COURSE</th>
+                            <th class="text-center">YEAR</th>
+                            <th class="text-left">REMARKS</th>
+                            <th class="text-left">STATUS</th>
+                            <th class="text-left">AMOUNT BILLED</th>
+                            <th class="text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_list_of_exceptions">
+                    </tbody>
+                    </table>
             </div>
         </div>
     </form>

@@ -70,6 +70,7 @@ Auth::routes(['verify' => true]);
 //CRUD Enrolled
 Route::post('/get-tempstudents', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/get-tempapplicants', [BillingController::class, 'fetchTempApplicantJSON'])->name('fetchAllApplicants');
+Route::post('/get-tempexceptions', [BillingController::class, 'fetchTempExceptionsJSON'])->name('fetchTempExceptions');
 // Route::get('/get-tempstudenttable', [BillingController::class, 'fetchTempStudent'])->name('fetchAll');
 Route::post('/newtempstudent', [BillingController::class, 'newTempStudent'])->name('newTempStudent')->middleware('validateNewTempStudent');
 Route::post('/add-batchtempstudents', [BillingController::class, 'batchTempStudent'])->middleware('validateTempStudentFields');
@@ -121,10 +122,10 @@ Route::get('/get-heis', [UserController::class, 'fetchHeis'])->name('fetchHeis')
 Route::post('/update-user', [UserController::class, 'updateUser'])->name('updateUser');
 
 //Summary
-Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');
+// Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->name('fetchTempSummary');
 
 //CRUD Applicants
-Route::get('/get-tempapplicants', [BillingController::class, 'fetchTempApplicants'])->name('fetchTempApplicants');
+// Route::get('/get-tempapplicants', [BillingController::class, 'fetchTempApplicants'])->name('fetchTempApplicants');
 Route::post('/newtempapplicants', [BillingController::class, 'newTempApplicant'])->name('newTempApplicant');
 
 //Exception Report
