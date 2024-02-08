@@ -1156,7 +1156,7 @@ SUM(
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
-                    'students_sub.*',
+                    // 'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
                 ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
@@ -1169,7 +1169,7 @@ SUM(
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
-                    'students_sub.*',
+                    // 'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
                 ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
