@@ -1710,7 +1710,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
 
         $students_sub = DB::table('tbl_billing_details_temp')
-            ->where('hei_uii', Auth::user()->hei_uii)
+            ->where('tbl_billing_details_temp.hei_uii', '=', Auth::user()->hei_uii)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
