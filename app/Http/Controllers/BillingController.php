@@ -1717,6 +1717,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             ->select(
                 'students_sub.*',
                 'tbl_fhe_billing_records.billing_status',
+                DB::raw('COUNT(students_sub.reference_no) as total_beneficiaries'),
                 DB::raw($this->carlo_columns)
             )
             ->join('tbl_fhe_billing_records', 'students_sub.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
