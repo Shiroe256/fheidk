@@ -20,7 +20,7 @@
                         class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage
                         Settings</a>
                     <button id="btn_download_template" class="btn btn-outline-primary btn-sm"><i
-                            class="fas fa-download"></i>&nbsp;Download Template</button>
+                            class="fas fa-file-excel-o"></i>&nbsp;Download Template</button>
                     <button id="btn_upload" class="btn btn-outline-primary btn-sm" type="button"><i
                             class="fas fa-file-upload"></i>&nbsp;Upload
                         List</button>
