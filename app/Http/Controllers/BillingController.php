@@ -1094,7 +1094,7 @@ SUM(
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
 
-        if ($for_applicant) {
+        if ($for_applicant == 1) {
             $total = $total->where(function ($query) {
                 $query->where(function ($query2) {
                     $query2->where('year_level', '=', 1)
@@ -1102,6 +1102,10 @@ SUM(
                 })
                     ->orWhere('transferee', '=', 1);
             });
+        }
+        if ($for_applicant == 2) {
+            $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+                ->where('remarks', '!=', '');
         }
 
         return $total->count();
@@ -1291,7 +1295,7 @@ SUM(
     {
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
-        $total = $this->getTotalGrantees($reference_no, $search, 1);
+        $total = $this->getTotalGrantees($reference_no, $search, 2);
 
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where('remarks', '!=', '');
