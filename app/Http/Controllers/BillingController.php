@@ -1709,22 +1709,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         // $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
         $hei_uii = Auth::user()->hei_uii;
-        $data['billings'] = DB::table('tbl_billing_details_temp')
-            ->select(DB::raw($this->carlo_columns),'tbl_billing_details_temp.reference_no', 'tbl_billing_details_temp.ac_year', 'tbl_billing_details_temp.semester', 'tbl_fhe_billing_records.billing_status')
+        $students_sub = DB::table('tbl_billing_details_temp')
             ->join('tbl_fhe_billing_records', 'tbl_billing_details_temp.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
-            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
-                $join->on('tbl_other_school_fees.course_enrolled', '=', 'tbl_billing_details_temp.degree_program')
-                    ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                    ->on('tbl_other_school_fees.semester', '=', 'tbl_billing_details_temp.semester')
-                    ->on('tbl_other_school_fees.year_level', '=', 'tbl_billing_details_temp.year_level');
-            })
-            ->where('tbl_billing_details_temp.hei_uii', '=', Auth::user()->hei_uii)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-            })
-            ->groupBy('tbl_billing_details_temp.reference_no')
-            ->get();
+            });
+        $data['billings'] = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->get();
 
         return view('listofbillings', $data);
     }
