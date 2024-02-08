@@ -1710,13 +1710,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
 
         $students_sub = DB::table('tbl_billing_details_temp')
+            ->join('tbl_fhe_billing_records', 'tbl_billing_details_temp.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
             ->where('tbl_billing_details_temp.hei_uii', '=', Auth::user()->hei_uii)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
         $data['billings'] = $this->joinStudentFees($students_sub, 0)
-            ->join('tbl_fhe_billing_records', 'tbl_billing_details_temp.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
             ->groupBy('reference_no')->get();
 
         return view('listofbillings', $data);
