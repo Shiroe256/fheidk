@@ -1292,12 +1292,18 @@ SUM(
         $reference_no  = $request->reference_no;
         $search = $request->search['value'];
         $total = $this->getTotalGrantees($reference_no, $search, 1);
-        
+
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where('remarks', '!=', '');
-        //dito jinojoin ung information about the fees and computation
-        
-        return view('elements.exceptionsummary', $data);
+
+        $students = $this->joinStudentFees($students_sub, 0)->groupBy('students_sub.uid')->orderBy('degree_program')->orderBy('remarks')->get();
+
+        echo json_encode([
+            "draw" => $request->draw,
+            "recordsTotal" => count($students),
+            "recordsFiltered" => $total,
+            "data" => $students
+        ]);
     }
     public function fetchTempExceptions(Request $request)
     {
@@ -1715,7 +1721,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-            $data['billings'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+        $data['billings'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
                 'students_sub.*',
@@ -1737,7 +1743,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     public function billingmanagementpage($reference_no)
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
- 
+
         $data['hei_psg_region'] = $billings->hei_psg_region;
         $data['ac_year'] = $billings->ac_year;
         $data['semester'] = $billings->semester;
