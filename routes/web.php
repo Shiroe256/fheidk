@@ -129,7 +129,7 @@ Route::get('/get-tempsummary', [BillingController::class, 'fetchTempSummary'])->
 Route::post('/newtempapplicants', [BillingController::class, 'newTempApplicant'])->name('newTempApplicant');
 
 //Exception Report
-Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempExceptions'])->name('fetchTempExceptions');
+// Route::get('/get-tempexceptions', [BillingController::class, 'fetchTempExceptions'])->name('fetchTempExceptions');
 
 //Admin Pages
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {

@@ -294,7 +294,7 @@
                     </thead>
                     <tbody id="tbl_list_of_exceptions">
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </form>
