@@ -1719,7 +1719,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
         $data['billings'] = $this->joinStudentFees($students_sub, 0)
-            ->groupBy('reference_no')->get();
+            ->groupBy('tbl_billing_details_temp.reference_no')->get();
 
         return view('listofbillings', $data);
     }
