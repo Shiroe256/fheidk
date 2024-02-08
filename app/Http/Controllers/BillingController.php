@@ -1715,6 +1715,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             $data['billings'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
+                'students_sub.*',
                 DB::raw($this->carlo_columns)
             )
             ->join('tbl_fhe_billing_records', 'students_sub.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
