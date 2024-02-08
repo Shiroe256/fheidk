@@ -1,8 +1,8 @@
 <?php $f = new NumberFormatter('en', NumberFormatter::ORDINAL); ?>
 <?php $format = new NumberFormatter('en_PH', NumberFormatter::CURRENCY); ?>
 @if (count($billings) > 0)
-    <div class="table-responsive table mt-2 table-style" role="grid" aria-describedby="dataTable_info">
-        <table class="table table-bordered table-hover table-sm dataTable my-0 table-style" id="tbl_listofbillings">
+    <div class="table-responsive mt-2">
+        <table class="table table-hover table-lg" id="tbl_listofbillings">
             <thead>
                 <tr>
                     <th class="text-center">NO.</th>
