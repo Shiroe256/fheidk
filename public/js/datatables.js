@@ -1,14 +1,14 @@
-$(document).ready(function () {
-    //tbl_listofbillings
-    $("#tbl_listofbillings").DataTable({
-        "order": [[0, "asc"]],
-        orderCellsTop: true,
-        fixedHeader: true,
-        columnDefs: [
-          { orderable: false, targets: [0, -1] }
-        ]
-      });
-});
+// $(document).ready(function () {
+//     //tbl_listofbillings
+//     $("#tbl_listofbillings").DataTable({
+//         "order": [[0, "asc"]],
+//         orderCellsTop: true,
+//         fixedHeader: true,
+//         columnDefs: [
+//           { orderable: false, targets: [0, -1] }
+//         ]
+//       });
+// });
 
 
 
