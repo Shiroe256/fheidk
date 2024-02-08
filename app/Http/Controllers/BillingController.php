@@ -1715,9 +1715,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $summary = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->get();
+        $billings = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->get();
 
-        return view('listofbillings', $data);
+        return view('listofbillings', $billings);
     }
 
     public function billingmanagementpage($reference_no)
