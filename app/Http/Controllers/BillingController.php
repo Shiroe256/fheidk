@@ -1718,8 +1718,8 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     }
     public function billingList()
     {
-        // $data['billings'] = Billing::where('hei_uii', Auth::user()->hei_uii)->get();
         $hei_uii = Auth::user()->hei_uii;
+        $billings = Billing::where('hei_uii', $hei_uii)->get();
         $students_sub = DB::table('tbl_billing_details_temp')
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
@@ -1741,7 +1741,20 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
             })->groupBy('students_sub.reference_no')->get();
 
-        return view('listofbillings', $data);
+        $joinedBillings = $billings->map(function ($billing) use ($data) {
+            $matchedBilling = $data['billings']->where('reference_no', $billing->reference_no)->first();
+
+            $billing->total_beneficiaries = 0;
+            $billing->total_fee = 0;
+            if ($matchedBilling) {
+                $billing->total_beneficiaries = $matchedBilling->total_beneficiaries;
+                $billing->total_fee = $matchedBilling->total_fee;
+            }
+
+            return $billing;
+        });
+
+        return view('listofbillings', [$joinedBillings]);
     }
 
     public function billingmanagementpage($reference_no)
