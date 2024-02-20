@@ -1217,8 +1217,7 @@ SUM(
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
-        // $students = $this->joinStudentFees($students_sub);
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
         // $students_sett = $this->joinSettings($students)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
         //dito jinojoin ung information about the fees and computation
 
