@@ -1754,7 +1754,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             return $billing;
         });
 
-        return view('listofbillings', ['billings' => $joinedBillings]);
+        return view('listofbillings', ['billings' => $billings]);
     }
 
     public function billingmanagementpage($reference_no)
