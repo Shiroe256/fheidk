@@ -6,9 +6,9 @@
                     class="btn_closefees" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body p-3">
-                <div class="row">
+                <div class="row w-6">
                     <div class="col p-0">
-                        <table class="table table-sm table-borderless">
+                        <table class="table table-md table-borderless">
                             <tbody>
                                 <tr class="table-active">
                                     <td colspan="4" id="studfee_enrollment_info"></td>
