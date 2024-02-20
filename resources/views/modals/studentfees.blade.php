@@ -13,61 +13,65 @@
                                 <tr class="table-active">
                                     <td colspan="4" id="studfee_enrollment_info"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Entrance and Admission Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Entrance and Admission Fees</td>
                                     <td id="studfee_entrance_and_admission_fee"></td>
-                                    <td><strong>Tuition Fees</strong></td>
+                                    <td>Tuition Fees</td>
                                     <td id="studfee_tuition_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Athletic Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Athletic Fees</td>
                                     <td id="studfee_athletic_fee"></td>
-                                    <td><strong>NSTP Fees</strong></td>
+                                    <td>NSTP Fees</td>
                                     <td id="studfee_nstp_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Computer Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Computer Fees</td>
                                     <td id="studfee_computer_fee"></td>
-                                    <td><strong>
-                                            Total Fees</strong>
-                                    </td>
-                                    <td id="studfee_total_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Cultural Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Cultural Fees</td>
                                     <td id="studfee_cultural_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Development Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Development Fees</td>
                                     <td id="studfee_development_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Guidance Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Guidance Fees</td>
                                     <td id="studfee_guidance_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Handbook Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Handbook Fees</td>
                                     <td id="studfee_handbook_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Laboratory Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Laboratory Fees</td>
                                     <td id="studfee_laboratory_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Library Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Library Fees</td>
                                     <td id="studfee_library_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Medical and Dental Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Medical and Dental Fees</td>
                                     <td id="studfee_medical_and_dental_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Registration Fees</strong></td>
+                                <tr class="my-0">
+                                    <td>Registration Fees</td>
                                     <td id="studfee_registration_fee"></td>
                                 </tr>
-                                <tr>
-                                    <td><strong>School ID</strong></td>
+                                <tr class="my-0">
+                                    <td>School ID</td>
                                     <td id="studfee_school_id_fee"></td>
+                                </tr>
+                                <tr class="mt-2">
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>
+                                            TOTAL FEES</strong>
+                                    </td>
+                                    <td id="studfee_total_fee"></td>
                                 </tr>
                             </tbody>
                         </table>

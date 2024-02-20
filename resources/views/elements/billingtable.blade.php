@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($billings as $id => $billing)
+                @foreach ($billings as $id => $billing) 
                     <tr>
                         <td class="text-center">{{ $id + 1 }}</td>
                         <td class="text-center"><span class="badge badge-pill badge-primary"><a class="text-light"
