@@ -25,8 +25,8 @@
                         </td>
                         <td class="text-center"><strong>{{ $billing->ac_year }}</strong></td>
                         <td class="text-center"><strong>{{ $f->format($billing->semester) }}</strong></td>
-                        <td class="text-center">{{ 0 }}</td>
-                        <td class="text-center">{{ 0 }}</td>
+                        <td class="text-center">{{ $format->format($billing->total_fee) }}</td>
+                        <td class="text-center">{{ $billing->total_beneficiaries }}</td>
                         <td class="text-center">
                             <?php
                             if($billing->billing_status==1):?>
@@ -45,10 +45,10 @@
                             <?php
                             elseif ($billing->billing_status==5):?>
                             <span class="badge badge-pill badge-primary span-size">Finalizing Billing</span>
-                            <?php
+                             <?php
                             elseif ($billing->billing_status==6):?>
                             <span class="badge badge-pill badge-primary span-size">Submitted to UniFAST: Billing
-                                Unit</span>
+                                Unit</span>    
                             <?php
                             elseif ($billing->billing_status==7):?>
                             <span class="badge badge-pill badge-danger span-size">For Revision</span>
@@ -67,32 +67,19 @@
                         <td></td>
                         <td class="text-center">
                             <?php if ($billing->billing_status == 2 || $billing->billing_status > 5): ?>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a class="btn btn-secondary disabled" role="button" data-toggle="tooltip"
-                                    data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i
-                                        class="far fa-edit"></i></a>
-                                <a class="btn btn-secondary disabled" role="button" data-toggle="tooltip"
-                                    data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings"
-                                    href="#' }}"><i class="fas fa-sliders"></i></a>
-                            </div>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i class="far fa-edit"></i></a>
+                                    <a class="btn btn-secondary disabled" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="#' }}"><i class="fas fa-sliders"></i></a>
+                                </div>
                             <?php elseif ($billing->billing_status === 5): ?>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip=""
-                                    data-placement="bottom" title="Attachments"
-                                    href="{{ 'billings/' . $billing->reference_no . '/attachments' }}"><i
-                                        class="far fa-file-alt"></i></a>
-                            </div>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Attachments" href="{{ 'billings/' . $billing->reference_no . '/attachments' }}"><i class="far fa-file-alt"></i></a>
+                                </div>
                             <?php else: ?>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip=""
-                                    data-placement="bottom" title="Edit Grantees"
-                                    href="{{ route('billings') . '/' . $billing->reference_no }}"><i
-                                        class="far fa-edit"></i></a>
-                                <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip=""
-                                    data-placement="bottom" title="Edit Billing Settings"
-                                    href="{{ route('billings') . '/' . $billing->reference_no . '/settings' }}"><i
-                                        class="fas fa-sliders"></i></a>
-                            </div>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="{{ route('billings') . '/' . $billing->reference_no }}"><i class="far fa-edit"></i></a>
+                                    <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings" href="{{ route('billings') . '/' . $billing->reference_no . '/settings' }}"><i class="fas fa-sliders"></i></a>
+                                </div>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -106,5 +93,5 @@
         <div class="row text-center justify-content-center p-3">
             <h3>There are no billings yet.</h3>
         </div>
-    </div>
+     </div>
 @endif
