@@ -20,7 +20,7 @@
                 @foreach ($billings as $id => $billing)
                     <tr>
                         <td class="text-center">{{ $id + 1 }}</td>
-                        <td class="text-center"><span class="badge rounded-pill bg-primary"><a
+                        <td class="text-center"><span class="badge badge-pill badge-primary"><a
                                     href="{{ route('billings') . '/' . $billing->reference_no }}">{{ $billing->reference_no }}</a></span>
                         </td>
                         <td class="text-center"><strong>{{ $billing->ac_year }}</strong></td>
