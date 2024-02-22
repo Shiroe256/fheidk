@@ -77,32 +77,32 @@ class AdminController extends Controller
     {
         // $students = BillingForm2::where('reference_no', $reference_no)->get();
         // $totalAmount = $students->sum('total_fee');
-        
+
         $reference_no = $request->reference_no;
 
         $students = DB::table('vw_billing_details')
-        ->select(
-        'vw_billing_details.stud_uid',
-        'vw_billing_details.reference_no',
-        'vw_billing_details.fhe_award_no',
-        'vw_billing_details.stud_id',
-        'vw_billing_details.stud_lname',
-        'vw_billing_details.stud_fname',
-        'vw_billing_details.stud_mname',
-        'vw_billing_details.stud_ext_name',
-        'vw_billing_details.stud_sex',
-        'vw_billing_details.stud_birth_date',
-        'vw_billing_details.stud_email',
-        'vw_billing_details.stud_phone_no',
-        'vw_billing_details.degree_program',
-        'vw_billing_details.year_level',
-        'vw_billing_details.lab_unit',
-        'vw_billing_details.comp_lab_unit',
-        'vw_billing_details.academic_unit',
-        'vw_billing_details.nstp_unit',
-        'vw_billing_details.remarks',
-        'vw_billing_details.stud_status',
-        DB::raw('SUM(
+            ->select(
+                'vw_billing_details.stud_uid',
+                'vw_billing_details.reference_no',
+                'vw_billing_details.fhe_award_no',
+                'vw_billing_details.stud_id',
+                'vw_billing_details.stud_lname',
+                'vw_billing_details.stud_fname',
+                'vw_billing_details.stud_mname',
+                'vw_billing_details.stud_ext_name',
+                'vw_billing_details.stud_sex',
+                'vw_billing_details.stud_birth_date',
+                'vw_billing_details.stud_email',
+                'vw_billing_details.stud_phone_no',
+                'vw_billing_details.degree_program',
+                'vw_billing_details.year_level',
+                'vw_billing_details.lab_unit',
+                'vw_billing_details.comp_lab_unit',
+                'vw_billing_details.academic_unit',
+                'vw_billing_details.nstp_unit',
+                'vw_billing_details.remarks',
+                'vw_billing_details.stud_status',
+                DB::raw('SUM(
             CASE
                 WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
@@ -145,17 +145,17 @@ class AdminController extends Controller
                 ELSE 0
             END
         ) AS total_fee')
-    )
-    ->where('reference_no', $reference_no)
-    ->where('vw_billing_details.form', 2)
-    ->where(function ($query) {
-        $query->where('vw_billing_details.bs_osf_settings', 1)
-            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-    })
-    ->groupBy('vw_billing_details.stud_uid')
-    ->get();
+            )
+            ->where('reference_no', $reference_no)
+            ->where('vw_billing_details.form', 2)
+            ->where(function ($query) {
+                $query->where('vw_billing_details.bs_osf_settings', 1)
+                    ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+            })
+            ->groupBy('vw_billing_details.stud_uid')
+            ->get();
 
-    $totalAmount = $students->sum('total_fee');
+        $totalAmount = $students->sum('total_fee');
 
         $data['students'] = $students;
         $data['totalAmount'] = $totalAmount;
@@ -167,73 +167,73 @@ class AdminController extends Controller
     {
         $id = $request->id;
         $viewstudentdetails = DB::table('vw_billing_details')
-        ->select(
-        'vw_billing_details.stud_uid',
-        'vw_billing_details.reference_no',
-        'vw_billing_details.hei_psg_region',
-        'vw_billing_details.hei_sid',
-        'vw_billing_details.hei_uii',
-        'vw_billing_details.hei_name',
-        'vw_billing_details.ac_year',
-        'vw_billing_details.semester',
-        'vw_billing_details.app_id',
-        'vw_billing_details.fhe_award_no',
-        'vw_billing_details.stud_id',
-        'vw_billing_details.lrn_no',
-        'vw_billing_details.stud_lname',
-        'vw_billing_details.stud_fname',
-        'vw_billing_details.stud_mname',
-        'vw_billing_details.stud_ext_name',
-        'vw_billing_details.stud_sex',
-        'vw_billing_details.stud_birth_date',
-        'vw_billing_details.stud_birth_place',
-        'vw_billing_details.f_lname',
-        'vw_billing_details.f_fname',
-        'vw_billing_details.f_mname',
-        'vw_billing_details.m_lname',
-        'vw_billing_details.m_fname',
-        'vw_billing_details.m_mname',
-        'vw_billing_details.present_prov',
-        'vw_billing_details.present_city',
-        'vw_billing_details.present_barangay',
-        'vw_billing_details.present_street',
-        'vw_billing_details.present_zipcode',
-        'vw_billing_details.permanent_prov',
-        'vw_billing_details.permanent_city',
-        'vw_billing_details.permanent_barangay',
-        'vw_billing_details.permanent_street',
-        'vw_billing_details.permanent_zipcode',
-        'vw_billing_details.stud_email',
-        'vw_billing_details.stud_alt_email',
-        'vw_billing_details.stud_phone_no',
-        'vw_billing_details.stud_alt_phone_no',
-        'vw_billing_details.transferee',
-        'vw_billing_details.degree_program',
-        'vw_billing_details.year_level',
-        'vw_billing_details.lab_unit',
-        'vw_billing_details.comp_lab_unit',
-        'vw_billing_details.academic_unit',
-        'vw_billing_details.nstp_unit',
-        'vw_billing_details.remarks',
-        'vw_billing_details.stud_status',
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.academic_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS tuition_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "entrance" THEN vw_billing_details.amount ELSE 0 END) + SUM(CASE WHEN vw_billing_details.type_of_fee = "admission" THEN vw_billing_details.amount ELSE 0 END) AS entrance_and_admission_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "athletic" THEN vw_billing_details.amount ELSE 0 END) AS athletic_fee'),
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount) ELSE 0 END) AS computer_per_unit_fee'), 
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS computer_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "cultural" THEN vw_billing_details.amount ELSE 0 END) AS cultural_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "development" THEN vw_billing_details.amount ELSE 0 END) AS development_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "guidance" THEN vw_billing_details.amount ELSE 0 END) AS guidance_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "handbook" THEN vw_billing_details.amount ELSE 0 END) AS handbook_fee'),
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.lab_unit * vw_billing_details.amount) ELSE 0 END) AS laboratory_per_unit_fee'),
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS laboratory_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "library" THEN vw_billing_details.amount ELSE 0 END) AS library_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "medical and dental" THEN vw_billing_details.amount ELSE 0 END) AS medical_and_dental_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "registration" THEN vw_billing_details.amount ELSE 0 END) AS registration_fee'),
-        DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "school id" THEN vw_billing_details.amount ELSE 0 END) AS school_id_fee'),
-        DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.nstp_unit * vw_billing_details.amount) ELSE 0 END)
+            ->select(
+                'vw_billing_details.stud_uid',
+                'vw_billing_details.reference_no',
+                'vw_billing_details.hei_psg_region',
+                'vw_billing_details.hei_sid',
+                'vw_billing_details.hei_uii',
+                'vw_billing_details.hei_name',
+                'vw_billing_details.ac_year',
+                'vw_billing_details.semester',
+                'vw_billing_details.app_id',
+                'vw_billing_details.fhe_award_no',
+                'vw_billing_details.stud_id',
+                'vw_billing_details.lrn_no',
+                'vw_billing_details.stud_lname',
+                'vw_billing_details.stud_fname',
+                'vw_billing_details.stud_mname',
+                'vw_billing_details.stud_ext_name',
+                'vw_billing_details.stud_sex',
+                'vw_billing_details.stud_birth_date',
+                'vw_billing_details.stud_birth_place',
+                'vw_billing_details.f_lname',
+                'vw_billing_details.f_fname',
+                'vw_billing_details.f_mname',
+                'vw_billing_details.m_lname',
+                'vw_billing_details.m_fname',
+                'vw_billing_details.m_mname',
+                'vw_billing_details.present_prov',
+                'vw_billing_details.present_city',
+                'vw_billing_details.present_barangay',
+                'vw_billing_details.present_street',
+                'vw_billing_details.present_zipcode',
+                'vw_billing_details.permanent_prov',
+                'vw_billing_details.permanent_city',
+                'vw_billing_details.permanent_barangay',
+                'vw_billing_details.permanent_street',
+                'vw_billing_details.permanent_zipcode',
+                'vw_billing_details.stud_email',
+                'vw_billing_details.stud_alt_email',
+                'vw_billing_details.stud_phone_no',
+                'vw_billing_details.stud_alt_phone_no',
+                'vw_billing_details.transferee',
+                'vw_billing_details.degree_program',
+                'vw_billing_details.year_level',
+                'vw_billing_details.lab_unit',
+                'vw_billing_details.comp_lab_unit',
+                'vw_billing_details.academic_unit',
+                'vw_billing_details.nstp_unit',
+                'vw_billing_details.remarks',
+                'vw_billing_details.stud_status',
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.academic_unit * vw_billing_details.amount) ELSE 0 END) + SUM(CASE WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS tuition_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "entrance" THEN vw_billing_details.amount ELSE 0 END) + SUM(CASE WHEN vw_billing_details.type_of_fee = "admission" THEN vw_billing_details.amount ELSE 0 END) AS entrance_and_admission_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "athletic" THEN vw_billing_details.amount ELSE 0 END) AS athletic_fee'),
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount) ELSE 0 END) AS computer_per_unit_fee'),
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS computer_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "cultural" THEN vw_billing_details.amount ELSE 0 END) AS cultural_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "development" THEN vw_billing_details.amount ELSE 0 END) AS development_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "guidance" THEN vw_billing_details.amount ELSE 0 END) AS guidance_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "handbook" THEN vw_billing_details.amount ELSE 0 END) AS handbook_fee'),
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.lab_unit * vw_billing_details.amount) ELSE 0 END) AS laboratory_per_unit_fee'),
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS laboratory_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "library" THEN vw_billing_details.amount ELSE 0 END) AS library_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "medical and dental" THEN vw_billing_details.amount ELSE 0 END) AS medical_and_dental_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "registration" THEN vw_billing_details.amount ELSE 0 END) AS registration_fee'),
+                DB::raw('SUM(CASE WHEN vw_billing_details.type_of_fee = "school id" THEN vw_billing_details.amount ELSE 0 END) AS school_id_fee'),
+                DB::raw('SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject")) THEN (vw_billing_details.nstp_unit * vw_billing_details.amount) ELSE 0 END)
          + SUM(CASE WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student") THEN vw_billing_details.amount ELSE 0 END) AS nstp_fee'),
-        DB::raw('SUM(
+                DB::raw('SUM(
             CASE
                 WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
                     THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
@@ -276,15 +276,15 @@ class AdminController extends Controller
                 ELSE 0
             END
         ) AS total_fee')
-    )
-    ->where(function ($query) {
-        $query->where('vw_billing_details.bs_osf_settings', 1)
-            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-    })
-    ->where('vw_billing_details.form', 2)
-    ->where('stud_uid', $id)
-    ->groupBy('vw_billing_details.stud_uid')
-    ->first();
+            )
+            ->where(function ($query) {
+                $query->where('vw_billing_details.bs_osf_settings', 1)
+                    ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+            })
+            ->where('vw_billing_details.form', 2)
+            ->where('stud_uid', $id)
+            ->groupBy('vw_billing_details.stud_uid')
+            ->first();
         return response()->json($viewstudentdetails);
     }
 
@@ -304,43 +304,45 @@ class AdminController extends Controller
 
         // $students = BillingForm3::where('reference_no', $reference_no)->get();
         $students = DB::table('vw_billing_details')
-        ->select(
-        'vw_billing_details.stud_uid',
-        'vw_billing_details.reference_no',
-        'vw_billing_details.app_id',
-        'vw_billing_details.fhe_award_no',
-        'vw_billing_details.stud_lname',
-        'vw_billing_details.stud_fname',
-        'vw_billing_details.stud_mname',
-        'vw_billing_details.stud_ext_name',
-        'vw_billing_details.stud_sex',
-        'vw_billing_details.stud_birth_date',
-        'vw_billing_details.stud_email',
-        'vw_billing_details.stud_phone_no',
-        'vw_billing_details.degree_program',
-        'vw_billing_details.year_level',
-        'vw_billing_details.total_exam_taken',
-        'vw_billing_details.exam_result',
-        'vw_billing_details.remarks',
-        'vw_billing_details.stud_status',
-        DB::raw('IF(`vw_billing_details`.`stud_status` = 0,
+            ->select(
+                'vw_billing_details.stud_uid',
+                'vw_billing_details.reference_no',
+                'vw_billing_details.app_id',
+                'vw_billing_details.fhe_award_no',
+                'vw_billing_details.stud_lname',
+                'vw_billing_details.stud_fname',
+                'vw_billing_details.stud_mname',
+                'vw_billing_details.stud_ext_name',
+                'vw_billing_details.stud_sex',
+                'vw_billing_details.stud_birth_date',
+                'vw_billing_details.stud_email',
+                'vw_billing_details.stud_phone_no',
+                'vw_billing_details.degree_program',
+                'vw_billing_details.year_level',
+                'vw_billing_details.total_exam_taken',
+                'vw_billing_details.exam_result',
+                'vw_billing_details.remarks',
+                'vw_billing_details.stud_status',
+                DB::raw(
+                    'IF(`vw_billing_details`.`stud_status` = 0,
             (SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END)
             + SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (NOT (`vw_billing_details`.`category` LIKE "%exam%")) THEN `vw_billing_details`.`amount` ELSE 0 END)),
             IF(`vw_billing_details`.`stud_status` = 4,
                 SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END),
                 0)) AS entrance_and_admission_fee'
-    ))
-    ->where(function ($query) {
-        $query->where('vw_billing_details.bs_osf_settings', 1)
-            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-    })
-    ->where('vw_billing_details.form', 3)
-    ->where('reference_no', $reference_no)
-    ->groupBy('vw_billing_details.stud_uid')
-    ->havingNotNull('entrance_and_admission_fee')
-    ->get();
-    
-    $totalAmount = $students->sum('entrance_and_admission_fee');
+                )
+            )
+            ->where(function ($query) {
+                $query->where('vw_billing_details.bs_osf_settings', 1)
+                    ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+            })
+            ->where('vw_billing_details.form', 3)
+            ->where('reference_no', $reference_no)
+            ->groupBy('vw_billing_details.stud_uid')
+            ->havingNotNull('entrance_and_admission_fee')
+            ->get();
+
+        $totalAmount = $students->sum('entrance_and_admission_fee');
 
         $data['totalAmount'] = $totalAmount;
         $data['students'] = $students;
@@ -352,67 +354,69 @@ class AdminController extends Controller
         $id = $request->id;
         // $viewapplicantdetails = BillingForm3::where('stud_uid', $id)->first();
         $viewapplicantdetails = DB::table('vw_billing_details')
-        ->select(
-        'vw_billing_details.stud_uid',
-        'vw_billing_details.reference_no',
-        'vw_billing_details.hei_psg_region',
-        'vw_billing_details.hei_sid',
-        'vw_billing_details.hei_uii',
-        'vw_billing_details.hei_name',
-        'vw_billing_details.ac_year',
-        'vw_billing_details.semester',
-        'vw_billing_details.app_id',
-        'vw_billing_details.fhe_award_no',
-        'vw_billing_details.stud_id',
-        'vw_billing_details.lrn_no',
-        'vw_billing_details.stud_lname',
-        'vw_billing_details.stud_fname',
-        'vw_billing_details.stud_mname',
-        'vw_billing_details.stud_ext_name',
-        'vw_billing_details.stud_sex',
-        'vw_billing_details.stud_birth_date',
-        'vw_billing_details.stud_birth_place',
-        'vw_billing_details.f_lname',
-        'vw_billing_details.f_fname',
-        'vw_billing_details.f_mname',
-        'vw_billing_details.m_lname',
-        'vw_billing_details.m_fname',
-        'vw_billing_details.m_mname',
-        'vw_billing_details.present_prov',
-        'vw_billing_details.present_city',
-        'vw_billing_details.present_street',
-        'vw_billing_details.present_zipcode',
-        'vw_billing_details.permanent_prov',
-        'vw_billing_details.permanent_city',
-        'vw_billing_details.permanent_street',
-        'vw_billing_details.permanent_zipcode',
-        'vw_billing_details.stud_email',
-        'vw_billing_details.stud_alt_email',
-        'vw_billing_details.stud_phone_no',
-        'vw_billing_details.stud_alt_phone_no',
-        'vw_billing_details.transferee',
-        'vw_billing_details.degree_program',
-        'vw_billing_details.year_level',
-        'vw_billing_details.total_exam_taken',
-        'vw_billing_details.exam_result',
-        'vw_billing_details.remarks',
-        'vw_billing_details.stud_status',
-        DB::raw('IF(`vw_billing_details`.`stud_status` = 0,
+            ->select(
+                'vw_billing_details.stud_uid',
+                'vw_billing_details.reference_no',
+                'vw_billing_details.hei_psg_region',
+                'vw_billing_details.hei_sid',
+                'vw_billing_details.hei_uii',
+                'vw_billing_details.hei_name',
+                'vw_billing_details.ac_year',
+                'vw_billing_details.semester',
+                'vw_billing_details.app_id',
+                'vw_billing_details.fhe_award_no',
+                'vw_billing_details.stud_id',
+                'vw_billing_details.lrn_no',
+                'vw_billing_details.stud_lname',
+                'vw_billing_details.stud_fname',
+                'vw_billing_details.stud_mname',
+                'vw_billing_details.stud_ext_name',
+                'vw_billing_details.stud_sex',
+                'vw_billing_details.stud_birth_date',
+                'vw_billing_details.stud_birth_place',
+                'vw_billing_details.f_lname',
+                'vw_billing_details.f_fname',
+                'vw_billing_details.f_mname',
+                'vw_billing_details.m_lname',
+                'vw_billing_details.m_fname',
+                'vw_billing_details.m_mname',
+                'vw_billing_details.present_prov',
+                'vw_billing_details.present_city',
+                'vw_billing_details.present_street',
+                'vw_billing_details.present_zipcode',
+                'vw_billing_details.permanent_prov',
+                'vw_billing_details.permanent_city',
+                'vw_billing_details.permanent_street',
+                'vw_billing_details.permanent_zipcode',
+                'vw_billing_details.stud_email',
+                'vw_billing_details.stud_alt_email',
+                'vw_billing_details.stud_phone_no',
+                'vw_billing_details.stud_alt_phone_no',
+                'vw_billing_details.transferee',
+                'vw_billing_details.degree_program',
+                'vw_billing_details.year_level',
+                'vw_billing_details.total_exam_taken',
+                'vw_billing_details.exam_result',
+                'vw_billing_details.remarks',
+                'vw_billing_details.stud_status',
+                DB::raw(
+                    'IF(`vw_billing_details`.`stud_status` = 0,
             (SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END)
             + SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (NOT (`vw_billing_details`.`category` LIKE "%exam%")) THEN `vw_billing_details`.`amount` ELSE 0 END)),
             IF(`vw_billing_details`.`stud_status` = 4,
                 SUM(CASE WHEN (`vw_billing_details`.`form` = 3) AND (`vw_billing_details`.`category` LIKE "%exam%") THEN (`vw_billing_details`.`total_exam_taken` * `vw_billing_details`.`amount`) ELSE 0 END),
                 0)) AS entrance_and_admission_fee'
-    ))
-    ->where(function ($query) {
-        $query->where('vw_billing_details.bs_osf_settings', 1)
-            ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-    })
-    ->where('vw_billing_details.form', 3)
-    ->where('stud_uid', $id)
-    ->groupBy('vw_billing_details.stud_uid')
-    ->havingNotNull('entrance_and_admission_fee')
-    ->first();
+                )
+            )
+            ->where(function ($query) {
+                $query->where('vw_billing_details.bs_osf_settings', 1)
+                    ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
+            })
+            ->where('vw_billing_details.form', 3)
+            ->where('stud_uid', $id)
+            ->groupBy('vw_billing_details.stud_uid')
+            ->havingNotNull('entrance_and_admission_fee')
+            ->first();
 
         return response()->json($viewapplicantdetails);
     }
@@ -494,9 +498,9 @@ class AdminController extends Controller
         //     'tbl_fhe_billing_records.reference_no',
         // )
         // ->get();
-    
+
         $billings = Billing::all();
-        
+
         $data['billings'] = $billings;
         return view('admin.elements.billinglist', $data);
     }
@@ -631,14 +635,14 @@ class AdminController extends Controller
                 $validator = Validator::make($data, [
                     'year_level' => 'numeric',
                     'semester' => 'numeric',
-                    'amount' => 'numeric',
+                    'amount' => 'numeric'
                 ]);
 
                 if ($validator->fails()) {
                     return redirect()->back()->withErrors($validator)->withInput();
                 }
 
-                $batch[] = [
+                $tosf = [
                     'ac_year' => $ac_year,
                     'hei_psg_region' => $hei_psg_region,
                     'hei_uii' => $hei_uii,
@@ -652,6 +656,26 @@ class AdminController extends Controller
                     'amount' => $data[10],
                     'form' => $data[11],
                 ];
+
+                $tosf_validator = Validator::make($tosf, [
+                    'ac_year' => 'required',
+                    'hei_psg_region' => 'required',
+                    'hei_uii' => 'required',
+                    'hei_name' => 'required',
+                    'year_level' => 'required',
+                    'semester' => 'required',
+                    'course_enrolled' => 'required',
+                    'type_of_fee' => 'required',
+                    'category' => 'required',
+                    'coverage' => 'required',
+                    'amount' => 'required',
+                    'form' => 'required',
+                ]);
+                if ($tosf_validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
+
+                $batch[] = $tosf;
             }
             OtherSchoolFees::insert($batch);
         }
@@ -1379,6 +1403,4 @@ class AdminController extends Controller
 
         return response()->json(['message' => $request->reference_no . ' Rejected Bank Cert'], 200);
     }
-
-    
 }
