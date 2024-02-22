@@ -2151,9 +2151,9 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
     public function queueBillingForChecking(Request $request)
     {
-        $billing = Billing::where('reference_no', $request->reference_no)->first();
-        $billing->billing_status = 2;
-        $billing->save();
+        // $billing = Billing::where('reference_no', $request->reference_no)->first();
+        // $billing->billing_status = 2;
+        // $billing->save();
         // $this->checkBilling();
         return response('Success', 200);
     }
