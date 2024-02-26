@@ -674,7 +674,7 @@ class AdminController extends Controller
                 if ($tosf_validator->fails()) {
                     return response([
                         'status' => 400,
-                        'errors' => $validator->messages(),
+                        'errors' => $tosf_validator->messages(),
                     ]);
                 }
 
