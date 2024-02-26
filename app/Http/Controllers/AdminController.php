@@ -656,7 +656,7 @@ class AdminController extends Controller
                     'amount' => $data[10],
                     'form' => $data[11],
                 ];
-
+                //validator for tosf. Required lahat at may regex sa form para 2 and 3 lang
                 $tosf_validator = Validator::make($tosf, [
                     'ac_year' => 'required',
                     'hei_psg_region' => 'required',
