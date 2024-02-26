@@ -672,7 +672,10 @@ class AdminController extends Controller
                     'form' => ['required', 'regex:/^(2|3)$/'],
                 ]);
                 if ($tosf_validator->fails()) {
-                    return redirect()->back()->withErrors($validator)->withInput();
+                    return response([
+                        'status' => 400,
+                        'errors' => $validator->messages(),
+                    ]);
                 }
 
                 $batch[] = $tosf;
