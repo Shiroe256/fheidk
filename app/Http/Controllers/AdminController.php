@@ -669,7 +669,7 @@ class AdminController extends Controller
                     'category' => 'required',
                     'coverage' => 'required',
                     'amount' => 'required',
-                    'form' => 'required',
+                    'form' => 'required|regex:/^(2|3)$/',
                 ]);
                 if ($tosf_validator->fails()) {
                     return redirect()->back()->withErrors($validator)->withInput();
