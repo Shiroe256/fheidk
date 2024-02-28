@@ -17,7 +17,7 @@ class ValidateBillingStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        $reference_no = $request->ref_no;
+        $reference_no = $request->reference_no;
         $billing_status = DB::table('tbl_fhe_billing_records')->where('reference_no', '=', $reference_no)->first()->billing_status;
 
         switch ($billing_status) {
