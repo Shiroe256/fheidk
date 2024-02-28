@@ -2156,7 +2156,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         queueBillingForChecking::dispatch($reference_no);
         $billing->billing_status = 2;
         $billing->save();
-        $this->checkBilling();
+        // $this->checkBilling();
         return response('Success', 200);
     }
 
