@@ -18,7 +18,7 @@ class ValidateBillingStatus
     public function handle(Request $request, Closure $next)
     {
         $reference_no = $request->ref_no;
-        $billing_status = DB::table('tbl_fhe_billing_records')->where('reference_no','=',$reference_no)->first()->billing_status;
+        $billing_status = DB::table('tbl_fhe_billing_records')->where('reference_no', '=', $reference_no)->first()->billing_status;
 
         switch ($billing_status) {
             case 2:
@@ -27,9 +27,9 @@ class ValidateBillingStatus
             case 8:
             case 9:
             case 10:
-                return redirect()->route('billings');
+                return response('error', 400);
                 break;
-            
+
             default:
                 return $next($request);
                 break;

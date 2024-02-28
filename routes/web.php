@@ -112,7 +112,7 @@ Route::middleware(['throttle:20,1'])->group(function () {
 Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
 
 //Billing Checker
-Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->name('queueBillingForChecking');
+Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->middleware('validateBillingStatus')->name('queueBillingForChecking');
 Route::post('/fetchTemplateData', [BillingController::class, 'getSheetTemplate'])->name('fetchTemplateData');
 Route::get('/fetchTemplate', [BillingController::class, 'downloadSheetTemplate'])->name('downloadTemplate');
 
