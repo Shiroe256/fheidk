@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use \NumberFormatter;
-use App\Jobs\computeFees;
+use App\Jobs\QueueBillingForChecking;
 
 require '../app/Libraries/FPDFscripts/FPDFunifast.php';
 require '../vendor/autoload.php';
@@ -2151,10 +2151,12 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     //medyo self explanatory naman to. Eto ung mangayayre pag clinick ung billing checker
     public function queueBillingForChecking(Request $request)
     {
-        // $billing = Billing::where('reference_no', $request->reference_no)->first();
-        // $billing->billing_status = 2;
-        // $billing->save();
-        // $this->checkBilling();
+        $reference_no = $request->reference_no;
+        $billing = Billing::where('reference_no', $reference_no)->first();
+        queueBillingForChecking::dispatch($reference_no);
+        $billing->billing_status = 2;
+        $billing->save();
+        $this->checkBilling();
         return response('Success', 200);
     }
 
