@@ -788,9 +788,9 @@ function validateFields(data) {
   var zippattern = /^[1-9]\d{3}$/;
   var namepattern = /^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/;
   // var acadpattern = /^\b(\d|40)\b$/;
+  var row = 8;
   for (const stud of data) {
     var error = [];
-    var row = 8;
     // errors[ctr] = [];
     // stud['fhe_aw_no']
     // stud['stud_no']
