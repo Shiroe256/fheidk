@@ -654,7 +654,8 @@ class AdminController extends Controller
                     'category' => $data[8],
                     'coverage' => $data[9],
                     'amount' => $data[10],
-                    'form' => $data[11],
+                    'is_optional' => $data[11],
+                    'form' => $data[12],
                 ];
                 //validator for tosf. Required lahat at may regex sa form para 2 and 3 lang
                 $tosf_validator = Validator::make($tosf, [
@@ -669,6 +670,7 @@ class AdminController extends Controller
                     'category' => 'required',
                     'coverage' => 'required',
                     'amount' => 'required',
+                    'is_optional' => 'required',
                     'form' => ['required', 'regex:/^(2|3)$/'],
                     // 'form' => ['required'],
                 ]);
