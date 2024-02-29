@@ -108,8 +108,8 @@ Route::middleware(['throttle:20,1'])->group(function () {
     Route::post('/save-studentfee', [BillingController::class, 'toggleStudentFee'])->name('toggleStudentFee')->middleware('PreventEditingIfSubmitted');
 });
 
-//test
-Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
+//test checker before it was made a cron job
+// Route::get('/testchecker', [BillingController::class, 'checkBilling'])->name('checkBilling');
 
 //Billing Checker
 Route::post('/queueBilling', [BillingController::class, 'queueBillingForChecking'])->middleware('validateBillingStatus')->name('queueBillingForChecking');
