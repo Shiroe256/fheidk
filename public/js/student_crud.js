@@ -420,6 +420,10 @@ async function showStudentFees(studid) {
       // document.getElementById('studfee_comp_lab_unit').innerHTML = fees.comp_lab_unit;
       //nstp
       document.getElementById('studfee_nstp_fee').innerHTML = fees.nstp_fee;
+      document.getElementById('studfee_academic_unit').innerHTML = fees.academic_unit;
+      document.getElementById('studfee_lab_unit').innerHTML = fees.lab_unit;
+      document.getElementById('studfee_comp_lab_unit').innerHTML = fees.comp_lab_unit;
+      document.getElementById('studfee_nstp_unit').innerHTML = fees.nstp_unit;
       // document.getElementById('studfee_nstp_unit').innerHTML = fees.nstp_unit;
       //tosf
       document.getElementById('studfee_athletic_fee').innerHTML = fees.athletic_fee;

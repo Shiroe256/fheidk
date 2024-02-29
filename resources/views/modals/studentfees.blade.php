@@ -16,30 +16,39 @@
                                 <tr class="my-0">
                                     <td>Entrance and Admission Fees</td>
                                     <td id="studfee_entrance_and_admission_fee"></td>
-                                    <td>Tuition Fees</td>
-                                    <td id="studfee_tuition_fee"></td>
+                                    <td>Academic Unit</td>
+                                    <td id="studfee_academic_unit"></td>
+                                    
                                 </tr>
                                 <tr class="my-0">
                                     <td>Athletic Fees</td>
                                     <td id="studfee_athletic_fee"></td>
-                                    <td>NSTP Fees</td>
-                                    <td id="studfee_nstp_fee"></td>
+                                    <td>Lab Unit</td>
+                                    <td id="studfee_lab_unit"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Computer Fees</td>
                                     <td id="studfee_computer_fee"></td>
+                                    <td>Computer Lab Unit</td>
+                                    <td id="studfee_comp_lab_unit"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Cultural Fees</td>
                                     <td id="studfee_cultural_fee"></td>
+                                    <td>Tuition Fees</td>
+                                    <td id="studfee_tuition_fee"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Development Fees</td>
                                     <td id="studfee_development_fee"></td>
+                                    <td>NSTP Fees</td>
+                                    <td id="studfee_nstp_fee"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Guidance Fees</td>
                                     <td id="studfee_guidance_fee"></td>
+                                    <td>NSTP Unit</td>
+                                    <td id="studfee_nstp_unit"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Handbook Fees</td>
