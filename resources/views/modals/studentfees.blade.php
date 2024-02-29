@@ -35,20 +35,18 @@
                                 <tr class="my-0">
                                     <td>Cultural Fees</td>
                                     <td id="studfee_cultural_fee"></td>
-                                    <td>Tuition Fees</td>
-                                    <td id="studfee_tuition_fee"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Development Fees</td>
                                     <td id="studfee_development_fee"></td>
-                                    <td>NSTP Fees</td>
-                                    <td id="studfee_nstp_fee"></td>
+                                    <td>NSTP Unit</td>
+                                    <td id="studfee_nstp_unit"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Guidance Fees</td>
                                     <td id="studfee_guidance_fee"></td>
-                                    <td>NSTP Unit</td>
-                                    <td id="studfee_nstp_unit"></td>
+                                    <td>NSTP Fees</td>
+                                    <td id="studfee_nstp_fee"></td>
                                 </tr>
                                 <tr class="my-0">
                                     <td>Handbook Fees</td>
@@ -73,12 +71,14 @@
                                 <tr class="my-0">
                                     <td>School ID</td>
                                     <td id="studfee_school_id_fee"></td>
+                                    <td>Tuition Fees</td>
+                                    <td id="studfee_tuition_fee"></td>
                                 </tr>
                                 <tr class="mt-2">
                                     <td></td>
                                     <td></td>
                                     <td><strong>
-                                            TOTAL FEES</strong>
+                                        TOTAL FEES</strong>
                                     </td>
                                     <td id="studfee_total_fee"></td>
                                 </tr>
