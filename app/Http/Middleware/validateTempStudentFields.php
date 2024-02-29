@@ -50,7 +50,8 @@ class validateTempStudentFields
             // 'last_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
             // 'given_name' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'],
             'sex_at_birth' => ['required', 'max:25', 'regex:/^(male|Male|Female|female|MALE|FEMALE)$/'],
-            'birthdate' => ['required', 'date_format:m-d-Y'],
+            // 'birthdate' => ['required', 'date_format:m-d-Y'],
+            'birthdate' => ['required'],
             // 'birthplace' => ['required', 'max:255', 'regex:/^[a-zA-Z][a-zA-ZÑñ\s\'-.]*$/'],
             // 'mothers_gname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien fname
             // 'mothers_lname' => ['required', 'max:255', 'regex:/^(?!^\s+)(?!.*\s$)[A-Za-zÑñ\s.-]+$/'], //mother madien lname
