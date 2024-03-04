@@ -60,6 +60,13 @@ function fetchtosflist() {
             .search(this.value)
             .draw();
         });
+
+        $('#search_optional input').on( 'keyup change', function () {
+          table
+            .column(7)
+            .search(this.value)
+            .draw();
+        });
   
       var table = $("#tbl_tosf").DataTable ({
           "order": [[1, "asc"]],
