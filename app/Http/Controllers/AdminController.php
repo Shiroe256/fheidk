@@ -538,6 +538,7 @@ class AdminController extends Controller
             'type_of_fee' => $request->add_tosf_type_of_fee,
             'category' => $request->add_tosf_category,
             'coverage' => $request->add_tosf_coverage,
+            'is_optional' => $request->add_tosf_optional,
             'amount' => $request->add_tosf_amount
         ];
         OtherSchoolFees::create($fee);
@@ -567,6 +568,7 @@ class AdminController extends Controller
             'type_of_fee' => $request->update_tosf_type_of_fee,
             'category' => $request->update_tosf_category,
             'coverage' => $request->update_tosf_coverage,
+            'is_optional' => $request->update_tosf_optional,
             'amount' => $request->update_tosf_amount
         ];
         $fee->update($feeData);

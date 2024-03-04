@@ -98,6 +98,13 @@
                             <option value="per new student">per new student</option>
                         </select>
                     </div>
+                    <div class="form-group"><label>Coverage</label>
+                        <select id="add_tosf_optional" name="add_tosf_optional" class="form-control">
+                            <option selected disabled value="">-- Select Option --</option>
+                            <option value="0">Non-Optional</option>
+                            <option value="1">Optional</option>
+                        </select>
+                    </div>
                     <div class="form-group"><label>Amount</label><input id="add_tosf_amount" name="add_tosf_amount"
                             type="number" class="form-control" min="0" /></div>
                 </div>
@@ -179,6 +186,13 @@
                             <option value="per subject">per subject</option>
                             <option value="per student">per student</option>
                             <option value="per new student">per new student</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Coverage</label>
+                        <select id="update_tosf_optional" name="update_tosf_optional" class="form-control">
+                            <option selected disabled value="">-- Select Option --</option>
+                            <option value="0">Non-Optional</option>
+                            <option value="1">Optional</option>
                         </select>
                     </div>
                     <div class="form-group"><label>Amount</label><input id="update_tosf_amount"
