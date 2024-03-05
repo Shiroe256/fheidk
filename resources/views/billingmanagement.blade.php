@@ -39,263 +39,261 @@
             @endif
         </div>
 
-        @if ($billing_status == 1 || ($billing_status = 3))
-            <div id="billing_forms_div" class="card-body billing_forms_div">
-            @else
-                <div id="billing_forms_div" class="card-body billing_forms_div" style="display:none">
-        @endif
-        <div>
-            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
-                        href="#tab-4">BILLING FORM 1</a></li>
-                <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                        href="#tab-5">BILLING FORM 2</a></li>
-                <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                        href="#tab-6">BILLING FORM 3</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" role="tabpanel" id="tab-4">
-                    <form class="mt-4">
-                        <div class="form-group input-style">
-                            <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary
-                            </h5>
-                            <div id="summary_placeholder">
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="skeleton skeleton-text"></p>
+        <div id="billing_forms_div"
+            class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
+            <div>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
+                            href="#tab-4">BILLING FORM 1</a></li>
+                    <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                            href="#tab-5">BILLING FORM 2</a></li>
+                    <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                            href="#tab-6">BILLING FORM 3</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" role="tabpanel" id="tab-4">
+                        <form class="mt-4">
+                            <div class="form-group input-style">
+                                <h5 class="text-black-50 mb-4"><i class="fas fa-list-ul"></i>&nbsp;Summary
+                                </h5>
+                                <div id="summary_placeholder">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="skeleton skeleton-text"></p>
+                                        </div>
+                                        <div class="col"></div>
+                                        <div class="col"></div>
                                     </div>
-                                    <div class="col"></div>
-                                    <div class="col"></div>
-                                </div>
-                                <div class="row py-3">
-                                    <div class="col">
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
+                                    <div class="row py-3">
+                                        <div class="col">
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                            <p class="skeleton skeleton-text"></p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
-                                        <p class="skeleton skeleton-text"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="skeleton skeleton-text skeleton-body"></p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="skeleton skeleton-text skeleton-body"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="show_summary" class="table-responsive table-style mt-2 show_summary"
-                                role="grid" aria-describedby="dataTable_info">
-                                {{-- SUMMARY TABLE HERE --}}
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" role="tabpanel" id="tab-5">
-                    <form class="mt-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col-lg-3 col-xl-4">
-                                    <h5 class="text-black-50 mb-4"><i
-                                            class="fas fa-user-graduate"></i>&nbsp;Beneficiaries</h5>
+                                <div id="show_summary" class="table-responsive table-style mt-2 show_summary"
+                                    role="grid" aria-describedby="dataTable_info">
+                                    {{-- SUMMARY TABLE HERE --}}
                                 </div>
-                                <div class="col text-right">
-                                    <div class="btn-group" role="group"><button
-                                            class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
-                                            type="button"></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-5">
+                        <form class="mt-4">
+                            <div class="form-group input-style">
+                                <div class="form-row">
+                                    <div class="col-lg-3 col-xl-4">
+                                        <h5 class="text-black-50 mb-4"><i
+                                                class="fas fa-user-graduate"></i>&nbsp;Beneficiaries</h5>
+                                    </div>
+                                    <div class="col text-right">
+                                        <div class="btn-group" role="group"><button
+                                                class="btn btn-outline-danger btn-sm d-none" id="btn_delete_students"
+                                                type="button"></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="students-placeholder" class="p-3">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <td colspan="5">
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                            <td>
-                                                <div class="skeleton skeleton-text skeleton-body"></div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="show_all_students" class="table-responsive">
-                                <table class="table table-hover w-100" id="tbl_students">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-left">APP ID</th>
-                                            <th class="text-left">AWARD NUMBER</th>
-                                            <th class="text-left">LASTNAME</th>
-                                            <th class="text-left">FIRSTNAME</th>
-                                            <th class="text-left">MIDDLENAME</th>
-                                            <th>COURSE</th>
-                                            <th class="text-center">YEAR</th>
-                                            <th class="text-left">REMARKS</th>
-                                            <th class="text-left">STATUS</th>
-                                            <th class="text-left" data-placement="bottom">AMOUNT BILLED <i
-                                                    class="fa-solid fa-circle-question"></i></th>
-                                            <th class="text-center">ACTIONS</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" role="tabpanel" id="tab-6">
-                    <form class="mt-4">
-                        <div class="form-group input-style">
-                            <div class="form-row">
-                                <div class="col-lg-3 col-xl-4">
-                                    <h5 class="text-black-50 mb-4"><i
-                                            class="fas fa-pencil-ruler"></i>&nbsp;Entrance/Admission
-                                        Exam</h5>
+                                <div id="students-placeholder" class="p-3">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="skeleton skeleton-text skeleton-body"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="show_all_students" class="table-responsive">
+                                    <table class="table table-hover w-100" id="tbl_students">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">APP ID</th>
+                                                <th class="text-left">AWARD NUMBER</th>
+                                                <th class="text-left">LASTNAME</th>
+                                                <th class="text-left">FIRSTNAME</th>
+                                                <th class="text-left">MIDDLENAME</th>
+                                                <th>COURSE</th>
+                                                <th class="text-center">YEAR</th>
+                                                <th class="text-left">REMARKS</th>
+                                                <th class="text-left">STATUS</th>
+                                                <th class="text-left" data-placement="bottom">AMOUNT BILLED <i
+                                                        class="fa-solid fa-circle-question"></i></th>
+                                                <th class="text-center">ACTIONS</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
-                            <div id="show_all_applicants" class="table-responsive">
-                                <table class="table table-hover w-100" id="tbl_applicants">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-left">APP ID</th>
-                                            <th class="text-left">LASTNAME</th>
-                                            <th class="text-left">FIRSTNAME</th>
-                                            <th class="text-left">MIDDLENAME</th>
-                                            <th>COURSE</th>
-                                            <th class="text-center">YEAR</th>
-                                            <th class="text-left">REMARKS</th>
-                                            <th class="text-center">NO. OF EXAM TAKEN</th>
-                                            <th class="text-left">RESULT</th>
-                                            <th class="text-left">TOTAL EXAM FEES</th>
-                                            <th class="text-center">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_list_of_students_form_3">
-                                    </tbody>
-                                </table>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" role="tabpanel" id="tab-6">
+                        <form class="mt-4">
+                            <div class="form-group input-style">
+                                <div class="form-row">
+                                    <div class="col-lg-3 col-xl-4">
+                                        <h5 class="text-black-50 mb-4"><i
+                                                class="fas fa-pencil-ruler"></i>&nbsp;Entrance/Admission
+                                            Exam</h5>
+                                    </div>
+                                </div>
+                                <div id="show_all_applicants" class="table-responsive">
+                                    <table class="table table-hover w-100" id="tbl_applicants">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">APP ID</th>
+                                                <th class="text-left">LASTNAME</th>
+                                                <th class="text-left">FIRSTNAME</th>
+                                                <th class="text-left">MIDDLENAME</th>
+                                                <th>COURSE</th>
+                                                <th class="text-center">YEAR</th>
+                                                <th class="text-left">REMARKS</th>
+                                                <th class="text-center">NO. OF EXAM TAKEN</th>
+                                                <th class="text-left">RESULT</th>
+                                                <th class="text-left">TOTAL EXAM FEES</th>
+                                                <th class="text-center">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbl_list_of_students_form_3">
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="billing_exceptions_div" class="card-body billing_exceptions_div {{ $billing_status == 4 ? 'd-none' : '' }}">
-        <form>
-            <div class="form-group input-style">
-                <div class="form-row">
-                    <div class="col-lg-3 col-xl-4">
-                        <h5 class="text-danger mb-4"><i class="fa fa-warning"></i>&nbsp;Exception Report
-                        </h5>
+        <div id="billing_exceptions_div"
+            class="card-body billing_exceptions_div {{ $billing_status == 4 ? '' : 'd-none' }}">
+            <form>
+                <div class="form-group input-style">
+                    <div class="form-row">
+                        <div class="col-lg-3 col-xl-4">
+                            <h5 class="text-danger mb-4"><i class="fa fa-warning"></i>&nbsp;Exception Report
+                            </h5>
+                        </div>
+                        <div class="col text-right">
+                            <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm"
+                                    type="button" data-toggle="modal" data-target="#mod_remove"><i
+                                        class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                        </div>
                     </div>
-                    <div class="col text-right">
-                        <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm"
-                                type="button" data-toggle="modal" data-target="#mod_remove"><i
-                                    class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                    <div id="show_all_exceptions" class="table-responsive mt-2" role="grid"
+                        aria-describedby="dataTable_info">
+                        {{-- EXCEPTIONS TABLE HERE --}}
+                        <table class="table table-hover" id="tbl_exception_report">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">APP ID</th>
+                                    <th class="text-left">AWARD NUMBER</th>
+                                    <th class="text-left">LASTNAME</th>
+                                    <th class="text-left">FIRSTNAME</th>
+                                    <th class="text-left">MIDDLENAME</th>
+                                    <th>COURSE</th>
+                                    <th class="text-center">YEAR</th>
+                                    <th class="text-left">REMARKS</th>
+                                    <th class="text-left">STATUS</th>
+                                    <th class="text-left">AMOUNT BILLED</th>
+                                    <th class="text-center">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_list_of_exceptions">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div id="show_all_exceptions" class="table-responsive mt-2" role="grid"
-                    aria-describedby="dataTable_info">
-                    {{-- EXCEPTIONS TABLE HERE --}}
-                    <table class="table table-hover" id="tbl_exception_report">
-                        <thead>
-                            <tr>
-                                <th class="text-left">APP ID</th>
-                                <th class="text-left">AWARD NUMBER</th>
-                                <th class="text-left">LASTNAME</th>
-                                <th class="text-left">FIRSTNAME</th>
-                                <th class="text-left">MIDDLENAME</th>
-                                <th>COURSE</th>
-                                <th class="text-center">YEAR</th>
-                                <th class="text-left">REMARKS</th>
-                                <th class="text-left">STATUS</th>
-                                <th class="text-left">AMOUNT BILLED</th>
-                                <th class="text-center">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_list_of_exceptions">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
 
-</div>
+    </div>
 </div>
 </div>
 <footer class="bg-white sticky-footer">
