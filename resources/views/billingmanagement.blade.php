@@ -41,11 +41,11 @@
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
                 <div class="btn-group d-flex" role="group" aria-label="Billing Form Tabs">
-                    <a class="btn btn-primary flex-fill input-style-tabs active" role="button" data-toggle="tab"
+                    <a class="btn btn-primary flex-fill input-style-tabs active" role="tab" data-toggle="tab"
                         href="#tab-4">Billing Form 1</a>
-                    <a class="btn btn-primary flex-fill input-style-tabs" role="button" data-toggle="tab"
+                    <a class="btn btn-primary flex-fill input-style-tabs" role="tab" data-toggle="tab"
                         href="#tab-5">Billing Form 2</a>
-                    <a class="btn btn-primary flex-fill input-style-tabs" role="button" data-toggle="tab"
+                    <a class="btn btn-primary flex-fill input-style-tabs" role="tab" data-toggle="tab"
                         href="#tab-6">Billing Form 3</a>
                 </div>
 
