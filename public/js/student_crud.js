@@ -222,7 +222,7 @@ tbl_applicants = $('#tbl_applicants').DataTable({
       data: 'exam_result', render: function (data) {
         var pill;
         data == 'PASSED' ? pill = 'success' : pill = 'danger';
-        return '<span class="badge badge-pill badge' + pill + '">' + data + '</span>'
+        return '<span class="badge badge-pill badge-' + pill + '">' + data + '</span>'
       }
     },
     {
