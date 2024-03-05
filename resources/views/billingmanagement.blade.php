@@ -40,7 +40,7 @@
         <div id="billing_forms_div"
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
-                <div class="btn-group d-flex" role="group" aria-label="Billing Form Tabs">
+                <div class="btn-group d-flex" role="tablist" aria-label="Billing Form Tabs">
                     <a class="btn btn-primary flex-fill input-style-tabs active" role="tab" data-toggle="tab"
                         href="#tab-4">Billing Form 1</a>
                     <a class="btn btn-primary flex-fill input-style-tabs" role="tab" data-toggle="tab"
