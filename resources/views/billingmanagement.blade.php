@@ -41,11 +41,11 @@
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
                 <ul class="nav btn-group" role="tablist">
-                    <li class="btn><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
+                    <li class="btn btn-primary><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-4">Billing Form 1</a></li>
-                    <li class="btn><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                    <li class="btn btn-primary><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-5">Billing Form 2</a></li>
-                    <li class="btn><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
+                    <li class="btn btn-primary><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-6">Billing Form 3</a></li>
                 </ul>
                 <div class="tab-content">
