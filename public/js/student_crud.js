@@ -62,7 +62,9 @@ tbl_students = $('#tbl_students').DataTable({
       data: 'app_id'
     },
     {
-      data: 'fhe_award_no'
+      data: 'fhe_award_no', render: function (data) {
+        return '<span class="badge badge-pill badge-primary">' + data + '</span>'
+      }
     },
     {
       data: 'stud_lname', render: function (data, type, row) {
@@ -285,7 +287,9 @@ tbl_exceptions = $('#tbl_exception_report').DataTable({
       data: 'app_id'
     },
     {
-      data: 'fhe_award_no'
+      data: 'fhe_award_no', render: function (data) {
+        return '<span class="badge badge-pill badge-primary">' + data + '</span>'
+      }
     },
     {
       data: 'stud_lname'
@@ -809,7 +813,7 @@ function validateFields(data) {
       var age = today.getFullYear() - bdate.getFullYear();
       var m = today.getMonth() - bdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < bdate.getDate())) age--;
-      if (age > 70) error.push('You\'re really that old? Please check the birthdate input');
+      if (age > 99) error.push('Please check the birthdate input');
     }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
 
