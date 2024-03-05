@@ -219,7 +219,11 @@ tbl_applicants = $('#tbl_applicants').DataTable({
       data: 'total_exam_taken'
     },
     {
-      data: 'exam_result'
+      data: 'exam_result', render: function (data) {
+        var pill;
+        data == 'PASSED' ? pill = 'success' : pill = 'danger';
+        return '<span class="badge badge-pill badge' + pill + '">' + data + '</span>'
+      }
     },
     {
       data: 'total_fee', render: function (data, type, row, meta) {
