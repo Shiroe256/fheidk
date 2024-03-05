@@ -40,14 +40,15 @@
         <div id="billing_forms_div"
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
-                <ul class="nav nav-pills nav-fill nav-justified" role="tablist">
-                    <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-4">Billing Form 1</a></li>
-                    <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-5">Billing Form 2</a></li>
-                    <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-6">Billing Form 3</a></li>
-                </ul>
+                <div class="btn-group d-flex" role="group" aria-label="Billing Form Tabs">
+                    <button type="button" class="btn btn-primary flex-fill input-style-tabs active" data-bs-toggle="tab"
+                        data-bs-target="#tab-4" aria-selected="true">Billing Form 1</button>
+                    <button type="button" class="btn btn-primary flex-fill input-style-tabs" data-bs-toggle="tab"
+                        data-bs-target="#tab-5">Billing Form 2</button>
+                    <button type="button" class="btn btn-primary flex-fill input-style-tabs" data-bs-toggle="tab"
+                        data-bs-target="#tab-6">Billing Form 3</button>
+                </div>
+                
                 <div class="tab-content">
                     <div class="tab-pane fade show active" role="tabpanel" id="tab-4">
                         <form class="mt-4">
