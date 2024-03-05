@@ -60,6 +60,13 @@ function fetchtosflist() {
             .search(this.value)
             .draw();
         });
+
+        $('#search_optional input').on( 'keyup change', function () {
+          table
+            .column(7)
+            .search(this.value)
+            .draw();
+        });
   
       var table = $("#tbl_tosf").DataTable ({
           "order": [[1, "asc"]],
@@ -201,6 +208,7 @@ function fetchtosflist() {
         $('#update_tosf_type_of_fee').val(response.type_of_fee);
         $('#update_tosf_category').val(response.category);
         $('#update_tosf_coverage').val(response.coverage);
+        $('#update_tosf_optional').val(response.is_optional);
         $('#update_tosf_amount').val(response.amount);
   
       }
