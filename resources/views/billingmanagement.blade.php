@@ -254,51 +254,46 @@
         </div>
     </div>
 
-
-    @if ($billing_status == 4)
-        <div id="billing_exceptions_div" class="card-body billing_exceptions_div">
-        @else
-            <div id="billing_exceptions_div" class="card-body billing_exceptions_div" style="display:none">
-    @endif
-    <form>
-        <div class="form-group input-style">
-            <div class="form-row">
-                <div class="col-lg-3 col-xl-4">
-                    <h5 class="text-danger mb-4"><i class="fa fa-warning"></i>&nbsp;Exception Report
-                    </h5>
+    <div id="billing_exceptions_div" class="card-body billing_exceptions_div {{ $billing_status == 4 ? 'd-none' : '' }}">
+        <form>
+            <div class="form-group input-style">
+                <div class="form-row">
+                    <div class="col-lg-3 col-xl-4">
+                        <h5 class="text-danger mb-4"><i class="fa fa-warning"></i>&nbsp;Exception Report
+                        </h5>
+                    </div>
+                    <div class="col text-right">
+                        <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm"
+                                type="button" data-toggle="modal" data-target="#mod_remove"><i
+                                    class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                    </div>
                 </div>
-                <div class="col text-right">
-                    <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm"
-                            type="button" data-toggle="modal" data-target="#mod_remove"><i
-                                class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                <div id="show_all_exceptions" class="table-responsive mt-2" role="grid"
+                    aria-describedby="dataTable_info">
+                    {{-- EXCEPTIONS TABLE HERE --}}
+                    <table class="table table-hover" id="tbl_exception_report">
+                        <thead>
+                            <tr>
+                                <th class="text-left">APP ID</th>
+                                <th class="text-left">AWARD NUMBER</th>
+                                <th class="text-left">LASTNAME</th>
+                                <th class="text-left">FIRSTNAME</th>
+                                <th class="text-left">MIDDLENAME</th>
+                                <th>COURSE</th>
+                                <th class="text-center">YEAR</th>
+                                <th class="text-left">REMARKS</th>
+                                <th class="text-left">STATUS</th>
+                                <th class="text-left">AMOUNT BILLED</th>
+                                <th class="text-center">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_list_of_exceptions">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div id="show_all_exceptions" class="table-responsive mt-2" role="grid"
-                aria-describedby="dataTable_info">
-                {{-- EXCEPTIONS TABLE HERE --}}
-                <table class="table table-hover" id="tbl_exception_report">
-                    <thead>
-                        <tr>
-                            <th class="text-left">APP ID</th>
-                            <th class="text-left">AWARD NUMBER</th>
-                            <th class="text-left">LASTNAME</th>
-                            <th class="text-left">FIRSTNAME</th>
-                            <th class="text-left">MIDDLENAME</th>
-                            <th>COURSE</th>
-                            <th class="text-center">YEAR</th>
-                            <th class="text-left">REMARKS</th>
-                            <th class="text-left">STATUS</th>
-                            <th class="text-left">AMOUNT BILLED</th>
-                            <th class="text-center">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl_list_of_exceptions">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 
 </div>
 </div>
