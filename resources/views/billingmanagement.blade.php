@@ -42,11 +42,11 @@
             <div>
                 <ul class="nav nav-pills nav-fill nav-justified" role="tablist">
                     <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-4">Form <span class="badge bg-dark">1</span></a></li>
+                            href="#tab-4">Form <span class="badge bg-dark text-light">1</span></a></li>
                     <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-5">Form <span class="badge bg-dark">2</span></a></li>
+                            href="#tab-5">Form <span class="badge bg-dark text-light">2</span></a></li>
                     <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
-                            href="#tab-6">Form <span class="badge bg-dark">3</span></a></li>
+                            href="#tab-6">Form <span class="badge bg-dark text-light">3</span></a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" role="tabpanel" id="tab-4">
