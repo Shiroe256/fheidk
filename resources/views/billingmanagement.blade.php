@@ -7,6 +7,8 @@
     <input type="hidden" name="ac_year" id="ac_year" value="{{ $ac_year }}">
     <input type="hidden" name="semester" id="semester" value="{{ $semester }}">
     <input type="hidden" name="tranche" id="tranche" value="{{ $tranche }}">
+    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
+    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
     <div class="card shadow">
         <div class="card-header d-flex justify-content-between align-items-center"><a
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
@@ -14,8 +16,6 @@
                 previous page</a>
             @if ($billing_status != 2 || $billing_status >= 5)
                 <div class="btn-group" role="group">
-                    <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
-                    <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
                     <a href="{{ Request::url() }}{{ '/settings' }}" id="btn_settings"
                         class="btn btn-outline-primary btn-sm"><i class="fas fa-sliders"></i>&nbsp;Manage
                         Settings</a>
@@ -31,8 +31,6 @@
                         Report</button>
                     <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
                             class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
-                    {{-- <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
-                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Submit for Review</button> --}}
                     <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
                         value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize</button>
                 </div>
