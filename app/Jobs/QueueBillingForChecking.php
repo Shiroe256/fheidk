@@ -128,6 +128,6 @@ class QueueBillingForChecking implements ShouldQueue
         $billing->save();
 
         //write a success message in the logs
-        Log::info('Billing Transaction with reference number ' . $this->reference_no . ' has been processed');
+        // Log::info('Billing Transaction with reference number ' . $this->reference_no . ' has been processed');
     }
 }
