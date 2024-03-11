@@ -1068,6 +1068,23 @@ SUM(
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                     ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
             })
+            ->leftJoin('tbl_billing_settings', function ($join) {
+                $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
+                    ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+            })
+            ->leftJoin('tbl_billing_stud_settings', function ($join) {
+                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
+                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
+            })
+            ->where(function ($query) {
+                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                    ->where('tbl_billing_settings.bs_status', '=', 1)
+                    ->orWhere(function ($query) {
+                        $query->whereNull('tbl_billing_stud_settings.bs_status')
+                            ->where('tbl_billing_settings.bs_status', '=', 1);
+                    });
+            })
             ->get()->toArray();
         $f = new NumberFormatter('en', NumberFormatter::ORDINAL);
         foreach ($student as $stud) {
