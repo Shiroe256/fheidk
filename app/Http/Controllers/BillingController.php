@@ -1237,27 +1237,6 @@ SUM(
 
         return $students;
     }
-    private function joinSettings($student_sub)
-    {
-        $student_fee_sett = $student_sub->leftJoin('tbl_billing_settings', function ($join) {
-            $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-        })
-            ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                    ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                    ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-            })
-            ->where(function ($query) {
-                $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                    ->where('tbl_billing_settings.bs_status', '=', 1)
-                    ->orWhere(function ($query) {
-                        $query->whereNull('tbl_billing_stud_settings.bs_status')
-                            ->where('tbl_billing_settings.bs_status', '=', 1);
-                    });
-            });
-        return $student_fee_sett;
-    }
     public function fetchTempStudent(Request $request)
     {
 
