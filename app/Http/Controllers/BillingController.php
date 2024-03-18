@@ -1247,10 +1247,6 @@ SUM(
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
         $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
-        // $students_sett = $this->joinSettings($students)->groupBy('students_sub.uid')->orderBy('degree_program')->get();
-        //dito jinojoin ung information about the fees and computation
-
-        //!kailangan lagyan dito ng para sa mga pumasa lang
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
@@ -1351,7 +1347,6 @@ SUM(
         //students sub query. Dito ung pagination
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where('remarks', '!=', '');
-        //dito jinojoin ung information about the fees and computation
         $data['exceptions'] = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
             ->mergeBindings($students_sub)
             ->select(
