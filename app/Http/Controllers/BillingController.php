@@ -492,7 +492,7 @@ SUM(
         
 
         $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first() ;
-        $total_fee = $form2_fees->total_fee + $form3_fees->total_fees;
+        $total_fee = $form2_fees->total_fee + $form3_fees->total_fee;
         return $total_fee;
     }
     function getForm3Data($reference_no)
