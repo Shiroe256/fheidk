@@ -852,7 +852,7 @@ function validateFields(data) {
     if (stud['lab_u'] > 40 || stud['lab_u'] === undefined) error.push('Invalid Lab unit value. The Lab unit only accepts between 0 to 40.');
     if (stud['com_lab_u'] > 40 || stud['com_lab_u'] === undefined) error.push('Invalid Computer Lab unit value. The Computer Lab unit only accepts between 0 to 40.');
     if (stud['acad_u'] > 40 || stud['acad_u'] === undefined) error.push('Invalid Academic unit value. The academic unit only accepts between 0 to 40.');
-    if (stud['nstp_u'] > 40 || stud['nstp_u'] === undefined) error.push('Invalid NSTP unit value. The NSTP unit only accepts between 0 to 40.');
+    if (stud['nstp_u'] > 40 || stud['nstp_u'] !== undefined) error.push('Invalid NSTP unit value. The NSTP unit only accepts between 0 to 40.');
     if (stud['exams'] > 40 && stud['exams'] !== undefined) error.push('Invalid exams value. Please input only how many times the student has taken the exam in whole numbers.');
     if (stud['exam_result'] != 'PASSED' && stud['exam_result'] != 'FAILED' !== stud['exam_result'] === undefined) error.push('Invalid exam result. Please enter only PASSED or FAILED');
     // stud['remarks']
