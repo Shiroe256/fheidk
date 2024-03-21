@@ -1323,7 +1323,7 @@ SUM(
 
         echo json_encode([
             "draw" => $request->draw,
-            "recordsTotal" => count($students),
+            "recordsTotal" => $students->count(),
             "recordsFiltered" => $total,
             "data" => $students
         ]);
