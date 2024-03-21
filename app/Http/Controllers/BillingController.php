@@ -1143,17 +1143,18 @@ SUM(
                         ->orWhere('stud_lname', 'like', '%' . $search . '%')
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
-                ->where(function ($query) {
-                    $query->where(function ($query2) {
-                        $query2->where('year_level', '=', 1)
-                            ->where('semester', '=', 1);
-                    })
-                        ->orWhere('transferee', '=', 1);
-                })
-                ->where(function ($query) {
-                    $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                })
+                // ->where(function ($query) {
+                //     $query->where(function ($query2) {
+                //         $query2->where('year_level', '=', 1)
+                //             ->where('semester', '=', 1);
+                //     })
+                //         ->orWhere('transferee', '=', 1);
+                // })
+                ->where('total_exam_taken', '>', 0)
+                // ->where(function ($query) {
+                //     $query->where('exam_result', '!=', 'Failed')
+                //         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                // })
                 ->skip($start)->take($length);
         } else {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
@@ -1162,13 +1163,10 @@ SUM(
                         ->orWhere('stud_lname', 'like', '%' . $search . '%')
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
-                // ->where(function ($query) {
-                //     $query->where('exam_result', '!=', 'Failed')
-                //         ->orWhere('total_exam_taken', '>', 0);
-                //         // ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                //     })
-                // ->orWhere('transferee', '=', 'YES')
-                ->where('total_exam_taken', '>', 0)
+                ->where(function ($query) {
+                    $query->where('exam_result', '!=', 'Failed')
+                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                })
                 ->skip($start)->take($length);
         }
         return $students_sub;
