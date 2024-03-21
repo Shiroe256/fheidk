@@ -1164,9 +1164,9 @@ SUM(
                 })
                 ->where(function ($query) {
                     $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('transferee', '=', 'YES')
                         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
                 })
+                ->orWhere('transferee', '=', 'YES')
                 ->skip($start)->take($length);
         }
         return $students_sub;
