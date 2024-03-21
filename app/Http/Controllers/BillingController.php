@@ -1213,8 +1213,9 @@ SUM(
                 ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                        // ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                        // ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                        ->on('tbl_other_school_fees.coverage', '=', DB::raw('"per new student"'))
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form));
                 })->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
