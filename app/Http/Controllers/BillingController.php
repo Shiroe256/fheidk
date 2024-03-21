@@ -493,10 +493,10 @@ SUM(
         $form3_tot = $this->joinStudentFees($form3_stud, 3)->groupBy('reference_no')->first()->total_fee;
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
 
+        
 
-
-        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first() + $form3_tot;
-        $total_fee = $summary->total_fee;
+        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first() ;
+        $total_fee = $summary->total_fee + $form3_tot;
         return $total_fee;
     }
     function getForm3Data($reference_no)
