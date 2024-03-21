@@ -1333,7 +1333,7 @@ SUM(
             return "Please Upload first";
         }
         $students_sub = $this->getStudentSubquery($reference_no);
-        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.reference_no')->get();
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.reference_no')->first();
         $form2_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 0);
         $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
         // $form3_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
