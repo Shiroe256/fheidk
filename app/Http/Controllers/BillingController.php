@@ -482,12 +482,12 @@ SUM(
     //pdffunctions
     function getForm1Data($reference_no)
     {
-        $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
         $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
+        $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
         $summary = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->first();
         $total_fee = $summary->total_fee;
         return $total_fee;
@@ -1113,13 +1113,7 @@ SUM(
             });
 
         if ($for_applicant == 1) {
-            $total = $total->where(function ($query) {
-                $query->where(function ($query2) {
-                    $query2->where('year_level', '=', 1)
-                        ->where('semester', '=', 1);
-                })
-                    ->orWhere('transferee', '=', 1);
-            });
+            $total = $total->where('total_exam_taken', '>', 0);
         }
         if ($for_applicant == 2) {
             $total = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
