@@ -482,13 +482,20 @@ SUM(
     //pdffunctions
     function getForm1Data($reference_no)
     {
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+        $form2_stud = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
+
+        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
+        $form3_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
+        $form3_tot = $this->joinStudentFees($form3_stud, 3)->groupBy('reference_no')->first()->total_fee;
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
-        $summary = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->first();
+
+
+
+        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first() + $form3_tot;
         $total_fee = $summary->total_fee;
         return $total_fee;
     }
@@ -1330,13 +1337,17 @@ SUM(
         if ($data['total_beneficiaries'] < 1) {
             return "Please Upload first";
         }
-        $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
+        $form2_stud = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
             ->where(function ($query) {
                 $query->where('exam_result', '!=', 'Failed')
                     ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
             });
-        $summary = $this->joinStudentFees($students_sub, 0)->groupBy('reference_no')->first();
-        $data['total_fee'] = $summary->total_fee;
+
+        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
+        $form3_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
+        $form3_tot = $this->joinStudentFees($form3_stud, 3)->groupBy('reference_no')->first()->total_fee;
+
+        $data['total_fee'] = $summary->total_fee + $form3_tot;
         $data['hei_name'] = $summary->hei_name;
         $data['hei_uii'] = $summary->hei_uii;
 
