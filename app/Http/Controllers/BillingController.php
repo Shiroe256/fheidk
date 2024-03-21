@@ -482,16 +482,17 @@ SUM(
     //pdffunctions
     function getForm1Data($reference_no)
     {
-        $form2_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 0);
-        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
-        $form3_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
-        $form3_tot = $this->joinStudentFees($form3_stud, 3)->groupBy('reference_no')->first()->total_fee;
+        $form2_stud = $this->getStudentSubquery($reference_no);
+        $form2_fees = $this->joinStudentFees($form2_stud, 2)->groupBy('students_sub.reference_no')->first();
+        $form3_stud = $this->getStudentSubquery($reference_no, '', 0, PHP_INT_MAX, 1);
+        $form3_fees = $this->joinStudentFees($form3_stud, 3)->groupBy('students_sub.reference_no')->first();
+
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
 
         
 
         $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first() ;
-        $total_fee = $summary->total_fee + $form3_tot;
+        $total_fee = $form2_fees->total_fee + $form3_fees;
         return $total_fee;
     }
     function getForm3Data($reference_no)
