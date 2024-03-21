@@ -1337,7 +1337,7 @@ SUM(
         $form3_stud = $this->getStudentSubquery($reference_no, '', 0, PHP_INT_MAX, 1);
         $form3_fees = $this->joinStudentFees($form3_stud, 3)->groupBy('students_sub.reference_no')->first();
 
-        $data['total_fee'] = $form3_fees->total_fee;
+        $data['total_fee'] = $form3_fees->total_fee + $form2_fees->total_fee;
         $data['hei_name'] = $form2_fees->hei_name;
         $data['hei_uii'] = $form2_fees->hei_uii;
 
