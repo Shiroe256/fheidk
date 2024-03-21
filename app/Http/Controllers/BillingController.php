@@ -1162,11 +1162,13 @@ SUM(
                         ->orWhere('stud_lname', 'like', '%' . $search . '%')
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
-                ->where(function ($query) {
-                    $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
-                })
-                ->orWhere('transferee', '=', 'YES')
+                // ->where(function ($query) {
+                //     $query->where('exam_result', '!=', 'Failed')
+                //         ->orWhere('total_exam_taken', '>', 0);
+                //         // ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                //     })
+                // ->orWhere('transferee', '=', 'YES')
+                ->where('total_exam_taken', '>', 0)
                 ->skip($start)->take($length);
         }
         return $students_sub;
