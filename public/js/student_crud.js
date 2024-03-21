@@ -707,6 +707,7 @@ fileInput.onchange = () => {
       var new_bdate = (bdate.getMonth() + 1) + '-' + bdate.getDate() + '-' + bdate.getFullYear();
       row.birthdate = new_bdate;
     });
+    console.log(output);
     let errorctr = 0; //counts error
     var errors = validateFields(output); //storefields to validate
     let errorhtml = "<table style='text-align: left; vertical-align:top'><thead><tr><th>Row Number--</th><th>Error Description</th></tr></thead><tbody>";
