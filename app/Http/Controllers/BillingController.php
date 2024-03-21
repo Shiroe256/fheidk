@@ -1332,16 +1332,14 @@ SUM(
         if ($data['total_beneficiaries'] < 1) {
             return "Please Upload first";
         }
-        $students_sub = $this->getStudentSubquery($reference_no);
-        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.reference_no')->first();
-        $form2_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 0);
-        $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
-        // $form3_stud = $this->getStudentSubquery($reference_no, "", 0, PHP_INT_MAX, 1);
-        // $form3_tot = $this->joinStudentFees($form3_stud, 3)->groupBy('reference_no')->first()->total_fee;
+        $form2_stud = $this->getStudentSubquery($reference_no);
+        $form2_fees = $this->joinStudentFees($form2_stud, 2)->groupBy('students_sub.reference_no')->first();
+        $form3_stud = $this->getStudentSubquery($reference_no, '', 0, PHP_INT_MAX, 1);
+        $form3_fees = $this->joinStudentFees($form3_stud, 3)->groupBy('students_sub.reference_no')->first();
 
-        $data['total_fee'] = $students->total_fee;
-        $data['hei_name'] = $summary->hei_name;
-        $data['hei_uii'] = $summary->hei_uii;
+        $data['total_fee'] = $form3_fees->total_fee;
+        $data['hei_name'] = $form2_fees->hei_name;
+        $data['hei_uii'] = $form2_fees->hei_uii;
 
         return view('elements.tempsummary', $data);
     }
