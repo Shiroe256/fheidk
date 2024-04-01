@@ -1338,12 +1338,12 @@ SUM(
         $form3_stud = $this->getStudentSubquery($reference_no, '', 0, PHP_INT_MAX, 1);
         $form3_fees = $this->joinStudentFees($form3_stud, 3)->groupBy('students_sub.reference_no')->first();
 
-        if (count($form2_fees) < 1) {
+        if (count((array)$form2_fees) < 1) {
             $data['form2_total'] = 0;
         } else {
             $data['form2_total'] = (int)$form2_fees->total_fee;
         }
-        if (count($form3_fees) < 1) {
+        if (count((array)$form3_fees) < 1) {
             $data['form3_total'] = 0;
         } else {
             $data['form3_total'] = (int)$form3_fees->total_fee;
