@@ -95,9 +95,6 @@ class BillingController extends Controller
                     WHEN(
                         `tbl_other_school_fees`.`type_of_fee` = 'admission'
                     ) THEN `tbl_other_school_fees`.`amount`
-                    WHEN(
-                        `students_sub`.`lab_unit` + `students_sub`.`comp_lab_unit` + `students_sub`.`academic_unit` + `students_sub`.`nstp_unit` = 0
-                    ) THEN 0
                     ELSE 0
                 END
             )
