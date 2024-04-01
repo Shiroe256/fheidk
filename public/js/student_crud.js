@@ -827,7 +827,7 @@ function validateFields(data) {
       if (age > 99) error.push('Please check the birthdate input');
     }
     // if (!birthlocpattern.test(stud['birthplace'] || stud['birthplace'] === undefined)) error.push('Incorrect birthplace value. Please enter the City/Municipality and/or Province.');
-
+    if (!('degree_course_id' in stud)) error.push('Please pick a course');
     if (!namepattern.test(stud['mothers_lname']) || stud['mothers_lname'] === undefined) error.push("Invalid Mother's last name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     if (!namepattern.test(stud['mothers_gname']) || stud['mothers_gname'] === undefined) error.push("Invalid Mother's given name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
     if (!namepattern.test(stud['mothers_mname'] || stud['mothers_mname'] === undefined)) error.push("Invalid Mother's middle name value. Numbers and special characters are not accepted except for hyphen (-), dot (.), and apostrophe (') or it may be missing.");
