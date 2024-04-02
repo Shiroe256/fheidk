@@ -1466,7 +1466,8 @@ class BillingController extends Controller
                                 ->where('tbl_billing_settings.bs_status', '=', 1);
                         });
                 });
-            $students = $students_fees->union($transferee_fees);
+            // $students = $students_fees->union($transferee_fees);
+            $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
