@@ -1416,6 +1416,7 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
+                        ->where('students_sub.total_exam_taken', '>', 1)
                         ->where('students_sub.year_level', '>', 1)
                         ->orWhere(function ($query) {
                             $query->where('students_sub.year_level', '=', 1)
