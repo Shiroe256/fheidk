@@ -1467,7 +1467,8 @@ class BillingController extends Controller
                         });
                 });
             // $students = $students_fees->union($transferee_fees);
-            $students = $students_fees;
+            // $students = $students_fees;
+            $students = $transferee_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
