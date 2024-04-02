@@ -1466,7 +1466,7 @@ class BillingController extends Controller
                                 ->where('tbl_billing_settings.bs_status', '=', 1);
                         });
                 });
-            $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.id'));
+            $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
             // $students = $students_fees;
             // $students = $transferee_fees;
         }
