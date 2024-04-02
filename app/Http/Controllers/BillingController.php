@@ -1405,26 +1405,26 @@ class BillingController extends Controller
                 });
         }
         if ($form == 2) {
-            $transferee_fees = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            $transferee_fees = DB::table(DB::raw("({$students_sub->toSql()}) AS transferees"))
                 ->mergeBindings($students_sub)
                 ->select(
-                    'students_sub.*',
+                    'transferees.*',
                     DB::raw($this->carlo_columns)
                 )
                 ->join('tbl_other_school_fees as transferee_settings', function ($join) use ($hei_uii, $form) {
-                    $join->on('transferee_settings.course_enrolled', '=', 'students_sub.degree_program')
+                    $join->on('transferee_settings.course_enrolled', '=', 'transferees.degree_program')
                         ->on('transferee_settings.hei_uii', '=', DB::raw($hei_uii))
                         ->on('transferee_settings.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
                         ->on('transferee_settings.form', '=', DB::raw($form))
-                        ->where('students_sub.transferee', '=', 'yes'); // Only for transferees
+                        ->where('transferees.transferee', '=', 'yes'); // Only for transferees
                 })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                        ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
+                        ->on('tbl_billing_settings.bs_reference_no', '=', 'transferees.reference_no');
                 })
                 ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                    $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                        ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
+                    $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'transferees.reference_no')
+                        ->on('tbl_billing_stud_settings.bs_student', '=', 'transferees.uid')
                         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
                 })
                 ->where(function ($query) {
@@ -1449,13 +1449,6 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form));
                 })
-                // ->join('tbl_other_school_fees as transferee_settings', function ($join) use ($hei_uii, $form) {
-                //     $join->on('transferee_settings.course_enrolled', '=', 'students_sub.degree_program')
-                //         ->on('transferee_settings.hei_uii', '=', DB::raw($hei_uii))
-                //         ->on('transferee_settings.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
-                //         ->on('transferee_settings.form', '=', DB::raw($form))
-                //         ->where('students_sub.transferee', '=', 'yes'); // Only for transferees
-                // })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
                         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
