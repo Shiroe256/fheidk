@@ -1466,11 +1466,11 @@ class BillingController extends Controller
                                 ->where('tbl_billing_settings.bs_status', '=', 1);
                         });
                 });
-            if ($transferee_fees->count() < 1) {
-                $students = $students_fees;
-            } else
-                $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
-            // $students = $transferee_fees;
+            // if ($transferee_fees->count() < 1) {
+            //     $students = $students_fees;
+            // } else
+            //     $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
+            $students = $transferee_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
