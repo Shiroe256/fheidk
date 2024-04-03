@@ -1442,7 +1442,7 @@ class BillingController extends Controller
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
-                ->join('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
@@ -1516,7 +1516,7 @@ class BillingController extends Controller
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub, 2)->get();
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('student_sub.uid')->get();
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
