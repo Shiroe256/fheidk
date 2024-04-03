@@ -1459,7 +1459,7 @@ class BillingController extends Controller
                                 ->where(function ($query) {
                                     $query
                                         ->whereRaw('LOWER(students_sub.transferee) = LOWER("yes")')
-                                        ->where('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
+                                        ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
                                 })
                                 ->orWhere(function ($query) {
                                     $query
