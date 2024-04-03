@@ -1329,9 +1329,10 @@ class BillingController extends Controller
     }
     public function Test($reference_no)
     {
+        $hei_uii = Auth::user()->hei_uii;
         $students_sub = $this->getStudentSubquery($reference_no)->get();
         $students = $this->joinStudentFees($students_sub)
-            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
                 $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                     ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                     ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
