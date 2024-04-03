@@ -1331,7 +1331,7 @@ class BillingController extends Controller
     {
         $hei_uii = Auth::user()->hei_uii;
         $students_sub = $this->getStudentSubquery($reference_no);
-        $students = $this->joinStudentFees($students_sub)->get();
+        $students = $this->joinStudentFees($students_sub, 99)->get();
         echo json_encode($students);
     }
     private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = PHP_INT_MAX, $new_students = 0)
