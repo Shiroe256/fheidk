@@ -1461,10 +1461,10 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
                         ->where(function ($query) {
                             $query->where(function ($query) {
-                                $query->whereRaw('LOWER(students_sub.transferee) = LOWER(?)', ['yes'])
-                                    ->where('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
+                                $query->where('students_sub.transferee', '=', DB::raw("'yes'"))
+                                    ->where('tbl_other_school_fees.coverage', '=', 'per new student');
                             })->orWhere(function ($query) {
-                                $query->whereRaw('LOWER(students_sub.transferee) = LOWER(?)', ['no'])
+                                $query->where('students_sub.transferee', '=', DB::raw("'no'"))
                                     ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                                     ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
                             });
