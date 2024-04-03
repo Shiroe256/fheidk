@@ -1463,7 +1463,7 @@ class BillingController extends Controller
                         })
                         ->orWhere(function ($query) {
                             $query
-                                ->whereRaw('LOWER(students_sub.transferee) = LOWER("no")')
+                                // ->whereRaw('LOWER(students_sub.transferee) = LOWER("no")')
                                 ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                                 ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
                         });
