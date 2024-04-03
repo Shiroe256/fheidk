@@ -1522,7 +1522,7 @@ class BillingController extends Controller
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->whereNotNull('students_sub.id')->get();
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->get()->whereNotNull('students_sub.uid');
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
