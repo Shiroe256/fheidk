@@ -1477,8 +1477,7 @@ class BillingController extends Controller
             // } else
             $students = DB::table(DB::raw("({$transferee_fees->toSql()}) as transferee_fees"))
                 ->mergeBindings($transferee_fees)
-                ->unionAll(DB::raw("({$students_fees->toSql()})"))
-                ->mergeBindings($students_fees);
+                ->unionAll($students_fees);
             // $students = $students_fees;
         }
         if ($form == 3) {
