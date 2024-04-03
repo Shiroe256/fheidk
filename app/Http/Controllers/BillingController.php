@@ -1542,7 +1542,7 @@ class BillingController extends Controller
             "draw" => $request->draw,
             "recordsTotal" => count($students),
             "recordsFiltered" => $total,
-            "data" => $students[0]
+            "data" => $students
         ]);
     }
     public function fetchTempApplicantJSON(Request $request)
