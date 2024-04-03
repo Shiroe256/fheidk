@@ -1454,20 +1454,20 @@ class BillingController extends Controller
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
+                        // ->where(function ($query) {
+                        //     $query
                         ->where(function ($query) {
                             $query
-                                ->where(function ($query) {
-                                    $query
-                                        ->whereRaw('LOWER(students_sub.transferee) = LOWER("yes")')
-                                        ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
-                                })
-                                ->orWhere(function ($query) {
-                                    $query
-                                        ->whereRaw('LOWER(students_sub.transferee) = LOWER("no")')
-                                        ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                                        ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
-                                });
+                                ->whereRaw('LOWER(students_sub.transferee) = LOWER("yes")')
+                                ->where('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
+                        })
+                        ->orWhere(function ($query) {
+                            $query
+                                ->whereRaw('LOWER(students_sub.transferee) = LOWER("no")')
+                                ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                                ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
                         });
+                    // });
                 })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
