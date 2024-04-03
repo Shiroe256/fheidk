@@ -1416,13 +1416,7 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->where('students_sub.total_exam_taken', '>', 1)
-                        ->where('students_sub.year_level', '>', 1)
-                        ->orWhere(function ($query) {
-                            $query->where('students_sub.year_level', '=', 1)
-                                ->where('students_sub.semester', '=', 2);
-                        });
-                    // ->on('students_sub.transferee', '=', DB::raw("'yes'")); // Only for transferees
+                        ->where('students_sub.transferee', '=', DB::raw("'yes'"));
                 })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
@@ -1454,7 +1448,7 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                         ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->where('students_sub.transferee', '=', DB::raw("'no'"));
+                        ->whereRaw('LOWER(students_sub.transferee) = LOWER(?)', ['no']);
                 })
                 // ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                 //     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
