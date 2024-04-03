@@ -1416,7 +1416,7 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
                         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->where('students_sub.transferee', '=', DB::raw("'yes'"));
+                        ->whereRaw('LOWER(students_sub.transferee) = LOWER("yes")');
                 })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
@@ -1488,8 +1488,8 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            // $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
-            $students = $students_fees;
+            $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
+            // $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
