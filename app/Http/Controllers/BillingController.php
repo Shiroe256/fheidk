@@ -1369,8 +1369,8 @@ class BillingController extends Controller
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
                 ->where(function ($query) {
-                    $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                    $query->where('exam_result', '!=', 'Failed');
+                        // ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
                 })
                 ->skip($start)->take($length);
         }
