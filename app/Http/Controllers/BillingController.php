@@ -202,8 +202,17 @@ class BillingController extends Controller
                 WHEN(
                     `students_sub`.`lab_unit` + `students_sub`.`comp_lab_unit` + `students_sub`.`academic_unit` + `students_sub`.`nstp_unit` = 0
                 ) THEN 0
-                WHEN(
-                    `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                WHEN (
+                    (
+                        `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                    )
+                    AND (
+                        `students_sub`.`transferee` = 'yes'
+                        OR (
+                            `students_sub`.`year_level` = 1
+                            AND `students_sub`.`semester` = 1
+                        )
+                    )
                 ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
             END
@@ -298,8 +307,17 @@ class BillingController extends Controller
                 WHEN(
                     `students_sub`.`lab_unit` + `students_sub`.`comp_lab_unit` + `students_sub`.`academic_unit` + `students_sub`.`nstp_unit` = 0
                 ) THEN 0
-                WHEN(
-                    `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                WHEN (
+                    (
+                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                    )
+                    AND (
+                        `students_sub`.`transferee` = 'yes'
+                        OR (
+                            `students_sub`.`year_level` = 1
+                            AND `students_sub`.`semester` = 1
+                        )
+                    )
                 ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
             END
@@ -528,8 +546,17 @@ class BillingController extends Controller
                                             WHEN(
                                                 `students_sub`.`lab_unit` + `students_sub`.`comp_lab_unit` + `students_sub`.`academic_unit` + `students_sub`.`nstp_unit` = 0
                                             ) THEN 0
-                                            WHEN(
-                                                `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                                            WHEN (
+                                                (
+                                                    `tbl_other_school_fees`.`type_of_fee` = 'handbook'
+                                                )
+                                                AND (
+                                                    `students_sub`.`transferee` = 'yes'
+                                                    OR (
+                                                        `students_sub`.`year_level` = 1
+                                                        AND `students_sub`.`semester` = 1
+                                                    )
+                                                )
                                             ) THEN `tbl_other_school_fees`.`amount`
                                             ELSE 0
                                         END
@@ -624,8 +651,17 @@ class BillingController extends Controller
                         WHEN(
                             `students_sub`.`lab_unit` + `students_sub`.`comp_lab_unit` + `students_sub`.`academic_unit` + `students_sub`.`nstp_unit` = 0
                         ) THEN 0
-                        WHEN(
-                            `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                        WHEN (
+                            (
+                                `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                            )
+                            AND (
+                                `students_sub`.`transferee` = 'yes'
+                                OR (
+                                    `students_sub`.`year_level` = 1
+                                    AND `students_sub`.`semester` = 1
+                                )
+                            )
                         ) THEN `tbl_other_school_fees`.`amount`
                         ELSE 0
                     END
