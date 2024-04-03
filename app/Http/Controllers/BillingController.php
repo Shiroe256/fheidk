@@ -1427,37 +1427,6 @@ class BillingController extends Controller
                 });
         }
         if ($form == 2) {
-            $transferee_fees = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
-                ->mergeBindings($students_sub)
-                ->select(
-                    'students_sub.*',
-                    DB::raw($this->carlo_columns)
-                )
-                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
-                    $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                        ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                        ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
-                        ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->whereRaw('LOWER(students_sub.transferee) = LOWER("yes")');
-                })
-                ->leftJoin('tbl_billing_settings', function ($join) {
-                    $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
-                        ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
-                })
-                ->leftJoin('tbl_billing_stud_settings', function ($join) {
-                    $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
-                        ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
-                        ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-                })
-                ->where(function ($query) {
-                    $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                        ->where('tbl_billing_settings.bs_status', '=', 1)
-                        ->orWhere(function ($query) {
-                            $query->whereNull('tbl_billing_stud_settings.bs_status')
-                                ->where('tbl_billing_settings.bs_status', '=', 1);
-                        });
-                });
-
             $students_fees = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
@@ -1492,7 +1461,7 @@ class BillingController extends Controller
             //     $students = $students_fees;
             // } else
             // $students = $students_fees->unionAll($transferee_fees);
-            $students = $transferee_fees;
+            $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
@@ -1538,7 +1507,7 @@ class BillingController extends Controller
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->get();
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->orderBy('students_sub.degree_program')->get();
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
