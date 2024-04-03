@@ -1427,7 +1427,7 @@ class BillingController extends Controller
                 });
         }
         if ($form == 2) {
-            $students_fees = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
+            $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
                 ->mergeBindings($students_sub)
                 ->select(
                     'students_sub.*',
@@ -1461,7 +1461,7 @@ class BillingController extends Controller
             //     $students = $students_fees;
             // } else
             // $students = $students_fees->unionAll($transferee_fees);
-            $students = $students_fees;
+            // $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
