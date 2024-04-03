@@ -1475,7 +1475,7 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            $students = $transferee_fees->unionAll($students_fees);
+            $students = $students_fees->unionAll($transferee_fees);
             // $students = $transferee_fees;
         }
         if ($form == 3) {
