@@ -1448,15 +1448,15 @@ class BillingController extends Controller
                     $join->on('tbl_billing_stud_settings.bs_reference_no', '=', 'students_sub.reference_no')
                         ->on('tbl_billing_stud_settings.bs_student', '=', 'students_sub.uid')
                         ->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_billing_stud_settings.bs_osf_uid');
-                })
-                ->where(function ($query) {
-                    $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
-                        ->where('tbl_billing_settings.bs_status', '=', 1)
-                        ->orWhere(function ($query) {
-                            $query->whereNull('tbl_billing_stud_settings.bs_status')
-                                ->where('tbl_billing_settings.bs_status', '=', 1);
-                        });
                 });
+                // ->where(function ($query) {
+                //     $query->where('tbl_billing_stud_settings.bs_status', '=', 1)
+                //         ->where('tbl_billing_settings.bs_status', '=', 1)
+                //         ->orWhere(function ($query) {
+                //             $query->whereNull('tbl_billing_stud_settings.bs_status')
+                //                 ->where('tbl_billing_settings.bs_status', '=', 1);
+                //         });
+                // });
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
