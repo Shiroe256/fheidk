@@ -1330,8 +1330,14 @@ class BillingController extends Controller
     public function Test($reference_no)
     {
         $students_sub = $this->getStudentSubquery($reference_no)->get();
-        // $students = $this->joinStudentFees($students_sub)->where('students_sub.uid', '=', 7725)->get();
-        echo json_encode($students_sub);
+        $students = $this->joinStudentFees($students_sub)
+            ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                    ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                    ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                    ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+            })->get();
+        echo json_encode($students);
     }
     private function getStudentSubquery($reference_no, $search = "", $start = 0, $length = PHP_INT_MAX, $new_students = 0)
     {
