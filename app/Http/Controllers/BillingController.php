@@ -1349,17 +1349,17 @@ class BillingController extends Controller
                 //     })
                 //         ->orWhere('transferee', '=', 1);
                 // })
-                ->where('total_exam_taken', '>', 0)
-                // ->where('transferee', '=', DB::raw("'yes'"))
-                // ->orWhere(function ($query) {
-                //     $query
-                //         ->where('year_level', 1)
-                //         ->where('semester', 1);
-                // })
-                ->where(function ($query) {
-                    $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                // ->where('total_exam_taken', '>', 0)
+                ->where('transferee', '=', DB::raw("'yes'"))
+                ->orWhere(function ($query) {
+                    $query
+                        ->where('year_level', 1)
+                        ->where('semester', 1);
                 })
+                // ->where(function ($query) {
+                //     $query->where('exam_result', '!=', 'Failed')
+                //         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                // })
                 ->skip($start)->take($length);
         } else {
             $students_sub = DB::table('tbl_billing_details_temp')->where('tbl_billing_details_temp.reference_no', '=', $reference_no)
@@ -1475,10 +1475,7 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            // $students = DB::table(DB::raw("({$transferee_fees->toSql()}) as transferee_fees"))
-            //     ->mergeBindings($transferee_fees)
-            //     ->unionAll($students_fees->toSql()})"))
-            //     ->mergeBindings($students_fees);
+            // $students = $students_fees->unionAll($transferee_fees);
             $students = $students_fees;
         }
         if ($form == 3) {
