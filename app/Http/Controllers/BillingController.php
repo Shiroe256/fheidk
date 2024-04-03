@@ -1475,8 +1475,8 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            $students = $students_fees->unionAll($transferee_fees);
-            // $students = $transferee_fees;
+            // $students = $students_fees->unionAll($transferee_fees);
+            $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
@@ -1522,7 +1522,7 @@ class BillingController extends Controller
 
         //students sub query. Dito ung pagination
         $students_sub = $this->getStudentSubquery($reference_no, $search, $request->start, $request->length);
-        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->get()->whereNotNull('students_sub.uid');
+        $students = $this->joinStudentFees($students_sub, 2)->groupBy('students_sub.uid')->get();
 
         //     $sql = "SELECT
         // `tbl_billing_details_temp`.*,
