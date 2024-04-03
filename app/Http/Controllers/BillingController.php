@@ -1475,8 +1475,12 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            // $students = $students_fees->unionAll($transferee_fees);
-            $students = $students_fees;
+            $students = DB::table(DB::raw("({$transferee_fees->toSql()}) as transferee_fees"))
+                ->mergeBindings($transferee_fees->getQuery())
+                ->union(DB::raw("({$students_fees->toSql()})"))
+                ->mergeBindings($students_fees->getQuery())
+                ->get();
+            // $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
