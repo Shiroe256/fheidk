@@ -1489,8 +1489,8 @@ class BillingController extends Controller
             // if ($transferee_fees->count() < 1) {
             //     $students = $students_fees;
             // } else
-            $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
-            // $students = $students_fees;
+            // $students = $students_fees->union($transferee_fees->whereNotNull('students_sub.uid'));
+            $students = $students_fees;
         }
         if ($form == 3) {
             $students = DB::table(DB::raw("({$students_sub->toSql()}) AS students_sub"))
