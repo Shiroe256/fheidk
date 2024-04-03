@@ -1465,7 +1465,7 @@ class BillingController extends Controller
                                 //     $query->where('students_sub.transferee', '=', DB::raw("'yes'"))
                                 //         ->where('tbl_other_school_fees.coverage', '=', 'per new student');
                                 // })
-                                ->orWhere(function ($query) {
+                                ->where(function ($query) {
                                     $query
                                         // ->where('students_sub.transferee', '=', DB::raw("'no'"))
                                         ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
