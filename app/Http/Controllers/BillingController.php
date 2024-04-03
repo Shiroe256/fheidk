@@ -1447,8 +1447,7 @@ class BillingController extends Controller
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
                         ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
-                        ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->whereRaw('LOWER(students_sub.transferee) = LOWER("no")');
+                        ->on('tbl_other_school_fees.form', '=', DB::raw($form));
                 })
                 // ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                 //     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
