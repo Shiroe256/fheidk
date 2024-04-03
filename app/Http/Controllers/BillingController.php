@@ -1349,13 +1349,13 @@ class BillingController extends Controller
                 //     })
                 //         ->orWhere('transferee', '=', 1);
                 // })
-                ->where('total_exam_taken', '>', 0)
-                // ->where('transferee', '=', DB::raw("'yes'"))
-                // ->orWhere(function ($query) {
-                //     $query
-                //         ->where('year_level', 1)
-                //         ->where('semester', 1);
-                // })
+                // ->where('total_exam_taken', '>', 0)
+                ->where('transferee', '=', DB::raw("'yes'"))
+                ->orWhere(function ($query) {
+                    $query
+                        ->where('year_level', 1)
+                        ->where('semester', 1);
+                })
                 // ->where(function ($query) {
                 //     $query->where('exam_result', '!=', 'Failed')
                 //         ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
