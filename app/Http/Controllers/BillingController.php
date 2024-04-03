@@ -1411,7 +1411,7 @@ class BillingController extends Controller
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
-                ->join('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'")) // Additional condition for transferees
