@@ -204,14 +204,7 @@ class BillingController extends Controller
                 ) THEN 0
                 WHEN(
                     `tbl_other_school_fees`.`type_of_fee` = 'handbook'
-                ) AND (
-                    `students_sub`.`transferee` = 'yes'
-                    OR (
-                        `students_sub`.`year_level` = 1
-                        AND `students_sub`.`semester` = 1
-                    )
-                )
-            ) THEN `tbl_other_school_fees`.`amount`
+                ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
             END
         )
@@ -307,14 +300,7 @@ class BillingController extends Controller
                 ) THEN 0
                 WHEN(
                     `tbl_other_school_fees`.`type_of_fee` = 'school id'
-                ) AND (
-                    `students_sub`.`transferee` = 'yes'
-                    OR (
-                        `students_sub`.`year_level` = 1
-                        AND `students_sub`.`semester` = 1
-                    )
-                )
-            ) THEN `tbl_other_school_fees`.`amount`
+                ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
             END
         )
@@ -544,14 +530,7 @@ class BillingController extends Controller
                                             ) THEN 0
                                             WHEN(
                                                 `tbl_other_school_fees`.`type_of_fee` = 'handbook'
-                                            ) AND (
-                                                `students_sub`.`transferee` = 'yes'
-                                                OR (
-                                                    `students_sub`.`year_level` = 1
-                                                    AND `students_sub`.`semester` = 1
-                                                )
-                                            )
-                                        ) THEN `tbl_other_school_fees`.`amount`
+                                            ) THEN `tbl_other_school_fees`.`amount`
                                             ELSE 0
                                         END
                                     )
@@ -647,14 +626,7 @@ class BillingController extends Controller
                         ) THEN 0
                         WHEN(
                             `tbl_other_school_fees`.`type_of_fee` = 'school id'
-                        ) AND (
-                            `students_sub`.`transferee` = 'yes'
-                            OR (
-                                `students_sub`.`year_level` = 1
-                                AND `students_sub`.`semester` = 1
-                            )
-                        )
-                    ) THEN `tbl_other_school_fees`.`amount`
+                        ) THEN `tbl_other_school_fees`.`amount`
                         ELSE 0
                     END
                 )
