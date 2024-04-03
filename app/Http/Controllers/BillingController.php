@@ -1448,31 +1448,31 @@ class BillingController extends Controller
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
-                // ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
-                //     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                //         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                //         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                //         ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
-                //         ->on('tbl_other_school_fees.form', '=', DB::raw($form));
-                // })
                 ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
-                        ->on('tbl_other_school_fees.form', '=', DB::raw($form))
-                        ->where(function ($query) {
-                            $query
-                                // ->where(function ($query) {
-                                //     $query->where('students_sub.transferee', '=', DB::raw("'yes'"))
-                                //         ->where('tbl_other_school_fees.coverage', '=', 'per new student');
-                                // })
-                                ->where(function ($query) {
-                                    $query
-                                        // ->where('students_sub.transferee', '=', DB::raw("'no'"))
-                                        ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
-                                        ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
-                                });
-                        });
+                        ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                        ->on('tbl_other_school_fees.year_level', '=', 'students_sub.year_level')
+                        ->on('tbl_other_school_fees.form', '=', DB::raw($form));
                 })
+                // ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                //     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
+                //         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                //         ->on('tbl_other_school_fees.form', '=', DB::raw($form))
+                //         ->where(function ($query) {
+                //             $query
+                //                 // ->where(function ($query) {
+                //                 //     $query->where('students_sub.transferee', '=', DB::raw("'yes'"))
+                //                 //         ->where('tbl_other_school_fees.coverage', '=', 'per new student');
+                //                 // })
+                //                 ->where(function ($query) {
+                //                     $query
+                //                         // ->where('students_sub.transferee', '=', DB::raw("'no'"))
+                //                         ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
+                //                         ->where('tbl_other_school_fees.year_level', '=', 'students_sub.year_level');
+                //                 });
+                //         });
+                // })
                 ->leftJoin('tbl_billing_settings', function ($join) {
                     $join->on('tbl_billing_settings.bs_osf_uid', '=', 'tbl_other_school_fees.uid')
                         ->on('tbl_billing_settings.bs_reference_no', '=', 'students_sub.reference_no');
