@@ -1457,12 +1457,12 @@ class BillingController extends Controller
                 // })
                 ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
-                        ->on('tbl_other_school_fees.hei_uii', '=', $hei_uii)
-                        ->on('tbl_other_school_fees.form', '=', $form)
+                        ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
+                        ->on('tbl_other_school_fees.form', '=', DB::raw($form))
                         ->where(function ($query) {
                             $query->where(function ($query) {
                                 $query->whereRaw('LOWER(students_sub.transferee) = LOWER(?)', ['yes'])
-                                    ->where('tbl_other_school_fees.coverage', '=', 'per new student');
+                                    ->where('tbl_other_school_fees.coverage', '=', DB::raw("'per new student'"));
                             })->orWhere(function ($query) {
                                 $query->whereRaw('LOWER(students_sub.transferee) = LOWER(?)', ['no'])
                                     ->where('tbl_other_school_fees.semester', '=', 'students_sub.semester')
