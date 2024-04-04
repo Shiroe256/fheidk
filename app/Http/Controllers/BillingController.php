@@ -309,7 +309,7 @@ class BillingController extends Controller
                 ) THEN 0
                 WHEN (
                     (
-                        `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                        `tbl_other_school_fees`.`type_of_fee` = 'school id' AND `tbl_other_school_fees`.`coverage` ='per new student'
                     )
                     AND (
                         `students_sub`.`transferee` = 'yes'
@@ -653,7 +653,7 @@ class BillingController extends Controller
                         ) THEN 0
                         WHEN (
                             (
-                                `tbl_other_school_fees`.`type_of_fee` = 'school id'
+                                `tbl_other_school_fees`.`type_of_fee` = 'school id' AND `tbl_other_school_fees`.`coverage` ='per new student'
                             )
                             AND (
                                 `students_sub`.`transferee` = 'yes'
