@@ -1425,7 +1425,7 @@ class BillingController extends Controller
                     'students_sub.*',
                     DB::raw($this->carlo_columns)
                 )
-                ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
+                ->rightJoin('tbl_other_school_fees', function ($join) use ($hei_uii, $form) {
                     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
                         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
                         ->on('tbl_other_school_fees.semester', '=', 'students_sub.semester')
