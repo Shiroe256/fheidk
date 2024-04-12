@@ -34,7 +34,7 @@ class validateTempStudentFields
 
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
-        $courses = array_column(OtherSchoolFees::selectRaw('UCASE(course_enrolled) AS course_enrolled_up')->where('hei_uii', $hei_uii)->groupBy('hei_uii', 'course_enrolled')->get()->toArray(), 'course_enrolled_up');
+        $courses = array_column(OtherSchoolFees::selectRaw('UPPER(course_enrolled) AS course_enrolled_up')->where('hei_uii', $hei_uii)->groupBy('course_enrolled')->get()->toArray(), 'course_enrolled_up');
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $key => $tempstudent) {
             if (!in_array(strtoupper($tempstudent->degree_course_id), $courses))
