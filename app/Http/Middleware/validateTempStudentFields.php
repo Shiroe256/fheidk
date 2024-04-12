@@ -41,7 +41,7 @@ class validateTempStudentFields
                 $courses_str = '';
             foreach ($courses as $course)
                 $courses_str = $courses_str . ' ' . $course;
-            return response('Invalid Course in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF. Courses:' . $courses_str, 400);
+            return response('Invalid Course(' . $tempstudent->degree_course_id . ') in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF. Courses:' . $courses_str, 400);
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
         }
