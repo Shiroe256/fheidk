@@ -34,14 +34,17 @@ class validateTempStudentFields
 
         $hei_uii = Auth::user()->hei_uii;
         $tempstudents =  json_decode($request->payload); //json decode into array (the second parameter)
-        $courses = array_column(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('course_enrolled')->get()->toArray(), 'course_enrolled');
+        $courses_raw = array_column(OtherSchoolFees::select('course_enrolled')->where('hei_uii', $hei_uii)->groupBy('course_enrolled')->get()->toArray(), 'course_enrolled');
         if (count($tempstudents) < 1) return response('Invalid', 400);
+        foreach ($courses_raw as $crs) {
+            $courses[] = strtoupper($crs);
+        }
         foreach ($tempstudents as $key => $tempstudent) {
             $courses_str = '';
-            if (!in_array($tempstudent->degree_course_id, $courses))
+            if (!in_array(strtoupper($tempstudent->degree_course_id), $courses))
                 foreach ($courses as $course)
                     $courses_str = $courses_str . ', ' . $course;
-            return response('Invalid Course(' . $tempstudent->degree_course_id . ') in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF. Courses:' . $courses_str, 400);
+            return response('Invalid Course(' . strtoupper($tempstudent->degree_course_id) . ') in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF. Courses:' . $courses_str, 400);
             $error = $this->validateTempStudentFields($tempstudent);
             if (count($error) > 0) return response('Invalid Input in ' . array_keys($error)[0] . ' in Row ' . $key + 1, 400);
         }
