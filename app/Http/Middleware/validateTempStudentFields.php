@@ -38,7 +38,7 @@ class validateTempStudentFields
         if (count($tempstudents) < 1) return response('Invalid', 400);
         foreach ($tempstudents as $key => $tempstudent) {
             $courses_str = '';
-            if (!in_array(strtoupper($tempstudent->degree_course_id), $courses))
+            if (!in_array($tempstudent->degree_course_id, $courses))
                 foreach ($courses as $course)
                     $courses_str = $courses_str . ', ' . $course;
             return response('Invalid Course(' . $tempstudent->degree_course_id . ') in Row ' . $key + 1 . '. Only choose courses in your template or the ones submitted in your certified TOSF. Courses:' . $courses_str, 400);
