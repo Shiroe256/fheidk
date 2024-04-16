@@ -1002,7 +1002,9 @@ class BillingController extends Controller
             elseif ($key == 24)
                 $widths[] = 12; //School ID Fees  
             elseif ($key == 25)
-                $widths[] = 12; //TOTAL  
+                $widths[] = 12; //TOTAL TOSF
+            elseif ($key == 26)
+                $widths[] = 14; //TOTAL TOSF
             else
                 $widths[] = $pagewidth_withborders / count($headers);
         }
