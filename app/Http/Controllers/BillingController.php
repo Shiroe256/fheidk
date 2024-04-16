@@ -208,10 +208,6 @@ class BillingController extends Controller
                     )
                     AND (
                         `students_sub`.`transferee` = 'yes'
-                        OR (
-                            `students_sub`.`year_level` = 1
-                            AND `students_sub`.`semester` = 1
-                        )
                     )
                 ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
@@ -313,10 +309,6 @@ class BillingController extends Controller
                     )
                     AND (
                         `students_sub`.`transferee` = 'yes'
-                        OR (
-                            `students_sub`.`year_level` = 1
-                            AND `students_sub`.`semester` = 1
-                        )
                     )
                 ) THEN `tbl_other_school_fees`.`amount`
                 ELSE 0
@@ -552,10 +544,6 @@ class BillingController extends Controller
                                                 )
                                                 AND (
                                                     `students_sub`.`transferee` = 'yes'
-                                                    OR (
-                                                        `students_sub`.`year_level` = 1
-                                                        AND `students_sub`.`semester` = 1
-                                                    )
                                                 )
                                             ) THEN `tbl_other_school_fees`.`amount`
                                             ELSE 0
@@ -657,10 +645,6 @@ class BillingController extends Controller
                             )
                             AND (
                                 `students_sub`.`transferee` = 'yes'
-                                OR (
-                                    `students_sub`.`year_level` = 1
-                                    AND `students_sub`.`semester` = 1
-                                )
                             )
                         ) THEN `tbl_other_school_fees`.`amount`
                         ELSE 0
