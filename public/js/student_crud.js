@@ -38,7 +38,7 @@ var heiinfo;
 tbl_students = $('#tbl_students').DataTable({
   rowId: 'uid',
   stateSave: true,
-  lengthMenu: [10, 25, 50, { label: 'All', value: -1 }],
+  lengthMenu: [10, 50, 100, 1000],
   processing: true,
   serverSide: true,
   select: {
@@ -144,7 +144,20 @@ tbl_students = $('#tbl_students').DataTable({
 tbl_applicants = $('#tbl_applicants').DataTable({
   rowId: 'uid',
   stateSave: true,
-  lengthMenu: [10, 25, 50, { label: 'All', value: -1 }],
+  buttons: [
+    {
+      text: 'Select all',
+      action: function () {
+        table.rows().select();
+      }
+    },
+    {
+      text: 'Select none',
+      action: function () {
+        table.rows().deselect();
+      }
+    }
+  ],
   processing: true,
   serverSide: true,
   select: {
@@ -245,7 +258,20 @@ tbl_applicants = $('#tbl_applicants').DataTable({
 tbl_exceptions = $('#tbl_exception_report').DataTable({
   rowId: 'uid',
   stateSave: true,
-  lengthMenu: [10, 25, 50, { label: 'All', value: -1 }],
+  buttons: [
+    {
+      text: 'Select all',
+      action: function () {
+        table.rows().select();
+      }
+    },
+    {
+      text: 'Select none',
+      action: function () {
+        table.rows().deselect();
+      }
+    }
+  ],
   processing: true,
   serverSide: true,
   select: {
