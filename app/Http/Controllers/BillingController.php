@@ -948,6 +948,7 @@ class BillingController extends Controller
         $headers[] = 'Registration Fees';
         $headers[] = 'School ID Fees';
         $headers[] = 'TOTAL TOSF';
+        $headers[] = 'TOTAL';
 
         foreach ($headers as $key => $header) {
             if ($key == 0)
@@ -977,13 +978,13 @@ class BillingController extends Controller
             elseif ($key == 12)
                 $widths[] = 12.3; //NSTP Fee
             elseif ($key == 13)
-                $widths[] = 14; //Athletic Fees
+                $widths[] = 8; //Athletic Fees
             elseif ($key == 14)
                 $widths[] = 12; //Computer Fees
             elseif ($key == 15)
                 $widths[] = 12; //Cultural Fees
             elseif ($key == 16)
-                $widths[] = 12; //Development Fees
+                $widths[] = 8; //Development Fees
             elseif ($key == 17)
                 $widths[] = 12; //Admission Fees
             elseif ($key == 18)
@@ -993,13 +994,15 @@ class BillingController extends Controller
             elseif ($key == 20)
                 $widths[] = 13; //Laboratory Fees
             elseif ($key == 21)
-                $widths[] = 12; //Library Fee
+                $widths[] = 10; //Library Fee
             elseif ($key == 22)
                 $widths[] = 12; //Medical Fees
             elseif ($key == 23)
-                $widths[] = 14; //Registration Fees
+                $widths[] = 12; //Registration Fees
             elseif ($key == 24)
                 $widths[] = 12; //School ID Fees  
+            elseif ($key == 25)
+                $widths[] = 12; //TOTAL  
             else
                 $widths[] = $pagewidth_withborders / count($headers);
         }
@@ -1018,6 +1021,7 @@ class BillingController extends Controller
         $alignments[] = 'C';
         $alignments[] = 'C';
         $alignments[] = 'C';
+        $alignments[] = 'R';
         $alignments[] = 'R';
         $alignments[] = 'R';
         $alignments[] = 'R';
@@ -1098,7 +1102,8 @@ class BillingController extends Controller
                 'medical_fees' => number_format($grantee->medical_and_dental_fee, 2),
                 'registration_fees' => number_format($grantee->registration_fee, 2),
                 'school_id_fees' => number_format($grantee->school_id_fee, 2),
-                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee, 2)
+                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee, 2),
+                'total' => number_format($grantee->total_fee, 2)
             );
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
