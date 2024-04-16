@@ -38,7 +38,7 @@ var heiinfo;
 tbl_students = $('#tbl_students').DataTable({
   rowId: 'uid',
   stateSave: true,
-  lengthMenu: [ [10, 25, 50, 1000]],
+  // lengthMenu: [ [10, 25, 50, 1000]],
   processing: true,
   serverSide: true,
   select: {
