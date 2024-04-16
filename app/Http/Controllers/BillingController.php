@@ -1407,8 +1407,8 @@ class BillingController extends Controller
                         ->orWhere('stud_mname', 'like', '%' . $search . '%');
                 })
                 ->where(function ($query) {
-                    $query->where('exam_result', '!=', 'Failed')
-                        ->orWhere('total_exam_taken', 'IS', DB::raw('NULL'));
+                    $query->where('total_exam_taken', '>', 0)
+                        ->orWhere('transferee', '=', 'YES');
                 })
                 ->skip($start)->take($length);
         }
@@ -2090,7 +2090,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
         $hei_uii = Auth::user()->hei_uii;
-        
+
         $otherfees = OtherSchoolFees::join('tbl_billing_settings', 'tbl_other_school_fees.uid', '=', 'tbl_billing_settings.bs_osf_uid')
             ->where('hei_uii', $hei_uii)
             ->where('bs_reference_no', $reference_no)
