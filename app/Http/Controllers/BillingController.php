@@ -947,95 +947,95 @@ class BillingController extends Controller
         $headers[] = 'Medical Fees';
         $headers[] = 'Registration Fees';
         $headers[] = 'School ID Fees';
-        $headers[] = 'TOTAL TOSF';
         $headers[] = 'TOTAL';
+        // $headers[] = 'TOTAL';
 
-        $widths[0] = 9; //#
-        $widths[1] = 13; //Stud. Number
-        $widths[2] = 25; //Last Name
-        $widths[3] = 24.4; //Given Name
-        $widths[4] = 9; //Middle Name
-        $widths[5] = 8; //Year Level
-        $widths[6] = 6; //Sex at Birth
-        $widths[7] = 7; //Labo Units
-        $widths[8] = 11; //Comp Lab Units
-        $widths[9] = 12; //Academic Units
-        $widths[10] = 9; //NSTP Units
-        $widths[11] = 13; //Tuition Fee'
-        $widths[12] = 12.3; //NSTP Fee
-        $widths[13] = 8; //Athletic Fees
-        $widths[14] = 12; //Computer Fees
-        $widths[15] = 12; //Cultural Fees
-        $widths[16] = 8; //Development Fees
-        $widths[17] = 12; //Admission Fees
-        $widths[18] = 12; //Guidance Fees
-        $widths[19] = 12; //Handbook Fees
-        $widths[20] = 13; //Laboratory Fees
-        $widths[21] = 10; //Library Fee
-        $widths[22] = 12; //Medical Fees
-        $widths[23] = 12; //Registration Fees
-        $widths[24] = 12; //School ID Fees  
-        $widths[25] = 12; //TOTAL TOSF
-        $widths[26] = 14; //TOTAL
+        // $widths[0] = 9; //#
+        // $widths[1] = 13; //Stud. Number
+        // $widths[2] = 25; //Last Name
+        // $widths[3] = 24.4; //Given Name
+        // $widths[4] = 9; //Middle Name
+        // $widths[5] = 8; //Year Level
+        // $widths[6] = 6; //Sex at Birth
+        // $widths[7] = 7; //Labo Units
+        // $widths[8] = 11; //Comp Lab Units
+        // $widths[9] = 12; //Academic Units
+        // $widths[10] = 9; //NSTP Units
+        // $widths[11] = 13; //Tuition Fee'
+        // $widths[12] = 12.3; //NSTP Fee
+        // $widths[13] = 8; //Athletic Fees
+        // $widths[14] = 12; //Computer Fees
+        // $widths[15] = 12; //Cultural Fees
+        // $widths[16] = 8; //Development Fees
+        // $widths[17] = 12; //Admission Fees
+        // $widths[18] = 12; //Guidance Fees
+        // $widths[19] = 12; //Handbook Fees
+        // $widths[20] = 13; //Laboratory Fees
+        // $widths[21] = 10; //Library Fee
+        // $widths[22] = 12; //Medical Fees
+        // $widths[23] = 12; //Registration Fees
+        // $widths[24] = 12; //School ID Fees  
+        // $widths[25] = 12; //TOTAL TOSF
+        // $widths[26] = 14; //TOTAL
 
-        // foreach ($headers as $key => $header) {
-        //     if ($key == 0)
-        //         $widths[] = 9; //#
-        //     elseif ($key == 1)
-        //         $widths[] = 13; //Stud. Number
-        //     elseif ($key == 2)
-        //         $widths[] = 25; //Last Name
-        //     elseif ($key == 3)
-        //         $widths[] = 24.4; //Given Name
-        //     elseif ($key == 4)
-        //         $widths[] = 9; //Middle Name
-        //     elseif ($key == 5)
-        //         $widths[] = 8; //Year Level
-        //     elseif ($key == 6)
-        //         $widths[] = 6; //Sex at Birth
-        //     elseif ($key == 7)
-        //         $widths[] = 7; //Labo Units
-        //     elseif ($key == 8)
-        //         $widths[] = 11; //Comp Lab Units
-        //     elseif ($key == 9)
-        //         $widths[] = 12; //Academic Units
-        //     elseif ($key == 10)
-        //         $widths[] = 9; //NSTP Units
-        //     elseif ($key == 11)
-        //         $widths[] = 13; //Tuition Fee'
-        //     elseif ($key == 12)
-        //         $widths[] = 12.3; //NSTP Fee
-        //     elseif ($key == 13)
-        //         $widths[] = 8; //Athletic Fees
-        //     elseif ($key == 14)
-        //         $widths[] = 12; //Computer Fees
-        //     elseif ($key == 15)
-        //         $widths[] = 12; //Cultural Fees
-        //     elseif ($key == 16)
-        //         $widths[] = 8; //Development Fees
-        //     elseif ($key == 17)
-        //         $widths[] = 12; //Admission Fees
-        //     elseif ($key == 18)
-        //         $widths[] = 12; //Guidance Fees
-        //     elseif ($key == 19)
-        //         $widths[] = 12; //Handbook Fees
-        //     elseif ($key == 20)
-        //         $widths[] = 13; //Laboratory Fees
-        //     elseif ($key == 21)
-        //         $widths[] = 10; //Library Fee
-        //     elseif ($key == 22)
-        //         $widths[] = 12; //Medical Fees
-        //     elseif ($key == 23)
-        //         $widths[] = 12; //Registration Fees
-        //     elseif ($key == 24)
-        //         $widths[] = 12; //School ID Fees  
-        //     elseif ($key == 25)
-        //         $widths[] = 12; //TOTAL TOSF
-        //     elseif ($key == 26)
-        //         $widths[] = 14; //TOTAL
-        //     else
-        //         $widths[] = $pagewidth_withborders / count($headers);
-        // }
+        foreach ($headers as $key => $header) {
+            if ($key == 0)
+                $widths[] = 9; //#
+            elseif ($key == 1)
+                $widths[] = 13; //Stud. Number
+            elseif ($key == 2)
+                $widths[] = 25; //Last Name
+            elseif ($key == 3)
+                $widths[] = 24.4; //Given Name
+            elseif ($key == 4)
+                $widths[] = 9; //Middle Name
+            elseif ($key == 5)
+                $widths[] = 8; //Year Level
+            elseif ($key == 6)
+                $widths[] = 6; //Sex at Birth
+            elseif ($key == 7)
+                $widths[] = 7; //Labo Units
+            elseif ($key == 8)
+                $widths[] = 11; //Comp Lab Units
+            elseif ($key == 9)
+                $widths[] = 12; //Academic Units
+            elseif ($key == 10)
+                $widths[] = 9; //NSTP Units
+            elseif ($key == 11)
+                $widths[] = 13; //Tuition Fee'
+            elseif ($key == 12)
+                $widths[] = 12.3; //NSTP Fee
+            elseif ($key == 13)
+                $widths[] = 8; //Athletic Fees
+            elseif ($key == 14)
+                $widths[] = 12; //Computer Fees
+            elseif ($key == 15)
+                $widths[] = 12; //Cultural Fees
+            elseif ($key == 16)
+                $widths[] = 8; //Development Fees
+            elseif ($key == 17)
+                $widths[] = 12; //Admission Fees
+            elseif ($key == 18)
+                $widths[] = 12; //Guidance Fees
+            elseif ($key == 19)
+                $widths[] = 12; //Handbook Fees
+            elseif ($key == 20)
+                $widths[] = 13; //Laboratory Fees
+            elseif ($key == 21)
+                $widths[] = 10; //Library Fee
+            elseif ($key == 22)
+                $widths[] = 12; //Medical Fees
+            elseif ($key == 23)
+                $widths[] = 12; //Registration Fees
+            elseif ($key == 24)
+                $widths[] = 12; //School ID Fees  
+            elseif ($key == 25)
+                $widths[] = 12; //TOTAL TOSF
+            elseif ($key == 26)
+                $widths[] = 14; //TOTAL
+            else
+                $widths[] = $pagewidth_withborders / count($headers);
+        }
 
         $pdf->SetWidths($widths);
 
@@ -1066,7 +1066,7 @@ class BillingController extends Controller
         $alignments[] = 'R';
         $alignments[] = 'R';
         $alignments[] = 'R';
-        $alignments[] = 'R';
+        // $alignments[] = 'R';
         $pdf->SetAligns($alignments);
         $headerHeight = $pdf->GetY();
         $headerHeight = $pdf->GetY() - $headerHeight;
@@ -1132,8 +1132,8 @@ class BillingController extends Controller
                 'medical_fees' => number_format($grantee->medical_and_dental_fee, 2),
                 'registration_fees' => number_format($grantee->registration_fee, 2),
                 'school_id_fees' => number_format($grantee->school_id_fee, 2),
-                'total_tosf' => number_format($grantee->total_fee - $grantee->tuition_fee, 2),
-                'total' => number_format($grantee->total_fee, 2)
+                'total_tosf' => number_format($grantee->total_fee, 2)
+                // 'total' => number_format($grantee->total_fee, 2)
             );
             $rowData = array_merge([$key + 1], array_values($granteeRow));
             $pdf->Row($rowData, 3, $alignments);
