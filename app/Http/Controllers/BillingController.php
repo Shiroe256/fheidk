@@ -1265,6 +1265,12 @@ class BillingController extends Controller
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
             $totalFees += (float) str_replace('', '', $grantee->total_fee);
+
+            //add page if less than 5 nalang grantees para dun na sa next page yun at signature line may ample space
+            if (count($grantees) - $key < 5) {
+                $pdf->AddPage();
+                continue;
+            }
         };
 
         // Display the Sum of TOTAL TOSF
