@@ -1075,10 +1075,7 @@ class BillingController extends Controller
         // Compute Total TOSF
         $totalTosf = 0;
         //prints the signature at the bottom always and cuts the page if there are no records in the signature page so laging may records na kasama ung signature
-        // $total = count($grantees);
-        // $grantees = array();
 
-        // for ($i = 0; $i < $total; $i++) {
         //     if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
         //         $pdf->AddPage('L');
         //         $pdf->Row($headers, 3, $alignments);
@@ -1097,12 +1094,7 @@ class BillingController extends Controller
         //     // $totalTosf += (float) str_replace('', '', $grantee_info[24]);
         // }
 
-        // $rowData = array_merge([$key + 1], array_values($grantees[0]));
-        // $pdf->Row($rowData, 3, $alignments);
-
-        // $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
         foreach ($grantees as $key => $grantee) {
-            // $rowData = array_merge([$sequenceNumber], $grantees);
             if ($pdf->currentCourse != $grantee->degree_program) {
                 $pdf->currentCourse = $grantee->degree_program;
                 $pdf->AddPage();
@@ -1139,6 +1131,12 @@ class BillingController extends Controller
             $pdf->Row($rowData, 3, $alignments);
             // Calculate the sum of "TOTAL TOSF"
             $totalTosf += (float) str_replace('', '', $grantee->total_fee);
+            if (count($grantees) - $key < 5 && $pdf->isLast == false) {
+                $pdf->AddPage();
+                //signature
+                $pdf->isLast = true;
+                continue;
+            }
         };
         // Display the Sum of TOTAL TOSF
         $pdf->SetFont('Arial', 'BI', 7);
@@ -1146,8 +1144,6 @@ class BillingController extends Controller
         $pdf->Cell(298, 5, 'TOTAL:', 0, 0, 'R', 0);
         $pdf->Cell(22, 5, number_format($totalTosf, 2), 0, 0, 'R', 0);
 
-        //signature
-        $pdf->isLast = true;
 
         $pdf->Output();
     }
