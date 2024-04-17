@@ -26,7 +26,7 @@ class CheckUserHei
         if ($request->reference_no) {
             $reference_no = $request->reference_no;
             $billing = Billing::where('reference_no', $reference_no)->first();
-            if (count($billing) < 1) {
+            if (!$billing) {
                 return response('Billing Not Found', 404);
             }
         }
