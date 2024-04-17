@@ -25,8 +25,8 @@ class CheckUserHei
         //check if billing exists
         if ($request->reference_no) {
             $reference_no = $request->reference_no;
-            $billing = Billing::where('reference_no', $reference_no)->count();
-            if ($billing < 1) {
+            $billing = Billing::where('reference_no', $reference_no)->first();
+            if (count($billing) < 1) {
                 return response('Billing Not Found', 404);
             }
         }
@@ -35,7 +35,7 @@ class CheckUserHei
         if ($hei_uii != $billing->hei_uii) {
             return response('Unauthorized', 401);
         }
-        $request->merge(['hei_uii' => $hei_uii]);
+        // $request->merge(['hei_uii' => $hei_uii]);
         return $next($request);
     }
 }
