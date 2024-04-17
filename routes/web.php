@@ -50,13 +50,13 @@ Route::put('/new-billing', [BillingController::class, 'newBilling'])->name('newB
 Route::put('/save-settings', [BillingController::class, 'saveSettings'])->name('saveSettings');
 //Billing routes
 Route::get('/billings', [BillingController::class, 'billingList'])->name('billings');
-Route::get('/billings/{reference_no}/attachments/form1', [BillingController::class, 'generatePDFForm1']);
-Route::get('/billings/{reference_no}/attachments/form2', [BillingController::class, 'generatePDFForm2']);
-Route::get('/billings/{reference_no}/attachments/form3', [BillingController::class, 'generatePDFForm3']);
+Route::get('/billings/{reference_no}/attachments/form1', [BillingController::class, 'generatePDFForm1'])->middleware('checkUserHei');
+Route::get('/billings/{reference_no}/attachments/form2', [BillingController::class, 'generatePDFForm2'])->middleware('checkUserHei');
+Route::get('/billings/{reference_no}/attachments/form3', [BillingController::class, 'generatePDFForm3'])->middleware('checkUserHei');
 Route::get('/billings/{reference_no?}/attachments', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments');
-Route::get('/billings/{reference_no}/settings', [BillingController::class, 'getBillingSettings'])->middleware('validateBillingStatus')->name('getBillingSettings');
-Route::get('/billings/{reference_no?}/test', [BillingController::class, 'Test']); //testing
-Route::get('/billings/{reference_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('validateBillingStatus');
+Route::get('/billings/{reference_no}/settings', [BillingController::class, 'getBillingSettings'])->middleware('checkUserHei')->middleware('validateBillingStatus')->name('getBillingSettings');
+Route::get('/billings/{reference_no?}/test', [BillingController::class, 'Test'])->middleware('checkUserHei'); //testing
+Route::get('/billings/{reference_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('validateBillingStatus')->middleware('checkUserHei');
 Route::post('/submitbilling', [BillingController::class, 'submitbilling'])->name('submitbilling');
 Route::get('/fees/{uid}', [BillingController::class, 'fetchStudentFees'])->name('fetchStudentFees'); //student fees
 Route::get('registers', 'App\Http\Controllers\Pagescontroller@registers')->name('registers');

@@ -18,12 +18,19 @@ class CheckUserHei
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->route('ref_no'))
-            $reference_no = $request->route('ref_no');
-        if ($request->reference_no)
+        //check log in
+        if (!Auth::check()) {
+            return response('Unauthorized', 401);
+        }
+        //check if billing exists
+        if ($request->reference_no) {
             $reference_no = $request->reference_no;
-
-        $billing = Billing::where('reference_no', $reference_no)->first();
+            $billing = Billing::where('reference_no', $reference_no)->count();
+            if ($billing < 1) {
+                return response('Billing Not Found', 404);
+            }
+        }
+        //check if currently logged in user handles this billing
         $hei_uii = Auth::user()->hei_uii;
         if ($hei_uii != $billing->hei_uii) {
             return response('Unauthorized', 401);
