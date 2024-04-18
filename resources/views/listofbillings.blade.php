@@ -44,10 +44,10 @@
         </div>
     </div>
 </div>
-@include('modals.newbilling');
+@include('modals.newbilling')
 </div>
 
-@include('includes.footer');
+@include('includes.footer')
 </body>
 
 </html>
