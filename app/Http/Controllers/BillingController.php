@@ -2048,7 +2048,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
                 DB::raw('COUNT(DISTINCT students_sub.uid) as total_beneficiaries'),
                 // DB::raw($this->carlo_columns)
             )
-            // ->join('tbl_fhe_billing_records', 'students_sub.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
+            ->join('tbl_fhe_billing_records', 'students_sub.reference_no', '=', 'tbl_fhe_billing_records.reference_no')
             // ->leftJoin('tbl_other_school_fees', function ($join) use ($hei_uii) {
             //     $join->on('tbl_other_school_fees.course_enrolled', '=', 'students_sub.degree_program')
             //         ->on('tbl_other_school_fees.hei_uii', '=', DB::raw($hei_uii))
