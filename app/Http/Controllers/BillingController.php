@@ -978,15 +978,74 @@ class BillingController extends Controller
         // $widths[25] = 12; //TOTAL TOSF
         // $widths[26] = 14; //TOTAL
 
+        // foreach ($headers as $key => $header) {
+        //     if ($key == 0)
+        //         $widths[] = 9; //#
+        //     elseif ($key == 1)
+        //         $widths[] = 13; //Stud. Number
+        //     elseif ($key == 2)
+        //         $widths[] = 25; //Last Name
+        //     elseif ($key == 3)
+        //         $widths[] = 24.4; //Given Name
+        //     elseif ($key == 4)
+        //         $widths[] = 9; //Middle Name
+        //     elseif ($key == 5)
+        //         $widths[] = 8; //Year Level
+        //     elseif ($key == 6)
+        //         $widths[] = 6; //Sex at Birth
+        //     elseif ($key == 7)
+        //         $widths[] = 7; //Labo Units
+        //     elseif ($key == 8)
+        //         $widths[] = 11; //Comp Lab Units
+        //     elseif ($key == 9)
+        //         $widths[] = 12; //Academic Units
+        //     elseif ($key == 10)
+        //         $widths[] = 9; //NSTP Units
+        //     elseif ($key == 11)
+        //         $widths[] = 13; //Tuition Fee'
+        //     elseif ($key == 12)
+        //         $widths[] = 12.3; //NSTP Fee
+        //     elseif ($key == 13)
+        //         $widths[] = 8; //Athletic Fees
+        //     elseif ($key == 14)
+        //         $widths[] = 12; //Computer Fees
+        //     elseif ($key == 15)
+        //         $widths[] = 12; //Cultural Fees
+        //     elseif ($key == 16)
+        //         $widths[] = 8; //Development Fees
+        //     elseif ($key == 17)
+        //         $widths[] = 12; //Admission Fees
+        //     elseif ($key == 18)
+        //         $widths[] = 12; //Guidance Fees
+        //     elseif ($key == 19)
+        //         $widths[] = 12; //Handbook Fees
+        //     elseif ($key == 20)
+        //         $widths[] = 13; //Laboratory Fees
+        //     elseif ($key == 21)
+        //         $widths[] = 10; //Library Fee
+        //     elseif ($key == 22)
+        //         $widths[] = 12; //Medical Fees
+        //     elseif ($key == 23)
+        //         $widths[] = 12; //Registration Fees
+        //     elseif ($key == 24)
+        //         $widths[] = 12; //School ID Fees  
+        //     elseif ($key == 25)
+        //         $widths[] = 12; //TOTAL TOSF
+        //     elseif ($key == 26)
+        //         $widths[] = 14; //TOTAL
+        //     else
+        //         $widths[] = $pagewidth_withborders / count($headers);
+        // }
+
         foreach ($headers as $key => $header) {
             if ($key == 0)
-                $widths[] = 9; //#
+                $widths[] = 8; //#
             elseif ($key == 1)
-                $widths[] = 13; //Stud. Number
+                $widths[] = 15; //Stud. Number
             elseif ($key == 2)
                 $widths[] = 25; //Last Name
             elseif ($key == 3)
-                $widths[] = 24.4; //Given Name
+                $widths[] = 26.4; //Given Name
             elseif ($key == 4)
                 $widths[] = 9; //Middle Name
             elseif ($key == 5)
@@ -1002,11 +1061,11 @@ class BillingController extends Controller
             elseif ($key == 10)
                 $widths[] = 9; //NSTP Units
             elseif ($key == 11)
-                $widths[] = 13; //Tuition Fee'
+                $widths[] = 14; //Tuition Fee'
             elseif ($key == 12)
                 $widths[] = 12.3; //NSTP Fee
             elseif ($key == 13)
-                $widths[] = 8; //Athletic Fees
+                $widths[] = 10; //Athletic Fees
             elseif ($key == 14)
                 $widths[] = 12; //Computer Fees
             elseif ($key == 15)
@@ -1032,7 +1091,7 @@ class BillingController extends Controller
             elseif ($key == 25)
                 $widths[] = 12; //TOTAL TOSF
             elseif ($key == 26)
-                $widths[] = 14; //TOTAL
+                $widths[] = 16; //TOTAL
             else
                 $widths[] = $pagewidth_withborders / count($headers);
         }
