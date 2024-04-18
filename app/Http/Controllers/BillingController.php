@@ -1005,7 +1005,7 @@ class BillingController extends Controller
                 $widths[] = $pagewidth_withborders / count($headers);
         }
 
-        $this->SetWidths($widths);
+        $pdf->SetWidths($widths);
 
         // $values[] = ['data' => '1', 'alignment' => 'L'];
         $alignments[] = 'L';
