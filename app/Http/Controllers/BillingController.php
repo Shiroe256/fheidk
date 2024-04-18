@@ -711,10 +711,25 @@ class BillingController extends Controller
 
         $data['total_beneficiaries'] = $this->getTotalGrantees($reference_no);
 
+        $form2_stud = $this->getStudentSubquery($reference_no);
+        $form2_fees = $this->joinStudentFees($form2_stud, 2)->groupBy('students_sub.reference_no')->first();
+        $form3_stud = $this->getStudentSubquery($reference_no, '', 0, PHP_INT_MAX, 1);
+        $form3_fees = $this->joinStudentFees($form3_stud, 3)->groupBy('students_sub.reference_no')->first();
 
+        if (count((array)$form2_fees) < 1) {
+            $data['form2_total'] = 0;
+        } else {
+            $data['form2_total'] = (int)$form2_fees->total_fee;
+        }
+        if (count((array)$form3_fees) < 1) {
+            $data['form3_total'] = 0;
+        } else {
+            $data['form3_total'] = (int)$form3_fees->total_fee;
+        }
+        $total_fee = (int)$data['form2_total'] + (int)$data['form3_total'];
 
         $summary = $this->joinStudentFees($form2_stud, 0)->groupBy('reference_no')->first();
-        $total_fee = $form2_fees->total_fee + $form3_fees->total_fee;
+        // $total_fee = $form2_fees->total_fee + $form3_fees->total_fee;
         return $total_fee;
     }
     function getForm3Data($reference_no)
