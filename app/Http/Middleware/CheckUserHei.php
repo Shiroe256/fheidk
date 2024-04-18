@@ -20,20 +20,20 @@ class CheckUserHei
     {
         //check log in
         if (!Auth::check()) {
-            return response('Unauthorized', 401);
+            abort(401);
         }
         //check if billing exists
         if ($request->reference_no) {
             $reference_no = $request->reference_no;
             $billing = Billing::where('reference_no', $reference_no)->first();
             if (!$billing) {
-                return response('Billing Not Found', 404);
+                abort(404);
             }
         }
         //check if currently logged in user handles this billing
         $hei_uii = Auth::user()->hei_uii;
         if ($hei_uii != $billing->hei_uii) {
-            return response('Unauthorized', 401);
+            abort(401);
         }
         // $request->merge(['hei_uii' => $hei_uii]);
         return $next($request);
