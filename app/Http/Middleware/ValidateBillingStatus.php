@@ -20,7 +20,7 @@ class ValidateBillingStatus
         $reference_no = $request->reference_no;
         $billing_status = DB::table('tbl_fhe_billing_records')->where('reference_no', '=', $reference_no)->first();
         if (!$billing_status) {
-            return response('Billing Not Found', 404);
+            abort(404);
         }
         switch ($billing_status->billing_status) {
             case 2:
