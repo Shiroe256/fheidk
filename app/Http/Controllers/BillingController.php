@@ -922,6 +922,7 @@ class BillingController extends Controller
         //!for the first page
         $pdf->currentCourse = $grantees[0]->degree_program;
         $pdf->Cell(0, 5, $pdf->currentCourse, 1, 1);
+
         $headers[] = '#';
         $headers[] = 'Stud. Number';
         $headers[] = 'Last Name';
@@ -948,98 +949,10 @@ class BillingController extends Controller
         $headers[] = 'Registration Fees';
         $headers[] = 'School ID Fees';
         $headers[] = 'TOTAL';
-        // $headers[] = 'TOTAL';
-
-        // $widths[0] = 9; //#
-        // $widths[1] = 13; //Stud. Number
-        // $widths[2] = 25; //Last Name
-        // $widths[3] = 24.4; //Given Name
-        // $widths[4] = 9; //Middle Name
-        // $widths[5] = 8; //Year Level
-        // $widths[6] = 6; //Sex at Birth
-        // $widths[7] = 7; //Labo Units
-        // $widths[8] = 11; //Comp Lab Units
-        // $widths[9] = 12; //Academic Units
-        // $widths[10] = 9; //NSTP Units
-        // $widths[11] = 13; //Tuition Fee'
-        // $widths[12] = 12.3; //NSTP Fee
-        // $widths[13] = 8; //Athletic Fees
-        // $widths[14] = 12; //Computer Fees
-        // $widths[15] = 12; //Cultural Fees
-        // $widths[16] = 8; //Development Fees
-        // $widths[17] = 12; //Admission Fees
-        // $widths[18] = 12; //Guidance Fees
-        // $widths[19] = 12; //Handbook Fees
-        // $widths[20] = 13; //Laboratory Fees
-        // $widths[21] = 10; //Library Fee
-        // $widths[22] = 12; //Medical Fees
-        // $widths[23] = 12; //Registration Fees
-        // $widths[24] = 12; //School ID Fees  
-        // $widths[25] = 12; //TOTAL TOSF
-        // $widths[26] = 14; //TOTAL
-
-        // foreach ($headers as $key => $header) {
-        //     if ($key == 0)
-        //         $widths[] = 9; //#
-        //     elseif ($key == 1)
-        //         $widths[] = 13; //Stud. Number
-        //     elseif ($key == 2)
-        //         $widths[] = 25; //Last Name
-        //     elseif ($key == 3)
-        //         $widths[] = 24.4; //Given Name
-        //     elseif ($key == 4)
-        //         $widths[] = 9; //Middle Name
-        //     elseif ($key == 5)
-        //         $widths[] = 8; //Year Level
-        //     elseif ($key == 6)
-        //         $widths[] = 6; //Sex at Birth
-        //     elseif ($key == 7)
-        //         $widths[] = 7; //Labo Units
-        //     elseif ($key == 8)
-        //         $widths[] = 11; //Comp Lab Units
-        //     elseif ($key == 9)
-        //         $widths[] = 12; //Academic Units
-        //     elseif ($key == 10)
-        //         $widths[] = 9; //NSTP Units
-        //     elseif ($key == 11)
-        //         $widths[] = 13; //Tuition Fee'
-        //     elseif ($key == 12)
-        //         $widths[] = 12.3; //NSTP Fee
-        //     elseif ($key == 13)
-        //         $widths[] = 8; //Athletic Fees
-        //     elseif ($key == 14)
-        //         $widths[] = 12; //Computer Fees
-        //     elseif ($key == 15)
-        //         $widths[] = 12; //Cultural Fees
-        //     elseif ($key == 16)
-        //         $widths[] = 8; //Development Fees
-        //     elseif ($key == 17)
-        //         $widths[] = 12; //Admission Fees
-        //     elseif ($key == 18)
-        //         $widths[] = 12; //Guidance Fees
-        //     elseif ($key == 19)
-        //         $widths[] = 12; //Handbook Fees
-        //     elseif ($key == 20)
-        //         $widths[] = 13; //Laboratory Fees
-        //     elseif ($key == 21)
-        //         $widths[] = 10; //Library Fee
-        //     elseif ($key == 22)
-        //         $widths[] = 12; //Medical Fees
-        //     elseif ($key == 23)
-        //         $widths[] = 12; //Registration Fees
-        //     elseif ($key == 24)
-        //         $widths[] = 12; //School ID Fees  
-        //     elseif ($key == 25)
-        //         $widths[] = 12; //TOTAL TOSF
-        //     elseif ($key == 26)
-        //         $widths[] = 14; //TOTAL
-        //     else
-        //         $widths[] = $pagewidth_withborders / count($headers);
-        // }
 
         foreach ($headers as $key => $header) {
             if ($key == 0)
-                $widths[] = 8; //#
+                $widths[] = 7; //#
             elseif ($key == 1)
                 $widths[] = 15; //Stud. Number
             elseif ($key == 2)
@@ -1061,17 +974,17 @@ class BillingController extends Controller
             elseif ($key == 10)
                 $widths[] = 9; //NSTP Units
             elseif ($key == 11)
-                $widths[] = 14; //Tuition Fee'
+                $widths[] = 13; //Tuition Fee'
             elseif ($key == 12)
                 $widths[] = 12.3; //NSTP Fee
             elseif ($key == 13)
-                $widths[] = 10; //Athletic Fees
+                $widths[] = 12; //Athletic Fees
             elseif ($key == 14)
                 $widths[] = 12; //Computer Fees
             elseif ($key == 15)
                 $widths[] = 12; //Cultural Fees
             elseif ($key == 16)
-                $widths[] = 8; //Development Fees
+                $widths[] = 12; //Development Fees
             elseif ($key == 17)
                 $widths[] = 12; //Admission Fees
             elseif ($key == 18)
@@ -1081,22 +994,18 @@ class BillingController extends Controller
             elseif ($key == 20)
                 $widths[] = 13; //Laboratory Fees
             elseif ($key == 21)
-                $widths[] = 10; //Library Fee
+                $widths[] = 12; //Library Fee
             elseif ($key == 22)
                 $widths[] = 12; //Medical Fees
             elseif ($key == 23)
-                $widths[] = 12; //Registration Fees
+                $widths[] = 14; //Registration Fees
             elseif ($key == 24)
                 $widths[] = 12; //School ID Fees  
-            elseif ($key == 25)
-                $widths[] = 12; //TOTAL TOSF
-            elseif ($key == 26)
-                $widths[] = 16; //TOTAL
             else
                 $widths[] = $pagewidth_withborders / count($headers);
         }
 
-        $pdf->SetWidths($widths);
+        $this->SetWidths($widths);
 
         // $values[] = ['data' => '1', 'alignment' => 'L'];
         $alignments[] = 'L';
@@ -1134,24 +1043,6 @@ class BillingController extends Controller
         // Compute Total TOSF
         $totalTosf = 0;
         //prints the signature at the bottom always and cuts the page if there are no records in the signature page so laging may records na kasama ung signature
-
-        //     if ($pdf->GetY() + 20 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + $headerHeight + $pagetitleheight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() == 1) {
-        //         $pdf->AddPage('L');
-        //         $pdf->Row($headers, 3, $alignments);
-        //     } else if ($pdf->GetY() + 30 >= $pdf->GetPageBreakTrigger() && ($total - $i) * 3 + 300 + $headerHeight <= $pdf->GetPageBreakTrigger() && $pdf->PageNo() != 1) {
-        //         $pdf->AddPage('L');
-        //         $pdf->Row($headers, 3, $alignments);
-        //     } else if ($pdf->GetY() + 3 >= $pdf->GetPageBreakTrigger()) {
-        //         //print headers if a new page will be created by adding a row
-        //         $pdf->Row($headers, 3, $alignments);
-        //     }
-        //     // // Sequence Number
-        //     // $rowData = array_merge([$sequenceNumber], $grantee_info);
-        //     // $pdf->Row($rowData, 3, $alignments);
-        //     // $sequenceNumber++;
-        //     // // Calculate the sum of "TOTAL TOSF"
-        //     // $totalTosf += (float) str_replace('', '', $grantee_info[24]);
-        // }
 
         foreach ($grantees as $key => $grantee) {
             if ($pdf->currentCourse != $grantee->degree_program) {
@@ -1192,7 +1083,7 @@ class BillingController extends Controller
             $totalTosf += (float) str_replace('', '', $grantee->total_fee);
             if (count($grantees) - $key < 5 && $pdf->isLast == false) {
                 $pdf->AddPage();
-                //signature
+                //signature line
                 $pdf->isLast = true;
                 continue;
             }

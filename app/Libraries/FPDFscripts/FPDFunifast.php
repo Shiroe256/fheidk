@@ -73,17 +73,17 @@ class FPDFunifast extends Fpdf
             $headers[] = 'Medical Fees';
             $headers[] = 'Registration Fees';
             $headers[] = 'School ID Fees';
-            $headers[] = 'TOTAL TOSF';
+            $headers[] = 'TOTAL';
 
             foreach ($headers as $key => $header) {
                 if ($key == 0)
-                    $widths[] = 9; //#
+                    $widths[] = 7; //#
                 elseif ($key == 1)
-                    $widths[] = 13; //Stud. Number
+                    $widths[] = 15; //Stud. Number
                 elseif ($key == 2)
                     $widths[] = 25; //Last Name
                 elseif ($key == 3)
-                    $widths[] = 24.4; //Given Name
+                    $widths[] = 26.4; //Given Name
                 elseif ($key == 4)
                     $widths[] = 9; //Middle Name
                 elseif ($key == 5)
@@ -103,7 +103,7 @@ class FPDFunifast extends Fpdf
                 elseif ($key == 12)
                     $widths[] = 12.3; //NSTP Fee
                 elseif ($key == 13)
-                    $widths[] = 14; //Athletic Fees
+                    $widths[] = 12; //Athletic Fees
                 elseif ($key == 14)
                     $widths[] = 12; //Computer Fees
                 elseif ($key == 15)
