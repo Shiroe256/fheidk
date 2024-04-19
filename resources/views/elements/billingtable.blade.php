@@ -17,16 +17,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($billings as $id => $billing) 
+                @foreach ($billings as $id => $billing)
                     <tr>
                         <td class="text-center">{{ $id + 1 }}</td>
-                        @if($billing->billing_status == 2 || ($billing->billing_status > 5 && $billing->billing_status != 7))
-                        <td class="text-center"><span class="badge badge-pill badge-primary"><a class="text-light"
-                            href="{{ route('billings') . '/' . $billing->reference_no }}">{{ $billing->reference_no }}</a></span>
-                        </td>
+                        @if ($billing->billing_status == 2 || ($billing->billing_status > 5 && $billing->billing_status != 7))
+                            <td class="text-center"><span
+                                    class="badge badge-pill badge-primary">{{ $billing->reference_no }}</span>
+                            </td>
                         @else
-                        <td class="text-center"><span class="badge badge-pill badge-primary">{{ $billing->reference_no }}</span>
-                        </td>
+                            <td class="text-center"><span class="badge badge-pill badge-primary"><a class="text-light"
+                                        href="{{ route('billings') . '/' . $billing->reference_no }}">{{ $billing->reference_no }}</a></span>
+                            </td>
                         @endif
                         <td class="text-center"><strong>{{ $billing->ac_year }}</strong></td>
                         <td class="text-center"><strong>{{ $f->format($billing->semester) }}</strong></td>
