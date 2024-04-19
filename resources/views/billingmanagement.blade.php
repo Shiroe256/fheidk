@@ -220,6 +220,12 @@
                                                 class="fas fa-pencil-ruler"></i>&nbsp;Entrance/Admission
                                             Exam</h5>
                                     </div>
+                                    <div class="col text-right">
+                                        <div class="btn-group" role="group"><button
+                                                class="btn btn-outline-danger btn-sm" type="button"
+                                                id="btn_delete_applicant"><i
+                                                    class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
+                                    </div>
                                 </div>
                                 <div id="show_all_applicants" class="table-responsive">
                                     <table class="table table-hover w-100" id="tbl_applicants">
@@ -260,7 +266,7 @@
                         </div>
                         <div class="col text-right">
                             <div class="btn-group" role="group"><button class="btn btn-outline-danger btn-sm"
-                                    type="button" data-toggle="modal" data-target="#mod_remove"><i
+                                    type="button" id="btn_delete_exception"><i
                                         class="fas fa-user-minus"></i>&nbsp;Remove</button></div>
                         </div>
                     </div>

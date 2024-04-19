@@ -2518,6 +2518,102 @@ $("#frm_update_student").submit(function (e) {
 // });
 
 //Delete data
+$(document).on('click', '#btn_delete_exception', function () {
+  // var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
+  var checkedStudents = tbl_exceptions.rows({ selected: true }).data().toArray().map(row => row.uid); // checked students now that ano na no more checkboxes
+  // $($('input[name="student_checkbox"]:checked')).each(function () {
+  //   checkedStudents.push($(this).val());
+  // });
+
+  let id = checkedStudents;
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/delete-tempstudent',
+        method: 'delete',
+        data: {
+          reference_no: reference_no,
+          uid: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Deleted!',
+            'Student record has been deleted.',
+            'success'
+          )
+          $('#btn_delete_students').addClass('d-none');
+          tbl_students.ajax.reload();
+          tbl_applicants.ajax.reload();
+          tbl_exceptions.ajax.reload();
+          fetchTempSummary();
+        }
+      });
+    }
+  })
+});
+$(document).on('click', '#btn_delete_applicant', function () {
+  // var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
+  var checkedStudents = tbl_applicants.rows({ selected: true }).data().toArray().map(row => row.uid); // checked students now that ano na no more checkboxes
+  // $($('input[name="student_checkbox"]:checked')).each(function () {
+  //   checkedStudents.push($(this).val());
+  // });
+
+  let id = checkedStudents;
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/delete-tempstudent',
+        method: 'delete',
+        data: {
+          reference_no: reference_no,
+          uid: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Deleted!',
+            'Student record has been deleted.',
+            'success'
+          )
+          $('#btn_delete_students').addClass('d-none');
+          tbl_students.ajax.reload();
+          tbl_applicants.ajax.reload();
+          tbl_exceptions.ajax.reload();
+          fetchTempSummary();
+        }
+      });
+    }
+  })
+});
 $(document).on('click', '#btn_delete_students', function () {
   // var checkedStudents = tbl_students.rows({ selected: true }).data().toArray(); // checked students now that ano na no more checkboxes
   var checkedStudents = tbl_students.rows({ selected: true }).data().toArray().map(row => row.uid); // checked students now that ano na no more checkboxes
@@ -2559,6 +2655,7 @@ $(document).on('click', '#btn_delete_students', function () {
           $('#btn_delete_students').addClass('d-none');
           tbl_students.ajax.reload();
           tbl_applicants.ajax.reload();
+          tbl_exceptions.ajax.reload();
           fetchTempSummary();
         }
       });
