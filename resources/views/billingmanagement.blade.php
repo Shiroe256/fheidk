@@ -250,7 +250,7 @@
         </div>
 
         <div id="billing_exceptions_div"
-            class="card-body billing_exceptions_div {{ $billing_status == 4 ? '' : 'd-none' }}">
+            class="card-body billing_exceptions_div {{ $billing_status == 4 ? '' : '' }}">
             <form>
                 <div class="form-group input-style">
                     <div class="form-row">
