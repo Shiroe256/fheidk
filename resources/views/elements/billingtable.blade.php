@@ -66,7 +66,7 @@
                         </td>
                         <td></td>
                         <td class="text-center">
-                            <?php if ($billing->billing_status == 2 || $billing->billing_status > 5): ?>
+                            <?php if ($billing->billing_status == 2 || ($billing->billing_status > 5 && $billing->billing_status != 7)): ?>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a class="btn btn-secondary disabled" role="button" data-toggle="tooltip"
                                     data-bs-tooltip="" data-placement="bottom" title="Edit Grantees" href="#"><i
