@@ -29,7 +29,7 @@ class ValidateBillingStatus
             case 8:
             case 9:
             case 10:
-                return response('error', 400);
+                abort('401','Billing status doesnt allow editing. Contact Administrator');
                 break;
 
             default:
