@@ -25,7 +25,7 @@ class ValidateBillingStatus
         switch ($billing_status->billing_status) {
             case 2:
             case 5:
-            case 7:
+            // case 7:
             case 8:
             case 9:
             case 10:
