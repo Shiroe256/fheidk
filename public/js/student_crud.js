@@ -47,7 +47,7 @@ tbl_students = $('#tbl_students').DataTable({
   columns: [
     {
       data: 'app_id', render: function (data) {
-        return '<span class="badge badge-pill badge-danger">' + data + '</span>'
+        return '<span class="badge badge-pill badge-primary">' + data + '</span>'
       }
     },
     {
@@ -166,7 +166,7 @@ tbl_applicants = $('#tbl_applicants').DataTable({
   columns: [
     {
       data: 'app_id', render: function (data) {
-        return '<span class="badge badge-pill badge-danger">' + data + '</span>'
+        return '<span class="badge badge-pill badge-primary">' + data + '</span>'
       }
     },
     {
@@ -280,7 +280,7 @@ tbl_exceptions = $('#tbl_exception_report').DataTable({
   columns: [
     {
       data: 'app_id', render: function (data) {
-        return '<span class="badge badge-pill badge-danger">' + data + '</span>'
+        return '<span class="badge badge-pill badge-primary">' + data + '</span>'
       }
     },
     {
