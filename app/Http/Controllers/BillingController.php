@@ -893,7 +893,7 @@ class BillingController extends Controller
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 0, "C");
         $pdf->Cell(30, $cell_height, "Date", 1, 0, "C");
         $pdf->Cell($pdf->GetPageWidth() / 2 - 40, $cell_height, now()->toDateString(), 1, 1, "C");
-        $pdf->Output();
+        $pdf->Output('D','form1.pdf');
     }
     function generateForm2($pdf_data, $signatories,  $grantees)
     {
@@ -1106,7 +1106,7 @@ class BillingController extends Controller
         $pdf->Cell(22, 5, number_format($totalTosf, 2), 0, 0, 'R', 0);
 
 
-        $pdf->Output();
+        $pdf->Output('D','form2.pdf');
     }
 
     function generateForm3($pdf_data, $signatories, $grantees)
@@ -1253,7 +1253,7 @@ class BillingController extends Controller
         $pdf->RowWithBorder(array($signatories['prep1'], $signatories['cert1'], $signatories['cert2']), 3, 'C', 0);
         $pdf->RowWithBorder(array($signatories['pos_prep1'], $signatories['pos_cert1'], $signatories['pos_cert2']), 3, 'C', 0);
 
-        $pdf->Output();
+        $pdf->Output('D','form3.pdf');
     }
     //end pdf functions
     public function fetchStudentFees($uid)
