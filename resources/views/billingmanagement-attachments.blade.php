@@ -73,7 +73,7 @@
                         <div class="tab-pane fade" role="tabpanel" id="submit_billing">
                             <form class="mt-4">
                                 <h5 class="text-black-50 mb-4"><i class="fas fa-paperclip"></i></i>&nbsp;Attach Billing
-                                    Requirements SAMPLE
+                                    Requirements
                                 </h5>
 
                                 <div class="table-responsive mt-2 table-style" role="grid"
