@@ -298,6 +298,54 @@
                                                             </div>
                                                         </td>
                                                     </tr>
+
+                                                    <tr>
+                                                        <td>Admission Forms and Certificates</td>
+                                                        <td class="text-left"> <a href="{{ $billing->afc_link }}"
+                                                            target="_blank">{{ $billing->afc_link }}</a></td>
+                                                    <td>
+                                                        @if ($billing->afc_status == 0)
+                                                            <span class="badge badge-pill badge-secondary input-style">No
+                                                                Attachment</span>
+                                                        @elseif ($billing->afc_status == 1)
+                                                            <span class="badge badge-pill badge-warning input-style">For
+                                                                Review</span>
+                                                        @elseif ($billing->afc_status == 2)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->afc_status == 3)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by UniFAST Billing Unit</span>
+                                                        @elseif ($billing->afc_status == 4)
+                                                            <span
+                                                                class="badge badge-pill badge-success input-style">Approved
+                                                                by CHED-AFMS</span>
+                                                        @elseif ($billing->afc_status == 5)
+                                                            <span class="badge badge-pill badge-danger input-style">Rejected
+                                                                by CHED-AFMS</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $billing->afc_remarks }}</td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-outline-info" role="button" data-bs-tooltip=""
+                                                            data-placement="bottom" title="View billing submission"
+                                                            href="{{ $billing->afc_link }}" target="_blank"><i class="far fa-file-alt"></i></a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div role="group" class="btn-group btn-group-sm">
+                                                                @if ($billing->billing_status == 6)
+                                                                <button id="btn_approve_afc" name="btn_approve_afc" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_afc" name="btn_reject_afc" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                                @if ($billing->billing_status == 8)
+                                                                <button id="btn_approve_afc_afms" name="btn_approve_afc_afms" class="btn btn-outline-success btn-sm" title="Approve"><i class="fas fa-check"></i></button>
+                                                                <button id="btn_reject_afc_afms" name="btn_reject_afc_afms" class="btn btn-outline-danger btn-sm" title="Reject"><i class="fas fa-times"></i></button>
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
                                                     <tr>
                                                         <td>Bank Certification of the HEI Certified by the HEI</td>
                                                         <td class="text-left"> <a href="{{ $billing->hei_bank_cert_link }}"
