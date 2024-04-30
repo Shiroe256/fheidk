@@ -96,6 +96,7 @@ Route::post('/updatelinkform2', [BillingController::class, 'updatelinkform2'])->
 Route::post('/updatelinkform3', [BillingController::class, 'updatelinkform3'])->name('updatelinkform3'); //for single entry
 Route::post('/updatelinknrc', [BillingController::class, 'updatelinknrc'])->name('updatelinknrc'); //for single entry
 Route::post('/updatelinkcor', [BillingController::class, 'updatelinkcor'])->name('updatelinkcor'); //for single entry
+Route::post('/updatelinkafc', [BillingController::class, 'updatelinkafc'])->name('updatelinkafc'); //for single entry
 Route::post('/updatelinkheibankcert', [BillingController::class, 'updatelinkheibankcert'])->name('updatelinkheibankcert'); //for single entry
 Route::post('/updatelinkbankcert', [BillingController::class, 'updatelinkbankcert'])->name('updatelinkbankcert'); //for single entry
 
