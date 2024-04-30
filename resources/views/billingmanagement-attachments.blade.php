@@ -371,12 +371,12 @@
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
                                                         <button id="{{ $billings->reference_no }}"
-                                                            name="btn_link_cor"
-                                                            class="btn_link_cor btn btn-outline-info"
+                                                            name="btn_link_afc"
+                                                            class="btn_link_afc btn btn-outline-info"
                                                             data-bs-toggle="modal" data-bs-tooltip=""
                                                             data-placement="bottom" type="button"
-                                                            title="Attach link for student cor's"
-                                                            data-bs-target="#mod_upload_link_cor"><i
+                                                            title="Attach link for admission forms and certificates"
+                                                            data-bs-target="#mod_upload_link_afc"><i
                                                                 class="fas fa-paperclip"></i></button>
                                                         <a class="btn btn-outline-info" role="button"
                                                             data-bs-tooltip="" data-placement="bottom"

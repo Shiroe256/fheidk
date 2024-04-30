@@ -181,6 +181,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/rejectregcert', [AdminController::class, 'rejectregcert'])->name('rejectregcert');
     Route::post('/approvecor', [AdminController::class, 'approvecor'])->name('approvecor');
     Route::post('/rejectcor', [AdminController::class, 'rejectcor'])->name('rejectcor');
+    Route::post('/approveafc', [AdminController::class, 'approveafc'])->name('approveafc');
+    Route::post('/rejectafc', [AdminController::class, 'rejectafc'])->name('rejectafc');
     Route::post('/approveheibankcert', [AdminController::class, 'approveheibankcert'])->name('approveheibankcert');
     Route::post('/rejectheibankcert', [AdminController::class, 'rejectheibankcert'])->name('rejectheibankcert');
     Route::post('/approvebankcert', [AdminController::class, 'approvebankcert'])->name('approvebankcert');
@@ -196,6 +198,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/rejectregcertafms', [AdminController::class, 'rejectregcertafms'])->name('rejectregcertafms');
     Route::post('/approvecorafms', [AdminController::class, 'approvecorafms'])->name('approvecorafms');
     Route::post('/rejectcorafms', [AdminController::class, 'rejectcorafms'])->name('rejectcorafms');
+    Route::post('/approveafcafms', [AdminController::class, 'approveafcafms'])->name('approveafcafms');
+    Route::post('/rejectafcafms', [AdminController::class, 'rejectafcafms'])->name('rejectafcafms');
     Route::post('/approveheibankcertafms', [AdminController::class, 'approveheibankcertafms'])->name('approveheibankcertafms');
     Route::post('/rejectheibankcertafms', [AdminController::class, 'rejectheibankcertafms'])->name('rejectheibankcertafms');
     Route::post('/approvebankcertafms', [AdminController::class, 'approvebankcertafms'])->name('approvebankcertafms');
