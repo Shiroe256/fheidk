@@ -1376,6 +1376,45 @@ class AdminController extends Controller
         return response()->json(['message' => $request->reference_no . ' Rejected COR'], 200);
     }
 
+    public function approveafcafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'afc_status' => 4
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Approved Admission Forms and Certificates'], 200);
+    }
+
+    public function rejectafcafms(Request $request)
+    {
+        $reference_no = $request->reference_no;
+
+        $record = Billing::where('reference_no', $reference_no)->first();
+
+        if (!$record) {
+            return response()->json(['error' => $request->reference_no . ' Billing record not found'], 404);
+        }
+
+        $records = [
+            'afc_status' => 5
+        ];
+
+        $record->update($records);
+
+        return response()->json(['message' => $request->reference_no . ' Rejected Admission Forms and Certificates'], 200);
+    }
+
+
     public function approveheibankcertafms(Request $request)
     {
         $reference_no = $request->reference_no;

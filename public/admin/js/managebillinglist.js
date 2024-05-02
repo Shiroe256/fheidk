@@ -1236,6 +1236,46 @@ $(document).on('click', '#btn_reject_cor_afms', function () {
 });
 
 //Process Billing
+$(document).on('click', '#btn_reject_afc_afms', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Reject Admission Forms and Certificates",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, reject admission forms and certificates'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/rejectafcafms',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Rejected Admission Forms and Certificates!',
+            'Admission Forms and Certificates has been rejected for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
 $(document).on('click', '#btn_approve_hei_bank_cert_afms', function () {
   let id = $("#reference_no").val();
   $.ajaxSetup({
