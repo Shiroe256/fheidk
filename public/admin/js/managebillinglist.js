@@ -1156,6 +1156,46 @@ $(document).on('click', '#btn_approve_cor_afms', function () {
 });
 
 //Process Billing
+$(document).on('click', '#btn_approve_afc_afms', function () {
+  let id = $("#reference_no").val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "Approve Admission Forms and Certificates",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, approve admission forms and certificates'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: '/admin/approveafcafms',
+        method: 'post',
+        data: {
+          reference_no: id
+        },
+        success: function (response) {
+          Swal.fire(
+            'Approved Admission Forms and Certificates!',
+            'Admission Forms and Certificates has been approved for billing.',
+            'success'
+          ).then(() => {
+            // Reload the specific div
+            $("#tbl_billing_attachments_div").load(location.href + " #tbl_billing_attachments_div");
+          });
+        }
+      });
+    }
+  })
+});
+
+//Process Billing
 $(document).on('click', '#btn_reject_cor_afms', function () {
   let id = $("#reference_no").val();
   $.ajaxSetup({
