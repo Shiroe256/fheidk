@@ -88,17 +88,17 @@
                                     <div class="dropdown-menu dropdown-menu-right animated--fade-in">
                                         <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
                                         <a class="dropdown-item"
-                                            href="{{ Request::url() . $billing->reference_no . '/form1' }}"
+                                            href="{{ Request::url() . '/' . $billing->reference_no . '/attachments/form1' }}"
                                             target="_blank"><i
                                                 class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Form 1 (Billing Summary)</a>
                                         <a class="dropdown-item"
-                                            href="{{ Request::url() . $billing->reference_no . '/form2' }}"
+                                            href="{{ Request::url() . '/' . $billing->reference_no . '/attachments/form2' }}"
                                             target="_blank"><i
                                                 class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Form 2 (Billing Details)</a>
                                         <a class="dropdown-item"
-                                            href="{{ Request::url() . $billing->reference_no . '/form3' }}"
+                                            href="{{ Request::url() . '/' . $billing->reference_no . '/attachments/form3' }}"
                                             target="_blank"><i
                                                 class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Form 3 (Billing Details)</a>
