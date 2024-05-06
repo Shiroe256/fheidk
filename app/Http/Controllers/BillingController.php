@@ -2991,6 +2991,42 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         ]);
     }
 
+    public function updatelinkafc(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'link_afc' => 'nullable|url',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+
+        $id = $request->reference_no;
+        $record = Billing::where('reference_no', $id)->first();
+
+        if (!$record) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Record not found.',
+            ], 404);
+        }
+
+        $recordData = [
+            'afc_link' => $request->link_afc,
+            'afc_status' => ($request->link_afc === null || $request->link_afc === 0) ? '0' : '1',
+        ];
+
+        $record->update($recordData);
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
     public function updatelinkheibankcert(Request $request)
     {
         $validator = Validator::make($request->all(), [

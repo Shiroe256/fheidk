@@ -134,6 +134,33 @@
     </div>
 </div>
 
+<div id="mod_upload_link_afc" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="frm_link_afc" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h6 class="modal-title">ATTACH LINK FOR ADMISSION FORMS AND CERTIFICATES</h6><button type="button" class="close"
+                        data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-style">
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="hidden" id="reference_no" name="reference_no" value="{{ $billings->reference_no }}">
+                                <div class="form-group"><input id="link_afc" name="link_afc" class="form-control input-style" type="text" placeholder="https://drive.google.com/"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light card-button-style" type="button"
+                    data-bs-dismiss="modal">Close</button><button id="btn_attach_afc" name="btn_attach_afc" class="btn btn-primary card-button-style"
+                        type="submit">Attach</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
     <div id="mod_upload_link_hei_bank_cert" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
