@@ -81,6 +81,24 @@
                                     data-bs-tooltip="" data-placement="bottom" title="Edit Billing Settings"
                                     href="#' }}"><i class="fas fa-sliders"></i></a>
                             </div>
+                            <div class="dropdown no-arrow">
+                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" aria-expanded="false"
+                                    data-bs-toggle="dropdown" type="button">
+                                    <i class="far fa-file-pdf"></i> Download Generated Forms
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right animated--fade-in">
+                                    <h6 class="dropdown-header">SELECT FORM TO DOWNLOAD:</h6>
+                                    <a class="dropdown-item" href="{{ Request::url() . '/form1' }}" target="_blank"><i
+                                            class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Form 1 (Billing Summary)</a>
+                                    <a class="dropdown-item" href="{{ Request::url() . '/form2' }}" target="_blank"><i
+                                            class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Form 2 (Billing Details)</a>
+                                    <a class="dropdown-item" href="{{ Request::url() . '/form3' }}" target="_blank"><i
+                                            class="fas fa-file-download fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Form 3 (Billing Details)</a>
+                                </div>
+                            </div>
                             <?php elseif ($billing->billing_status === 5 || $billing->billing_status === 7): ?>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a class="btn btn-primary" role="button" data-toggle="tooltip" data-bs-tooltip=""
