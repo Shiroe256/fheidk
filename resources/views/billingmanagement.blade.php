@@ -41,7 +41,7 @@
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
                 <ul class="nav nav-pills nav-fill nav-justified" role="tablist">
-                    <li class="nav-item"><a class="nav-link active input-style-tabs" role="tab" data-toggle="tab"
+                    <li class="nav-item"><a class="nav-link active input-style-tabs" style="border-color:darkgrey; border-style:solid;border-width: 1px;" role="tab" data-toggle="tab"
                             href="#tab-4">Billing Form 1</a></li>
                     <li class="nav-item"><a class="nav-link input-style-tabs" role="tab" data-toggle="tab"
                             href="#tab-5">Billing Form 2</a></li>
