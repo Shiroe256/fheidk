@@ -1,0 +1,252 @@
+@include('admin.includes.header')
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md clean-navbar">
+        <div class="container-fluid"><a class="navbar-brand logo" href="#" style="font-weight: bold;"><img width="50px" height="50px" src="{{url('img/UnifastLogo.png')}}">&nbsp;FHE ABS</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{route('admindashboard')}}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('managebillinglist')}}">Manage Billing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('manageuserslist')}}">Manage Users</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <div class="nav-item dropdown"><a aria-expanded="false" data-toggle="dropdown" class="nav-link" href="#">{{ Auth::user()->fhe_focal_fname . ' ' . Auth::user()->fhe_focal_mname . ' ' . Auth::user()->fhe_focal_lname }}</a>
+                            <div class="dropdown-menu"><a class="dropdown-item navbar-dropdown" data-toggle="modal" data-target="#modal_profile" href="#"><i class="fas fa-user"></i>&nbsp; &nbsp;Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
+                                {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page faq-page">
+        <section class="clean-block clean-faq dark">
+            <div class="container">
+                <div class="block-heading">
+                    <h4 class="text-left text-info">MANAGE USERS / {{ $heis->hei_name }}</h4>
+                </div> 
+                <input type="hidden" name="hei_uii" id="hei_uii" value="{{ $heis->hei_uii }}">
+                <input type="hidden" name="hei_psg_region" id="hei_psg_region" value="{{ $heis->hei_psg_region }}">
+                <input type="hidden" name="hei_name" id="hei_name" value="{{ $heis->hei_name }}">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="row d-none"><!--Hidden for a while-->
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="font-weight-bold m-0">HEI Profile</h6><a class="text-dark" data-toggle="tooltip" data-bss-tooltip="" href="#" title="Edit Information"><i class="far fa-edit"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src=" {{url('admin/img/UP-Seal.png')}}" width="200" height="200">
+                                        <h6 class="font-weight-bold">{{ $heis->hei_name }}</h6>
+                                    </div>
+                                    <div class="col-lg-7 col-xl-7">
+                                        <form>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>HEI UII</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>HEI Type</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>HEI Address</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>HEI Email</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>HEI Contact</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>Website</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-none">
+                                                <div class="form-row">
+                                                    <div class="col text-right">
+                                                        <div class="btn-group" role="group"><button class="btn btn-outline-danger" type="button">Cancel</button><button class="btn btn-outline-success" type="button">Update</button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-none">
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="font-weight-bold m-0">President Profile</h6><a class="text-dark" data-toggle="tooltip" data-bss-tooltip="" href="#" title="Edit Information"><i class="far fa-edit"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="{{url('admin/img/29513133_2090719884273325_673072045147924405_n.jpg')}}" width="200" height="200"></div>
+                                    <div class="col-lg-7 col-xl-7">
+                                        <form>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>Lastname</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Firstname</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Middlename</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>Email</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Contact</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-none">
+                                                <div class="form-row">
+                                                    <div class="col text-right">
+                                                        <div class="btn-group" role="group"><button class="btn btn-outline-danger" type="button">Cancel</button><button class="btn btn-outline-success" type="button">Update</button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-none">
+                    <div class="col">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="font-weight-bold m-0">Focal Person Profile</h6><a class="text-dark" data-toggle="tooltip" data-bss-tooltip="" href="#" title="Edit Information"><i class="far fa-edit"></i></a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-5 text-center mt-1 mb-4"><img class="rounded-circle mb-2" src="{{url('admin/img/293228345_5209578979160533_6724701494728557606_n.jpg')}}" width="200" height="200"></div>
+                                    <div class="col-lg-7 col-xl-7">
+                                        <form>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>Lastname</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Firstname</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Middlename</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col"><label>Email</label><input class="form-control" type="text"></div>
+                                                    <div class="col"><label>Contact</label><input class="form-control" type="text"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-none">
+                                                <div class="form-row">
+                                                    <div class="col text-right">
+                                                        <div class="btn-group" role="group"><button class="btn btn-outline-danger" type="button">Cancel</button><button class="btn btn-outline-success" type="button">Update</button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="font-weight-bold m-0">Tuition and Other School Fees</h6>
+                                <div role="group" class="btn-group">
+                                    <button class="btn_upload btn btn-primary" type="button" data-toggle="modal" data-target="#modal_tosf"><i class="fas fa-upload"></i> Upload List</button>
+                                    <button class="btn_add btn btn-success" type="button" data-toggle="modal" data-bss-tooltip="" href="#" data-target="#modal_add_tosf"><i class="fas fa-plus"></i> Add New Fee</button>
+                                    <button id="btn_tosf_remove" name="btn_tosf_remove" class="btn_remove btn btn-danger d-none" type="button"><i class="far fa-trash-alt"></i></button></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive table mt-2" id="tbl_tosf_div" role="grid" aria-describedby="dataTable_info">
+                                <!--LIST OF TOSF HERE-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-none">
+                    <div class="col-xl-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="font-weight-bold m-0">Audit Trail</h6>
+                                <div class="dropdown no-arrow"><button class="btn btn-sm" aria-expanded="false" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in">
+                                        <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="col-12 col-md-12 col-lg-5 col-xl-5 mb-2"><label>From</label><input class="form-control" type="date"></div>
+                                            <div class="col-12 col-md-12 col-lg-5 col-xl-5 mb-2"><label>To</label><input class="form-control" type="date"></div>
+                                            <div class="col align-self-end mb-2"><button class="btn btn-outline-info btn-block border rounded-pill border-info" type="button"><i class="fas fa-search"></i>Search</button></div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="table-responsive table-bordered table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                                    <table class="table table-bordered my-0" id="dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">ACTION TAKEN</th>
+                                                <th class="text-left">OLD VALUE</th>
+                                                <th class="text-left">NEW VALUE</th>
+                                                <th class="text-left">DATE TAKEN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                            <tr></tr>
+                                            <tr>
+                                                <td>updated</td>
+                                                <td>name: carltzy</td>
+                                                <td class="text-left">name:carlo</td>
+                                                <td class="text-left">04/15/1997</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+@include('admin.includes.manage-user-page-modal');
+@include('admin.includes.modal')
+@include('admin.includes.footer')
+<script src="{{url('admin\js\tosflist.js')}}"></script>
+</body>
+
+</html>
