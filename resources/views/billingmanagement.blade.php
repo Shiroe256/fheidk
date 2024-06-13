@@ -41,11 +41,11 @@
             class="card-body billing_forms_div {{ $billing_status == 1 || ($billing_status = 3) ? '' : 'd-none' }}">
             <div>
                 <ul class="nav nav-pills nav-fill nav-justified" role="tablist">
-                    <li class="nav-item"><a class="nav-link active input-style-tabs" style="border-botom-style:none;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
+                    <li class="nav-item"><a class="nav-link active input-style-tabs" style="border-botom:0;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
                             href="#tab-4">Billing Form 1</a></li>
-                    <li class="nav-item"><a class="nav-link input-style-tabs" style="border-botom-style:none;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
+                    <li class="nav-item"><a class="nav-link input-style-tabs" style="border-botom:0;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
                             href="#tab-5">Billing Form 2</a></li>
-                    <li class="nav-item"><a class="nav-link input-style-tabs" style="border-botom-style:none;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
+                    <li class="nav-item"><a class="nav-link input-style-tabs" style="border-botom:0;border-color:rgb(187, 187, 187); border-style:solid;border-width: 3px;" role="tab" data-toggle="tab"
                             href="#tab-6">Billing Form 3</a></li>
                 </ul>
                 <div class="tab-content">
