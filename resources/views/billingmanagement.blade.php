@@ -10,6 +10,35 @@
     <input type="hidden" id="reference_no" name="reference_no" value="{{ $reference_no }}">
     <input type="hidden" id="billing_status" name="billing_status" value="{{ $billing_status }}">
     <div class="card shadow">
+        <div class="" style="">
+            <h2>Billing Status: 
+                @if ($billing->billing_status == 1)
+                    <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
+                @elseif ($billing->billing_status == 2)
+                    <span class="badge badge-pill badge-info span-size">Ongoing Validation, please return once
+                        done</span>
+                @elseif ($billing->billing_status == 3)
+                    <span class="badge badge-pill badge-primary span-size">Done Validating: Ready For
+                        Submission</span>
+                @elseif ($billing->billing_status == 4)
+                    <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
+                @elseif ($billing->billing_status == 5)
+                    <span class="badge badge-pill badge-warning span-size">Finalizing Billing</span>
+                @elseif ($billing->billing_status == 6)
+                    <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing Unit</span>
+                @elseif ($billing->billing_status == 7)
+                    <span class="badge badge-pill badge-danger span-size">For revision</span>
+                @elseif ($billing->billing_status == 8)
+                    <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                @elseif ($billing->billing_status == 9)
+                    <span class="badge badge-pill badge-success span-size">Ready for Disbursement</span>
+                @elseif ($billing->billing_status == 10)
+                    <span class="badge badge-pill badge-success span-size">Disbursed</span>
+                @endif
+            </h2>
+            <h4>Instrunctions: </h4>
+            <span>sample instruction</span>
+        </div>
         <div class="card-header d-flex justify-content-between align-items-center"><a
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
                     class="fas fa-arrow-left"></i>&nbsp;Return to the
