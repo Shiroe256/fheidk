@@ -1,0 +1,35 @@
+name: Deploy to Production
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ production ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:   
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.PRODHOST }}
+        username: ${{ secrets.PROD_USER }}
+        passphrase: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.PROD_SSHKEY }}
+
+        port: 22
+        script: |
+          cd .ssh
+          eval "$(ssh-agent -s)"
+          ssh-add unifastph
+          git config --global user.email "ictunit.unifast@ched.gov.ph"
+          git config --global user.name "unifastph"
+          cd /www/wwwroot/fhe.unifast.gov.ph
+          git pull
+          git status
