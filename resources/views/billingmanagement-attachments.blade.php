@@ -9,7 +9,12 @@
     <input type="hidden" name="tranche" id="tranche" value="{{ $billings->tranche }}">
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
-            <h2>Billing Status: 
+            @if (count($billings) > 0)
+            <span>with billings</span>
+            @else
+            <span>no billings</span>
+            @endif
+            {{-- <h2>Billing Status: 
                 @if ($billing_status == 1)
                     <span class="">Open for Billing Uploads</span>
                 @elseif ($billing_status == 2)
@@ -91,7 +96,7 @@
                     <li class="" style="font-size:15px;"><i>End of Billing Process</i></li>
                 </ul>
                 @endif
-            </h4>
+            </h4> --}}
         </div>
         <div class="card-header d-flex justify-content-between align-items-center"><a
                 class="btn btn-outline-dark btn-sm" role="button" href="{{ route('billings') }}"><i
