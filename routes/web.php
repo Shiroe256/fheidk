@@ -54,7 +54,7 @@ Route::get('/billings/{reference_no}/attachments/form1', [BillingController::cla
 Route::get('/billings/{reference_no}/attachments/form2', [BillingController::class, 'generatePDFForm2'])->middleware('checkUserHei');
 Route::get('/billings/{reference_no}/attachments/form3', [BillingController::class, 'generatePDFForm3'])->middleware('checkUserHei');
 Route::get('/billings/{reference_no?}/attachments', [BillingController::class, 'billingmanagementattachments'])->name('billingmanagementattachments')->middleware('checkUserHei');
-Route::get('/billings/{reference_no?}/attachments', [BillingController::class, 'billingmanagementattachmentsJojo'])->name('billingmanagementattachmentsJojo')->middleware('checkUserHei');
+Route::get('/billings/{reference_no?}/attachments', [BillingController::class, 'billingmanagementattachments_Jojo'])->name('billingmanagementattachments_Jojo')->middleware('checkUserHei');
 Route::get('/billings/{reference_no}/settings', [BillingController::class, 'getBillingSettings'])->middleware('checkUserHei')->middleware('validateBillingStatus')->name('getBillingSettings');
 Route::get('/billings/{reference_no?}/test', [BillingController::class, 'Test'])->middleware('checkUserHei'); //testing
 Route::get('/billings/{reference_no?}', [BillingController::class, 'billingmanagementpage'])->middleware('validateBillingStatus')->middleware('checkUserHei');
