@@ -2118,7 +2118,6 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
         $data['tranche'] = $billings->tranche;
         $data['reference_no'] = $billings->reference_no;
         $data['billing_status'] = $billings->billing_status;
-        dd($data);
         return view('billingmanagement-attachments', $data);
     }
 
