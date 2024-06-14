@@ -10,7 +10,7 @@
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
             <ul>
-                {{billing_status}}
+                {{billings->billing_status}}
             </ul>
             
             {{-- <h2>Billing Status: 
