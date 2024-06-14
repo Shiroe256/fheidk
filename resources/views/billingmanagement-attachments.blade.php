@@ -9,7 +9,12 @@
     <input type="hidden" name="tranche" id="tranche" value="{{ $billings->tranche }}">
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
-            <span>{{$billings->ac_year}} </span>
+            <ul>
+                @foreach ($billings as $billing)
+                    <li>{{ $billings->ac_year }}</li>
+                @endforeach
+            </ul>
+            
             {{-- <h2>Billing Status: 
                 @if ($billing_status == 1)
                     <span class="">Open for Billing Uploads</span>
