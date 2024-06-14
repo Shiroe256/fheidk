@@ -2112,13 +2112,13 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
             $this->newBillingSettings($billings->reference_no, $hei_uii);
         }
 
-        $data['hei_psg_region'] = $billings->hei_psg_region;
-        $data['ac_year'] = $billings->ac_year;
-        $data['semester'] = $billings->semester;
-        $data['tranche'] = $billings->tranche;
-        $data['reference_no'] = $billings->reference_no;
-        $data['billing_status'] = $billings->billing_status;
-        return view('billingmanagement-attachments', $data);
+        $data2['hei_psg_region'] = $billings->hei_psg_region;
+        $data2['ac_year'] = $billings->ac_year;
+        $data2['semester'] = $billings->semester;
+        $data2['tranche'] = $billings->tranche;
+        $data2['reference_no'] = $billings->reference_no;
+        $data2['billing_status'] = $billings->billing_status;
+        return view('billingmanagement-attachments', $data2);
     }
 
     public function billingmanagementattachments($reference_no)
