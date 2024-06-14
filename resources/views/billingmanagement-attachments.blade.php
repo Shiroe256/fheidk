@@ -57,13 +57,12 @@
                 </ol>
                 @elseif ($billings->billing_status == 5)
                 <ol>
-                    <li class="" style="font-size:15px;">Download, print and sign the Billing Form 1, 2 and 3</li>
+                    <li class="" style="font-size:15px;">Download, print and sign the Billing Form 1, 2 and 3 by clicking the <b>Download Generated Forms</b> button.</li>
                     <li class="" style="font-size:15px;">Upload the signed forms and other attachments to your google drive</li>
                     <li class="" style="font-size:15px;">Attach the links from the google drive</li>
                     <li class="" style="font-size:15px;">Click <b>"Submit for Review"</b> button</li>
                 </ol>
                 @elseif ($billings->billing_status == 6)
-                <b>Note(s):</b>
                 <ul>
                     <li class="" style="font-size:15px;"><i>UniFAST Billing Unit will review your submission</i></li>
                     <li class="" style="font-size:15px;"><i>You can view the status and content of the submitted billing but, you will not be able to edit its content</i></li>
