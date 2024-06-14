@@ -10,15 +10,7 @@
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
             <ul>
-                @foreach ($billings as $billing)
-                    <li>{{ $billings->ac_year }}</li>
-                    <li>{{ $billings->billing_status }}</li>
-                    <li>{{ $billings->semester }}</li>
-                    <li>{{ $billings->tranche }}</li>
-                    <li>{{ $billings->total_beneficiaries }}</li>
-                    <li>{{ $billings->total_amount }}</li>
-
-                @endforeach
+                {{billing_status}}
             </ul>
             
             {{-- <h2>Billing Status: 
