@@ -47,7 +47,8 @@
                 </ul>
                 @elseif ($billing_status == 3)
                 <ul>
-                    <li class="" style="font-size:15px;">The billing is ready for submission. However, the HEI can still add, edit or remove student in the billing</li>
+                    <li class="" style="font-size:15px;">Click the <b>Finalize</b> button to submit the billing to UniFAST.</li>
+                    <li class="" style="font-size:15px;"><b>Note: </b>The HEI can still add, edit or remove student in the billing.</li>
                 </ul>
                 @elseif ($billing_status == 4)
                 <ol>

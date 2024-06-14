@@ -88,7 +88,8 @@
                             <?php
                             elseif ($billing->billing_status==3):?>
                                 <ul>
-                                    <li>The billing is ready for submission. However, the HEI can still add, edit or remove student in the billing</li>
+                                    <li>Click the <b>Finalize</b> button to submit the billing to UniFAST.</li>
+                                    <li><b>Note: </b>The HEI can still add, edit or remove student in the billing.</li>
                                 </ul>
                                 <?php
                             elseif ($billing->billing_status==4):?>
