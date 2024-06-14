@@ -13,27 +13,26 @@
         <div class="" style="">
             <h2>Billing Status: 
                 @if ($billing_status == 1)
-                    <span class="badge badge-pill badge-secondary span-size">Open for Billing Uploads</span>
+                    <span class="">Open for Billing Uploads</span>
                 @elseif ($billing_status == 2)
-                    <span class="badge badge-pill badge-info span-size">Ongoing Validation, please return once
-                        done</span>
+                    <span class="">Ongoing Validation</span>
                 @elseif ($billing_status == 3)
-                    <span class="badge badge-pill badge-primary span-size">Done Validating: Ready For
+                    <span class="">Done Validating: Ready For
                         Submission</span>
                 @elseif ($billing_status == 4)
-                    <span class="badge badge-pill badge-danger span-size">Done Validating: For Review</span>
+                    <span class="">Done Validating: For Review</span>
                 @elseif ($billing_status == 5)
-                    <span class="badge badge-pill badge-warning span-size">Finalizing Billing</span>
+                    <span class="">Finalizing Billing</span>
                 @elseif ($billing_status == 6)
-                    <span class="badge badge-pill badge-warning span-size">Submitted to UniFAST: Billing Unit</span>
+                    <span class="">Submitted to UniFAST: Billing Unit</span>
                 @elseif ($billing_status == 7)
-                    <span class="badge badge-pill badge-danger span-size">For revision</span>
+                    <span class="">For revision</span>
                 @elseif ($billing_status == 8)
-                    <span class="badge badge-pill badge-warning span-size">Submitted to CHED-AFMS</span>
+                    <span class="">Submitted to CHED-AFMS</span>
                 @elseif ($billing_status == 9)
-                    <span class="badge badge-pill badge-success span-size">Ready for Disbursement</span>
+                    <span class="">Ready for Disbursement</span>
                 @elseif ($billing_status == 10)
-                    <span class="badge badge-pill badge-success span-size">Disbursed</span>
+                    <span class="">Disbursed</span>
                 @endif
             </h2>
             <h4>Instrunctions: </h4>
