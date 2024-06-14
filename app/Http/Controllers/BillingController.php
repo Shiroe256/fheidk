@@ -2125,6 +2125,7 @@ sum(if(tbl_other_school_fees.category = "Computer Laboratory", tbl_other_school_
     {
         $billings = Billing::where('reference_no', $reference_no)->first();
         $data['billings'] = $billings;
+        dd($data);
         return view('billingmanagement-attachments', $data);
     }
 
