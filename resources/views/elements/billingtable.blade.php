@@ -82,14 +82,14 @@
                                 </ol>
                             <?php
                             elseif ($billing->billing_status==2):?>
-                                <ol>
+                                <ul>
                                     <li>Refresh the page to check if the validation is done</li>
-                                </ol>
+                                </ul>
                             <?php
                             elseif ($billing->billing_status==3):?>
-                                <ol>
+                                <ul>
                                     <li>The billing is ready for submission. However, the HEI can still add, edit or remove student in the billing</li>
-                                </ol>
+                                </ul>
                                 <?php
                             elseif ($billing->billing_status==4):?>
                                 <ol>
