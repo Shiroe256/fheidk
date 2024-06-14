@@ -9,16 +9,12 @@
     <input type="hidden" name="tranche" id="tranche" value="{{ $billings->tranche }}">
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
-            @if (count($billings) > 0)
-            <span>with billings</span>
-            @else
-            <span>no billings</span>
-            @endif
+            <span>{$billings->tranche} </span>
             {{-- <h2>Billing Status: 
                 @if ($billing_status == 1)
                     <span class="">Open for Billing Uploads</span>
                 @elseif ($billing_status == 2)
-                    <span class="">Ongoing Validation</span>
+                    <span class="">Ongoing Validation</span>        
                 @elseif ($billing_status == 3)
                     <span class="">Done Validating</span>
                 @elseif ($billing_status == 4)
