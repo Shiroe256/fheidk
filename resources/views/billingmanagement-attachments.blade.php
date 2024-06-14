@@ -11,7 +11,7 @@
         <div class="mx-auto mt-3 alert alert-info" style="">
             <ul>
                 @foreach ($billings as $billing)
-                    <li>{{ $billings->status }}</li>
+                    <li>{{ $billings->billing_status }}</li>
                 @endforeach
             </ul>
             
