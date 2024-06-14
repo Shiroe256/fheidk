@@ -9,9 +9,7 @@
     <input type="hidden" name="tranche" id="tranche" value="{{ $billings->tranche }}">
     <div class="card shadow">
         <div class="mx-auto mt-3 alert alert-info" style="">
-            <ul>
-                {{billings->billing_status}}
-            </ul>
+            {{$billing_status ? "with billing status" : "No billing status"}}
             
             {{-- <h2>Billing Status: 
                 @if ($billing_status == 1)
