@@ -37,9 +37,9 @@
             <h4>Instructions: 
                 @if ($billings->billing_status == 1)
                 <ol>
-                    <li class="" style="font-size:15px;">Download billing template</li>
-                    <li class="" style="font-size:15px;">Upload the filled out billing template</li>
-                    <li class="" style="font-size:15px;">Click the <b>Run validation</b> button</li>
+                    <li class="" style="font-size:15px;">Download billing template by clicking the <b>Download Template</b> button.</li>
+                    <li class="" style="font-size:15px;">Upload the filled out billing template by clicking the <b>Upload List</b> button.</li>
+                    <li class="" style="font-size:15px;">Click the <b>Run validation</b> button.</li>
                 </ol>
                 @elseif ($billings->billing_status == 2)
                 <ul>
