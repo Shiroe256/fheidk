@@ -117,7 +117,7 @@
                     <button id="btn_forms" class="btn btn-outline-primary btn-sm" type="button" style="display:none"><i
                             class="far fa-file-alt"></i>&nbsp;Billing Forms</button>
                     <button id="btn_finalize" class="btn btn-outline-primary btn-sm" type="button"
-                        value="{{ $reference_no }}"><i class="far fa-file-alt"></i>&nbsp;Finalize</button>
+                        value="{{ $reference_no }}"><i class="far fa-file-alt" {{$billing_status == 3 ? "" : "hidden"}}></i>&nbsp;Finalize</button>
                 </div>
             @endif
         </div>
