@@ -34,7 +34,7 @@
                     <span class="">Disbursed</span>
                 @endif
             </h2>
-            <h4>Instrunctions: 
+            <h4>Instructions: 
                 @if ($billing_status == 1)
                 <ol>
                     <li class="" style="font-size:15px;">Download billing template</li>
