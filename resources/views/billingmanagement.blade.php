@@ -57,10 +57,10 @@
                 </ol>
                 @elseif ($billing_status == 5)
                 <ol>
-                    <li class="" style="font-size:15px;">Download, print and sign the Billing Form 1, 2 and 3</li>
+                    <li class="" style="font-size:15px;">Download, print and sign the Billing Form 1, 2 and 3 by navigating to <b>GENERATE BILLING FORMS</b> tab and clicking the <b>Download Generated Forms</b> button.</li>
                     <li class="" style="font-size:15px;">Upload the signed forms and other attachments to your google drive</li>
-                    <li class="" style="font-size:15px;">Attach the links from the google drive</li>
-                    <li class="" style="font-size:15px;">Click <b>"Submit for Review"</b> button</li>
+                    <li class="" style="font-size:15px;">Proceed to the <b>SUBMIT FINAL BILLING</b> tab and kindly attach the relevant links from Google Drive.</li>
+                    <li class="" style="font-size:15px;">Click the <b>Submit for Review</b> button located at the upper right part of the page.</li>
                 </ol>
                 @elseif ($billing_status == 6)
                 <b>Note(s):</b>
