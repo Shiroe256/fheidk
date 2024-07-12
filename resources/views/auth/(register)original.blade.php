@@ -39,7 +39,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <input class="form-control form-control-user @error('fhe_focal_fname') is-invalid @enderror" type="text" id="fhe_focal_fname" placeholder="First Name" name="fhe_focal_fname" value="{{ old('fhe_focal_fname') }}">
-                                            
+
                                                 @error('fhe_focal_fname')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -51,13 +51,13 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <input class="form-control form-control-user @error('fhe_focal_mname') is-invalid @enderror" type="text" id="fhe_focal_mname" placeholder="Middle Name" name="fhe_focal_mname" value="{{ old('fhe_focal_mname') }}">
-                                            
+
                                                 @error('fhe_focal_mname')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
-                                            
+
                                             </div>
                                         </div>
                                     </div>

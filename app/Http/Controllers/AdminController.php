@@ -17,6 +17,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -75,92 +76,84 @@ class AdminController extends Controller
 
     public function fetchform2list(Request $request)
     {
-        // $students = BillingForm2::where('reference_no', $reference_no)->get();
-        // $totalAmount = $students->sum('total_fee');
-
         $reference_no = $request->reference_no;
+        $cacheKey = 'form2list_' . $reference_no;
 
-        $students = DB::table('vw_billing_details')
-            ->select(
-                'vw_billing_details.stud_uid',
-                'vw_billing_details.reference_no',
-                'vw_billing_details.fhe_award_no',
-                'vw_billing_details.stud_id',
-                'vw_billing_details.stud_lname',
-                'vw_billing_details.stud_fname',
-                'vw_billing_details.stud_mname',
-                'vw_billing_details.stud_ext_name',
-                'vw_billing_details.stud_sex',
-                'vw_billing_details.stud_birth_date',
-                'vw_billing_details.stud_email',
-                'vw_billing_details.stud_phone_no',
-                'vw_billing_details.degree_program',
-                'vw_billing_details.year_level',
-                'vw_billing_details.lab_unit',
-                'vw_billing_details.comp_lab_unit',
-                'vw_billing_details.academic_unit',
-                'vw_billing_details.nstp_unit',
-                'vw_billing_details.remarks',
-                'vw_billing_details.stud_status',
-                DB::raw('SUM(
-            CASE
-                WHEN (vw_billing_details.type_of_fee = "tuition" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
-                    THEN (vw_billing_details.academic_unit * vw_billing_details.amount)
-                WHEN (vw_billing_details.type_of_fee = "tuition" AND vw_billing_details.coverage = "per student")
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "entrance"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "admission"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "athletic"
-                    THEN vw_billing_details.amount
-                WHEN (vw_billing_details.type_of_fee = "computer" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
-                    THEN (vw_billing_details.comp_lab_unit * vw_billing_details.amount)
-                WHEN (vw_billing_details.type_of_fee = "computer" AND vw_billing_details.coverage = "per student")
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "cultural"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "development"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "guidance"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "handbook"
-                    THEN vw_billing_details.amount
-                WHEN (vw_billing_details.type_of_fee = "laboratory" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
-                    THEN (vw_billing_details.lab_unit * vw_billing_details.amount)
-                WHEN (vw_billing_details.type_of_fee = "laboratory" AND vw_billing_details.coverage = "per student")
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "library"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "medical and dental"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "registration"
-                    THEN vw_billing_details.amount
-                WHEN vw_billing_details.type_of_fee = "school id"
-                    THEN vw_billing_details.amount
-                WHEN (vw_billing_details.type_of_fee = "nstp" AND (vw_billing_details.coverage = "per unit" OR vw_billing_details.coverage = "per subject"))
-                    THEN (vw_billing_details.nstp_unit * vw_billing_details.amount)
-                WHEN (vw_billing_details.type_of_fee = "nstp" AND vw_billing_details.coverage = "per student")
-                    THEN vw_billing_details.amount
-                ELSE 0
-            END
-        ) AS total_fee')
-            )
-            ->where('reference_no', $reference_no)
-            ->where('vw_billing_details.form', 2)
-            ->where(function ($query) {
-                $query->where('vw_billing_details.bs_osf_settings', 1)
-                    ->orWhere('vw_billing_details.bs_student_osf_settings', 1);
-            })
-            ->groupBy('vw_billing_details.stud_uid')
-            ->get();
+        // Attempt to retrieve data from cache
+        $students = Cache::get($cacheKey);
 
+        // If cache is empty, fetch from database and cache it
+        if (!$students) {
+            $students = DB::table('vw_billing_details')
+                ->select(
+                    'stud_uid',
+                    'reference_no',
+                    'fhe_award_no',
+                    'stud_id',
+                    'stud_lname',
+                    'stud_fname',
+                    'stud_mname',
+                    'stud_ext_name',
+                    'stud_sex',
+                    'stud_birth_date',
+                    'stud_email',
+                    'stud_phone_no',
+                    'degree_program',
+                    'year_level',
+                    'lab_unit',
+                    'comp_lab_unit',
+                    'academic_unit',
+                    'nstp_unit',
+                    'remarks',
+                    'stud_status',
+                    DB::raw('SUM(
+                        CASE
+                            WHEN type_of_fee = "tuition" AND (coverage = "per unit" OR coverage = "per subject")
+                                THEN (academic_unit * amount)
+                            WHEN type_of_fee = "tuition" AND coverage = "per student"
+                                THEN amount
+                            WHEN type_of_fee = "computer" AND (coverage = "per unit" OR coverage = "per subject")
+                                THEN (comp_lab_unit * amount)
+                            WHEN type_of_fee = "computer" AND coverage = "per student"
+                                THEN amount
+                            WHEN type_of_fee = "laboratory" AND (coverage = "per unit" OR coverage = "per subject")
+                                THEN (lab_unit * amount)
+                            WHEN type_of_fee = "laboratory" AND coverage = "per student"
+                                THEN amount
+                            WHEN type_of_fee = "nstp" AND (coverage = "per unit" OR coverage = "per subject")
+                                THEN (nstp_unit * amount)
+                            WHEN type_of_fee = "nstp" AND coverage = "per student"
+                                THEN amount
+                            WHEN type_of_fee IN ("entrance", "admission", "athletic", "cultural", "development", "guidance", "handbook", "library", "medical and dental", "registration", "school id")
+                                THEN amount
+                            ELSE amount
+                        END
+                    ) AS total_fee')
+                )
+                ->where('reference_no', $reference_no)
+                ->where('form', 2)
+                ->where(function ($query) {
+                    $query->where('bs_osf_settings', 1)
+                        ->orWhere('bs_student_osf_settings', 1);
+                })
+                ->groupBy('stud_uid')
+                ->get();
+
+            // Store the result in the cache
+            Cache::put($cacheKey, $students, now()->addMinutes(1));
+        }
+
+        // Calculate total amount from the fetched data
         $totalAmount = $students->sum('total_fee');
 
+        // Prepare data for the view
         $data['students'] = $students;
         $data['totalAmount'] = $totalAmount;
+
+        // Return the view with the data
         return view('admin.elements.form2list', $data);
     }
+
 
     // handle edit an student ajax request
     public function viewstudentinfo(Request $request)

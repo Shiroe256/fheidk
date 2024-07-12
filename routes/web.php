@@ -39,10 +39,10 @@ use App\Http\Controllers\UserController;
 
 // Route::get('contactus', 'App\Http\Controllers\Pagescontroller@contactus');
 // Route::get('aboutus', 'App\Http\Controllers\Pagescontroller@aboutus');
-// Route::resource('blog', 'App\Http\Controllers\Pagescontroller'); 
+// Route::resource('blog', 'App\Http\Controllers\Pagescontroller');
 
 Route::get('/', function () {
-    return redirect()->route('billings');
+    return redirect()->route('dashboard');
 })->middleware('auth');
 
 //billing CRUD
